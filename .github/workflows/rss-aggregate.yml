@@ -1,0 +1,35 @@
+name: RSS Aggregation
+
+on:
+  schedule:
+    # 每天 UTC 02:00（台北時間 10:00）
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # 手動觸發
+
+permissions:
+  contents: write
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run RSS Aggregation
+        run: node scripts/rss-aggregate.mjs
+
+      - name: Commit and Push New Posts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/content/posts/rss/ scripts/.rss-cache.json
+          git diff --cached --quiet || git commit -m "📡 RSS 聚合: $(date +%Y-%m-%d)"
+          git push

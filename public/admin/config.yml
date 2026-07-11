@@ -1,8 +1,12 @@
 backend:
   name: github
-  repo: ethanyang/personal-website  # TODO: update after GitHub repo is created
+  repo: Ethan-Ethan-Ethan/personal-website
   branch: main
   base_url: https://api.github.com
+
+publish_mode: editorial_workflow
+display_url: https://ethanyang.dpdns.org
+show_preview_links: true
 
 media_folder: "public/assets/uploads"
 public_folder: "/assets/uploads"

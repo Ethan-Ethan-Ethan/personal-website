@@ -7,7 +7,8 @@ import { getCollection, render } from 'astro:content';
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
   return posts.map(post => ({
-    params: { slug: post.id },
+    // Use filename without directory as slug
+    params: { slug: post.id.split('/').pop() || post.id },
     props: { post },
   }));
 }

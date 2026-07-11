@@ -1,0 +1,122 @@
+---
+/**
+ * 交易量 K 線圖元件（TradingView Lightweight Charts）
+ * Props:
+ *   - data: 交易資料 JSON 路徑或陣列
+ *   - height: 圖表高度（預設 400px）
+ *   - symbol: 交易對名稱（預設 BTC/USDT）
+ */
+
+export interface Props {
+  data: string | Array<{
+    time: string;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+    volume: number;
+  }>;
+  height?: number;
+  symbol?: string;
+}
+
+const {
+  data = '/assets/trading/btc-usdt.json',
+  height = 400,
+  symbol = 'BTC/USDT',
+} = Astro.props;
+
+const chartId = `chart-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class="trading-chart" id="{chartId}" style="height: {height}px;"></div>
+
+<script is:inline>
+  // Lightweight Charts client-side initialization
+  document.addEventListener('DOMContentLoaded', async () => {
+    const chartEl = document.getElementById('{chartId}');
+    if (!chartEl) return;
+
+    const { createChart } = await import('lightweight-charts');
+
+    const chart = createChart(chartEl, {
+      layout: {
+        background: { color: '#1b1b18' },
+        textColor: '#b9b3a5',
+        fontFamily: 'Inter, sans-serif',
+      },
+      grid: {
+        vertLines: { color: '#37372f' },
+        horzLines: { color: '#37372f' },
+      },
+      crosshair: {
+        mode: 0,
+        vertLine: {
+          color: '#88b56b',
+          labelBackgroundColor: '#88b56b',
+        },
+        horzLine: {
+          color: '#88b56b',
+          labelBackgroundColor: '#88b56b',
+        },
+      },
+      rightPriceScale: {
+        borderColor: '#37372f',
+      },
+      timeScale: {
+        borderColor: '#37372f',
+        timeVisible: true,
+      },
+    });
+
+    // K 線圖
+    const candlestickSeries = chart.addCandlestickSeries({
+      upColor: '#88b56b',
+      downColor: '#c46f5a',
+      borderUpColor: '#88b56b',
+      borderDownColor: '#c46f5a',
+      wickUpColor: '#88b56b',
+      wickDownColor: '#c46f5a',
+    });
+
+    // 成交量柱狀圖
+    const volumeSeries = chart.addHistogramSeries({
+      color: '#76a7bd',
+      priceFormat: { type: 'volume' },
+      priceScaleId: 'volume',
+    });
+
+    chart.priceScale('volume').applyOptions({
+      scaleMargins: { top: 0.85, bottom: 0 },
+    });
+
+    // 載入資料
+    let chartData;
+    if (typeof '{data}' === 'string') {
+      const res = await fetch('{data}');
+      chartData = await res.json();
+    } else {
+      chartData = {data};
+    }
+
+    candlestickSeries.setData(chartData.candles || []);
+    volumeSeries.setData(chartData.volumes || []);
+
+    chart.timeScale().fitContent();
+
+    // 響應式
+    const resizeObserver = new ResizeObserver(() => {
+      chart.applyOptions({ width: chartEl.clientWidth });
+    });
+    resizeObserver.observe(chartEl);
+  });
+</script>
+
+<style>
+  .trading-chart {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+</style>

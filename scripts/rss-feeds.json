@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://hnrss.org/frontpage",
+    "category": "科技",
+    "tags": ["Hacker News", "科技趨勢"],
+    "maxItems": 10
+  },
+  {
+    "url": "https://feeds.bbci.co.uk/zhongwen/trad/rss.xml",
+    "category": "新聞",
+    "tags": ["BBC", "中文新聞"],
+    "maxItems": 10
+  },
+  {
+    "url": "https://www.infoq.com/feed",
+    "category": "科技",
+    "tags": ["InfoQ", "軟體工程"],
+    "maxItems": 10
+  }
+]
