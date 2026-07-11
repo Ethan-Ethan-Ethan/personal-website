@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Group by category
+const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))];
+---
+
+<BaseLayout title="文章 | Ethan Yang" description="所有公開文章 — 工作經驗、AI 工作流、公開筆記與 RSS 聚合內容。">
+  <Topbar />
+
+  <main class="pt-14 max-w-[var(--container-default)] mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold tracking-tight mb-2">文章</h1>
+    <p class="text-muted mb-8">工作經驗、AI 工作流、公開筆記，以及自動聚合的 RSS 與 Gmail 文章。</p>
+
+    <!-- Category Filter -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      <span class="px-3 py-1 rounded-full bg-green/15 text-green text-xs font-medium">全部 ({posts.length})</span>
+      {categories.map(cat => {
+        const count = posts.filter(p => p.data.category === cat).length;
+        return (
+          <span class="px-3 py-1 rounded-full bg-panel border border-line text-xs text-muted">{cat} ({count})</span>
+        );
+      })}
+    </div>
+
+    <!-- Post Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {posts.map(post => (
+        <PostCard post={post} />
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <p class="text-center text-muted py-12">尚未發布任何文章。</p>
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>

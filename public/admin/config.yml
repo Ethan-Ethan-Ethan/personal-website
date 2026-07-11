@@ -1,0 +1,31 @@
+backend:
+  name: github
+  repo: ethanyang/personal-website  # TODO: update after GitHub repo is created
+  branch: main
+  base_url: https://api.github.com
+
+media_folder: "public/assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "posts"
+    label: "文章"
+    folder: "src/content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "標題", name: "title", widget: "string" }
+      - { label: "摘要", name: "description", widget: "text", required: false }
+      - { label: "發布日期", name: "date", widget: "datetime" }
+      - { label: "分類", name: "category", widget: "string", required: false }
+      - { label: "標籤", name: "tags", widget: "list", required: false }
+      - {
+          label: "來源",
+          name: "source",
+          widget: "select",
+          options: ["manual", "rss", "gmail"],
+          default: "manual",
+        }
+      - { label: "原文網址", name: "sourceUrl", widget: "string", required: false }
+      - { label: "草稿", name: "draft", widget: "boolean", default: false }
+      - { label: "內容", name: "body", widget: "markdown" }

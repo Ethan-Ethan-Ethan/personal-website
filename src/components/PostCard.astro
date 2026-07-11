@@ -1,0 +1,49 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, description, date, category, tags, source } = post.data;
+const formattedDate = date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const sourceLabel = {
+  manual: '原創',
+  rss: 'RSS',
+  gmail: 'Gmail',
+}[source];
+
+const sourceColor = {
+  manual: 'text-green',
+  rss: 'text-blue',
+  gmail: 'text-amber',
+}[source];
+---
+
+<a
+  href={`/articles/${post.id}`}
+  class="block p-5 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] no-underline text-text group"
+>
+  <div class="flex items-center gap-2 mb-2">
+    <span class:list={['text-xs font-medium', sourceColor]}>{sourceLabel}</span>
+    {category && <span class="text-xs text-soft">· {category}</span>}
+  </div>
+  <h3 class="text-lg font-semibold mb-1.5 group-hover:text-green transition-colors leading-tight">
+    {title}
+  </h3>
+  {description && (
+    <p class="text-sm text-muted line-clamp-2 mb-3">{description}</p>
+  )}
+  <div class="flex items-center gap-3 text-xs text-soft">
+    <time datetime={date.toISOString()}>{formattedDate}</time>
+    {tags.length > 0 && (
+      <div class="flex gap-1.5">
+        {tags.slice(0, 3).map(tag => (
+          <span class="px-1.5 py-0.5 rounded bg-panel-2 text-soft">{tag}</span>
+        ))}
+      </div>
+    )}
+  </div>
+</a>

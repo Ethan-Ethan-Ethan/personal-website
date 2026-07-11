@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, date, category, tags, source, sourceUrl } = post.data;
+const formattedDate = date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// Get sorted posts for prev/next navigation
+const allPosts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const currentIndex = allPosts.findIndex(p => p.id === post.id);
+const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+
+const sourceLabel = { manual: '原創', rss: 'RSS 聚合', gmail: 'Gmail 擷取' }[source];
+---
+
+<BaseLayout title={`${title} | Ethan Yang`} description={description}>
+  <Topbar />
+
+  <main class="pt-14 max-w-[var(--container-narrow)] mx-auto px-4 py-10">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-soft mb-6">
+      <a href="/" class="hover:text-text transition-colors">首頁</a>
+      <span class="mx-1">/</span>
+      <a href="/articles/" class="hover:text-text transition-colors">文章</a>
+      <span class="mx-1">/</span>
+      <span class="text-muted">{title}</span>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-xs font-medium text-green">{sourceLabel}</span>
+        {category && <span class="text-xs text-soft">· {category}</span>}
+      </div>
+      <h1 class="text-3xl font-bold tracking-tight leading-tight mb-3">{title}</h1>
+      {description && <p class="text-muted text-md mb-4">{description}</p>}
+      <div class="flex items-center gap-4 text-sm text-soft">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+        {sourceUrl && (
+          <a href={sourceUrl} target="_blank" rel="noopener" class="text-blue hover:text-green transition-colors">原文 ↗</a>
+        )}
+      </div>
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-1.5 mt-3">
+          {tags.map(tag => (
+            <span class="px-2 py-0.5 rounded bg-panel-2 text-xs text-soft border border-line">{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Article Content -->
+    <article class="prose">
+      <Content />
+    </article>
+
+    <!-- Article Navigation -->
+    <nav class="mt-12 pt-6 border-t border-line flex justify-between items-center gap-4">
+      {prevPost ? (
+        <a href={`/articles/${prevPost.id}`} class="text-sm text-muted hover:text-green transition-colors no-underline">
+          ← {prevPost.data.title}
+        </a>
+      ) : <span />}
+      <a href="/articles/" class="text-sm text-blue hover:text-green transition-colors no-underline">
+        文章列表
+      </a>
+      {nextPost ? (
+        <a href={`/articles/${nextPost.id}`} class="text-sm text-muted hover:text-green transition-colors no-underline">
+          {nextPost.data.title} →
+        </a>
+      ) : <span />}
+    </nav>
+  </main>
+
+  <Footer />
+</BaseLayout>
