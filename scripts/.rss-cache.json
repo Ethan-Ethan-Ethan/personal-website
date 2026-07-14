@@ -231,7 +231,95 @@
     "https://www.infoq.com/news/2026/07/cloudflare-hyper-bug-fix/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Cloudflare Identifies Race Condition in hyper’s HTTP/1 Implementation",
       "date": "2026-07-13T05:39:54.370Z"
+    },
+    "https://github.com/JetBrains/youtrackdb": {
+      "title": "YouTrackDB is a general-use object-oriented graph database",
+      "date": "2026-07-14T04:53:15.119Z"
+    },
+    "https://gist.github.com/skorotkiewicz/2d4db4ceaf83aa54eb7f2066fdb961ff": {
+      "title": "Agents.md – Dumb Human",
+      "date": "2026-07-14T04:53:15.119Z"
+    },
+    "https://www.thedial.world/articles/news/amish-pennsylvania-dutch": {
+      "title": "Our Amish Language",
+      "date": "2026-07-14T04:53:15.120Z"
+    },
+    "https://tech.supercarblondie.com/japan-recovers-up-to-90-of-lithium-from-used-ev-batteries/": {
+      "title": "Japan develops a method to recover up to 90% of lithium from used EV batteries",
+      "date": "2026-07-14T04:53:15.120Z"
+    },
+    "https://web.stanford.edu/~dntse/wireless_book.html": {
+      "title": "Fundamentals of Wireless Communication",
+      "date": "2026-07-14T04:53:15.120Z"
+    },
+    "https://satellitemap.space/": {
+      "title": "Satellite Tracker – Live Map of Starlink and 30k Satellites",
+      "date": "2026-07-14T04:53:15.120Z"
+    },
+    "https://www.normaltech.ai/p/what-will-be-left-for-us-to-work": {
+      "title": "What will be left for us to work on?",
+      "date": "2026-07-14T04:53:15.120Z"
+    },
+    "https://careersatdoordash.com/blog/building-food-metadata-with-llm-juries-context-optimization-multimodal-ai/": {
+      "title": "Building Food Metadata with LLM Juries",
+      "date": "2026-07-14T04:53:15.121Z"
+    },
+    "https://chipsandcheese.com/p/is-x86-ready-to-ace-it": {
+      "title": "Is x86 ready to ACE it?",
+      "date": "2026-07-14T04:53:15.121Z"
+    },
+    "https://elasticity.institute/rsi-paper.pdf": {
+      "title": "The Economics of Recursive Self-Improvement [pdf]",
+      "date": "2026-07-14T04:53:15.121Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cy472d80ewwo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "馬興瑞被「雙開」：習時代「技術官僚」代表隕落，政治局三名委員落馬",
+      "date": "2026-07-14T04:53:15.356Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cq61eqrdj74o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "那位被指為墨西哥「芬太尼王」的中國留學生",
+      "date": "2026-07-14T04:53:15.356Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cy9r72jej2wo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美參議員葛蘭姆突辭世：主張友台、強硬對華的特朗普盟友",
+      "date": "2026-07-14T04:53:15.357Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c4gyn4yr9rlo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "所有人「擠成一團」：目擊者描述致命大火如何席捲曼谷酒吧",
+      "date": "2026-07-14T04:53:15.357Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c8r27nd55y2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "英西118年邊防撤關 直布羅陀迎來新紀元",
+      "date": "2026-07-14T04:53:15.357Z"
+    },
+    "https://www.infoq.com/news/2026/07/data-ownership-localfirst/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "The Path to Sovereign Data: Challenges and Priorities in Local-First Computing",
+      "date": "2026-07-14T04:53:16.191Z"
+    },
+    "https://www.infoq.com/news/2026/07/doordash-ai-ask-assistant/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "How DoorDash Built an AI Shopping Assistant That Doesn’t Rely on the LLM Alone",
+      "date": "2026-07-14T04:53:16.191Z"
+    },
+    "https://www.infoq.com/news/2026/07/java-news-roundup-jul06-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: TornadoVM 5, JHipster, Google ADK, OmniFish Build of Payara, Introducing Vidocq",
+      "date": "2026-07-14T04:53:16.192Z"
+    },
+    "https://www.infoq.com/presentations/platform-engineering-team-compliance/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Road to Compliance: Will Your Internal Users Hate Your Platform Team?",
+      "date": "2026-07-14T04:53:16.192Z"
+    },
+    "https://www.infoq.com/articles/aws-multi-region-signing/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Removing a Hidden Round Trip from a Multi-Region AWS API",
+      "date": "2026-07-14T04:53:16.192Z"
+    },
+    "https://www.infoq.com/podcasts/governance-age-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: Governance in the Age of AI: A Conversation with Sarah Wells",
+      "date": "2026-07-14T04:53:16.192Z"
+    },
+    "https://www.infoq.com/news/2026/07/atproto-webapp/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "How to Build More Resilient Local-First Applications With AT Protocol Infrastructure",
+      "date": "2026-07-14T04:53:16.192Z"
     }
   },
-  "lastRun": "2026-07-13T05:39:54.370Z"
+  "lastRun": "2026-07-14T04:53:16.192Z"
 }
