@@ -319,7 +319,103 @@
     "https://www.infoq.com/news/2026/07/atproto-webapp/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "How to Build More Resilient Local-First Applications With AT Protocol Infrastructure",
       "date": "2026-07-14T04:53:16.192Z"
+    },
+    "https://fabiensanglard.net/jurrasic_park_computers/index.html": {
+      "title": "Jurassic Park computers in excruciating detail",
+      "date": "2026-07-15T04:53:32.398Z"
+    },
+    "https://tailscale.com/security-bulletins": {
+      "title": "TS-2026-009: Insecure argument handling in Tailscale SSH permitted root access",
+      "date": "2026-07-15T04:53:32.398Z"
+    },
+    "https://fortune.com/2026/07/14/data-centers-23-billion-electricity-bills/": {
+      "title": "Data centers have hiked electricity prices on the public by $23B",
+      "date": "2026-07-15T04:53:32.398Z"
+    },
+    "https://www.starfleetmath.com/": {
+      "title": "Solving 20 Erdős Problems with 20 Codex Accounts Running in Parallel",
+      "date": "2026-07-15T04:53:32.399Z"
+    },
+    "https://vpd.ca/": {
+      "title": "Vancouver PD website features Quick Escape button that wipes itself from history",
+      "date": "2026-07-15T04:53:32.399Z"
+    },
+    "https://www.benjamin-bai.com/projects/lemario": {
+      "title": "LeMario: Training a JEPA World Model on Super Mario Bros",
+      "date": "2026-07-15T04:53:32.399Z"
+    },
+    "https://xeiaso.net/notes/2026/check-your-smart-tv/": {
+      "title": "Probably check on your smart appliances",
+      "date": "2026-07-15T04:53:32.399Z"
+    },
+    "https://www.bis.org/publ/bisbull120.pdf": {
+      "title": "Financing the AI boom: from cash flows to debt [pdf]",
+      "date": "2026-07-15T04:53:32.400Z"
+    },
+    "https://krebsonsecurity.com/2026/07/microsoft-patches-a-record-570-security-flaws/": {
+      "title": "Microsoft Patches a Record 570 Security Flaws",
+      "date": "2026-07-15T04:53:32.400Z"
+    },
+    "https://github.blog/changelog/2026-07-14-dependabot-version-updates-introduce-default-package-cooldown/": {
+      "title": "Dependabot version updates introduce default package cooldown",
+      "date": "2026-07-15T04:53:32.400Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cn757r6824vo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「香港應是個更自由的地方」：大陸讀者眼中的獨立書店往事",
+      "date": "2026-07-15T04:53:32.702Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cj3g3mygk2xo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "小紅書前員工跨境實名舉報，傳聞中的赴港上市計劃會有變化嗎？",
+      "date": "2026-07-15T04:53:32.702Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c2dydezz0jro/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「不出去，這一輩子我的心都不甘」：中國異見人士董廣平跨海偷渡韓國",
+      "date": "2026-07-15T04:53:32.702Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c33ygke3y83o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "霸王龍創下史上最昂貴恐龍標本拍賣紀錄",
+      "date": "2026-07-15T04:53:32.702Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqj1jer2z22o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「來月經讓我的ADHD更厲害了」",
+      "date": "2026-07-15T04:53:32.703Z"
+    },
+    "https://www.infoq.com/news/2026/07/cloud-workbench-vscode-extension/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Google Cloud Workbench Notebooks Extension Connects VS Code to Google Cloud's Jupyter Notebooks",
+      "date": "2026-07-15T04:53:33.266Z"
+    },
+    "https://www.infoq.com/news/2026/07/agentic-resource-discovery-spec/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Google and Industry Partners Announce Agentic Resource Discovery Specification for AI Agents",
+      "date": "2026-07-15T04:53:33.266Z"
+    },
+    "https://www.infoq.com/news/2026/07/meta-brain-interface/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Meta's Noninvasive Brain–Computer Interface Brain2Qwerty Achieves 61% Accuracy",
+      "date": "2026-07-15T04:53:33.266Z"
+    },
+    "https://www.infoq.com/presentations/migration-micro-frontend/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Lessons Learned in Migrating to Micro-Frontends",
+      "date": "2026-07-15T04:53:33.267Z"
+    },
+    "https://www.infoq.com/news/2026/07/linkerd-2-20-improvements/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Linkerd 2.20 Delivers Smarter Traffic Management and Dramatic Efficiency Gains",
+      "date": "2026-07-15T04:53:33.267Z"
+    },
+    "https://www.infoq.com/news/2026/07/genkit-agents-api-preview/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Google's Genkit Ships Agents API with Detached Turns and Human-in-the-Loop for TypeScript and Go",
+      "date": "2026-07-15T04:53:33.267Z"
+    },
+    "https://www.infoq.com/articles/ai-speed-context-store-architecture/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Comprehension at AI Speed: Building a Context Store for Evolutionary Architecture",
+      "date": "2026-07-15T04:53:33.267Z"
+    },
+    "https://www.infoq.com/news/2026/07/durable-document-schema/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Evolutionary Data Through Schemaboi: Achieving Forward, Backwards, and Sideways Compatibility",
+      "date": "2026-07-15T04:53:33.267Z"
+    },
+    "https://www.infoq.com/news/2026/07/swiftdata-27-whats-new/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "SwiftData Enhances Queries, Adds Support for External Types and Data Store Observation",
+      "date": "2026-07-15T04:53:33.268Z"
     }
   },
-  "lastRun": "2026-07-14T04:53:16.192Z"
+  "lastRun": "2026-07-15T04:53:33.268Z"
 }
