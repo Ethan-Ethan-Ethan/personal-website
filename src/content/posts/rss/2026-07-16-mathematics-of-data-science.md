@@ -1,0 +1,19 @@
+---
+title: "Mathematics of Data Science"
+description: "Article URL: https://arxiv.org/abs/2607.11938 Comments URL: https://news.ycombinator.com/item?id=48939896 Points: 122 # Comments: 3"
+date: 2026-07-16
+category: "科技"
+tags: ["Hacker News", "科技趨勢"]
+source: rss
+sourceUrl: "https://arxiv.org/abs/2607.11938"
+---
+
+> 原文：[Mathematics of Data Science](https://arxiv.org/abs/2607.11938)
+
+Article URL: https://arxiv.org/abs/2607.11938 Comments URL: https://news.ycombinator.com/item?id=48939896 Points: 122 # Comments: 3
+
+
+
+---
+
+*此文章由 RSS 自動聚合，完整內容請點閱原文。*

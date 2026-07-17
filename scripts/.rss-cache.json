@@ -487,7 +487,83 @@
     "https://www.infoq.com/news/2026/07/claude-apps-gateway-aws/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "AWS Ships Claude Apps Gateway as Self-Hosted Control Plane for Claude Code and Claude Desktop",
       "date": "2026-07-16T05:12:40.591Z"
+    },
+    "https://www.smithsonianmag.com/smart-news/how-has-roman-concrete-lasted-for-millennia-a-1900-year-old-latrine-offers-new-clues-about-the-materials-impressive-durability-180989115/": {
+      "title": "How Has Roman Concrete Lasted for Millennia? 1,900-Year-Old Latrine Offers Clues",
+      "date": "2026-07-17T05:15:51.918Z"
+    },
+    "https://privacypros.com.au/privacy-hub/articles/dv-safe-phone-australia/": {
+      "title": "GrapheneOS recommended for domestic abuse victims",
+      "date": "2026-07-17T05:15:51.918Z"
+    },
+    "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t13l/executive": {
+      "title": "M 3.9 Experimental Explosion – 147 Km ENE of Ponce Inlet, Florida",
+      "date": "2026-07-17T05:15:51.918Z"
+    },
+    "https://pydantic.dev/articles/the-human-in-the-loop-is-tired": {
+      "title": "The Human-in-the-Loop Is Tired",
+      "date": "2026-07-17T05:15:51.919Z"
+    },
+    "https://mojibake.zaerl.com/": {
+      "title": "Show HN: Mojibake – A low-level Unicode library written in C",
+      "date": "2026-07-17T05:15:51.919Z"
+    },
+    "https://github.com/alxndrTL/little-book-rl/": {
+      "title": "The Little Book of Reinforcement Learning",
+      "date": "2026-07-17T05:15:51.919Z"
+    },
+    "https://hellorecon.com/blog/cve-2026-25089": {
+      "title": "CVE-2026-25089: FortiSandbox unauthenticated command injection added to CISA KEV",
+      "date": "2026-07-17T05:15:51.920Z"
+    },
+    "https://news.yale.edu/2026/07/15/meet-likweli-new-monkey-species-discovered-congo-basin": {
+      "title": "'Likweli': A new monkey species discovered in the Congo Basin",
+      "date": "2026-07-17T05:15:51.920Z"
+    },
+    "https://arxiv.org/abs/2607.12395": {
+      "title": "Ring-Zero: Scaling Zero RL to a Trillion Parameters for Emergent Reasoning",
+      "date": "2026-07-17T05:15:51.920Z"
+    },
+    "https://arxiv.org/abs/2607.11938": {
+      "title": "Mathematics of Data Science",
+      "date": "2026-07-17T05:15:51.920Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c5ywdnz6yqgo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "劍指中國 特朗普稱美國選舉安全有「令人震驚的漏洞」",
+      "date": "2026-07-17T05:15:52.052Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3d392peye9o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "涉以特朗普演說內幕下注，白宮讀稿機操作員獲利10萬元被查",
+      "date": "2026-07-17T05:15:52.052Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cy0jnwzx5dzo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「贏了官司輸了輿論」：LV 訴茉莉奶白案，司法判決之後再被網絡審判",
+      "date": "2026-07-17T05:15:52.052Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c4gwedwpvy4o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「充滿魔力與人性」電影《奧德賽》的五大看點",
+      "date": "2026-07-17T05:15:52.052Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cy07rwyeg7ko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "阿根廷揮舞福克蘭群島橫幅宣示主權後面臨FIFA處分",
+      "date": "2026-07-17T05:15:52.053Z"
+    },
+    "https://www.infoq.com/news/2026/07/aws-continuum-code-security/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Continuum to Enable Agentic Code Security for Enterprises",
+      "date": "2026-07-17T05:15:53.052Z"
+    },
+    "https://www.infoq.com/news/2026/07/platform-business-users/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Developing and Deploying a Platform that the Business Understands and Developers Actually Want",
+      "date": "2026-07-17T05:15:53.053Z"
+    },
+    "https://www.infoq.com/presentations/rust-tps-service/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: The Rust High Performance Talk You Did Not Expect",
+      "date": "2026-07-17T05:15:53.053Z"
+    },
+    "https://www.infoq.com/news/2026/07/ai-agents-billing-guardrails/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AI Agents with Cloud Credentials Are Outrunning Billing Guardrails Built for Human-Speed Mistakes",
+      "date": "2026-07-17T05:15:53.053Z"
     }
   },
-  "lastRun": "2026-07-16T05:12:40.592Z"
+  "lastRun": "2026-07-17T05:15:53.053Z"
 }
