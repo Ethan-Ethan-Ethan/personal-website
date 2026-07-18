@@ -563,7 +563,79 @@
     "https://www.infoq.com/news/2026/07/ai-agents-billing-guardrails/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "AI Agents with Cloud Credentials Are Outrunning Billing Guardrails Built for Human-Speed Mistakes",
       "date": "2026-07-17T05:15:53.053Z"
+    },
+    "https://www.macworld.com/article/3189951/apples-latest-game-porting-toolkit-beta-changed-how-i-think-about-mac-gaming.html": {
+      "title": "Mac gaming is finally getting the overpowered upgrade it deserves",
+      "date": "2026-07-18T04:50:40.909Z"
+    },
+    "https://moonstone.sh/": {
+      "title": "Moonstone: Modern, cross-platform Lua runtime and package manager written in Zig",
+      "date": "2026-07-18T04:50:40.909Z"
+    },
+    "https://pinewind.bearblog.dev/i-started-a-dirt-notebook/": {
+      "title": "I Started a \"Dirt Notebook\"",
+      "date": "2026-07-18T04:50:40.909Z"
+    },
+    "https://www.ycombinator.com/companies/drdroid/jobs/w45QcNV-product-engineer-assignment-mandatory": {
+      "title": "DrDroid (YC W23) Is Hiring",
+      "date": "2026-07-18T04:50:40.910Z"
+    },
+    "https://www.stenchill.com/en/": {
+      "title": "Stenchill: 3D Printable Solder Paste Stencil Generator",
+      "date": "2026-07-18T04:50:40.910Z"
+    },
+    "https://www.isomorphiclabs.com/articles/the-isomorphic-labs-drug-design-engine-unlocks-a-new-frontier": {
+      "title": "The Isomorphic Labs Drug Design Engine unlocks a new frontier beyond AlphaFold",
+      "date": "2026-07-18T04:50:40.910Z"
+    },
+    "https://localnewsmatters.org/2026/07/15/kaiser-nurses-say-ai-workplace-surveillance-are-making-their-jobs-and-patient-care-worse/": {
+      "title": "Kaiser nurses say AI, workplace surveillance are making their jobs, care worse",
+      "date": "2026-07-18T04:50:40.910Z"
+    },
+    "https://github.com/BadChemical/IoT-Vulnerability-Research-Public/blob/main/TP-Link_Kasa_EC71/Kasa_EC71.md": {
+      "title": "TP-Link Kasa cameras leaked home GPS via unauthenticated UDP for 6 years",
+      "date": "2026-07-18T04:50:40.910Z"
+    },
+    "https://www.cnbc.com/2026/07/17/faa-boeing-737-max-787.html": {
+      "title": "FAA lets Boeing sign off on 737 MAX, 787 airworthiness certificates again",
+      "date": "2026-07-18T04:50:40.910Z"
+    },
+    "https://www.crowdsupply.com/oddly-specific-objects/open-book-touch": {
+      "title": "Open Book Touch: open-source e-reader",
+      "date": "2026-07-18T04:50:40.911Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c9w0jqyqngdo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "梅西、馬拉多納、貝利——誰才是真正的足球史上最強？",
+      "date": "2026-07-18T04:50:41.110Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c2k7jkvwq1zo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "習近平首度現身世界AI大會：中國的「開源」戰略意味著什麼？",
+      "date": "2026-07-18T04:50:41.110Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3v0xg2zq9go/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "香港「禁書時代」：國安法下那些被下架、點名與檢走的書",
+      "date": "2026-07-18T04:50:41.157Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm2g3pyx3j1o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「貝安德是誰？」：為何新任英國首相仍是一個充滿謎團的人物",
+      "date": "2026-07-18T04:50:41.159Z"
+    },
+    "https://www.infoq.com/presentations/otel-slm-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: From OTEL to SLMs: Distilling Frontier Model Behaviour from Production Telemetry",
+      "date": "2026-07-18T04:50:41.446Z"
+    },
+    "https://www.infoq.com/news/2026/07/cncf-trustworthy-agentic-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloud Native Infrastructure Emerges as the Foundation for Trustworthy Agentic AI",
+      "date": "2026-07-18T04:50:41.446Z"
+    },
+    "https://www.infoq.com/news/2026/07/uber-opensearch-zone-failure/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "How Uber Builds Zone-Failure-Resilient OpenSearch Clusters",
+      "date": "2026-07-18T04:50:41.447Z"
+    },
+    "https://www.infoq.com/news/2026/07/production-ai-platforms-evals/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "QCon AI Boston: Production AI Moves Beyond Prompts to Platforms, Harnesses, and Evals",
+      "date": "2026-07-18T04:50:41.447Z"
     }
   },
-  "lastRun": "2026-07-17T05:15:53.053Z"
+  "lastRun": "2026-07-18T04:50:41.447Z"
 }
