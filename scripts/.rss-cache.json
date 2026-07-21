@@ -771,7 +771,95 @@
     "https://www.infoq.com/news/2026/07/cloudformation-express-mode/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "AWS Introduces CloudFormation Express Mode for Faster Infrastructure Deployments",
       "date": "2026-07-20T05:41:52.695Z"
+    },
+    "https://exsitu.app/map": {
+      "title": "Show HN: Ex Situ – open-source spatial index of displaced cultural artifacts",
+      "date": "2026-07-21T05:22:52.129Z"
+    },
+    "https://alganet.github.io/terminal/?p=post:2026-07-21-00-Bash-for-Browser-Frontend&amp;lang=en": {
+      "title": "Bash for Browser Front End",
+      "date": "2026-07-21T05:22:52.129Z"
+    },
+    "https://asia.nikkei.com/business/technology/five-us-tech-giants-hidden-debts-soar-to-1.65tn-on-opaque-ai-funding": {
+      "title": "Five US tech giants' hidden debts soar to $1.65T on opaque AI funding",
+      "date": "2026-07-21T05:22:52.129Z"
+    },
+    "https://www.armaangomes.com/blogs/doom/": {
+      "title": "Running Doom on Our Custom CPU and Going Viral",
+      "date": "2026-07-21T05:22:52.129Z"
+    },
+    "https://www.instructables.com/A-Koi-Pond-Mosaic-Made-From-10-Pounds-of-3D-Printe/": {
+      "title": "A Koi Pond Mosaic Made from 10 Pounds of 3D Printer Waste",
+      "date": "2026-07-21T05:22:52.129Z"
+    },
+    "https://github.com/janestreet/incremental": {
+      "title": "Jane Street: Incremental",
+      "date": "2026-07-21T05:22:52.130Z"
+    },
+    "https://www.aclu.org/news/privacy-technology/tracking-alpr-cameras/flock-safety-credibility-lost-as-it-repeatedly-lies-to-city-councils-police-departments-and-public-across-the-country": {
+      "title": "Flock Credibility Lost as It Repeatedly Lies to City Councils, Police, & Public",
+      "date": "2026-07-21T05:22:52.130Z"
+    },
+    "https://forum.jellyfin.org/t-project-leadership-changes": {
+      "title": "Jellyfin founder Andrew leaves team",
+      "date": "2026-07-21T05:22:52.130Z"
+    },
+    "https://words.filippo.io/passkey-record/": {
+      "title": "Opaque, Interoperable Passkey Records (and a Go API)",
+      "date": "2026-07-21T05:22:52.130Z"
+    },
+    "https://numerlab.org/2025/07/20/bashumerate-enumerator/": {
+      "title": "I wrote an bash enumerator because I was sick of xargs",
+      "date": "2026-07-21T05:22:52.131Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3v0x30ny39o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「兩岸之間只剩三公里」：金門對面多了一座巨型機場，台灣憂軍事與飛航安全",
+      "date": "2026-07-21T05:22:52.502Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c20e6vk7dn6o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "從烏干達、美國到中國：在俄羅斯戰爭中喪生的外國人",
+      "date": "2026-07-21T05:22:52.502Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3d3x5njxxgo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "阿里旗下速賣通因售非法商品 被歐盟罰款 5.5億歐元 ",
+      "date": "2026-07-21T05:22:52.503Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cvgjm0x0pzlo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "貝安德入主唐寧街後 中英關係會開啟新篇章嗎？",
+      "date": "2026-07-21T05:22:52.503Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c05qzd2v54yo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "外賣騎手獲中國頂級文學獎，作品靈感來自日常工作挑戰",
+      "date": "2026-07-21T05:22:52.503Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/clyxj2pky5go/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "更多比賽，更多爭議——該如何評價2026年FIFA世界盃？",
+      "date": "2026-07-21T05:22:52.504Z"
+    },
+    "https://www.infoq.com/news/2026/07/java-news-roundup-jul13-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: Value Objects, WildFly 41, TornadoVM, LangChain4j, Oracle AI Agent Studio",
+      "date": "2026-07-21T05:22:53.259Z"
+    },
+    "https://www.infoq.com/news/2026/07/doordash-entity-cache-proxy/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "DoorDash Uses Envoy and Valkey for a 1.5M RPS Proxy Cache with 99.99999% Availability",
+      "date": "2026-07-21T05:22:53.259Z"
+    },
+    "https://www.infoq.com/news/2026/07/infoq-online-cohorts-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Three InfoQ Certification Cohorts Start This August: Meet the Facilitators",
+      "date": "2026-07-21T05:22:53.259Z"
+    },
+    "https://www.infoq.com/presentations/platform-engineering-product-mindset/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Platform Engineering for Everyone - Success Can’t Be Coded",
+      "date": "2026-07-21T05:22:53.260Z"
+    },
+    "https://www.infoq.com/podcasts/strands-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: Strands Agents with Clare Liguori",
+      "date": "2026-07-21T05:22:53.260Z"
+    },
+    "https://www.infoq.com/news/2026/07/loom-aws-agent-platform/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Releases Loom, an Open-Source Reference Platform for Governing AI Agents at Enterprise Scale",
+      "date": "2026-07-21T05:22:53.260Z"
     }
   },
-  "lastRun": "2026-07-20T05:41:52.695Z"
+  "lastRun": "2026-07-21T05:22:53.260Z"
 }
