@@ -859,7 +859,103 @@
     "https://www.infoq.com/news/2026/07/loom-aws-agent-platform/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "AWS Releases Loom, an Open-Source Reference Platform for Governing AI Agents at Enterprise Scale",
       "date": "2026-07-21T05:22:53.260Z"
+    },
+    "https://late.sh/": {
+      "title": "Late.sh – a command-line Clubhouse for computer people",
+      "date": "2026-07-22T05:21:33.241Z"
+    },
+    "https://krebsonsecurity.com/2026/07/lg-to-ban-residential-proxies-from-smart-tv-apps/": {
+      "title": "LG to ban residential proxies from smart TV apps",
+      "date": "2026-07-22T05:21:33.242Z"
+    },
+    "http://hintjens.com/blog:99": {
+      "title": "Ten Steps Towards Happiness (2015)",
+      "date": "2026-07-22T05:21:33.242Z"
+    },
+    "https://buildkite.engineering/how-a-flaky-test-exposed-a-redis-use-after-free/": {
+      "title": "A flaky test exposed a Redis client use-after-free",
+      "date": "2026-07-22T05:21:33.242Z"
+    },
+    "https://blog.jimgrey.net/2026/07/21/its-a-shame-whats-happened-to-radio-3/": {
+      "title": "It's a shame what's happened to radio",
+      "date": "2026-07-22T05:21:33.242Z"
+    },
+    "https://fireworks.ai/blog/kimik3-fable": {
+      "title": "Kimi K3 Is Competitive with Fable; Kimi K3 and Fable Is SoTA",
+      "date": "2026-07-22T05:21:33.242Z"
+    },
+    "https://www.getcomputable.com/": {
+      "title": "Show HN: Computable – Buy, sell, and redeem GPU for the exact weeks you want",
+      "date": "2026-07-22T05:21:33.243Z"
+    },
+    "https://ai.google.dev/gemini-api/docs/latest-model": {
+      "title": "Gemini last models: temperature, top_p, and top_k are deprecated and ignored",
+      "date": "2026-07-22T05:21:33.243Z"
+    },
+    "https://www.tryai.dev/blog/ai-drawing-arena-colored-pencils-claude-gpt-grok": {
+      "title": "\"Drawing\" the Mona Lisa with GPT-5.6, Claude, Gemini, and Grok",
+      "date": "2026-07-22T05:21:33.243Z"
+    },
+    "https://terrytao.wordpress.com/2026/07/21/a-digestion-of-the-jacobian-conjecture-counterexample/": {
+      "title": "A digestion of the Jacobian conjecture counterexample",
+      "date": "2026-07-22T05:21:33.243Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cx25g733w65o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「如果有一座橋」：翔安機場啟用在即，金門人怎麼看北京的「情感工程」？",
+      "date": "2026-07-22T05:21:33.445Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c9q97x49gd4o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "APEC前夕四個月，中國深圳地鐵突加強安檢惹民怨",
+      "date": "2026-07-22T05:21:33.445Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cx2vpjg3qlpo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "連日抗議後 澤連斯基革除烏克蘭軍方總司令",
+      "date": "2026-07-22T05:21:33.445Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cdewkr7e307o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "貝安德的隨性風格能否經受唐寧街10號的考驗？",
+      "date": "2026-07-22T05:21:33.445Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cn5n4krydr7o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "台灣防空演習將首度模擬「斷網」，象徵防衛思維轉型？",
+      "date": "2026-07-22T05:21:33.445Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cy74k4zk00ko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普訴BBC誹謗案 法官頒令總統交出紀錄",
+      "date": "2026-07-22T05:21:33.446Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cly8vlyr1mzo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "貝克漢為何成為世界盃在美國的門面人物",
+      "date": "2026-07-22T05:21:33.446Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cvgwp1xgq02o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "亞洲年輕人大舉押注科技股 他們過得怎麼樣？",
+      "date": "2026-07-22T05:21:33.446Z"
+    },
+    "https://www.infoq.com/news/2026/07/android-studio-quail-2/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Android Studio Quail 2 Redesigns Agent Mode, Streamlines AI-Assisted Coding",
+      "date": "2026-07-22T05:21:34.472Z"
+    },
+    "https://www.infoq.com/news/2026/07/rspack-2-release/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "RSPack 2.0: Performance Gains, Leaner Dependencies and ESM Core",
+      "date": "2026-07-22T05:21:34.472Z"
+    },
+    "https://www.infoq.com/news/2026/07/gitlab-carbon-awareness/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "GitLab Brings Carbon Awareness to CI/CD to Measure the Environmental Cost of Software Delivery",
+      "date": "2026-07-22T05:21:34.472Z"
+    },
+    "https://www.infoq.com/presentations/ai-mobile/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Engineering AI for Creativity and Curiosity on Mobile",
+      "date": "2026-07-22T05:21:34.472Z"
+    },
+    "https://www.infoq.com/news/2026/07/yelp-ai-model-training/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Yelp Unifies ML Model Training with Training Orchestrator",
+      "date": "2026-07-22T05:21:34.473Z"
+    },
+    "https://www.infoq.com/news/2026/07/gitlab-19-2-ai-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "GitLab 19.2 Puts AI Agents to Work on the Security Backlog",
+      "date": "2026-07-22T05:21:34.473Z"
     }
   },
-  "lastRun": "2026-07-21T05:22:53.260Z"
+  "lastRun": "2026-07-22T05:21:34.473Z"
 }
