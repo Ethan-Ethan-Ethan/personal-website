@@ -955,7 +955,79 @@
     "https://www.infoq.com/news/2026/07/gitlab-19-2-ai-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "GitLab 19.2 Puts AI Agents to Work on the Security Backlog",
       "date": "2026-07-22T05:21:34.473Z"
+    },
+    "https://github.blog/security/next-chapter-restructuring-githubs-bug-bounty-program/": {
+      "title": "Restructuring GitHub's bug bounty program",
+      "date": "2026-07-23T05:27:45.714Z"
+    },
+    "https://arxiv.org/abs/2607.20386": {
+      "title": "Honey Bee Colony Monitoring via Audio IoT Sensors, Tensorgrams and RNNs",
+      "date": "2026-07-23T05:27:45.715Z"
+    },
+    "https://petals.dev/": {
+      "title": "Petals: Run LLMs at home, BitTorrent-style",
+      "date": "2026-07-23T05:27:45.715Z"
+    },
+    "https://codeberg.org/Codeberg/org/pulls/1254": {
+      "title": "Codeberg Bans Cryptocurrency Projects",
+      "date": "2026-07-23T05:27:45.715Z"
+    },
+    "https://www.cnn.com/2026/07/15/science/medici-family-mystery-dna-malaria": {
+      "title": "Medici family mystery may be solved after more than 400 years",
+      "date": "2026-07-23T05:27:45.715Z"
+    },
+    "https://cacm.acm.org/blogcacm/if-you-think-you-can-do-real-world-text-to-sql/": {
+      "title": "Any text-to-SQL benchmark should address difficulties of real-world data stores",
+      "date": "2026-07-23T05:27:45.716Z"
+    },
+    "https://claytondorge.com/patterns-list": {
+      "title": "All 253 Patterns from Christopher Alexander's a Pattern Language Summarized",
+      "date": "2026-07-23T05:27:45.716Z"
+    },
+    "http://yummymelon.com/devnull/malleable-computing-emacs-and-you.html": {
+      "title": "Malleable Computing, Emacs, and You",
+      "date": "2026-07-23T05:27:45.716Z"
+    },
+    "https://nondescriptpointer.com/articles/fairphone-6-wide-camera-linux/": {
+      "title": "Fairphone 6 wide camera experimental Linux support",
+      "date": "2026-07-23T05:27:45.716Z"
+    },
+    "https://twitter.com/na_announce/status/2079952538040672302": {
+      "title": "John C. Dvorak has died",
+      "date": "2026-07-23T05:27:45.716Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c9w0l4wgjq4o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "施南生：華語電影「金牌製片」病逝 友人眼中的最後「香港海派」",
+      "date": "2026-07-23T05:27:45.905Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cpw92ew1rw2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「我一天之內賺了10萬英鎊」：看TikTok直播帶貨在英國的熱鬧",
+      "date": "2026-07-23T05:27:45.906Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c20dwywr8gxo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "日本鼓勵男性穿短褲上班，女性不滿「腿毛騷擾」",
+      "date": "2026-07-23T05:27:45.906Z"
+    },
+    "https://www.infoq.com/news/2026/07/github-issues-navigation/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "GitHub Increased Instant Navigation from 4% to 22% by Rethinking Client Side Architecture",
+      "date": "2026-07-23T05:27:46.907Z"
+    },
+    "https://www.infoq.com/news/2026/07/anthropic-claude-containment/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Anthropic Details How It Contains Claude Across Web, Code, and Cowork",
+      "date": "2026-07-23T05:27:46.908Z"
+    },
+    "https://www.infoq.com/presentations/agent-software-engineering/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: From Copy-Paste to Composition: Building Agents Like Real Software",
+      "date": "2026-07-23T05:27:46.908Z"
+    },
+    "https://www.infoq.com/news/2026/07/aws-billing-estimates-incident/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Billing Bug Shows Customers Trillion-Dollar Estimates While Its Own Cost Alarms Fail to Act",
+      "date": "2026-07-23T05:27:46.908Z"
+    },
+    "https://www.infoq.com/news/2026/07/google-gke-ai-security-blueprint/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "GKE Security Blueprint Joins Growing List of Cloud AI Frameworks",
+      "date": "2026-07-23T05:27:46.908Z"
     }
   },
-  "lastRun": "2026-07-22T05:21:34.473Z"
+  "lastRun": "2026-07-23T05:27:46.909Z"
 }
