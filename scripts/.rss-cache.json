@@ -1027,7 +1027,107 @@
     "https://www.infoq.com/news/2026/07/google-gke-ai-security-blueprint/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "GKE Security Blueprint Joins Growing List of Cloud AI Frameworks",
       "date": "2026-07-23T05:27:46.908Z"
+    },
+    "https://www.wheresyoured.at/the-subprime-data-center-crisis/": {
+      "title": "Zitron: The Subprime Datacenter Crisis",
+      "date": "2026-07-24T05:22:16.936Z"
+    },
+    "http://visual6502.org/JSSim/index.html": {
+      "title": "The Visual 6502",
+      "date": "2026-07-24T05:22:16.936Z"
+    },
+    "https://jdan.github.io/98.css/#status-bar": {
+      "title": "98.css",
+      "date": "2026-07-24T05:22:16.936Z"
+    },
+    "https://www.science.org/content/article/exclusive-death-girl-chinese-gene-editing-trial-was-never-made-public": {
+      "title": "Couple pay >$800k for a gene-editing therapy for their daughter. She died.",
+      "date": "2026-07-24T05:22:16.937Z"
+    },
+    "https://lwn.net/Articles/1084545/": {
+      "title": "Mourning Dan Williams",
+      "date": "2026-07-24T05:22:16.937Z"
+    },
+    "https://news.ycombinator.com/item?id=49026810": {
+      "title": "Show HN: Echo – Fable-level results at 1/3 the cost using open-weight models",
+      "date": "2026-07-24T05:22:16.937Z"
+    },
+    "https://lukekanies.com/writing/building-on-atproto/": {
+      "title": "Building on ATProto",
+      "date": "2026-07-24T05:22:16.937Z"
+    },
+    "https://pme.uchicago.edu/news-events/news/cleaner-route-purifying-rare-earth-elements": {
+      "title": "A solid-state “atomic channel” for separating rare earth elements",
+      "date": "2026-07-24T05:22:16.938Z"
+    },
+    "https://obsoletesony.substack.com/p/why-sony-cant-bring-back-classic-walkman": {
+      "title": "Why Sony can't bring back its classic Walkman models",
+      "date": "2026-07-24T05:22:16.938Z"
+    },
+    "https://github.com/izeigerman/claude-thermos": {
+      "title": "Show HN: Claude-thermos keeps your Claude session warm for you",
+      "date": "2026-07-24T05:22:16.938Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c4g63djrgy8o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "曼德海峽：胡塞武裝的威脅會否觸發紅海航運危機？",
+      "date": "2026-07-24T05:22:16.983Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/clyezy3l60qo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美國以「強迫勞動」為由徵新關稅，影響中國、台灣等60個貿易夥伴",
+      "date": "2026-07-24T05:22:16.984Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c62vqpqdqjwo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美中AI科技戰：白宮稱中國「月之暗面」Kimi K3模型竊取Anthropic技術",
+      "date": "2026-07-24T05:22:16.984Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c77gr3163dxo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "台灣陸配參選資格「設籍滿十年」改「除籍滿十年」意味什麼？",
+      "date": "2026-07-24T05:22:16.984Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cx2m5e7g3dyo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "為什麼你總是在凌晨三點醒來？",
+      "date": "2026-07-24T05:22:16.984Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cy8ep5lp2n6o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "香港「47人案」前議員胡志偉英國機場險被遣返",
+      "date": "2026-07-24T05:22:16.985Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c78gw439gp9o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中國電影《澎湖海戰》傳上映遭擱置：「反清復明」民間史觀神經再被挑動",
+      "date": "2026-07-24T05:22:16.985Z"
+    },
+    "https://www.infoq.com/news/2026/07/gitlost-github-prompt-injection/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Indirect Prompt Injection Exploits GitHub's AI Agent to Leak Private Repository Data",
+      "date": "2026-07-24T05:22:18.053Z"
+    },
+    "https://www.infoq.com/news/2026/07/expedia-ai-observability-star/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Expedia Uses AI Driven Service Telemetry Analyzer to Accelerate Incident Investigation",
+      "date": "2026-07-24T05:22:18.053Z"
+    },
+    "https://www.infoq.com/news/2026/07/platform-that-helps-developers/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Achieving Compliance as a Platform Engineering Team by Helping Developers",
+      "date": "2026-07-24T05:22:18.053Z"
+    },
+    "https://www.infoq.com/presentations/dbos/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Compiling Workflows into Databases: The Architecture That Shouldn't Work (But Does)",
+      "date": "2026-07-24T05:22:18.053Z"
+    },
+    "https://www.infoq.com/news/2026/07/qcon-ai-newyork-2026-live/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "QCon AI New York 2026: Registration Opens for December 15-16 Production-AI Conference",
+      "date": "2026-07-24T05:22:18.054Z"
+    },
+    "https://www.infoq.com/news/2026/07/bijou64-canonical-varint/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Ink &amp; Switch Introduces Bijou64: Canonical Variable-Length Integer Encoding for Safe Parsing",
+      "date": "2026-07-24T05:22:18.054Z"
+    },
+    "https://www.infoq.com/articles/multi-agent-security-operations/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Multi-Agent AI for Production Security Operations: An A2A and MCP Architecture in a 5G Core",
+      "date": "2026-07-24T05:22:18.054Z"
+    },
+    "https://www.infoq.com/news/2026/07/meta-react-compiler-rust/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Meta Ports React Compiler to Rust for Faster Builds and Tighter Toolchain Integration",
+      "date": "2026-07-24T05:22:18.054Z"
     }
   },
-  "lastRun": "2026-07-23T05:27:46.909Z"
+  "lastRun": "2026-07-24T05:22:18.054Z"
 }
