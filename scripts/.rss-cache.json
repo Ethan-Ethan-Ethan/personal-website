@@ -1247,7 +1247,71 @@
     "https://www.infoq.com/news/2026/07/client-side-load-balancer/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "How Zalando Built an In-Process Client-Side Load Balancer for One Million Requests per Second",
       "date": "2026-07-26T05:34:27.766Z"
+    },
+    "https://nikolays.github.io/PGSimCity/": {
+      "title": "PGSimCity - How PostgreSQL Works",
+      "date": "2026-07-27T05:52:58.355Z"
+    },
+    "https://fontsinuse.com/": {
+      "title": "Fonts In Use – Find out where a font is used",
+      "date": "2026-07-27T05:52:58.355Z"
+    },
+    "https://github.com/vercel-labs/scriptc": {
+      "title": "Scriptc by Vercel: TypeScript-to-Native compiler, no JavaScript engine in binary",
+      "date": "2026-07-27T05:52:58.355Z"
+    },
+    "https://www.techspot.com/news/113236-us-prosecutors-charge-atlanta-man-after-grapheneos-phone.html": {
+      "title": "US citizen charged after GrapheneOS phone wipes during airport search",
+      "date": "2026-07-27T05:52:58.355Z"
+    },
+    "https://gracefulliberty.com/articles/teaching-kids-forth/": {
+      "title": "Teaching Kids Forth",
+      "date": "2026-07-27T05:52:58.356Z"
+    },
+    "https://www.imperialviolet.org/2026/07/26/zstd-lean.html": {
+      "title": "We have proof automation now",
+      "date": "2026-07-27T05:52:58.356Z"
+    },
+    "https://spectrum.ieee.org/space-debris-atmosphere-burn-up": {
+      "title": "Plasma Tunnels Reveal How Dying Satellites Fall to Earth",
+      "date": "2026-07-27T05:52:58.356Z"
+    },
+    "https://github.com/AARomanov1985/Audio-Cassette-Simulation": {
+      "title": "Simulate cassette tape audio profiles using FFmpeg",
+      "date": "2026-07-27T05:52:58.357Z"
+    },
+    "https://nochan.net/b/Internet-Crap/20260606-How-To-Block-Some-Of-The-Bots/": {
+      "title": "How to Block Some of the Bots",
+      "date": "2026-07-27T05:52:58.357Z"
+    },
+    "https://beyondloom.com/decker/": {
+      "title": "Decker, a platform that builds on the legacy of Hypercard and classic macOS",
+      "date": "2026-07-27T05:52:58.357Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cx2594ne6g7o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "審視阿努廷時代下的泰中關係：中國「長臂管轄」連上泰國了？",
+      "date": "2026-07-27T05:52:58.427Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c1l1m290yl3o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「它一點點侵蝕我的身體」：韓國超級便利隔夜送貨的人命代價",
+      "date": "2026-07-27T05:52:58.427Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqx748q7zrwo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "今年最強颱風「紅霞」登陸中國廣東  逾71萬人疏散",
+      "date": "2026-07-27T05:52:58.427Z"
+    },
+    "https://www.infoq.com/news/2026/07/tanstack-table-v9-beta/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "TanStack Table V9 Beta: Tree-Shakable Features, TanStack Store State, and Lower Memory Usage",
+      "date": "2026-07-27T05:52:59.478Z"
+    },
+    "https://www.infoq.com/news/2026/07/pixelsmash-vulnerability/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AI-Enabled Security Researchers Discover How a Crafted Video Can Provide Attackers Access to Your PC",
+      "date": "2026-07-27T05:52:59.479Z"
+    },
+    "https://www.infoq.com/news/2026/07/eks-version-rollback/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Amazon EKS Adds Kubernetes Version Rollback Within 7 Days of an Upgrade",
+      "date": "2026-07-27T05:52:59.479Z"
     }
   },
-  "lastRun": "2026-07-26T05:34:27.767Z"
+  "lastRun": "2026-07-27T05:52:59.479Z"
 }
