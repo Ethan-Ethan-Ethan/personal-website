@@ -1311,7 +1311,99 @@
     "https://www.infoq.com/news/2026/07/eks-version-rollback/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Amazon EKS Adds Kubernetes Version Rollback Within 7 Days of an Upgrade",
       "date": "2026-07-27T05:52:59.479Z"
+    },
+    "https://thedecisionlab.com/biases/the-illusion-of-explanatory-depth": {
+      "title": "Why do we think we understand the world more than we actually do?",
+      "date": "2026-07-28T05:16:43.847Z"
+    },
+    "https://golemui.com/blog/the-age-of-token-efficiency/": {
+      "title": "The age of token efficiency, the age of libraries",
+      "date": "2026-07-28T05:16:43.847Z"
+    },
+    "https://matthewsaltz.com/blog/using-an-open-model-feels-surprisingly-good/": {
+      "title": "Using an open model feels surprisingly good",
+      "date": "2026-07-28T05:16:43.847Z"
+    },
+    "https://www.lrb.co.uk/the-paper/v48/n14/emily-wilson/an-uncomplicated-man": {
+      "title": "An Uncomplicated Man",
+      "date": "2026-07-28T05:16:43.848Z"
+    },
+    "https://crowdhailer.me/2026-06-08/a-programming-language-for-humans/": {
+      "title": "EYG: A Programming Language for Humans",
+      "date": "2026-07-28T05:16:43.848Z"
+    },
+    "https://fermisense.com/when-machines-take-the-wheel/": {
+      "title": "A $500 RL fine-tune of a 9B open model beat frontier models on catalog review",
+      "date": "2026-07-28T05:16:43.848Z"
+    },
+    "https://jacob.gold/posts/residential-proxies-are-a-national-security-threat/": {
+      "title": "Residential Proxies Are a National Security Threat",
+      "date": "2026-07-28T05:16:43.848Z"
+    },
+    "https://support.apple.com/guide/iphone/iphone-comfortably-riding-a-vehicle-iph55564cb22/ios": {
+      "title": "Vehicle Motion Cues",
+      "date": "2026-07-28T05:16:43.848Z"
+    },
+    "https://arxiv.org/abs/2607.05283": {
+      "title": "The Burau representation of the braid group is faithful for n = 4",
+      "date": "2026-07-28T05:16:43.849Z"
+    },
+    "https://nypost.com/2026/07/26/us-news/netflix-exec-goes-ballistic-after-being-fired-for-stunning-trust-exercise-confession-at-retreat-suit/": {
+      "title": "Netflix employee fired for sharing personal details in retreat trust exercise",
+      "date": "2026-07-28T05:16:43.849Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cg5lvqre8lzo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "唐山大地震50週年：從毛澤東批閱到44年後的餘震，五個鮮為人知的歷史細節",
+      "date": "2026-07-28T05:16:44.475Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c70gzyjnj44o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "香港前議員胡志偉獲准如常逗留英國 向BBC中文談機場風波",
+      "date": "2026-07-28T05:16:44.475Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cjrv7vp8p53o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中國女童基因編輯治療後死亡，為何引發巨大爭議？",
+      "date": "2026-07-28T05:16:44.475Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c0ejq8n30qxo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「這只是開始」：印度Z世代抗議者迫使教育部長下台，然後呢？",
+      "date": "2026-07-28T05:16:44.475Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cn0n57kynz2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "所羅門群島中資金礦坍塌傳多人死亡　突顯「淘金熱」隱憂",
+      "date": "2026-07-28T05:16:44.475Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ce34qp6zdryo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "一文讀懂柏林驕傲遊行攻擊事件的最新情況",
+      "date": "2026-07-28T05:16:44.476Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cr49n7we21qo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "梅根在《澳洲廚神》節目中稱哈里王子「魅力十足」",
+      "date": "2026-07-28T05:16:44.477Z"
+    },
+    "https://www.infoq.com/news/2026/07/dotnet-11-preview-6/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Microsoft Releases .NET 11 Preview 6 With Language and Framework Updates",
+      "date": "2026-07-28T05:16:44.834Z"
+    },
+    "https://www.infoq.com/news/2026/07/java-news-roundup-jul20-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: Simple JSON API, JEPs for JDK 28, Oracle CPUs, Embabel 1.0, Azul Payara, Helidon",
+      "date": "2026-07-28T05:16:44.834Z"
+    },
+    "https://www.infoq.com/podcasts/rethinking-data-client-event-sourcing/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: Rethinking Data: Moving From the Traditional Three-Tier Web Stack to Client-Side Event Sourcing",
+      "date": "2026-07-28T05:16:44.834Z"
+    },
+    "https://www.infoq.com/presentations/kotlin-serverless/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Clean Architecture for Serverless: Business Logic You Can Take Anywhere",
+      "date": "2026-07-28T05:16:44.834Z"
+    },
+    "https://www.infoq.com/articles/evolutionary-architecture-pattern/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: An Evolutionary Architecture Pattern for Managing AI’s Pace of Change",
+      "date": "2026-07-28T05:16:44.834Z"
+    },
+    "https://www.infoq.com/news/2026/07/netflix-llm-platform/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Netflix Details Its In-House LLM Serving Platform with Triton and vLLM",
+      "date": "2026-07-28T05:16:44.835Z"
     }
   },
-  "lastRun": "2026-07-27T05:52:59.479Z"
+  "lastRun": "2026-07-28T05:16:44.835Z"
 }
