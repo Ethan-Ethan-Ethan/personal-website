@@ -1495,7 +1495,91 @@
     "https://www.infoq.com/news/2026/07/efficient-ai-infrastructure/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Uber’s Zero Growth Stack: Scaling Services, While Optimising Infrastructure and AI Cost",
       "date": "2026-07-29T05:23:41.285Z"
+    },
+    "https://www.nsf.gov/news/nsf-partners-universities-industry-pilot-initiative-four": {
+      "title": "NSF pilots 4-year PhDs with industry research placements",
+      "date": "2026-07-30T05:10:59.111Z"
+    },
+    "https://noelo.org/blog/kuna-release/": {
+      "title": "Kuna: Decompiler Development in the Age of Coding Agents",
+      "date": "2026-07-30T05:10:59.111Z"
+    },
+    "https://waveformsecurity.com/blog/flume/": {
+      "title": "Flume Water Monitor 915 MHz Security Is Pretty Good",
+      "date": "2026-07-30T05:10:59.112Z"
+    },
+    "https://logicforprogrammers.com/": {
+      "title": "Logic for Programmers",
+      "date": "2026-07-30T05:10:59.112Z"
+    },
+    "https://github.com/funador/claude-code-merge-queue": {
+      "title": "Show HN: A local merge queue for parallel Claude Code agents",
+      "date": "2026-07-30T05:10:59.112Z"
+    },
+    "https://frantic.im/mirage/": {
+      "title": "The Productivity Mirage",
+      "date": "2026-07-30T05:10:59.112Z"
+    },
+    "https://archive.org/details/mancomputerbyjoh0000john": {
+      "title": "Man and the Computer by John G. Kemeny (1972 book by the co-creator of BASIC)",
+      "date": "2026-07-30T05:10:59.112Z"
+    },
+    "https://llm2human.pages.dev/": {
+      "title": "LLM Honeypot",
+      "date": "2026-07-30T05:10:59.113Z"
+    },
+    "https://www.science.org/content/article/ai-s-top-startups-are-barely-publishing-their-research": {
+      "title": "AI's top startups are barely publishing their research",
+      "date": "2026-07-30T05:10:59.113Z"
+    },
+    "https://zachholman.com/posts/cold-email": {
+      "title": "The Cold Email",
+      "date": "2026-07-30T05:10:59.113Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c36d5l57e7no/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "四名女性指控傑瑞德·萊托涉及刑事不當性行為",
+      "date": "2026-07-30T05:10:59.348Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3ekn91y5j5o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普政府禁止中國人形機械人進口 北京批「泛化國家安全」",
+      "date": "2026-07-30T05:10:59.348Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c98vjejn839o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "健身練得滿身肌肉 為何有人卻因此英年早逝？",
+      "date": "2026-07-30T05:10:59.348Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c0rdvn5npelo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「不要等到想報復時才行動」：為何婚前協議越來越普遍？",
+      "date": "2026-07-30T05:10:59.348Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c39ezlgpyx0o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "OpenAI：失控AI曾試圖入侵其他公司系統",
+      "date": "2026-07-30T05:10:59.348Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cdx7vvn1n29o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "重視骨骼健康就是補鈣？吃哪些食物會有幫助？",
+      "date": "2026-07-30T05:10:59.349Z"
+    },
+    "https://www.infoq.com/news/2026/07/microsoft-agents-aks-routing/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Microsoft Three-Layer LLM Routing Architecture for AI Agents on AKS",
+      "date": "2026-07-30T05:11:00.254Z"
+    },
+    "https://www.infoq.com/news/2026/07/cloudflare-internal-dns/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Makes Internal DNS Generally Available",
+      "date": "2026-07-30T05:11:00.254Z"
+    },
+    "https://www.infoq.com/presentations/ai-lead-interview/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Getting Rid of LeetCode Interviews in the World of AI",
+      "date": "2026-07-30T05:11:00.254Z"
+    },
+    "https://www.infoq.com/articles/securing-mcp-production-gateway/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Securing MCP in Production: Defense-in-Depth Beyond the Gateway",
+      "date": "2026-07-30T05:11:00.255Z"
+    },
+    "https://www.infoq.com/news/2026/07/net-maui-11-preview-6/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": ".NET 11 Preview 6 Modernises MAUI CollectionView and Android Shell",
+      "date": "2026-07-30T05:11:00.255Z"
     }
   },
-  "lastRun": "2026-07-29T05:23:41.285Z"
+  "lastRun": "2026-07-30T05:11:00.255Z"
 }
