@@ -1839,7 +1839,103 @@
     "https://www.infoq.com/news/2026/08/cloudflare-meerkat-consensus/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Cloudflare Introduces Meerkat for Strongly Consistent Global Coordination",
       "date": "2026-08-03T05:44:03.999Z"
+    },
+    "https://blog.rootsofprogress.org/why-did-we-wait-so-long-for-the-bicycle": {
+      "title": "Why did we wait so long for the bicycle? (2019)",
+      "date": "2026-08-04T05:16:46.159Z"
+    },
+    "https://users.wpi.edu/~zrbutzke/Docs/BradburyStories(1).pdf": {
+      "title": "There Will Come Soft Rains (1950) [pdf]",
+      "date": "2026-08-04T05:16:46.159Z"
+    },
+    "https://virtuallyfun.com/2026/08/03/windows-xp-2002-for-the-itanium-unbridled-rage/": {
+      "title": "Windows XP 2002 for the Itanium: Unbridled rage",
+      "date": "2026-08-04T05:16:46.159Z"
+    },
+    "https://bumbershootsoft.wordpress.com/2026/05/30/zx-spectrum-system-tour-text-mode/": {
+      "title": "ZX Spectrum System Tour: Text Mode",
+      "date": "2026-08-04T05:16:46.159Z"
+    },
+    "https://www.seangoedecke.com/llms-reward-expertise/": {
+      "title": "LLMs reward expertise",
+      "date": "2026-08-04T05:16:46.160Z"
+    },
+    "https://www.mcgill.ca/oss/article/critical-thinking/dunning-kruger-effect-probably-not-real": {
+      "title": "The Dunning-Kruger effect may just be a data artefact (2020)",
+      "date": "2026-08-04T05:16:46.160Z"
+    },
+    "https://github.com/SwagSoftware/KisakCOD": {
+      "title": "KisakCOD – Open-source reimplementation of Call of Duty 4 Multiplayer",
+      "date": "2026-08-04T05:16:46.160Z"
+    },
+    "https://blog.cloudflare.com/smaller-faster-safer-models/": {
+      "title": "Smaller, faster, safer: running Kimi and GLM at scale",
+      "date": "2026-08-04T05:16:46.160Z"
+    },
+    "https://changelog.complete.org/archives/44456-celebrating-45-years-of-kermit-with-the-first-new-c-kermit-release-in-15-years-and-working-with-a-decades-old-c-codebase": {
+      "title": "Celebrating 45 Years of Kermit with the First New C-Kermit Release in 15 Years",
+      "date": "2026-08-04T05:16:46.161Z"
+    },
+    "https://github.com/leonickson1/Swiftlet": {
+      "title": "Show HN: Run an 80B Qwen in 4.3 GB of RAM on a Mac, and a 35B on an iPhone",
+      "date": "2026-08-04T05:16:46.161Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c1d1qwq9502o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「台灣出版、香港銷售」模式受阻，書商如何在紅線下找出路？",
+      "date": "2026-08-04T05:16:46.471Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqx7z51qvpgo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特習會後美中再現摩擦　「建設性穩定」能否撐到九月？",
+      "date": "2026-08-04T05:16:46.472Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c9v47zjjzpeo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "緬甸軍方發佈最新照片 昂山素與世隔絕兩年半後首會客",
+      "date": "2026-08-04T05:16:46.472Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cpw91wpe1g1o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「奇蹟」嬰兒胚胎接受開創性子宮手術 修復腸臟外露",
+      "date": "2026-08-04T05:16:46.472Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cy0j4z0e04xo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "台灣物流商成「審書人」：香港國安法如何改變跨境圖書供應鏈？",
+      "date": "2026-08-04T05:16:46.472Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cpw91e718vzo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "為何我不後悔20多歲就選擇結紮？",
+      "date": "2026-08-04T05:16:46.472Z"
+    },
+    "https://www.infoq.com/news/2026/08/choosing-between-subagent-skills/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Azure and Community Guidelines on Choosing Between a Skill or a Sub-Agent",
+      "date": "2026-08-04T05:16:47.108Z"
+    },
+    "https://www.infoq.com/news/2026/08/java-news-roundup-jul27-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: OpenJDK JEPs, Jakarta EE, GraalVM, TornadoVM, Micronaut, Quarkus, JobRunr, Maven",
+      "date": "2026-08-04T05:16:47.109Z"
+    },
+    "https://www.infoq.com/news/2026/08/hubspot-jita-rule-engine/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "HubSpot Redesigns JITA Authorization with Rule Engine Architecture",
+      "date": "2026-08-04T05:16:47.109Z"
+    },
+    "https://www.infoq.com/articles/evolutionary-architecture-change-locality/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Enabling Evolutionary Architecture Through the Preservation of Change Locality",
+      "date": "2026-08-04T05:16:47.109Z"
+    },
+    "https://www.infoq.com/podcasts/feature-evolution-performance-transition-endive/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: WebAssembly on the JVM: Feature Evolution, Performance, and the Transition to Endive",
+      "date": "2026-08-04T05:16:47.109Z"
+    },
+    "https://www.infoq.com/news/2026/08/agent-framework-harness-ga/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Microsoft Agent Framework Harness and Hosted Agents Reach General Availability",
+      "date": "2026-08-04T05:16:47.109Z"
+    },
+    "https://www.infoq.com/news/2026/08/vault-kubernetes-key-management/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "HashiCorp Ships Public Beta of Vault Kubernetes Key Management",
+      "date": "2026-08-04T05:16:47.109Z"
+    },
+    "https://www.infoq.com/presentations/agentic-compute/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Architecting AI Systems for the Messy Reality of Enterprises: Why Agentic Compute is the Missing Layer",
+      "date": "2026-08-04T05:16:47.109Z"
     }
   },
-  "lastRun": "2026-08-03T05:44:03.999Z"
+  "lastRun": "2026-08-04T05:16:47.110Z"
 }
