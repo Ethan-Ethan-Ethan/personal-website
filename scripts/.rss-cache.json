@@ -2191,7 +2191,95 @@
     "https://www.infoq.com/news/2026/08/vercel-ships-zero-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Vercel Labs Ships Zero: A Graph-First Language Built So Agents Write the Code",
       "date": "2026-08-07T04:26:55.402Z"
+    },
+    "https://www.space.com/space-exploration/voyager/nasa-figured-out-how-to-keep-its-48-year-old-voyager-2-probe-running-for-yet-another-year": {
+      "title": "NASA to keep its 48-year-old Voyager 2 probe running for yet another year",
+      "date": "2026-08-08T03:27:24.310Z"
+    },
+    "https://discourse.nixos.org/t/the-nixpkgs-core-team-has-disbanded/79413": {
+      "title": "The Nixpkgs core team has disbanded",
+      "date": "2026-08-08T03:27:24.310Z"
+    },
+    "https://genesisopenmodels.anl.gov/": {
+      "title": "U.S. Department of Energy Launches the Genesis Open Models Initiative",
+      "date": "2026-08-08T03:27:24.310Z"
+    },
+    "https://www.theregister.com/security/2026/08/07/water-system-controllers-dont-belong-on-the-internet-says-ex-nsa-chief-after-suspected-iran-attacks/5285070": {
+      "title": "Water system controllers don't belong on the internet, says ex-NSA chief",
+      "date": "2026-08-08T03:27:24.311Z"
+    },
+    "https://github.com/xoreaxeaxeax/repsych": {
+      "title": "Psychological Warfare in Reverse Engineering (2015)",
+      "date": "2026-08-08T03:27:24.311Z"
+    },
+    "https://ancientlibrary.net/": {
+      "title": "Ancient Library – 1,060 Greek/Latin texts, click any word to parse it",
+      "date": "2026-08-08T03:27:24.311Z"
+    },
+    "https://www.databricks.com/blog/managing-ai-coding-costs-scale": {
+      "title": "Managing AI Coding Costs at Scale",
+      "date": "2026-08-08T03:27:24.312Z"
+    },
+    "https://github.com/xoreaxeaxeax/asm-hall-of-shame": {
+      "title": "Assembly Hall of Shame",
+      "date": "2026-08-08T03:27:24.312Z"
+    },
+    "https://arcprize.org/results/deepseek-v4-flash-0731": {
+      "title": "DeepSeek V4 Flash 0731",
+      "date": "2026-08-08T03:27:24.312Z"
+    },
+    "https://app.dealroom.co/news/feed/oracle-bans-ai-generated-code-from-openjdk-despite-ellison-s-claim-oracle-isn-t-writing-its-own-code": {
+      "title": "Oracle bans AI-generated code from OpenJDK",
+      "date": "2026-08-08T03:27:24.312Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cn8n2yxew0eo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "泰國校園槍擊案至少七人死亡 槍手同告斃命",
+      "date": "2026-08-08T03:27:24.552Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crrvndrv1pyo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "人工智能被用於設計全新病毒",
+      "date": "2026-08-08T03:27:24.552Z"
+    },
+    "https://www.infoq.com/news/2026/08/cloudflare-computer-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Launches Persistent, Stateful, Computer-like Environments for Agents",
+      "date": "2026-08-08T03:27:25.089Z"
+    },
+    "https://www.infoq.com/news/2026/08/instacart-blueberry-sre-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Instacart Builds Blueberry, an AI-Powered Assistant to Help On-Call Engineers Investigate Incidents",
+      "date": "2026-08-08T03:27:25.090Z"
+    },
+    "https://www.infoq.com/news/2026/08/ai-incident-response/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AI Is Transforming Incident Response - but the Hardest Problems May Still Belong to Humans",
+      "date": "2026-08-08T03:27:25.090Z"
+    },
+    "https://www.infoq.com/presentations/spotify-ai-codebase-migration-agent/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Rewriting All of Spotify's Code Base, All the Time",
+      "date": "2026-08-08T03:27:25.090Z"
+    },
+    "https://www.infoq.com/articles/culture-trends-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: InfoQ Culture and Methods Trends Report - 2026",
+      "date": "2026-08-08T03:27:25.090Z"
+    },
+    "https://www.infoq.com/podcasts/infoq-culture-trends-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: Culture &amp; Methods Trends 2026: The Human Side of AI Engineering",
+      "date": "2026-08-08T03:27:25.091Z"
+    },
+    "https://www.infoq.com/news/2026/08/uno-platform-6-6/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Uno Platform 6.6 Adds Native AOT, Vulkan Rendering, and Broader Accessibility Support",
+      "date": "2026-08-08T03:27:25.091Z"
+    },
+    "https://www.infoq.com/news/2026/08/rootly-small-pr-agentic-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Rootly Drops Small PR Rule as Agentic AI Changes Code Review Economics",
+      "date": "2026-08-08T03:27:25.091Z"
+    },
+    "https://www.infoq.com/news/2026/08/azure-apim-ai-gateway-tier/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Azure API Management Adds Dedicated AI Gateway Tier, Governing Models and MCP Tools",
+      "date": "2026-08-08T03:27:25.091Z"
+    },
+    "https://www.infoq.com/news/2026/08/npm-stage-available/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "npm Staged Publishing Available, Adding a Human Approval Step Before Packages Go Live",
+      "date": "2026-08-08T03:27:25.091Z"
     }
   },
-  "lastRun": "2026-08-07T04:26:55.402Z"
+  "lastRun": "2026-08-08T03:27:25.092Z"
 }
