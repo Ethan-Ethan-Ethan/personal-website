@@ -1,0 +1,24 @@
+{
+  "source_file": "01-Personal Website.md",
+  "total_urls": 4,
+  "github_urls": 0,
+  "all_urls": [
+    "https://ethanyang.dpdns.org/articles/",
+    "https://ethanyang.dpdns.org/",
+    "https://personal-website-bvk.pages.dev/",
+    "https://personal-website-bvk.pages.dev`（Cloudflare"
+  ],
+  "urls_by_type": {
+    "direct": [
+      "https://ethanyang.dpdns.org/",
+      "https://personal-website-bvk.pages.dev`（Cloudflare",
+      "https://ethanyang.dpdns.org/articles/",
+      "https://personal-website-bvk.pages.dev/"
+    ],
+    "github": [],
+    "video": []
+  },
+  "key_persons": [],
+  "scanned_at": "2026-07-23T23:56:26.641922",
+  "merged_from": "Personal-Website/sources.json"
+}

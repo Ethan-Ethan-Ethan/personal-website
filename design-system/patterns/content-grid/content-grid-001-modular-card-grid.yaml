@@ -1,0 +1,131 @@
+id: "content-grid-001"
+name: "Modular Card Grid for Content Catalog"
+category: "content-grid"
+subcategory: "card-grid"
+tags:
+  - "card-grid"
+  - "catalog"
+  - "thumbnail"
+  - "metadata"
+  - "modular"
+  - "courses"
+  - "articles"
+quality: "experimental"
+version: 1
+
+sources:
+  - site: "nngroup.com"
+    page: "/"
+    analyzed_date: 2026-07-10
+    confidence: "low"
+    evidence: "inference"
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "CSS Grid or flexbox card grid"
+    height: "auto (equal-height cards)"
+    max_width: "1200px"
+    alignment: "left"
+    padding: "24px (card padding)"
+  typography:
+    headline:
+      font_family: "sans-serif (Inter or Geist)"
+      font_size: "16-20px"
+      font_weight: 600
+      line_height: 1.2
+    body:
+      font_size: "14px"
+      font_weight: 400
+      line_height: 1.4
+    metadata:
+      font_size: "12-13px"
+      font_weight: 400
+      color: "medium gray (#64748D / #7d7d7d)"
+  spacing:
+    between_elements:
+      - "cards: 16-24px gap"
+      - "thumbnail -> title: 12px"
+      - "title -> description: 8px"
+      - "description -> metadata: 16px"
+    section_padding_y: ["64px", "64px"]
+  colors:
+    background: "#FFFFFF (white)"
+    text_primary: "#171717 (Vercel) / dark gray (NN/g)"
+    text_secondary: "#4d4d4d (Vercel) / medium gray (NN/g)"
+    accent: "#006bff (Vercel)"
+    harmony: "white cards on white canvas; content hierarchy through weight, not color"
+  effects:
+    shadow: "0 2px 2px rgba(0,0,0,0.04) (Vercel) / none (NN/g)"
+    border_radius: "12px (Vercel) / unknown (NN/g)"
+  animation:
+    entrance: "fade-in slide-up on scroll"
+    duration: "150-200ms"
+    easing: "cubic-bezier(0.175, 0.885, 0.32, 1.1)"
+
+structure:
+  - element: "section"
+    role: "content_catalog"
+    children:
+      - element: "section_header"
+        role: "context"
+        content_type: "heading + optional description"
+      - element: "card_grid"
+        role: "content_listing"
+        children:
+          - element: "card"
+            role: "content_item"
+            children:
+              - element: "thumbnail_or_icon"
+                content_type: "image (330-648px, or SVG icon)"
+              - element: "title"
+                content_type: "heading (bold)"
+              - element: "description"
+                content_type: "brief text"
+              - element: "metadata"
+                content_type: "tags, date, author, read time, price"
+              - element: "badge_tag_optional"
+                content_type: "category or status pill"
+
+when_to_use:
+  - "Displaying multiple content items of the same type (courses, articles, products)"
+  - "Content-heavy pages needing scannable, predictable layout"
+  - "Sites with regularly updated content (blog, knowledge base, changelog)"
+  - "Showcasing product cards on homepage (Recently Shipped section)"
+
+when_not_to_use:
+  - "When items need strong priority ordering (use list layout instead)"
+  - "When only 1-2 items exist (use featured card instead of grid)"
+  - "When items have highly variable content length (use list or table)"
+
+comparisons:
+  nngroup_vs_vercel:
+    differences:
+      - "NN/g uses thumbnail images (330px/648px) + metadata (author, read time, price); Vercel uses product names + icon/illustration"
+      - "NN/g cards include badges/tags for pricing and format; Vercel Recently Shipped cards are minimal (name + description only)"
+      - "VN/g is content-catalog oriented; Vercel is product-launch oriented"
+    similarities:
+      - "Both use consistent card dimensions and grid spacing"
+      - "Both organize content in scannable, predictable layouts"
+      - "Both collapse to single column on mobile"
+    recommendation: "Use NN/g's approach for content catalogs with rich metadata; Vercel's minimal approach for product/news announcements"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Single column, full-width cards; collapse metadata to secondary line"
+    tablet: "2-column grid"
+    desktop: "3-4 column grid depending on content density"
+  accessibility:
+    - "Card images must have descriptive alt text"
+    - "Use semantic heading hierarchy (H3 for card titles)"
+    - "Metadata should be marked with appropriate HTML (time, author)"
+    - "Cards should be keyboard-navigable if clickable"
+
+assets:
+  screenshots: {}
+  references: []

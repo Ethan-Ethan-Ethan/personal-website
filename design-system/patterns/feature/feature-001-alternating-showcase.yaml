@@ -1,0 +1,133 @@
+id: "feature-001"
+name: "Alternating Feature Section with Customer Showcase"
+category: "feature"
+subcategory: "alternating"
+tags:
+  - "alternating-layout"
+  - "customer-proof"
+  - "metrics"
+  - "2-column"
+  - "narrative-flow"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "alternating 2-column split (feature bullets + customer showcase)"
+    height: "auto"
+    max_width: "1200px"
+    alignment: "left (feature list), right (showcase), swapping per section"
+    padding: "64-96px (section vertical)"
+  typography:
+    headline:
+      font_family: "Sohne (Stripe) / Geist Sans (Vercel)"
+      font_size: "32-48px"
+      font_weight: 300
+      line_height: 1.1
+    body:
+      font_size: "15-16px"
+      font_weight: 300
+      line_height: 1.4
+  spacing:
+    between_elements:
+      - "feature bullets: 24px vertical gap"
+      - "bullet icon -> title -> description: 8px vertical stack"
+      - "section heading -> content: 48px"
+    section_padding_y: ["64px", "96px"]
+  colors:
+    background: "alternating per section (canvas -> canvas-soft -> canvas)"
+    text_primary: "#0D253D (Stripe) / #171717 (Vercel)"
+    text_secondary: "#64748D (Stripe) / #4d4d4d (Vercel)"
+    accent: "#533AFD (Stripe) / #006bff (Vercel)"
+    harmony: "clean, high-contrast with muted secondary text"
+  effects:
+    shadow: "none"
+    border_radius: "0"
+  animation:
+    entrance: "fade-in slide-up on scroll"
+    duration: "0.2-0.3s"
+    easing: "ease-in-out"
+
+structure:
+  - element: "section"
+    role: "feature_showcase"
+    children:
+      - element: "section_heading"
+        role: "context"
+        content_type: "display-lg heading + body-lg subheading"
+      - element: "content_row_alternating"
+        role: "feature_detail"
+        children:
+          - element: "feature_bullet_list"
+            role: "value_propositions"
+            children:
+              - element: "bullet"
+                role: "feature_item"
+                children:
+                  - element: "icon"
+                    content_type: "SVG (monochrome, brand-colored)"
+                  - element: "title"
+                    content_type: "heading-md"
+                  - element: "description"
+                    content_type: "body-md"
+          - element: "customer_showcase"
+            role: "social_proof"
+            children:
+              - element: "customer_logo"
+                content_type: "SVG (dark/light variant)"
+              - element: "metric"
+                content_type: "bold number + context text"
+              - element: "quote_optional"
+                content_type: "italicized or muted text"
+
+when_to_use:
+  - "Feature-heavy product pages needing customer validation alongside features"
+  - "SaaS landing pages with 3-4 key value propositions"
+  - "Pages where social proof should interleave with features, not be isolated"
+  - "Telling a narrative through product capabilities (build agents -> ship apps -> host platforms)"
+
+when_not_to_use:
+  - "When features are equally important and best shown as grid (use multi-column grid)"
+  - "When customer metrics aren't impressive enough to share column spotlight"
+  - "Short landing pages with only 1 feature section"
+
+comparisons:
+  vercel_vs_stripe:
+    differences:
+      - "Vercel uses left-feature/right-customer layout; Stripe uses separate sections for features and customer proof"
+      - "Vercel feature bullets have monochrome icons; Stripe uses indigo-colored icons"
+      - "Vercel customer metric is bold number + context; Stripe uses full case study accordion"
+      - "Vercel alternates side swapping; Stripe keeps consistent left alignment within each section"
+    similarities:
+      - "Both use section heading as clear divider between feature groups"
+      - "Both pair each feature section with customer validation"
+      - "Both use generous whitespace between sections (64-96px)"
+      - "Both collapse to single column on mobile"
+    recommendation: "Use Vercel's alternating layout when you have strong customer metrics for each feature section; use Stripe's separate-sections approach when customer proof needs more depth (case studies)"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Stack feature list above customer showcase; single column"
+    tablet: "Stack or side-by-side depending on content length"
+    desktop: "Side-by-side 2-column with optional alternating side swap"
+  accessibility:
+    - "Ensure icon-only features have aria-hidden or alt text"
+    - "Customer metric numbers should be marked with appropriate semantic tags"
+    - "Proper heading hierarchy (H2 for section, H3 for feature bullet titles)"
+
+assets:
+  screenshots: {}
+  references: []

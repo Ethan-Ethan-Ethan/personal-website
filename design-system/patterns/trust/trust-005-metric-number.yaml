@@ -1,0 +1,100 @@
+id: "trust-005"
+name: "Metric Number with Label"
+category: "trust"
+subcategory: ""
+tags: ["statistic", "metric", "number", "amber", "data-visualization"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "vertical group: number above label"
+    height: ""
+    max_width: ""
+    alignment: "center or inline"
+    padding: ""
+  typography:
+    headline:
+      font_family: "Inter, Arial, sans-serif"
+      font_size: "26px (metric b); 18px (metric-value strong)"
+      font_weight: 800 (number)
+      line_height: "1.0 (number)"
+    subheadline:
+      font_size: "13px"
+      color: "--muted (warm gray-beige, #b9b3a5)"
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: ""
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    number_color: "--amber (amber-gold, #d4a34b)"
+    label_color: "--muted (warm gray-beige, #b9b3a5)"
+  effects:
+    shadow: ""
+    border_radius: ""
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "div or span"
+    role: "metric display"
+    children:
+      - element: "strong or b (number)"
+        role: "metric value"
+        content_type: "numeric value (e.g., 10+, 87%)"
+      - element: "small or span (label)"
+        role: "metric description"
+        content_type: "short label (e.g., Years, Completed)"
+
+when_to_use:
+  - "Key statistics on dashboard or resume (experience years, counts)"
+  - "Emphasis numbers that need to stand out from surrounding text"
+  - "Static data points that do not change dynamically"
+
+when_not_to_use:
+  - "When data is continuous or fractional (use progress-bar instead)"
+  - "For interactive counters or animated numbers (add animation layer)"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .metric {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .metric b {
+      font-size: 26px;
+      font-weight: 800;
+      color: #d4a34b;
+      line-height: 1;
+    }
+    .metric .label {
+      font-size: 13px;
+      color: #b9b3a5;
+    }
+  responsive_notes:
+    mobile: "Keep same size; ensure metrics remain legible"
+    tablet: "Unchanged"
+    desktop: "Unchanged"
+  accessibility:
+    - "Amber (#d4a34b) on dark background: verify WCAG AA for large text (passes)"
+    - "Use semantic <strong> for the number value"
+    - "Consider screen reader text like '10+ years of experience' concatenated"
+
+assets:
+  screenshots: {}
+  references: []

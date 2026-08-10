@@ -1,0 +1,102 @@
+id: "feature-003"
+name: "Numbered Sequential Feature Sections"
+category: "feature"
+subcategory: "numbered"
+tags:
+  - "numbered-list"
+  - "sequential"
+  - "narrative"
+  - "workflow"
+  - "step-by-step"
+quality: "experimental"
+version: 1
+
+sources:
+  - site: "linear.app"
+    page: "/"
+    analyzed_date: 2026-07-10
+    confidence: "low"
+    evidence: "inference"
+
+spec:
+  layout:
+    type: "vertical sequential sections"
+    height: "auto"
+    max_width: "1200px"
+    alignment: "center"
+    padding: "unknown (generous, inferred)"
+  typography:
+    headline:
+      font_family: "Inter or similar sans-serif (assumed)"
+      font_size: "unknown (large hero-to-section progression)"
+      font_weight: "bold or semibold"
+      line_height: ""
+  spacing:
+    between_elements: []
+    section_padding_y: ["generous", "generous"]
+  colors:
+    background: "likely light (white or light gray)"
+    text_primary: "dark gray (likely #171717 range)"
+    text_secondary: "medium gray"
+    accent: "unknown"
+    harmony: "clean, minimal"
+  effects:
+    shadow: "unknown"
+    border_radius: "unknown"
+  animation:
+    entrance: "smooth scroll-triggered transitions (inferred from Linear's reputation)"
+    duration: "0.2-0.3s"
+    easing: ""
+
+structure:
+  - element: "section"
+    role: "numbered_feature"
+    children:
+      - element: "section_number"
+        role: "ordinal_identifier"
+        content_type: "large number label (e.g. '1.0')"
+      - element: "section_content"
+        role: "feature_detail"
+        children:
+          - element: "headline"
+            content_type: "text"
+          - element: "description"
+            content_type: "text"
+          - element: "visual_demo"
+            content_type: "UI screenshot or animation"
+
+when_to_use:
+  - "Product pages where the feature story follows a workflow or pipeline order"
+  - "Showcasing a product that has a linear user journey (intake -> plan -> build -> ship)"
+  - "When the sequence of features communicates product completeness"
+  - "SaaS landing pages wanting to feel structured and methodical"
+
+when_not_to_use:
+  - "When features are independent and don't follow a sequence"
+  - "Consumer products where emotional appeal beats logical progression"
+  - "When numbering would create unnecessary cognitive ordering where none exists"
+
+comparisons:
+  linear_vs_others:
+    differences:
+      - "Linear numbers sections (1.0, 2.0, 3.0) creating a product workflow narrative; Stripe and Vercel use thematic groupings instead"
+      - "Linear's approach emphasizes product process over feature listing"
+    similarities:
+      - "All three use generous section spacing and heading content pairs"
+      - "All three include visual demos per section"
+    recommendation: "Use numbered sections when the product has a clear sequential workflow to explain; avoid when features are parallel/equal"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Stack number and content vertically; keep number prominent but scale down"
+    tablet: "Maintain side-by-side layout if possible"
+    desktop: "Full split or inline layout with prominent number"
+  accessibility:
+    - "Section number should be a visual treatment, not the only heading indicator"
+    - "Use proper heading hierarchy (H2 per section) regardless of number styling"
+    - "Ensure number text has sufficient contrast"
+
+assets:
+  screenshots: {}
+  references: []

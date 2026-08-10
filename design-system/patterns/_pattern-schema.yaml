@@ -1,0 +1,78 @@
+# Pattern YAML Schema — 每個模式檔的參考模板
+# 檔名規則：{category}-{nnn}-{slug}.yaml（例：hero-001-fullscreen-centered.yaml）
+
+id: ""                          # 全域唯一 ID（{category}-{nnn}）
+name: ""                        # 人類可讀名稱
+category: ""                    # 主分類（= 目錄名）
+subcategory: ""                 # 次分類（可選）
+tags: []                        # 自由標籤
+quality: "experimental"         # reference | adapted | experimental
+version: 1
+
+sources: []
+#  - site: ""
+#    page: "/"
+#    analyzed_date: 2026-07-11
+#    confidence: "medium"        # high | medium | low
+#    evidence: "inference"       # tokens | tokens+screenshots | screenshots | inference
+
+spec:
+  layout:
+    type: ""
+    height: ""
+    max_width: ""
+    alignment: ""
+    padding: ""
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight:
+      line_height:
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: ""
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    harmony: ""
+  effects:
+    shadow: ""
+    border_radius: ""
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure: []
+#  - element: ""
+#    role: ""
+#    children:
+#      - element: ""
+#        content_type: ""
+
+when_to_use: []
+when_not_to_use: []
+
+comparisons: {}
+#  site_a_vs_site_b:
+#    differences: []
+#    similarities: []
+#    recommendation: ""
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: ""
+    tablet: ""
+    desktop: ""
+  accessibility: []
+
+assets:
+  screenshots: {}
+  references: []

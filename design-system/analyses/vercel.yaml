@@ -1,0 +1,822 @@
+meta:
+  domain: vercel.com
+  analyzed_date: '2026-07-11'
+  url: https://vercel.com
+  design_system: Geist Design System (open-source)
+  total_sections_on_homepage: 8
+  theme_support: dark + light (system preference detection)
+layout:
+  hero:
+    concept: Agentic Infrastructure
+    structure:
+    - type: background_glow
+      variants:
+      - fallback-dark-glow-mobile
+      - fallback-dark-glow-desktop
+      - fallback-light-glow-mobile
+      - fallback-light-glow-desktop
+    - type: headline
+      text: Agentic Infrastructure
+    - type: subheadline
+      text: To ship apps and agents
+    - type: cta_group
+      buttons:
+      - Deploy Now
+      - Talk to Sales
+    height: 100vh (approx. full viewport)
+    padding: large (80-120px top/bottom estimated)
+    alignment: center
+  grid:
+    system: flexbox + CSS Grid hybrid
+    columns: variable (1-4 column layouts)
+    container_max_width: 1200px (max content column)
+    card_grid: 3-column grid for feature cards
+  section_spacing:
+    between_sections: 96px-192px (24-48 spacing units on 4px grid)
+    content_padding: 24-32px side padding on mobile, auto-centering on desktop
+  responsive:
+    breakpoints:
+      sm: 401px
+      md: 601px
+      lg: 961px
+      xl: 1200px
+      2xl: 1400px
+    desktop: '> 961px'
+    tablet: 601px - 960px
+    mobile: < 600px
+  section_structure_top_to_bottom:
+  - section: Hero
+    headline: Agentic Infrastructure
+  - section: Feature Section 1
+    headline: Build agents on infrastructure that thinks like them
+    subfeatures:
+    - Durable Orchestration
+    - Sandboxed Environments
+    - AI Model Gateway
+    - Fluid Compute
+    customer_showcase: Notion - powers millions of agent conversations daily on Vercel
+  - section: Feature Section 2
+    headline: Ship apps that scale from zero to millions instantly
+    subfeatures:
+    - Global Delivery
+    - Deployment Environments
+    - Serverless Functions
+    - Web Application Firewall
+    customer_showcase: Zapier - serves over 100 million monthly website visits
+  - section: Feature Section 3
+    headline: Host platforms that serve every customer
+    subfeatures:
+    - Tenant Isolation
+    - Domain Management
+    - Custom SSL Certificates
+    - Preview URLs
+    customer_showcase: Mintlify - powers documentation for 20,000+ companies
+  - section: Recently Shipped
+    cards:
+    - Eve framework
+    - Passport
+    - Containers (Dockerfile support)
+  - section: Final CTA
+    headline: Built by you, or your agents
+    action: Deploy button + npx plugins add vercel/vercel-plugin
+  - section: Footer
+    columns: 12
+spacing:
+  base_unit: 4px
+  scale:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 6
+  - 8
+  - 10
+  - 16
+  - 24
+  scale_values_px:
+  - 4
+  - 8
+  - 12
+  - 16
+  - 24
+  - 32
+  - 40
+  - 64
+  - 96
+  extended_values_px:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 8
+  - 10
+  - 12
+  - 14
+  - 16
+  - 32
+  - 36
+  - 40
+  - 48
+  - 64
+  - 80
+  - 96
+  - 120
+  - 128
+  - 160
+  - 192
+  consistency: high
+  whitespace_ratio: generous
+  rhythm_rules:
+    inside_group: 8px
+    between_groups: 16px
+    between_sections: 32-40px
+    hero_padding: 80-120px
+  card_padding:
+    standard: 24px
+    compact: 16px
+    hero: 32px
+color:
+  system_name: Geist Design System Colors
+  primary: '#171717'
+  secondary: '#4d4d4d'
+  accent_blue: '#006bff'
+  neutral:
+    background_100: '#ffffff'
+    background_200: '#fafafa'
+    text_primary: '#171717'
+    text_secondary: '#4d4d4d'
+    text_tertiary: '#7d7d7d'
+    text_placeholder: '#a8a8a8'
+    border_default: '#ebebeb'
+    border_strong: '#c9c9c9'
+    divider: '#eaeaea'
+  gray_scale:
+    '100': '#f2f2f2'
+    '200': '#ebebeb'
+    '300': '#e6e6e6'
+    '400': '#eaeaea'
+    '500': '#c9c9c9'
+    '600': '#a8a8a8'
+    '700': '#8f8f8f'
+    '800': '#7d7d7d'
+    '900': '#4d4d4d'
+    '1000': '#171717'
+  gray_alpha:
+    '100': '#0000000d'
+    '200': '#00000015'
+    '300': '#0000001a'
+    '400': '#00000014'
+    '500': '#00000036'
+    '600': '#0000003d'
+    '700': '#00000070'
+    '800': '#00000082'
+    '900': '#000000b3'
+    '1000': '#000000e8'
+  semantic_colors:
+    link: '#006bff'
+    info: '#006bff'
+    success: '#28a948'
+    warning: '#ffae00'
+    error: '#fc0035'
+    danger: '#ea001d'
+    focus_ring: '#006bff'
+  workflow_accent_colors:
+    develop: '#0a72ef'
+    preview: '#de1d8d'
+    ship: '#ff5b4f'
+    console_blue: '#0070f3'
+    console_purple: '#7928ca'
+    console_pink: '#eb367f'
+  dark_mode:
+    background: '#000000'
+    background_elevated: '#0a0a0a'
+    foreground: '#ededed'
+    foreground_muted: '#888888'
+    border: rgba(255,255,255,0.08)
+    border_strong: rgba(255,255,255,0.14)
+  harmony: monochromatic + single accent (blue)
+  contrast_ratio: 'high (WCAG AA: 4.5:1 minimum)'
+  philosophy: Color conveys information, not decoration
+typography:
+  font_family:
+    heading: Geist Sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif
+    body: Geist Sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif
+    mono: Geist Mono, ui-monospace, SFMono-Regular, 'Roboto Mono', Menlo, Monaco, 'Cascadia Code', monospace
+  open_type_features: liga (enabled globally), tnum (tabular numbers)
+  font_weights:
+    regular: 400
+    medium: 500
+    semibold: 600
+  headings:
+  - token: heading-72
+    size: 72px
+    line_height: 72px
+    letter_spacing: -4.32px
+    weight: 600
+  - token: heading-64
+    size: 64px
+    line_height: 64px
+    letter_spacing: -3.84px
+    weight: 600
+  - token: heading-56
+    size: 56px
+    line_height: 56px
+    letter_spacing: -3.36px
+    weight: 600
+  - token: heading-48
+    size: 48px
+    line_height: 56px
+    letter_spacing: -2.88px
+    weight: 600
+  - token: heading-40
+    size: 40px
+    line_height: 48px
+    letter_spacing: -2.40px
+    weight: 600
+  - token: heading-32
+    size: 32px
+    line_height: 40px
+    letter_spacing: -1.28px
+    weight: 600
+  - token: heading-24
+    size: 24px
+    line_height: 32px
+    letter_spacing: -0.96px
+    weight: 600
+  - token: heading-20
+    size: 20px
+    line_height: 26px
+    letter_spacing: -0.40px
+    weight: 600
+  - token: heading-16
+    size: 16px
+    line_height: 24px
+    letter_spacing: -0.32px
+    weight: 600
+  - token: heading-14
+    size: 14px
+    line_height: 20px
+    letter_spacing: -0.28px
+    weight: 600
+  body_copy:
+  - token: copy-24
+    size: 24px
+    line_height: 36px
+  - token: copy-20
+    size: 20px
+    line_height: 36px
+  - token: copy-18
+    size: 18px
+    line_height: 28px
+  - token: copy-16
+    size: 16px
+    line_height: 24px
+  - token: copy-14
+    size: 14px
+    line_height: 20px
+  - token: copy-13
+    size: 13px
+    line_height: 18px
+  labels:
+  - token: label-20
+    size: 20px
+    line_height: 32px
+  - token: label-16
+    size: 16px
+    line_height: 20px
+  - token: label-14
+    size: 14px
+    line_height: 20px
+  - token: label-13
+    size: 13px
+    line_height: 16px
+  - token: label-12
+    size: 12px
+    line_height: 16px
+  buttons:
+  - token: button-16
+    size: 16px
+    line_height: 20px
+    weight: 500
+  - token: button-14
+    size: 14px
+    line_height: 20px
+    weight: 500
+  - token: button-12
+    size: 12px
+    line_height: 16px
+    weight: 500
+  signature_trait: aggressive negative letter-spacing on headings (tightest of any major design system)
+animation:
+  transitions:
+    default_duration: 150ms
+    popover_duration: 200ms
+    overlay_duration: 300ms
+    easing: cubic-bezier(0.175, 0.885, 0.32, 1.1)
+    description: 'Overshoot-like spring easing: fast in, slight bounce out'
+  hover_effects:
+  - type: background_color
+    progression: 100 -> 200 (hover) -> 300 (active)
+  - type: border_color
+    progression: 400 -> 500 (hover) -> 600 (active)
+  - type: button
+    description: Subtle background darkening or shadow on hover
+  scroll_animations: fade-in + slide-up on feature sections (estimated)
+  micro_interactions:
+    button_click: instant visual feedback (150ms)
+    focus_ring: '0 0 0 2px #ffffff, 0 0 0 4px #006bff'
+    disabled_state: gray-100 fill, gray-700 text, not-allowed cursor
+  motion_preference:
+    respects_reduced_motion: 'yes'
+    default_state: 0ms for most interactions
+  glow_effects:
+    hero_background: animated radial gradients (CSS-based glow)
+    variants: dark and light mode, mobile and desktop
+components:
+  buttons:
+    specifications:
+      border_radius: 6px
+      typography: button-14 (14px/20px), weight 500
+      padding_horizontal: 10px (standard), 6px (small), 14px (large)
+      height: 40px (standard), 32px (small), 48px (large)
+    variants:
+    - name: primary
+      background: '#171717'
+      text: '#ffffff'
+      usage: Deploy Now, Sign Up
+    - name: secondary
+      background: '#ffffff'
+      border: '1px solid #ebebeb'
+      text: '#171717'
+      usage: Talk to Sales, Log In
+    - name: tertiary
+      background: transparent
+      text: '#171717'
+      usage: Ghost actions, text links
+    - name: error_danger
+      background: '#ea001d'
+      text: '#ffffff'
+      usage: Destructive actions
+    sizes:
+      small: height 32px, padding 0 6px
+      standard: height 40px, padding 0 10px
+      large: height 48px, padding 0 14px, button-16 font
+    states:
+      hover: next step in gray scale (200 for fills, 500 for borders)
+      active: third step (300 for fills, 600 for borders)
+      disabled: gray-100 fill, gray-700 text, not-allowed cursor
+  inputs:
+    border_radius: 6px
+    typography: label-14 (14px/20px)
+    padding: 0 12px
+    height: 40px (standard), 32px (small), 48px (large)
+    background: '#ffffff'
+    text_color: '#171717'
+    focus_state: border-color to blue-700 + focus ring shadow
+  cards:
+    border_radius:
+      standard: 12px
+      featured: 12px top (image), 12px bottom (content)
+    shadow: 0 2px 2px rgba(0,0,0,0.04)
+    border: 'shadow-as-border: 0px 0px 0px 1px rgba(0,0,0,0.08)'
+    padding:
+      standard: 24px
+      compact: 16px
+      hero: 32px
+    hover: elevated shadow + subtle transform
+  navigation:
+    type: fixed top
+    height: 64px (estimated)
+    items_alignment: left (logo) + center (nav links) + right (actions)
+    nav_items:
+    - Products (mega-dropdown)
+    - Resources (mega-dropdown)
+    - Enterprise
+    - Pricing
+    action_items:
+    - Get a Demo
+    - Log In
+    - Sign Up
+    - Ask AI (pill badge)
+    - Dashboard
+    mega_dropdown_products:
+      categories:
+      - name: Agent Stack
+        items:
+        - AI SDK
+        - AI Gateway
+        - Sandbox
+        - Workflows
+        - Passport
+        - eve
+      - name: Core Platform
+        items:
+        - Security
+        - Content Delivery
+        - Fluid Compute
+        - Observability
+        - CI/CD
+      - name: Tools
+        items:
+        - Next.js
+        - Vercel Agent
+        - Vercel Plugin
+        - Domains
+        - v0
+    mega_dropdown_resources:
+      categories:
+      - name: Learn
+        items:
+        - Docs
+        - About
+        - Blog
+        - Changelog
+        - Knowledge Base
+      - name: Build
+        items:
+        - AI Apps
+        - Web Apps
+        - Marketing Sites
+        - Platforms
+        - Commerce
+      - name: Explore
+        items:
+        - Customers
+        - Marketplace
+        - Partner Finder
+        - AWS
+        - Community
+  badges:
+    style: pill (9999px border-radius)
+    typography: 12px/16px, weight 500
+    usage: Ask AI badge, status indicators, new feature tags
+  footer:
+    groups:
+    - Agent Stack
+    - Core Platform
+    - Security
+    - Tools
+    - Frameworks
+    - SDKs
+    - Build
+    - Learn
+    - Explore
+    - Company
+    - Legal and Trust
+    - Social
+    theme_selector: system light dark toggle
+    status_link: vercel-status.com
+information_architecture:
+  navigation:
+    primary:
+    - Products
+    - Resources
+    - Enterprise
+    - Pricing
+    secondary:
+    - Get a Demo
+    - Log In
+    - Sign Up
+    - Ask AI
+    - Dashboard
+    breadcrumb: 'no'
+    mega_menu: yes (Products and Resources have 3-column category dropdowns)
+  content_hierarchy:
+    levels: 4
+    organization: task-based (Build agents - Ship apps - Host platforms - Recently shipped)
+    depth: shallow (user reaches conversion in 2-3 clicks)
+  user_flow:
+    primary_goal: sign-up (Deploy Now)
+    secondary_goal: learn (scroll through features)
+    tertiary_goal: contact sales (Talk to Sales)
+    steps_to_goal: 2
+  findability:
+    search: yes (Ask AI button + Knowledge Base)
+    tags: 'no'
+    categories: 'yes'
+    filters: 'no'
+  information_density: low (spacious layout, generous whitespace)
+  homepage_sections: 8
+  observations:
+  - Navigation uses mega-dropdowns to surface product depth without cluttering top nav
+  - 'Three-part narrative: build agents, ship apps, host platforms - each with customer proof'
+  - Recently Shipped section acts as a changelog/social proof hybrid
+  - Final CTA is minimal - just a headline and deploy button, no friction
+brand_identity:
+  positioning: innovative + authoritative + developer-first
+  tagline: Agentic Infrastructure - To ship apps and agents
+  tone_of_voice: technical + confident + concise
+  trust_signals:
+    client_logos: yes (Notion, Zapier, Mintlify with metrics)
+    testimonials: yes (embedded in feature sections with usage numbers)
+    certifications: yes (SOC 2, GDPR, Trust Center)
+    years_in_business: 10+ years
+    case_studies: yes (Customers page)
+    metrics:
+    - 'Notion: millions of agent conversations daily'
+    - 'Zapier: 100+ million monthly website visits'
+    - 'Mintlify: 20,000+ companies'
+    open_source: yes (Geist design system, Next.js, Turborepo)
+    status_page: yes (vercel-status.com)
+  visual_consistency: high
+  brand_personality:
+  - Innovative (agent-first positioning)
+  - Trustworthy (enterprise security emphasis)
+  - Developer-centric (code snippets, CLI commands)
+  - Minimalist (monochrome-dominant, functional color)
+  color_personality: restrained + professional
+  design_philosophy:
+  - Color conveys information, not decoration
+  - Shadow-as-border technique (no CSS border property)
+  - Negative letter-spacing as brand signature
+  - Monochromatic dominance with targeted color accents
+  observations:
+  - The phrase 'Agentic Infrastructure' signals a pivot toward AI/agent era positioning
+  - Dark mode is first-class, not an afterthought
+  - Code snippets in marketing pages reinforce developer identity
+accessibility:
+  color_contrast:
+    wcag_aa: pass (minimum 4.5:1 for body text enforced)
+    wcag_aaa: partial (some decorative elements may not meet 7:1)
+    contrast_ratio_minimum: 4.5:1
+    text_on_primary_button: '17:1 (#ffffff on #171717)'
+    text_on_background: '16:1 (#171717 on #ffffff)'
+  keyboard_navigation:
+    tab_order: logical
+    focus_visible: 'yes (custom focus ring: 2px white + 2px blue-700)'
+    skip_links: 'yes'
+  screen_reader:
+    heading_hierarchy: logical
+    alt_text: complete (Next.js Image component requires alt)
+    aria_labels: complete
+  color_only_signaling: never (color always paired with icon or text label)
+  forms:
+    labels: visible
+    error_messages: clear
+    required_fields: marked
+  reduced_motion:
+    respects_prefers_reduced_motion: 'yes'
+    default_state: 0ms for most interactions
+  overall_score: good
+  observations:
+  - Custom focus ring design is both accessible and on-brand
+  - Color is never the sole indicator of state - follows WCAG SC 1.4.1
+  - High contrast ratios due to near-black on white design
+  - Geist color system designed for accessibility at every step of the scale
+conversion:
+  cta:
+    clarity: clear (Deploy Now - action + immediacy)
+    visibility: high (primary CTA in hero, repeated at bottom)
+    placement: multiple (hero + section CTAs + bottom CTA)
+    design: prominent (black button, high contrast)
+    text: action-oriented (Deploy Now, Talk to Sales, Get a Demo)
+    variants:
+      primary_cta: Deploy Now
+      secondary_cta: Talk to Sales
+      top_nav_ctas: Get a Demo, Log In, Sign Up
+      bottom_cta: Deploy (with code snippet)
+  forms:
+    length: 'short (Sign Up: email + password + name)'
+    fields: 3-4
+    validation: inline
+    progress_indicator: 'no'
+  user_guidance:
+    tooltips: yes (within product screens)
+    help_text: yes (docs links)
+    onboarding: 'yes'
+  friction_reduction:
+    social_login: yes (GitHub, GitLab, BitBucket)
+    auto_fill: 'yes'
+    guest_checkout: 'no'
+  social_proof:
+    testimonials: yes (embedded in feature sections)
+    case_studies: yes (Customers page + blog)
+    numbers: yes (millions of conversations, 100M+ visits, 20K+ companies)
+    trust_badges: yes (SOC 2, GDPR, Enterprise)
+    customer_logos: yes (Notion, Zapier, Mintlify in-page)
+    open_source_community: yes (Next.js ecosystem)
+  urgency_scarcity:
+    countdown: 'no'
+    limited_supply: 'no'
+    time_offers: 'no'
+  conversion_score: good
+  observations:
+  - 'Primary conversion path: Deploy Now -> authentication -> deploy'
+  - 'Secondary path: Talk to Sales for enterprise'
+  - No pricing on homepage - pricing is a separate page
+  - 'CTAs are strategically placed: top nav, hero, and bottom (3 placements)'
+  - Customer metrics serve as prime social proof
+  - Code snippet in CTA section appeals directly to developer audience
+  - Free tier / no credit card required is implied but not shouted
+key_takeaways:
+- Monochromatic design with near-black (#171717) on white - maximum contrast, minimalist aesthetic
+- Signature negative letter-spacing on headings (-2.88px for 48px, -3.84px for 64px) - most aggressive of any major design
+  system
+- 'Shadow-as-border technique: borders are implemented as 1px inset box-shadows, not CSS borders'
+- 8px grid system with generous whitespace (96-192px between sections)
+- 'Three-part narrative structure: Build agents -> Ship apps -> Host platforms, each with customer validation'
+- Geist Sans + Geist Mono as custom typefaces, open-sourced
+- 150ms cubic-bezier transitions with overshoot spring easing
+- Dark/light mode with system preference detection - both first-class
+- Color system uses 10-step scales (100-1000) with clear semantic intent per step
+- 'Developer-first language throughout: code snippets, CLI commands, agent terminology'
+reusable_patterns:
+- name: Vercel-Style Agentic Hero
+  category: Hero
+  core_elements:
+  - Full-viewport height with animated radial glow background
+  - Large headline (64-72px) with aggressive negative letter-spacing
+  - Single-line subheadline in medium gray
+  - 'Dual CTA: Primary (dark) + Secondary (outline)'
+  - Dark/light mode background variants
+  visual_features:
+  - Monochrome color scheme
+  - No image or illustration - pure typography + glow
+  - Massive whitespace around headline
+  when_to_use:
+  - Product landing pages with a strong, single-minded value proposition
+  - Developer-facing tools where minimalism signals sophistication
+  - Sites that benefit from dramatic first impression without imagery
+- name: Vercel-Style Feature + Customer Showcase
+  category: Feature-Section
+  core_elements:
+  - 'Left: 4 feature bullets (icon + title + description)'
+  - 'Right: Customer showcase (logo + metric + quote)'
+  - Alternating layout pattern across sections
+  - Section headline as section divider
+  visual_features:
+  - Clean 2-column layout on desktop, stacked on mobile
+  - Minimal icons (monochrome, simple)
+  - Customer metric as bold number + context
+  - No card borders - whitespace defines sections
+  when_to_use:
+  - Feature-heavy product pages that need customer validation
+  - SaaS landing pages with 3-4 key value propositions
+  - Pages where social proof should interleave with features
+- name: Vercel-Style Mega Dropdown Navigation
+  category: Navbar
+  core_elements:
+  - Fixed top navigation bar (~64px)
+  - 'Left: Logo (SVG, dark/light variants)'
+  - 'Center: Primary links (Products, Resources, Enterprise, Pricing)'
+  - 'Right: Actions (Get a Demo, Log In, Sign Up, Ask AI, Dashboard)'
+  - Products/Resources trigger 3-column mega-dropdowns
+  visual_features:
+  - Near-invisible nav (white background, minimal shadow)
+  - 6px border-radius on dropdown content
+  - Categorized columns with group headings
+  - 'Hover state: subtle background shift'
+  - Ask AI as pill badge (9999px border-radius)
+  when_to_use:
+  - Sites with many sub-pages and product categories
+  - Developer platforms with SDKs, tools, and docs
+  - Any site needing to surface depth without clutter
+- name: Vercel-Style Metrics Footer
+  category: Footer
+  core_elements:
+  - 12-column link grid (3-4 links per column)
+  - 'Categories: Products, Platforms, Tools, Learn, Company, Legal'
+  - Social media icons row at bottom
+  - Theme selector (system/dark/light)
+  - Status page link
+  visual_features:
+  - Small font size (label-13 or label-12)
+  - Minimal dividers between columns
+  - Gray-600 (#a8a8a8) link color on hover
+  - No heavy borders - whitespace separates sections
+  when_to_use:
+  - Content-heavy platforms needing deep footer navigation
+  - SEO optimization (many internal links)
+  - Sites with multiple product lines and resources
+- name: Vercel-Style Recently Shipped Section
+  category: Product-Showcase
+  core_elements:
+  - Horizontal or 3-column card grid
+  - Product name + short description
+  - Minimal card design (white bg, subtle shadow-as-border)
+  visual_features:
+  - 12px border-radius on cards
+  - 'Hover: elevated shadow'
+  - Consistent 24px card padding
+  when_to_use:
+  - Product landing pages showing latest features
+  - Changelog-style sections on homepage
+  - Showcasing multiple products without overwhelming
+- name: Vercel-Style Minimal CTA Section
+  category: CTA
+  core_elements:
+  - Single headline (e.g. 'Built by you, or your agents')
+  - Primary button (Deploy Now)
+  - 'Optional: code snippet or CLI command'
+  - Generous whitespace around CTA
+  visual_features:
+  - Centered layout
+  - No subheadline - headline alone is enough
+  - Code block uses Geist Mono
+  - Minimal visual noise, maximum focus on action
+  when_to_use:
+  - Final section before footer on product pages
+  - Developer tools where the action is a single command
+  - Pages aiming for high conversion with minimal friction
+- name: Vercel-Style Customer Metric Card
+  category: Testimonial
+  core_elements:
+  - Customer logo (dark/light variant)
+  - Bold metric number/stat
+  - Short context sentence
+  - Subtle background treatment
+  visual_features:
+  - No face/avatar - company logo only
+  - Metric as largest visual element
+  - Minimal text, maximum impact
+  - Dark/light mode support for logos
+  when_to_use:
+  - B2B SaaS landing pages
+  - Building trust with measurable results
+  - Sections where numbers speak louder than quotes
+- name: Geist Shadow-as-Border Pattern
+  category: Visual-Technique
+  core_elements:
+  - No CSS border property on cards/containers
+  - 'box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08) replaces border'
+  - 'Card shadow stack: border + elevation + ambient + inner glow'
+  visual_features:
+  - Softer, more subtle edges than CSS borders
+  - 'Hover: shadow deepens instead of border color change'
+  - Works in both light and dark modes
+  when_to_use:
+  - Modern, minimalist designs wanting softer edges
+  - Card-based layouts where hover elevation is needed
+  - Dark/light mode themes (shadow adjusts automatically)
+- name: Geist Focus Ring Pattern
+  category: Accessibility
+  core_elements:
+  - focus-visible pseudo-class only (not :focus)
+  - 2px white gap ring
+  - 2px blue-700 (#006bff) outer ring
+  visual_features:
+  - Visually distinct without being obtrusive
+  - White gap prevents ring from blending into button
+  - Only appears on keyboard navigation (not click)
+  when_to_use:
+  - Any site targeting WCAG 2.1 compliance
+  - Design systems wanting accessible but aesthetic focus indicators
+  - Sites with both mouse and keyboard users
+- name: Vercel-Style Dark/Light Mode Toggle
+  category: Theme-Switch
+  core_elements:
+  - 'Three-state toggle: system, light, dark'
+  - System preference detection as default
+  - Image assets with -dark and -light variants
+  - CSS variables for all color tokens
+  visual_features:
+  - Smooth transition between themes
+  - All design tokens have paired dark/light values
+  - Glow effects adapt to theme
+  when_to_use:
+  - Any modern web application
+  - Developer tools (developers frequently use dark mode)
+  - Sites wanting to respect user system preferences
+shadows:
+  shadow_as_border: 0px 0px 0px 1px rgba(0,0,0,0.08)
+  raised_card: 0 2px 2px rgba(0,0,0,0.04)
+  popover_menu:
+  - 0 1px 1px rgba(0,0,0,0.02)
+  - 0 4px 8px -4px rgba(0,0,0,0.04)
+  - 0 16px 24px -8px rgba(0,0,0,0.06)
+  modal_dialog:
+  - 0 1px 1px rgba(0,0,0,0.02)
+  - 0 8px 16px -4px rgba(0,0,0,0.04)
+  - 0 24px 32px -8px rgba(0,0,0,0.06)
+  card_shadow_stack_light:
+  - rgba(0,0,0,0.08) 0px 0px 0px 1px (border layer)
+  - rgba(0,0,0,0.04) 0px 2px 2px (elevation layer)
+  - rgba(0,0,0,0.04) 0px 8px 8px -8px (ambient layer)
+  - '#fafafa 0px 0px 0px 1px (inner glow, light mode only)'
+  focus_ring: '0 0 0 2px #ffffff, 0 0 0 4px #006bff'
+  dark_mode_shadow_as_border: 0px 0px 0px 1px rgba(255,255,255,0.08)
+border_radius:
+  sm: 6px (buttons, inputs, functional controls)
+  md: 12px (cards, menus, modals)
+  lg: 16px (full-screen surfaces)
+  pill: 9999px (badges, avatars, status pills)
+  circle: 50% (avatars, menu toggles)
+  usage:
+    buttons: 6
+    cards: 12
+    inputs: 6
+    badges: 9999
+    nav_dropdowns: 6
+color_step_semantics:
+  '100': Default background
+  '200': Hover background
+  '300': Active background
+  '400': Default border
+  '500': Hover border
+  '600': Active border
+  '700': Solid fill, high contrast
+  '800': Solid fill, hover
+  '900': Secondary text and icons
+  '1000': Primary text and icons

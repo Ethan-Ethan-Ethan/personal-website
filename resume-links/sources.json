@@ -1,0 +1,29 @@
+{
+  "source_file": "今天你想要去演哪部電影？輕鬆製作一個自己的數位分身，拿來製作形象照或合成都超級方便喔！Flux.md",
+  "total_urls": 6,
+  "github_urls": 2,
+  "all_urls": [
+    "https://www.youtube.com/watch?v=yEEOGQ-6Tc4",
+    "https://github.com/Replicate",
+    "https://replicate.com/",
+    "https://replicate.com/ostris/flux-dev-lor",
+    "https://github.com/",
+    "https://replicate.com/ostris/flux-dev-lora-trainer/train"
+  ],
+  "urls_by_type": {
+    "direct": [
+      "https://replicate.com/",
+      "https://replicate.com/ostris/flux-dev-lor",
+      "https://replicate.com/ostris/flux-dev-lora-trainer/train"
+    ],
+    "github": [
+      "https://github.com/Replicate",
+      "https://github.com/"
+    ],
+    "video": [
+      "https://www.youtube.com/watch?v=yEEOGQ-6Tc4"
+    ]
+  },
+  "key_persons": [],
+  "scanned_at": "2026-07-23T23:56:26.643981"
+}

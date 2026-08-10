@@ -1,0 +1,123 @@
+id: "cta-001"
+name: "Dual-Path CTA Section"
+category: "cta"
+subcategory: "standalone"
+tags:
+  - "dual-cta"
+  - "conversion"
+  - "self-serve"
+  - "sales-led"
+  - "section-level"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "centered single-column"
+    height: "auto"
+    max_width: "720px (content column)"
+    alignment: "center"
+    padding: "64px 24px (vertical)"
+  typography:
+    headline:
+      font_family: "Sohne (Stripe) / Geist Sans (Vercel)"
+      font_size: "32-48px"
+      font_weight: 300
+      line_height: 1.1
+      letter_spacing: "-0.64px"
+    subheadline:
+      font_size: "16px"
+      font_weight: 300
+      line_height: 1.4
+      color: "#64748D (ink-mute)"
+  spacing:
+    between_elements:
+      - "headline -> subheadline: 16px"
+      - "subheadline -> CTA group: 32px"
+      - "CTA buttons: 12px gap"
+    section_padding_y: ["64px", "64px"]
+  colors:
+    background: "#FFFFFF (clean white focus)"
+    text_primary: "#0D253D (Stripe) / #171717 (Vercel)"
+    text_secondary: "#64748D (Stripe) / #4d4d4d (Vercel)"
+    accent: "#533AFD (Stripe) / #171717 (Vercel)"
+    harmony: "minimal color - let CTA buttons be the focal point"
+  effects:
+    shadow: "none"
+    border_radius: "9999px (pill buttons)"
+  animation:
+    entrance: "fade-in on scroll"
+    duration: "0.2-0.3s"
+    easing: "ease-in-out"
+
+structure:
+  - element: "section"
+    role: "final_cta_section"
+    children:
+      - element: "headline"
+        role: "final_value_proposition"
+        content_type: "display-lg or display-xl"
+      - element: "subheadline_optional"
+        role: "context_or_reassurance"
+        content_type: "body-lg"
+      - element: "cta_group"
+        role: "conversion"
+        children:
+          - element: "primary_cta"
+            content_type: "filled pill button (main action)"
+          - element: "secondary_cta"
+            content_type: "outline pill button (alternative)"
+      - element: "optional_supporting_links"
+        role: "extra_guidance"
+        content_type: "small text links or code snippet"
+
+when_to_use:
+  - "End of landing page as final conversion opportunity"
+  - "When offering two distinct paths (self-serve vs. sales-led)"
+  - "Developer tools where the CTA can be paired with a code snippet"
+  - "SaaS sites wanting a clean, focused conversion section without distractions"
+
+when_not_to_use:
+  - "When there's a single clear conversion path (use single CTA instead)"
+  - "When secondary action would dilute primary conversion goal"
+  - "For in-page CTAs within content sections (use section-specific CTA)"
+
+comparisons:
+  stripe_vs_vercel:
+    differences:
+      - "Stripe: heading + subheading + dual CTA + optional bottom links (pricing, integration); Vercel: single headline + primary button + code snippet"
+      - "Stripe uses 'Start now' (primary) and 'Contact sales' (secondary); Vercel uses 'Deploy Now' (primary) and optional code block"
+      - "Stripe has extra reassurance links below; Vercel relies on headline alone, no subheadline"
+    similarities:
+      - "Both use centered layout with generous whitespace"
+      - "Both use a prominent primary button"
+      - "Both are the final section before footer"
+    recommendation: "Use Stripe's fuller version when users need context before converting; use Vercel's minimal version when the action is obvious (e.g., Deploy, Start)"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Stack CTAs vertically; full-width buttons"
+    tablet: "Keep horizontal CTA pair if space allows"
+    desktop: "Side-by-side primary + secondary CTA"
+  accessibility:
+    - "Ensure CTA text is descriptive and action-oriented"
+    - "Single primary action per band (CRO best practice)"
+    - "Secondary CTA should not look like primary (different visual weight)"
+    - "Code snippets need copy-to-clipboard with accessible button"
+
+assets:
+  screenshots: {}
+  references: []

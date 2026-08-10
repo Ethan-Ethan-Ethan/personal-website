@@ -1,0 +1,230 @@
+# Website Analysis Report
+domain: nngroup.com
+analyzed_date: 2026-07-10
+url: https://www.nngroup.com/
+analysis_method: WebFetch (limited - no CSS access)
+company: Nielsen Norman Group (UX research and consulting)
+
+# Executive Summary
+NNG 是 UX 研究和顧問公司，網站設計強調：
+- **專業權威感**：28+ 年經驗、企業客戶 logo 牆
+- **模組化內容**：嚴格的網格系統、一致的卡片設計
+- **資訊分層**：清晰區分培訓、課程、顧問服務、免費資源
+- **信任建構**：證據導向的研究、知名企業客戶
+
+## Layout
+```yaml
+layout:
+  hero:
+    type: "value proposition"
+    description: "Research-backed, 28+ years strong"
+    alignment: "left or center"
+  grid:
+    type: "strict modular grid"
+    image_standards:
+      course_thumbnails: "330px width"
+      article_covers: "648px squares"
+    consistency: "high"
+  sections:
+    - name: "Hero / Value Prop"
+      description: "Main value proposition with trust signals"
+    - name: "Services Overview"
+      description: "Training, courses, consulting"
+    - name: "Course Cards"
+      description: "Modular card grid with thumbnails"
+    - name: "Article Cards"
+      description: "Content cards with metadata"
+    - name: "Client Logos"
+      description: "Enterprise client logo cloud"
+    - name: "Newsletter Signup"
+      description: "Single-field email capture"
+  section_spacing: "generous (distinct breaks between content types)"
+  responsive: "likely responsive (standardized image dimensions suggest responsive grid)"
+```
+
+## Spacing
+```yaml
+spacing:
+  consistency: "high"
+  whitespace: "generous"
+  vertical_padding: "consistent between sections"
+  observations:
+    - "Distinct section breaks imply generous whitespace"
+    - "Consistent vertical padding separates diverse content types"
+    - "Clean, uncluttered layout"
+```
+
+## Color
+```yaml
+color:
+  primary: "unknown (likely professional blue or corporate color)"
+  secondary: "unknown"
+  neutral:
+    background: "likely white or light gray"
+    text: "likely dark gray or black"
+    muted: "medium gray for metadata"
+  accent: "unknown"
+  palette_type: "clean, accessible, professional"
+  contrast: "likely high (accessibility focus for UX company)"
+  observations:
+    - "Corporate focus implies conservative, professional palette"
+    - "Accessibility likely a priority (UX company)"
+    - "Clean and not distracting"
+```
+
+## Typography
+```yaml
+typography:
+  hierarchy: "strong visual hierarchy"
+  font_family: "unknown (likely clean sans-serif)"
+  font_sizes:
+    h1: "large (primary value proposition)"
+    h2: "medium (section titles, course titles)"
+    body: "readable (article descriptions)"
+    small: "metadata (author names, read times)"
+  font_weights:
+    heading: "bold"
+    body: "regular"
+  line_height: "likely 1.5-1.6 for body text"
+  observations:
+    - "Clear hierarchy guides users from value prop → course titles → metadata"
+    - "No jargon, practical guidance emphasis"
+    - "Readable and accessible"
+```
+
+## Animation
+```yaml
+animation:
+  transitions: "likely subtle (professional site)"
+  hover_effects: "expected on clickable cards and navigation"
+  scroll_animations: "unknown (likely minimal)"
+  observations:
+    - "Professional site likely uses subtle, purposeful animations"
+    - "Cards likely have hover states"
+    - "No flashy animations (not appropriate for UX consulting)"
+```
+
+## Components
+```yaml
+components:
+  navigation:
+    type: "multi-tiered menu"
+    categories:
+      - "Services"
+      - "Training"
+      - "Resources"
+    description: "Clear categorization of offerings"
+  cards:
+    type: "primary UI pattern"
+    structure:
+      - icon_or_thumbnail: "330px or 648px"
+      - title: "bold"
+      - description: "brief"
+      - metadata: "author, read time, price"
+    variations:
+      course_cards: "with thumbnails, pricing badges"
+      article_cards: "with metadata (author, read time)"
+  badges_tags:
+    type: "text labels"
+    usage: "pricing, format types, categorization"
+    description: "Visual categorization within cards"
+  trust_signals:
+    logo_cloud: "enterprise client logos"
+    experience_badge: "28+ years strong"
+    research_backed: "evidence-based positioning"
+  forms:
+    newsletter: "single-field email capture"
+    design: "minimal, low friction"
+  buttons:
+    style: "likely clean, professional"
+    usage: "CTAs for courses, services, signup"
+```
+
+## Brand Identity & Positioning
+```yaml
+brand:
+  positioning: "authoritative, evidence-based UX experts"
+  key_messages:
+    - "Research-backed"
+    - "28+ years strong"
+    - "Practical guidance without jargon"
+  trust_builders:
+    - enterprise_clients: "logo cloud"
+    - experience: "28+ years"
+    - evidence_based: "research emphasis"
+  tone: "professional, authoritative, accessible"
+  target_audience:
+    - "UX professionals"
+    - "Product teams"
+    - "Enterprise companies"
+```
+
+## UX Patterns & Effectiveness
+```yaml
+ux_patterns:
+  content_segmentation: "clear separation of training, courses, consulting, resources"
+  information_architecture: "modular, predictable, scannable"
+  trust_building: "immediate credibility through client logos and experience"
+  friction_reduction: "easy categorization, clear CTAs"
+  accessibility: "likely high priority (UX company)"
+
+effectiveness:
+  strengths:
+    - "Immediate trust through positioning and social proof"
+    - "Clear content categorization"
+    - "Consistent, predictable layout"
+    - "Professional, authoritative tone"
+    - "Focus on practical, accessible guidance"
+  weaknesses:
+    - "unknown (would need user testing to identify)"
+```
+
+## Key Takeaways
+key_takeaways:
+  - "Strict modular grid creates consistency and predictability"
+  - "Cards are the primary UI pattern (courses, articles)"
+  - "Strong trust signals (28+ years, enterprise clients)"
+  - "Clear content segmentation (training vs courses vs resources)"
+  - "Professional, authoritative brand identity"
+  - "Accessibility and usability likely high priorities"
+
+## Reusable Patterns
+reusable_patterns:
+  - name: "Modular Card Grid"
+    description: "Consistent card layout for courses/articles with thumbnails, titles, metadata"
+    category: "layout"
+    use_when: "展示多個同類型內容（課程、文章、產品）"
+  - name: "Trust Signal Stack"
+    description: "Experience badge + client logos + research backing"
+    category: "components"
+    use_when: "需要建立專業權威和信任感"
+  - name: "Content Segmentation"
+    description: "Clear separation of different content types (training, courses, resources)"
+    category: "information-architecture"
+    use_when: "有多種產品/服務需要清晰區分"
+  - name: "Minimal Newsletter Signup"
+    description: "Single-field email capture, low friction"
+    category: "components"
+    use_when: "需要收集用戶郵件但不想造成壓力"
+
+## Comparison with Other Sites
+comparison:
+  vs_linear:
+    nngroup: "more content-focused, modular cards, trust signals"
+    linear: "product-focused, hero sections, feature showcase"
+  vs_stripe:
+    nngroup: "educational content, professional authority"
+    stripe: "developer tools, technical documentation"
+
+# Limitations & Next Steps
+limitations:
+  - "WebFetch cannot access CSS styles (colors, exact spacing, fonts)"
+  - "Cannot observe animations and hover effects"
+  - "Cannot see responsive breakpoints in action"
+  - "Cannot inspect computed styles or design tokens"
+
+next_steps:
+  - "Use browser Console script to extract actual CSS values"
+  - "Take screenshots for visual reference"
+  - "Analyze personal blog and compare with NNG patterns"
+  - "Identify applicable patterns for personal blog"

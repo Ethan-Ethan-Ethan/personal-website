@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, getEntryBySlug } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content, headings } = await article.render();
+
+const dateFormatter = new Intl.DateTimeFormat('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+// 從 headings 產生目錄（h2、h3）
+const tocHeadings = headings.filter(
+  (h) => h.depth === 2 || h.depth === 3
+);
+
+// 上一篇 / 下一篇
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+allArticles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const currentIndex = allArticles.findIndex((a) => a.slug === article.slug);
+const prevArticle = currentIndex > 0 ? allArticles[currentIndex - 1] : null;
+const nextArticle = currentIndex < allArticles.length - 1 ? allArticles[currentIndex + 1] : null;
+---
+
+<BaseLayout
+  title={article.data.title}
+  description={article.data.description || article.data.title}
+>
+  <article class="container">
+    <!-- Article Header -->
+    <header style="margin-bottom: var(--space-8);">
+      <h1>{article.data.title}</h1>
+      <div class="article-meta">
+        <time datetime={article.data.date.toISOString()}>
+          {dateFormatter.format(article.data.date)}
+        </time>
+        {
+          article.data.tags && article.data.tags.length > 0 && (
+            <div class="article-tags">
+              {article.data.tags.map(tag => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </header>
+
+    <!-- Table of Contents -->
+    {
+      tocHeadings.length > 0 && (
+        <nav class="toc" aria-label="目錄">
+          <p class="toc__title">目錄</p>
+          <ul class="toc__list">
+            {
+              tocHeadings.map((h) => (
+                <li
+                  class="toc__item"
+                  style={h.depth === 3 ? 'padding-left: var(--space-4);' : ''}
+                >
+                  <a class="toc__link" href={`#${h.slug}`}>
+                    {h.text}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      )
+    }
+
+    <!-- Article Content -->
+    <div class="article-content">
+      <Content />
+    </div>
+
+    <!-- Previous / Next Article Navigation -->
+    {
+      (prevArticle || nextArticle) && (
+        <nav
+          style="
+            margin-top: var(--space-12);
+            padding-top: var(--space-6);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-4);
+          "
+          aria-label="文章導覽"
+        >
+          <div style="flex: 1;">
+            {
+              prevArticle && (
+                <>
+                  <span style="font-size: var(--text-sm); color: var(--color-text-muted);">
+                    &larr; 上一篇
+                  </span>
+                  <br />
+                  <a href={`/articles/${prevArticle.slug}/`}>
+                    {prevArticle.data.title}
+                  </a>
+                </>
+              )
+            }
+          </div>
+          <div style="flex: 1; text-align: right;">
+            {
+              nextArticle && (
+                <>
+                  <span style="font-size: var(--text-sm); color: var(--color-text-muted);">
+                    下一篇 &rarr;
+                  </span>
+                  <br />
+                  <a href={`/articles/${nextArticle.slug}/`}>
+                    {nextArticle.data.title}
+                  </a>
+                </>
+              )
+            }
+          </div>
+        </nav>
+      )
+    }
+  </article>
+</BaseLayout>

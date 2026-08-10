@@ -1,0 +1,88 @@
+id: "misc-004"
+name: "Kicker (Section Eyebrow)"
+category: "misc"
+subcategory: ""
+tags: ["typography", "section-label", "eyebrow", "uppercase"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "inline"
+    height: "auto"
+    max_width: ""
+    alignment: "inherit"
+    padding: ""
+  typography:
+    headline:
+      font_family: "Inter, Arial, sans-serif"
+      font_size: "13px"
+      font_weight: 800
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+    text_transform: "uppercase"
+    letter_spacing: "0.12em"
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: ""
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    text_color: "--green (sage green, #88b56b)"
+  effects:
+    shadow: ""
+    border_radius: ""
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "p or span"
+    role: "section label"
+    content_type: "short uppercase text"
+
+when_to_use:
+  - "Preceding section headings to indicate content category"
+  - "Dashboard-style interfaces with multiple content panels"
+  - "Establishing visual hierarchy between sections"
+
+when_not_to_use:
+  - "When screen space is extremely limited (kicker adds line)"
+  - "For primary CTAs or actionable labels"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .kicker {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #88b56b;
+      margin-bottom: 16px;
+    }
+  responsive_notes:
+    mobile: "Keep same size; ensure green contrast ratio meets AA for small text"
+    tablet: "Unchanged"
+    desktop: "Unchanged"
+  accessibility:
+    - "Use semantic <p> or <span>, never a heading element"
+    - "Avoid relying solely on color to convey meaning (pair with content)"
+    - "Ensure 13px green text on dark background passes WCAG AA (4.5:1)"
+
+assets:
+  screenshots: {}
+  references: []

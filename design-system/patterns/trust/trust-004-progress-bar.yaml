@@ -1,0 +1,99 @@
+id: "trust-004"
+name: "Gradient Progress Bar"
+category: "trust"
+subcategory: ""
+tags: ["progress", "bar", "gradient", "data-visualization", "completion"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "horizontal bar with fill"
+    height: "8px"
+    max_width: "100%"
+    alignment: "stretch"
+    padding: ""
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "dark (track)"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    fill_gradient: "green (#88b56b) to amber (#d4a34b)"
+  effects:
+    shadow: ""
+    border_radius: "rounded (on both track and fill)"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "div.progress-track"
+    role: "outer track container"
+    children:
+      - element: "div.progress-fill"
+        role: "animated fill indicator"
+        attributes:
+          - "aria-valuenow: completion percentage"
+          - "aria-valuemin: 0"
+          - "aria-valuemax: 100"
+      - element: "span.label (optional)"
+        role: "percentage or status text"
+        content_type: "text"
+
+when_to_use:
+  - "Skill proficiency indicators on resume or profile sections"
+  - "Project completion status"
+  - "Any linear metric that fits a percentage scale"
+
+when_not_to_use:
+  - "For precise data visualization (use metric-number instead)"
+  - "When space is very narrow (< 100px, bar becomes too thin to read)"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .progress-bar {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #88b56b, #d4a34b);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+  responsive_notes:
+    mobile: "Keep 8px height; do not reduce further"
+    tablet: "Unchanged"
+    desktop: "Unchanged"
+  accessibility:
+    - "Add role='progressbar' with aria-valuenow, aria-valuemin, aria-valuemax"
+    - "Do not rely solely on color to convey completion (provide text label)"
+    - "Green-to-amber gradient: verify colorblind-safe pattern"
+
+assets:
+  screenshots: {}
+  references: []

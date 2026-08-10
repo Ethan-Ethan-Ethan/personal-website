@@ -1,0 +1,106 @@
+id: "misc-002"
+name: "Section Heading Group (Eyebrow + Heading + Subheading)"
+category: "misc"
+subcategory: "text-pattern"
+tags:
+  - "heading"
+  - "eyebrow"
+  - "subheading"
+  - "section-header"
+  - "text-pattern"
+  - "hierarchy"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "vertical text stack, centered or left-aligned"
+    height: "auto"
+    max_width: "720px (for centered) / full (for left)"
+    alignment: "center (Stripe default) or left"
+    padding: "0 (used within sections)"
+  typography:
+    headline:
+      font_family: "Sohne"
+      font_size: "48px (display-xl) or 32px (display-lg)"
+      font_weight: 300
+      line_height: 1.15
+      letter_spacing: "-0.96px"
+    subheadline:
+      font_size: "16px"
+      font_weight: 300
+      line_height: 1.4
+      color: "#64748D"
+    eyebrow:
+      font_size: "10px"
+      font_weight: 400
+      line_height: 1.15
+      letter_spacing: "0.1px"
+      text_transform: "uppercase"
+      color: "#64748D or #533AFD"
+  spacing:
+    between_elements:
+      - "eyebrow -> heading: 8px"
+      - "heading -> subheading: 16px"
+    section_padding_y: ["0", "0"]
+  colors:
+    background: ""
+    text_primary: "#0D253D"
+    text_secondary: "#64748D"
+    accent: "#533AFD (eyebrow variant)"
+    harmony: "big heading dominates; subheading recedes; eyebrow is subtle"
+  effects:
+    shadow: "none"
+    border_radius: "0"
+  animation:
+    entrance: "fade-in"
+    duration: "0.2-0.3s"
+    easing: "ease-in-out"
+
+structure:
+  - element: "section_header"
+    role: "context_provider"
+    children:
+      - element: "eyebrow_label_optional"
+        role: "pre_context"
+        content_type: "micro-cap uppercase text"
+      - element: "heading"
+        role: "primary_title"
+        content_type: "display-xl or display-lg"
+      - element: "subheading"
+        role: "additional_context"
+        content_type: "body-lg (muted color)"
+
+when_to_use:
+  - "Every major content section on a marketing page"
+  - "Establishing clear hierarchy before section content"
+  - "Long-form pages needing visual rhythm and predictable patterns"
+  - "Any page wanting Stripe-style clean, structured sections"
+
+when_not_to_use:
+  - "Within card content (use card titles instead of section heading pattern)"
+  - "When space is extremely limited (use compact heading variant)"
+  - "Hero sections (hero uses its own heading pattern)"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Reduce heading size proportionally (48px -> 32px); keep stack vertical"
+    tablet: "Maintain layout; optional reduction of heading size by 20%"
+    desktop: "Standard layout with full-size heading type"
+  accessibility:
+    - "Eyebrow is decorative text, not a heading"
+    - "Heading must be H2 (section) or H3 (subsection)"
+    - "Subheading should not be missable as the heading's complement"
+    - "Keep headings concise (5-10 words)"
+
+assets:
+  screenshots: {}
+  references: []

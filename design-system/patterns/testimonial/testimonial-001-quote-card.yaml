@@ -1,0 +1,107 @@
+id: "testimonial-001"
+name: "Quote Card with Headshot and Attributed Source"
+category: "testimonial"
+subcategory: "quote-cards"
+tags:
+  - "headshot"
+  - "direct-quote"
+  - "attributed"
+  - "social-proof"
+  - "case-study-link"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "vertical stack card"
+    height: "auto"
+    max_width: "360px (card width)"
+    alignment: "left"
+    padding: "24px"
+  typography:
+    headline:
+      font_family: "Sohne"
+      font_size: "15px"
+      font_weight: 300
+      line_height: 1.4
+    name:
+      font_size: "14px"
+      font_weight: 500
+    title:
+      font_size: "13px"
+      font_weight: 400
+      color: "#64748D"
+  spacing:
+    between_elements:
+      - "quote -> speaker name: 12px"
+      - "speaker name -> title + company: 4px"
+      - "title -> link: 16px"
+    section_padding_y: ["64px", "64px"]
+  colors:
+    background: "#FFFFFF (no border or shadow)"
+    text_primary: "#0D253D"
+    text_secondary: "#64748D"
+    accent: "#533AFD"
+    harmony: "clean white card with muted secondary text for attribution"
+  effects:
+    shadow: "none"
+    border_radius: "0 (card is implied by layout, not explicit box)"
+  animation:
+    entrance: "fade-in"
+    duration: "0.2-0.3s"
+    easing: "ease-in-out"
+
+structure:
+  - element: "card"
+    role: "testimonial"
+    children:
+      - element: "quote_text"
+        role: "testimonial_content"
+        content_type: "direct quote in body text"
+      - element: "attribution"
+        role: "source"
+        children:
+          - element: "headshot"
+            content_type: "circular image (48px)"
+          - element: "speaker_name"
+            content_type: "bold/medium weight text"
+          - element: "title_company"
+            content_type: "muted text in ink-mute color"
+      - element: "cta_link"
+        role: "read_more"
+        content_type: "text link with arrow ('Read the story')"
+
+when_to_use:
+  - "Featuring real customer voices with names, faces, and companies"
+  - "Building trust through peer recommendations in B2B context"
+  - "Sections where direct quotes add human credibility to technical claims"
+  - "Multi-column testimonial grids (pair with Testimonial Metric Card pattern)"
+
+when_not_to_use:
+  - "When quotes are anonymous or unattributed"
+  - "When you can't get permission to use real names and photos"
+  - "When testimonials need to be quantified (use metric card instead)"
+  - "Consumer products where star ratings and reviews work better"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Single column, full-width cards"
+    tablet: "2-up grid"
+    desktop: "3-up or 4-up grid of testimonial cards"
+  accessibility:
+    - "Use <blockquote> element for quote content"
+    - "Headshot needs descriptive alt text, not 'headshot'"
+    - "Ensure quote text has adequate contrast on white background"
+    - "Link text should be descriptive ('Read the story' not 'Read more')"
+
+assets:
+  screenshots: {}
+  references: []

@@ -1,0 +1,201 @@
+# Website Analysis Report
+domain: linear.app
+analyzed_date: 2026-07-10
+url: https://linear.app
+analysis_method: WebFetch (limited - no CSS access)
+
+# 6 Dimensions Analysis
+
+## Layout
+```yaml
+layout:
+  hero:
+    height: "unknown (likely 100vh or 80vh)"
+    padding: "unknown"
+    alignment: "center"
+    content: "System for teams and agents"
+  grid:
+    columns: "unknown"
+    gutter: "unknown"
+    container_max_width: "unknown"
+  section_spacing:
+    between_sections: "unknown (distinct sections visible)"
+    content_padding: "unknown"
+  sections:
+    - name: "Hero"
+      description: "Product intro with main value proposition"
+    - name: "Feature sections"
+      description: "Numbered sections (1.0 Intake, 2.0 Plan, etc.)"
+  responsive:
+    desktop: "> 1024px"
+    tablet: "768px - 1024px"
+    mobile: "< 768px"
+    notes: "Images use dpr=2 and fit=scale-down for responsive delivery"
+```
+
+## Spacing
+```yaml
+spacing:
+  scale: "unknown (needs manual inspection)"
+  base_unit: "unknown"
+  consistency: "high (standardized asset dimensions observed)"
+  whitespace_ratio: "generous (inferred from Linear's design reputation)"
+  observations:
+    - "User avatars consistently sized at 352x352"
+    - "UI thumbnails use width w=72"
+    - "Likely uses 8px base unit (common in modern design systems)"
+```
+
+## Color
+```yaml
+color:
+  primary: "unknown (needs visual inspection, likely blue/purple)"
+  secondary: "unknown"
+  neutral:
+    background: "unknown (likely light gray or white)"
+    text: "unknown (likely dark gray or black)"
+    muted: "unknown"
+  accent:
+    cta: "unknown"
+    link: "unknown"
+    error: "unknown"
+  semantic_colors:
+    status_risk: "red (inferred from 'At risk' indicator)"
+    status_on_track: "green (inferred from 'On track' indicator)"
+    status_in_progress: "yellow (inferred from 'In Progress' indicator)"
+  harmony: "unknown"
+  contrast_ratio: "unknown"
+```
+
+## Typography
+```yaml
+typography:
+  font_family:
+    heading: "unknown (likely Inter or similar sans-serif)"
+    body: "unknown (likely Inter or similar sans-serif)"
+    code: "monospace (confirmed - 'import React' snippets visible)"
+  font_sizes:
+    h1: "unknown (large hero header)"
+    h2: "unknown (section titles like 'Built for purpose')"
+    h3: "unknown"
+    body: "unknown"
+    small: "unknown"
+    caption: "unknown"
+  font_weights:
+    regular: 400
+    medium: 500
+    bold: 700
+  line_height:
+    heading: "unknown"
+    body: "unknown"
+  letter_spacing:
+    heading: "unknown"
+    body: "unknown"
+  hierarchy: "clear (hero → section titles → body text → code)"
+```
+
+## Animation
+```yaml
+animation:
+  transitions:
+    duration: "unknown (likely 0.2-0.3s based on industry standards)"
+    easing: "unknown"
+  hover_effects:
+    - type: "unknown (needs visual inspection)"
+  scroll_animations: "unknown"
+  micro_interactions:
+    loading: "spinners observed"
+    ui_flicker_prevention: "referenced in content"
+```
+
+## Components
+```yaml
+components:
+  buttons:
+    primary:
+      labels: ["Get started", "Contact sales"]
+      style: "unknown (likely filled with primary color)"
+    secondary:
+      labels: ["links with directional arrows →"]
+      style: "text links with icons"
+  cards:
+    issue_cards:
+      structure: "metadata display"
+      elements:
+        - id: "ENG-2085"
+        - priority: "High"
+        - status: "Todo"
+    border_radius: "unknown"
+    shadow: "unknown"
+    padding: "unknown"
+  navigation:
+    type: "top bar"
+    items:
+      - "Product"
+      - "Resources"
+      - "Log in"
+    height: "unknown"
+    alignment: "horizontal"
+  specialized_components:
+    - name: "Code diff viewer"
+      description: "Understand code changes through structural comparisons"
+    - name: "Issue cards"
+      description: "Display metadata with IDs, priority, status"
+    - name: "User avatars"
+      description: "352x352 px, consistent sizing"
+
+# Key Takeaways
+key_takeaways:
+  - "Clear visual hierarchy from hero to sections"
+  - "Numbered feature sections (1.0, 2.0) create structure"
+  - "Consistent component patterns (issue cards, avatars)"
+  - "Code snippets use monospace font"
+  - "Responsive images with proper delivery (dpr, fit parameters)"
+  - "Linear is known for: generous whitespace, smooth animations, dark mode option"
+
+# Reusable Patterns
+reusable_patterns:
+  - name: "Numbered Feature Sections"
+    description: "Sequential numbering (1.0, 2.0) for feature showcase"
+    category: "layout"
+  - name: "Issue Card Component"
+    description: "Compact metadata display with ID, priority, status"
+    category: "components"
+  - name: "Hero + Feature Flow"
+    description: "Main value prop → detailed feature sections"
+    category: "layout"
+
+# Limitations & Next Steps
+limitations:
+  - "WebFetch cannot access CSS styles (colors, exact spacing, fonts)"
+  - "Cannot observe animations and hover effects"
+  - "Cannot see responsive breakpoints in action"
+  - "Cannot inspect computed styles or design tokens"
+
+next_steps:
+  - "Manual inspection: Open browser DevTools to extract actual CSS values"
+  - "Take screenshots of key sections for visual reference"
+  - "Use browser automation tools (Playwright) for deeper inspection"
+  - "Supplement this report with visual observations"
+  - "Extract design tokens from actual CSS (colors, spacing scale, typography)"
+
+# Manual Inspection Checklist
+manual_checklist:
+  colors:
+    - [ ] Primary color (hex)
+    - [ ] Background color (hex)
+    - [ ] Text color (hex)
+    - [ ] CTA button color (hex)
+  typography:
+    - [ ] Heading font family
+    - [ ] Body font family
+    - [ ] H1 font size
+    - [ ] Body font size
+  spacing:
+    - [ ] Base spacing unit
+    - [ ] Section padding
+    - [ ] Card padding
+  animation:
+    - [ ] Transition duration
+    - [ ] Hover effect type
+    - [ ] Scroll animation style

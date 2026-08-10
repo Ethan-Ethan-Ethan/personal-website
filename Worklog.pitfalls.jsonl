@@ -1,0 +1,19 @@
+{"domain": "個人網站", "symptom": "WebFetch 無法讀取 CSS styles", "cause": "工具只能抓 HTML 結構", "fix": "建立 4 個 console scripts", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "Cloudflare 403 攔截個人站分析", "cause": "Cloudflare 防護", "fix": "從原始碼直接分析", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "卡片 padding 不統一（18/20/22/24px）", "cause": "無統一 base unit", "fix": "4px base → sm/md/lg 命名變數", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "h1 跨頁不一致（28-48px）", "cause": "無 typography scale", "fix": "定義 --text-xs ~ --text-4xl", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "CSS 散落 7 個 HTML 檔", "cause": "無外部樣式表", "fix": "提取為 styles.css + components/*.css", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "panel toggle 無鍵盤支援", "cause": "只有 click 事件", "fix": "keyboard handler + History API", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "rgba 值散落未收斂", "cause": "各處硬編碼", "fix": "定義 --white-04/06/08/12/16", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "無 scroll 動畫", "cause": "全站 0 個 micro-interaction", "fix": "IntersectionObserver + CSS transitions", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "Hero 缺乏價值主張", "cause": "原始文案為「工作台摘要」", "fix": "重寫 kicker + h1 + lead + trust strip", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "RSS XML CDATA 解析失敗", "cause": "自寫解析器未處理 CDATA", "fix": "加入 CDATA stripping 函式", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "中文 slugify 產生空字串", "cause": "JS `\\w` 不含中文", "fix": "regex 加 CJK range `一-鿿`", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "Reddit RSS 403", "cause": "Reddit 封鎖伺服器端 RSS", "fix": "改用 RSSHub 36Kr 源", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "Cloudflare API DNS 權限不足", "cause": "Token scope 只給 Workers", "fix": "補 Zone DNS Edit 權限", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "Guardrail 擋 rm 指令", "cause": "全域 guardrail 禁止 rm", "fix": "改用 trash 指令", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "TradingView widget async 載入失敗", "cause": "Astro Islands 與 TradingView 非同步初始化衝突", "fix": "改用獨立 iframe 頁面 embed", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "RSS 中文標題 slug 路徑衝突", "cause": "動態路由 slug 取自完整檔名路徑", "fix": "`post.id.split('/').pop()` 取最後一段", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "GitHub Actions workflow push 權限不足", "cause": "GITHUB_TOKEN 預設無 workflow scope", "fix": "`gh auth refresh -s workflow` 補足", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "gh CLI OAuth token 失效", "cause": "macOS Keychain token 過期/SSL 錯誤", "fix": "裝置授權流程重新認證", "confidence": 0.95, "date": "2026-07-24", "count": 17}
+{"domain": "個人網站", "symptom": "GitHub Secrets 設定混淆", "cause": "誤以為 gh CLI 授權 = 部署權限", "fix": "明確區分兩階段認證", "confidence": 0.95, "date": "2026-07-24", "count": 17}

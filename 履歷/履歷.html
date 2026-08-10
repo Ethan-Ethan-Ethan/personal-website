@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>楊宥綸 - 資深 FAE 應用工程師 履歷</title>
+    <style>
+        /* ===== Reset & Base ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+            line-height: 1.7;
+            color: #2d3436;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.25);
+            overflow: hidden;
+        }
+
+        /* ===== Header ===== */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            padding: 48px 44px 40px;
+            text-align: center;
+        }
+        .header .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.3);
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: .85;
+            margin-bottom: 22px;
+            font-weight: 400;
+        }
+        .header .contact-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: .92rem;
+        }
+        .header .contact-bar span {
+            background: rgba(255,255,255,.12);
+            padding: 7px 18px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* ===== Sections ===== */
+        .section {
+            padding: 36px 44px;
+            border-bottom: 1px solid #eef0f2;
+        }
+        .section:last-of-type { border-bottom: none; }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 26px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        /* ===== Profile ===== */
+        .profile-box {
+            background: #f8f9fa;
+            padding: 24px 28px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            color: #444;
+            font-size: .97rem;
+        }
+
+        /* ===== Job Entry ===== */
+        .job {
+            margin-bottom: 28px;
+        }
+        .job:last-child { margin-bottom: 0; }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .job-header .left h3 {
+            font-size: 1.15rem;
+            color: #2a5298;
+            font-weight: 700;
+        }
+        .job-header .left .company {
+            font-size: .92rem;
+            color: #636e72;
+            font-weight: 500;
+        }
+        .job-header .period {
+            font-size: .88rem;
+            color: #888;
+            background: #f1f2f6;
+            padding: 4px 14px;
+            border-radius: 14px;
+            white-space: nowrap;
+        }
+
+        .job ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .job ul li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 7px;
+            color: #555;
+            font-size: .95rem;
+        }
+        .job ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 4px;
+            color: #667eea;
+            font-weight: 700;
+        }
+        .job ul li strong,
+        .job ul li b {
+            color: #2a5298;
+        }
+
+        /* ===== Projects ===== */
+        .project-grid {
+            display: grid;
+            gap: 20px;
+        }
+        .project-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #eef1f5 100%);
+            padding: 24px 28px;
+            border-radius: 12px;
+            border-left: 4px solid #764ba2;
+        }
+        .project-card h3 {
+            font-size: 1.08rem;
+            color: #1e3c72;
+            margin-bottom: 4px;
+        }
+        .project-card .meta {
+            font-size: .88rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .project-card .period {
+            font-size: .85rem;
+            color: #999;
+            margin-bottom: 12px;
+        }
+        .project-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .project-card ul li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 6px;
+            color: #555;
+            font-size: .93rem;
+        }
+        .project-card ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 2px;
+            color: #764ba2;
+        }
+        .project-card .result {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .project-card .result .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 14px;
+            font-size: .82rem;
+            font-weight: 600;
+        }
+
+        /* ===== Skills ===== */
+        .skills-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .skill-block {
+            background: #f8f9fa;
+            padding: 20px 22px;
+            border-radius: 10px;
+            border: 1px solid #e8eaed;
+        }
+        .skill-block h3 {
+            font-size: 1rem;
+            color: #2a5298;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+        .skill-block table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .9rem;
+        }
+        .skill-block td {
+            padding: 4px 8px 4px 0;
+            vertical-align: top;
+            color: #555;
+        }
+        .skill-block td:first-child {
+            width: 30%;
+            font-weight: 600;
+            color: #444;
+            white-space: nowrap;
+        }
+        .skill-block ul {
+            list-style: none;
+        }
+        .skill-block ul li {
+            padding: 4px 0;
+            color: #555;
+            font-size: .9rem;
+        }
+        .skill-block ul li::before {
+            content: '▸ ';
+            color: #667eea;
+        }
+
+        /* ===== Education / Extra ===== */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .95rem;
+        }
+        .info-table td {
+            padding: 6px 12px 6px 0;
+            color: #555;
+        }
+        .info-table td:first-child {
+            width: 22%;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .highlight-bar {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            color: #333;
+            margin-top: 18px;
+            font-size: 1rem;
+        }
+
+        /* ===== Print ===== */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                font-size: 11pt;
+                line-height: 1.5;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+            }
+            .header {
+                padding: 30px 36px 24px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .header .profile-photo {
+                width: 100px;
+                height: 100px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .header h1 { font-size: 20pt; }
+            .section { padding: 20px 36px; }
+            .section-title { font-size: 13pt; margin-bottom: 12px; }
+            .project-card, .profile-box, .skill-block {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .project-card .result .tag,
+            .highlight-bar {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .skills-section { grid-template-columns: 1fr 1fr; }
+            .job { page-break-inside: avoid; }
+            .project-card { page-break-inside: avoid; }
+            .skill-block { page-break-inside: avoid; }
+        }
+
+        /* ===== Mobile ===== */
+        @media (max-width: 700px) {
+            body { padding: 16px 10px; }
+            .header { padding: 32px 20px 28px; }
+            .header h1 { font-size: 1.6rem; }
+            .section { padding: 24px 20px; }
+            .skills-section { grid-template-columns: 1fr; }
+            .project-card { padding: 18px 20px; }
+            .header .contact-bar span { white-space: normal; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ===== Header ===== -->
+        <header class="header">
+            <img src="profile.jpeg" alt="楊宥綸" class="profile-photo">
+            <h1>楊宥綸 Ethan Yang</h1>
+            <p class="subtitle">資深 FAE / 硬體研發 / 電源與 EMC 設計</p>
+            <div class="contact-bar">
+                <span>📱 0976-168-586</span>
+                <span>✉️ isitoled@gmail.com</span>
+                <span>💼 https://ethanyang.dpdns.org</span>
+                <span>📍 台灣</span>
+            </div>
+        </header>
+
+        <!-- ===== Profile ===== -->
+        <section class="section">
+            <h2 class="section-title">個人摘要</h2>
+            <div class="profile-box">
+                <p>具 15+ 年硬體研發與 FAE 經驗，早期深耕伺服器電源架構設計（VRD、DC-DC）與 EMC 對策，後轉任 FAE 專注客戶技術支援、NPI 導入與海外量產管理。熟悉從電路設計、PCB Layout、EMC 驗證到客戶端失效分析與良率改善的完整產品生命週期，能快速定位軟硬體整合問題並推動內外部團隊解決。具備跨文化工作經驗（廈門和深圳共駐點八年，主要負責大陸客戶，也曾接觸東南亞客戶），英文商務溝通流利，可配合長期外派大陸／泰國／越南／深圳／華南。</p>
+            </div>
+        </section>
+
+        <!-- ===== Work Experience ===== -->
+        <section class="section">
+            <h2 class="section-title">工作經歷</h2>
+
+            <!-- Current: FAE -->
+            <div class="job">
+                <div class="job-header">
+                    <div class="left">
+                        <h3>資深 FAE 應用工程師</h3>
+                        <span class="company">偉詮電子股份有限公司 ｜ 台灣／亞洲區支援</span>
+                    </div>
+                    <span class="period">2020/10 — 2026/05</span>
+                </div>
+                <ul>
+                    <li>擔任亞洲區客戶技術窗口，以大陸客戶為主，也曾協助東南亞客戶之產品導入、異常分析與量產支援，年度支援案件超過 80 件</li>
+                    <li>負責電源產品硬體開發與設計，包括 USB PD 充電器、電源適配器</li>
+                    <li>主導客戶端 NPI 導入與試產驗證，協調 RD、製造、品保及業務團隊，將新產品導入時程由 12 週縮短至 8 週（−33%）</li>
+                    <li>處理量產異常、客訴與退貨分析，建立 RCA／8D 報告機制，使重複性問題發生率下降 35%</li>
+                    <li>針對客戶製程與應用條件進行參數優化，協助主要客戶將良率從 92% 提升至 97%</li>
+                    <li>定期至海外客戶現場提供故障排除、設備調校、產品驗證與教育訓練，以英文進行技術簡報與會議</li>
+                    <li>深圳駐點期間，除負責個人案件外，主動協助台灣同仁處理客戶技術問題，跨部門協調並成功解決所有專案問題</li>
+                    <li>與工廠及總部技術團隊合作，建立技術知識庫與標準化 troubleshooting 流程，縮短現場問題回應時間 40%</li>
+                    <li>協助業務團隊進行技術簡報、產品提案與競品比較，支援關鍵專案爭取，成功導入 3 個新客戶平台案</li>
+                    <li>負責客戶需求收集與產品改善回饋，將現場問題轉化為內部開發需求，推動超過10項產品優化</li>
+                    <li>提供客戶應用線路建議與設計審查，協助客戶優化電源架構與 PCB Layout</li>
+                </ul>
+            </div>
+
+            <!-- Addtistn, Xiamen -->
+            <div class="job">
+                <div class="job-header">
+                    <div class="left">
+                        <h3>研發工程師</h3>
+                        <span class="company">雅蒂斯登（Addtistn） ｜ 廈門</span>
+                    </div>
+                    <span class="period">2017 — 2020</span>
+                </div>
+                <ul>
+                    <li>主導 PCB Layout 設計與 EMC 對策最佳化</li>
+                    <li>開發降低電磁干擾之 PCB 佈局技術，透過優化 MOSFET 佈局位置降低 EMI 輻射 3-5dB，解決產品認證問題</li>
+                    <li>管理 2 人研發團隊，協調專案進度與技術指導</li>
+                </ul>
+            </div>
+
+            <!-- Wistron Power DC -->
+            <div class="job">
+                <div class="job-header">
+                    <div class="left">
+                        <h3>硬體研發工程師（Power DC）</h3>
+                        <span class="company">緯創資通（Wistron） ｜ 台灣</span>
+                    </div>
+                    <span class="period">2011 — 2016</span>
+                </div>
+                <ul>
+                    <li>負責伺服器電源架構設計（VRD、DDR、POL），涵蓋 Intel Grantley／Haswell 與 AMD 平台</li>
+                    <li>使用 OrCAD 繪製 Vcore／DDR／POL 電源線路圖，Allegro 進行 PCB Layout 佈局</li>
+                    <li>使用 Sigrity PowerDC 進行 PI／SI 模擬驗證，確保電源完整性</li>
+                    <li>執行電源時序量測與補償調校（Tektronix 示波器、Agilent 資料收集器）</li>
+                    <li>開發 GPIB 自動化量測程式（效率測試、抽載壓力測試），提升測試效率與準確度</li>
+                </ul>
+            </div>
+
+            <!-- Wistron EMC -->
+            <div class="job">
+                <div class="job-header">
+                    <div class="left">
+                        <h3>EMC 工程師</h3>
+                        <span class="company">緯創資通（Wistron） ｜ 台灣</span>
+                    </div>
+                    <span class="period">2007 — 2011</span>
+                </div>
+                <ul>
+                    <li>負責 Notebook 產品 EMC 設計與驗證（Intel Sandy Bridge 平台）</li>
+                    <li>審查 PCB Layout，針對高速訊號與電源訊號提供 EMI 對策方案</li>
+                    <li>設計 EMI 濾波電路（OrCAD），執行 EMI 輻射／傳導測試（EN55022）與 ESD 測試（EN61000-4-2）</li>
+                    <li>與設計團隊協作，在產品開發初期導入 EMC 考量，降低後期整改成本與週期</li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- ===== Projects ===== -->
+        <section class="section">
+            <h2 class="section-title">專案經驗</h2>
+            <div class="project-grid">
+
+                <div class="project-card">
+                    <h3>新產品 NPI 導入流程優化</h3>
+                    <div class="meta">角色：NPI 專案負責人</div>
+                    <div class="period">時程：2021 — 2022</div>
+                    <ul>
+                        <li>重新設計 NPI 導入流程，整合跨部門資源與溝通機制</li>
+                        <li>建立標準化文件與檢查清單，提升導入效率</li>
+                    </ul>
+                    <div class="result">
+                        <span class="tag">🏅 新產品導入時程縮短 33%</span>
+                        <span class="tag">🏅 客戶滿意度提升 25%</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== Skills ===== -->
+        <section class="section">
+            <h2 class="section-title">技能專長</h2>
+            <div class="skills-section">
+
+                <div class="skill-block">
+                    <h3>🔧 技術技能</h3>
+                    <table>
+                        <tr><td>FAE 領域</td><td>Field Application Support, NPI導入, 失效分析, 量產支援</td></tr>
+                        <tr><td>電源設計</td><td>Server VRD, DC-DC, USB PD, Flyback/LLC</td></tr>
+                        <tr><td>PCB 設計</td><td>OrCAD Capture, Allegro PCB Editor, Layout, EMC對策</td></tr>
+                        <tr><td>模擬驗證</td><td>Sigrity PowerDC/PowerSI, PI/SI 模擬</td></tr>
+                        <tr><td>EMC/安規</td><td>EMI對策, ESD測試, EN55022, EN61000-4-2</td></tr>
+                        <tr><td>測試設備</td><td>示波器、資料收集器、EMC測試儀器</td></tr>
+                        <tr><td>分析方法</td><td>8D Report, RCA, FMEA, SPC, Minitab, JMP</td></tr>
+                        <tr><td>程式語言</td><td>Python（測試自動化）、GPIB 控制</td></tr>
+                        <tr><td>產業標準</td><td>ISO 9001, IATF 16949, ISO 14001</td></tr>
+                    </table>
+                </div>
+
+                <div class="skill-block">
+                    <h3>🌐 語言能力</h3>
+                    <table>
+                        <tr><td>中文</td><td>母語</td></tr>
+                        <tr><td>英文</td><td>商務流利（TOEIC 600）— 技術簡報與會議</td></tr>
+                    </table>
+                    <br>
+                    <h3>📜 證照</h3>
+                    <ul>
+                        <li>普通駕照／國際駕照</li>
+                    </ul>
+                </div>
+
+                <div class="skill-block">
+                    <h3>⭐ 核心專長</h3>
+                    <table>
+                        <tr><td>客戶支援</td><td>Field Application Support, On-site Support, Technical Training</td></tr>
+                        <tr><td>產品導入</td><td>NPI, Production Ramp, Application Validation</td></tr>
+                        <tr><td>品質分析</td><td>Failure Analysis, 8D Report, RCA, CAPA, Yield Improvement</td></tr>
+                        <tr><td>硬體設計</td><td>Power Architecture, PCB Layout, EMC Design, Schematic</td></tr>
+                        <tr><td>流程優化</td><td>Troubleshooting, Standardization, Knowledge Base</td></tr>
+                        <tr><td>溝通協作</td><td>Cross-functional Coordination, Customer Complaint Handling</td></tr>
+                        <tr><td>海外能力</td><td>Overseas Assignment, Multi-site Support, Cross-cultural Communication</td></tr>
+                    </table>
+                </div>
+
+                <div class="skill-block">
+                    <h3>📌 加分項目</h3>
+                    <table>
+                        <tr><td>外派意願</td><td>可長期外派大陸／泰國／越南</td></tr>
+                        <tr><td>到職時間</td><td>錄取後 4 週內</td></tr>
+                        <tr><td>國際經驗</td><td>廈門和深圳共駐點八年，也曾接觸東南亞客戶</td></tr>
+                        <tr><td>跨文化</td><td>大陸客戶服務經驗，熟悉當地文化</td></tr>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== Self Introduction ===== -->
+        <section class="section">
+            <h2 class="section-title">🙋 自我介紹</h2>
+            <div class="profile-box">
+                <p>大家好，我是 Ethan 楊宥綸。</p>
+                <p>我在硬體與電源領域工作了 16 年，一路從 EMC、Server 電源設計，走到現在的 FAE。回頭看，這條路其實蠻一致的——我一直在做「把技術問題搞定」這件事，只是從面對電路板，變成面對客戶。</p>
+                <p>我的技術底子是在緯創打下的。做 EMC 那四年，讓我知道一個產品從設計到通過認證，中間會踩多少坑；做 Power 那五年，讓我習慣用系統性思考去處理多電源軌、Power tree、Power sequence 這一類需要整體規劃的問題。後來轉 FAE，這些底子幫了不少忙——客戶丟來的問題，我常常可以先定位出方向，再跟 RD 一起確認。</p>
+                <p>我個性上比較直接，喜歡把事情做簡化、做系統化。在偉詮這幾年，我建立的 troubleshooting 流程、NPI 導入 checklist、知識庫，都是基於同一個想法：如果同樣的問題會重複發生，那就寫下來、流程化，讓它不要再發生第二次。我不太喜歡靠救火，比較相信靠制度跟系統把問題處理好。</p>
+                <p>另外，我確實很喜歡幫別人。無論是客戶端的工程師、內部的 RD、還是產線的作業員，只要有人遇到問題來找我，我都願意花時間跟他一起看。我覺得 FAE 這個角色，技術能力是一部分，另一部分是讓客戶跟同事願意把問題交給你。我比較開心的不是解過多少問題，而是很多人願意繼續找我幫忙。</p>
+                <p>最後，關於為什麼想往海外走。我在廈門和深圳加起來待了八年，長期負責大陸客戶的技術支援。我不怕離開舒適圈，反而比較怕停在原地。海外工作對我來說，是把過去十六年累積的東西，換個地方繼續做。大陸、泰國、越南，我都願意，也都能適應。</p>
+            </div>
+        </section>
+
+        <!-- ===== Long-term Plan ===== -->
+        <section class="section">
+            <h2 class="section-title">🧭 長期規劃</h2>
+            <div class="profile-box">
+                <h3 style="margin-top:0; font-size:11pt; color:#2c3e50;">短期（1–2 年）：站穩海外據點，熟悉當地團隊</h3>
+                <ul style="margin-bottom:16px;">
+                    <li>快速熟悉當地客戶、產線與團隊文化，建立信任關係</li>
+                    <li>把過去在台灣和廈門、深圳累積的 troubleshooting 流程、RCA/8D 模板、NPI checklist 帶過去，協助當地團隊建立標準作業</li>
+                    <li>讓當地客戶的技術問題可以在第一時間得到處理，減少等待時間</li>
+                </ul>
+
+                <h3 style="margin-top:0; font-size:11pt; color:#2c3e50;">中期（3–5 年）：建立區域支援體系</h3>
+                <ul style="margin-bottom:16px;">
+                    <li>不只解決單一客戶問題，而是建立區域級的技術支援體系——包含知識庫、標準化流程、自動化診斷工具</li>
+                    <li>帶人。把當地的 FAE 或 PE 帶起來，讓團隊可以自主處理大部分常見問題</li>
+                    <li>把現場客戶的痛點系統化地回饋給 RD 與產品團隊，參與產品規格的優化</li>
+                    <li>持續精進英文與當地語言的溝通能力，讓技術簡報與會議可以更順暢</li>
+                </ul>
+
+                <h3 style="margin-top:0; font-size:11pt; color:#2c3e50;">長期（5 年以上）：海外技術骨幹，兼顧自動化與系統優化</h3>
+                <ul style="margin-bottom:16px;">
+                    <li>成為公司海外區域的技術負責人，統整多個國家的客戶支援與產品導入</li>
+                    <li>結合我對 AI 和自動化的興趣，推動內部工作流的自動化（例如自動 RCA 報告生成、自動測試數據分析、客戶問題智慧分類），減少重複性工作</li>
+                    <li>同時兼顧個人投資系統的自動化，讓工作和資產都能更穩定</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== Education ===== -->
+        <section class="section">
+            <h2 class="section-title">學歷</h2>
+            <table class="info-table">
+                <tr><td>碩士（肄業）</td><td>電子工程 · 輔仁大學</td></tr>
+                <tr><td>學士</td><td>電子工程與自動化 · 中華科技大學（夜間部）</td></tr>
+                <tr><td>高職</td><td>電子科 · 大安高工</td></tr>
+            </table>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section class="section">
+            <div class="highlight-bar">✈️ 可立即配合海外出差與長期外派</div>
+        </section>
+    </div>
+
+    <script>
+        console.log('按 Ctrl+P 可列印或另存為 PDF');
+    </script>
+</body>
+</html>

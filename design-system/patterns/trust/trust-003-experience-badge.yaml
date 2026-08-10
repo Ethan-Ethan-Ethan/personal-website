@@ -1,0 +1,95 @@
+id: "trust-003"
+name: "Experience Badge and Research Trust Stack"
+category: "trust"
+subcategory: "badges"
+tags:
+  - "experience"
+  - "research"
+  - "credibility"
+  - "badge"
+  - "authority"
+  - "trust-stack"
+quality: "experimental"
+version: 1
+
+sources:
+  - site: "nngroup.com"
+    page: "/"
+    analyzed_date: 2026-07-10
+    confidence: "low"
+    evidence: "inference"
+
+spec:
+  layout:
+    type: "inline badge cluster or hero-level trust signal"
+    height: "auto"
+    max_width: "auto"
+    alignment: "near hero or section intro"
+    padding: ""
+  typography:
+    headline:
+      font_family: ""
+      font_size: "14-16px (badge text)"
+      font_weight: 600
+      line_height: 1.2
+    subheadline:
+      font_size: "12-13px"
+      color: "#64748D"
+  spacing:
+    between_elements:
+      - "badges: 8-12px gap"
+      - "badge group -> heading: 16px"
+    section_padding_y: ["0", "0"]
+  colors:
+    background: "subtle (light gray or tinted)"
+    text_primary: "dark"
+    text_secondary: "medium gray"
+    accent: "conservative blue or brand color"
+    harmony: "professional, muted, non-distracting"
+  effects:
+    shadow: "none"
+    border_radius: "4-8px (pill or soft rectangle)"
+  animation:
+    entrance: "none"
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "trust_signal_group"
+    role: "authority_display"
+    children:
+      - element: "experience_badge"
+        role: "tenure_signal"
+        content_type: "badge with years (e.g. '28+ years')"
+      - element: "research_claIm"
+        role: "methodology_signal"
+        content_type: "text ('Research-backed', 'Evidence-based')"
+      - element: "client_logo_cloud"
+        role: "client_trust"
+        content_type: "grid of enterprise logos"
+
+when_to_use:
+  - "Professional services, consulting, or research companies"
+  - "Sites where authority and credibility are the primary conversion driver"
+  - "When the organization has significant tenure, certifications, or research backing"
+  - "Education and training platforms where trust in expertise matters"
+
+when_not_to_use:
+  - "New companies without established credentials (logo marquee may suffice)"
+  - "Consumer products where peer reviews matter more than expert authority"
+  - "When trust signals distract from product value proposition"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Stack badges vertically; keep compact"
+    tablet: "Inline badge row"
+    desktop: "Prominent badge cluster near hero"
+  accessibility:
+    - "Badges should be non-interactive (decorative trust signals)"
+    - "Use aria-label if badges contain non-text content"
+    - "Ensure badge text has sufficient contrast"
+
+assets:
+  screenshots: {}
+  references: []

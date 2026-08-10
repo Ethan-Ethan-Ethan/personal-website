@@ -1,0 +1,88 @@
+id: "misc-006"
+name: "Status Pill"
+category: "misc"
+subcategory: ""
+tags: ["badge", "pill", "status", "green", "label"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "inline badge"
+    height: "auto"
+    max_width: ""
+    alignment: "inline"
+    padding: "varies (tight)"
+  typography:
+    headline:
+      font_family: "Inter, Arial, sans-serif"
+      font_size: "12px"
+      font_weight: 800
+      line_height: ""
+      text_transform: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "green-tinted transparent"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    border: "--green (sage green, #88b56b)"
+    text_color: "--green (sage green, #88b56b)"
+  effects:
+    shadow: ""
+    border_radius: "standard"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "span or div"
+    role: "status badge"
+    content_type: "short status text (e.g., WIP, Live, Published)"
+
+when_to_use:
+  - "Status labels on content cards (article status, project state)"
+  - "Small inline badges that need to be scannable"
+
+when_not_to_use:
+  - "When content category is needed (use tag-chip with blue accent instead)"
+  - "For interactive elements that need button behavior"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .status-pill {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      color: #88b56b;
+      background: rgba(136, 181, 107, 0.08);
+      border: 1px solid rgba(136, 181, 107, 0.28);
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+  responsive_notes:
+    mobile: "Unchanged"
+    tablet: "Unchanged"
+    desktop: "Unchanged"
+  accessibility:
+    - "12px text at 800 weight on green background: verify WCAG AA"
+    - "Do not rely solely on color to convey status (pair with text)"
+
+assets:
+  screenshots: {}
+  references: []

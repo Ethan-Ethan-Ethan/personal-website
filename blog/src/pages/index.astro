@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+// 取得所有非草稿文章，按日期降冪排序
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+allArticles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// 首頁只顯示最近 3 篇
+const recentArticles = allArticles.slice(0, 3);
+---
+
+<BaseLayout
+  title="首頁"
+  description="個人部落格 — 寫作、數據、自動化"
+  canonicalURL={new URL('/', Astro.url).href}
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero__title">個人部落格</h1>
+      <p class="hero__subtitle">
+        一個會自己長內容的個人網站 —
+        文章靠寫、資源靠抓、數據靠跑。
+      </p>
+    </div>
+  </section>
+
+  <!-- Recent Articles -->
+  <section class="container">
+    <h2 class="section-title">最新文章</h2>
+    {
+      recentArticles.length > 0 ? (
+        recentArticles.map((article) => (
+          <ArticleCard article={article} />
+        ))
+      ) : (
+        <p style="color: var(--color-text-secondary);">
+          還沒有文章。很快會開始寫。
+        </p>
+      )
+    }
+
+    {
+      allArticles.length > 3 && (
+        <p style="margin-top: var(--space-6);">
+          <a href="/articles/">查看全部文章 &rarr;</a>
+        </p>
+      )
+    }
+  </section>
+
+  <!-- About Section -->
+  <section class="container" style="margin-top: var(--space-16);">
+    <h2 class="section-title">關於這個網站</h2>
+    <div class="article-content" style="font-family: var(--font-sans);">
+      <p>
+        這個網站是一個自動化內容聚合平台。它的核心機制透過三條管線自動產生內容：
+      </p>
+      <ul>
+        <li><strong>手寫文章管線</strong> — 本地撰寫，一鍵發布</li>
+        <li><strong>Gmail 擷取管線</strong> — 自動從信箱抓取文章</li>
+        <li><strong>量化數據管線</strong> — 交易分析結果自動展示</li>
+      </ul>
+      <p>
+        目前處於 <strong>Phase 1（MVP）</strong>階段，已實作手寫文章管線與基本靜態頁面產生。
+        後續階段將陸續加入自動化擷取與數據可視化功能。
+      </p>
+    </div>
+  </section>
+</BaseLayout>

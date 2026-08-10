@@ -1,0 +1,655 @@
+# Website Analysis Report
+domain: ethanyang.dpdns.org
+analyzed_date: 2026-07-11
+url: https://ethanyang.dpdns.org
+site_name: "Ethan Yang | Personal Website Dashboard"
+language: zh-Hant
+tech_stack:
+  html: "static HTML5 (no build tool)"
+  css: "embedded <style> in each HTML file (no external stylesheet)"
+  js: "vanilla JavaScript (no framework, no bundler)"
+  deployment: "Cloudflare Workers (Wrangler)"
+  authentication: "Cloudflare Access (email verification) + client-side password fallback"
+  widgets: "TradingView Advanced Chart widget (dynamic script injection)"
+
+# ============================================================
+# 1. LAYOUT - layout and grid system
+# ============================================================
+layout:
+  hero:
+    height: "min-height: 560px (index page hero section)"
+    padding: "hero-copy: 34px; trading-panel: 24px"
+    alignment: "two-column grid split (1.05fr / 0.95fr)"
+    layout_type: "grid sidebar"
+    content_max_width: "620px (h1, lead text constrained)"
+    background: "two diagonal green-blue gradient overlays on dark base"
+  grid:
+    columns: "CSS Grid with fractional units (no fixed column system)"
+    gutter: "14px (primary); 10px-12px (dense layouts); 22px (hero); 18px (section-head)"
+    container_max_width: "1180px (.shell on dashboard); 1080px (resume); 1040px (articles index); 860px (articles)"
+    container_padding: "calc(100% - 36px) on desktop -> calc(100% - 24px) on mobile"
+  section_spacing:
+    between_sections: "28px (section margin-top)"
+    content_padding: "28px (.section-panel); 34px (article body); 34px (hero-copy)"
+    card_padding: "18px-22px (summary/insight/ops cards)"
+  responsive:
+    desktop: "> 980px (full two-column hero, 3-up grids)"
+    tablet: "720px-980px (all multi-column grid collapsed to 1fr, nav stays horizontal)"
+    mobile: "< 720px (stacks nav vertically, reduces padding, simplifies grids)"
+  observations:
+    - "Pure CSS Grid layout system, no Flexbox grids (flex only for small component-level layouts)"
+    - "No 12-column grid system -- uses fractional units"
+    - "Shell container width varies across page types"
+    - "All sections share identical container styling creating visual uniformity"
+    - "Sticky topbar at z-index:20 with glassmorphism effect"
+    - "View-panel toggle system uses JavaScript class toggling on click"
+
+# ============================================================
+# 2. SPACING - spacing system
+# ============================================================
+spacing:
+  scale: [0, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 28, 32, 34, 38, 44, 46, 54, 68, 92]
+  token_usage:
+    a: "0px (h1/h2/h3/p margin-top reset)"
+    b: "6px (tag-list gap, article-card/topic-list gap)"
+    c: "8px (nav-links gap, market-watchlist gap, market-list gap, domain-countdown gap, tag padding)"
+    d: "10px (hero-actions gap, hero-meta gap, ops-card mb, progress-row gap, brief-list gap)"
+    e: "12px (summary-grid gap, brand gap, summary-meta gap, todo-row gap, nav-link padding)"
+    f: "14px (standard grid gap for ops-grid, weekly-grid, grid-3, insights-grid, content-grid)"
+    g: "16px (kicker margin-bottom, hero-meta padding, market-board padding, section-head mb, timeline padding)"
+    h: "18px (summary-card padding, section-head gap, padding on smaller panels)"
+    i: "20px (nav-links gap, ops-card padding, focus-card padding, content-card padding)"
+    j: "22px (main padding-top, insight-card padding, article-grid padding)"
+    k: "24px (lead margin-bottom, hero-actions mb, career-map/trading-panel padding, mobile panel padding)"
+    l: "28px (section margin-top, section-panel padding, reflection-lead padding, intro-copy padding)"
+    m: "34px (hero-copy padding, article padding, main padding-top in articles)"
+    n: "44px (button min-height, main padding-bottom)"
+    o: "46px (footer padding-bottom)"
+    p: "54px (articles main padding-bottom)"
+    q: "68px (nav min-height)"
+    r: "92px (scroll-padding-top, matches topbar height with buffer)"
+  base_unit: "Inconsistent (uses 2px increments, not a strict multiple)"
+  consistency: "Moderate -- values repeat but no systematic token naming"
+  whitespace_ratio: "Comfortable on desktop, tighter on mobile"
+  patterns:
+    standard_grid_gap: "14px (primary grid gutter)"
+    card_padding: "18px (summary-cards), 20px (ops-cards), 22px (insight-cards), 24px (access-panels)"
+    button_padding: "0 14px (articles), 0 16px (index), 9px 12px (nav-links)"
+    section_vertical: "22px-34px (main padding-top), 44px-54px (main padding-bottom)"
+  observations:
+    - "Spacing values are expressed as literal CSS values, not CSS custom properties"
+    - "Padding and gap values differ between the two index versions"
+    - "No systematic spacing scale (uses 2px, 4px, 6px, 8px, 10px increments)"
+
+# ============================================================
+# 3. COLOR - color system
+# ============================================================
+color:
+  css_custom_properties:
+    defined_in_root:
+      --bg: "near-black warm (hex: 11110f)"
+      --panel: "dark olive-gray (hex: 1b1b18)"
+      --panel-2: "slightly lighter panel (hex: 22221e)"
+      --line: "dark olive border (hex: 37372f)"
+      --text: "warm off-white (hex: f3f0e8)"
+      --muted: "warm gray-beige (hex: b9b3a5)"
+      --soft: "medium warm gray (hex: 8f897b)"
+      --green: "sage green (hex: 88b56b)"
+      --amber: "amber-gold (hex: d4a34b)"
+      --blue: "dusty blue (hex: 76a7bd)"
+      --red: "terracotta (hex: c46f5a)"
+  literal_colors_in_use:
+    - "near-black warm: body background, same as --bg"
+    - "green overlay rgba(136,181,107,0.12) at 135 degrees"
+    - "blue overlay rgba(118,167,189,0.11) at 315 degrees"
+    - "sticky header rgba(17,17,15,0.84) with blur"
+    - "warm cream f0eadc: primary button background"
+    - "near-black warm 161511: primary button text"
+    - "dark olive 20231d: brand-mark background"
+    - "light gray f5f6f7: tradingview container"
+    - "dark 11120f: market-board background"
+    - "various white overlays: rgba(255,255,255,0.04) to rgba(255,255,255,0.16)"
+    - "panel backgrounds: rgba(27,27,24,0.78) and rgba(27,27,24,0.86)"
+    - "green accent overlays at various opacities (0.4 to 0.6)"
+    - "amber accent overlays at 0.08 and 0.28 opacity"
+    - "blue accent overlay at 0.08 opacity for tag backgrounds"
+  semantic_color_mapping:
+    text_primary: "--text (warm off-white)"
+    text_secondary: "--muted (warm gray-beige)"
+    text_tertiary: "--soft (medium warm gray)"
+    text_inverse: "near-black on light backgrounds"
+    accent_green: "--green (sage green)"
+    accent_amber: "--amber (amber-gold)"
+    accent_blue: "--blue (dusty blue)"
+    accent_red: "--red (terracotta)"
+    border_default: "--line (dark olive)"
+    border_subtle: "white overlays at low opacity"
+    surface_darkest: "--bg (near-black)"
+    surface_panel: "--panel (dark olive-gray)"
+    surface_card: "panel with 0.78 or 0.86 opacity"
+    surface_light: "warm cream for primary buttons"
+    gradient_green: "green at 135 degrees"
+    gradient_blue: "blue at 315 degrees"
+    progress_bar: "gradient from green to amber"
+    health_dot: "same as accent green"
+  observations:
+    - "Thoroughly defined color palette in :root CSS custom properties (11 tokens)"
+    - "Dark theme only (no light theme variant)"
+    - "Warm olive undertone throughout (not neutral gray)"
+    - "Green is primary accent: health indicators, active states, kicker text"
+    - "Amber is for emphasis numbers, metrics data, warnings"
+    - "Blue is exclusively for tag or chip categories"
+    - "Red is only used in error messages"
+    - "Primary text on background contrast ratio: passes AAA"
+    - "Secondary text on background contrast ratio: passes AAA"
+
+# ============================================================
+# 4. TYPOGRAPHY - font system
+# ============================================================
+typography:
+  font_stack:
+    primary: "Inter (sans-serif)"
+    fallback_chinese: '"Noto Sans TC", "PingFang TC", "Microsoft JhengHei"'
+    final_fallback: "Arial, sans-serif"
+  font_sizes:
+    root: "16px (browser default, not explicitly set)"
+    h1_desktop: "clamp(28px, 3vw, 42px) on index; clamp(30px, 4vw, 48px) on articles"
+    h1_mobile: "42px on index (fixed)"
+    h2_index: "30px (section-panel); 32px (reflection-lead); 22px (map-top)"
+    h2_articles: "23px (article-card); 20px (pipeline)"
+    h2_article_detail: "22px"
+    h3: "18px-20px (summary-card, ops-card, focus-card)"
+    h4: "18px (article-body internal sections)"
+    kicker: "13px"
+    body_large: "17px (article lead text)"
+    body_default: "16px (index lead text, article detail body)"
+    body_small: "14px (ops-card, content-card, link-card)"
+    body_xsmall: "13px (summary-card, nav-links, brief-list, timeline p)"
+    body_xxsmall: "12px (brand subtitle, market-state, year, tag, status-pill)"
+    metric_number: "26px (.metric b)"
+    metric_value: "18px (summary-meta strong)"
+  font_weights:
+    "800": "nav-links, kicker, button, tag, status-pill, health-dot, market-state"
+    "900": "market-avatar, focus-icon"
+    normal: "body text (implicit default)"
+  line_heights:
+    tightest: "1.0 (metric b)"
+    very_tight: "1.15-1.18 (h1)"
+    tight: "1.2 (brand strong, section-head h2)"
+    moderate: "1.3-1.35 (h3, article-card h2, ops-card h3)"
+    reading: "1.6-1.65 (summary-card p, timeline-item p, work-list span)"
+    comfortable: "1.7-1.82 (lead, ops-card p, article-body p)"
+    generous: "1.85-1.9 (reflection-lead p, article-detail body p)"
+  letter_spacing:
+    normal: "0 (default)"
+    uppercase: "0.12em (kicker text)"
+  observations:
+    - "Inter as primary font -- excellent for technical content"
+    - "Chinese fallback covers Google, Apple, and Windows fonts"
+    - "No @font-face or Google Fonts link -- relies on locally installed fonts"
+    - "Responsive typography with clamp() for h1"
+    - "Font-weight 800 used extensively for labels, buttons, tags"
+    - "Line-heights are carefully tuned from 1.0 to 1.9"
+
+# ============================================================
+# 5. ANIMATION - transitions and motion
+# ============================================================
+animation:
+  css_transitions:
+    - element: ".market-watchlist li"
+      property: "all"
+      duration: "0.2s"
+      easing: "ease"
+      effect: "border color and background transition on hover/active"
+  scroll_behavior:
+    html: "scroll-behavior: smooth"
+    js: "window.scrollTo with behavior smooth on panel toggle"
+  backdrop_filter:
+    topbar: "backdrop-filter: blur(18px) -- glassmorphism effect"
+  tradingview_widget:
+    type: "dynamic script injection (full DOM replacement on click)"
+  observations:
+    - "Minimal animation -- only one CSS transition defined site-wide"
+    - "No loading states or skeleton screens"
+    - "No micro-interactions (no button press effects, no focus ring animations)"
+    - "Sticky header has glassmorphism effect"
+    - "No scroll-driven animations (no IntersectionObserver)"
+
+# ============================================================
+# 6. COMPONENT - component inventory
+# ============================================================
+component:
+  design_system_type: "Ad-hoc -- no formal component library or framework"
+  inventory:
+    - name: "topbar"
+      category: navigation
+      description: "Sticky header with glassmorphism, brand mark, and nav links"
+      responsive: "stacks vertically on mobile"
+    - name: "brand_mark"
+      category: logo
+      description: "Initials EY in bordered box, green on dark olive"
+      css: "38x38px, grid place-items center, border radius, dark bg"
+    - name: "navigation_link"
+      category: navigation
+      description: "Text link with hover state (white bg overlay)"
+      css: "13px, muted text, 9px 12px padding, border radius"
+    - name: "kicker"
+      category: typography
+      description: "Section label in all-caps green, precedes headings"
+      css: "13px, 800 weight, 0.12em letter-spacing, uppercase"
+    - name: "button_primary"
+      category: button
+      description: "Primary CTA with cream background and dark text"
+      css: "inline-flex, 44px min-height, 800 weight"
+    - name: "button_secondary"
+      category: button
+      description: "Ghost button with subtle light background"
+      css: "inherits button, transparent overlay bg"
+    - name: "card_base"
+      category: card
+      description: "Foundation for all card variants"
+      css: "panel border, radius, dark card background"
+    - name: "health_dot"
+      category: indicator
+      description: "Green dot with label for status"
+      pseudo: "8px green circle via before"
+    - name: "status_pill"
+      category: badge
+      description: "Small pill with green accent border"
+      css: "12px, 800 weight, green tinted bg"
+    - name: "tag_chip"
+      category: badge
+      description: "Category tag with blue accent"
+      css: "inline-flex, 26px min-height, blue tinted bg"
+    - name: "progress_bar"
+      category: data-visualization
+      description: "Gradient progress indicator"
+      css: "8px height, green-to-amber gradient fill"
+    - name: "metric_number"
+      category: data-visualization
+      description: "Large amber number with description"
+      css: "26px amber number, 13px muted label"
+    - name: "timeline_item"
+      category: data-visualization
+      description: "Two-column year plus content"
+      css: "92px year, 1fr content, grid layout"
+    - name: "todo_row"
+      category: list
+      description: "Three-column todo item with status"
+      css: "grid 84px 1fr auto, top-border separator"
+    - name: "market_watchlist_item"
+      category: list
+      description: "Tradable asset row with green hover"
+      css: "grid, cursor pointer, green accent on active"
+    - name: "unlock_form"
+      category: form
+      description: "Password input with submit button"
+      css: "grid 1fr auto, dark input styling"
+    - name: "section_panel"
+      category: container
+      description: "Standard content wrapper"
+      css: "28px padding, shadow, panel border"
+    - name: "article_card"
+      category: card
+      description: "Card with content pushed to bottom"
+      css: "flex column, align-content space-between, 360px min-height"
+    - name: "domain_countdown"
+      category: alert
+      description: "Amber bordered alert for renewal"
+      css: "amber border 0.28 opacity, 20px amber number"
+  observations:
+    - "About 20 distinct component types with consistent styling"
+    - "All card variants share identical border, radius, background"
+    - "Cards form implicit hierarchy: summary-card to insight-card"
+    - "Kicker pattern is consistent across all 7 HTML files"
+    - "Components not extracted into reusable classes"
+
+# ============================================================
+# 7. INFORMATION ARCHITECTURE - site structure
+# ============================================================
+information_architecture:
+  site_structure:
+    - path: index.html (dashboard)
+      type: "single-page with view-panel toggling"
+      content: "Workspace hero, ops, weekly brief, reflections, content overview, links, maintenance, access"
+    - path: articles/index.html
+      type: "article index"
+      content: "3 published articles with metadata"
+    - path: articles/fae-value.html
+      type: "article detail"
+      content: "FAE field experience"
+    - path: articles/ai-workflow.html
+      type: "article detail"
+      content: "AI workflow methodology"
+    - path: articles/public-notes.html
+      type: "article detail"
+      content: "Public note-taking methodology"
+    - path: protected/resume.html
+      type: "protected resume dashboard"
+      content: "Career timeline, metrics, competencies"
+    - path: protected/vlog.html
+      type: "protected vlog dashboard"
+      content: "Video content pipeline"
+    - path: assets/ethan-yang-resume.pdf
+      type: "PDF download"
+  navigation_model:
+    primary: "Sticky topbar with brand and links"
+    secondary: "data-view-target links on summary cards (panel toggle)"
+    tertiary: "Article prev/next navigation"
+  view_panel_system:
+    sections: ops, weekly-brief, reflection, content, links, maintenance, access
+    activation: "click on data-view-target elements"
+    behavior: "single panel visible via CSS class toggle"
+  content_hierarchy:
+    level_1: "Workspace hero (always visible)"
+    level_2: "Toggle panels (hidden by default)"
+    level_3: "Protected pages (behind authentication)"
+    level_4: "Article detail pages"
+  observations:
+    - "Dashboard-style IA: user enters at workspace hero, drills into panels"
+    - "No global search or sitemap"
+    - "View-panel toggle creates pseudo-SPA without URL state"
+    - "Protected content accessible only through access panel"
+    - "All article pages have linear prev/next navigation"
+
+# ============================================================
+# 8. BRAND IDENTITY - brand system
+# ============================================================
+brand_identity:
+  brand_name: "Ethan Yang"
+  domain: "ethanyang.dpdns.org"
+  tagline: "Personal website dashboard"
+  visual:
+    color_scheme: "Dark olive-warm with sage green accent"
+    typography: "Inter + Chinese sans-serif stack"
+    logo: "Text-based EY brand mark in bordered box"
+    design_style: "Dark dashboard / ops console aesthetic"
+  voice:
+    primary: "Professional, direct, technical"
+    language: "Traditional Chinese with occasional English labels"
+    writing_style: "First-person narrative in articles, dashboard labels in UI"
+    target_audience: "Engineering professionals, recruiters, hiring managers"
+  principles:
+    - "Content-first: moderate text density, information-rich"
+    - "Dashboard metaphor: status indicators, progress bars, metrics panels"
+    - "Technical aesthetic: grid layouts, panel borders, monospace-compatible font"
+    - "Personal, not corporate: maintains individual voice"
+  observations:
+    - "Brand presence is subtle -- no logo mark beyond EY brand box"
+    - "Site positions as personal dashboard rather than portfolio"
+    - "Color palette suggests technical or engineering personal brand"
+    - "No external brand assets (icons, images, illustrations)"
+
+# ============================================================
+# 9. ACCESSIBILITY - a11y assessment
+# ============================================================
+accessibility:
+  aria_usage:
+    labels:
+      - "aria-label on brand link, nav, aside, summary-grid, progress bars, access panels"
+    labelledby:
+      - "aria-labelledby on hero, all section panels, article features"
+    live_regions:
+      - "aria-live polite on resume-dashboard"
+    button_states:
+      - "aria-selected toggle on workspace-switcher"
+  semantic_html:
+    proper_use:
+      - "header, nav, main, section with labelledby, article, aside, footer"
+      - "time with datetime, dl dt dd for metadata"
+    gaps:
+      - "View-panel toggle is click-only (no keyboard support)"
+      - "No skip-to-content link"
+      - "Password form lacks proper screen reader announcements"
+  focus_management:
+    tab_index: "Not explicitly set (DOM order)"
+    focus_visible: "Custom focus-visible on nav links and summary cards"
+    keyboard_support: "Incomplete -- click-only view-panel toggling"
+  color_contrast:
+    primary_text_on_bg: "Passes WCAG AAA (approximately 15.5 to 1)"
+    muted_text_on_bg: "Passes WCAG AAA (approximately 8.5 to 1)"
+    soft_text_on_bg: "Passes WCAG AA (approximately 5.4 to 1)"
+    inverse_text_on_light: "Passes WCAG AAA (approximately 12.8 to 1)"
+    green_accent: "Adequate for large text and status indicators"
+    amber_accent: "Adequate for emphasis numbers"
+  observations:
+    - "Good semantic HTML structure using proper landmark elements"
+    - "Aria-labelledby consistently applied to content sections"
+    - "Strong color contrast across all text-background combinations"
+    - "Missing keyboard support for view-panel toggle"
+    - "No skip-to-content link"
+    - "No prefers-reduced-motion media query"
+    - "No dark mode preference support"
+
+# ============================================================
+# 10. CONVERSION - user journeys and CTAs
+# ============================================================
+conversion:
+  primary_goals:
+    - "Resume and PDF viewing (professional hiring)"
+    - "Article reading (knowledge demonstration)"
+    - "Vlog content exploration (media portfolio)"
+  user_journeys:
+    recruiter:
+      - "Land on index dashboard"
+      - "Navigate to resume (protected section)"
+      - "Complete authentication"
+      - "View resume dashboard"
+      - "Download PDF"
+    technical_peer:
+      - "Land on index dashboard"
+      - "Read summary cards"
+      - "Navigate to articles"
+      - "Browse article index"
+      - "Read specific articles"
+    casual_visitor:
+      - "Land on index dashboard"
+      - "Scan workspace summary"
+      - "Explore insight cards"
+      - "Leave or return to articles"
+  ctas:
+    primary:
+      - "Resume dashboard entry (protected)"
+      - "Vlog dashboard entry (protected)"
+      - "Article index (reflection section)"
+      - "Read article (article cards)"
+      - "Download PDF (link cards)"
+    secondary:
+      - "Unlock form submit (password-based resume)"
+      - "Return to homepage (article navigation)"
+      - "Prev/Next article (linear sequence)"
+  friction:
+    - "Resume requires authentication -- privacy positive, conversion friction"
+    - "View-panel toggle hides content by default"
+    - "No CTA above the fold (hero is informational)"
+    - "No clear hire me or contact me CTA"
+  observations:
+    - "Dual purpose: professional portfolio plus personal dashboard"
+    - "No analytics or tracking present in code"
+    - "No social media links, contact form, or email subscription"
+    - "PDF download is the most concrete conversion action"
+    - "Articles serve as SEO-friendly warm content before authentication wall"
+
+# ============================================================
+# DESIGN PATTERNS (for pattern library extraction)
+# ============================================================
+patterns:
+  - name: "kicker"
+    category: typography
+    description: "Section label preceding headings in all-caps green."
+    css: "13px, 800 weight, 0.12em letter-spacing, uppercase, green color"
+
+  - name: "panel"
+    category: container
+    description: "Standard content container with dark background, border, shadow."
+    css: "panel border, radius, panel bg at 0.78 opacity, shadow, 28px padding"
+
+  - name: "card-base"
+    category: card
+    description: "Card foundation shared by all card variants."
+    css: "panel border, radius, card bg at 0.86 opacity"
+
+  - name: "card-hover-accent"
+    category: card
+    description: "Hover state for interactive cards with green accent border."
+    css: "green border at 0.42 opacity, brighter background"
+
+  - name: "health-dot"
+    category: indicator
+    description: "Green dot with label for online or active status."
+    pseudo: "8px green circle via before pseudo element"
+
+  - name: "button-primary"
+    category: button
+    description: "Primary action button with cream background, dark text."
+    css: "inline-flex, 44px min-height, cream bg, near-black text, 800 weight"
+
+  - name: "button-secondary"
+    category: button
+    description: "Secondary ghost button with transparent background."
+    css: "transparent overlay bg, muted text, 800 weight"
+
+  - name: "tag-chip"
+    category: badge
+    description: "Category tag with blue accent."
+    css: "inline-flex, 26px min-height, blue tinted bg, 800 weight"
+
+  - name: "status-pill"
+    category: badge
+    description: "Status indicator pill with green accent."
+    css: "green border and tinted bg, 12px, 800 weight"
+
+  - name: "progress-bar"
+    category: data-visualization
+    description: "Gradient progress bar for completion metrics."
+    css: "8px height, rounded, green-to-amber gradient fill"
+
+  - name: "metric-number"
+    category: data-visualization
+    description: "Large amber number with supporting label."
+    css: "26px amber number at line-height 1, 13px muted label"
+
+  - name: "timeline-grid"
+    category: data-visualization
+    description: "Two-column timeline with year on left, content on right."
+    css: "grid 92px 1fr, subtle border and bg"
+
+  - name: "glass-topbar"
+    category: navigation
+    description: "Sticky top navigation with glassmorphism."
+    css: "sticky top 0, z-index 20, blur 18px, translucent bg"
+
+  - name: "brand-mark"
+    category: logo
+    description: "Initials logo in bordered box."
+    css: "38px square, grid centered, green on dark olive, border"
+
+  - name: "responsive-stack"
+    category: layout
+    description: "All multi-column grids collapse to single column at 980px."
+    breakpoints: "tablet 980px, mobile 720px"
+
+  - name: "push-cta-card"
+    category: card
+    description: "Card that pushes CTA button to bottom."
+    css: "flex column, button at margin-top auto"
+
+  - name: "accessible-section"
+    category: accessibility
+    description: "Section with id and aria-labelledby for landmarks."
+    pattern: "section id plus labelledby matching heading id"
+
+# ============================================================
+# DESIGN ISSUES AND IMPROVEMENT OPPORTUNITIES
+# ============================================================
+issues:
+  - severity: high
+    area: maintainability
+    description: "CSS duplicated across all 7 HTML files with identical root variables and body styles."
+    suggestion: "Extract shared CSS into external stylesheet and link across all pages."
+
+  - severity: high
+    area: spacing_consistency
+    description: "No systematic spacing scale. Uses arbitrary values without tokens."
+    suggestion: "Define spacing tokens as CSS custom properties."
+
+  - severity: medium
+    area: accessibility
+    description: "View-panel toggle click-only with no keyboard support."
+    suggestion: "Add keyboard handlers or use native button elements."
+
+  - severity: medium
+    area: accessibility
+    description: "No skip-to-content link."
+    suggestion: "Add skip-link as first focusable element."
+
+  - severity: medium
+    area: accessibility
+    description: "No prefers-reduced-motion media query."
+    suggestion: "Add media query to disable motion for vestibular disorders."
+
+  - severity: medium
+    area: architecture
+    description: "Panel toggling does not update URL. Back button cannot restore state."
+    suggestion: "Use History API or hash-based routing."
+
+  - severity: medium
+    area: responsiveness
+    description: "Container max-width varies arbitrarily across page types."
+    suggestion: "Establish 2 or 3 named container widths."
+
+  - severity: low
+    area: performance
+    description: "TradingView widget loads on page load without lazy loading."
+    suggestion: "Use IntersectionObserver to defer widget load."
+
+  - severity: low
+    area: seo
+    description: "No meta description on index page."
+    suggestion: "Add meta description and Open Graph tags to all pages."
+
+  - severity: low
+    area: animation
+    description: "Only one CSS transition defined. No micro-interactions."
+    suggestion: "Add hover effects, button press feedback, card transitions."
+
+  - severity: low
+    area: security
+    description: "Resume password protection is client-side only."
+    suggestion: "Use server-side authentication (Cloudflare Access)."
+
+  - severity: low
+    area: typography
+    description: "No web font loading strategy."
+    suggestion: "Add Inter from Google Fonts with display swap."
+
+  - severity: low
+    area: animation
+    description: "No loading or skeleton states for dynamic content."
+    suggestion: "Implement loading indicators for TradingView widget."
+
+  - severity: low
+    area: components
+    description: "No error or empty state defined for any component."
+    suggestion: "Define empty state, error state, and loading state for each component."
+
+# ============================================================
+# DESIGN SYSTEM SUMMARY
+# ============================================================
+summary:
+  maturity: "Early stage -- functional, internally consistent, but lacks systematic structure."
+  strengths:
+    - "Thorough CSS custom property color system (11 tokens)"
+    - "Consistent dark theme with high contrast ratios"
+    - "Strong semantic HTML and ARIA usage"
+    - "Component consistency across all 7 HTML files"
+    - "Responsive design with two breakpoints"
+    - "Clear typography hierarchy"
+  weaknesses:
+    - "Duplicated CSS across all files"
+    - "No spacing or sizing token system"
+    - "No animation system"
+    - "No form design system"
+    - "No image or media component standards"
+    - "Keyboard accessibility gap"
+    - "Inconsistent container widths"

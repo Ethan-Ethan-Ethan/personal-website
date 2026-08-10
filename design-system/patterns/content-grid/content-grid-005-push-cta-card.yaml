@@ -1,0 +1,92 @@
+id: "content-grid-005"
+name: "Push CTA Card"
+category: "content-grid"
+subcategory: ""
+tags: ["card", "cta", "flexbox", "layout", "content-card"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/articles/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "flex column with auto-margin CTA"
+    height: ""
+    max_width: ""
+    alignment: "space-between (flex column)"
+    padding: "inherits from card-base"
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "inherits from card-base"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+  effects:
+    shadow: ""
+    border_radius: "inherits from card-base"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "div.card"
+    role: "content card"
+    children:
+      - element: "content area (top)"
+        role: "fills remaining space"
+        content_type: "text / metadata"
+      - element: "CTA button"
+        role: "pushed to bottom"
+        content_type: "action"
+
+when_to_use:
+  - "Article cards with read-more CTA at consistent bottom position"
+  - "Any card where content length varies but CTA must stay at bottom"
+
+when_not_to_use:
+  - "When cards have no CTA action"
+  - "When equal-height cards are not needed across a grid"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .push-cta-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 360px;
+    }
+    .push-cta-card .card-content {
+      flex: 1;
+    }
+    .push-cta-card .card-cta {
+      margin-top: auto;
+    }
+  responsive_notes:
+    mobile: "Reduce min-height to accommodate smaller screens"
+    tablet: "Keep same structure"
+    desktop: "360px min-height standard"
+  accessibility:
+    - "Ensure CTA button has descriptive accessible name"
+    - "Card itself may be clickable if entirely interactive"
+
+assets:
+  screenshots: {}
+  references: []

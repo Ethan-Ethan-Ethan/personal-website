@@ -1,0 +1,101 @@
+id: "trust-001"
+name: "Client Logo Marquee / Logo Cloud"
+category: "trust"
+subcategory: "badges"
+tags:
+  - "logo-marquee"
+  - "social-proof"
+  - "auto-scroll"
+  - "trust-signal"
+  - "continuous-animation"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+  - site: "nngroup.com"
+    page: "/"
+    analyzed_date: 2026-07-10
+    confidence: "low"
+    evidence: "inference"
+
+spec:
+  layout:
+    type: "continuous horizontal scroll (Stripe) / static logo grid (NN/g)"
+    height: "48-80px"
+    max_width: "full-width (edge-to-edge)"
+    alignment: "center"
+    padding: "32px 0"
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+  spacing:
+    between_elements:
+      - "logos: 48-64px horizontal gap"
+    section_padding_y: ["32px", "32px"]
+  colors:
+    background: "transparent or section background"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    harmony: "grayscale or muted-color logos maintain visual hierarchy"
+  effects:
+    shadow: "none"
+    border_radius: "0"
+  animation:
+    entrance: "continuous / none"
+    duration: "8-12s (full loop)"
+    easing: "linear"
+
+structure:
+  - element: "marquee_or_cloud"
+    role: "social_proof_logos"
+    children:
+      - element: "logo_item"
+        role: "trust_signal"
+        content_type: "SVG or image (grayscale, consistent size)"
+
+when_to_use:
+  - "Below hero section to build instant trust with recognizable brand logos"
+  - "When you have 10-15 major companies as customers"
+  - "SaaS, B2B, or professional services landing pages"
+  - "Adding credibility before diving into features"
+
+when_not_to_use:
+  - "When logos are not recognizable (can backfire — 'who are these companies?')"
+  - "When the page already has strong trust signals above the fold"
+  - "When only 1-2 logos available (use testimonials instead)"
+
+comparisons:
+  stripe_vs_nngroup:
+    differences:
+      - "Stripe: continuous horizontal auto-scroll (JS/CSS animation); NN/g: static grid of logos"
+      - "Stripe: 14+ logos; NN/g: enterprise client logo cloud (count unknown)"
+      - "Stripe: grayscale logos; NN/g: likely colored logos"
+    similarities:
+      - "Both place logo trust signal early in the page hierarchy (after hero)"
+      - "Both use logos to establish credibility with recognizable brands"
+    recommendation: "Use Stripe's auto-scrolling marquee for dynamic, visually engaging trust signal; use NN/g's static grid for more formal, research-oriented context"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Reduce logo count and/or size; increase scroll speed slightly for smaller viewport"
+    tablet: "Maintain scroll but ensure logos are still recognizable"
+    desktop: "Full marquee; logos at consistent height (24-32px)"
+  accessibility:
+    - "Use aria-hidden='true' on the marquee (decorative, not content)"
+    - "Logos should have alt='Company name' for screen readers"
+    - "Pause animation on hover or focus for WCAG 2.2.2 compliance"
+    - "Support prefers-reduced-motion by disabling auto-scroll"
+
+assets:
+  screenshots: {}
+  references: []

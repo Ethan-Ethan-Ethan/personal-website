@@ -1,0 +1,302 @@
+index:
+  version: 1
+  last_updated: 2026-07-11
+  total_patterns: 36
+  patterns:
+    hero-001:
+      id: "hero-001"
+      name: "Fullscreen Centered Hero with Brand Background"
+      category: "hero"
+      path: "hero/hero-001-fullscreen-centered.yaml"
+      sources:
+        - "stripe.com"
+        - "vercel.com"
+        - "linear.app"
+      quality: "reference"
+    navbar-001:
+      id: "navbar-001"
+      name: "Fixed Mega-Dropdown Navigation"
+      category: "navbar"
+      path: "navbar/navbar-001-mega-dropdown.yaml"
+      sources:
+        - "vercel.com"
+        - "stripe.com"
+      quality: "reference"
+    footer-001:
+      id: "footer-001"
+      name: "Mega-Directory Footer with Multi-Column Links"
+      category: "footer"
+      path: "footer/footer-001-mega-directory.yaml"
+      sources:
+        - "stripe.com"
+        - "vercel.com"
+      quality: "reference"
+    pricing-001:
+      id: "pricing-001"
+      name: "Three-Tier Pricing Cards with Featured Highlight"
+      category: "pricing"
+      path: "pricing/pricing-001-3-tier-cards.yaml"
+      sources:
+        - "stripe.com"
+      quality: "reference"
+    feature-001:
+      id: "feature-001"
+      name: "Alternating Feature Section with Customer Showcase"
+      category: "feature"
+      path: "feature/feature-001-alternating-showcase.yaml"
+      sources:
+        - "vercel.com"
+        - "stripe.com"
+      quality: "reference"
+    feature-002:
+      id: "feature-002"
+      name: "Multi-Column Feature Card Grid"
+      category: "feature"
+      path: "feature/feature-002-multi-column-grid.yaml"
+      sources:
+        - "stripe.com"
+      quality: "reference"
+    feature-003:
+      id: "feature-003"
+      name: "Numbered Sequential Feature Sections"
+      category: "feature"
+      path: "feature/feature-003-numbered-sections.yaml"
+      sources:
+        - "linear.app"
+      quality: "experimental"
+    cta-001:
+      id: "cta-001"
+      name: "Dual-Path CTA Section"
+      category: "cta"
+      path: "cta/cta-001-dual-path.yaml"
+      sources:
+        - "stripe.com"
+        - "vercel.com"
+      quality: "reference"
+    cta-002:
+      id: "cta-002"
+      name: "Primary Pill CTA Button"
+      category: "cta"
+      path: "cta/cta-002-primary-pill.yaml"
+      sources:
+        - "stripe.com"
+        - "vercel.com"
+      quality: "reference"
+    testimonial-001:
+      id: "testimonial-001"
+      name: "Quote Card with Headshot and Attributed Source"
+      category: "testimonial"
+      path: "testimonial/testimonial-001-quote-card.yaml"
+      sources:
+        - "stripe.com"
+      quality: "reference"
+    testimonial-002:
+      id: "testimonial-002"
+      name: "Customer Metric Card with Logo"
+      category: "testimonial"
+      path: "testimonial/testimonial-002-metric-card.yaml"
+      sources:
+        - "vercel.com"
+      quality: "reference"
+    content-grid-001:
+      id: "content-grid-001"
+      name: "Modular Card Grid for Content Catalog"
+      category: "content-grid"
+      path: "content-grid/content-grid-001-modular-card-grid.yaml"
+      sources:
+        - "nngroup.com"
+        - "vercel.com"
+      quality: "experimental"
+    trust-001:
+      id: "trust-001"
+      name: "Client Logo Marquee / Logo Cloud"
+      category: "trust"
+      path: "trust/trust-001-logo-marquee.yaml"
+      sources:
+        - "stripe.com"
+        - "nngroup.com"
+      quality: "reference"
+    trust-002:
+      id: "trust-002"
+      name: "Stat Counter Grid with Data Visualizations"
+      category: "trust"
+      path: "trust/trust-002-stat-counter-grid.yaml"
+      sources:
+        - "stripe.com"
+      quality: "reference"
+    trust-003:
+      id: "trust-003"
+      name: "Experience Badge and Research Trust Stack"
+      category: "trust"
+      path: "trust/trust-003-experience-badge.yaml"
+      sources:
+        - "nngroup.com"
+      quality: "experimental"
+    forms-001:
+      id: "forms-001"
+      name: "Minimal Single-Field Newsletter Signup"
+      category: "forms"
+      path: "forms/forms-001-minimal-newsletter.yaml"
+      sources:
+        - "nngroup.com"
+      quality: "experimental"
+    misc-001:
+      id: "misc-001"
+      name: "Shadow-as-Border Card Delineation"
+      category: "misc"
+      path: "misc/misc-001-shadow-as-border.yaml"
+      sources:
+        - "vercel.com"
+      quality: "reference"
+    misc-002:
+      id: "misc-002"
+      name: "Section Heading Group (Eyebrow + Heading + Subheading)"
+      category: "misc"
+      path: "misc/misc-002-section-heading-group.yaml"
+      sources:
+        - "stripe.com"
+      quality: "reference"
+    misc-003:
+      id: "misc-003"
+      name: "Alternating Background Color Sections"
+      category: "misc"
+      path: "misc/misc-003-alternating-bg-sections.yaml"
+      sources:
+        - "stripe.com"
+      quality: "reference"
+    misc-004:
+      id: "misc-004"
+      name: "Kicker (Section Eyebrow)"
+      category: "misc"
+      path: "misc/misc-004-kicker.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    misc-005:
+      id: "misc-005"
+      name: "Health Dot (Status Indicator)"
+      category: "misc"
+      path: "misc/misc-005-health-dot.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    misc-006:
+      id: "misc-006"
+      name: "Status Pill"
+      category: "misc"
+      path: "misc/misc-006-status-pill.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    misc-007:
+      id: "misc-007"
+      name: "Tag Chip (Category Label)"
+      category: "misc"
+      path: "misc/misc-007-tag-chip.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    misc-008:
+      id: "misc-008"
+      name: "Accessible Section with ARIA Landmark"
+      category: "misc"
+      path: "misc/misc-008-accessible-section.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "experimental"
+    content-grid-002:
+      id: "content-grid-002"
+      name: "Content Panel Container"
+      category: "content-grid"
+      path: "content-grid/content-grid-002-panel.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    content-grid-003:
+      id: "content-grid-003"
+      name: "Card Base"
+      category: "content-grid"
+      path: "content-grid/content-grid-003-card-base.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    content-grid-004:
+      id: "content-grid-004"
+      name: "Card Hover Accent"
+      category: "content-grid"
+      path: "content-grid/content-grid-004-card-hover-accent.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    content-grid-005:
+      id: "content-grid-005"
+      name: "Push CTA Card"
+      category: "content-grid"
+      path: "content-grid/content-grid-005-push-cta-card.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    content-grid-006:
+      id: "content-grid-006"
+      name: "Responsive Stack (Grid Collapse)"
+      category: "content-grid"
+      path: "content-grid/content-grid-006-responsive-stack.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    cta-003:
+      id: "cta-003"
+      name: "Primary Ghost CTA Button"
+      category: "cta"
+      path: "cta/cta-003-button-primary.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    cta-004:
+      id: "cta-004"
+      name: "Secondary Ghost CTA Button"
+      category: "cta"
+      path: "cta/cta-004-button-secondary.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    feature-004:
+      id: "feature-004"
+      name: "Two-Column Timeline Grid"
+      category: "feature"
+      path: "feature/feature-004-timeline-grid.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    trust-004:
+      id: "trust-004"
+      name: "Gradient Progress Bar"
+      category: "trust"
+      path: "trust/trust-004-progress-bar.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    trust-005:
+      id: "trust-005"
+      name: "Metric Number with Label"
+      category: "trust"
+      path: "trust/trust-005-metric-number.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    navbar-002:
+      id: "navbar-002"
+      name: "Glassmorphism Topbar"
+      category: "navbar"
+      path: "navbar/navbar-002-glass-topbar.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"
+    navbar-003:
+      id: "navbar-003"
+      name: "Initials Brand Mark"
+      category: "navbar"
+      path: "navbar/navbar-003-brand-mark.yaml"
+      sources:
+        - "ethanyang.dpdns.org"
+      quality: "reference"

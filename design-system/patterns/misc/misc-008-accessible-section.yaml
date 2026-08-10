@@ -1,0 +1,92 @@
+id: "misc-008"
+name: "Accessible Section with ARIA Landmark"
+category: "misc"
+subcategory: ""
+tags: ["accessibility", "aria", "landmark", "semantic-html", "section"]
+quality: "experimental"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "semantic HTML section"
+    height: ""
+    max_width: ""
+    alignment: ""
+    padding: ""
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: ""
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+  effects:
+    shadow: ""
+    border_radius: ""
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "section"
+    role: "content landmark"
+    attributes:
+      - "id: unique-section-id"
+      - "aria-labelledby: matches heading id"
+    children:
+      - element: "h2 (or h3)"
+        role: "section heading"
+        attributes:
+          - "id: matching-section-id-heading"
+      - element: "body content"
+        content_type: "various"
+
+when_to_use:
+  - "Every distinct content section on a page"
+  - "Dashboard panels with clear heading hierarchy"
+  - "Any section that benefits from screen reader navigation landmarks"
+
+when_not_to_use:
+  - "For presentational wrappers with no semantic heading"
+  - "When section has no heading (use aria-label instead of aria-labelledby)"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    <!-- HTML Pattern -->
+    <section id="section-name" aria-labelledby="section-name-heading">
+      <h2 id="section-name-heading">Section Title</h2>
+      <!-- content -->
+    </section>
+  responsive_notes:
+    mobile: "No change; structural pattern is responsive-neutral"
+    tablet: "No change"
+    desktop: "No change"
+  accessibility:
+    - "Every <section> should have either aria-labelledby or aria-label"
+    - "ID on section and matching id on heading must be unique within the page"
+    - "Do not skip heading levels (h2 before h3)"
+    - "Use <main> for primary content and <aside> for complementary content"
+
+assets:
+  screenshots: {}
+  references: []

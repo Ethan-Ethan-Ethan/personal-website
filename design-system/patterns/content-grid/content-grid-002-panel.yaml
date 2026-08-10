@@ -1,0 +1,88 @@
+id: "content-grid-002"
+name: "Content Panel Container"
+category: "content-grid"
+subcategory: ""
+tags: ["container", "panel", "section-wrapper", "dark-theme"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "block container"
+    height: "auto"
+    max_width: ""
+    alignment: ""
+    padding: "28px"
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "rgba(27, 27, 24, 0.78) | dark olive-gray"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    border: "#37372f (dark olive border, --line)"
+  effects:
+    shadow: "soft box-shadow"
+    border_radius: "standard (matching card system)"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "section or div"
+    role: "content wrapper"
+    children:
+      - element: "section-heading (optional)"
+        content_type: "heading"
+      - element: "body content"
+        content_type: "various"
+
+when_to_use:
+  - "Wrapping distinct content sections on a dashboard"
+  - "Creating visual separation between content zones"
+  - "When a subtle card-like container is needed without interaction"
+
+when_not_to_use:
+  - "When content should be fully transparent or seamless"
+  - "For interactive cards that need hover states"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .section-panel {
+      background: rgba(27, 27, 24, 0.78);
+      border: 1px solid #37372f;
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  responsive_notes:
+    mobile: "Reduce padding to 24px or 18px on narrow screens"
+    tablet: "Padding may reduce to 24px"
+    desktop: "28px padding standard"
+  accessibility:
+    - "Use <section> with aria-labelledby referencing the section heading"
+    - "Ensure sufficient contrast between panel background and text"
+
+assets:
+  screenshots: {}
+  references: []

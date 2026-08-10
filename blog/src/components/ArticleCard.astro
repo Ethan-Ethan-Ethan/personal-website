@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+const { data, slug } = article;
+
+const dateFormatter = new Intl.DateTimeFormat('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<article class="article-card">
+  <h2 class="article-card__title">
+    <a href={`/articles/${slug}/`}>{data.title}</a>
+  </h2>
+  <div class="article-card__meta">
+    <time datetime={data.date.toISOString()}>
+      {dateFormatter.format(data.date)}
+    </time>
+  </div>
+  {
+    data.description && (
+      <p class="article-card__excerpt">{data.description}</p>
+    )
+  }
+  {
+    data.tags && data.tags.length > 0 && (
+      <div class="article-tags">
+        {data.tags.map(tag => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    )
+  }
+</article>

@@ -1,0 +1,847 @@
+# 個人網站改進計畫
+# ethanyang.dpdns.org 跨網站比較與改善建議
+generated_date: 2026-07-11
+personal_site: ethanyang.dpdns.org
+reference_sites:
+  - stripe.com
+  - vercel.com
+  - nngroup.com
+  - linear.app
+
+# ============================================================
+# 1. 跨網站比較
+# ============================================================
+comparisons:
+
+  color_system:
+    personal_site:
+      maturity: "中等"
+      description: "11 個 CSS 自定義屬性，語義化命名，暗色主題一致性高"
+      strengths:
+        - "暖橄欖色調（非純灰），品牌識別度高"
+        - "對比度通過 WCAG AAA（主文字 ~15.5:1）"
+        - "四色語義系統：green=健康、amber=指標、blue=分類、red=錯誤"
+      weaknesses:
+        - "缺少系統化的色階（每色僅 1 個值，無 hover/pressed/disabled 變體）"
+        - "大量 literal rgba 值未收斂到 CSS 變數"
+        - "無亮色主題支援"
+    stripe:
+      maturity: "高"
+      description: "完整品牌色階 + 語義色 + 裝飾色，每色含 press/deep/soft/bg-subdued 變體"
+      key_pattern: "單一 Indigo 品牌錨點 + pastel gradient mesh 簽名視覺"
+    vercel:
+      maturity: "最高"
+      description: "Geist Design System：10 步色階（100-1000）+ 完整 gray-alpha 通道 + 語義色 + 暗/亮雙主題"
+      key_pattern: "Color conveys information, not decoration；每步色階有明確定義的用途"
+    gap_analysis:
+      - "個人網站缺少 accent color 的 hover/pressed 狀態變體"
+      - "literal rgba 值（overlay、backdrop）未收斂到 design tokens"
+      - "無 prefers-color-scheme 支援"
+      - "色階粒度不足（stripe 每色 4+ 變體，vercel 10 步，個人網站每色僅 1）"
+
+  spacing_system:
+    personal_site:
+      maturity: "低"
+      description: "21 個不規則數值（0-92px），無 token 命名，無系統化 scale"
+      strengths:
+        - "視覺上舒適，間距大致合理"
+      weaknesses:
+        - "無 base unit（混用 2px/4px/6px/8px 增量）"
+        - "card padding 不一致：18px/20px/22px/24px 四種"
+        - "container max-width 隨頁面類型任意變化：1180/1080/1040/860px"
+        - "所有值為 literal CSS，無 custom properties"
+    stripe:
+      maturity: "高"
+      description: "8px base unit，9 級 token（xxs:2px 到 huge:64px），命名語義化"
+    vercel:
+      maturity: "最高"
+      description: "4px base unit，完整 scale 映射，rhythm rules 明確定義（group 內 8px、group 間 16px、section 間 32-40px）"
+    gap_analysis:
+      - "個人網站需要定義 4px 或 8px base unit 並建立 token scale"
+      - "card padding 應統一為 2-3 個命名尺寸（sm/md/lg）"
+      - "container width 應收斂為 2-3 個命名寬度"
+
+  typography_system:
+    personal_site:
+      maturity: "中等"
+      description: "Inter 字體選擇佳，clamp() 響應式，line-height 細緻調校（1.0-1.9）"
+      strengths:
+        - "中文字體 fallback 鏈完善（Noto Sans TC -> PingFang TC -> Microsoft JhengHei）"
+        - "font-weight 800 統一用於標籤/按鈕/狀態"
+        - "使用 clamp() 實現 h1 響應式"
+      weaknesses:
+        - "無 @font-face 或 Google Fonts 載入，依賴本地安裝"
+        - "h1 大小在不同頁面不一致（28-48px 範圍）"
+        - "無系統化 type scale（大小值分散）"
+        - "letter-spacing 僅在 kicker 使用"
+    stripe:
+      maturity: "最高"
+      description: "Sohne 品牌字體 + 14 級 type scale + negative letter-spacing 簽名 + tnum 數字特性"
+      key_pattern: "weight 300 + 負 letter-spacing（-1.4px at 56px）創造高端感"
+    vercel:
+      maturity: "最高"
+      description: "Geist Sans/Mono + 完整 heading/copy/label/button 分組 + 激進負 letter-spacing"
+      key_pattern: "每級 size 都有精確的 letter-spacing（-6% ratio），tnum tabular numerals"
+    gap_analysis:
+      - "個人網站應加入 Google Fonts Inter 載入（含 display=swap）"
+      - "應定義 8-10 級 type scale tokens"
+      - "heading 的 letter-spacing 應系統化（大標題負值，小文字正值或 0）"
+      - "數字應考慮 tnum font-feature"
+
+  component_reusability:
+    personal_site:
+      maturity: "低"
+      description: "~20 種元件，樣式一致但 CSS 未抽取為可複用 class"
+      strengths:
+        - "card 變體共享 border/radius/background 基礎"
+        - "kicker pattern 跨 7 個 HTML 檔一致"
+      weaknesses:
+        - "CSS 在 7 個 HTML 檔中完全重複（:root + body 樣式）"
+        - "無外部樣式表"
+        - "元件未抽取為獨立 class（inline 定義）"
+        - "無元件狀態系統（loading/error/empty）"
+    stripe:
+      maturity: "高"
+      description: "完整元件規格（button 4 variants x 2 sizes、card 5 types、form states）"
+    vercel:
+      maturity: "最高"
+      description: "Geist Design System 開源，完整 shadow stack + border-radius tokens + 狀態系統"
+    gap_analysis:
+      - "最關鍵：抽取 shared CSS 為外部樣式表"
+      - "定義元件 class 命名系統（BEM 或 utility-first）"
+      - "加入元件狀態變體（hover/active/disabled/loading/error）"
+
+  accessibility:
+    personal_site:
+      maturity: "中等偏上"
+      description: "語義 HTML 良好，ARIA 使用到位，對比度 AAA"
+      strengths:
+        - "aria-labelledby 一致應用於所有 section"
+        - "aria-live polite 用於動態區域"
+        - "所有文字-背景對比通過 WCAG AA/AAA"
+        - "semantic HTML landmarks（header/nav/main/section/article/aside/footer）"
+      weaknesses:
+        - "view-panel toggle 僅支援 click，無鍵盤導航"
+        - "無 skip-to-content link"
+        - "無 prefers-reduced-motion 媒體查詢"
+        - "無 prefers-color-scheme 支援"
+    stripe:
+      maturity: "高"
+      description: "邏輯 tab order、focus visible、heading hierarchy、descriptive alt text"
+    vercel:
+      maturity: "最高"
+      description: "自訂 focus ring（2px white + 2px blue）、color never sole indicator、skip links"
+    gap_analysis:
+      - "加入 skip-to-content link（最高優先）"
+      - "view-panel toggle 加入 keyboard handler（Enter/Space）"
+      - "加入 @media (prefers-reduced-motion: reduce)"
+      - "借鑒 Vercel 的 focus ring pattern"
+
+  brand_consistency:
+    personal_site:
+      maturity: "中等"
+      description: "暗色 dashboard 美學一致，warm olive 色調有品牌識別"
+      strengths:
+        - "Dashboard metaphor 貫穿全站（status indicators, progress bars, metrics）"
+        - "warm olive 色調有別於通用 dark theme"
+        - "kicker pattern 統一"
+      weaknesses:
+        - "brand mark 僅 EY 文字方框，識別度有限"
+        - "無明確 tagline 或 value proposition"
+        - "hero 區域缺乏清晰的定位陳述"
+    stripe:
+      maturity: "最高"
+      description: "Indigo + gradient mesh + thin type + pill buttons = 即時可識別"
+    gap_analysis:
+      - "需要更強的品牌定位語句"
+      - "brand mark 可考慮加入圖形元素"
+      - "缺少信任信號（參考 NNG 的 experience badge + client logos）"
+
+  animation_and_motion:
+    personal_site:
+      maturity: "低"
+      description: "全站僅 1 個 CSS transition，無微互動"
+      weaknesses:
+        - "無 button hover/press 效果"
+        - "無 card hover 效果"
+        - "無 scroll-driven animations"
+        - "無 loading/skeleton states"
+        - "smooth scroll 是唯一動效"
+    stripe:
+      maturity: "高"
+      description: "0.2-0.3s transitions、hover shadow increase、scroll fade-in、logo marquee"
+    vercel:
+      maturity: "高"
+      description: "150ms default、overshoot spring easing、animated glow backgrounds"
+    gap_analysis:
+      - "加入 button/card hover 過渡效果"
+      - "加入 scroll-driven fade-in（IntersectionObserver）"
+      - "加入 prefers-reduced-motion 支援"
+
+# ============================================================
+# 2. 可借鑒的模式映射
+# ============================================================
+applicable_patterns:
+  - pattern_id: "misc-002"
+    name: "Section Heading Group (Eyebrow + Heading + Subheading)"
+    source: "stripe.com"
+    relevance: "個人網站的 kicker pattern 已是此模式的變體，可系統化"
+    adaptation: "將現有 kicker 收斂為正式的 eyebrow token + heading + subheading 三層結構"
+
+  - pattern_id: "trust-001"
+    name: "Client Logo Marquee / Logo Cloud"
+    source: "stripe.com / nngroup.com"
+    relevance: "個人網站完全缺少信任信號"
+    adaptation: "可加入曾合作的公司/專案 logo 或技術棧 icon 牆"
+
+  - pattern_id: "trust-002"
+    name: "Stat Counter Grid with Data Visualizations"
+    source: "stripe.com"
+    relevance: "個人網站的 metric-number pattern 可升級為此模式"
+    adaptation: "在 resume dashboard 或 hero 區域加入具體數據指標"
+
+  - pattern_id: "cta-002"
+    name: "Primary Pill CTA Button"
+    source: "stripe.com / vercel.com"
+    relevance: "個人網站的 button-primary 可加入 hover/pressed 狀態"
+    adaptation: "保留 cream bg 風格，加入 transition 和狀態變體"
+
+  - pattern_id: "content-grid-001"
+    name: "Modular Card Grid for Content Catalog"
+    source: "nngroup.com / vercel.com"
+    relevance: "文章卡片可統一為模組化網格"
+    adaptation: "統一 article-card 的 min-height、padding、hover 效果"
+
+  - pattern_id: "misc-001"
+    name: "Shadow-as-Border Card Delineation"
+    source: "vercel.com"
+    relevance: "個人網站使用 CSS border，可考慮 shadow-as-border 提升質感"
+    adaptation: "暗色主題下特別適合（rgba(255,255,255,0.08) inset shadow）"
+
+  - pattern_id: "misc-003"
+    name: "Alternating Background Color Sections"
+    source: "stripe.com"
+    relevance: "個人網站所有 section 使用相同 panel bg，可加入層次變化"
+    adaptation: "在 --bg / --panel / --panel-2 之間交替，創造視覺節奏"
+
+  - pattern_id: "forms-001"
+    name: "Minimal Single-Field Newsletter Signup"
+    source: "nngroup.com"
+    relevance: "個人網站完全缺少聯繫/訂閱功能"
+    adaptation: "可在 footer 或文章末尾加入 email 訂閱"
+
+# ============================================================
+# 3. 具體改進建議（按優先級排序）
+# ============================================================
+recommendations:
+
+  # --- 優先級 1：基礎架構 ---
+  - id: "REC-01"
+    priority: 1
+    title: "抽取外部共用樣式表"
+    problem: "CSS 在 7 個 HTML 檔中完全重複，:root 變數和 body 樣式各複製一份，修改需同步 7 處"
+    reference: "所有參考網站均使用外部樣式表或 CSS-in-JS 模組化"
+    solution: |
+      /* 1. 建立 styles/main.css */
+      /* 將所有 :root 變數、reset、body、共用元件 class 抽取至此 */
+      
+      /* styles/main.css */
+      :root {
+        --bg: #11110f;
+        --panel: #1b1b18;
+        --panel-2: #22221e;
+        --line: #37372f;
+        --text: #f3f0e8;
+        --muted: #b9b3a5;
+        --soft: #8f897b;
+        --green: #88b56b;
+        --amber: #d4a34b;
+        --blue: #76a7bd;
+        --red: #c46f5a;
+        /* 新增 spacing tokens */
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 24px;
+        --space-6: 32px;
+        --space-7: 48px;
+        --space-8: 64px;
+      }
+
+      /* 2. 每個 HTML 檔改為： */
+      /* <link rel="stylesheet" href="/styles/main.css"> */
+      /* <link rel="stylesheet" href="/styles/page-specific.css"> (可選) */
+    effort: "中"
+    pattern_ref: null
+    impact: "極高 — 所有後續改進的基礎"
+
+  - id: "REC-02"
+    priority: 2
+    title: "建立系統化間距 tokens"
+    problem: "21 個任意數值（0-92px），card padding 四種（18/20/22/24px），container width 四種（860-1180px），無 base unit"
+    reference: "Stripe 使用 8px base unit 9 級 scale；Vercel 使用 4px base unit + rhythm rules"
+    solution: |
+      :root {
+        /* Spacing scale (4px base) */
+        --space-0: 0;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-7: 32px;
+        --space-8: 48px;
+        --space-9: 64px;
+        --space-10: 96px;
+
+        /* Container widths (named) */
+        --container-narrow: 860px;   /* articles */
+        --container-default: 1080px; /* dashboard, resume */
+        --container-wide: 1180px;    /* index shell */
+
+        /* Card padding (named) */
+        --card-padding-sm: 16px;
+        --card-padding-md: 20px;
+        --card-padding-lg: 24px;
+
+        /* Section spacing */
+        --section-gap: 28px;
+        --section-padding: 28px;
+      }
+    effort: "中"
+    pattern_ref: null
+    impact: "高 — 消除不一致，簡化後續調整"
+
+  - id: "REC-03"
+    priority: 3
+    title: "建立系統化 type scale"
+    problem: "字型大小分散在 12-48px 範圍，無系統化 scale，heading 大小隨頁面不一致"
+    reference: "Stripe 14 級 type scale + negative letter-spacing；Vercel heading/copy/label/button 分組"
+    solution: |
+      :root {
+        /* Type scale */
+        --text-xs: 12px;
+        --text-sm: 13px;
+        --text-base: 14px;
+        --text-md: 16px;
+        --text-lg: 18px;
+        --text-xl: 20px;
+        --text-2xl: 24px;
+        --text-3xl: 30px;
+        --text-4xl: clamp(28px, 3.5vw, 42px);
+        --text-5xl: clamp(32px, 4vw, 48px);
+
+        /* Line heights */
+        --leading-none: 1.0;
+        --leading-tight: 1.15;
+        --leading-snug: 1.35;
+        --leading-normal: 1.6;
+        --leading-relaxed: 1.8;
+
+        /* Letter spacing (negative for headings) */
+        --tracking-tight-1: -0.02em;  /* 4xl, 5xl */
+        --tracking-tight-2: -0.01em;  /* 2xl, 3xl */
+        --tracking-normal: 0em;
+        --tracking-wide: 0.12em;      /* kicker, uppercase */
+      }
+    effort: "中"
+    pattern_ref: null
+    impact: "高 — 統一排版節奏"
+
+  # --- 優先級 2：無障礙性 ---
+  - id: "REC-04"
+    priority: 4
+    title: "加入 skip-to-content link"
+    problem: "無 skip link，鍵盤用戶必須 tab 過整個導覽列才能到達主內容"
+    reference: "Vercel 有 skip links；WCAG 2.1 Level A 建議"
+    solution: |
+      <!-- HTML: 放在 <body> 第一個子元素 -->
+      <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+      /* CSS */
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: var(--space-4);
+        padding: var(--space-2) var(--space-4);
+        background: var(--green);
+        color: var(--bg);
+        font-weight: 800;
+        font-size: var(--text-sm);
+        border-radius: 6px;
+        z-index: 100;
+        text-decoration: none;
+      }
+      .skip-link:focus {
+        top: var(--space-2);
+      }
+    effort: "小"
+    pattern_ref: null
+    impact: "高 — 基本無障礙合規"
+
+  - id: "REC-05"
+    priority: 5
+    title: "view-panel toggle 加入鍵盤支援"
+    problem: "data-view-target 元素僅響應 click，鍵盤無法操作（若為 div/span 而非 button）"
+    reference: "Vercel 的 focus ring pattern（2px white gap + 2px blue ring）"
+    solution: |
+      /* 方案 A：改用原生 <button> 元素（推薦） */
+      <button data-view-target="ops" class="view-trigger"
+              aria-expanded="false" aria-controls="panel-ops">
+        營運概覽
+      </button>
+
+      /* 方案 B：若保留 div，加入 keyboard handler */
+      /* JS */
+      document.querySelectorAll('[data-view-target]').forEach(el => {
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            el.click();
+          }
+        });
+      });
+
+      /* Focus ring (Vercel-style) */
+      [data-view-target]:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 2px var(--bg),
+          0 0 0 4px var(--green);
+      }
+    effort: "中"
+    pattern_ref: null
+    impact: "高 — 鍵盤可及性"
+
+  - id: "REC-06"
+    priority: 6
+    title: "加入 prefers-reduced-motion 支援"
+    problem: "smooth scroll + backdrop-filter blur 未尊重用戶的動效偏好"
+    reference: "Vercel 預設 0ms，尊重 prefers-reduced-motion"
+    solution: |
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        html { scroll-behavior: auto; }
+      }
+    effort: "小"
+    pattern_ref: null
+    impact: "中 — 前庭障礙用戶友善"
+
+  # --- 優先級 3：微互動與動效 ---
+  - id: "REC-07"
+    priority: 7
+    title: "加入 button hover/press 過渡效果"
+    problem: "按鈕無 hover/press 視覺回饋，使用者互動感受生硬"
+    reference: "Stripe: bg shift (#533AFD -> #4434D4)；Vercel: gray scale progression"
+    solution: |
+      .btn-primary {
+        background: #f0eadc;
+        color: #161511;
+        transition: background 0.15s ease, transform 0.1s ease;
+      }
+      .btn-primary:hover {
+        background: #e8e2d2;
+        transform: translateY(-1px);
+      }
+      .btn-primary:active {
+        background: #ddd7c7;
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        background: rgba(255,255,255,0.06);
+        color: var(--muted);
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+      .btn-secondary:hover {
+        background: rgba(255,255,255,0.10);
+        color: var(--text);
+      }
+    effort: "小"
+    pattern_ref: "cta-002"
+    impact: "中 — 提升互動質感"
+
+  - id: "REC-08"
+    priority: 8
+    title: "加入 card hover 效果"
+    problem: "卡片無 hover 狀態（僅 market-watchlist 有 transition），互動式卡片缺少視覺回饋"
+    reference: "Stripe: subtle shadow increase on hover；Vercel: elevated shadow + transform"
+    solution: |
+      .card-interactive {
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease,
+          transform 0.15s ease;
+      }
+      .card-interactive:hover {
+        border-color: rgba(136, 181, 107, 0.42);
+        background: rgba(27, 27, 24, 0.95);
+        transform: translateY(-2px);
+      }
+    effort: "小"
+    pattern_ref: null
+    impact: "中 — 提升可探索感"
+
+  - id: "REC-09"
+    priority: 9
+    title: "加入 scroll-driven fade-in 動畫"
+    problem: "頁面內容靜態載入，缺少漸進展示的層次感"
+    reference: "Stripe: sections fade in on scroll via IntersectionObserver"
+    solution: |
+      /* CSS */
+      .fade-in-section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .fade-in-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* JS */
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.fade-in-section').forEach(el => {
+        observer.observe(el);
+      });
+    effort: "小"
+    pattern_ref: null
+    impact: "中 — 提升瀏覽體驗"
+
+  # --- 優先級 4：品牌與轉換 ---
+  - id: "REC-10"
+    priority: 10
+    title: "強化 hero value proposition"
+    problem: "Hero 區域為資訊性 dashboard，缺少清晰的身份定位陳述"
+    reference: "Stripe: 明確 value prop（'Payments infrastructure for the internet'）；Vercel: 'Agentic Infrastructure'"
+    solution: |
+      <!-- 在 workspace hero 加入明確定位 -->
+      <div class="hero-copy">
+        <p class="kicker">FAE / AI 工程 / 技術顧問</p>
+        <h1>從現場到產品的橋樑工程師</h1>
+        <p class="lead">
+          專注 AI 工具導入與技術顧問，連結客戶需求與產品實作。
+          紀錄實戰經驗、方法論、與對技術趨勢的觀察。
+        </p>
+        <div class="hero-actions">
+          <a href="/articles/" class="btn-primary">閱讀文章</a>
+          <a href="#access" class="btn-secondary">查看經歷</a>
+        </div>
+      </div>
+    effort: "小"
+    pattern_ref: "misc-002"
+    impact: "高 — 第一印象與品牌定位"
+
+  - id: "REC-11"
+    priority: 11
+    title: "加入聯繫方式與社交連結"
+    problem: "無社交媒體連結、無聯繫表單、無 email 訂閱。轉換路徑不完整"
+    reference: "Stripe: 多路徑 CTA（self-serve + sales）；NNG: newsletter signup"
+    solution: |
+      <!-- Footer 加入聯繫區塊 -->
+      <footer>
+        <div class="footer-contacts">
+          <a href="mailto:your@email.com" aria-label="Email">Email</a>
+          <a href="https://github.com/yourname" aria-label="GitHub">GitHub</a>
+          <a href="https://linkedin.com/in/yourname" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+      </footer>
+
+      /* 或文章末尾加入 CTA */
+      <aside class="article-cta">
+        <p>對 AI 工程與技術顧問有興趣？</p>
+        <a href="mailto:your@email.com" class="btn-primary">聯繫我</a>
+      </aside>
+    effort: "小"
+    pattern_ref: "forms-001"
+    impact: "高 — 完成轉換路徑"
+
+  - id: "REC-12"
+    priority: 12
+    title: "加入信任信號區"
+    problem: "缺少社會證明（客戶 logo、合作案例、具體數據指標）"
+    reference: "NNG: 28+ years + enterprise client logos；Stripe: logo marquee + stat counters"
+    solution: |
+      <!-- Hero 下方加入 trust strip -->
+      <section class="trust-strip" aria-label="專業經歷">
+        <div class="trust-item">
+          <b class="metric-number">8+</b>
+          <span class="metric-label">年 FAE 經驗</span>
+        </div>
+        <div class="trust-item">
+          <b class="metric-number">50+</b>
+          <span class="metric-label">企業客戶服務</span>
+        </div>
+        <div class="trust-item">
+          <b class="metric-number">3</b>
+          <span class="metric-label">技術領域專精</span>
+        </div>
+      </section>
+    effort: "小"
+    pattern_ref: "trust-002"
+    impact: "中 — 建立專業可信度"
+
+  # --- 優先級 5：技術品質 ---
+  - id: "REC-13"
+    priority: 13
+    title: "加入 Google Fonts Inter 載入"
+    problem: "依賴本地安裝的 Inter 字體，若未安裝則 fallback 至 Arial，排版一致性無法保證"
+    reference: "所有參考網站均使用自訂字體或系統字體棧的明確策略"
+    solution: |
+      <!-- HTML <head> 中加入 -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap"
+            rel="stylesheet">
+    effort: "小"
+    pattern_ref: null
+    impact: "中 — 排版一致性"
+
+  - id: "REC-14"
+    priority: 14
+    title: "加入 Meta tags 與 Open Graph"
+    problem: "index 頁面無 meta description，所有頁面缺少 OG tags，SEO 與社交分享不佳"
+    reference: "所有參考網站均有完整的 meta + OG + Twitter card tags"
+    solution: |
+      <!-- 每個頁面的 <head> 中加入 -->
+      <meta name="description" content="Ethan Yang 的技術筆記與職涯紀錄">
+      <meta property="og:title" content="Ethan Yang | Personal Dashboard">
+      <meta property="og:description" content="FAE 實戰經驗、AI 工作方法論、技術觀察">
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://ethanyang.dpdns.org">
+      <meta name="twitter:card" content="summary_large_image">
+    effort: "小"
+    pattern_ref: null
+    impact: "中 — SEO 與社交分享"
+
+  - id: "REC-15"
+    priority: 15
+    title: "view-panel toggle 加入 URL 狀態"
+    problem: "panel 切換不更新 URL，重新整理或按返回鍵無法恢復狀態"
+    reference: "所有 SPA-like 網站均使用 History API 或 hash routing"
+    solution: |
+      /* JS: 使用 History API */
+      function showPanel(panelId) {
+        // 現有 panel toggle 邏輯...
+        history.pushState({ panel: panelId }, '', '#' + panelId);
+      }
+
+      window.addEventListener('popstate', (e) => {
+        const panel = e.state?.panel;
+        if (panel) showPanel(panel);
+      });
+
+      /* 初始化：從 URL hash 恢復狀態 */
+      const initialPanel = location.hash.slice(1);
+      if (initialPanel) showPanel(initialPanel);
+    effort: "中"
+    pattern_ref: null
+    impact: "中 — 可分享性與瀏覽體驗"
+
+  - id: "REC-16"
+    priority: 16
+    title: "統一 container max-width 為命名寬度"
+    problem: "container width 隨頁面類型任意變化（860/1040/1080/1180px），缺乏規則"
+    reference: "Stripe: 1200px 統一 container；Vercel: 1200px max content column"
+    solution: |
+      :root {
+        --container-sm: 860px;   /* 文章內文 */
+        --container-md: 1080px;  /* 一般頁面 */
+        --container-lg: 1180px;  /* dashboard shell */
+      }
+      .shell { max-width: var(--container-lg); }
+      .shell--article { max-width: var(--container-sm); }
+      .shell--default { max-width: var(--container-md); }
+    effort: "小"
+    pattern_ref: null
+    impact: "中 — 視覺一致性"
+
+  - id: "REC-17"
+    priority: 17
+    title: "加入色彩系統變體"
+    problem: "每個 accent color 僅有單一值，缺少 hover/pressed/disabled/subtle 變體"
+    reference: "Stripe 每色 4+ 變體（primary/press/deep/soft/bg-subdued）；Vercel 10 步色階"
+    solution: |
+      :root {
+        /* 現有 */
+        --green: #88b56b;
+        --amber: #d4a34b;
+        --blue: #76a7bd;
+        --red: #c46f5a;
+
+        /* 新增變體 */
+        --green-hover: #7aa65d;
+        --green-subtle: rgba(136, 181, 107, 0.12);
+        --green-muted: rgba(136, 181, 107, 0.28);
+
+        --amber-hover: #c49443;
+        --amber-subtle: rgba(212, 163, 75, 0.08);
+
+        --blue-hover: #6898ae;
+        --blue-subtle: rgba(118, 167, 189, 0.10);
+
+        --red-hover: #b5614d;
+      }
+    effort: "小"
+    pattern_ref: null
+    impact: "中 — 互動狀態完整性"
+
+  - id: "REC-18"
+    priority: 18
+    title: "TradingView widget 延遲載入"
+    problem: "TradingView widget 在頁面載入時即注入 script，影響初始載入效能"
+    reference: "Vercel: 延遲載入非關鍵資源"
+    solution: |
+      /* JS: IntersectionObserver lazy load */
+      const chartContainer = document.querySelector('.tradingview-container');
+      const chartObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          loadTradingViewWidget();
+          chartObserver.disconnect();
+        }
+      }, { rootMargin: '200px' });
+      chartObserver.observe(chartContainer);
+    effort: "小"
+    pattern_ref: null
+    impact: "低 — 效能改善"
+
+# ============================================================
+# 4. 改進路線圖
+# ============================================================
+roadmap:
+
+  phase_1_quick_wins:
+    title: "快速修正"
+    duration: "1-2 小時"
+    description: "不需重構的立即改善，主要是新增 HTML/CSS 片段"
+    tasks:
+      - id: "REC-04"
+        title: "加入 skip-to-content link"
+        effort: "小 (10 分鐘)"
+      - id: "REC-06"
+        title: "加入 prefers-reduced-motion 媒體查詢"
+        effort: "小 (5 分鐘)"
+      - id: "REC-07"
+        title: "加入 button hover/press 過渡效果"
+        effort: "小 (15 分鐘)"
+      - id: "REC-08"
+        title: "加入 card hover 效果"
+        effort: "小 (15 分鐘)"
+      - id: "REC-13"
+        title: "加入 Google Fonts Inter 載入"
+        effort: "小 (5 分鐘)"
+      - id: "REC-14"
+        title: "加入 Meta tags 與 Open Graph"
+        effort: "小 (15 分鐘)"
+      - id: "REC-10"
+        title: "強化 hero value proposition"
+        effort: "小 (20 分鐘)"
+
+  phase_2_mid_term:
+    title: "中期改進"
+    duration: "半天 - 1 天"
+    description: "需要一些重構但可在單次工作 session 完成"
+    tasks:
+      - id: "REC-01"
+        title: "抽取外部共用樣式表"
+        effort: "中 (1-2 小時)"
+        note: "最關鍵的基礎工作，影響所有後續改進"
+      - id: "REC-02"
+        title: "建立系統化間距 tokens"
+        effort: "中 (1 小時)"
+        depends_on: "REC-01"
+      - id: "REC-03"
+        title: "建立系統化 type scale"
+        effort: "中 (1 小時)"
+        depends_on: "REC-01"
+      - id: "REC-05"
+        title: "view-panel toggle 加入鍵盤支援"
+        effort: "中 (30 分鐘)"
+      - id: "REC-09"
+        title: "加入 scroll-driven fade-in 動畫"
+        effort: "小 (30 分鐘)"
+      - id: "REC-11"
+        title: "加入聯繫方式與社交連結"
+        effort: "小 (20 分鐘)"
+      - id: "REC-12"
+        title: "加入信任信號區"
+        effort: "小 (30 分鐘)"
+      - id: "REC-16"
+        title: "統一 container max-width"
+        effort: "小 (20 分鐘)"
+        depends_on: "REC-01"
+      - id: "REC-17"
+        title: "加入色彩系統變體"
+        effort: "小 (30 分鐘)"
+        depends_on: "REC-01"
+
+  phase_3_long_term:
+    title: "長期規劃"
+    duration: "1 週+"
+    description: "需要重大改動或多次迭代的工作"
+    tasks:
+      - id: "REC-15"
+        title: "view-panel toggle 加入 URL 狀態管理"
+        effort: "大 (2-3 小時)"
+        note: "需要測試各種 edge case（書籤、分享、back button）"
+      - id: "REC-18"
+        title: "TradingView widget 延遲載入"
+        effort: "小 (30 分鐘)"
+        note: "需測試 widget 載入時機對圖表功能的影響"
+      - id: "FUTURE-01"
+        title: "亮色主題支援"
+        effort: "大 (4-8 小時)"
+        description: "建立完整的 light theme color tokens + prefers-color-scheme 切換"
+        depends_on: "REC-01, REC-17"
+      - id: "FUTURE-02"
+        title: "元件狀態系統"
+        effort: "大 (4-6 小時)"
+        description: "為每個互動元件定義 loading/error/empty/disabled 狀態"
+        depends_on: "REC-01"
+      - id: "FUTURE-03"
+        title: "自動化測試與品質保證"
+        effort: "大"
+        description: "加入 Lighthouse CI、axe-core 無障礙自動檢查、visual regression testing"
+      - id: "FUTURE-04"
+        title: "完整 design token 文件"
+        effort: "中 (2-3 小時)"
+        description: "建立 design token 文件頁面，記錄所有 tokens 的用途與值"
+        depends_on: "REC-01, REC-02, REC-03, REC-17"
+
+# ============================================================
+# 5. 總結
+# ============================================================
+summary:
+  overall_maturity: "早期階段 — 功能完整、內部一致，但缺乏系統化結構"
+  priority_insight: "最高優先級是 CSS 架構重構（REC-01），這是所有其他改進的基礎"
+  key_strengths_to_preserve:
+    - "暖橄欖色調暗色主題 — 品牌識別度高"
+    - "Dashboard metaphor — 個人風格強烈"
+    - "語義 HTML + ARIA — 無障礙基礎良好"
+    - "Inter 字體選擇 — 技術內容友善"
+  biggest_gaps_vs_reference:
+    - "無外部樣式表（所有參考網站均有模組化 CSS 架構）"
+    - "無系統化 spacing/type scale（Stripe/Vercel 均有完整 token 系統）"
+    - "動效幾乎為零（參考網站均有完整的 hover/transition/scroll 動畫）"
+    - "缺少信任信號與轉換路徑（Stripe/NNG 在信任建構上遠超個人網站）"
+  success_metrics:
+    - "CSS 重複度：7 份 -> 1 份（REC-01）"
+    - "Lighthouse Performance score：目標 > 90"
+    - "Lighthouse Accessibility score：目標 100"
+    - "Core Web Vitals：LCP < 2.5s, CLS < 0.1"

@@ -1,0 +1,93 @@
+id: "navbar-003"
+name: "Initials Brand Mark"
+category: "navbar"
+subcategory: ""
+tags: ["logo", "brand", "initials", "monogram", "dark-theme"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "square box with centered initials"
+    height: "38px"
+    max_width: "38px"
+    alignment: "center (grid place-items)"
+    padding: ""
+  typography:
+    headline:
+      font_family: "Inter, Arial, sans-serif"
+      font_size: "14px (estimated)"
+      font_weight: 800
+      line_height: "1"
+      alignment: "center"
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "dark olive (#20231d)"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    text_color: "--green (sage green, #88b56b)"
+  effects:
+    shadow: ""
+    border_radius: "standard"
+    border: "1px solid (dark olive border)"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "a (linked to homepage)"
+    role: "brand identity"
+    content_type: "initials (e.g., EY)"
+
+when_to_use:
+  - "Personal websites where full logo is unnecessary"
+  - "Dark-themed dashboards with minimal brand presence"
+  - "When a text-based logo alternative is preferred over graphic logo"
+
+when_not_to_use:
+  - "When company or product has an established logo mark"
+  - "For multi-word brand names (initials become ambiguous)"
+  - "When brand needs photographic or illustrative representation"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      background: #20231d;
+      border: 1px solid #37372f;
+      border-radius: 8px;
+      color: #88b56b;
+      font-weight: 800;
+      font-size: 14px;
+      text-decoration: none;
+    }
+  responsive_notes:
+    mobile: "Unchanged; small enough for any screen size"
+    tablet: "Unchanged"
+    desktop: "Unchanged"
+  accessibility:
+    - "Wrap in <a> with aria-label describing full brand name (e.g., 'Ethan Yang homepage')"
+    - "Ensure green text (#88b56b) on dark olive (#20231d) passes WCAG AA contrast"
+
+assets:
+  screenshots: {}
+  references: []

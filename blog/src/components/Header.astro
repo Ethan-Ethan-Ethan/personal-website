@@ -1,0 +1,31 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/', label: '首頁' },
+  { href: '/articles/', label: '文章' },
+  { href: '/about/', label: '關於' },
+];
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo">個人部落格</a>
+    <nav class="nav" aria-label="主導覽">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={{
+              'nav__link': true,
+              'nav__link--active': currentPath === item.href
+                || (item.href !== '/' && currentPath.startsWith(item.href)),
+            }}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,133 @@
+id: "footer-001"
+name: "Mega-Directory Footer with Multi-Column Links"
+category: "footer"
+subcategory: "mega-footer"
+tags:
+  - "multi-column"
+  - "link-directory"
+  - "dark"
+  - "seo"
+  - "sitemap"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "multi-column link grid"
+    height: "auto (content-driven)"
+    max_width: "1200px (container)"
+    alignment: "top-aligned columns"
+    padding: "64px 24px (vertical) / 16px 24px (bottom bar)"
+  typography:
+    headline:
+      font_family: "Sohne (Stripe) / Geist Sans (Vercel)"
+      font_size: "13-14px"
+      font_weight: 400
+      line_height: 1.4
+    column_heading:
+      font_size: "13px"
+      font_weight: 600
+      color: "#0D253D (Stripe) / #171717 (Vercel)"
+  spacing:
+    between_elements:
+      - "columns: 24-32px gap"
+      - "links within column: 8-12px stack"
+      - "column heading to first link: 16px"
+      - "bottom bar elements: 16px gap"
+    section_padding_y: ["64px", "24px"]
+  colors:
+    background: "#FFFFFF (Stripe) / gray-100 (#f2f2f2 Vercel) or light gray"
+    text_primary: "#0D253D (Stripe) / #171717 (Vercel)"
+    text_secondary: "#64748D (Stripe) / #a8a8a8 (Vercel)"
+    accent: "#533AFD (Stripe) / #006bff (Vercel)"
+    harmony: "light background, muted link text"
+  effects:
+    shadow: "none"
+    border_radius: "0"
+  animation:
+    entrance: "none"
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "footer"
+    role: "site_footer"
+    children:
+      - element: "link_grid"
+        role: "main_navigation"
+        children:
+          - element: "column"
+            role: "link_group"
+            children:
+              - element: "column_heading"
+                content_type: "category label (bold)"
+              - element: "link_list"
+                content_type: "anchor links in column"
+      - element: "bottom_bar"
+        role: "utility_strip"
+        children:
+          - element: "copyright"
+            content_type: "text"
+          - element: "language_selector"
+            content_type: "dropdown"
+          - element: "theme_toggle"
+            content_type: "system/dark/light switch"
+          - element: "status_link"
+            content_type: "text link"
+          - element: "social_icons"
+            content_type: "icon row"
+          - element: "legal_links"
+            content_type: "text links"
+
+when_to_use:
+  - "Product/SaaS companies with extensive documentation and features"
+  - "When users need comprehensive navigation for deep content (60+ pages)"
+  - "SEO optimization requiring many internal footer links"
+  - "Sites with multiple product lines, resources, and company pages"
+
+when_not_to_use:
+  - "Simple brochure sites with few pages"
+  - "Consumer apps where a sitemap footer isn't helpful"
+  - "Mobile-only products where footer is primarily copyright-only"
+
+comparisons:
+  stripe_vs_vercel:
+    differences:
+      - "Stripe: 7 columns, ~100+ links, white background, no theme toggle; Vercel: 12 columns, categorized groups, lighter background, theme toggle included"
+      - "Stripe link color: ink-mute (#64748D); Vercel link color: gray-600 (#a8a8a8)"
+      - "Stripe column headings: muted; Vercel column headings: semibold"
+      - "Vercel includes status page link and social media row; Stripe includes language/country selector"
+    similarities:
+      - "Both use small type (13-14px) for links"
+      - "Both organize links by logical category"
+      - "Both use minimal visual borders - density itself signals footer boundary"
+      - "Both include contact info and legal links at bottom"
+    recommendation: "Use Stripe's approach for white/clean footer on white background; Vercel's for slightly tinted background with theme support"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Collapse columns to single-column accordion for space efficiency"
+    tablet: "2-3 column grid instead of 7-12"
+    desktop: "Full multi-column layout"
+  accessibility:
+    - "Use <nav> with aria-label='Footer navigation'"
+    - "Column headings as <h2>/<h3> for screen reader navigation"
+    - "Sufficient contrast for small link text (minimum 4.5:1)"
+    - "Theme toggle must indicate current state with aria-pressed"
+
+assets:
+  screenshots: {}
+  references: []

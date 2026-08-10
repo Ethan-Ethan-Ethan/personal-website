@@ -1,0 +1,112 @@
+id: "feature-002"
+name: "Multi-Column Feature Card Grid"
+category: "feature"
+subcategory: "bento"
+tags:
+  - "card-grid"
+  - "3-column"
+  - "icon-cards"
+  - "equal-weight"
+  - "flat-design"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "3-column CSS Grid / flexbox"
+    height: "auto (equal-height cards)"
+    max_width: "1200px"
+    alignment: "left (card content), center (grid)"
+    padding: "32px (card padding)"
+  typography:
+    headline:
+      font_family: "Sohne"
+      font_size: "22px (card title)"
+      font_weight: 300
+      line_height: 1.1
+      letter_spacing: "-0.22px"
+    body:
+      font_size: "15px"
+      font_weight: 300
+      line_height: 1.4
+  spacing:
+    between_elements:
+      - "grid gap: 24px"
+      - "card icon -> title: 16px"
+      - "card title -> description: 8px"
+      - "section heading -> grid: 48px"
+    section_padding_y: ["64px", "64px"]
+  colors:
+    background: "#FFFFFF (canvas)"
+    text_primary: "#0D253D (ink)"
+    text_secondary: "#64748D (ink-mute)"
+    accent: "#533AFD (icon color)"
+    harmony: "white cards on white canvas; indigo icons as only color accent"
+  effects:
+    shadow: "none (flat)"
+    border_radius: "12px"
+  animation:
+    entrance: "fade-in with staggered delay per card"
+    duration: "0.2-0.3s"
+    easing: "ease-in-out"
+
+structure:
+  - element: "section"
+    role: "feature_grid_section"
+    children:
+      - element: "section_header"
+        role: "context"
+        children:
+          - element: "eyebrow_label"
+            content_type: "micro-cap text (optional)"
+          - element: "heading"
+            content_type: "display-xl or display-lg"
+          - element: "subheading"
+            content_type: "body-lg"
+      - element: "card_grid"
+        role: "feature_grid"
+        children:
+          - element: "card"
+            role: "feature_card"
+            children:
+              - element: "icon"
+                content_type: "outline SVG (24-48px, indigo)"
+              - element: "title"
+                content_type: "heading-lg (22px)"
+              - element: "description"
+                content_type: "body-md (15px)"
+
+when_to_use:
+  - "Listing multiple product features or service offerings of equal importance"
+  - "SaaS landing pages with 3, 6, or 9 feature items"
+  - "When features need icon + title + description format"
+  - "Content that reads well in a scannable grid (no strong hierarchy between items)"
+
+when_not_to_use:
+  - "When features have a clear priority order (use staggered/alternating layout instead)"
+  - "When each feature needs a large hero image or screenshot"
+  - "When only 1-2 features exist (use simpler layout)"
+  - "When card heights would be dramatically unequal"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "1 column, full-width cards"
+    tablet: "2 columns, cards resize evenly"
+    desktop: "3 columns with equal-height cards (flex-align or grid stretch)"
+  accessibility:
+    - "Cards should have proper heading hierarchy (H3 for card titles)"
+    - "Icons need aria-hidden='true' (decorative, not content)"
+    - "Ensure touch target sizes are adequate on mobile"
+    - "Card hover effect should not be the only interactive cue"
+
+assets:
+  screenshots: {}
+  references: []

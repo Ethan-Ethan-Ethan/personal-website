@@ -1,0 +1,87 @@
+id: "cta-003"
+name: "Primary Ghost CTA Button"
+category: "cta"
+subcategory: ""
+tags: ["button", "cta", "primary", "dark-theme", "ghost"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/articles/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "inline-flex centered"
+    height: "44px min-height"
+    max_width: ""
+    alignment: "center"
+    padding: "0 14px to 0 16px"
+  typography:
+    headline:
+      font_family: "Inter, Arial, sans-serif"
+      font_size: ""
+      font_weight: 800
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "warm cream (#f0eadc) — primary variant"
+    text_primary: "near-black warm"
+    text_secondary: ""
+    accent: ""
+  effects:
+    shadow: ""
+    border_radius: "standard"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "a or button"
+    role: "primary call-to-action"
+    content_type: "short action text (e.g., Read More, View)"
+
+when_to_use:
+  - "Primary actions on article cards, content cards"
+  - "When a visible, high-contrast CTA is needed on dark backgrounds"
+
+when_not_to_use:
+  - "Alongside multiple primary buttons (dilutes hierarchy)"
+  - "On light backgrounds (cream on white lacks contrast)"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 16px;
+      font-weight: 800;
+      background: #f0eadc;
+      color: #161511;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+  responsive_notes:
+    mobile: "Reduce padding to 0 14px; maintain min-height for touch targets"
+    tablet: "Unchanged"
+    desktop: "Standard"
+  accessibility:
+    - "Minimum 44px touch target (WCAG 2.2 requirement)"
+    - "Ensure focus-visible style is applied"
+    - "Button text must describe the action clearly"
+
+assets:
+  screenshots: {}
+  references: []

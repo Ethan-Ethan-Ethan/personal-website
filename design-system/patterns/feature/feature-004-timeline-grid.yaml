@@ -1,0 +1,105 @@
+id: "feature-004"
+name: "Two-Column Timeline Grid"
+category: "feature"
+subcategory: ""
+tags: ["timeline", "grid", "career", "chronological", "data-visualization"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/protected/resume.html"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "grid two-column: year + content"
+    height: ""
+    max_width: ""
+    alignment: ""
+    padding: ""
+    grid_columns: "92px 1fr"
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "subtle panel/tint"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    border: "subtle (dark olive)"
+  effects:
+    shadow: ""
+    border_radius: ""
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "div.timeline"
+    role: "timeline container"
+    children:
+      - element: "div.timeline-item (repeating)"
+        role: "timeline row"
+        children:
+          - element: "span.year"
+            role: "year label"
+            content_type: "numeric year (e.g., 2024)"
+          - element: "div.content"
+            role: "event description"
+            content_type: "text: title, organization, description"
+
+when_to_use:
+  - "Career timeline or resume experience sections"
+  - "Project history, company milestones, or chronological lists"
+  - "Any paired year+content display pattern"
+
+when_not_to_use:
+  - "For cards with long descriptions (content column becomes too narrow)"
+  - "When years are not the primary organizing axis"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #37372f;
+    }
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+    .timeline-item .year {
+      font-weight: 800;
+      color: #d4a34b;
+    }
+  responsive_notes:
+    mobile: "Stack year above content on very small screens, or reduce year column to 72px"
+    tablet: "Keep two-column layout"
+    desktop: "92px year column standard"
+  accessibility:
+    - "Use <time> element with datetime attribute for machine-readable dates"
+    - "Ensure grid order matches visual order for screen reader navigation"
+
+assets:
+  screenshots: {}
+  references: []

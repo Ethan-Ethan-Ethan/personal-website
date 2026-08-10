@@ -1,0 +1,939 @@
+# Website Analysis Report
+domain: stripe.com
+analyzed_date: 2026-07-11
+url: https://stripe.com
+
+# ============================================================
+# 1. LAYOUT - 版面結構
+# ============================================================
+layout:
+  hero:
+    height: "90vh (minimum 600px)"
+    padding: "80px 24px 64px"
+    alignment: "center"
+    layout_type: "full-width column-flex"
+    background: "gradient mesh edge-to-edge"
+    content_max_width: "720px"
+  grid:
+    columns: 12
+    gutter: "24px (gap: 24px)"
+    container_max_width: "1200px"
+    container_padding: "24px (mobile: 16px)"
+  section_spacing:
+    between_sections: "80px-96px (marketing); 32px-48px (dashboard)"
+    content_padding: "64px-96px (vertical)"
+    card_padding: "32px (feature cards); 24px (dashboard mockups)"
+  responsive:
+    wide: ">= 1440px (full gradient mesh, full-scale composites)"
+    desktop: "1024px-1440px (default max-width)"
+    tablet: "768px-1023px (2-up grids, simplified composites)"
+    mobile: "< 768px (1-up grids, hamburger nav, display drops 56px->36px)"
+  section_background_pattern:
+    - type: "alternating"
+      sequence:
+        - "canvas (white)"
+        - "canvas-soft (light blue-gray)"
+        - "canvas (white)"
+        - "canvas-cream (warm cream)"
+        - "canvas (white)"
+  observations:
+    - "Stripe uses a consistent ~1200px centered container for content sections"
+    - "Hero section bleeds edge-to-edge (no container constraint)"
+    - "Gradient mesh extends horizontally across upper third of page"
+    - "Generous vertical padding creates breathing room between sections"
+    - "Cards are laid out in 3-column grids on desktop, collapsing to 2 then 1"
+    - "Stats section uses 4-column layout on desktop"
+    - "Footer is a 7-column link directory"
+
+# ============================================================
+# 2. SPACING - 間距系統
+# ============================================================
+spacing:
+  scale: [2, 4, 8, 12, 16, 24, 32, 48, 64]
+  token_names:
+    xxs: "2px"
+    xs: "4px"
+    sm: "8px"
+    md: "12px"
+    lg: "16px"
+    xl: "24px"
+    xxl: "32px"
+    huge: "64px"
+  base_unit: "8px"
+  consistency: "high"
+  whitespace_ratio: "generous"
+  patterns:
+    button_padding: "8px 16px"
+    card_padding: "32px"
+    nav_padding: "16px 24px"
+    section_vertical: "64px-96px"
+    card_grid_gap: "24px"
+    testimonial_vertical_stack: "12px-16px (between quote, name, title)"
+    cta_section_padding: "64px 24px"
+  observations:
+    - "8px is the base unit; all spacing tokens are multiples of 8px (except 12px)"
+    - "Marketing pages are deliberately generous with whitespace"
+    - "Inner card spacing is tight (32px) relative to the generous section padding"
+    - "Between-section spacing is larger than within-section spacing"
+
+# ============================================================
+# 3. COLOR - 色彩系統
+# ============================================================
+color:
+  primary:
+    brand: "#533AFD"
+    name: "Stripe Indigo"
+    usage: "CTA buttons, links, brand anchor"
+  primary_variants:
+    press: "#4434D4"
+    deep: "#2E2B8C"
+    soft: "#665EFD"
+    bg_subdued: "#B9B9F9"
+  brand_dark: "#1C1E54"
+  neutral:
+    ink: "#0D253D"
+    ink_secondary: "#273951"
+    ink_mute: "#64748D"
+    ink_mute_2: "#61718A"
+  surfaces:
+    canvas: "#FFFFFF"
+    canvas_soft: "#F6F9FC"
+    canvas_cream: "#F5E9D4"
+  borders:
+    hairline: "#E3E8EE"
+    hairline_input: "#A8C3DE"
+  accent_decorative:
+    ruby: "#EA2261"
+    magenta: "#F96BEE"
+    lemon: "#9B6829"
+    shadow_blue: "#003770"
+  text_on_dark: "#FFFFFF"
+  harmony: "monochromatic (indigo primary) + pastel accent palette"
+  contrast_ratio: "high (ink #0D253D on canvas #FFFFFF)"
+  gradient_mesh_stops:
+    - "#F5E9D4 (cream)"
+    - "#F96BEE (magenta)"
+    - "#EA2261 (ruby)"
+    - "#533AFD (indigo)"
+    - "#9B6829 (lemon/sherbet)"
+  observations:
+    - "Primary text is deep navy (#0D253D), never pure black (#000000)"
+    - "Ruby (#EA2261) and magenta (#F96BEE) are decorative/gradient-only - NEVER used for buttons or interactive elements"
+    - "Gradient mesh signature: cream->sherbet->lavender->indigo->ruby-pink horizontally across upper third"
+    - "Dividers are thin and subtle (#E3E8EE)"
+    - "Only one filled primary indigo button per visual band (CRO-informed rule)"
+
+# ============================================================
+# 4. TYPOGRAPHY - 字體系統
+# ============================================================
+typography:
+  font_family:
+    primary: "Sohne (proprietary, Klim Type Foundry)"
+    fallback: "'SF Pro Display', system-ui, -apple-system, sans-serif"
+    open_source_substitute: "Inter (Google Fonts)"
+    css_stack: "sohne-var, 'SF Pro Display', system-ui, -apple-system, sans-serif"
+  font_features:
+    global: "ss01 (single-story 'a' and character variants)"
+    numeric: "tnum (tabular numerals for financial data)"
+  type_scale:
+    display_xxl:
+      size: "56px"
+      weight: 300
+      line_height: 1.03
+      letter_spacing: "-1.4px"
+      usage: "Hero headline"
+    display_xl:
+      size: "48px"
+      weight: 300
+      line_height: 1.15
+      letter_spacing: "-0.96px"
+      usage: "Major section headings"
+    display_lg:
+      size: "32px"
+      weight: 300
+      line_height: 1.1
+      letter_spacing: "-0.64px"
+      usage: "Section subheadings"
+    display_md:
+      size: "26px"
+      weight: 300
+      line_height: 1.12
+      letter_spacing: "-0.26px"
+      usage: "Card titles, compact headings"
+    heading_lg:
+      size: "22px"
+      weight: 300
+      line_height: 1.1
+      letter_spacing: "-0.22px"
+      usage: "Pricing tier names, feature titles"
+    heading_md:
+      size: "20px"
+      weight: 300
+      line_height: 1.4
+      letter_spacing: "-0.2px"
+      usage: "Section subheadings"
+    heading_sm:
+      size: "18px"
+      weight: 300
+      line_height: 1.4
+      letter_spacing: "0"
+      usage: "Mini labels, eyebrow text"
+    body_lg:
+      size: "16px"
+      weight: 300
+      line_height: 1.4
+      letter_spacing: "0"
+      usage: "Marketing body lead text"
+    body_md:
+      size: "15px"
+      weight: 300
+      line_height: 1.4
+      letter_spacing: "0"
+      usage: "Default UI body text"
+    body_tabular:
+      size: "14px"
+      weight: 300
+      line_height: 1.4
+      letter_spacing: "-0.42px"
+      feature: "tnum"
+      usage: "Money, numeric tables, pricing"
+    button_md:
+      size: "16px"
+      weight: 400
+      line_height: 1.0
+      letter_spacing: "0"
+      usage: "Standard pill buttons"
+    button_sm:
+      size: "14px"
+      weight: 400
+      line_height: 1.0
+      letter_spacing: "0"
+      usage: "Compact pill buttons"
+    caption:
+      size: "13px"
+      weight: 400
+      line_height: 1.4
+      letter_spacing: "-0.39px"
+      usage: "Helper text, table labels"
+    micro:
+      size: "11px"
+      weight: 300
+      line_height: 1.4
+      letter_spacing: "0"
+      usage: "Fine print"
+    micro_cap:
+      size: "10px"
+      weight: 400
+      line_height: 1.15
+      letter_spacing: "0.1px"
+      usage: "All-caps eyebrow labels, pill tags"
+  observations:
+    - "Signature: weight 300 at display sizes with negative letter-spacing (tightest at largest sizes)"
+    - "Button labels use weight 400 (slightly bolder than body/display at 300)"
+    - "Tabular figures (tnum) for all money/numeric content - critical for fintech credibility"
+    - "Font-feature-settings ss01 is globally applied for brand character variants"
+    - "All text is deep navy (ink #0D253D), not pure black - softer on eyes"
+
+# ============================================================
+# 5. ANIMATION - 動畫系統
+# ============================================================
+animation:
+  transitions:
+    duration: "0.2s-0.3s"
+    easing: "ease-in-out"
+  hover_effects:
+    - type: "background_color"
+      description: "Buttons shift from primary to press state (#533AFD -> #4434D4)"
+    - type: "shadow_increase"
+      description: "Cards get subtle elevation on hover"
+    - type: "link_underline"
+      description: "Text links show underline on hover"
+  scroll_animations:
+    - type: "fade-in"
+      description: "Sections fade in on scroll via IntersectionObserver pattern"
+    - type: "slide-up"
+      description: "Cards and content slide up on entry"
+  logo_marquee:
+    type: "continuous_horizontal_scroll"
+    description: "Auto-scrolling client logo strip beneath hero (JS or CSS animation)"
+  hero_background:
+    type: "drift_animation"
+    description: "Gradient mesh has subtle gentle drift/movement"
+  news_carousel:
+    type: "horizontal_swipe"
+    description: "News cards scrollable with 'Item X of 8' indicator"
+  enterprise_accordion:
+    type: "smooth_expand_collapse"
+    description: "Case study accordion with smooth height transition"
+  micro_interactions:
+    button_click: "color shift (primary -> press state #2E2B8C)"
+    card_hover: "subtle transform or shadow increase"
+    link_hover: "color change from ink to primary (#533AFD)"
+  observations:
+    - "Animations are subtle and purposeful - never flashy or distracting"
+    - "No parallax scrolling effects detected"
+    - "Logo marquee is the most prominent animation on the page"
+    - "All transitions use standard ease-in-out with short duration (0.2s-0.3s)"
+
+# ============================================================
+# 6. COMPONENTS - 元件系統
+# ============================================================
+components:
+  buttons:
+    primary_pill:
+      background: "#533AFD"
+      text: "#FFFFFF"
+      padding: "8px 16px"
+      border_radius: "9999px (pill)"
+      font: "16px, weight 400"
+      hover: "background #4434D4"
+      pressed: "background #2E2B8C"
+      usage: "Main CTAs like 'Start now', 'Get started'"
+    primary_on_dark:
+      background: "#1C1E54"
+      text: "#FFFFFF"
+      padding: "8px 16px"
+      border_radius: "9999px (pill)"
+      font: "16px, weight 400"
+      usage: "CTAs on dark backgrounds"
+    secondary_outline:
+      background: "transparent"
+      text: "#533AFD"
+      border: "1px solid #533AFD"
+      padding: "8px 16px"
+      border_radius: "9999px (pill)"
+      font: "16px, weight 400"
+      usage: "Secondary CTAs like 'Contact sales'"
+    secondary_ghost:
+      background: "transparent"
+      text: "#0D253D (ink)"
+      padding: "8px 16px"
+      border_radius: "9999px (pill)"
+      font: "14px, weight 400"
+      usage: "Subtle navigation actions"
+    text_link:
+      color: "#533AFD"
+      decoration: "none (underline on hover)"
+      font: "14px-16px, weight 400"
+      includes_arrow: true
+      usage: "Read more, Learn more, View details"
+    sizes:
+      - "standard (button-md: 16px / 8px 16px padding)"
+      - "compact (button-sm: 14px / 6px 12px padding)"
+    hierarchy_rule: "Only one filled primary button per visual band"
+  cards:
+    feature_card:
+      background: "#FFFFFF"
+      border_radius: "12px"
+      border: "1px solid #E3E8EE"
+      padding: "32px"
+      shadow: "none (flat)"
+      hover: "subtle shadow increase"
+    pricing_card:
+      background: "#FFFFFF"
+      border_radius: "12px"
+      border: "1px solid #E3E8EE"
+      padding: "32px"
+    pricing_card_featured:
+      background: "#1C1E54 (brand dark)"
+      text: "#FFFFFF"
+      border_radius: "12px"
+      border: "none"
+      padding: "32px"
+      note: "Deliberately avoids indigo to prevent oversaturation"
+    cream_band_card:
+      background: "#F5E9D4"
+      text: "#0D253D"
+      padding: "32px"
+      border_radius: "12px"
+    testimonial_card:
+      padding: "24px"
+      alignment: "left"
+      headshot_size: "48px (circular)"
+    stat_card:
+      padding: "24px"
+      number_size: "display-xxl (56px)"
+      label_size: "caption (13px)"
+    news_card:
+      background: "#FFFFFF"
+      padding: "24px"
+      layout: "vertical (image top, text bottom)"
+  forms:
+    text_input:
+      height: "auto"
+      padding: "8px 12px"
+      border_radius: "6px"
+      border: "1px solid #A8C3DE"
+      background: "#FFFFFF"
+      text: "#0D253D"
+      focus_border: "#533AFD"
+      focus_shadow: "none specified"
+  navigation:
+    type: "sticky top bar"
+    background: "#FFFFFF (or transparent on hero overlay)"
+    height: "auto (approx 64px)"
+    padding: "16px 24px"
+    structure:
+      logo: "left"
+      primary_links: "center (Products, Solutions, Developers, Resources, Pricing)"
+      ctas: "right (Sign in, Start now, Contact sales)"
+    item_styling:
+      link_color: "#61718A (ink-mute-2)"
+      link_active_color: "#0D253D (ink)"
+      link_font: "14px, weight 400"
+      link_padding: "8px 12px"
+    mobile:
+      type: "hamburger overlay menu"
+      items: "same as desktop"
+      layout: "full-screen overlay"
+  tags:
+    soft_pill:
+      background: "#B9B9F9 (primary-bg-subdued)"
+      text: "#4434D4 (primary-deep)"
+      padding: "4px 8px"
+      border_radius: "9999px"
+      font: "micro-cap (10px, weight 400, 0.1px letter-spacing)"
+      usage: "Eyebrow labels, feature tags"
+  icons:
+    style: "outline (consistent with brand aesthetic)"
+    size: "16px-24px (inline); 32px-48px (feature cards)"
+    color: "#533AFD (primary) or #0D253D (ink)"
+  dividers:
+    hairline: "1px solid #E3E8EE"
+    usage: "Card borders, section separators"
+  shadows:
+    level_0: "none (flat surface)"
+    level_1: "rgba(0,55,112,0.08) 0 1px 3px (card lift on white)"
+    level_2: "rgba(0,55,112,0.08) 0 8px 24px, rgba(0,55,112,0.04) 0 2px 6px (floating panels)"
+    level_3: "gradient mesh backdrop (primary depth medium)"
+    observation: "Stripe avoids heavy box-shadows on marketing surfaces; shadows are subtle with blue tint (#003770 shadow_blue)"
+
+# ============================================================
+# 7. INFORMATION ARCHITECTURE - 資訊架構
+# ============================================================
+information_architecture:
+  navigation:
+    primary: ["Products", "Solutions", "Developers", "Resources", "Pricing"]
+    secondary: ["Sign in", "Start now", "Contact sales"]
+    utility: ["Sign in dropdown", "Language/country selector", "Cookie settings"]
+    breadcrumb: "no"
+    footer_nav_groups: 7
+    footer_total_links: "~100+ links organized by product/solution/resource"
+  content_hierarchy:
+    levels: 4
+    organization: "hybrid (topic-based sections with user-journey progression)"
+    order:
+      - 1. Hero (value proposition + identity)
+      - 2. Social proof logos (trust)
+      - 3. Feature grid (what you can do)
+      - 4. Stats (credibility)
+      - 5. Enterprise case studies (depth for big customers)
+      - 6. Professional services (how to get help)
+      - 7. Startup stories (relatability for small customers)
+      - 8. Platform/SaaS (vertical-specific)
+      - 9. Infrastructure/developer (technical depth)
+      - 10. News/community (current activity)
+      - 11. Final CTA (conversion)
+      - 12. Footer (comprehensive navigation)
+  user_flow:
+    primary_goal: "sign-up (start using Stripe)"
+    secondary_goals:
+      - "learn about specific products"
+      - "compare pricing"
+      - "read documentation"
+      - "contact sales for enterprise"
+    steps_to_conversion: 2 (hero -> sign up)
+    friction_points: ["account creation form", "pricing information not on homepage"]
+  findability:
+    search: "yes (footer sitemap, top nav organized by category)"
+    tags: "no"
+    categories: "yes (7 footer groups, organized nav)"
+    filters: "no"
+  information_density: "medium (generous whitespace keeps it from feeling dense despite rich content)"
+  content_sections_count: 15 (hero + 13 content sections + footer)
+  observations:
+    - "Page follows a classic trust-building narrative: value prop -> logos -> features -> stats -> proof -> CTA"
+    - "Both enterprise and startup tracks exist in parallel (dual audience targeting)"
+    - "Every content section has exactly one primary link/CTA"
+    - "Footer is the most comprehensive navigation element (~100 links across 7 groups)"
+
+# ============================================================
+# 8. BRAND IDENTITY - 品牌識別
+# ============================================================
+brand_identity:
+  positioning: "authoritative, trustworthy, innovative"
+  tone_of_voice: "professional, confident, clear, technically precise"
+  trust_signals:
+    client_logos: "yes (14 major companies in marquee)"
+    testimonials: "yes (4 named testimonials with titles and companies)"
+    certifications: "yes (99.999% uptime stat, PCI compliance implied)"
+    years_in_business: "15+ years (founded 2010)"
+    case_studies: "yes (4 enterprise + 8 startup case studies on homepage)"
+    numbers:
+      - "$1.9T payments volume (2025)"
+      - "135+ currencies"
+      - "99.999% uptime"
+      - "200M+ subscriptions"
+      - "50% of Fortune 100 companies"
+      - "500M+ API requests per day"
+      - "78% of Forbes AI 50"
+    media_press: "yes (news section, annual letter, Sessions conference)"
+  visual_consistency: "high"
+  brand_personality:
+    - "professional (fintech authority)"
+    - "trustworthy (blue/navy color anchor, precise language)"
+    - "innovative (gradient mesh, AI/agentic commerce positioning)"
+    - "developer-friendly (code references, API stats)"
+  color_personality: "serious with creative accents (indigo anchor + pastel gradients)"
+  signature_elements:
+    - "Gradient mesh backdrop (cream -> magenta -> ruby -> indigo -> lemon)"
+    - "Thin display type (weight 300 with negative tracking)"
+    - "Pill-shaped buttons (9999px radius)"
+    - "Tabular figures for all money data"
+    - "Deep navy ink (#0D253D) instead of pure black"
+    - "Single filled CTA per band"
+  observations:
+    - "Brand radiates authority through specific, verifiable numbers"
+    - "Dual identity: approachable for startups AND serious for enterprises"
+    - "The indigo color is instantly recognizable and consistently applied"
+    - "Typography choice (Sohne weight 300) is a distinctive brand differentiator"
+
+# ============================================================
+# 9. ACCESSIBILITY - 無障礙性
+# ============================================================
+accessibility:
+  color_contrast:
+    wcag_aa: "pass"
+    wcag_aaa: "pass (ink #0D253D on white #FFFFFF = ~14:1 ratio)"
+    contrast_ratio: "~14:1 (primary text on white); ~5:1 (ink-mute #64748D on white)"
+  keyboard_navigation:
+    tab_order: "logical (top-to-bottom, left-to-right)"
+    focus_visible: "yes (observed on interactive elements)"
+    skip_links: "assumed (standard for modern marketing sites)"
+  screen_reader:
+    heading_hierarchy: "logical (single H1 -> H2s for sections -> H3s for subsections)"
+    alt_text: "complete (images have descriptive alt text)"
+    aria_labels: "assumed complete (standard Stripe practice)"
+    aria_hidden: "yes (decorative elements like logo marquee use aria-hidden)"
+  images:
+    alt_text_quality: "descriptive (e.g., 'Aerial view of a street intersection in a European city')"
+  forms:
+    labels: "visible (standard form fields)"
+    error_messages: "assumed clear (industry leader)"
+    required_fields: "marked (standard)"
+  link_text:
+    descriptiveness: "high ('Read the story', 'Watch now', 'View services')"
+  overall_score: "good"
+  observations:
+    - "Color contrast is excellent due to deep ink on white canvas"
+    - "Heading hierarchy is properly structured (H1 -> H2 -> H3)"
+    - "Link text is descriptive and action-oriented"
+    - "Alt text for images is detailed and descriptive"
+    - "Decorative animation elements (logo marquee) use aria-hidden"
+    - "Section-based organization with clear landmarks"
+  recommendations:
+    - "Could add visible skip navigation link"
+    - "Would benefit from reduced motion media query for animation-sensitive users"
+
+# ============================================================
+# 10. CONVERSION - 轉換率設計
+# ============================================================
+conversion:
+  cta:
+    clarity: "clear (action-oriented verbs: 'Get started', 'Start now', 'Read the story')"
+    visibility: "high (pill buttons with indigo primary on white backgrounds)"
+    placement: "multiple (nav, hero, section ends, footer, bottom strip)"
+    design: "prominent (filled indigo pill for primary, outline for secondary)"
+    text: "action-oriented (all CTAs start with verbs)"
+    hierarchy: "single primary per band (one filled button, rest outline/ghost)"
+  forms:
+    signup_form:
+      length: "short (email + password + basic info)"
+      fields: 4
+      validation: "inline (real-time field validation)"
+    oauth_option: "yes (Sign up with Google in hero section)"
+  user_guidance:
+    tooltips: "yes (product documentation)"
+    help_text: "yes (per-section descriptions)"
+    onboarding: "yes (10-minute setup claim)"
+  friction_reduction:
+    social_login: "yes (Google OAuth in hero)"
+    auto_fill: "yes (browser autofill supported)"
+    guest_checkout: "not applicable (business signup, not e-commerce)"
+    instant_setup: "yes ('Get up and running in as little as 10 minutes')"
+  social_proof:
+    testimonials: "yes (4 named with company/title)"
+    case_studies: "yes (4 enterprise + 8 startup with quantified results)"
+    numbers: "yes (multiple statistics throughout)"
+    trust_badges: "yes (client logo marquee of 14 major companies)"
+    industry_adoption: "50% of Fortune 100, 78% of Forbes AI 50"
+  urgency_scarcity:
+    countdown: "no"
+    limited_supply: "no"
+    time_offers: "no"
+    strategy: "Stripe avoids artificial urgency; relies on trust and credibility instead"
+  conversion_score: "good"
+  cta_count_by_type:
+    primary_filled: "Start now (nav), Get started (hero), Start now (final CTA)"
+    secondary_outline: "Contact sales (nav), Contact sales (final CTA)"
+    oauth: "Sign up with Google (hero)"
+    text_links: "Read the story, Read the guide, View services, etc. (~30+ links)"
+  landing_paths:
+    - "nav 'Start now' -> registration"
+    - "hero 'Get started' -> registration"
+    - "hero 'Sign up with Google' -> OAuth flow"
+    - "nav 'Pricing' -> /pricing"
+    - "nav 'Contact sales' -> sales form"
+  observations:
+    - "Every section ends with exactly one primary action link"
+    - "Dual-path strategy throughout: self-serve (Start now) + enterprise (Contact sales)"
+    - "Hero offers Google OAuth as friction-free alternative to registration form"
+    - "Stripe does not use scarcity or urgency tactics (countdowns, limited time)"
+    - "Trust signals are woven into EVERY section, not just one testimonial block"
+    - "Stats use precise, verifiable numbers ($1.9T, 99.999%, 200M+) instead of vague claims"
+    - "The page is designed for multiple audience segments (startups, enterprise, developers, platforms)"
+
+# ============================================================
+# KEY TAKEAWAYS
+# ============================================================
+key_takeaways:
+  - "Stripe's design language is built around a single indigo brand anchor (#533AFD) with a pastel gradient mesh as its signature visual element"
+  - "Typography is the strongest brand differentiator: Sohne weight 300 at display sizes with aggressive negative letter-spacing creates a distinctive, premium feel"
+  - "Spacing is consistently generous (8px base unit, 64-96px section padding), creating an airy, trustworthy feel appropriate for financial infrastructure"
+  - "Design hierarchy rule: only one filled primary indigo button per visual band reduces cognitive load and drives focus"
+  - "Information architecture follows a masterful trust-building narrative: value prop -> logos -> features -> stats -> proof -> CTA"
+  - "Stripe avoids dark patterns entirely: no urgency/scarcity, no hidden fees, transparent pricing with clear CTAs"
+  - "Dual audience targeting (startup + enterprise) is handled by giving each its own dedicated section rather than mixing signals"
+  - "Every claim is backed by a specific, verifiable number ($1.9T, 99.999%, 50% of Fortune 100) - never vague superlatives"
+  - "Deep navy ink (#0D253D) instead of pure black for text creates a softer, more premium reading experience"
+  - "Pill-shaped buttons (9999px radius) with tight padding (8px 16px) are the standard CTA container"
+
+# ============================================================
+# REUSABLE PATTERNS
+# ============================================================
+reusable_patterns:
+  - name: "Indigo Pill CTA"
+    category: "CTA"
+    source: "stripe.com"
+    core_elements:
+      - "background: #533AFD"
+      - "text: #FFFFFF"
+      - "padding: 8px 16px"
+      - "border-radius: 9999px"
+      - "font: button-md (16px, weight 400)"
+    visual_features:
+      - "Capsule/pill shape (fully rounded)"
+      - "Solid indigo fill with white text"
+      - "Hover: deepens to #4434D4"
+      - "Pressed: darkens to #2E2B8C"
+    when_to_use:
+      - "Primary conversion actions (sign up, get started, buy now)"
+      - "When you need a single dominant call-to-action"
+      - "On white or light backgrounds"
+    when_not_to_use:
+      - "When multiple primary buttons compete for attention (max 1 per band)"
+      - "On dark backgrounds (use brand-dark variant instead)"
+    implementation_tips:
+      - "Use exactly once per visual section/band"
+      - "Pair with an outline/ghost secondary CTA for the alternative path"
+      - "Keep padding tight (8px 16px) - don't over-size the button"
+
+  - name: "Gradient Mesh Hero Banner"
+    category: "Hero"
+    source: "stripe.com"
+    core_elements:
+      - "full-width background (edge-to-edge)"
+      - "gradient mesh: cream (#F5E9D4) -> magenta (#F96BEE) -> ruby (#EA2261) -> indigo (#533AFD) -> lemon (#9B6829)"
+      - "centered content column (max-width ~720px)"
+      - "display-xxl heading (56px, weight 300, -1.4px letter-spacing)"
+      - "body-lg subheadline (16px, weight 300)"
+      - "primary CTA + secondary CTA or OAuth"
+      - "client logo marquee beneath"
+    visual_features:
+      - "Horizontal pastel gradient mesh across upper third of page"
+      - "Gentle drift animation on mesh"
+      - "Thin display type floats on gradient"
+      - "H: ~90vh"
+    when_to_use:
+      - "Fintech, SaaS, or B2B landing pages needing trust and authority"
+      - "Brand that wants to feel premium and established"
+      - "Single clear value proposition"
+    when_not_to_use:
+      - "E-commerce or consumer products needing aggressive conversion"
+      - "When the brand identity doesn't support pastel/artistic backgrounds"
+    implementation_tips:
+      - "Implement gradient mesh as SVG or optimized image (not CSS gradient - too complex)"
+      - "Ensure text contrast against gradient (use dark text on light mesh stops)"
+      - "Restrict mesh to upper third of viewport to avoid overwhelming the page"
+
+  - name: "Client Logo Marquee"
+    category: "Trust-Signal"
+    source: "stripe.com"
+    core_elements:
+      - "Continuous horizontal scroll animation"
+      - "Logos of 10-15 major recognizable companies"
+      - "Grayscale or muted-color logos"
+      - "Auto-scrolling with no user interaction needed"
+    visual_features:
+      - "Seamless loop (CSS or JS infinite scroll)"
+      - "Logos at consistent size and opacity"
+      - "No hover/pause on individual logos"
+    when_to_use:
+      - "Below hero section to build instant trust"
+      - "When you have recognizable brand logos to display"
+      - "SaaS, B2B, or professional services landing pages"
+    when_not_to_use:
+      - "When logos are not household names (can backfire)"
+      - "When the page already has strong trust signals above the fold"
+    implementation_tips:
+      - "Use aria-hidden='true' on the carousel (decorative, not content)"
+      - "Duplicate logo array in markup for seamless loop"
+      - "Keep scroll speed moderate (not distracting)"
+      - "Use grayscale logos to maintain visual hierarchy"
+
+  - name: "Alternating Background Sections"
+    category: "Layout-Pattern"
+    source: "stripe.com"
+    core_elements:
+      - "Sequences of sections with alternating background colors"
+      - "Pattern: white -> soft (#F6F9FC) -> white -> cream (#F5E9D4) -> white"
+      - "Consistent container width (~1200px) regardless of background"
+      - "Same vertical padding (64-96px) on all sections"
+    visual_features:
+      - "Creates visual rhythm without heavy borders or dividers"
+      - "Cream section adds warmth as an accent interlude"
+      - "Soft blue-gray feels technical and trustworthy"
+    when_to_use:
+      - "Long-form marketing pages with 5+ content sections"
+      - "When you need visual separation without explicit dividers"
+      - "Telling a multi-part story or covering multiple topics"
+    when_not_to_use:
+      - "Short pages with few sections"
+      - "When the design calls for a single continuous background"
+    implementation_tips:
+      - "Start and end on white for clean page boundaries"
+      - "Use no more than 3-4 color variants to maintain consistency"
+      - "Keep section spacing identical regardless of background color"
+
+  - name: "Enterprise Accordion with Stats"
+    category: "Case-Study"
+    source: "stripe.com"
+    core_elements:
+      - "Accordion/tabbed container with 4 enterprise stories"
+      - "Each story has: headline, 2-4 quantified stats, products used list"
+      - 'CTA: "Read the story" text link with arrow'
+      - "Illustration/photo for each story"
+    visual_features:
+      - "Smooth expand/collapse animation"
+      - "Stats displayed prominently below story headline"
+      - "Products used shown as tags or inline list"
+    when_to_use:
+      - "B2B landing pages with multiple strong customer stories"
+      - "When each story has specific, quantified outcomes"
+      - "Enterprise sales pages where social proof is critical"
+    when_not_to_use:
+      - "Only 1-2 case studies (use dedicated testimonials instead)"
+      - "When results are vague or unquantified"
+    implementation_tips:
+      - "Always include specific numbers (revenue, users, countries, uptime)"
+      - "List the specific products/services used for technical credibility"
+      - "Open the first accordion tab by default"
+
+  - name: "Stat Counter Grid"
+    category: "Data-Visualization"
+    source: "stripe.com"
+    core_elements:
+      - "4-column grid of large statistics"
+      - "Display-size number (56px, weight 300)"
+      - "Caption-style label (13px, weight 400)"
+      - "Section heading above"
+    visual_features:
+      - "Numbers are the hero - oversized and bold (at weight 300)"
+      - "Labels are smaller and muted (ink-mute #64748D)"
+      - "Each stat paired with a data visualization graphic"
+    when_to_use:
+      - "Building credibility with hard data"
+      - "SaaS or fintech pages with impressive scale metrics"
+      - "Above trust signals to establish authority"
+    when_not_to_use:
+      - "When numbers are small or unimpressive"
+      - "Consumer brands where emotional appeal matters more"
+    implementation_tips:
+      - "Use tnum font feature for aligned numerals"
+      - "Keep labels short and descriptive (1-3 words)"
+      - "Pair with visualization for visual interest"
+      - "Collapse to 2 columns on tablet, 1 on mobile"
+
+  - name: "Testimonial Card with Headshot"
+    category: "Testimonial"
+    source: "stripe.com"
+    core_elements:
+      - "Circular headshot (48px)"
+      - "Direct quote in body text"
+      - "Speaker name (bold/medium weight)"
+      - "Job title and company"
+      - '"Read the story" link below'
+    visual_features:
+      - "Clean, minimal card (white background, no border)"
+      - "Quote is the most prominent element"
+      - "Headshot is small but visible (48px)"
+      - "Consistent vertical stacking: quote -> name -> title -> link"
+    when_to_use:
+      - "Featuring real customer voices with names and faces"
+      - "Building trust through peer recommendations"
+      - "B2B pages where decision-makers want peer validation"
+    when_not_to_use:
+      - "When quotes are anonymous or unattributed"
+      - "When you can't get permission to use a real name and photo"
+    implementation_tips:
+      - "Always use real names, titles, and companies"
+      - "Keep quotes concise (1-3 sentences)"
+      - "Headshot should be professional but natural"
+      - "Include a link to full case study for deeper validation"
+
+  - name: "Dual CTA Section"
+    category: "CTA"
+    source: "stripe.com"
+    core_elements:
+      - "Centered heading + subheading"
+      - "Two CTAs: primary (filled) + secondary (outline)"
+      - "Generous vertical padding (64px+)"
+      - "Bottom feature strip with pricing and integration links"
+    visual_features:
+      - "Clean, focused section (no distractions, no background change)"
+      - "Primary: 'Start now' (indigo pill)"
+      - "Secondary: 'Contact sales' (outline)"
+      - "White background to keep focus on CTAs"
+    when_to_use:
+      - "End of landing page as final conversion opportunity"
+      - "When offering two distinct paths (self-serve vs. sales-led)"
+    when_not_to_use:
+      - "When there's a single clear conversion path"
+      - "When secondary action dilutes primary conversion goal"
+    implementation_tips:
+      - "Primary CTA should be the desired action (default path)"
+      - "Secondary CTA serves the 'not ready yet' segment"
+      - "Add supporting links below for extra reassurance"
+
+  - name: "Multi-Column Feature Grid"
+    category: "Feature-Section"
+    source: "stripe.com"
+    core_elements:
+      - "3-column grid (flex or CSS grid)"
+      - "24px gap between cards"
+      - "Each card: icon + title (heading-lg 22px) + description (body-md 15px)"
+      - "White cards with hairline border (#E3E8EE)"
+      - "12px border-radius, 32px padding"
+    visual_features:
+      - "Flat cards with subtle border (no shadow in default state)"
+      - "Icons colored in indigo (#533AFD)"
+      - "Clean 3-column layout that reads left-to-right"
+      - "Collapses to 2 columns (tablet), 1 column (mobile)"
+    when_to_use:
+      - "Listing multiple product features or service offerings"
+      - "When features are equally important (no hierarchy)"
+      - "SaaS landing pages with 3, 6, or 9 features"
+    when_not_to_use:
+      - "When features have a clear priority order (use staggered layout)"
+      - "When each feature needs a large hero image"
+    implementation_tips:
+      - "Keep card heights equal (flex-align or fixed height)"
+      - "Use consistent icon size and color"
+      - "Title: 22px weight 300; Body: 15px weight 300"
+
+  - name: "Brand-Dark Featured Card"
+    category: "Pricing"
+    source: "stripe.com"
+    core_elements:
+      - "Background: #1C1E54 (brand-dark-900)"
+      - "Text: #FFFFFF"
+      - "Border-radius: 12px"
+      - "Padding: 32px"
+      - "Same structure as light cards but inverted color scheme"
+    visual_features:
+      - "Dark navy card stands out against white/light surroundings"
+      - "White text on dark background for high contrast"
+      - "Deliberately avoids indigo (#533AFD) to prevent oversaturation"
+    when_to_use:
+      - "Featured/recommended pricing tier"
+      - "Drawing attention to one option in a multi-card layout"
+      - "Dark-themed sections with white text"
+    when_not_to_use:
+      - "When all options should appear equal"
+      - "On dark page backgrounds (would blend in)"
+    implementation_tips:
+      - "Use sparingly - only for the single best/recommended option"
+      - "Maintain same card dimensions as light counterparts"
+      - "Use white text on dark background (not indigo on dark)"
+
+  - name: "Three-Pillar Service Row"
+    category: "Feature-Section"
+    source: "stripe.com"
+    core_elements:
+      - "3 equal columns in a horizontal row"
+      - "Each column: title (heading-lg) + description (body-md) + text link"
+      - "Subtle dividers or gap between columns"
+      - "Text link with arrow at bottom of each"
+    visual_features:
+      - "Clean horizontal layout without card containers"
+      - "Dividers are thin hairlines (#E3E8EE) if present"
+      - "Each pillar is self-contained with a single action"
+    when_to_use:
+      - "Three parallel service offerings, integration paths, or options"
+      - "When each option leads to a different destination"
+      - "Choice-based sections ('choose your path')"
+    when_not_to_use:
+      - "More than 3 options (use grid instead)"
+      - "When options should be compared (use table instead)"
+    implementation_tips:
+      - "Use vertical dividers or generous gaps for separation"
+      - "Make link text parallel and action-oriented"
+      - "Keep descriptions roughly equal in length"
+
+  - name: "Footer Mega-Directory"
+    category: "Footer"
+    source: "stripe.com"
+    core_elements:
+      - "6-7 columns of grouped links"
+      - "Column headings (categories)"
+      - "60-100+ link items organized by topic"
+      - "Bottom bar: contact info, language selector, copyright, privacy"
+    visual_features:
+      - "Dense, text-heavy layout (contrasts with generous whitespace above)"
+      - "Links in caption size (13px, weight 400)"
+      - "Link color: ink-mute (#64748D)"
+      - "Clean, organized columns with clear categories"
+    when_to_use:
+      - "Product/SaaS companies with extensive documentation and features"
+      - "When users need comprehensive navigation for deep content"
+    when_not_to_use:
+      - "Simple brochure sites with few pages"
+      - "Consumer apps where sitemap isn't helpful"
+    implementation_tips:
+      - "Group links by logical category (products, solutions, resources)"
+      - "Use small type (13-14px) to fit more links"
+      - "Include contact info, language selector, and legal links at bottom"
+      - "No border/top divider needed - let the content density signal the boundary"
+
+  - name: "Section Eyebrow + Heading + Subheading"
+    category: "Text-Pattern"
+    source: "stripe.com"
+    core_elements:
+      - "Optional eyebrow label (micro-cap: 10px, uppercase, weight 400)"
+      - "Section heading (display-xl or display-lg: 48px or 32px, weight 300)"
+      - "Section subheading (body-lg: 16px, weight 300)"
+      - "Consistent vertical gap: eyebrow -> ~8px -> heading -> ~16px -> subheading"
+    visual_features:
+      - "Heading is by far the most prominent element"
+      - "Subheading is smaller and muted (ink-mute #64748D)"
+      - "Eyebrow (if used) is subtle and all-caps"
+    when_to_use:
+      - "Every major content section on a marketing page"
+      - "Establishing clear hierarchy before content"
+    when_not_to_use:
+      - "For subsections within a card grid (use card titles instead)"
+    implementation_tips:
+      - "Keep headings concise (5-10 words)"
+      - "Lead with the value proposition in the heading"
+      - "Use subheading to add context the heading can't carry"
+      - "Period at end of heading is a Stripe brand convention"

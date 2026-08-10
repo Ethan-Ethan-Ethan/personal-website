@@ -1,0 +1,104 @@
+id: "cta-002"
+name: "Primary Pill CTA Button"
+category: "cta"
+subcategory: "inline"
+tags:
+  - "button"
+  - "pill"
+  - "primary-action"
+  - "filled"
+  - "conversion"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "inline pill-shaped button"
+    height: "auto (text + padding determines)"
+    max_width: "auto"
+    alignment: "inline"
+    padding: "8px 16px (Stripe) / 10px (horizontal Vercel standard)"
+  typography:
+    headline:
+      font_family: "Sohne (Stripe) / Geist Sans (Vercel)"
+      font_size: "14-16px"
+      font_weight: 400
+      line_height: 1.0
+      letter_spacing: "0"
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "#533AFD (Stripe) / #171717 (Vercel)"
+    text_primary: "#FFFFFF"
+    text_secondary: ""
+    accent: "#533AFD (Stripe) / #006bff (Vercel)"
+    harmony: "high contrast white on brand color"
+  effects:
+    shadow: "none"
+    border_radius: "9999px (Stripe) / 6px (Vercel)"
+  animation:
+    entrance: "none (state-based)"
+    duration: "150-200ms"
+    easing: "ease-in-out"
+
+structure:
+  - element: "button"
+    role: "primary_call_to_action"
+    children:
+      - element: "label"
+        content_type: "action-oriented verb text"
+
+when_to_use:
+  - "Primary conversion actions (sign up, deploy, get started, buy now)"
+  - "When you need a single dominant action per viewport band"
+  - "On white or light backgrounds"
+  - "Header navigation, hero section, and final CTA sections"
+
+when_not_to_use:
+  - "Multiple primary buttons competing in the same band (max 1 per visual section)"
+  - "On dark backgrounds (use inverted/dark-mode variant instead)"
+  - "For secondary actions (use outline or ghost variant)"
+  - "When the button needs extra attention (use larger size or featured card instead)"
+
+comparisons:
+  stripe_vs_vercel:
+    differences:
+      - "Stripe: pill shape (9999px border-radius), tight padding (8px 16px); Vercel: squared (6px radius), larger padding (10px horizontal)"
+      - "Stripe: indigo (#533AFD) background; Vercel: near-black (#171717)"
+      - "Stripe hover: #4434D4; Vercel hover: next gray scale step"
+      - "Stripe: single size (button-md 16px); Vercel: three sizes (small/standard/large)"
+    similarities:
+      - "Both use weight 400/500 for button labels (slightly bolder than body text)"
+      - "Both use high-contrast white text on dark button"
+      - "Both have clear hover/pressed states"
+    recommendation: "Use Stripe pill shape for premium, design-forward brands; use Vercel squared shape for developer tools and functional interfaces"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Full-width button if needed; maintain padding proportion"
+    tablet: "Standard inline button"
+    desktop: "Standard inline button"
+  accessibility:
+    - "Minimum touch target 44x44px for mobile"
+    - "Focus-visible ring required (white gap + brand color outer ring)"
+    - "Button must have aria-label if icon-only"
+    - "Disabled state: gray fill, gray text, not-allowed cursor"
+    - "Color is not the sole indicator (include text label)"
+
+assets:
+  screenshots: {}
+  references: []

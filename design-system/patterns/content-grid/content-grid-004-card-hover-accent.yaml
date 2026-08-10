@@ -1,0 +1,90 @@
+id: "content-grid-004"
+name: "Card Hover Accent"
+category: "content-grid"
+subcategory: ""
+tags: ["card", "hover", "interactive", "accent-border", "dark-theme"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "card variant"
+    height: ""
+    max_width: ""
+    alignment: ""
+    padding: "inherits from card-base"
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "brighter than card-base (on hover)"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    border_hover: "rgba(136, 181, 107, 0.42) | green accent"
+  effects:
+    shadow: ""
+    border_radius: "inherits from card-base"
+    transition: "all 0.2s ease"
+  animation:
+    entrance: ""
+    duration: "0.2s"
+    easing: "ease"
+
+structure:
+  - element: "div.card"
+    role: "interactive card"
+    children:
+      - element: "optional heading"
+        content_type: "text"
+      - element: "optional body"
+        content_type: "text or data"
+
+when_to_use:
+  - "Interactive cards that respond to hover (summary cards, insight cards)"
+  - "Cards that act as navigation or toggle triggers"
+  - "Dark-themed dashboards where hover feedback is subtle"
+
+when_not_to_use:
+  - "For static display cards with no interaction"
+  - "On touch-only interfaces where hover state is not reachable"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .card-interactive {
+      transition: all 0.2s ease;
+    }
+    .card-interactive:hover {
+      border-color: rgba(136, 181, 107, 0.42);
+      background: rgba(27, 27, 24, 0.92);
+    }
+  responsive_notes:
+    mobile: "Hover state is not persistent; ensure tap state is styled similarly"
+    tablet: "Same behavior as desktop"
+    desktop: "Standard hover with transition"
+  accessibility:
+    - "Ensure hover state also has a visible focus-visible style"
+    - "Do not rely solely on border color change for hover feedback"
+    - "Add cursor:pointer to indicate interactivity"
+
+assets:
+  screenshots: {}
+  references: []

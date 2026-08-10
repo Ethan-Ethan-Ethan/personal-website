@@ -1,0 +1,44 @@
+{
+  "source_file": "注册永久免费域名，托管到 CloudFlare ，自动免费续订、提醒！.md",
+  "total_urls": 14,
+  "github_urls": 1,
+  "all_urls": [
+    "https://digitalplat.org/",
+    "https://dash.domain.digitalplat.org/auth/register",
+    "https://dash.domain.digitalplat.org/auth/login",
+    "https://www.cloudflare.com/zh-cn/",
+    "https://github.com/wangwangit/SubsTracker",
+    "https://intl.ozabc.com/page/12.html",
+    "https://www.freedidi.com/20033.html",
+    "https://www.freedidi.com/wp-content/uploads/2025/07/9e9397d45820250707123542-scaled.webp",
+    "https://www.freedidi.com/wp-content/uploads/2025/07/bb0189695920250707123827-scaled.webp",
+    "https://www.freedidi.com/wp-content/uploads/2025/07/66bc5bc51f20250707123941.webp",
+    "https://www.freedidi.com/wp-content/uploads/2025/07/00dfda6cd920250707124914.webp",
+    "https://www.freedidi.com/wp-content/uploads/2025/07/a1633f053b20250707125553.webp",
+    "https://www.freedidi.com/wp-content/uploads/2025/07/e1ae11177020250707130151.webp",
+    "https://www.freedidi.com/wp-content/uploads/2025/07/e2756ed88a20250707130426.webp"
+  ],
+  "urls_by_type": {
+    "direct": [
+      "https://digitalplat.org/",
+      "https://dash.domain.digitalplat.org/auth/register",
+      "https://dash.domain.digitalplat.org/auth/login",
+      "https://www.cloudflare.com/zh-cn/",
+      "https://intl.ozabc.com/page/12.html",
+      "https://www.freedidi.com/20033.html",
+      "https://www.freedidi.com/wp-content/uploads/2025/07/9e9397d45820250707123542-scaled.webp",
+      "https://www.freedidi.com/wp-content/uploads/2025/07/bb0189695920250707123827-scaled.webp",
+      "https://www.freedidi.com/wp-content/uploads/2025/07/66bc5bc51f20250707123941.webp",
+      "https://www.freedidi.com/wp-content/uploads/2025/07/00dfda6cd920250707124914.webp",
+      "https://www.freedidi.com/wp-content/uploads/2025/07/a1633f053b20250707125553.webp",
+      "https://www.freedidi.com/wp-content/uploads/2025/07/e1ae11177020250707130151.webp",
+      "https://www.freedidi.com/wp-content/uploads/2025/07/e2756ed88a20250707130426.webp"
+    ],
+    "github": [
+      "https://github.com/wangwangit/SubsTracker"
+    ],
+    "video": []
+  },
+  "key_persons": [],
+  "scanned_at": "2026-07-23T23:56:26.644343"
+}

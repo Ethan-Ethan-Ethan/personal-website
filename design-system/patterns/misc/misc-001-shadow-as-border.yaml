@@ -1,0 +1,92 @@
+id: "misc-001"
+name: "Shadow-as-Border Card Delineation"
+category: "misc"
+subcategory: "visual-technique"
+tags:
+  - "shadow"
+  - "border"
+  - "card"
+  - "geist"
+  - "visual-technique"
+  - "dark-mode"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "visual effect applied to cards and containers"
+    height: ""
+    max_width: ""
+    alignment: ""
+    padding: "n/a (visual technique)"
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: ""
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    harmony: ""
+  effects:
+    shadow: "0px 0px 0px 1px rgba(0,0,0,0.08)"
+    border_radius: "12px (cards) / 6px (inputs/buttons)"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "card"
+    role: "container_with_shadow_border"
+    children: []
+
+when_to_use:
+  - "Modern, minimalist designs wanting softer edges than CSS border"
+  - "Card-based layouts where hover elevation is desired"
+  - "Dark/light mode themes where shadow adjusts automatically"
+  - "Design systems targeting both light and dark themes"
+
+when_not_to_use:
+  - "When explicit CSS border is needed for accessibility (e.g., high contrast mode)"
+  - "When performance is critical (box-shadow is more expensive than border)"
+  - "When strict 1px border is a brand requirement"
+
+implementation:
+  css_snippet: |-
+    /* Light mode */
+    box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08);
+
+    /* Dark mode */
+    box-shadow: 0px 0px 0px 1px rgba(255,255,255,0.08);
+
+    /* Full card shadow stack */
+    --shadow-as-border: 0px 0px 0px 1px rgba(0,0,0,0.08);
+    --shadow-elevation: 0px 2px 2px rgba(0,0,0,0.04);
+    --shadow-ambient: 0px 8px 8px -8px rgba(0,0,0,0.04);
+    box-shadow: var(--shadow-as-border), var(--shadow-elevation), var(--shadow-ambient);
+  responsive_notes:
+    mobile: "Same technique applies; may use lighter shadow"
+    tablet: "Same technique"
+    desktop: "Can add elevated shadow on hover"
+  accessibility:
+    - "Not a WCAG concern directly, but ensure borders don't disappear in forced colors mode"
+    - "Shadow-as-border may not be visible in high contrast mode; provide fallback outline"
+    - "Hover elevation should not be the only interactive cue"
+
+assets:
+  screenshots: {}
+  references: []

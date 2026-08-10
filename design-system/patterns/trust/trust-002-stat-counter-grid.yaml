@@ -1,0 +1,108 @@
+id: "trust-002"
+name: "Stat Counter Grid with Data Visualizations"
+category: "trust"
+subcategory: "stats"
+tags:
+  - "statistics"
+  - "metrics"
+  - "4-column"
+  - "data-viz"
+  - "tabular-numbers"
+  - "credibility"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "4-column stat grid"
+    height: "auto"
+    max_width: "1200px"
+    alignment: "center"
+    padding: "24px (card padding)"
+  typography:
+    headline:
+      font_family: "Sohne"
+      font_size: "56px"
+      font_weight: 300
+      line_height: 1.03
+      letter_spacing: "-1.4px"
+    label:
+      font_size: "13px"
+      font_weight: 400
+      line_height: 1.4
+      letter_spacing: "-0.39px"
+      color: "#64748D"
+  spacing:
+    between_elements:
+      - "stats: 24px gap (grid)"
+      - "number -> label: 8px"
+      - "section heading -> grid: 48px"
+    section_padding_y: ["64px", "64px"]
+  colors:
+    background: "section background (alternating canvas/canvas-soft)"
+    text_primary: "#0D253D"
+    text_secondary: "#64748D"
+    accent: "#533AFD (visualization accent)"
+    harmony: "big numbers dominate; small labels recede; graphics add color"
+  effects:
+    shadow: "none"
+    border_radius: "0"
+  animation:
+    entrance: "fade-in slide-up (count-up animation optional)"
+    duration: "0.2-0.3s"
+    easing: "ease-in-out"
+
+structure:
+  - element: "section"
+    role: "stats_section"
+    children:
+      - element: "section_header"
+        role: "context"
+        content_type: "heading + optional subheading"
+      - element: "stat_grid"
+        role: "metrics"
+        children:
+          - element: "stat_item"
+            role: "metric"
+            children:
+              - element: "number"
+                content_type: "display-xxl with tnum font feature"
+              - element: "label"
+                content_type: "caption text"
+              - element: "visualization_optional"
+                content_type: "small chart / graph (brand-colored)"
+
+when_to_use:
+  - "Building credibility with hard, verifiable data"
+  - "SaaS or fintech pages with impressive scale metrics"
+  - "Sections where trust needs to be established before deeper content"
+  - "When you have 4 equally impressive statistics to display"
+
+when_not_to_use:
+  - "When numbers are small or unimpressive"
+  - "Consumer brands where emotional appeal matters more than data"
+  - "When stats are vague or unverifiable (use testimonials instead)"
+  - "More than 6 stats would cause grid layout issues"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "2-column stat grid or single column; reduce stat font size to 32px"
+    tablet: "2-column grid"
+    desktop: "4-column grid with full stat font size"
+  accessibility:
+    - "Use tnum (tabular numbers) font feature for aligned numerals"
+    - "Stats should have aria-label for screen readers"
+    - "Ensure stat numbers are actual text, not images"
+    - "Pair with visualizations that have alt text or aria-describedby"
+
+assets:
+  screenshots: {}
+  references: []

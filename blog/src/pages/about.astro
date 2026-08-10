@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="關於"
+  description="關於這個個人部落格的詳細介紹"
+>
+  <div class="container">
+    <h1 style="margin-bottom: var(--space-8);">關於</h1>
+
+    <div class="article-content" style="font-family: var(--font-sans);">
+      <h2>這個網站</h2>
+      <p>
+        這是一個個人部落格與自動化內容聚合平台的結合。目標是建立一個「會自己長內容」的網站——文章靠寫、資源靠抓、數據靠跑，三條管線各自自動化，匯聚到同一個前端呈現。
+      </p>
+
+      <h2>內容管線</h2>
+      <ul>
+        <li>
+          <strong>手寫文章管線</strong> — 本地使用 Markdown 撰寫，透過 Astro 靜態產生器預覽與發布。
+          支援標籤分類、草稿模式、日期管理。
+        </li>
+        <li>
+          <strong>Gmail 擷取管線</strong>（規劃中） — 自動從 Gmail 信箱抓取符合條件的內容，
+          轉換為文章格式發布。預計使用 Gmail API + OAuth 認證。
+        </li>
+        <li>
+          <strong>量化數據管線</strong>（規劃中） — 交易分析、數據可視化，
+          自動更新展示頁面。預計整合 Python 分析腳本與圖表產生。
+        </li>
+      </ul>
+
+      <h2>技術棧</h2>
+      <ul>
+        <li><strong>前端框架</strong>：Astro 5 — 靜態網站產生器</li>
+        <li><strong>內容管理</strong>：Markdown + Content Collections</li>
+        <li><strong>部署</strong>：Cloudflare Pages</li>
+        <li><strong>語法高亮</strong>：Prism</li>
+      </ul>
+
+      <h2>開發路線圖</h2>
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--color-border);">
+            <th style="padding: var(--space-2); text-align: left;">Phase</th>
+            <th style="padding: var(--space-2); text-align: left;">內容</th>
+            <th style="padding: var(--space-2); text-align: left;">狀態</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid var(--color-border);">
+            <td style="padding: var(--space-2);">Phase 1</td>
+            <td style="padding: var(--space-2);">MVP：手寫管線 + 靜態發布 + 部署</td>
+            <td style="padding: var(--space-2); color: var(--color-accent);">進行中</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--color-border);">
+            <td style="padding: var(--space-2);">Phase 2</td>
+            <td style="padding: var(--space-2);">Gmail 擷取管線</td>
+            <td style="padding: var(--space-2); color: var(--color-text-muted);">規劃中</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--color-border);">
+            <td style="padding: var(--space-2);">Phase 3</td>
+            <td style="padding: var(--space-2);">量化數據儀表板</td>
+            <td style="padding: var(--space-2); color: var(--color-text-muted);">規劃中</td>
+          </tr>
+          <tr>
+            <td style="padding: var(--space-2);">Phase 4</td>
+            <td style="padding: var(--space-2);">搜尋、標籤雲、RSS 增強</td>
+            <td style="padding: var(--space-2); color: var(--color-text-muted);">規劃中</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</BaseLayout>

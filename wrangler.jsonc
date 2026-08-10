@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "steep-glitter-0952",
+  "account_id": "c73dba6f5aac979271d75c66c05369ad",
+  "compatibility_date": "2026-06-15",
+  "assets": {
+    "directory": "./website",
+    "not_found_handling": "single-page-application"
+  }
+}

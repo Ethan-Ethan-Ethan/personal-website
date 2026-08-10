@@ -1,0 +1,115 @@
+id: "forms-001"
+name: "Minimal Single-Field Newsletter Signup"
+category: "forms"
+subcategory: "newsletter"
+tags:
+  - "newsletter"
+  - "single-field"
+  - "email-capture"
+  - "low-friction"
+  - "minimal"
+quality: "experimental"
+version: 1
+
+sources:
+  - site: "nngroup.com"
+    page: "/"
+    analyzed_date: 2026-07-10
+    confidence: "low"
+    evidence: "inference"
+
+spec:
+  layout:
+    type: "single-row input + submit"
+    height: "auto (40-48px input height)"
+    max_width: "400-500px"
+    alignment: "center"
+    padding: "8px 12px (input padding)"
+  typography:
+    headline:
+      font_family: "sans-serif"
+      font_size: "20-24px"
+      font_weight: 600
+      line_height: 1.2
+    body:
+      font_size: "14px"
+      font_weight: 400
+      line_height: 1.4
+  spacing:
+    between_elements:
+      - "heading -> subtitle: 8px"
+      - "subtitle -> form: 24px"
+      - "input -> submit button: 8px"
+    section_padding_y: ["48px", "48px"]
+  colors:
+    background: "light (white or soft gray)"
+    text_primary: "dark"
+    text_secondary: "medium gray"
+    accent: "brand color"
+    harmony: "clean, low visual noise"
+  effects:
+    shadow: "none"
+    border_radius: "6px (input) / 6-9999px (button)"
+  animation:
+    entrance: "none"
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "section"
+    role: "newsletter_signup"
+    children:
+      - element: "section_header"
+        role: "context"
+        children:
+          - element: "heading"
+            content_type: "text"
+          - element: "subtitle"
+            content_type: "muted text (optional)"
+      - element: "form"
+        role: "email_capture"
+        children:
+          - element: "email_input"
+            role: "field"
+            content_type: "single email input"
+          - element: "submit_button"
+            role: "action"
+            content_type: "primary button"
+
+when_to_use:
+  - "Collecting email subscriptions with minimal friction"
+  - "Footer or sidebar newsletter signup sections"
+  - "When the value proposition of subscribing is clear without explanation"
+  - "Blog, content, or resource sites wanting to grow mailing lists"
+
+when_not_to_use:
+  - "When multiple form fields are needed for lead qualification"
+  - "For signup flows that require account creation (use multi-field form)"
+  - "Gated content downloads requiring name + email + company"
+
+comparisons:
+  nngroup_vs_others:
+    differences:
+      - "NN/g uses single-field email input; Stripe uses multi-field signup (email + password + info)"
+      - "NN/g is email-only capture for newsletter; Stripe is account creation"
+    similarities:
+      - "Both use clean, minimal form design"
+      - "Both use clear call-to-action buttons"
+    recommendation: "Use single-field newsletter for low-friction email capture; use multi-field for account registration"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Full-width input and button (stack or wrap); ensure touch targets 44px"
+    tablet: "Inline input + button row"
+    desktop: "Inline input + button row, centered in section"
+  accessibility:
+    - "Email input must have associated <label>"
+    - "Input type='email' with appropriate autocomplete"
+    - "Submit button must have descriptive text"
+    - "Error messages should be announced by screen readers"
+    - "Success confirmation should be clear (inline or redirect)"
+
+assets:
+  screenshots: {}
+  references: []

@@ -1,0 +1,145 @@
+id: "hero-001"
+name: "Fullscreen Centered Hero with Brand Background"
+category: "hero"
+subcategory: "fullscreen"
+tags:
+  - "full-viewport"
+  - "centered"
+  - "gradient-mesh"
+  - "animated-glow"
+  - "dual-cta"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+  - site: "linear.app"
+    page: "/"
+    analyzed_date: 2026-07-10
+    confidence: "low"
+    evidence: "inference"
+
+spec:
+  layout:
+    type: "full-width column-flex"
+    height: "90-100vh"
+    max_width: "720px (content column)"
+    alignment: "center"
+    padding: "80px 24px 64px"
+  typography:
+    headline:
+      font_family: "Sohne (Stripe) / Geist Sans (Vercel)"
+      font_size: "56-72px"
+      font_weight: 300
+      line_height: 1.03
+    subheadline:
+      font_size: "16-20px"
+      color: "#64748D (Stripe) / #4d4d4d (Vercel)"
+  spacing:
+    between_elements:
+      - "headline -> subheadline: 16px"
+      - "subheadline -> CTA group: 32px"
+      - "CTA group -> marquee/glow: 48px"
+    section_padding_y: ["80px", "64px"]
+  colors:
+    background: "gradient mesh (Stripe) / animated radial glow (Vercel)"
+    text_primary: "#FFFFFF on dark / #0D253D on light"
+    text_secondary: "#64748D"
+    accent: "#533AFD (Stripe) / #171717 (Vercel)"
+    harmony: "pastel gradient (Stripe) / monochrome glow (Vercel)"
+  effects:
+    shadow: "none (content is flat on background)"
+    border_radius: "0 (full-width no border)"
+  animation:
+    entrance: "fade-in on scroll"
+    duration: "0.2-0.3s"
+    easing: "ease-in-out"
+
+structure:
+  - element: "section"
+    role: "hero"
+    children:
+      - element: "background_layer"
+        role: "visual_backdrop"
+        children:
+          - element: "gradient_mesh_or_glow"
+            content_type: "CSS / SVG animation"
+      - element: "content_column"
+        role: "value_proposition"
+        children:
+          - element: "eyebrow_label"
+            content_type: "optional micro-cap text"
+          - element: "headline"
+            content_type: "text (display-xxl)"
+          - element: "subheadline"
+            content_type: "text (body-lg)"
+          - element: "cta_group"
+            content_type: "dual buttons"
+            children:
+              - element: "primary_cta"
+                content_type: "filled pill button"
+              - element: "secondary_cta"
+                content_type: "outline/ghost button"
+  - element: "trust_signal_strip"
+    role: "social_proof"
+    children:
+      - element: "logo_marquee_or_glow"
+        content_type: "continuous scroll / static glow"
+
+when_to_use:
+  - "Landing pages with a single, strong value proposition"
+  - "SaaS, fintech, or developer tools where first impression conveys authority"
+  - "Brand that has a distinctive visual background (gradient, glow, mesh)"
+  - "Pages targeting dual audiences (self-serve + enterprise)"
+
+when_not_to_use:
+  - "E-commerce or content-heavy pages where above-fold space is precious"
+  - "Brand without a distinctive visual background treatment"
+  - "Pages where the hero needs to communicate multiple messages"
+
+comparisons:
+  stripe_vs_vercel:
+    differences:
+      - "Stripe uses a pastel gradient mesh (cream -> magenta -> indigo); Vercel uses monochrome radial glow"
+      - "Stripe content includes client logo marquee below CTA; Vercel relies on pure typography + glow"
+      - "Stripe headline weight 300 with -1.4px letter-spacing; Vercel weight 600 with -3.84px"
+      - "Stripe has dual CTA + OAuth option; Vercel has dual CTA only"
+      - "Stripe background drifts gently; Vercel background has animated glow pulses"
+    similarities:
+      - "Both are full-viewport height with edge-to-edge background"
+      - "Both use centered content column with max-width ~720px"
+      - "Both use a distinctive animated background as brand signature"
+      - "Both pair primary CTA with secondary outline CTA"
+    recommendation: "Choose Stripe approach for brands wanting warmth and approachability; Vercel approach for minimalist, developer-focused brands"
+  linear_vs_others:
+    differences:
+      - "Linear puts code snippet / UI mockup in hero rather than pure typography"
+      - "Uses numbered feature flow (1.0, 2.0) rather than single message"
+    similarities:
+      - "Centered alignment, full-viewport height"
+      - "Clear value proposition with dual-CTA"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Stack content vertically, reduce display size to 36px, collapse secondary CTA to text link"
+    tablet: "Maintain centered layout, reduce heading size by ~20%"
+    desktop: "Full golden layout with background animation at native resolution"
+  accessibility:
+    - "Ensure text contrast against gradient/glow background (minimum 4.5:1)"
+    - "aria-hidden on decorative background elements"
+    - "Support prefers-reduced-motion by disabling background animation"
+    - "Single H1 per page"
+
+assets:
+  screenshots: {}
+  references: []

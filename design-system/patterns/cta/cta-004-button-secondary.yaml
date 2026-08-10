@@ -1,0 +1,98 @@
+id: "cta-004"
+name: "Secondary Ghost CTA Button"
+category: "cta"
+subcategory: ""
+tags: ["button", "cta", "secondary", "ghost", "dark-theme"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "inline-flex centered"
+    height: "44px min-height"
+    max_width: ""
+    alignment: "center"
+    padding: "0 14px to 0 16px"
+  typography:
+    headline:
+      font_family: "Inter, Arial, sans-serif"
+      font_size: ""
+      font_weight: 800
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "transparent or subtle white overlay (rgba(255,255,255,0.04))"
+    text_primary: "warm gray-beige (--muted, #b9b3a5)"
+    text_secondary: ""
+    accent: ""
+  effects:
+    shadow: ""
+    border_radius: "standard"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "a or button"
+    role: "secondary call-to-action"
+    content_type: "short action text"
+
+when_to_use:
+  - "Secondary or tertiary actions alongside a primary button"
+  - "Ghost-style navigation links that need button appearance"
+
+when_not_to_use:
+  - "As a standalone primary action (insufficient contrast)"
+  - "On light backgrounds (transparent + muted text = invisible)"
+
+comparisons:
+  cta-003_vs_cta-004:
+    differences:
+      - "Primary has cream background (#f0eadc) with dark text"
+      - "Secondary has transparent background with muted text"
+    similarities:
+      - "Same min-height (44px), same padding pattern"
+      - "Same font weight (800)"
+    recommendation: "Always pair secondary with primary; never use alone"
+
+implementation:
+  css_snippet: |
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 16px;
+      font-weight: 800;
+      background: transparent;
+      color: #b9b3a5;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+  responsive_notes:
+    mobile: "Maintain 44px min-height for touch targets"
+    tablet: "Unchanged"
+    desktop: "Standard"
+  accessibility:
+    - "Minimum 44px touch target (WCAG 2.2)"
+    - "Ensure muted text (#b9b3a5) on dark background passes AA contrast (approximately 8.5:1, passes)"
+    - "Pair with visible border or background if used on lighter surfaces"
+
+assets:
+  screenshots: {}
+  references: []

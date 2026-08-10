@@ -1,0 +1,94 @@
+id: "navbar-002"
+name: "Glassmorphism Topbar"
+category: "navbar"
+subcategory: "sticky"
+tags: ["navigation", "topbar", "glassmorphism", "sticky", "backdrop-filter"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "sticky horizontal bar"
+    height: ""
+    max_width: ""
+    alignment: "space-between (brand left, nav right)"
+    padding: ""
+    position: "sticky top 0, z-index 20"
+  typography:
+    headline:
+      font_family: "Inter, Arial, sans-serif"
+      font_size: "13px (nav links)"
+      font_weight: 800
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "translucent dark (rgba(17,17,15,0.84))"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+  effects:
+    shadow: ""
+    border_radius: ""
+    backdrop_filter: "blur(18px)"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "header"
+    role: "primary navigation"
+    children:
+      - element: "brand-mark"
+        role: "site logo / identity"
+        content_type: "initials logo"
+      - element: "nav"
+        role: "navigation links"
+        content_type: "list of anchor links"
+
+when_to_use:
+  - "Content-heavy dashboards where navigation must remain accessible while scrolling"
+  - "Dark-themed sites where glassmorphism adds depth"
+  - "Minimal navigation (4-7 links) that fits on one row"
+
+when_not_to_use:
+  - "For mega-menus or multi-level dropdown navigation"
+  - "When backdrop-filter performance is a concern (older devices)"
+  - "For more than ~7 links (needs dropdown or overflow handling)"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(17, 17, 15, 0.84);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+  responsive_notes:
+    mobile: "Stack navigation links vertically below brand; maintain glassmorphism"
+    tablet: "Keep horizontal layout"
+    desktop: "Full sticky topbar"
+  accessibility:
+    - "Ensure sticky topbar does not obscure content (use scroll-padding-top)"
+    - "Focusable elements in topbar must be reachable via keyboard tab order"
+    - "Add prefers-reduced-motion: no media query if blur animation is added"
+
+assets:
+  screenshots: {}
+  references: []

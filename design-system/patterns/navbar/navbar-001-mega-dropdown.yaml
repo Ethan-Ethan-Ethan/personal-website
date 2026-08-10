@@ -1,0 +1,131 @@
+id: "navbar-001"
+name: "Fixed Mega-Dropdown Navigation"
+category: "navbar"
+subcategory: "mega-menu"
+tags:
+  - "fixed-top"
+  - "mega-dropdown"
+  - "sticky"
+  - "multi-column"
+  - "dual-cta"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+  - site: "stripe.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "fixed top bar (no background shift on scroll or transparent overlay)"
+    height: "~64px"
+    max_width: "1200px (container)"
+    alignment: "logo-left, links-center, actions-right"
+    padding: "16px 24px"
+  typography:
+    headline:
+      font_family: "Sohne (Stripe) / Geist Sans (Vercel)"
+      font_size: "14px"
+      font_weight: 400
+      line_height: 1.4
+    dropdown_heading:
+      font_size: "14px"
+      font_weight: 600
+      color: "#171717 (Vercel)"
+  spacing:
+    between_elements:
+      - "link_items: 0 gap (inline flow with padding)"
+      - "dropdown columns: 24px gap"
+      - "nav item padding: 8px 12px"
+    section_padding_y: []
+  colors:
+    background: "#FFFFFF (or transparent on hero overlay)"
+    text_primary: "#0D253D (Stripe) / #171717 (Vercel)"
+    text_secondary: "#61718A (Stripe) / #4d4d4d (Vercel)"
+    accent: "#533AFD (Stripe) / #006bff (Vercel)"
+    harmony: "clean white bar with muted link text"
+  effects:
+    shadow: "none or very subtle (Stripe: hairline border-bottom only)"
+    border_radius: "0 (bar) / 6-12px (dropdown content)"
+  animation:
+    entrance: "instant (no entrance animation)"
+    duration: "150-200ms"
+    easing: "cubic-bezier(0.175, 0.885, 0.32, 1.1)"
+
+structure:
+  - element: "nav"
+    role: "primary_navigation"
+    children:
+      - element: "logo"
+        role: "brand_anchor"
+        content_type: "SVG (dark/light variants)"
+      - element: "primary_links"
+        role: "main_nav_items"
+        children:
+          - element: "link_dropdown"
+            role: "mega_menu_trigger"
+            children:
+              - element: "dropdown_content"
+                role: "mega_menu"
+                children:
+                  - element: "column_group"
+                    role: "category"
+                    content_type: "heading + link list"
+      - element: "action_items"
+        role: "cta_group"
+        children:
+          - element: "secondary_action"
+            content_type: "text link / outline button"
+          - element: "primary_action"
+            content_type: "filled pill button"
+
+when_to_use:
+  - "Product/SaaS sites with many sub-pages and product categories"
+  - "Developer platforms with SDKs, tools, and docs to surface"
+  - "Any site needing to surface content depth without cluttering top nav"
+  - "Sites with 4-6 primary nav items that each have 5-15 sub-items"
+
+when_not_to_use:
+  - "Simple brochure sites with few pages (< 10 total)"
+  - "Consumer apps where sitemap navigation isn't helpful"
+  - "Mobile-first products where hamburger menu is more appropriate"
+  - "When dropdown performance or DOM size is concern"
+
+comparisons:
+  vercel_vs_stripe:
+    differences:
+      - "Vercel uses mega-dropdowns (Products and Resources trigger 3-column panels); Stripe has single-column dropdowns or inline sub-nav"
+      - "Vercel includes special badges (Ask AI pill with 9999px border-radius); Stripe keeps nav links text-only"
+      - "Vercel nav items: Products(DD), Resources(DD), Enterprise, Pricing; Stripe nav: Products, Solutions, Developers, Resources, Pricing"
+      - "Vercel dropdown has 6px border-radius; Stripe dropdown is minimal"
+    similarities:
+      - "Both use fixed/sticky top bar ~64px"
+      - "Both have logo left, links center, CTAs right"
+      - "Both use muted link colors (gray) that become darker on hover/active"
+      - "Both have dual right-side CTAs (secondary text link + primary filled button)"
+    recommendation: "Use Vercel's mega-dropdown for deep product catalogs; use Stripe's simpler dropdown for clearer top-level focus"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Collapse to hamburger overlay menu; same items as desktop; full-screen overlay panel"
+    tablet: "Hamburger or condensed nav with fewer visible links"
+    desktop: "Full horizontal bar with interactive dropdowns"
+  accessibility:
+    - "Dropdown must be keyboard navigable (Tab through items, Enter/Space to open)"
+    - "Escape key closes dropdown; focus returns to trigger"
+    - "aria-expanded on dropdown triggers"
+    - "aria-label on hamburger toggle for mobile"
+    - "Skip navigation link recommended"
+
+assets:
+  screenshots: {}
+  references: []

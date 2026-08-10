@@ -1,0 +1,17 @@
+{
+  "source_file": "Cloudflare 與 API 部署紀錄.md",
+  "total_urls": 1,
+  "github_urls": 0,
+  "all_urls": [
+    "https://steep-glitter-0952.isitoled.workers.dev/`"
+  ],
+  "urls_by_type": {
+    "direct": [
+      "https://steep-glitter-0952.isitoled.workers.dev/`"
+    ],
+    "github": [],
+    "video": []
+  },
+  "key_persons": [],
+  "scanned_at": "2026-07-23T23:56:26.643741"
+}

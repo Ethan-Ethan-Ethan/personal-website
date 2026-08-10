@@ -1,0 +1,8 @@
+name = "personal-blog"
+compatibility_date = "2026-07-11"
+
+# 靜態網站輸出設定
+pages_build_output_dir = "dist"
+
+[env.production]
+routes = [{ pattern = "yourdomain.com", custom_domain = true }]

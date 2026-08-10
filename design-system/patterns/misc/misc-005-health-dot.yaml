@@ -1,0 +1,93 @@
+id: "misc-005"
+name: "Health Dot (Status Indicator)"
+category: "misc"
+subcategory: ""
+tags: ["indicator", "status", "dot", "pseudo-element", "green"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "inline dot + label"
+    height: "8px (dot)"
+    max_width: ""
+    alignment: "inline"
+    padding: ""
+  typography:
+    headline:
+      font_family: ""
+      font_size: "12px (label)"
+      font_weight: 800
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: ""
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    dot_color: "--green (sage green, #88b56b)"
+  effects:
+    shadow: ""
+    border_radius: "50% (dot)"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "inline container (e.g., span)"
+    role: "status indicator group"
+    children:
+      - element: "::before pseudo-element"
+        role: "green circle indicator"
+        content_type: "8px circle"
+      - element: "text label"
+        role: "status label"
+        content_type: "short status text (e.g., Online, Active)"
+
+when_to_use:
+  - "Showing online/active/healthy status next to a label"
+  - "Dashboard interfaces with live status indicators"
+  - "Replacing icon-only status with accessible text alternative"
+
+when_not_to_use:
+  - "When more states are needed (consider using status-pill with color variants)"
+  - "When the dot alone must convey meaning without text (inaccessible)"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .health-dot::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #88b56b;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+  responsive_notes:
+    mobile: "Unchanged"
+    tablet: "Unchanged"
+    desktop: "Unchanged"
+  accessibility:
+    - "Do not rely solely on the dot color; include text label"
+    - "Green dot must have visible alternative (e.g., 'Online' text)"
+    - "Ensure green (#88b56b) is distinguishable for colorblind users (use position/shape too)"
+
+assets:
+  screenshots: {}
+  references: []

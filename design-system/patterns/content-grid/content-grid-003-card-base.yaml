@@ -1,0 +1,85 @@
+id: "content-grid-003"
+name: "Card Base"
+category: "content-grid"
+subcategory: ""
+tags: ["card", "foundation", "container", "dark-theme"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "flex column container"
+    height: "auto"
+    max_width: ""
+    alignment: ""
+    padding: "18px-22px"
+  typography:
+    headline:
+      font_family: ""
+      font_size: ""
+      font_weight: ""
+      line_height: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "rgba(27, 27, 24, 0.86) | dark olive-gray"
+    text_primary: ""
+    text_secondary: ""
+    accent: ""
+    border: "#37372f (dark olive border, --line)"
+  effects:
+    shadow: ""
+    border_radius: "standard"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "div"
+    role: "card container"
+    children:
+      - element: "optional heading"
+        content_type: "text"
+      - element: "optional body"
+        content_type: "text or data"
+
+when_to_use:
+  - "Building any card variant in a dark-themed dashboard"
+  - "Consistent card foundation across summary, insight, ops, and content cards"
+
+when_not_to_use:
+  - "For section-level containers (use Panel instead)"
+  - "When card is interactive and needs hover states (use card-hover-accent)"
+
+comparisons: {}
+
+implementation:
+  css_snippet: |
+    .card {
+      background: rgba(27, 27, 24, 0.86);
+      border: 1px solid #37372f;
+      border-radius: 8px;
+      padding: 18px;
+    }
+  responsive_notes:
+    mobile: "Padding reduces to 16px"
+    tablet: "Padding remains 18px"
+    desktop: "18px-22px depending on card tier"
+  accessibility:
+    - "Interactive cards should have role and tabindex where applicable"
+
+assets:
+  screenshots: {}
+  references: []

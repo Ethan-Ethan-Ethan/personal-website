@@ -1,0 +1,97 @@
+id: "misc-007"
+name: "Tag Chip (Category Label)"
+category: "misc"
+subcategory: ""
+tags: ["badge", "tag", "chip", "blue", "category", "label"]
+quality: "reference"
+version: 1
+
+sources:
+  - site: "ethanyang.dpdns.org"
+    page: "/articles/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens"
+
+spec:
+  layout:
+    type: "inline-flex centered"
+    height: "26px min-height"
+    max_width: ""
+    alignment: "center"
+    padding: "0 8px"
+  typography:
+    headline:
+      font_family: "Inter, Arial, sans-serif"
+      font_size: "12px"
+      font_weight: 800
+      line_height: ""
+      text_transform: ""
+    subheadline:
+      font_size: ""
+      color: ""
+  spacing:
+    between_elements: []
+    section_padding_y: []
+  colors:
+    background: "blue-tinted transparent"
+    text_primary: ""
+    text_secondary: ""
+    accent: "--blue (dusty blue, #76a7bd)"
+    text_color: "--blue (dusty blue, #76a7bd)"
+  effects:
+    shadow: ""
+    border_radius: "standard"
+  animation:
+    entrance: ""
+    duration: ""
+    easing: ""
+
+structure:
+  - element: "span"
+    role: "category tag"
+    content_type: "short category or topic name (e.g., AI, Design, Tech)"
+
+when_to_use:
+  - "Article category labels"
+  - "Filterable tag lists on content index pages"
+  - "Topic classification on cards"
+
+when_not_to_use:
+  - "For status indicators (use status-pill with green instead)"
+  - "For interactive filters (needs button/click role)"
+
+comparisons:
+  tag-chip_vs_status-pill:
+    differences:
+      - "Tag-chip uses blue accent (#76a7bd) for category identification"
+      - "Status-pill uses green accent (#88b56b) for status indication"
+    similarities:
+      - "Both are inline badges with 12px, 800 weight text"
+      - "Both use tinted transparent backgrounds"
+    recommendation: "Use tag-chip for categories and status-pill for states"
+
+implementation:
+  css_snippet: |
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 8px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #76a7bd;
+      background: rgba(118, 167, 189, 0.08);
+      border-radius: 4px;
+    }
+  responsive_notes:
+    mobile: "Unchanged; 26px min-height meets touch target for inline elements"
+    tablet: "Unchanged"
+    desktop: "Unchanged"
+  accessibility:
+    - "Blue accent (#76a7bd) on dark background: verify WCAG AA contrast"
+    - "Tag list with multiple chips should use aria-label for list semantics"
+
+assets:
+  screenshots: {}
+  references: []

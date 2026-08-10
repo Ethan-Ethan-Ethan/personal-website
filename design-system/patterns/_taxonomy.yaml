@@ -1,0 +1,99 @@
+taxonomy:
+  version: 1
+  last_updated: 2026-07-11
+  categories:
+    - id: "hero"
+      label: "英雄區 / 首屏"
+      description: "頁面頂部的第一個視覺區域，承載核心價值主張"
+      subcategories:
+        - "fullscreen"
+        - "split"
+        - "compact"
+        - "video-bg"
+
+    - id: "navbar"
+      label: "導覽列"
+      subcategories:
+        - "fixed-top"
+        - "sticky"
+        - "mega-menu"
+        - "minimal"
+
+    - id: "footer"
+      label: "頁尾"
+      subcategories:
+        - "mega-footer"
+        - "compact"
+        - "dark"
+
+    - id: "pricing"
+      label: "定價區"
+      subcategories:
+        - "3-tier-cards"
+        - "comparison-table"
+        - "calculator"
+        - "freemium"
+
+    - id: "faq"
+      label: "FAQ"
+      subcategories:
+        - "accordion"
+        - "sidebar"
+        - "searchable"
+
+    - id: "cta"
+      label: "行動呼籲"
+      subcategories:
+        - "inline"
+        - "standalone"
+        - "floating"
+
+    - id: "feature"
+      label: "功能展示"
+      subcategories:
+        - "numbered"
+        - "alternating"
+        - "bento"
+        - "tabbed"
+
+    - id: "content-grid"
+      label: "內容網格"
+      subcategories:
+        - "card-grid"
+        - "list"
+        - "masonry"
+        - "carousel"
+
+    - id: "testimonial"
+      label: "客戶推薦"
+      subcategories:
+        - "logo-cloud"
+        - "quote-cards"
+        - "video"
+        - "case-study"
+
+    - id: "forms"
+      label: "表單"
+      subcategories:
+        - "signup"
+        - "contact"
+        - "newsletter"
+        - "search"
+
+    - id: "trust"
+      label: "信任元素"
+      subcategories:
+        - "stats"
+        - "badges"
+        - "security"
+
+    - id: "onboarding"
+      label: "用戶引導"
+      subcategories:
+        - "hero-onboarding"
+        - "tooltip-tour"
+        - "empty-states"
+
+    - id: "misc"
+      label: "未分類"
+      subcategories: []

@@ -1,0 +1,108 @@
+id: "testimonial-002"
+name: "Customer Metric Card with Logo"
+category: "testimonial"
+subcategory: "case-study"
+tags:
+  - "metric"
+  - "logo"
+  - "quantified-impact"
+  - "b2b"
+  - "data-driven"
+quality: "reference"
+version: 1
+
+sources:
+  - site: "vercel.com"
+    page: "/"
+    analyzed_date: 2026-07-11
+    confidence: "high"
+    evidence: "tokens+screenshots"
+
+spec:
+  layout:
+    type: "compact card, logo-top, metric-center"
+    height: "auto"
+    max_width: "300-400px"
+    alignment: "left or center"
+    padding: "24px"
+  typography:
+    headline:
+      font_family: "Geist Sans"
+      font_size: "24-32px (metric number)"
+      font_weight: 600
+      line_height: 1.1
+      letter_spacing: "-0.96px"
+    body:
+      font_size: "14px"
+      font_weight: 400
+      line_height: 1.4
+      color: "#4d4d4d"
+  spacing:
+    between_elements:
+      - "logo -> metric number: 12px"
+      - "metric -> context sentence: 4px"
+    section_padding_y: []
+  colors:
+    background: "transparent or subtle (#fafafa)"
+    text_primary: "#171717"
+    text_secondary: "#4d4d4d"
+    accent: "#006bff (link only)"
+    harmony: "near-black metric stands out; secondary text recedes"
+  effects:
+    shadow: "none (whitespace as separator)"
+    border_radius: "0 (flat)"
+  animation:
+    entrance: "fade-in"
+    duration: "150ms"
+    easing: "cubic-bezier(0.175, 0.885, 0.32, 1.1)"
+
+structure:
+  - element: "showcase_card"
+    role: "customer_social_proof"
+    children:
+      - element: "customer_logo"
+        role: "brand_identifier"
+        content_type: "SVG (dark/light variant)"
+      - element: "metric_value"
+        role: "quantified_impact"
+        content_type: "bold large number or statement"
+      - element: "metric_context"
+        role: "explanation"
+        content_type: "one-line context sentence"
+
+when_to_use:
+  - "B2B SaaS landing pages needing quantified social proof"
+  - "Building trust with measurable results (revenue, users, visits, conversations)"
+  - "Sections where numbers speak louder than full quotes"
+  - "Alternating feature sections that pair features with customer metrics"
+
+when_not_to_use:
+  - "When customer metrics are not impressive or not verifiable"
+  - "When full narrative context is needed (use case study or quote card)"
+  - "Consumer brands where emotional appeal matters more than data"
+
+comparisons:
+  vercel_vs_stripe:
+    differences:
+      - "Vercel: logo + metric number + context sentence; Stripe: headshot + quote + name + title + link"
+      - "Vercel uses company logo instead of individual photo"
+      - "Vercel metric is bold number; Stripe testimonial is prose quote"
+    similarities:
+      - "Both are compact (~24px padding) and fit into feature section layouts"
+      - "Both link to full case studies for deeper reading"
+    recommendation: "Use metric card when the customer proof is numerical; use quote card when it's narrative. Best combined in alternating feature sections"
+
+implementation:
+  css_snippet: ""
+  responsive_notes:
+    mobile: "Stack metrics vertically; reduce metric font size"
+    tablet: "2-up grid"
+    desktop: "Side-by-side with feature list in alternating layout"
+  accessibility:
+    - "Logo must have alt text describing company name"
+    - "Metric numbers should use appropriate semantic markup"
+    - "Ensure metric text contrast on any background"
+
+assets:
+  screenshots: {}
+  references: []
