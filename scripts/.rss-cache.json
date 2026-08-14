@@ -2675,7 +2675,75 @@
     "https://www.infoq.com/news/2026/08/mcp-stateless-gateway/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "MCP Goes Stateless, and Developers Ask Whether That Just Makes It an API Again",
       "date": "2026-08-13T04:13:26.741Z"
+    },
+    "https://www.theguardian.com/us-news/2026/aug/13/us-government-spied-anti-ice-protesters": {
+      "title": "US conducted mass spying campaign against leftwing and anti-ICE protesters",
+      "date": "2026-08-14T04:10:21.089Z"
+    },
+    "https://atproto.com/blog/introducing-bluesky-protocol-services": {
+      "title": "Bluesky Protocol Services",
+      "date": "2026-08-14T04:10:21.089Z"
+    },
+    "https://sparrowmap.com/": {
+      "title": "SparrowMap – Cameras that watch government vehicles",
+      "date": "2026-08-14T04:10:21.089Z"
+    },
+    "https://www.seangoedecke.com/blog-about-things-you-dont-understand-yet/": {
+      "title": "Blog about things you don't understand yet",
+      "date": "2026-08-14T04:10:21.089Z"
+    },
+    "https://gruhn.me/blog/2026-08-13/": {
+      "title": "NP-overrated",
+      "date": "2026-08-14T04:10:21.089Z"
+    },
+    "https://www.quantamagazine.org/how-godels-proof-works-20200714/": {
+      "title": "How Gödel's Proof Works (2020)",
+      "date": "2026-08-14T04:10:21.090Z"
+    },
+    "https://cdn.openai.com/pdf/how-organizations-use-chatgpt.pdf": {
+      "title": "How Organizations Use AI: Evidence from ChatGPT [pdf]",
+      "date": "2026-08-14T04:10:21.090Z"
+    },
+    "https://www.geoffreylitt.com/2026/07/02/understanding-is-the-new-bottleneck": {
+      "title": "Understanding is the new bottleneck",
+      "date": "2026-08-14T04:10:21.090Z"
+    },
+    "https://github.com/systemd/systemd/issues/40262": {
+      "title": "Single log line is 49KB+ (ext4) / 110KB+ (btrfs) of systemd-journald disk writes",
+      "date": "2026-08-14T04:10:21.090Z"
+    },
+    "https://themech.net/2026/08/hello-me-its-been-a-while/": {
+      "title": "Hello, me. It's been a while",
+      "date": "2026-08-14T04:10:21.091Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c4g48ryvnz2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "伊朗跟美國、以色列打仗 還能撐多久？",
+      "date": "2026-08-14T04:10:21.306Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm2gpjxyxzgo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "朱鎔基：台灣記住「搞台獨沒好下場」 香港感念「挺港功臣」",
+      "date": "2026-08-14T04:10:21.306Z"
+    },
+    "https://www.infoq.com/news/2026/08/vercel-v0-api/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Vercel Launches v0 API for Headless App Building",
+      "date": "2026-08-14T04:10:22.211Z"
+    },
+    "https://www.infoq.com/news/2026/08/AI-disrupts-engineering-progress/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "How Artificial Intelligence Disrupts Engineering Progression",
+      "date": "2026-08-14T04:10:22.211Z"
+    },
+    "https://www.infoq.com/news/2026/08/claude-sandox-breach/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Anthropic's Claude Breaches Sandbox During Model Security Evaluations",
+      "date": "2026-08-14T04:10:22.211Z"
+    },
+    "https://www.infoq.com/presentations/migration-mobile-application/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Migrating Uber Eats Feeds to Webview",
+      "date": "2026-08-14T04:10:22.211Z"
+    },
+    "https://www.infoq.com/news/2026/08/astro-7-release-speed/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Astro 7: Rust Compiler, Rust Markdown Pipeline and Vite 8 for Builds Up to 61% Faster",
+      "date": "2026-08-14T04:10:22.211Z"
     }
   },
-  "lastRun": "2026-08-13T04:13:26.741Z"
+  "lastRun": "2026-08-14T04:10:22.212Z"
 }
