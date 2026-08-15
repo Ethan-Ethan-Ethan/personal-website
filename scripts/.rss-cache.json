@@ -2743,7 +2743,95 @@
     "https://www.infoq.com/news/2026/08/astro-7-release-speed/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Astro 7: Rust Compiler, Rust Markdown Pipeline and Vite 8 for Builds Up to 61% Faster",
       "date": "2026-08-14T04:10:22.211Z"
+    },
+    "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tkt2/executive": {
+      "title": "Magnitude 7.7 Earthquake – 68 km NNW of Ende, Indonesia",
+      "date": "2026-08-15T02:52:43.845Z"
+    },
+    "https://blog.ploopy.co/the-aplus-is-finally-here-499": {
+      "title": "The Ploopy A+ Trackball Is Here",
+      "date": "2026-08-15T02:52:43.846Z"
+    },
+    "https://blog.cr.yp.to/20260814-update.html": {
+      "title": "NSA and IETF, Part 9",
+      "date": "2026-08-15T02:52:43.846Z"
+    },
+    "https://arxiv.org/abs/1811.03459": {
+      "title": "Simplifying and Refactoring Introductory Calculus",
+      "date": "2026-08-15T02:52:43.846Z"
+    },
+    "https://www.economist.com/by-invitation/2026/08/13/the-case-for-overhauling-american-science": {
+      "title": "The case for overhauling American science",
+      "date": "2026-08-15T02:52:43.846Z"
+    },
+    "https://getsmall.xyz/post/cmstjfl9l000if70ljmpzr4va": {
+      "title": "Stop sending me huge PRs; a rant",
+      "date": "2026-08-15T02:52:43.846Z"
+    },
+    "https://dmitry.gr/?r=06.%20Thoughts&amp;proj=12.%20RV": {
+      "title": "RISC-V: They should have known better",
+      "date": "2026-08-15T02:52:43.847Z"
+    },
+    "https://eigendrum.com/#p=circle": {
+      "title": "eigendrum",
+      "date": "2026-08-15T02:52:43.847Z"
+    },
+    "https://blog.cryptographyengineering.com/2026/08/14/everything-is-about-to-go-dark/": {
+      "title": "Going Dark, and the era of law enforcement hacking",
+      "date": "2026-08-15T02:52:43.847Z"
+    },
+    "https://arxiv.org/abs/2608.11158": {
+      "title": "New Lower and Upper Bounds for the Grothendieck Constant",
+      "date": "2026-08-15T02:52:43.847Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cn7n5zxmmr1o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "時隔20年，台灣前總統陳水扁女兒陳幸妤再次成為媒體焦點",
+      "date": "2026-08-15T02:52:43.997Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ce34eqlg2ppo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美軍林肯號航母航行250天 引發官兵人道狀況擔憂",
+      "date": "2026-08-15T02:52:43.998Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cx2dkv400l8o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「我一個月便虧了一萬四」——遭遇韓國股市暴跌的散戶們",
+      "date": "2026-08-15T02:52:43.998Z"
+    },
+    "https://www.infoq.com/news/2026/08/cloudflare-cdnjs-migration/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Migrates JavaScript CDN Serving 9B Requests a Day to Its Developer Platform",
+      "date": "2026-08-15T02:52:45.049Z"
+    },
+    "https://www.infoq.com/news/2026/08/incidents-reliability-metrics/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "More Incidents Don't Necessarily Mean Less Reliability",
+      "date": "2026-08-15T02:52:45.049Z"
+    },
+    "https://www.infoq.com/presentations/architecture-context-engineering/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: The Right 300 Tokens Beat 100k Noisy Ones: The Architecture of Context Engineering",
+      "date": "2026-08-15T02:52:45.050Z"
+    },
+    "https://www.infoq.com/news/2026/08/graphql-llm-mocking-spec/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "LLM-Generated GraphQL Mocks Arrive at Airbnb and Expedia, While the Spec Lags Behind",
+      "date": "2026-08-15T02:52:45.050Z"
+    },
+    "https://www.infoq.com/podcasts/building-engineering-teams-early-stage-startups/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: Founders, Friction, and Focus: Building Engineering Teams at Early-Stage Startups",
+      "date": "2026-08-15T02:52:45.050Z"
+    },
+    "https://www.infoq.com/news/2026/08/rx-net-7/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Rx.NET 7.0 Reduces Deployment Size by Splitting Windows UI Support",
+      "date": "2026-08-15T02:52:45.050Z"
+    },
+    "https://www.infoq.com/news/2026/08/kubeflow/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Kubeflow Expands AI Capabilities as CNCF Graduation Nears",
+      "date": "2026-08-15T02:52:45.051Z"
+    },
+    "https://www.infoq.com/news/2026/08/npm-12-released/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "npm 12 Released: Install Scripts Off by Default as Registry Moves to Explicit Trust",
+      "date": "2026-08-15T02:52:45.051Z"
+    },
+    "https://www.infoq.com/news/2026/08/meta-muse-glimmer/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Meta Open-Sources Muse Glimmer: A 30B Local Agentic Model Optimised for On-Device Execution",
+      "date": "2026-08-15T02:52:45.051Z"
     }
   },
-  "lastRun": "2026-08-14T04:10:22.212Z"
+  "lastRun": "2026-08-15T02:52:45.051Z"
 }
