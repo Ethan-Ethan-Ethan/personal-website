@@ -2831,7 +2831,63 @@
     "https://www.infoq.com/news/2026/08/meta-muse-glimmer/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Meta Open-Sources Muse Glimmer: A 30B Local Agentic Model Optimised for On-Device Execution",
       "date": "2026-08-15T02:52:45.051Z"
+    },
+    "https://www.micdrop.gg/": {
+      "title": "Show HN: Mic Drop, a real-time multiplayer karaoke game",
+      "date": "2026-08-16T03:01:08.826Z"
+    },
+    "https://waku.sh": {
+      "title": "Show HN: I built a native app for coding agents with Rust and GPUI",
+      "date": "2026-08-16T03:01:08.826Z"
+    },
+    "https://github.com/PhillipChaffee/big-pickle-swe-atlas": {
+      "title": "Big Pickle on SWE Atlas – Codebase QnA",
+      "date": "2026-08-16T03:01:08.827Z"
+    },
+    "https://github.com/turtushig22-blip/tea5767-radio-tuner": {
+      "title": "Tea5767-Radio-Tuner",
+      "date": "2026-08-16T03:01:08.827Z"
+    },
+    "https://www.colorado.edu/today/2026/08/10/decoding-smell-study-reveals-how-odor-signals-shapeshift-wind": {
+      "title": "Decoding smell: Study reveals how odor signals shapeshift in the wind",
+      "date": "2026-08-16T03:01:08.827Z"
+    },
+    "https://arxiv.org/abs/2608.13122": {
+      "title": "AI-Assisted GPU Porting of a 250k Line Legacy Weather Simulation Code",
+      "date": "2026-08-16T03:01:08.827Z"
+    },
+    "https://rhonabwy.com/2026/08/15/software-engineering-fundamentals-matter-more-than-ever/": {
+      "title": "Software Engineering fundamentals matter more",
+      "date": "2026-08-16T03:01:08.828Z"
+    },
+    "https://sugartrack-beta.vercel.app/": {
+      "title": "SugarTrack – an offline Android logbook for blood sugar (no account, no cloud)",
+      "date": "2026-08-16T03:01:08.828Z"
+    },
+    "https://bribes.fyi/compare": {
+      "title": "Show HN: Bribes.fyi – Compare bribes statistics department wise",
+      "date": "2026-08-16T03:01:08.828Z"
+    },
+    "https://spectrum.ieee.org/digital-signal-processing": {
+      "title": "Bede Liu, a digital signal processing pioneer, has died",
+      "date": "2026-08-16T03:01:08.828Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c9q92p7ze7eo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「他送給我一個長得像他的洋娃娃」：卡斯特羅之女回顧那個她從不想認的父親",
+      "date": "2026-08-16T03:01:08.972Z"
+    },
+    "https://www.infoq.com/presentations/ai-agentic-recommendations-semantic-ids/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: From Models to Agents: Building Context-Aware Consumer AI at Scale at DoorDash",
+      "date": "2026-08-16T03:01:09.860Z"
+    },
+    "https://www.infoq.com/news/2026/08/cloudflare-agent-tracing/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Adds Agent Tracing, with Truncation Limits and Uneven Payload Defaults",
+      "date": "2026-08-16T03:01:09.861Z"
+    },
+    "https://www.infoq.com/news/2026/08/cloudflare-cache-rules/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Introduces Cache Response Rules for Post-Origin Cache Control",
+      "date": "2026-08-16T03:01:09.861Z"
     }
   },
-  "lastRun": "2026-08-15T02:52:45.051Z"
+  "lastRun": "2026-08-16T03:01:09.861Z"
 }
