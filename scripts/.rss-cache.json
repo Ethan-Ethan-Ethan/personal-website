@@ -2887,7 +2887,91 @@
     "https://www.infoq.com/news/2026/08/cloudflare-cache-rules/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Cloudflare Introduces Cache Response Rules for Post-Origin Cache Control",
       "date": "2026-08-16T03:01:09.861Z"
+    },
+    "https://meanhamster.com/news/agi-64-brings-sierra-adventures-to-the-commodore-64": {
+      "title": "AGI-64 Brings Sierra Adventures to the Commodore 64",
+      "date": "2026-08-17T03:01:04.799Z"
+    },
+    "https://blog.racket-lang.org/2026/08/rhombus-v1.1.html": {
+      "title": "Rhombus 1.1 is now available",
+      "date": "2026-08-17T03:01:04.800Z"
+    },
+    "https://www.ischool.berkeley.edu/sites/default/files/vinton_report_5.pdf": {
+      "title": "The Life and Death of Direct File [pdf]",
+      "date": "2026-08-17T03:01:04.800Z"
+    },
+    "https://www.highereddive.com/news/inside-the-federal-keyword-lists-that-canceled-billions-in-research-funding/826203/": {
+      "title": "The federal keyword lists that canceled billions in research funding",
+      "date": "2026-08-17T03:01:04.800Z"
+    },
+    "https://reticulum.network/": {
+      "title": "Reticulum – Decentralized Mesh Network",
+      "date": "2026-08-17T03:01:04.800Z"
+    },
+    "https://simonwillison.net/2026/Aug/16/qwen-38-27b/": {
+      "title": "Qwen 3.8 27B is excellent, but it defaults to overthinking things",
+      "date": "2026-08-17T03:01:04.801Z"
+    },
+    "https://www.reuters.com/business/nvidia-scales-back-250-billion-openai-data-center-guarantee-wsj-reports-2026-08-14/": {
+      "title": "Nvidia dramatically reduces amount of OpenAI infra financing it may guarantee",
+      "date": "2026-08-17T03:01:04.801Z"
+    },
+    "https://www.bloomberg.com/news/articles/2026-08-16/stripe-nears-deal-to-buy-ai-firm-openrouter-for-over-7-billion": {
+      "title": "Stripe Clinches over $7B Deal to Buy AI Firm OpenRouter",
+      "date": "2026-08-17T03:01:04.801Z"
+    },
+    "https://github.com/aleks-ent/pump-dump-crypto-screener": {
+      "title": "An open-source, candle-only crypto pump detector–looking for ML contributors",
+      "date": "2026-08-17T03:01:04.802Z"
+    },
+    "https://www.cst.cam.ac.uk/news/red-queen-hypothesis-new-way-forward-self-improving-ai": {
+      "title": "Red queen hypothesis – a new way forward for self-improving AI",
+      "date": "2026-08-17T03:01:04.802Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cn8nn1g2y26o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "靖國神社：81年後，為何一次參拜仍能牽動東亞？",
+      "date": "2026-08-17T03:01:05.017Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c5yvv1vz252o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美軍指揮官許諾「優先」應對林肯號航母人員精神健康",
+      "date": "2026-08-17T03:01:05.017Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3044704219o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "劍橋大學教授阿爾戴之死勢將在分裂的學術界引發震盪",
+      "date": "2026-08-17T03:01:05.018Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c2352dp3y4vo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「我從20多歲開始賺了8000英鎊」：為何女性總是更懂投資？",
+      "date": "2026-08-17T03:01:05.018Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwyj01086yvo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "外國超市為何總讓遊客們樂不思蜀",
+      "date": "2026-08-17T03:01:05.018Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/clyll19nvj9o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "印尼強震造成至少47死　救援人員搜尋生還者",
+      "date": "2026-08-17T03:01:05.018Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cr49931x112o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "為何Z世代女性比母親一代更了解月經？",
+      "date": "2026-08-17T03:01:05.019Z"
+    },
+    "https://www.infoq.com/news/2026/08/java-news-roundup-aug10-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: Simple JSON API, GlassFish, Jakarta EE, JNoSQL, Open Liberty, LangChain4j",
+      "date": "2026-08-17T03:01:06.051Z"
+    },
+    "https://www.infoq.com/news/2026/08/aws-dogwood-agent-policy/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Open-Sources Dogwood, Extending Cedar to Govern Sequences of Agent Tool Calls",
+      "date": "2026-08-17T03:01:06.051Z"
+    },
+    "https://www.infoq.com/news/2026/08/aws-dynamodb-vector-search/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Introduces Native Vector Search for DynamoDB",
+      "date": "2026-08-17T03:01:06.052Z"
+    },
+    "https://www.infoq.com/news/2026/08/pgsimcity/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "How PGSimCity Turns PostgreSQL Complexity into a Virtual City 3D Simulation",
+      "date": "2026-08-17T03:01:06.052Z"
     }
   },
-  "lastRun": "2026-08-16T03:01:09.861Z"
+  "lastRun": "2026-08-17T03:01:06.052Z"
 }
