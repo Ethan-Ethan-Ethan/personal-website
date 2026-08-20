@@ -3159,7 +3159,87 @@
     "https://www.infoq.com/news/2026/08/eu-ai-content-watermark/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Major Frontier Model Providers Adopt Watermarking Tech to Comply with EU Regulation",
       "date": "2026-08-19T02:58:19.236Z"
+    },
+    "https://www.computerenhance.com/p/turns-are-better-than-radians": {
+      "title": "Turns are Better than Radians",
+      "date": "2026-08-20T02:57:48.155Z"
+    },
+    "https://arxiv.org/abs/2007.13664": {
+      "title": "Universality of Gradient Descent Neural Network Training",
+      "date": "2026-08-20T02:57:48.155Z"
+    },
+    "https://github.com/anthropics/claude-code/issues/6235": {
+      "title": "Feature Request: Support AGENTS.md",
+      "date": "2026-08-20T02:57:48.155Z"
+    },
+    "https://os8088.com/spotlight/": {
+      "title": "Os8088.com: IBM XT OS now has a Browser, CP/M 2.2 with Z80 core and MS Word 1.1a",
+      "date": "2026-08-20T02:57:48.155Z"
+    },
+    "https://inco.ai/blog/dflash2/": {
+      "title": "DFlash 2: Keep Drafting Parallel",
+      "date": "2026-08-20T02:57:48.155Z"
+    },
+    "https://pennypresses.net/home/map.php": {
+      "title": "Pressed Penny Machine Map",
+      "date": "2026-08-20T02:57:48.155Z"
+    },
+    "https://sprocketfox.io/xssfox/2026/07/01/cricut-unlock/": {
+      "title": "Unlocking a locked/deactivated e-waste Cricut Maker",
+      "date": "2026-08-20T02:57:48.156Z"
+    },
+    "https://unsloth.ai/docs/basics/dynamic-3.0-ggufs": {
+      "title": "Unsloth Dynamic 3.0 GGUFs",
+      "date": "2026-08-20T02:57:48.156Z"
+    },
+    "https://go.dev/blog/go1.27": {
+      "title": "Go 1.27",
+      "date": "2026-08-20T02:57:48.156Z"
+    },
+    "https://grapheneos.social/@GrapheneOS/117057099753905023": {
+      "title": "Google replaced Git tags for certain source code with obtaining via Google Drive",
+      "date": "2026-08-20T02:57:48.156Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ce3q0yd25j9o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「我就是個普通人」：中國出入境新規上路前，那些早已受困的民眾",
+      "date": "2026-08-20T02:57:48.650Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cq56nzxq39qo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "《牛來》為何爆紅？觀眾、導演與電影從業者解讀「粗糙」動畫的意外狂歡",
+      "date": "2026-08-20T02:57:48.650Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c5yrnedq47go/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "上市首天漲價近五倍 宇樹科技是怎樣的機械人企業？",
+      "date": "2026-08-20T02:57:48.650Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c235d87yp0ko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "她指控：一名法國公務員下藥，讓我們小便失禁",
+      "date": "2026-08-20T02:57:48.651Z"
+    },
+    "https://www.infoq.com/news/2026/08/docker-vmm-layer/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Docker Launches Fully Rebuilt Virtualization Layer to Boost Performance and Improve Dev Experience",
+      "date": "2026-08-20T02:57:49.522Z"
+    },
+    "https://www.infoq.com/news/2026/08/whatsapp-scam-alert-beta/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Whatsapp Tests on Device ML for Scam Detection with Privacy Preserving Analytics",
+      "date": "2026-08-20T02:57:49.522Z"
+    },
+    "https://www.infoq.com/presentations/progressive-collapse-system-resilience/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Understanding Progressive Collapse: How To Avoid A Cascading Failure",
+      "date": "2026-08-20T02:57:49.523Z"
+    },
+    "https://www.infoq.com/news/2026/08/dotnet-11-preview-7/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": ".NET 11 Preview 7 Brings Updates Across C#, ASP.NET Core, EF Core, and Windows Forms",
+      "date": "2026-08-20T02:57:49.523Z"
+    },
+    "https://www.infoq.com/news/2026/08/aws-bedrock-agentcore-runtime/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Multi Agent Collaboration Gets Persistent Compute in Bedrock AgentCore",
+      "date": "2026-08-20T02:57:49.523Z"
+    },
+    "https://www.infoq.com/news/2026/08/react-route-v8/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "React Router v8: A Deliberately Boring Release with ESM-Only Builds and Default Middleware",
+      "date": "2026-08-20T02:57:49.523Z"
     }
   },
-  "lastRun": "2026-08-19T02:58:19.236Z"
+  "lastRun": "2026-08-20T02:57:49.523Z"
 }
