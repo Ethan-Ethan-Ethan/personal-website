@@ -3339,7 +3339,83 @@
     "https://www.infoq.com/news/2026/08/deep-seek-harness/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "The Open-Sourcing of DeepSeek Harness Opens the Door to Modular, Unbundled AI Agent Infrastructure",
       "date": "2026-08-21T03:04:06.235Z"
+    },
+    "https://www.us-debt-clock.com/debt-to-gdp": {
+      "title": "US Debt-to-GDP Ratio",
+      "date": "2026-08-22T02:55:42.026Z"
+    },
+    "https://danluu.com/perf-opt/": {
+      "title": "There's no reason for software to be slow anymore",
+      "date": "2026-08-22T02:55:42.027Z"
+    },
+    "https://grapheneos.social/@GrapheneOS/117136278553665985": {
+      "title": "Initial focus for our partnership with Motorola is a regular non-folding device",
+      "date": "2026-08-22T02:55:42.027Z"
+    },
+    "https://danluu.com/hn-comments/": {
+      "title": "HN: The Good Parts (2016)",
+      "date": "2026-08-22T02:55:42.027Z"
+    },
+    "https://ozbrain.com": {
+      "title": "Show HN: OzBrain, a shared brain for knowledge between agents and your team",
+      "date": "2026-08-22T02:55:42.028Z"
+    },
+    "https://thomasdullien.github.io/posts/2026-08-21-three-important-steps-in-my-maturation-process/": {
+      "title": "Three important steps in my maturation process",
+      "date": "2026-08-22T02:55:42.028Z"
+    },
+    "https://www.ycombinator.com/companies/salespatriot/jobs/M46X6YX-forward-deployed-engineer": {
+      "title": "SalesPatriot (YC W25) Is Hiring Forward Deployed Engineers",
+      "date": "2026-08-22T02:55:42.028Z"
+    },
+    "https://rust-glancer.github.io/blog/hello-world/": {
+      "title": "Rust Glancer: Rust LSP using 100x less RAM",
+      "date": "2026-08-22T02:55:42.028Z"
+    },
+    "https://tumbleforth.hardcoded.net/": {
+      "title": "Tumble Forth – from assembly to OS with C compiler (2023)",
+      "date": "2026-08-22T02:55:42.029Z"
+    },
+    "https://newscenter.lbl.gov/2026/08/10/scientists-release-biggest-2d-map-of-the-universe/": {
+      "title": "Scientists release biggest 2D map of the universe",
+      "date": "2026-08-22T02:55:42.029Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c74g2d2293zo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普想與金正恩做朋友，韓國恐要為此付出代價",
+      "date": "2026-08-22T02:55:42.281Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c0rdle4l1lvo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "台灣「三大公投」：時隔一年再公投，這次投什麼？通過門檻為何？",
+      "date": "2026-08-22T02:55:42.281Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cr59gmzdj2zo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "生於烏克蘭，為何替俄羅斯作戰？被俘士兵向BBC講述背後故事",
+      "date": "2026-08-22T02:55:42.281Z"
+    },
+    "https://www.infoq.com/news/2026/08/cloudflare-astro-ai-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Cuts Astro Github Issues by 85% with AI Agents",
+      "date": "2026-08-22T02:55:43.353Z"
+    },
+    "https://www.infoq.com/news/2026/08/cloudflare-ai-enforcement/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Turns Engineering Standards Into an AI-Enforced Control System",
+      "date": "2026-08-22T02:55:43.353Z"
+    },
+    "https://www.infoq.com/minibooks/architect-sociotechnical-craft/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Mini book: Architecture as a Socio-Technical Craft",
+      "date": "2026-08-22T02:55:43.354Z"
+    },
+    "https://www.infoq.com/presentations/ebpf-ai-gateway-kubernetes-security/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Enchant Your AI and APIs with eBPF Magic &#x1fa84;",
+      "date": "2026-08-22T02:55:43.355Z"
+    },
+    "https://www.infoq.com/news/2026/08/azure-devops-remote-mcp-ga/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Azure DevOps Remote MCP Server Reaches GA, Without Support for Claude, ChatGPT, or Cursor",
+      "date": "2026-08-22T02:55:43.355Z"
+    },
+    "https://www.infoq.com/news/2026/08/s3-clone-security/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "S3 Compatibility Doesn't Guarantee S3-Level Security",
+      "date": "2026-08-22T02:55:43.355Z"
     }
   },
-  "lastRun": "2026-08-21T03:04:06.235Z"
+  "lastRun": "2026-08-22T02:55:43.355Z"
 }
