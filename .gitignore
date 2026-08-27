@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# 個人證件（隱私，不進 git history）
+履歷/02_學歷證照/
+
+# 自動產物 / 快取（可重生，不進 git）
+scripts/.rss-cache.json
+graphify-out/
+.wrangler/
