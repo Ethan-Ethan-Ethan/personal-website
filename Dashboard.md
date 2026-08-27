@@ -29,7 +29,7 @@ tags:
 
 > 來源去重：`01-Personal Website.md` 與 `網站重建計畫 2026.md` 原本各寫一份重複清單，此處為唯一正本。
 
-- [ ] **#1 Decap CMS GitHub OAuth 驗證** — `public/admin/config.yml` 缺 `auth: github` + `client_id`，需在 GitHub 註冊 OAuth App 後補設定（blocked / 待外部註冊）
+- [ ] **#1 Decap CMS GitHub OAuth 驗證** — 結構已補（`auth: github` + `client_id` 佔位已加入 `public/admin/config.yml`）；**待你在 GitHub 註冊 OAuth App 並填入真實 client_id**（外部操作）
 - [ ] **#2 測試「瀏覽器寫文章 → commit → 自動部署」** — 依賴 #1 OAuth 完成
 - [ ] **#3 Cloudflare Access 設定（`/protected/*` 路由保護）** — 待完成（外部 Cloudflare 操作）
 - [ ] **#4 停用舊 Workers 部署（`steep-glitter-0952`）** — 待確認（外部 Cloudflare 操作）
@@ -82,3 +82,4 @@ npm run dev          # 或 astro dev --background
 
 ## 處理日誌
 - 2026-08-27：建立 Dashboard，去重代辦；確認 #1 缺口為 config.yml 缺 `auth: github` + `client_id`。
+- 2026-08-27：#1 補上 config.yml 的 `auth: github` + `client_id` 佔位；剩餘需使用者在 GitHub 註冊 OAuth App 並填入真實 client_id（外部操作，我未擅自執行）。

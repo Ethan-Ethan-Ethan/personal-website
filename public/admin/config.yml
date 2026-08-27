@@ -3,6 +3,11 @@ backend:
   repo: Ethan-Ethan-Ethan/personal-website
   branch: main
   base_url: https://api.github.com
+  auth: github
+  # TODO: 在 GitHub 註冊 OAuth App 後，將下方替換為真實 client_id
+  # 註冊處：https://github.com/settings/developers → New OAuth App
+  # Authorization callback URL：https://ethanyang.dpdns.org/admin/
+  client_id: <YOUR_GITHUB_OAUTH_CLIENT_ID>
 
 publish_mode: editorial_workflow
 display_url: https://ethanyang.dpdns.org
