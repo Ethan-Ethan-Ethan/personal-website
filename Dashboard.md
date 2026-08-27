@@ -130,3 +130,4 @@ npm run dev          # 或 astro dev --background
 - 2026-08-27：#7 調查 — 完整履歷目前 100% 私人（/protected/resume 經 Cloudflare Access，僅 isitoled@gmail.com）；公開站只有文章（public-notes.md 哲學：履歷=壓縮結果、網站=解壓脈絡）。建議公開「摘要版履歷頁」、完整版留 Access，待使用者決定是否做。
 - 2026-08-27：#8 實作 — 首頁新增「工作台」區塊 + 3 卡片滑動面板（grid-template-rows 0fr→1fr 動畫），`astro build` 35 頁通過。週報 / 經驗沉澱面板內容待使用者填。
 - 2026-08-27：#1 完成 — 使用者提供 GitHub OAuth App client_id（`Ov23li...`），填入 `public/admin/config.yml` 並移除 TODO 佔位；`astro build` 通過。#2 解鎖，待 push 後於 live `/admin/` 實測登入。
+- 2026-08-27：push 上線 — 先 `git pull --rebase`（遠端有 46 個 `📡 RSS 聚合` commit，本地 22 commit 無衝突接在其後），`git push origin main` 成功（`a3faa74..a7ef8f6`）；GitHub Actions 觸發 Cloudflare Pages 部署 #8 工作台 + #1 OAuth 設定。待部署完成後至 live `/admin/` 實測 #2。
