@@ -24,7 +24,7 @@ aliases:
 - **第二代 Astro 7 站**：`https://personal-website-bvk.pages.dev`（Cloudflare Pages，push to main 自動部署）
 - **Repo**：`Ethan-Ethan-Ethan/personal-website`
 - **狀態**：Phase 1-6 全部完成（Astro 重建 + RSS 聚合 + Gmail 擷取 + 交易視覺化 + Pages 部署 + 設計系統）
-- **待完成**：Cloudflare Access（`/protected/*`）、停用舊 Workers 部署
+- **待完成**：Decap CMS OAuth 驗證、瀏覽器寫文測試、網域續約（2026-11-12）、Reddit 替代源、履歷公開邊界（Cloudflare Access / 停用舊 Workers 已於 2026-08-27 完成）
 - **技術棧**：Astro 7 + Tailwind CSS v4 + Decap CMS + GitHub Actions + Cloudflare Pages
 - **域名**：`ethanyang.dpdns.org`（DigitalPlat FreeDomain，續期檢查 2026-11-12）
 - **成本**：全站零成本基礎設施（$0/月）
