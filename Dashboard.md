@@ -31,7 +31,7 @@ tags:
 
 - [ ] **#1 Decap CMS GitHub OAuth 驗證** — 結構已補（`auth: github` + `client_id` 佔位已加入 `public/admin/config.yml`）；**待你在 GitHub 註冊 OAuth App 並填入真實 client_id**（外部操作）
 - [ ] **#2 測試「瀏覽器寫文章 → commit → 自動部署」** — 依賴 #1 OAuth 完成
-- [ ] **#3 Cloudflare Access 設定（`/protected/*` 路由保護）** — 本地無 Cloudflare 憑證，需 Cloudflare 後台手動設定（步驟見下）；目前 `/protected/*` 兩頁**實際未受保護**（僅顯示佔位文字）
+- [x] **#3 Cloudflare Access 設定（`/protected/*` 路由保護）** — ✅ 2026-08-27 實測生效：未帶憑證訪問 /protected/resume 回傳 302 導向 cloudflareaccess.com 登入；App「Ethan Personal Website Protected」允許 isitoled@gmail.com（GitHub IdP）。原計畫書「待完成」為過期狀態。
 - [ ] **#4 停用舊 Workers 部署（`steep-glitter-0952`）** — 待確認（外部 Cloudflare 操作）
 - [ ] **#5 網域續簽** — 期限 **2026-11-12**（見下方專區）
 - [ ] **#6 Reddit 替代 RSS 源評估** — 伺服器端 403，待評估
@@ -52,7 +52,9 @@ tags:
 
 ## #3 執行步驟（Cloudflare 後台，需手動）
 
-> 本地無 Cloudflare API 憑證（無 token / 未裝 wrangler），故由使用者在 Cloudflare 儀表板執行。目標：讓 `/protected/*` 真正受 Access 保護（目前兩頁公開可見）。
+> ✅ **2026-08-27 實測：Access 已生效**（線上 `/protected/*` 會擋未授權訪客，回傳 302 導向 cloudflareaccess.com 登入）。下方步驟僅供日後重設/參考，一般情況無需執行。
+>
+> 原有說法「本地無憑證、需手動設定」已過期——當時未實測線上狀態，實則 App「Ethan Personal Website Protected」早已綁定 `ethanyang.dpdns.org/protected/*` 並允許 `isitoled@gmail.com`（GitHub IdP）。
 
 1. 開 https://one.dash.cloudflare.com → 選帳號 → **Zero Trust** → **Access** → **Applications**
 2. 若舊 Workers 的 Access App 仍存在：編輯它，把 **Hostname** 從舊 Workers 網址改為 `ethanyang.dpdns.org`
@@ -105,3 +107,4 @@ npm run dev          # 或 astro dev --background
 - 2026-08-27：建立 Dashboard，去重代辦；確認 #1 缺口為 config.yml 缺 `auth: github` + `client_id`。
 - 2026-08-27：#1 補上 config.yml 的 `auth: github` + `client_id` 佔位；剩餘需使用者在 GitHub 註冊 OAuth App 並填入真實 client_id（外部操作，我未擅自執行）。
 - 2026-08-27：#3 調查 — `/protected/resume`、`/protected/vlog` 已存在但**目前未受 Cloudflare Access 保護**（僅佔位文字）；本地無 Cloudflare 憑證，已將手動設定步驟寫入 Dashboard，待使用者在 Cloudflare 後台執行。
+- 2026-08-27：#3 **實測翻案** — 線上探測證實 Access 已生效（/protected/resume 回 302 登入挑戰，App 允許 isitoled@gmail.com via GitHub IdP）。原「待完成」為過期狀態，標記完成；當初「頁面公開」的判斷因未實測線上而錯誤。
