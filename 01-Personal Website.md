@@ -317,7 +317,7 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 | 2026-07-24 | 4px base 遷移策略 | 設計決策 | `01_Notes/` |
 | 2026-07-24 | 品牌特徵優先於趨勢 | 設計原則 | `01_Notes/` |
 | 2026-07-24 | GitHub Actions 兩階段認證 | SOP | `05_Reference/個人自動化/` |
-| 2026-07-24 | Design token 系統化方法論 | 方法論 | `05_Reference/設計/` |
+| 2026-07-24 | Design token 系統化方法論 | 方法論 | 內嵌於本頁「設計 Tokens」章節（未獨立畢業至 05_Reference/設計/） |
 
 ## 相關筆記
 

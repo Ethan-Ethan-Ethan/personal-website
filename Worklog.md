@@ -93,7 +93,7 @@ status: seedling
 - 踩坑索引：[[04_Projects/知識處理/影片分析工作流/Worklog]]
 - RSS 管線：[[RSS 聚合管線-行動流程]]
 - 畢業原子筆記：[[第三方 widget 與 SPA 非同步初始化衝突時用 iframe 隔離]]
-- 畢業 Reference：[[Design Tokens 從散亂值到 CSS 自訂屬性]]
+- 畢業 Reference：[[Personal Website#設計-Tokens]]（Design Tokens 內嵌於專案主頁「設計 Tokens」章節，尚未獨立畢業至 05_Reference）
 
 ---
 
