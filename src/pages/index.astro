@@ -12,6 +12,23 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft))
 const recentPosts = posts.slice(0, 6);
 ---
 
+<style>
+  .workbench-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.4s ease, opacity 0.3s ease;
+  }
+  .workbench-panel > .panel-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+  .workbench-panel.open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+</style>
+
 <BaseLayout title="Ethan Yang | Personal Website" description="Ethan Yang 的個人網站 — FAE / AI 工程 / 技術寫作，從現場到產品的橋樑工程師。">
   <Topbar />
 
@@ -125,6 +142,59 @@ const recentPosts = posts.slice(0, 6);
       </div>
     </section>
 
+    <!-- Workbench (slide panels) -->
+    <section id="workbench" class="max-w-[var(--container-default)] mx-auto px-4 pb-10">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold">工作台</h2>
+        <span class="px-2 py-0.5 rounded-full bg-panel-2 border border-line text-xs text-soft">個人儀表板</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all text-left text-text w-full cursor-pointer" data-panel="health" aria-expanded="false">
+          <p class="text-xs text-green mb-1">Tracking</p>
+          <h3 class="text-md font-semibold mb-1">待辦健康度</h3>
+          <p class="text-sm text-muted mb-2">專案代辦完成度與瓶頸</p>
+        </button>
+        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all text-left text-text w-full cursor-pointer" data-panel="weekly" aria-expanded="false">
+          <p class="text-xs text-blue mb-1">Report</p>
+          <h3 class="text-md font-semibold mb-1">週報</h3>
+          <p class="text-sm text-muted mb-2">本週進度與重點</p>
+        </button>
+        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all text-left text-text w-full cursor-pointer" data-panel="experience" aria-expanded="false">
+          <p class="text-xs text-amber mb-1">Notes</p>
+          <h3 class="text-md font-semibold mb-1">經驗沉澱</h3>
+          <p class="text-sm text-muted mb-2">從現場到方法的累積</p>
+        </button>
+      </div>
+
+      <div class="workbench-panels mt-3">
+        <div id="panel-health" class="workbench-panel">
+          <div class="panel-inner bg-panel border border-line rounded-lg p-6">
+            <h3 class="text-md font-semibold mb-3">待辦健康度</h3>
+            <p class="text-sm text-muted mb-3">來自 Dashboard 快照（2026-08-27）：8 項代辦，已完成 4 項，待處理 4 項。</p>
+            <ul class="text-sm text-soft space-y-1">
+              <li>✅ #3 Cloudflare Access（已生效）／ #4 停用舊 Workers（已刪除）／ #5 網域續簽（SOP+追蹤）／ #6 Reddit 替代源（已評估）</li>
+              <li>🔶 #1 Decap OAuth（待 client_id）／ #2 瀏覽器寫文（待 #1）／ #7 履歷邊界（待決）／ #8 本面板（製作中）</li>
+            </ul>
+          </div>
+        </div>
+        <div id="panel-weekly" class="workbench-panel">
+          <div class="panel-inner bg-panel border border-line rounded-lg p-6">
+            <h3 class="text-md font-semibold mb-3">週報</h3>
+            <p class="text-sm text-muted">（內容待填：每週進度、重點、blockers）</p>
+          </div>
+        </div>
+        <div id="panel-experience" class="workbench-panel">
+          <div class="panel-inner bg-panel border border-line rounded-lg p-6">
+            <h3 class="text-md font-semibold mb-3">經驗沉澱</h3>
+            <p class="text-sm text-muted mb-3">從現場問題到可複用方法的累積。相關公開文章：</p>
+            <ul class="text-sm text-soft space-y-1">
+              <li><a href="/articles/" class="text-blue hover:text-green no-underline">公開筆記 / FAE 價值觀</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Custom Trading Chart (Lightweight Charts) -->
     <section class="max-w-[var(--container-wide)] mx-auto px-4 pb-10">
       <div class="bg-panel border border-line rounded-lg p-6">
@@ -172,6 +242,25 @@ const recentPosts = posts.slice(0, 6);
         if (iframe && symbol) {
           const encodedSymbol = encodeURIComponent(symbol);
           iframe.src = `https://s.tradingview.com/widgetembed/?frameElementId=tradingview-widget&symbol=${encodedSymbol}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=1&toolbarbg=1b1b18&studies=[]&hideideas=1&theme=dark&style=1&timezone=Asia%2FTaipei&withdateranges=1&showpopupbutton=1&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&locale=zh_TW&utm_source=&utm_medium=widget&utm_campaign=chart&utm_term=${encodedSymbol}`;
+        }
+      });
+    });
+  </script>
+
+  <!-- Workbench slide panels -->
+  <script>
+    const wbCards = document.querySelectorAll('.workbench-card');
+    const wbPanels = document.querySelectorAll('.workbench-panel');
+    wbCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const panel = document.getElementById('panel-' + card.dataset.panel);
+        const isOpen = panel.classList.contains('open');
+        wbPanels.forEach(p => p.classList.remove('open'));
+        wbCards.forEach(c => c.classList.remove('border-soft'));
+        if (!isOpen) {
+          panel.classList.add('open');
+          card.classList.add('border-soft');
+          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       });
     });
