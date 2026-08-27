@@ -276,8 +276,8 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 
 - [ ] Phase 2：GitHub OAuth 驗證（Decap CMS 瀏覽器登入）
 - [ ] Phase 2：測試瀏覽器寫文章 → commit → 自動部署
-- [ ] Phase 6：Cloudflare Access 設定（`/protected/*` 路由保護）
-- [ ] Phase 6：停用舊 Workers 部署（`steep-glitter-0952`）
+- [x] Phase 6：Cloudflare Access 設定（`/protected/*` 路由保護）— ✅ 2026-08-27 實測已生效
+- [x] Phase 6：停用舊 Workers 部署（`steep-glitter-0952`）— ✅ 2026-08-27 已刪除 script
 - [ ] 域名續約檢查（2026-11-12）
 - [ ] Reddit 替代 RSS 源評估
 - [ ] 檢查履歷中哪些內容適合公開
