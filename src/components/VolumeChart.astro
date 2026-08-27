@@ -27,19 +27,19 @@ const {
 } = Astro.props;
 
 const chartId = `chart-${Math.random().toString(36).slice(2, 9)}`;
+const dataAttr = typeof data === 'string' ? data : JSON.stringify(data);
 ---
 
-<div class="trading-chart" id="{chartId}" style="height: {height}px;"></div>
+<div class="trading-chart" id={chartId} data-data={dataAttr} style={`height: ${height}px;`}></div>
 
-<script is:inline>
-  // Lightweight Charts client-side initialization
-  document.addEventListener('DOMContentLoaded', async () => {
-    const chartEl = document.getElementById('{chartId}');
-    if (!chartEl) return;
+<script>
+  import { createChart, CandlestickSeries, HistogramSeries } from 'lightweight-charts';
 
-    const { createChart } = await import('lightweight-charts');
+  function initVolumeChart(el: HTMLElement) {
+    const raw = el.dataset.data;
+    if (!raw) return;
 
-    const chart = createChart(chartEl, {
+    const chart = createChart(el, {
       layout: {
         background: { color: '#1b1b18' },
         textColor: '#b9b3a5',
@@ -51,26 +51,14 @@ const chartId = `chart-${Math.random().toString(36).slice(2, 9)}`;
       },
       crosshair: {
         mode: 0,
-        vertLine: {
-          color: '#88b56b',
-          labelBackgroundColor: '#88b56b',
-        },
-        horzLine: {
-          color: '#88b56b',
-          labelBackgroundColor: '#88b56b',
-        },
+        vertLine: { color: '#88b56b', labelBackgroundColor: '#88b56b' },
+        horzLine: { color: '#88b56b', labelBackgroundColor: '#88b56b' },
       },
-      rightPriceScale: {
-        borderColor: '#37372f',
-      },
-      timeScale: {
-        borderColor: '#37372f',
-        timeVisible: true,
-      },
+      rightPriceScale: { borderColor: '#37372f' },
+      timeScale: { borderColor: '#37372f', timeVisible: true },
     });
 
-    // K 線圖
-    const candlestickSeries = chart.addCandlestickSeries({
+    const candlestickSeries = chart.addSeries(CandlestickSeries, {
       upColor: '#88b56b',
       downColor: '#c46f5a',
       borderUpColor: '#88b56b',
@@ -79,8 +67,7 @@ const chartId = `chart-${Math.random().toString(36).slice(2, 9)}`;
       wickDownColor: '#c46f5a',
     });
 
-    // 成交量柱狀圖
-    const volumeSeries = chart.addHistogramSeries({
+    const volumeSeries = chart.addSeries(HistogramSeries, {
       color: '#76a7bd',
       priceFormat: { type: 'volume' },
       priceScaleId: 'volume',
@@ -90,26 +77,27 @@ const chartId = `chart-${Math.random().toString(36).slice(2, 9)}`;
       scaleMargins: { top: 0.85, bottom: 0 },
     });
 
-    // 載入資料
-    let chartData;
-    if (typeof '{data}' === 'string') {
-      const res = await fetch('{data}');
-      chartData = await res.json();
-    } else {
-      chartData = {data};
-    }
+    const load = async () => {
+      let chartData;
+      if (raw.startsWith('/')) {
+        const res = await fetch(raw);
+        chartData = await res.json();
+      } else {
+        chartData = JSON.parse(raw);
+      }
+      candlestickSeries.setData(chartData.candles || []);
+      volumeSeries.setData(chartData.volumes || []);
+      chart.timeScale().fitContent();
+    };
+    load();
 
-    candlestickSeries.setData(chartData.candles || []);
-    volumeSeries.setData(chartData.volumes || []);
-
-    chart.timeScale().fitContent();
-
-    // 響應式
     const resizeObserver = new ResizeObserver(() => {
-      chart.applyOptions({ width: chartEl.clientWidth });
+      chart.applyOptions({ width: el.clientWidth });
     });
-    resizeObserver.observe(chartEl);
-  });
+    resizeObserver.observe(el);
+  }
+
+  document.querySelectorAll('.trading-chart').forEach(initVolumeChart);
 </script>
 
 <style>
