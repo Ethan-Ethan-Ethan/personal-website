@@ -9,16 +9,16 @@ TEMP_DIR="$TMPDIR/chrome-pdf-$$"
 mkdir -p "$TEMP_DIR"
 
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  --headless \
+  --headless=new \
   --disable-gpu \
-  --disable-software-rasterizer \
   --no-sandbox \
+  --disable-dev-shm-usage \
+  --allow-file-access-from-files \
   --user-data-dir="$TEMP_DIR" \
   --print-to-pdf="$OUTPUT" \
-  --print-to-pdf-no-header \
-  --run-all-compositor-stages-before-draw \
-  --virtual-time-budget=5000 \
-  "file://$HTML" 2>/dev/null
+  --no-pdf-header-footer \
+  --virtual-time-budget=3000 \
+  "file://$HTML"
 
 rm -rf "$TEMP_DIR"
 
