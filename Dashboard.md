@@ -35,7 +35,7 @@ tags:
 - [x] **#4 停用舊 Workers 部署（`steep-glitter-0952`）** — ✅ 2026-08-27 已透過 Cloudflare API 刪除 script（剩 isitoled / red-mode-ea77，非目標）。舊站徹底停用。
 - [ ] **#5 網域續簽** — 期限 **2026-11-12**；SOP 與追蹤已建（見專區）。續簽窗口約 2026-10-13 起，**現過早不續，待窗口內執行**
 - [ ] **#6 Reddit 替代 RSS 源評估** — 已評估：Reddit 伺服器端 403 早已由「改用 RSSHub 36Kr 源」緩解（feeds 現無 Reddit，見 踩坑紀錄/Worklog）。若要真 Reddit 內容，替代方案：①Reddit OAuth API（需建 Reddit app + 憑證）②穩定 RSSHub/Redlib 實例（公共實例不穩）。待你決定是否要真 Reddit。
-- [ ] **#7 檢查履歷公開 / 私人邊界** — 待處理
+- [ ] **#7 檢查履歷公開 / 私人邊界** — 現狀：完整履歷 100% 私人（`/protected/resume` 經 Cloudflare Access，僅 isitoled@gmail.com）；公開站只有文章（哲學：履歷=壓縮結果、網站=解壓脈絡）。建議：公開「摘要版履歷頁」（職稱/時間/技能/總結，不含客戶機密），完整版留 Access。待你決定是否做公開頁。
 - [ ] **#8 工作台卡片滑動面板功能** — 點擊後滑動顯示對應面板（待辦健康度 / 週報 / 經驗沉澱）
 
 ## 網域續簽專區（#5）
@@ -127,3 +127,4 @@ npm run dev          # 或 astro dev --background
 - 2026-08-27：#4 執行 — 使用者確認後透過 Cloudflare API 刪除 steep-glitter-0952 script（success=True），剩 isitoled / red-mode-ea77。標記完成。
 - 2026-08-27：#5 調查 — DigitalPlat FreeDomain 續簽以手動後台為主（dash.domain.digitalplat.org），API 續簽 endpoint 不公開（需從 Dashboard 取得）；FreeDomain 通常僅到期前 ~30 天開放續簽。距 2026-11-12 還 2.5 個月，過早續會浪費天數/被拒，故文件化 SOP + 設追蹤（建議動作日 ~2026-10-13），暫不續。DIGITALPLAT_API_KEY 已確認可取。
 - 2026-08-27：#6 評估 — Reddit 伺服器端 403 早已由「改用 RSSHub 36Kr 源」緩解（feeds 現無 Reddit；主因 GitHub Actions IP 被 Reddit 標 bot）。若要真 Reddit 內容的替代方案：Reddit OAuth API（需憑證）或 RSSHub/Redlib 實例。待使用者決定。
+- 2026-08-27：#7 調查 — 完整履歷目前 100% 私人（/protected/resume 經 Cloudflare Access，僅 isitoled@gmail.com）；公開站只有文章（public-notes.md 哲學：履歷=壓縮結果、網站=解壓脈絡）。建議公開「摘要版履歷頁」、完整版留 Access，待使用者決定是否做。
