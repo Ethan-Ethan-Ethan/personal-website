@@ -33,7 +33,7 @@ tags:
 - [ ] **#2 測試「瀏覽器寫文章 → commit → 自動部署」** — 依賴 #1 OAuth 完成
 - [x] **#3 Cloudflare Access 設定（`/protected/*` 路由保護）** — ✅ 2026-08-27 實測生效：未帶憑證訪問 /protected/resume 回傳 302 導向 cloudflareaccess.com 登入；App「Ethan Personal Website Protected」允許 isitoled@gmail.com（GitHub IdP）。原計畫書「待完成」為過期狀態。
 - [x] **#4 停用舊 Workers 部署（`steep-glitter-0952`）** — ✅ 2026-08-27 已透過 Cloudflare API 刪除 script（剩 isitoled / red-mode-ea77，非目標）。舊站徹底停用。
-- [ ] **#5 網域續簽** — 期限 **2026-11-12**（見下方專區）
+- [ ] **#5 網域續簽** — 期限 **2026-11-12**；SOP 與追蹤已建（見專區）。續簽窗口約 2026-10-13 起，**現過早不續，待窗口內執行**
 - [ ] **#6 Reddit 替代 RSS 源評估** — 伺服器端 403，待評估
 - [ ] **#7 檢查履歷公開 / 私人邊界** — 待處理
 - [ ] **#8 工作台卡片滑動面板功能** — 點擊後滑動顯示對應面板（待辦健康度 / 週報 / 經驗沉澱）
@@ -47,8 +47,23 @@ tags:
 | 續期方式 | 每 ~150 天**手動**續期 |
 | 下次檢查日 | **2026-11-12** ⚠️ |
 | 管理後台 | https://dash.domain.digitalplat.org （GitHub OAuth 登入） |
+| API key | `DIGITALPLAT_API_KEY`（Keychain service=`digitalplat`）已確認可取；但續簽 endpoint 需從 Dashboard API 文件取得，不對外硬編 |
 
-> 提醒：免費方案無自動續期，需在 2026-11-12 前手動登入續期，否則網域可能被釋出。
+### 續簽 SOP（依 DigitalPlat 官方文件 5.2-renewal-and-expiration）
+1. 登入 https://dash.domain.digitalplat.org （GitHub OAuth）
+2. 閱讀當前公告與政策變更
+3. 確認網域與帳號正確
+4. 確認 registrant 聯絡資訊為最新
+5. 檢視續簽結果、slot 使用與任何費用
+6. 完成續簽
+7. 在網域清單確認**新到期日**
+8. 留存非敏感紀錄（新到期日）
+
+### 追蹤
+- 免費方案無自動續期，**必須在到期前手動續**，否則網域可能被釋出（同時中斷 DNS 委派 / 網站 / 憑證）。
+- FreeDomain 通常僅在到期前 ~30 天開放續簽 → **建議動作日：~2026-10-13 起**。
+- 現狀（2026-08-27）：距到期 ~2.5 個月，過早續簽會浪費天數且可能被拒，**暫不續**，待窗口內再執行。
+- 實際續簽：優先用後台手動（最穩）；若走 API，需先從 Dashboard 取得正確 endpoint 並確認在窗口內，且不得對 ambiguous 回應自動重試。
 
 ## #3 執行步驟（Cloudflare 後台，需手動）
 
@@ -110,3 +125,4 @@ npm run dev          # 或 astro dev --background
 - 2026-08-27：#3 **實測翻案** — 線上探測證實 Access 已生效（/protected/resume 回 302 登入挑戰，App 允許 isitoled@gmail.com via GitHub IdP）。原「待完成」為過期狀態，標記完成；當初「頁面公開」的判斷因未實測線上而錯誤。
 - 2026-08-27：#4 調查 — `steep-glitter-0952` 為孤立舊站 Worker：無 zone route、DNS 無指向、repo 現役程式碼無引用（僅 封存/ 歷史文件提及）；workers.dev 仍 HTTP 200。停用 = 刪除 script（不可逆），待使用者確認。
 - 2026-08-27：#4 執行 — 使用者確認後透過 Cloudflare API 刪除 steep-glitter-0952 script（success=True），剩 isitoled / red-mode-ea77。標記完成。
+- 2026-08-27：#5 調查 — DigitalPlat FreeDomain 續簽以手動後台為主（dash.domain.digitalplat.org），API 續簽 endpoint 不公開（需從 Dashboard 取得）；FreeDomain 通常僅到期前 ~30 天開放續簽。距 2026-11-12 還 2.5 個月，過早續會浪費天數/被拒，故文件化 SOP + 設追蹤（建議動作日 ~2026-10-13），暫不續。DIGITALPLAT_API_KEY 已確認可取。
