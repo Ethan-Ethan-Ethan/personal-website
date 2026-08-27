@@ -32,6 +32,8 @@
   --radius-md: 8px;
   --radius-lg: 12px;
 
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.3);
+
   --container-narrow: 860px;
   --container-default: 1080px;
   --container-wide: 1180px;
@@ -153,4 +155,26 @@ body {
 
 .skip-link:focus {
   top: 0;
+}
+
+/* ─── Focus visibility (a11y) ─── */
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+}
+
+/* ─── Light theme (D2) ─── */
+[data-theme="light"] {
+  --color-bg: #f4f1e9;
+  --color-panel: #ffffff;
+  --color-panel-2: #efeadf;
+  --color-line: #ddd6c7;
+  --color-text: #1a1a17;
+  --color-muted: #5f5a4d;
+  --color-soft: #6f695a;
+  --color-green: #387024;
+  --color-amber: #8a5f15;
+  --color-blue: #2f6f8f;
+  --color-red: #b1432f;
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.12);
 }

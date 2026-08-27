@@ -62,7 +62,7 @@ const recentPosts = posts.slice(0, 6);
 
           <!-- Summary Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <a href="#posts" class="block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all no-underline text-text">
+            <a href="#posts" class="block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-card no-underline text-text">
               <p class="text-xs text-green mb-1">Articles</p>
               <h3 class="text-md font-semibold mb-1">公開文章</h3>
               <p class="text-sm text-muted mb-2">FAE 價值觀、AI 工作流程、公開筆記</p>
@@ -71,7 +71,7 @@ const recentPosts = posts.slice(0, 6);
                 <strong>{posts.length} 篇</strong>
               </div>
             </a>
-            <a href="/protected/resume" class="block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all no-underline text-text">
+            <a href="/resume" class="block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-card no-underline text-text">
               <p class="text-xs text-blue mb-1">Career</p>
               <h3 class="text-md font-semibold mb-1">工作經驗</h3>
               <p class="text-sm text-muted mb-2">EMC 電源設計 × FAE，從產品驗證到跨國技術支援</p>
@@ -80,7 +80,7 @@ const recentPosts = posts.slice(0, 6);
                 <strong>5+ 年</strong>
               </div>
             </a>
-            <a href="#investing" class="block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all no-underline text-text">
+            <a href="#investing" class="block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-card no-underline text-text">
               <p class="text-xs text-amber mb-1">Investing</p>
               <h3 class="text-md font-semibold mb-1">投資心得</h3>
               <p class="text-sm text-muted mb-2">科技業視角的產業分析與投資框架</p>
@@ -89,7 +89,7 @@ const recentPosts = posts.slice(0, 6);
                 <strong>整理中</strong>
               </div>
             </a>
-            <a href="/protected/vlog" class="block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all no-underline text-text">
+            <a href="/protected/vlog" class="block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-card no-underline text-text">
               <p class="text-xs text-red mb-1">Vlog</p>
               <h3 class="text-md font-semibold mb-1">Vlog 製作</h3>
               <p class="text-sm text-muted mb-2">AI 字幕、聲音克隆、剪輯流程</p>
@@ -149,17 +149,17 @@ const recentPosts = posts.slice(0, 6);
         <span class="px-2 py-0.5 rounded-full bg-panel-2 border border-line text-xs text-soft">個人儀表板</span>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all text-left text-text w-full cursor-pointer" data-panel="health" aria-expanded="false">
+        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-card text-left text-text w-full cursor-pointer" data-panel="health" aria-expanded="false">
           <p class="text-xs text-green mb-1">Tracking</p>
           <h3 class="text-md font-semibold mb-1">待辦健康度</h3>
           <p class="text-sm text-muted mb-2">專案代辦完成度與瓶頸</p>
         </button>
-        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all text-left text-text w-full cursor-pointer" data-panel="weekly" aria-expanded="false">
+        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-card text-left text-text w-full cursor-pointer" data-panel="weekly" aria-expanded="false">
           <p class="text-xs text-blue mb-1">Report</p>
           <h3 class="text-md font-semibold mb-1">週報</h3>
           <p class="text-sm text-muted mb-2">本週進度與重點</p>
         </button>
-        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all text-left text-text w-full cursor-pointer" data-panel="experience" aria-expanded="false">
+        <button type="button" class="workbench-card block p-4 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-card text-left text-text w-full cursor-pointer" data-panel="experience" aria-expanded="false">
           <p class="text-xs text-amber mb-1">Notes</p>
           <h3 class="text-md font-semibold mb-1">經驗沉澱</h3>
           <p class="text-sm text-muted mb-2">從現場到方法的累積</p>

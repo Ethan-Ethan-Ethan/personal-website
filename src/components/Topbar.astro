@@ -3,7 +3,7 @@ const currentPath = Astro.url.pathname;
 
 const navLinks = [
   { href: '/articles/', label: '文章' },
-  { href: '/protected/resume', label: '履歷' },
+  { href: '/resume', label: '履歷' },
   { href: '/protected/vlog', label: 'Vlog' },
 ];
 ---
@@ -30,5 +30,25 @@ const navLinks = [
         </a>
       ))}
     </nav>
+    <button id="theme-toggle" type="button" class="text-sm no-underline text-muted hover:text-text transition-colors" aria-label="切換深淺色主題">淺色</button>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    function sync() {
+      var t = document.documentElement.getAttribute('data-theme');
+      btn.textContent = t === 'light' ? '深色' : '淺色';
+    }
+    sync();
+    btn.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme');
+      var next = cur === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      sync();
+    });
+  })();
+</script>
