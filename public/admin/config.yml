@@ -2,7 +2,6 @@ backend:
   name: github
   repo: Ethan-Ethan-Ethan/personal-website
   branch: main
-  base_url: https://api.github.com
   auth: github
   client_id: Ov23liWBSrm6U8VNv6Zi
 
