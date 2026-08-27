@@ -29,7 +29,7 @@ tags:
 
 > 來源去重：`01-Personal Website.md` 與 `網站重建計畫 2026.md` 原本各寫一份重複清單，此處為唯一正本。
 
-- [x] **#1 Decap CMS GitHub OAuth 驗證** — ✅ 2026-08-27 填入真實 client_id（`Ov23li...`，來自你註冊的 GitHub OAuth App）；`auth: github` + `client_id` 就位，`astro build` 35 頁通過。#2 已解鎖。
+- [ ] **#1 Decap CMS GitHub OAuth 驗證** — ⚠️ 2026-08-27 經 Playwright 實測：Decap 已能掛載（修好 `index.html` script 位置 + `#root`），但 `auth: github` 走的是 Decap 舊的 **Netlify 閘道**（`api.netlify.com/auth` → 404，已停用），**我們設的 `client_id` 完全沒被用到**（登入網址無 `client_id` 參數）。非 Netlify 託管站要用自訂 GitHub OAuth App，必須自行架設 **External OAuth Client proxy**（Decap 官方列出的社群方案，含專給 Cloudflare Pages 的），再把 `auth` 指向它。**#1 未完成，被 proxy 需求阻擋。** GitHub OAuth App（client_id `Ov23li...`）已建好待用。
 - [ ] **#2 測試「瀏覽器寫文章 → commit → 自動部署」** — 依賴 #1 OAuth 完成
 - [x] **#3 Cloudflare Access 設定（`/protected/*` 路由保護）** — ✅ 2026-08-27 實測生效：未帶憑證訪問 /protected/resume 回傳 302 導向 cloudflareaccess.com 登入；App「Ethan Personal Website Protected」允許 isitoled@gmail.com（GitHub IdP）。原計畫書「待完成」為過期狀態。
 - [x] **#4 停用舊 Workers 部署（`steep-glitter-0952`）** — ✅ 2026-08-27 已透過 Cloudflare API 刪除 script（剩 isitoled / red-mode-ea77，非目標）。舊站徹底停用。
@@ -98,9 +98,11 @@ npm run dev          # 或 astro dev --background
 # 停止：astro dev stop ｜ 狀態：astro dev status ｜ 日誌：astro dev logs
 ```
 
-### B. 透過 Decap CMS 瀏覽器編輯（目標流程，#1 完成後可用）
+### B. 透過 Decap CMS 瀏覽器編輯（目標流程，**被 #1 阻擋**）
+> ⚠️ 現狀：`auth: github` 走 Netlify 閘道（已停用 404），自訂 client_id 無效。
+> 需先架設 **External OAuth Client proxy** 並把 `auth` 指向它，本流程才可用。
 1. 開瀏覽器前往 `https://ethanyang.dpdns.org/admin/`
-2. 點「Login with GitHub」授權（#1 OAuth App 已完成，client_id 已就位）
+2. 點「Login with GitHub」授權（需 proxy 就位後才會導向 `github.com/login/oauth/authorize?client_id=...`）
 3. 在「文章 / posts」集合新增或編輯
 4. 儲存 → Decap 以 editorial workflow 開 PR → 合併後 `deploy.yml` 自動部署
 
@@ -129,5 +131,7 @@ npm run dev          # 或 astro dev --background
 - 2026-08-27：#6 評估 — Reddit 伺服器端 403 早已由「改用 RSSHub 36Kr 源」緩解（feeds 現無 Reddit；主因 GitHub Actions IP 被 Reddit 標 bot）。若要真 Reddit 內容的替代方案：Reddit OAuth API（需憑證）或 RSSHub/Redlib 實例。待使用者決定。
 - 2026-08-27：#7 調查 — 完整履歷目前 100% 私人（/protected/resume 經 Cloudflare Access，僅 isitoled@gmail.com）；公開站只有文章（public-notes.md 哲學：履歷=壓縮結果、網站=解壓脈絡）。建議公開「摘要版履歷頁」、完整版留 Access，待使用者決定是否做。
 - 2026-08-27：#8 實作 — 首頁新增「工作台」區塊 + 3 卡片滑動面板（grid-template-rows 0fr→1fr 動畫），`astro build` 35 頁通過。週報 / 經驗沉澱面板內容待使用者填。
-- 2026-08-27：#1 完成 — 使用者提供 GitHub OAuth App client_id（`Ov23li...`），填入 `public/admin/config.yml` 並移除 TODO 佔位；`astro build` 通過。#2 解鎖，待 push 後於 live `/admin/` 實測登入。
-- 2026-08-27：push 上線 — 先 `git pull --rebase`（遠端有 46 個 `📡 RSS 聚合` commit，本地 22 commit 無衝突接在其後），`git push origin main` 成功（`a3faa74..a7ef8f6`）；GitHub Actions 觸發 Cloudflare Pages 部署 #8 工作台 + #1 OAuth 設定。待部署完成後至 live `/admin/` 實測 #2。
+- 2026-08-27：#1 填入 client_id — 使用者提供 GitHub OAuth App client_id（`Ov23li...`），填入 `public/admin/config.yml` 並移除 TODO 佔位；`astro build` 通過。#2 解鎖，待 push 後於 live `/admin/` 實測登入。
+- 2026-08-27：push 上線 — 先 `git pull --rebase`（遠端有 46 個 `📡 RSS 聚合` commit，本地 22 commit 無衝突接在其後），`git push origin main` 成功（`a3faa74..a7ef8f6`）；GitHub Actions 觸發 Cloudflare Pages 部署 #8 工作台 + #1 OAuth 設定。
+- 2026-08-27：#2/#1 Playwright 實測 — `#8` 工作台已上線 ✅；`/admin/` 修好 `#root` 與 script 位置後 Decap 正常掛載（0 console error，「Login with GitHub」按鈕出現）。**但點擊後導向 `api.netlify.com/auth?provider=github&site_id=ethanyang.dpdns.org&scope=repo` → 404**。
+- 2026-08-27：#1 **根因定案** — Decap 源碼 `Login with GitHub` 的 `handleLogin` 永遠用 `gR`（Netlify 閘道 `api.netlify.com/auth`），不讀 `client_id`；官方文件確認 `auth: github` 即為 Netlify 閘道，非 Netlify 託管站已失效。自訂 GitHub OAuth App 需自行架設 **External OAuth Client proxy** 並把 `auth` 指向它。**#1 未完成，被 proxy 需求阻擋**；`Ov23li...` client_id 已建好待用。
