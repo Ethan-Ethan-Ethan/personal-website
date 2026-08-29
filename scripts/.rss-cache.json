@@ -3939,7 +3939,55 @@
     "https://www.infoq.com/news/2026/08/astro-satteri-rust/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Astro Introduces Sätteri: A Rust-powered Markdown And Mdx Processor With Up To 60% Faster Builds",
       "date": "2026-08-28T13:55:58.911Z"
+    },
+    "https://www.inventati.org/who/manifesto": {
+      "title": "Autistici/inventati: Manifesto – who we are and what do we want (2002)",
+      "date": "2026-08-29T08:43:30.741Z"
+    },
+    "https://github.com/paveluv/e": {
+      "title": "e is a customizable self-aware Emacs-like editor written in Chez Scheme",
+      "date": "2026-08-29T08:43:30.741Z"
+    },
+    "https://chipsandcheese.com/p/hot-chips-2026-samsungs-processing": {
+      "title": "Samsung's Processing-in-Memory (PIM)",
+      "date": "2026-08-29T08:43:30.741Z"
+    },
+    "https://github.com/kingroryg/turbokv": {
+      "title": "TurboKV: Insanely fast Rust key-value store",
+      "date": "2026-08-29T08:43:30.741Z"
+    },
+    "https://www.kumander.org/": {
+      "title": "Kumander Linux – A Linux Distro with a Windows 7 Desktop",
+      "date": "2026-08-29T08:43:30.741Z"
+    },
+    "https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/": {
+      "title": "Our decision on Cursor following its acquisition by SpaceX",
+      "date": "2026-08-29T08:43:30.742Z"
+    },
+    "https://github.com/stemdeckapp/stemdeck": {
+      "title": "StemDeck, a free, open-source and local AI stem separator",
+      "date": "2026-08-29T08:43:30.742Z"
+    },
+    "https://www.vectorian.be/articles/2026-06-07/sumerian-king-list-paleoclimate-alignment-explorer/": {
+      "title": "Does the Sumerian King List Align with Paleoclimate Events?",
+      "date": "2026-08-29T08:43:30.742Z"
+    },
+    "https://azmirror.com/2026/08/28/9th-circuit-sides-with-states-in-kalshi-gambling-fight-potentially-reviving-arizonas-prosecution/": {
+      "title": "9th Circuit sides with states in Kalshi gambling fight",
+      "date": "2026-08-29T08:43:30.742Z"
+    },
+    "https://pwning.systems/posts/llm-memory-program-analysis/": {
+      "title": "I accidentally turned LLM memory into program analysis",
+      "date": "2026-08-29T08:43:30.742Z"
+    },
+    "https://www.infoq.com/news/2026/08/freetoken-local-inference/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "FreeToken Unlocks Frontier MoE Inference on Consumer Hardware via Dynamic Co-Execution",
+      "date": "2026-08-29T08:43:31.869Z"
+    },
+    "https://www.infoq.com/news/2026/08/uber-gitfarm-git-as-a-service/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Uber Builds GitFarm to Run Git Operations as a Service for Large-Scale Monorepos",
+      "date": "2026-08-29T08:43:31.869Z"
     }
   },
-  "lastRun": "2026-08-28T13:55:58.911Z"
+  "lastRun": "2026-08-29T08:43:31.869Z"
 }
