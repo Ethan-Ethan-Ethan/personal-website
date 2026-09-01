@@ -4127,7 +4127,91 @@
     "https://www.infoq.com/news/2026/08/kiro-crew-coding-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "AWS Open Sources Kiro Crew for Asynchronous Coding Agents",
       "date": "2026-08-31T08:15:36.165Z"
+    },
+    "https://www.alilleybrinker.com/blog/1password-funds-ethnic-cleansing/": {
+      "title": "1Password Supports the Ethnic Cleansing of Europe",
+      "date": "2026-09-01T07:25:23.988Z"
+    },
+    "https://www.ycombinator.com/companies/collectwise/jobs/7U500pP-founding-customer-success-engineer": {
+      "title": "CollectWise (YC F24) Is Hiring",
+      "date": "2026-09-01T07:25:23.988Z"
+    },
+    "https://www.hermit-tech.com/blog/ai-can-make-you-suck-faster-too": {
+      "title": "AI Can Make You Suck Faster Too",
+      "date": "2026-09-01T07:25:23.988Z"
+    },
+    "https://github.com/vermellcc/vermell": {
+      "title": "Vermell – Minimal, dependency-free C++ web framework using epoll",
+      "date": "2026-09-01T07:25:23.989Z"
+    },
+    "https://restroomarchive.com": {
+      "title": "Restroom Archive",
+      "date": "2026-09-01T07:25:23.989Z"
+    },
+    "https://www.gpuworld.org/": {
+      "title": "GPU World",
+      "date": "2026-09-01T07:25:23.989Z"
+    },
+    "https://fastpotify.rocks/": {
+      "title": "Fastpotify",
+      "date": "2026-09-01T07:25:23.989Z"
+    },
+    "https://github.com/fregacmols/RotaryCell": {
+      "title": "RotaryCell: Making an unmodified rotary phone work over LTE with an ESP32-S3",
+      "date": "2026-09-01T07:25:23.989Z"
+    },
+    "https://www.dolthub.com/blog/2026-08-31-doltlite-beta/": {
+      "title": "DoltLite: A SQLite fork with Git-style version control, built with 2k agent PRs",
+      "date": "2026-09-01T07:25:23.990Z"
+    },
+    "https://jkm.dev/posts/how-2004-runescape-fit-a-multiplayer-rpg-into-56k-dialup/": {
+      "title": "2004 RuneScape fit a multiplayer RPG into 56k dial-up",
+      "date": "2026-09-01T07:25:23.990Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crer81r33pno/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "數百名水力發電工人受困隧道：尼泊爾地下夢魘",
+      "date": "2026-09-01T07:25:24.240Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3d752l9vxxo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "尼泊爾—西藏泥石流：吉隆口岸為何是朝聖之路上的重要關口？",
+      "date": "2026-09-01T07:25:24.240Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cz7ze2lq0vjo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "Shein香港上市首日股價下跌　期待已久的股市首秀表現疲弱",
+      "date": "2026-09-01T07:25:24.240Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cp8dkp32xndo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "梅西退出阿根廷國家隊：「已沒什麼可以再付出了」",
+      "date": "2026-09-01T07:25:24.241Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c15897j72vno/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "星巴克咖啡就算了吧——Z世代喜歡喝冰飲",
+      "date": "2026-09-01T07:25:24.241Z"
+    },
+    "https://www.infoq.com/news/2026/08/doordash-flux-cloud-agent/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "DoorDash’s Flux Runs 130,000 Engineering Tasks Through Cloud-Based Agents",
+      "date": "2026-09-01T07:25:24.660Z"
+    },
+    "https://www.infoq.com/news/2026/08/java-news-roundup-aug24-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: GraalVM, Jakarta Data, JNoSQL, Azul Payara, WildFly, Quarkus, Atmosphere",
+      "date": "2026-09-01T07:25:24.660Z"
+    },
+    "https://www.infoq.com/articles/gcp-wif-scale/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Eliminating Long-Lived Credentials in GCP with Workload Identity Federation",
+      "date": "2026-09-01T07:25:24.660Z"
+    },
+    "https://www.infoq.com/podcasts/evolving-desktop-agentic-ux/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: Scott Jenson on Evolving Desktop OS, Local-First, &amp; Agentic UX",
+      "date": "2026-09-01T07:25:24.660Z"
+    },
+    "https://www.infoq.com/presentations/local-ai-browser-inference-privacy/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Running AI at the Edge: Running Real Workloads Directly in the Browser",
+      "date": "2026-09-01T07:25:24.661Z"
+    },
+    "https://www.infoq.com/news/2026/08/foundry-model-router-regions/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Foundry Model Router Expands from Two Regions to 28, Refreshing Its Model Pool",
+      "date": "2026-09-01T07:25:24.661Z"
     }
   },
-  "lastRun": "2026-08-31T08:15:36.165Z"
+  "lastRun": "2026-09-01T07:25:24.661Z"
 }
