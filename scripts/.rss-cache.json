@@ -4367,7 +4367,91 @@
     "https://www.infoq.com/news/2026/09/cloudflare-optional-oauth-scopes/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Cloudflare Adds Optional OAuth Scopes, Letting Developers Mark What Users May Decline",
       "date": "2026-09-03T06:57:34.659Z"
+    },
+    "https://www.agentconnect.md/blog/grep-beat-lsp-harness/": {
+      "title": "Grep beats LSP? Why coding agents ignore your fancier tools",
+      "date": "2026-09-04T07:01:36.668Z"
+    },
+    "https://www.texasmonthly.com/news-politics/ckdu-kidney-disease-immigration/": {
+      "title": "A mysterious kidney disease has arrived in Texas",
+      "date": "2026-09-04T07:01:36.668Z"
+    },
+    "https://computer.rip/2026-06-14-hookswitch-to-grave.html": {
+      "title": "From Hookswitch to Grave",
+      "date": "2026-09-04T07:01:36.668Z"
+    },
+    "https://gwern.net/xanadu": {
+      "title": "Project Xanadu: Even More Hindsight (2025)",
+      "date": "2026-09-04T07:01:36.668Z"
+    },
+    "https://gizmodo.com/ozempic-and-other-glp-1s-are-being-linked-to-fewer-serious-infections-including-tb-2000806796": {
+      "title": "GLP-1s are being linked to fewer serious infections, including TB",
+      "date": "2026-09-04T07:01:36.668Z"
+    },
+    "https://armature.tech/blog/which-tools-coding-agents-install": {
+      "title": "Which tools do Claude, Codex and Cursor choose? We measured 17k runs to find out",
+      "date": "2026-09-04T07:01:36.669Z"
+    },
+    "https://tasklet.ai/careers/customer-success-engineer": {
+      "title": "Tasklet (YC P26) Is Hiring a Customer Success Engineer",
+      "date": "2026-09-04T07:01:36.669Z"
+    },
+    "https://nolanlawson.com/2026/08/23/the-asteroid-currently-hitting-frontend-web-development/": {
+      "title": "The asteroid currently hitting front end web development",
+      "date": "2026-09-04T07:01:36.669Z"
+    },
+    "https://openai.com/index/gpt-6-astra/": {
+      "title": "GPT-6 Astra",
+      "date": "2026-09-04T07:01:36.669Z"
+    },
+    "https://inference-docs.cerebras.ai/models/overview": {
+      "title": "Qwen 3.8 27B available on Cerebras at 1500 tokens/s",
+      "date": "2026-09-04T07:01:36.670Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c87v19vx721o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "親俄宣傳網絡內幕：利用烏克蘭女性遭強姦的虛假消息，作引流「誘餌」",
+      "date": "2026-09-04T07:01:36.706Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwyznp4qlg9o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "行走在紐約：我發現監控攝像頭數量遠超想像",
+      "date": "2026-09-04T07:01:36.707Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c1dlr007vkgo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "豬腎在人體內運作271天——這會是器官移植的未來嗎？",
+      "date": "2026-09-04T07:01:36.707Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm27n2emn1zo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "聯合國警告可能出現「超大型」厄爾尼諾現象，各國須準備應對",
+      "date": "2026-09-04T07:01:36.707Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3wj1gd3x9no/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "執迷於「睡眠分數」如何反讓你睡得更差？",
+      "date": "2026-09-04T07:01:36.707Z"
+    },
+    "https://www.infoq.com/news/2026/09/apple-continuity-linux/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Tether: Apple Continuity Like Experience Between iOS and Linux Desktop Machines",
+      "date": "2026-09-04T07:01:37.593Z"
+    },
+    "https://www.infoq.com/news/2026/09/jquery-20-years/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Twenty Years of jQuery: How a Little Library Rewired Web Development",
+      "date": "2026-09-04T07:01:37.593Z"
+    },
+    "https://www.infoq.com/news/2026/09/spotify-gisting-llm-performance/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Shopify Introduces Gisting: Compressing LLM System Prompts into Learned Tokens",
+      "date": "2026-09-04T07:01:37.593Z"
+    },
+    "https://www.infoq.com/news/2026/09/human-reviews-AI-era/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Rigorous Yet Sustainable Human Reviews in the AI Era",
+      "date": "2026-09-04T07:01:37.593Z"
+    },
+    "https://www.infoq.com/news/2026/09/pnpm-12-rust/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "pnpm 12 Rewrites Package Manager in Rust, Accelerating Installs While Preserving pnpm 11 Workflows",
+      "date": "2026-09-04T07:01:37.593Z"
+    },
+    "https://www.infoq.com/presentations/instrumenting-scale/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Instrumentation at Scale: Having Your Performance Cake and Eating It Too",
+      "date": "2026-09-04T07:01:37.594Z"
     }
   },
-  "lastRun": "2026-09-03T06:57:34.659Z"
+  "lastRun": "2026-09-04T07:01:37.594Z"
 }
