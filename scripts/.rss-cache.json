@@ -4451,7 +4451,87 @@
     "https://www.infoq.com/presentations/instrumenting-scale/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Presentation: Instrumentation at Scale: Having Your Performance Cake and Eating It Too",
       "date": "2026-09-04T07:01:37.594Z"
+    },
+    "https://www.bbc.com/news/articles/cvgyn8q8gqxo": {
+      "title": "Why are European countries moving their gold out of North America?",
+      "date": "2026-09-05T06:45:41.994Z"
+    },
+    "https://www.coderabbit.ai/blog/gpt-6-astra-code-review-evaluation": {
+      "title": "GPT-6 Astra in code review: Gains, privacy, and cost",
+      "date": "2026-09-05T06:45:41.994Z"
+    },
+    "https://codeberg.org/mv12star/shitter/wiki/Instances": {
+      "title": "Nitter has more working instances than before the takedowns",
+      "date": "2026-09-05T06:45:41.994Z"
+    },
+    "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-2": {
+      "title": "Artificial Analysis Intelligence Index v4.2",
+      "date": "2026-09-05T06:45:41.994Z"
+    },
+    "https://engineering.atspotify.com/2026/9/portal-by-spotify-cut-my-claude-code-token-usage-by-90": {
+      "title": "Portal by Spotify cut my Claude Code token usage by 90%",
+      "date": "2026-09-05T06:45:41.995Z"
+    },
+    "https://blog.val.town/connectors": {
+      "title": "Connecting every app to every other app",
+      "date": "2026-09-05T06:45:41.995Z"
+    },
+    "https://www.charlespetzold.com/blog/2026/09/Can-Guitar-Frets-Perform-Multiplication.html": {
+      "title": "Can guitar frets perform multiplication?",
+      "date": "2026-09-05T06:45:41.995Z"
+    },
+    "https://news.gallup.com/poll/713933/record-high-say-government-corruption-widespread.aspx": {
+      "title": "Record-High 89% in U.S. Say Government Corruption Widespread",
+      "date": "2026-09-05T06:45:41.995Z"
+    },
+    "https://nvd.nist.gov/vuln/detail/cve-2026-85046": {
+      "title": "Actively exploited sandbox RCE in all Chromium versions",
+      "date": "2026-09-05T06:45:41.996Z"
+    },
+    "https://nravic.com/blog/images/": {
+      "title": "Icons as a Service",
+      "date": "2026-09-05T06:45:41.996Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c2kwv977qlko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「究竟是誰在批准什麼？」：光州雙年展台灣復名、中國退展，改名風波背後的角力",
+      "date": "2026-09-05T06:45:42.343Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c89jgd5gn14o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "福克蘭群島爭議升溫：阿根廷宣佈制裁附近油企，特朗普暗示未必協助英國",
+      "date": "2026-09-05T06:45:42.343Z"
+    },
+    "https://www.infoq.com/news/2026/09/blume-docs-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Blume: Zero-Config Docs Framework That Turns a Markdown Folder into an AI-Ready Website",
+      "date": "2026-09-05T06:45:42.710Z"
+    },
+    "https://www.infoq.com/news/2026/09/jupyter-gis-extension/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Redefining GIS: Declarative Symbology and Collaborative Workflows in JupyterGIS",
+      "date": "2026-09-05T06:45:42.711Z"
+    },
+    "https://www.infoq.com/news/2026/09/airbnb-server-driven-login/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Airbnb Cuts Authentication Code by 60% with Server Driven Architecture",
+      "date": "2026-09-05T06:45:42.711Z"
+    },
+    "https://www.infoq.com/news/2026/09/kubernetes-kyaml-manifests/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Kubernetes Promotes KYAML as a Safer, More Consistent Way to Work with Manifests",
+      "date": "2026-09-05T06:45:42.711Z"
+    },
+    "https://www.infoq.com/minibooks/next-gen-architecture-ai-era/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Mini book: Next-Gen Architecture Playbook: Insights and Patterns for the AI Era",
+      "date": "2026-09-05T06:45:42.711Z"
+    },
+    "https://www.infoq.com/presentations/vortex-columnar-file-format-gpu-streaming/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: From S3 to GPU in One Copy: Rethinking Data Loading for ML Training",
+      "date": "2026-09-05T06:45:42.712Z"
+    },
+    "https://www.infoq.com/news/2026/09/copilot-code-review-azure-repos/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Copilot Code Review Reaches Azure Repos, Billed Per Review with Reporting Two Days Behind",
+      "date": "2026-09-05T06:45:42.712Z"
+    },
+    "https://www.infoq.com/podcasts/personality-over-skillset/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: Personality Over Skillset: How Adam Wachtel Builds Engineering Teams",
+      "date": "2026-09-05T06:45:42.712Z"
     }
   },
-  "lastRun": "2026-09-04T07:01:37.594Z"
+  "lastRun": "2026-09-05T06:45:42.712Z"
 }
