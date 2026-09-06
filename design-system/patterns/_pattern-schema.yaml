@@ -15,6 +15,7 @@ sources: []
 #    analyzed_date: 2026-07-11
 #    confidence: "medium"        # high | medium | low
 #    evidence: "inference"       # tokens | tokens+screenshots | screenshots | inference
+#    certification: "inferred"   # inferred | visually_verified；inferred 不得作為本站完成證據
 
 spec:
   layout:

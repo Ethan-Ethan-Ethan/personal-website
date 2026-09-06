@@ -17,6 +17,7 @@ sources:
     analyzed_date: 2026-07-10
     confidence: "low"
     evidence: "inference"
+    certification: "inferred"
 
 spec:
   layout:
