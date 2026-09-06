@@ -1,0 +1,10 @@
+# 個人網站完成證據台帳（pilot，2026-09-06 建立）
+#
+# 契約：claimed ≠ verified。
+# - AI 僅可寫 status（claimed / in_progress）。
+# - status: completed/done 的條目必須帶 evidence 區塊，否則視為未驗證。
+# - evidence.* 僅驗證流程可填非 null（null = 未驗證，不得解讀為通過）。
+# - screenshot 欄填 Playwright 快照路徑（見 verification/e2e/visual-fusion.spec.ts-snapshots/）。
+# - 鍵名用 evidence，不用頂層 verification（避讓 config/site-system.yaml L56 既有語義）。
+version: 1
+items: []
