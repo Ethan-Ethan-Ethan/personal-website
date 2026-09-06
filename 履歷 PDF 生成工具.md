@@ -6,6 +6,7 @@ updated: 2026-06-17
 tags:
   - project/personal-website
   - project/resume
+source_exempt: true
 ---
 
 # 履歷 PDF 生成工具

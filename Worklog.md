@@ -2,13 +2,78 @@
 type: note
 project: personal-website
 created: 2026-06-15
-updated: 2026-07-24
+updated: 2026-09-06
 status: seedling
+source_exempt: true
 ---
 
 # Worklog — Personal Website（含 Website Design System）
 
 > 合併專案工作紀錄：原 Personal-Website（Astro 7 重建）+ Website Design System（設計方法論）
+
+## 2026-09-06 現況更新 — 星空與電腦景深
+
+### 現況
+
+```text
+已完成
+├── Astro／React／Three.js 場景骨架
+├── 四個 HTML 工作視窗與 Command Bus
+├── 公開內容 projection 與隱私閘門
+├── Unit／E2E／contract／build 驗證
+└── 860 個靜態頁面 build
+
+待修正
+└── 星空與前景物件的真實遮擋關係
+```
+
+### 問題與決策
+
+| 問題 | 根因 | 已否決做法 | 核准做法 | 狀態 |
+|------|------|------------|----------|------|
+| 星空應位於電腦後方，但畫面像是把星星硬裁掉 | `workspace-foreground.webp` 是無 Alpha 的完整扁平圖；目前用 polygon `clip-path` 重畫一小塊前景，無法符合真實輪廓 | 繼續擴大矩形／polygon 遮罩 | 將場景拆成背景 → 星空動畫 → 透明電腦／玩偶／桌面前景 | 候選已接入，待人工視覺驗收 |
+
+### 本地模型執行結果
+
+| 階段 | 結果 | 判定 |
+|------|------|------|
+| macOS Vision foreground mask | 桌機玩偶區約 2.8%、桌面約 7%；錯留約 27% 窗外背景 | ❌ 不可用 |
+| 本地 Qwen3.8-27B 視覺複驗 | 確認 Vision 為中央實心區塊，漏電腦配件、玩偶與桌面 | ❌ Vision 路線停止 |
+| Qwen boxes → SAM 2.1 | 電腦／玩偶可辨識，但桌面與小物件不完整 | ⚠️ 不直接採用 |
+| BiRefNet HR-matting | 補依賴後仍遇到 MPS dtype 相容問題；兩次失敗後停止同路徑 | ❌ 停止迭代 |
+| Grounding DINO Tiny → SAM 2.1 Hiera Small | 逐物件定位電腦、鍵盤、滑鼠、玩偶、桌面、植物、燈與書本 | ✅ 採用候選 |
+
+產出：
+
+```text
+public/assets/galaxy/
+├── workspace-foreground-alpha.webp         # 1672×941，241 KB
+└── workspace-mobile-foreground-alpha.webp  # 940×1672，96 KB
+```
+
+驗證：
+
+- Unit：Alpha WebP 尺寸、ALPH channel、無電腦／玩偶 polygon、layer order。
+- Playwright：桌機／手機各驗證實際 `currentSrc`、`object-fit`、`object-position`。
+- Pixel contract：各取三個前景點必須不透明、三個天空／空隙點必須透明。
+- 舊無 Alpha WebP 保留作 rollback，但不再由現役前景元件載入。
+
+### 下一步 SOP
+
+1. 從原始工作室圖分離桌機版電腦、玩偶與桌面物件，輸出透明 PNG／WebP。
+2. 保留房間底圖為最底層，將 Three.js 星空放在背景與透明前景之間。
+3. 移除 `.computer-foreground` 的粗略 polygon `clip-path`。
+4. 先以靜態星點檢查電腦外殼、螢幕框、玩偶與桌緣是否完全遮擋。
+5. 再開啟星空、星雲與流星動畫，執行桌機／手機 Playwright regression。
+6. 桌機視覺確認後，使用獨立手機透明前景重複驗證。
+
+### 驗收條件
+
+- 星星可從電腦後方經過，但不能顯示在電腦本體上。
+- 電腦與玩偶的遮擋使用實際 Alpha 輪廓，不使用粗略矩形代替。
+- `prefers-reduced-motion` 下保持靜態背景與相同遮擋關係。
+- WebGL fallback 下仍維持相同 layer order。
+- 未通過人工視覺確認前，不合併 `main` 或部署 production。
 
 ## 問題與解法
 

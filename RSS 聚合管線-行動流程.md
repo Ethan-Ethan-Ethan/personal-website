@@ -8,6 +8,8 @@ tags:
   - workflow/rss
 status: seedling
 verification_status: partial
+source_url: "https://rss-source.com/feed"
+source_url_state: direct
 ---
 
 # RSS 聚合管線 — 行動流程

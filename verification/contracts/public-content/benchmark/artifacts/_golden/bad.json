@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "leak",
+      "summary": "/Users/ethan secret",
+      "liveSignal": true,
+      "site_visibility": "public"
+    }
+  ]
+}

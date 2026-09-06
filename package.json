@@ -7,14 +7,44 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run system:validate && npm run content:check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "content:check": "node scripts/site.mjs content check --source-mode artifact",
+    "content:sync": "node scripts/site.mjs content sync",
+    "content:sync:dry": "node scripts/site.mjs content sync --dry-run",
+    "test:e2e": "node scripts/site.mjs verify e2e",
+    "content:dsh": "node scripts/run-content-dsh.mjs",
+    "verify": "node scripts/site.mjs verify all",
+    "site": "node scripts/site.mjs",
+    "system:validate": "node scripts/site.mjs system validate",
+    "system:generate": "node scripts/site.mjs system generate",
+    "content:verify": "node scripts/site.mjs content check --source-mode auto",
+    "test:e2e:raw": "playwright test"
   },
   "dependencies": {
+    "@astrojs/react": "^6.0.5",
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.7",
+    "gsap": "^3.15.0",
     "lightweight-charts": "^5.2.0",
-    "tailwindcss": "^4.3.2"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.2",
+    "three": "^0.185.1",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-react": "^6.1.1",
+    "jsdom": "^30.0.1",
+    "vitest": "^5.0.0"
   }
 }

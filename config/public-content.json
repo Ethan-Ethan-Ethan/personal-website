@@ -1,0 +1,13 @@
+{
+  "vaultRoot": "../..",
+  "output": "src/data/generated/public-content.json",
+  "sources": [
+    "04_Projects/個人網站/01-Personal Website.md",
+    "04_Projects/影片轉場分析器/影片轉場分析器.md",
+    "04_Projects/自建 Harness/01-自建 Harness Dashboard.md",
+    "04_Projects/Graphify 知識圖譜/Graphify 知識圖譜.md",
+    "04_Projects/SearXNG 整合/SearXNG 整合.md",
+    "04_Projects/投資交易/01-投資交易自動化 Dashboard.md"
+  ],
+  "lock": "config/public-content.lock.json"
+}

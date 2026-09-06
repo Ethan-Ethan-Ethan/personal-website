@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "personal-website",
+      "slug": "personal-website",
+      "title": "Personal Website",
+      "summary": "把內容管線、交易視覺化與個人品牌整合成可持續維護的 Astro 網站。",
+      "section": "projects",
+      "status": "active",
+      "updatedAt": "2026-09-06",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 10,
+      "tags": [
+        "project/personal-website",
+        "domain/ai-dev"
+      ],
+      "highlights": [
+        "Astro 7 靜態內容架構",
+        "RSS 與 Gmail 自動聚合",
+        "Cloudflare Pages 自動部署"
+      ],
+      "demoUrl": "https://ethanyang.dpdns.org",
+      "sourceHash": "a868496334b0d55140abc26c2a7ecd2bce32905545d97bfa674f2e7a9fb03f14"
+    },
+    {
+      "id": "video-transition-analyzer",
+      "slug": "video-transition-analyzer",
+      "title": "影片轉場分析器",
+      "summary": "使用 Apple 原生框架分析影片鏡頭、轉場、運鏡與聲音，輸出可被後續工具使用的結構化結果。",
+      "section": "ai-lab",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 20,
+      "tags": [
+        "domain/ai-llm",
+        "workflow/video-analysis"
+      ],
+      "highlights": [
+        "本機優先的影音分析",
+        "結構化 JSON 與可讀報告",
+        "驗證驅動的分析流程"
+      ],
+      "sourceHash": "fa1e3b890894b33bae88bead5b71d0dd62b720da0207b38342ecc7240a7fda3d"
+    },
+    {
+      "id": "harness-build",
+      "slug": "self-evolving-harness",
+      "title": "自建 Harness",
+      "summary": "以 deterministic rubric、凍結樣本與 keep-or-revert ratchet，讓 AI 工作流的改進可以被驗證。",
+      "section": "ai-lab",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 30,
+      "tags": [
+        "domain/ai-dev"
+      ],
+      "highlights": [
+        "確定性品質閘門",
+        "退化自動拒絕",
+        "跨案例不變量抽取"
+      ],
+      "sourceHash": "24720c5b318bdc2c3f6b834907282a2caab835ec66741dd7dde93312780b2bfe"
+    },
+    {
+      "id": "graphify-knowledge-graph",
+      "slug": "graphify",
+      "title": "Graphify 知識圖譜",
+      "summary": "連接程式碼、文件與圖片的跨域關係，協助找到隱藏依賴並驗證知識正本。",
+      "section": "ai-lab",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 40,
+      "tags": [
+        "concept/agent"
+      ],
+      "highlights": [
+        "跨 code／docs／images 查詢",
+        "區分 extracted 與 inferred 關係",
+        "支援正本與影響範圍判斷"
+      ],
+      "sourceHash": "2b1da6b50f05064c5250dfe09df18ac921f5c07c5394101e0a30921b08a3f99d"
+    },
+    {
+      "id": "searxng-integration",
+      "slug": "searxng",
+      "title": "SearXNG 隱私搜尋",
+      "summary": "將本機隱私搜尋接入 Agent 工具鏈，在不依賴單一搜尋引擎下取得多來源資訊。",
+      "section": "projects",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 50,
+      "tags": [
+        "concept/agent"
+      ],
+      "highlights": [
+        "多搜尋引擎聚合",
+        "本機部署與隱私控制",
+        "可重用的研究入口"
+      ],
+      "sourceHash": "cb6704b7d2290459c2104e5e909d13445ae86a4110d864a6265a92b3ba80b2ae"
+    },
+    {
+      "id": "trading-automation",
+      "slug": "trading-research",
+      "title": "量化交易驗證研究",
+      "summary": "用候選模型、回放與驗證邊界研究交易方法；公開內容只呈現方法，不提供即時訊號。",
+      "section": "trading-lab",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 60,
+      "tags": [],
+      "highlights": [
+        "歷史資料回放",
+        "候選與執行環境隔離",
+        "每個結論附適用邊界"
+      ],
+      "evidence": {
+        "date": "2026-09-05",
+        "scope": "歷史市場資料與候選策略驗證；不包含即時交易建議。",
+        "disclaimer": "歷史研究不代表未來績效，內容不構成投資建議。",
+        "liveSignal": false
+      },
+      "sourceHash": "a0c85d4ca65dd5c9d421aae3586c69ef8e7e9552fc65f84e29034134a719457b"
+    }
+  ]
+}

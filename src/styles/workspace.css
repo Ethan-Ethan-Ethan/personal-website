@@ -1,0 +1,7 @@
+/** Compatibility aggregator. Canonical styles are classified under src/styles/workspace/. */
+@import "./workspace/tokens.css";
+@import "./workspace/shell.css";
+@import "./workspace/scene.css";
+@import "./workspace/elements.css";
+@import "./workspace/windows.css";
+@import "./workspace/responsive.css";

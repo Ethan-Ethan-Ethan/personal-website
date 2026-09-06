@@ -8,6 +8,8 @@ tags:
   - reference/devops
   - reference/lessons-learned
 verification_status: partial
+source_url: "https://dash.cloudflare.com/profile/api-tokens"
+source_url_state: direct
 ---
 
 # Cloudflare API Token 權限規劃

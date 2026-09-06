@@ -1,0 +1,26 @@
+# DSH Runtime project task registry — generated-state, build-only website pilot.
+tasks:
+  - id: website.build.scoped
+    trigger: source.changed
+    not_before: "2026-09-05T02:24:35+00:00"
+    input:
+      project: 個人網站
+      subject_globs:
+        - 04_Projects/個人網站/src/**
+        - 04_Projects/個人網站/public/**
+        - 04_Projects/個人網站/package.json
+        - 04_Projects/個人網站/package-lock.json
+        - 04_Projects/個人網站/astro.config.mjs
+        - 04_Projects/個人網站/tsconfig.json
+    command: website-build-verify
+    policy: generated_state
+    timeout_seconds: 180
+    retry:
+      max_attempts: 2
+      backoff_seconds: 30
+    acceptance:
+      - exit_zero
+      - report_present
+    eval:
+      - website_build_contract
+    on_failure: evidence_packet_and_notify

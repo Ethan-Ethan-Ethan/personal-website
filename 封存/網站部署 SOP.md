@@ -8,6 +8,8 @@ tags:
   - workflow/deploy
   - type/archived
 verification_status: verified
+source_url: "https://ethanyang.dpdns.org/"
+source_url_state: direct
 ---
 
 > **已封存**：此文件記錄第一代 Workers 的手動部署 SOP。2026-07-12 已全面改為 Cloudflare Pages 自動部署。新流程：`git push main` → Cloudflare Pages 自動偵測 → `astro build` → `dist/` 輸出 → 部署上線。無需手動 staging 或 Wrangler 指令。

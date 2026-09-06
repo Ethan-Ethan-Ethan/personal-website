@@ -3,6 +3,8 @@ type: note
 status: seedling
 created: 2026-07-18
 updated: 2026-07-18
+source_url: "https://ethanyang.dpdns.org/"
+source_url_state: direct
 ---
 
 # GitHub Actions + Cloudflare Pages deployment flow

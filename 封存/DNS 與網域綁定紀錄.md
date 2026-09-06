@@ -7,6 +7,8 @@ tags:
   - project/personal-website
   - tool/cloudflare
   - type/archived
+source_url: "https://steep-glitter-0952.isitoled.workers.dev/"
+source_url_state: direct
 ---
 
 > **已封存**：此文件記錄第一代 Workers 的 DNS 設定。2026-07-12 已將 CNAME 目標從 Workers 改為 Cloudflare Pages（`personal-website-bvk.pages.dev`），Nameserver 與續期提醒維持不變。最新設定請參考 [[網站重建計畫 2026]]。

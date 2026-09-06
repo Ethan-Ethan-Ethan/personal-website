@@ -8,6 +8,8 @@ tags:
   - tool/cloudflare
   - workflow/deploy
   - type/archived
+source_url: "https://steep-glitter-0952.isitoled.workers.dev/"
+source_url_state: direct
 ---
 
 > **已封存**：此文件記錄第一代 Workers 靜態部署流程。2026-07-12 已全面遷移至 Astro 7 + Cloudflare Pages，部署方式改為 git push 自動觸發。新流程請參考 [[網站重建計畫 2026]] 與 [[RSS 聚合管線-行動流程]]。

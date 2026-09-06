@@ -6,6 +6,7 @@ updated: 2026-07-18
 tags:
   - project/personal-website
 verification_status: partial
+source_exempt: true
 ---
 
 # Obsidian 到網站輸出流程

@@ -3,6 +3,8 @@ type: note
 status: seedling
 created: 2026-07-18
 updated: 2026-07-18
+source_url: "https://original-article-url.com"
+source_url_state: direct
 ---
 
 # RSS aggregation pipeline — technical details

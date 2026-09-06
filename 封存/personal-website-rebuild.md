@@ -3,6 +3,7 @@ type: note
 status: seedling
 created: 2026-07-18
 updated: 2026-07-18
+source_exempt: true
 ---
 
 # Personal website rebuild — complete summary

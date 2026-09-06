@@ -1,0 +1,20 @@
+benchmark: personal-website-public-projection
+version: 3
+title: 個人網站公開 projection deterministic 安全契約
+pass_threshold: 1.0
+items:
+  - { id: R01, description: 固定 schema 版本, assertion: json_path, path: schemaVersion, equals: "1", weight: 1 }
+  - { id: R02, description: 第一項摘要存在, assertion: json_path, path: "items[0].summary", exists: true, weight: 1 }
+  - { id: R03, description: 第一項 hash 格式, assertion: json_path, path: "items[0].sourceHash", regex: '^[a-f0-9]{64}$', weight: 1 }
+  - { id: R04, description: 不得輸出本機絕對路徑, assertion: regex_matches, pattern: '(?s)\A(?!.*\/(?:Users|home|private|var|Volumes|tmp|etc)\/).*\Z', weight: 2 }
+  - { id: R05, description: 不得輸出 build-time visibility, assertion: not_contains_text, text: "site_visibility", weight: 1 }
+  - { id: R06, description: URL 欄位不得使用 protocol-relative URL, assertion: regex_matches, pattern: '(?s)\A(?!.*"(?:cover|demoUrl|repoUrl)"\s*:\s*"\/\/).*\Z', weight: 2 }
+  - { id: R07, description: HTTPS URL 不得內嵌 credentials, assertion: regex_matches, pattern: '(?s)\A(?!.*"(?:cover|demoUrl|repoUrl)"\s*:\s*"https:\/\/[^\/"\s]+@).*\Z', weight: 2 }
+  - { id: R08, description: 所有 liveSignal 必須不是 true, assertion: regex_matches, pattern: '(?s)\A(?!.*"liveSignal"\s*:\s*true).*\Z', weight: 2 }
+  - { id: R09, description: 不得輸出常見裸 token, assertion: regex_matches, pattern: '(?is)\A(?!.*(?:github_pat_[a-z0-9_]{20,}|gh[pousr]_[a-z0-9]{20,}|sk-(?:proj-)?[a-z0-9_-]{20,}|(?:AKIA|ASIA)[A-Z0-9]{16})).*\Z', weight: 3 }
+  - id: R10
+    description: 使用 production deterministic validator 驗證 closed schema、URL、安全掃描與 sourceHash payload binding
+    assertion: shell_check
+    command: >-
+      node --input-type=module -e "import {readFile} from 'node:fs/promises'; import {validateProjection} from './scripts/lib/sync-public-content.mjs'; validateProjection(JSON.parse(await readFile(process.argv[1], 'utf8')));" {artifact}
+    weight: 10

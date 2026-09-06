@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "personal-website",
+      "slug": "personal-website",
+      "title": "Personal Website",
+      "summary": "把內容管線、交易視覺化與個人品牌整合成可持續維護的 Astro 網站。",
+      "section": "projects",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 10,
+      "tags": [
+        "Astro",
+        "Cloudflare",
+        "Content Pipeline"
+      ],
+      "highlights": [
+        "Astro 7 靜態內容架構",
+        "RSS 與 Gmail 自動聚合",
+        "Cloudflare Pages 自動部署"
+      ],
+      "demoUrl": "https://ethanyang.dpdns.org",
+      "sourceHash": "d2969ea4ca09d26e383250aafc9dfe147bbf945f162e4e9e0d11c8d9113cb775"
+    },
+    {
+      "id": "video-transition-analyzer",
+      "slug": "video-transition-analyzer",
+      "title": "影片轉場分析器",
+      "summary": "使用 Apple 原生框架分析影片鏡頭、轉場、運鏡與聲音，輸出可被後續工具使用的結構化結果。",
+      "section": "ai-lab",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 20,
+      "tags": [
+        "Swift",
+        "Video Intelligence",
+        "On-device AI"
+      ],
+      "highlights": [
+        "本機優先的影音分析",
+        "結構化 JSON 與可讀報告",
+        "驗證驅動的分析流程"
+      ],
+      "sourceHash": "2bf46262c41ee83caaf9a5302496b6995189479b6eb2cb5959363377977a8668"
+    },
+    {
+      "id": "harness-build",
+      "slug": "self-evolving-harness",
+      "title": "自建 Harness",
+      "summary": "以 deterministic rubric、凍結樣本與 keep-or-revert ratchet，讓 AI 工作流的改進可以被驗證。",
+      "section": "ai-lab",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 30,
+      "tags": [
+        "Agent Reliability",
+        "Evaluation",
+        "Automation"
+      ],
+      "highlights": [
+        "確定性品質閘門",
+        "退化自動拒絕",
+        "跨案例不變量抽取"
+      ],
+      "sourceHash": "2eb361e53e15f063031397184bdc1dba013f88094334f5e92956cc8861a055d2"
+    },
+    {
+      "id": "graphify-knowledge-graph",
+      "slug": "graphify",
+      "title": "Graphify 知識圖譜",
+      "summary": "連接程式碼、文件與圖片的跨域關係，協助找到隱藏依賴並驗證知識正本。",
+      "section": "ai-lab",
+      "status": "research",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 40,
+      "tags": [
+        "Knowledge Graph",
+        "Multimodal",
+        "Governance"
+      ],
+      "highlights": [
+        "跨 code／docs／images 查詢",
+        "區分 extracted 與 inferred 關係",
+        "支援正本與影響範圍判斷"
+      ],
+      "sourceHash": "dca55b9891088545e0e5941311a297b464b3c3432cf1e9de48b128642e151bfa"
+    },
+    {
+      "id": "searxng-integration",
+      "slug": "searxng",
+      "title": "SearXNG 隱私搜尋",
+      "summary": "將本機隱私搜尋接入 Agent 工具鏈，在不依賴單一搜尋引擎下取得多來源資訊。",
+      "section": "projects",
+      "status": "completed",
+      "updatedAt": "2026-07-08",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 50,
+      "tags": [
+        "Search",
+        "Privacy",
+        "Agent Tools"
+      ],
+      "highlights": [
+        "多搜尋引擎聚合",
+        "本機部署與隱私控制",
+        "可重用的研究入口"
+      ],
+      "sourceHash": "50363a8a07ccb2e1942def58e1cfb93b62464b8f43bf6c9f9515314ad1212731"
+    },
+    {
+      "id": "trading-research",
+      "slug": "trading-research",
+      "title": "量化交易驗證研究",
+      "summary": "用候選模型、回放與驗證邊界研究交易方法；公開內容只呈現方法，不提供即時訊號。",
+      "section": "trading-lab",
+      "status": "research",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 60,
+      "tags": [
+        "Trading Research",
+        "Backtesting",
+        "Risk"
+      ],
+      "highlights": [
+        "歷史資料回放",
+        "候選與執行環境隔離",
+        "每個結論附適用邊界"
+      ],
+      "evidence": {
+        "date": "2026-09-05",
+        "scope": "歷史市場資料與候選策略驗證；不包含即時交易建議。",
+        "disclaimer": "歷史研究不代表未來績效，內容不構成投資建議。",
+        "liveSignal": false
+      },
+      "sourceHash": "e3a145e815d65878c0ede55aeae7087bc21dd90361240f8ca6abc60e935a8358"
+    }
+  ]
+}

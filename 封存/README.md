@@ -4,6 +4,8 @@ status: active
 created: 2026-06-15
 updated: 2026-07-18
 type: note
+source_url: "https://ethanyang.dpdns.org/"
+source_url_state: direct
 ---
 
 # 個人網站

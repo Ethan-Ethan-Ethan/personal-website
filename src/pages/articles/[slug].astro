@@ -3,14 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Topbar from '../../components/Topbar.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
+import {
+  buildArticleStaticPaths,
+  getArticleHref,
+} from '../../features/articles/routing.mjs';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts');
-  return posts.map(post => ({
-    // Use filename without directory as slug
-    params: { slug: post.id.split('/').pop() || post.id },
-    props: { post },
-  }));
+  return buildArticleStaticPaths(await getCollection('posts'));
 }
 
 const { post } = Astro.props;
@@ -72,7 +71,7 @@ const sourceLabel = { manual: '原創', rss: 'RSS 聚合', gmail: 'Gmail 擷取'
     <!-- Article Navigation -->
     <nav class="mt-12 pt-6 border-t border-line flex justify-between items-center gap-4">
       {prevPost ? (
-        <a href={`/articles/${prevPost.id}`} class="text-sm text-muted hover:text-green transition-colors no-underline">
+        <a href={getArticleHref(prevPost)} class="text-sm text-muted hover:text-green transition-colors no-underline">
           ← {prevPost.data.title}
         </a>
       ) : <span />}
@@ -80,7 +79,7 @@ const sourceLabel = { manual: '原創', rss: 'RSS 聚合', gmail: 'Gmail 擷取'
         文章列表
       </a>
       {nextPost ? (
-        <a href={`/articles/${nextPost.id}`} class="text-sm text-muted hover:text-green transition-colors no-underline">
+        <a href={getArticleHref(nextPost)} class="text-sm text-muted hover:text-green transition-colors no-underline">
           {nextPost.data.title} →
         </a>
       ) : <span />}

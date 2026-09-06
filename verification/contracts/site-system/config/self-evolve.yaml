@@ -1,0 +1,17 @@
+meta:
+  project: personal-website
+  title: Site System YAML contract
+  version: "3"
+  standalone: false
+engine:
+  framework: benchmark-gate
+metric:
+  pass_threshold: 1.0
+  required_pass_ratio: 1.0
+  weights_sum: 34
+gate:
+  vault_write: manual
+  rule: Generated registry must never replace config/site-system.yaml as canonical source.
+layout:
+  docs_dir: docs
+  benchmark_dir: benchmark

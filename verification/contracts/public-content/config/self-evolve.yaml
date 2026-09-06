@@ -1,0 +1,17 @@
+meta:
+  project: personal-website
+  title: "Public content sync deterministic gate"
+  version: "3"
+  standalone: false
+engine:
+  framework: "benchmark-gate pre-deploy validation"
+metric:
+  pass_threshold: 1.0
+  required_pass_ratio: 1.0
+  weights_sum: 25
+gate:
+  vault_write: manual
+  rule: "Only reviewed site_* frontmatter may enter the public projection."
+layout:
+  docs_dir: docs
+  benchmark_dir: benchmark

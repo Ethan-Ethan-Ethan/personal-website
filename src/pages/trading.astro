@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Topbar from '../components/Topbar.astro';
+import Footer from '../components/Footer.astro';
+import VolumeChart from '../components/VolumeChart.astro';
+---
+<BaseLayout title="Trading Lab｜Ethan Yang" description="以歷史資料、回放與驗證邊界整理量化交易研究；不提供即時訊號或投資建議。">
+  <Topbar />
+  <main id="main-content" class="pt-20 max-w-[var(--container-wide)] mx-auto px-4">
+    <header class="max-w-3xl py-10">
+      <p class="text-xs text-blue tracking-widest uppercase">Trading Lab · Research only</p>
+      <h1 class="text-4xl font-extrabold tracking-tight mt-3 mb-4">量化交易驗證研究</h1>
+      <p class="text-muted text-md leading-relaxed">用歷史資料、候選模型與回放檢查交易想法。所有圖表都是研究介面，不提供即時交易訊號，也不構成投資建議。</p>
+    </header>
+    <section class="bg-panel border border-line rounded-lg p-6 mb-8">
+      <h2 class="text-xl font-semibold mb-2">BTC/USDT 走勢與成交量</h2>
+      <p class="text-xs text-soft mb-5">歷史視覺化資料 · 最後公開審核：2026-09-05</p>
+      <VolumeChart data="/assets/trading/btc-usdt.json" height={430} symbol="BTC/USDT" />
+    </section>
+    <section class="grid md:grid-cols-3 gap-4 mb-10">
+      <article class="p-5 bg-panel border border-line rounded-lg"><p class="text-xs text-blue mb-2">METHOD</p><h2 class="text-lg font-semibold mb-2">先定義再回測</h2><p class="text-sm text-muted">把名詞、資料範圍與失敗條件寫清楚，避免從結果反推規則。</p></article>
+      <article class="p-5 bg-panel border border-line rounded-lg"><p class="text-xs text-amber mb-2">EVIDENCE</p><h2 class="text-lg font-semibold mb-2">候選與執行隔離</h2><p class="text-sm text-muted">研究結果維持 candidate-only，驗證通過不代表可以直接進入真實執行。</p></article>
+      <article class="p-5 bg-panel border border-line rounded-lg"><p class="text-xs text-green mb-2">BOUNDARY</p><h2 class="text-lg font-semibold mb-2">歷史不等於未來</h2><p class="text-sm text-muted">資料、時框與市場條件都會改變，每項結果都必須附帶適用邊界。</p></article>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getArticleHref } from '../features/articles/routing.mjs';
 
 interface Props {
   post: CollectionEntry<'posts'>;
@@ -23,7 +24,7 @@ const sourceColor = {
 ---
 
 <a
-  href={`/articles/${post.id}`}
+  href={getArticleHref(post)}
   class="block p-5 rounded-lg bg-panel border border-line hover:border-soft transition-all hover:shadow-card no-underline text-text group"
 >
   <div class="flex items-center gap-2 mb-2">

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "demo",
+      "slug": "demo",
+      "title": "Demo",
+      "summary": "Safe summary",
+      "section": "projects",
+      "status": "active",
+      "updatedAt": "2026-09-05",
+      "lastReviewed": "2026-09-05",
+      "featured": true,
+      "order": 1,
+      "tags": [],
+      "highlights": [],
+      "sourceHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ]
+}

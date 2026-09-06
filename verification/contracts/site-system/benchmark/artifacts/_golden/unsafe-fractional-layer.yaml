@@ -1,0 +1,265 @@
+version: 1
+system:
+  id: personal-website
+  generated_types: src/generated/site-system.ts
+trunk:
+  site-shell:
+    owner: astro
+    depends_on: []
+  command-bus:
+    owner: react
+    depends_on:
+      - scene-state
+      - window-state
+      - content-bridge
+  scene-state:
+    owner: react
+    depends_on: []
+  window-state:
+    owner: react
+    depends_on: []
+  content-bridge:
+    owner: astro
+    depends_on: []
+elements:
+  galaxy:
+    owner: GalaxyCanvas
+    component: GalaxyCanvas
+    layer: 2.5
+    responsive: adaptive
+    motion: webgl
+    reduced_motion: static
+    depends_on:
+      - scene-state
+  scene-atmosphere:
+    owner: SceneAtmosphere
+    component: SceneAtmosphere
+    layer: 3
+    responsive: adaptive
+    motion: css
+    reduced_motion: static
+    depends_on:
+      - scene-state
+  computer-foreground:
+    owner: ForegroundOcclusion
+    component: ForegroundOcclusion
+    layer: 4
+    responsive: adaptive
+    motion: none
+    reduced_motion: static
+    depends_on:
+      - galaxy
+  plush-character:
+    owner: PlushCharacter
+    component: PlushCharacter
+    layer: 4
+    responsive: adaptive
+    motion: css
+    reduced_motion: static
+    depends_on:
+      - galaxy
+      - scene-state
+  computer-hotspots:
+    owner: ComputerHotspots
+    component: ComputerHotspots
+    layer: 5
+    responsive: adaptive
+    motion: css
+    reduced_motion: static
+    depends_on:
+      - command-bus
+      - scene-state
+  workspace-windows:
+    owner: WorkspaceWindows
+    component: WorkspaceWindows
+    layer: 20
+    responsive: adaptive
+    motion: css
+    reduced_motion: fade-only
+    depends_on:
+      - command-bus
+      - window-state
+      - content-bridge
+  workspace-dock:
+    owner: WorkspaceDock
+    component: WorkspaceDock
+    layer: 40
+    responsive: adaptive
+    motion: css
+    reduced_motion: static
+    depends_on:
+      - command-bus
+      - window-state
+features:
+  scene-preview:
+    owner: workspace
+    depends_on:
+      - command-bus
+      - scene-state
+      - galaxy
+      - scene-atmosphere
+      - plush-character
+      - computer-hotspots
+  window-lifecycle:
+    owner: workspace
+    depends_on:
+      - command-bus
+      - window-state
+      - workspace-windows
+      - workspace-dock
+  foreground-occlusion:
+    owner: workspace
+    depends_on:
+      - galaxy
+      - computer-foreground
+      - plush-character
+  public-content:
+    owner: content
+    depends_on:
+      - content-bridge
+  trading-consent:
+    owner: trading
+    depends_on:
+      - workspace-windows
+  responsive-fallback:
+    owner: workspace
+    depends_on:
+      - site-shell
+      - galaxy
+      - workspace-windows
+  article-routing:
+    owner: articles
+    depends_on:
+      - site-shell
+      - content-bridge
+content:
+  sections:
+    - projects
+    - ai-lab
+    - trading-lab
+    - about
+    - articles
+commands:
+  system:
+    validate:
+      owner: site-shell
+      input: {}
+      result: system-valid
+      failure: invalid-site-system
+    generate:
+      owner: site-shell
+      input:
+        dry-run: boolean
+      result: registry-generated
+      failure: generated-registry-drift
+  command:
+    list:
+      owner: site-shell
+      input: {}
+      result: commands-listed
+      failure: command-registry-invalid
+  scene:
+    preview:
+      owner: scene-state
+      input:
+        target: scene-state
+      result: scene-updated
+      failure: invalid-scene-target
+    reset:
+      owner: scene-state
+      input: {}
+      result: scene-reset
+      failure: scene-reset-failed
+  window:
+    open:
+      owner: window-state
+      input:
+        id: window-id
+        history: history-mode
+      result: window-opened
+      failure: invalid-window-id
+    close:
+      owner: window-state
+      input:
+        id: window-id
+      result: window-closed
+      failure: invalid-window-id
+    minimize:
+      owner: window-state
+      input:
+        id: window-id
+      result: window-minimized
+      failure: invalid-window-id
+    focus:
+      owner: window-state
+      input:
+        id: window-id
+      result: window-focused
+      failure: invalid-window-id
+    move:
+      owner: window-state
+      input:
+        id: window-id
+        position: point
+      result: window-moved
+      failure: invalid-window-position
+    reconcile:
+      owner: window-state
+      input:
+        id: nullable-window-id
+      result: windows-reconciled
+      failure: invalid-window-id
+  content:
+    check:
+      owner: public-content
+      input:
+        source-mode: source-mode
+      result: public-content-valid
+      failure: public-content-invalid
+    sync:
+      owner: public-content
+      input:
+        dry-run: boolean
+      result: public-content-synced
+      failure: public-content-sync-failed
+  rss:
+    run:
+      owner: content-bridge
+      input:
+        dry-run: boolean
+      result: rss-aggregated
+      failure: rss-aggregation-failed
+  verify:
+    unit:
+      owner: site-shell
+      input: {}
+      result: unit-tests-passed
+      failure: unit-tests-failed
+    e2e:
+      owner: site-shell
+      input: {}
+      result: e2e-tests-passed
+      failure: e2e-tests-failed
+    contracts:
+      owner: site-shell
+      input: {}
+      result: contracts-passed
+      failure: contracts-failed
+    build:
+      owner: site-shell
+      input: {}
+      result: build-passed
+      failure: build-failed
+    all:
+      owner: site-shell
+      input: {}
+      result: verification-passed
+      failure: verification-failed
+verification:
+  commands:
+    verify-all:
+      - unit
+      - e2e
+      - contracts
+      - content
+      - build

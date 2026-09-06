@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "manifestHash": "caa6f93740e3c0e7feacd351103073892b61209cf37f882e2bd1bc6a3a23640f",
+  "projectionHash": "09cafc9655dc51f7288469e4e8680fb71727498af9d6d66a84853308058c65f1",
+  "output": "src/data/generated/public-content.json",
+  "sources": [
+    "04_Projects/個人網站/01-Personal Website.md",
+    "04_Projects/影片轉場分析器/影片轉場分析器.md",
+    "04_Projects/自建 Harness/01-自建 Harness Dashboard.md",
+    "04_Projects/Graphify 知識圖譜/Graphify 知識圖譜.md",
+    "04_Projects/SearXNG 整合/SearXNG 整合.md",
+    "04_Projects/投資交易/01-投資交易自動化 Dashboard.md"
+  ],
+  "items": [
+    {
+      "id": "personal-website",
+      "slug": "personal-website",
+      "sourceHash": "a868496334b0d55140abc26c2a7ecd2bce32905545d97bfa674f2e7a9fb03f14"
+    },
+    {
+      "id": "video-transition-analyzer",
+      "slug": "video-transition-analyzer",
+      "sourceHash": "fa1e3b890894b33bae88bead5b71d0dd62b720da0207b38342ecc7240a7fda3d"
+    },
+    {
+      "id": "harness-build",
+      "slug": "self-evolving-harness",
+      "sourceHash": "24720c5b318bdc2c3f6b834907282a2caab835ec66741dd7dde93312780b2bfe"
+    },
+    {
+      "id": "graphify-knowledge-graph",
+      "slug": "graphify",
+      "sourceHash": "2b1da6b50f05064c5250dfe09df18ac921f5c07c5394101e0a30921b08a3f99d"
+    },
+    {
+      "id": "searxng-integration",
+      "slug": "searxng",
+      "sourceHash": "cb6704b7d2290459c2104e5e909d13445ae86a4110d864a6265a92b3ba80b2ae"
+    },
+    {
+      "id": "trading-automation",
+      "slug": "trading-research",
+      "sourceHash": "a0c85d4ca65dd5c9d421aae3586c69ef8e7e9552fc65f84e29034134a719457b"
+    }
+  ]
+}

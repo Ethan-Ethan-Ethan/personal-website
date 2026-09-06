@@ -1,0 +1,36 @@
+version: 1
+system:
+  id: personal-website
+  generated_types: ../../escaped.ts
+  secret: should-not-be-generated
+trunk:
+  site-shell: { owner: astro, depends_on: [] }
+  command-bus: { owner: react, depends_on: [scene-state, window-state] }
+  scene-state: { owner: react, depends_on: [] }
+  window-state: { owner: react, depends_on: [] }
+  content-bridge: { owner: astro, depends_on: [] }
+elements:
+  galaxy: { owner: GalaxyCanvas, layer: 2, depends_on: [] }
+  computer-foreground: { owner: ForegroundOcclusion, layer: 4, depends_on: [galaxy] }
+  plush-character: { owner: PlushCharacter, layer: 4, depends_on: [galaxy] }
+features:
+  scene-preview: { owner: workspace, depends_on: [scene-state, galaxy, plush-character] }
+  window-lifecycle: { owner: workspace, depends_on: [window-state, command-bus] }
+content:
+  sections: [projects, ai-lab, trading-lab, about, articles]
+commands:
+  scene:
+    preview:
+      owner: scene-state
+      input: { target: scene-state }
+      result: scene-updated
+      failure: invalid-scene-target
+  window:
+    open:
+      owner: window-state
+      input: { id: window-id }
+      result: window-opened
+      failure: invalid-window-id
+verification:
+  commands:
+    verify-all: [unit, e2e, contracts, content, build]

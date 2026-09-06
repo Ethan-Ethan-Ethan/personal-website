@@ -1,0 +1,9 @@
+version: 1
+system: { id: personal-website }
+trunk:
+  command-bus: { depends_on: [scene-state] }
+  scene-state: { depends_on: [command-bus] }
+elements:
+  galaxy: { layer: -1 }
+commands:
+  doThing: {}

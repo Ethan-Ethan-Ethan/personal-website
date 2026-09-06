@@ -1,0 +1,5 @@
+{
+  "generated_from": "src/data/generated/public-content.json",
+  "canonical": false,
+  "note": "Compatibility pointer only; consumers must import the generated projection."
+}

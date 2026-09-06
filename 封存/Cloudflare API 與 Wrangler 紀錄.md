@@ -7,6 +7,8 @@ tags:
   - project/personal-website
   - tool/cloudflare
   - type/archived
+source_url: "https://ethanyang.dpdns.org/"
+source_url_state: direct
 ---
 
 > **已封存**：此文件記錄第一代 Workers 部署的 API Token 設定與 Wrangler 指令。2026-07-12 已改用 Astro 7 + Cloudflare Pages，認證方式改為 wrangler OAuth。新流程請參考 [[網站重建計畫 2026]]。

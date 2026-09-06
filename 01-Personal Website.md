@@ -3,7 +3,7 @@ type: project
 status: active
 project: personal-website
 created: 2026-06-15
-updated: 2026-07-12
+updated: 2026-09-06
 tags:
   - project/personal-website
   - domain/ai-dev
@@ -11,6 +11,21 @@ aliases:
   - 個人網站
   - Personal Website
   - Personal Website MOC
+site_publish: true
+site_visibility: public
+site_section: projects
+site_slug: personal-website
+site_title: Personal Website
+site_summary: 把內容管線、交易視覺化與個人品牌整合成可持續維護的 Astro 網站。
+site_last_reviewed: 2026-09-05
+site_featured: true
+site_order: 10
+site_demo_url: https://ethanyang.dpdns.org
+site_highlights:
+  - Astro 7 靜態內容架構
+  - RSS 與 Gmail 自動聚合
+  - Cloudflare Pages 自動部署
+
 ---
 
 # Personal Website
@@ -23,11 +38,29 @@ aliases:
 - **正式網站**：[https://ethanyang.dpdns.org/](https://ethanyang.dpdns.org/)
 - **第二代 Astro 7 站**：`https://personal-website-bvk.pages.dev`（Cloudflare Pages，push to main 自動部署）
 - **Repo**：`Ethan-Ethan-Ethan/personal-website`
-- **狀態**：Phase 1-6 全部完成（Astro 重建 + RSS 聚合 + Gmail 擷取 + 交易視覺化 + Pages 部署 + 設計系統）
+- **狀態**：系統重構與自動驗證已通過；本地 Grounding DINO＋SAM 2.1 透明前景已接入，等待人工視覺驗收
 - **待完成**：Decap CMS OAuth 驗證、瀏覽器寫文測試、網域續約（2026-11-12）、Reddit 替代源、履歷公開邊界（Cloudflare Access / 停用舊 Workers 已於 2026-08-27 完成）
-- **技術棧**：Astro 7 + Tailwind CSS v4 + Decap CMS + GitHub Actions + Cloudflare Pages
+- **技術棧**：Astro 7 + React island + Three.js + Tailwind CSS v4 + Playwright/Vitest + Cloudflare Pages
 - **域名**：`ethanyang.dpdns.org`（DigitalPlat FreeDomain，續期檢查 2026-11-12）
 - **成本**：全站零成本基礎設施（$0/月）
+- **AI Lab 模組**：[[04_Projects/個人網站/ai-lab/README|AI Lab]]（網站組裝與公開映射；專案正文仍留原 Canonical Source）
+
+## 目前焦點（2026-09-06）
+
+```text
+正確場景分層
+├── 背景：房間與窗外底圖
+├── 中景：Three.js 星空／星雲／流星
+└── 前景：具 Alpha 的完整電腦、玩偶與桌面物件
+```
+
+- **Mac Vision 判定**：桌機玩偶區僅保留約 2.8%、桌面約 7%，且錯留約 27% 窗外背景；本地 Qwen 複驗為 FAIL，已排除。
+- **實作路線**：本地 Qwen／Grounding DINO 定位物件，SAM 2.1 Hiera Small 產生逐物件 mask；BiRefNet HR-matting 因本機 dtype 相容失敗兩次，依規則停止。
+- **已接入素材**：`workspace-foreground-alpha.webp`（桌機 241 KB）與 `workspace-mobile-foreground-alpha.webp`（手機 96 KB）。
+- **程式調整**：移除電腦與玩偶的不透明 WebP polygon overlay；保留純 CSS 眼睛、圍巾與光暈動畫。
+- **下一步**：由使用者在本機 preview 人工檢查邊緣、漏切與背景殘留；必要時只精修 mask，不回退 polygon。
+- **驗收標準**：星星可在窗外與電腦後方移動，但不得穿過電腦外殼、螢幕框、玩偶或桌面物件。
+- **發布狀態**：尚未合併 `main`、尚未部署 production；本機 preview 僅供視覺檢查。
 
 ## 里程碑
 
@@ -41,6 +74,10 @@ aliases:
 | Phase 6 | 2026-07-12 | 遷移到 Cloudflare Pages + 域名綁定 |
 | WDS Phase 1-5 | 2026-07-10~11 | 網站設計系統：5 份標竿分析 + 36 模式 + Phase 5 重新設計方案 |
 | WDS M1-M4 | 2026-07-11 | CSS 架構重構 + 元件完善 + Hero 文案 + 亮色主題 |
+| DSH build pilot | 2026-09-04 | 受限於 source/config 的本機 Astro build verification；未啟用 launchd |
+| Galaxy system refactor | 2026-09-05 | YAML 系統正本、Command Bus、分層場景、公開 projection 與整合驗證 |
+| Foreground depth correction | 2026-09-06 | 本地 Grounding DINO＋SAM 2.1 產出桌機／手機 Alpha 前景並接入，待人工視覺驗收 |
+| Evidence contract pilot | 2026-09-06 | YAML 假完成收斂試點：completion-evidence 台帳 + 5 模式 inferred 加標 + visual-fusion 快照 spec（基線待認可）+ Error Ledger 首案 UFE-20260906-001 |
 
 > 詳細重建計畫：[[網站重建計畫 2026]]
 > 設計系統詳情：下方「設計系統」章節
@@ -223,10 +260,22 @@ aliases:
 
 ### 首頁規劃
 
-- 首頁：左右雙欄 Dashboard；左側工作台摘要，右側 TradingView K 線圖與觀察清單
-- 工作台卡片：點擊後滑動到下方並顯示對應面板（待辦健康度、週報新聞、經驗沉澱等）
-- 右上導覽：固定履歷、Vlog
-- 文章區：Dashboard 風格文章列表 + 單篇閱讀
+```text
+Cozy Galaxy AI Workshop
+├── 窗外宇宙：Three.js 星空、星雲、行星與流星
+├── 書桌前景：電腦遮擋星空，燈光、植物與 glow 微動畫
+├── 玩偶：呼吸、眨眼、耳朵與圍巾動態
+└── HTML 工作區
+    ├── Projects
+    ├── AI Lab
+    ├── Trading Lab
+    └── About / Contact
+```
+
+- 主文案：**我打造能持續驗證與演化的 AI 系統。**
+- 桌機使用可拖曳視窗；手機使用單一全螢幕 active card。
+- URL hash、瀏覽器返回鍵、鍵盤與 reduced-motion 均納入互動契約。
+- 架構正本：`config/site-system.yaml`；指令入口：`npm run site -- <domain> <action>`。
 
 ## 網站部署
 
@@ -255,6 +304,16 @@ git push (main)
 - **Output**：`dist/`
 - **Auth**：wrangler OAuth（`wrangler login`）— NOT API Token
 
+### Local DSH build pilot（未啟用排程）
+
+- **唯一 task 正本**：[`config/automation.yaml`](config/automation.yaml) 的 `website.build.scoped`。
+- **固定執行契約**：僅以固定 argv `npm run build` 在本專案目錄執行；policy 為 `generated_state`，只允許重生 `dist/` 與工具快取，不寫入網站正本或對外部署。
+- **觸發範圍**：`src/**`、`public/**`、`package.json`、`package-lock.json`、`astro.config.mjs`、`tsconfig.json`；其他筆記、部署設定與憑證相關檔案不會匹配。
+- **驗收**：exit zero、JSON build contract、`dist/index.html` 存在；失敗由 Runtime evidence packet/review queue 處理，不自動修復。
+- **驗證狀態**：2026-09-04 已在隔離 SQLite ledger 完成一次 source event → build → eval 的去重 run；來源檔 SHA 前後一致。
+- **邊界**：`com.ethan.dsh.runtime` 目前僅載入 Graphify manifest，因此本 task 尚未由 launchd 自動執行、也不會部署到 Cloudflare。須累積 30 次可追溯且無重複 run，才提出啟用／替換入口提案。
+- **延後項目與重新評估條件**：link check 與 Lighthouse 尚未導入；待選定已安裝、可重現的 headless 工具及其固定品質 contract 後，再各自以獨立 task 試點。
+
 ### DNS 設定
 
 - **Nameservers**：`camilo.ns.cloudflare.com` / `sonia.ns.cloudflare.com`
@@ -274,6 +333,7 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 
 ### 待完成
 
+- [ ] P0：人工驗收桌機／手機 Alpha 前景的邊緣與漏切；通過後才允許合併 `main`
 - [ ] Phase 2：GitHub OAuth 驗證（Decap CMS 瀏覽器登入）
 - [ ] Phase 2：測試瀏覽器寫文章 → commit → 自動部署
 - [x] Phase 6：Cloudflare Access 設定（`/protected/*` 路由保護）— ✅ 2026-08-27 實測已生效
@@ -291,7 +351,9 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 - [x] P1：文章頁共同版型（日期、分類、標籤、SEO metadata）
 - [x] P2：部署流程文件化
 - [x] P3：Obsidian → 網站輸出流程
-- [x] Phase 1-6 全部完成
+- [x] Phase 1-6 既有網站管線完成
+- [x] Cozy Galaxy 系統骨架、Command Bus、公開 projection 與 verification commands
+- [ ] 完成 branch preview 的視覺與內容人工審核後再合併 `main`
 
 ## 封存文件
 
@@ -299,13 +361,13 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 
 | 文件 | 說明 |
 |------|------|
-| [[封存/README]] | 第一代專案總覽（Workers 靜態版） |
-| [[封存/個人網站建置工作流程]] | 第一代 Workers 建置流程 |
-| [[封存/Cloudflare 與 API 部署紀錄]] | Workers 部署流程（Pages 已取代） |
-| [[封存/Cloudflare API 與 Wrangler 紀錄]] | 舊版 API Token 設定（OAuth 已取代） |
-| [[封存/DNS 與網域綁定紀錄]] | 舊版 DNS 設定 |
-| [[封存/網站部署 SOP]] | 第一代手動部署 SOP |
-| [[封存/Obsidian 到網站輸出流程]] | 第一代靜態 HTML 輸出流程 |
+| [[04_Projects/個人網站/封存/README|README]] | 第一代專案總覽（Workers 靜態版） |
+| [[04_Projects/個人網站/封存/個人網站建置工作流程|個人網站建置工作流程]] | 第一代 Workers 建置流程 |
+| [[04_Projects/個人網站/封存/Cloudflare 與 API 部署紀錄|Cloudflare 與 API 部署紀錄]] | Workers 部署流程（Pages 已取代） |
+| [[04_Projects/個人網站/封存/Cloudflare API 與 Wrangler 紀錄|Cloudflare API 與 Wrangler 紀錄]] | 舊版 API Token 設定（OAuth 已取代） |
+| [[04_Projects/個人網站/封存/DNS 與網域綁定紀錄|DNS 與網域綁定紀錄]] | 舊版 DNS 設定 |
+| [[04_Projects/個人網站/封存/網站部署 SOP|網站部署 SOP]] | 第一代手動部署 SOP |
+| [[04_Projects/個人網站/封存/Obsidian 到網站輸出流程|Obsidian 到網站輸出流程]] | 第一代靜態 HTML 輸出流程 |
 
 ## 萃取紀錄
 

@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Topbar from '../components/Topbar.astro';
+import Footer from '../components/Footer.astro';
+
+const experience = [
+  {
+    role: '資深 FAE 應用工程師',
+    company: '偉詮電子股份有限公司',
+    period: '2020/10 – 2026/05',
+    scope: '亞洲區客戶技術窗口，以電源產品為主；主導 NPI 導入與試產驗證，協調 RD／製造／品保／業務跨部門團隊；處理量產異常、客訴與退貨分析，建立 RCA／8D 機制；定期赴海外客戶現場提供故障排除、設備調校與技術訓練，以英文進行簡報與會議。',
+  },
+  {
+    role: '研發工程師',
+    company: '雅蒂斯登（廈門）',
+    period: '2017 – 2020',
+    scope: '主導 PCB Layout 設計與 EMC 對策最佳化；開發降低電磁干擾之 PCB 佈局技術，解決產品認證問題；管理 2 人研發團隊，協調專案進度與技術指導。',
+  },
+  {
+    role: '硬體研發工程師（Power DC）',
+    company: '緯創資通（Wistron）',
+    period: '2011 – 2016',
+    scope: '伺服器電源架構設計（VRD、DDR、POL），涵蓋 Intel 與 AMD 平台；使用 OrCAD 繪製電源線路圖、Allegro 進行 PCB Layout；Sigrity PowerDC 執行 PI／SI 模擬；開發 GPIB 自動化量測程式提升測試效率。',
+  },
+  {
+    role: 'EMC 工程師',
+    company: '緯創資通（Wistron）',
+    period: '2007 – 2011',
+    scope: 'Notebook 產品 EMC 設計與驗證；審查 PCB Layout 並提供 EMI 對策；設計 EMI 濾波電路，執行 EMI 輻射／傳導（EN55022）與 ESD（EN61000-4-2）測試；開發初期導入 EMC 考量以降低後期整改成本。',
+  },
+];
+
+const skills = [
+  'FAE / 客戶技術支援',
+  'NPI 導入',
+  '失效分析 (8D·RCA·FMEA·SPC)',
+  '量產支援',
+  '電源設計 (VRD·DC-DC·USB PD·Flyback/LLC)',
+  'PCB 設計 (OrCAD·Allegro)',
+  'PI/SI 模擬 (Sigrity PowerDC/PowerSI)',
+  'EMC 與安規',
+  '測試自動化 (Python·GPIB)',
+  'ISO 9001 / IATF 16949 / ISO 14001',
+];
+
+const education = [
+  { degree: '碩士（肄業）電子工程', school: '輔仁大學' },
+  { degree: '學士 電子工程與自動化', school: '中華科技大學' },
+  { degree: '高職 電子科', school: '大安高工' },
+];
+---
+
+<BaseLayout
+  title="履歷摘要 | Ethan Yang"
+  description="楊宥綸 Ethan Yang 的公開履歷摘要 — 資深 FAE 應用工程師，15+ 年硬體研發與電源／EMC 設計經驗。"
+>
+  <Topbar />
+
+  <main class="pt-14 max-w-[var(--container-default)] mx-auto px-4 py-16">
+    <!-- Header -->
+    <header class="mb-10">
+      <p class="text-sm text-amber tracking-widest uppercase mb-2">Resume · 公開摘要</p>
+      <h1 class="text-4xl font-extrabold tracking-tight mb-2">楊宥綸 Ethan Yang</h1>
+      <p class="text-lg text-muted mb-4">資深 FAE 應用工程師 ／ 硬體研發 ／ 電源與 EMC 設計</p>
+      <div class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-soft">
+        <span>📍 台灣</span>
+        <span>✉ isitoled@gmail.com</span>
+        <span>💼 ethanyang.dpdns.org</span>
+        <span>🌐 中文（母語）／英文（商務流利）</span>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="bg-panel border border-line rounded-lg p-6 mb-8">
+      <h2 class="text-md font-semibold mb-3 text-green">個人摘要</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        15+ 年硬體研發與 FAE 經驗，早期深耕伺服器電源架構設計（VRD、DC-DC）與 EMC 對策，
+        後轉任 FAE 專注客戶技術支援、NPI 導入與海外量產管理。熟悉從電路設計、PCB Layout、
+        EMC 驗證到客戶端失效分析與良率改善的完整產品生命週期；具跨文化生活與海外駐點經驗
+        （廈門、深圳共八年），英文商務溝通流利，可配合長期外派。
+      </p>
+    </section>
+
+    <!-- Experience -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">工作經歷</h2>
+      <div class="space-y-4">
+        {experience.map((job) => (
+          <div class="bg-panel border border-line rounded-lg p-5">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+              <h3 class="text-md font-semibold">{job.role}</h3>
+              <span class="text-xs text-soft">{job.period}</span>
+            </div>
+            <p class="text-sm text-blue mb-2">{job.company}</p>
+            <p class="text-sm text-muted leading-relaxed">{job.scope}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">技能專長</h2>
+      <div class="flex flex-wrap gap-2">
+        {skills.map((s) => (
+          <span class="px-3 py-1 rounded-full bg-panel-2 border border-line text-sm text-muted">{s}</span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">學歷</h2>
+      <ul class="space-y-2">
+        {education.map((e) => (
+          <li class="flex items-baseline gap-3 text-sm">
+            <span class="text-text font-medium">{e.degree}</span>
+            <span class="text-soft">｜ {e.school}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Full resume note -->
+    <section class="p-5 rounded-lg bg-panel border border-line text-center">
+      <p class="text-sm text-muted">
+        完整履歷包含詳細專案經驗與長期規劃，由 <strong class="text-text">Cloudflare Access</strong> 保護。
+        <a href="/protected/resume" class="text-blue hover:text-green no-underline ml-1">查看完整履歷 →</a>
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
