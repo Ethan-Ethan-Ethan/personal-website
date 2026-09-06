@@ -30,3 +30,8 @@ pnpm-debug.log*
 scripts/.rss-cache.json
 graphify-out/
 .wrangler/
+
+# session working data (2.1G foreground segmentation intermediates)
+work/foreground-segmentation/
+# playwright test artifacts
+test-results/
