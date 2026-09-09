@@ -4711,7 +4711,51 @@
     "https://www.infoq.com/news/2026/09/cern-debian-infra/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "CERN Renounces RHEL in Favor of  Debian for Its Accelerator Controls Infrastructure",
       "date": "2026-09-08T07:00:23.839Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c33k4zjm6lro/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "推崇⽑澤東的「Z世代」：彈幕、「教員」與政治失語",
+      "date": "2026-09-09T07:09:39.292Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cx2yn54wn4eo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "董建華逝世：從船王富二代到香港首任特首，中共的「親密朋友」",
+      "date": "2026-09-09T07:09:39.293Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cr4vwye0z02o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「我一度認不出我的男朋友」：我是如何發現自己患有臉盲症的",
+      "date": "2026-09-09T07:09:39.293Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c36ljn4e8k1o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "朝俄首座跨境公路橋通車 烏克蘭團體擔心加快軍援物流",
+      "date": "2026-09-09T07:09:39.293Z"
+    },
+    "https://www.infoq.com/news/2026/09/async-lua-neovim/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "vim.async's Addition Modernizes Neovim’s Async Architecture for Better Stability",
+      "date": "2026-09-09T07:09:40.312Z"
+    },
+    "https://www.infoq.com/news/2026/09/hashicorp-packer-verification/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "HashiCorp Packer 1.16 Adds Native SLSA Provenance Generation and Verification for Machine Images",
+      "date": "2026-09-09T07:09:40.312Z"
+    },
+    "https://www.infoq.com/presentations/ai-platform-engineering-roundtable/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Platform Engineering in the Age of AI",
+      "date": "2026-09-09T07:09:40.312Z"
+    },
+    "https://www.infoq.com/news/2026/09/gitlab-ai-sandbox-access/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "GitLab Warns That AI Agent Sandboxes Are Only as Secure as Their Network Access",
+      "date": "2026-09-09T07:09:40.312Z"
+    },
+    "https://www.infoq.com/presentations/solopreneur-journey/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: A Solopreneur's Journey: From Engineer to Puzzle Master and Storyteller",
+      "date": "2026-09-09T07:09:40.313Z"
+    },
+    "https://www.infoq.com/articles/chaos-engineering-ecs-payments/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Implementing Chaos Engineering in Financial Payment Systems: Lessons from Enterprise ECS Deployments",
+      "date": "2026-09-09T07:09:40.313Z"
+    },
+    "https://www.infoq.com/news/2026/09/name-domain-drop/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Does ICANN Open the Door on Identity Theft by Dropping 3rd Level .name Domains Registrations?",
+      "date": "2026-09-09T07:09:40.313Z"
     }
   },
-  "lastRun": "2026-09-08T07:00:23.839Z"
+  "lastRun": "2026-09-09T07:09:40.313Z"
 }
