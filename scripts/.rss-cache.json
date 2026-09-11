@@ -4835,7 +4835,87 @@
     "https://www.infoq.com/news/2026/09/avd-hybrid-ga/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Azure Virtual Desktop Hybrid Reaches GA with Licensing Details Unpublished",
       "date": "2026-09-10T07:06:00.470Z"
+    },
+    "https://lucumr.pocoo.org/2026/9/7/astra-why/": {
+      "title": "Astra for Coding: Why Are We Doing This Again?",
+      "date": "2026-09-11T07:05:06.495Z"
+    },
+    "https://www.conviva.ai/resource/we-replaced-mmap-with-io_uring-in-our-rust-query-engine-it-got-slower/": {
+      "title": "We Replaced MMAP with Io_uring in Our Rust Query Engine. It Got Slower",
+      "date": "2026-09-11T07:05:06.495Z"
+    },
+    "https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-windows/": {
+      "title": "The Gemini app is now available for Windows",
+      "date": "2026-09-11T07:05:06.495Z"
+    },
+    "https://www.cell.com/cell-reports-medicine/fulltext/S2666-3791(26)00405-2": {
+      "title": "Exercise intensity is associated with cardiometabolic health",
+      "date": "2026-09-11T07:05:06.496Z"
+    },
+    "https://www.upsocl.com/en/16-year-old-mexican-student-creates-an-acoustic-fire-extinguisher-that-uses-sound-waves-to-put-out-fires-in-seconds/": {
+      "title": "Mexican student creates an acoustic fire extinguisher to put out fire in seconds",
+      "date": "2026-09-11T07:05:06.496Z"
+    },
+    "https://powerfooI.github.io/herdr-studio/": {
+      "title": "Herdr Studio",
+      "date": "2026-09-11T07:05:06.496Z"
+    },
+    "https://www.bbc.com/news/articles/c8r6y4me2g6o": {
+      "title": "Google will buy half the electricity from one of Finland's nuclear power plants",
+      "date": "2026-09-11T07:05:06.496Z"
+    },
+    "https://map-yue2.github.io/": {
+      "title": "YuE2 · Frontier Music with Symbolic Planning",
+      "date": "2026-09-11T07:05:06.497Z"
+    },
+    "https://system76.com/workstations/thelio-mira-ai": {
+      "title": "Thelio Mira AI Linux Workstation: 192 GB GPU Memory",
+      "date": "2026-09-11T07:05:06.497Z"
+    },
+    "https://nasutton.notion.site/Nine-coding-harnesses-vs-your-laptop-3d139990182b80d59fa3cf500f0450ba?pvs=74": {
+      "title": "Nine coding harnesses vs. your laptop",
+      "date": "2026-09-11T07:05:06.497Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cvgyj1x17vko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "香港支聯會「煽動顛覆」案：李卓人、鄒幸彤、何俊仁判囚5至7年",
+      "date": "2026-09-11T07:05:06.805Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c99dg718vg2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "間諜、戰略與錯失的機會：911的教訓至今仍在消化",
+      "date": "2026-09-11T07:05:06.805Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ckgwygp9nero/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「無時無刻都在想」：911事件25年後審訊仍未了，遇難者家屬傷痛難癒",
+      "date": "2026-09-11T07:05:06.805Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/czjzvdxw8gvo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "青島北海造船廠外籍貨輪大火 失聯25人已確定全部死亡",
+      "date": "2026-09-11T07:05:06.805Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cvgyrjx1n7yo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普真的能向每位美國成年人發放5000美元嗎？",
+      "date": "2026-09-11T07:05:06.805Z"
+    },
+    "https://www.infoq.com/news/2026/09/tinygo-devkit/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Advancing Embedded Go: Recoverable Panics, UEFI, Radio and Hardware Dev Kit",
+      "date": "2026-09-11T07:05:07.528Z"
+    },
+    "https://www.infoq.com/news/2026/09/openai-gpt6-astra/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "OpenAI Releases GPT-6 Astra for Coding and Computer Use",
+      "date": "2026-09-11T07:05:07.528Z"
+    },
+    "https://www.infoq.com/news/2026/09/autonomous-software-teams/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Beyond Autonomous Teams in Software Product Development",
+      "date": "2026-09-11T07:05:07.528Z"
+    },
+    "https://www.infoq.com/presentations/rust-refactoring/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Accelerating Performance by Incrementally Integrating Rust Into Existing Codebase",
+      "date": "2026-09-11T07:05:07.528Z"
+    },
+    "https://www.infoq.com/articles/when-spec-driven-development-pays-off/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: When Spec-Driven Development Pays Off",
+      "date": "2026-09-11T07:05:07.528Z"
     }
   },
-  "lastRun": "2026-09-10T07:06:00.470Z"
+  "lastRun": "2026-09-11T07:05:07.529Z"
 }
