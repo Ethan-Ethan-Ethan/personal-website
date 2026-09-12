@@ -4915,7 +4915,91 @@
     "https://www.infoq.com/articles/when-spec-driven-development-pays-off/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Article: When Spec-Driven Development Pays Off",
       "date": "2026-09-11T07:05:07.528Z"
+    },
+    "https://calif.io/research/weworm": {
+      "title": "WeWorm: Zero-Click WeChat Worm",
+      "date": "2026-09-12T06:57:31.481Z"
+    },
+    "https://www.usenet-rewind.com/": {
+      "title": "Usenet rewind archive search engine",
+      "date": "2026-09-12T06:57:31.482Z"
+    },
+    "https://www.claymath.org/news/navier-stokes-announcement/": {
+      "title": "Navier-Stokes Announcement",
+      "date": "2026-09-12T06:57:31.482Z"
+    },
+    "https://www.autom.dev/blog/google-search-goto-links": {
+      "title": "google.com/goto: Google's anti-scraping update",
+      "date": "2026-09-12T06:57:31.482Z"
+    },
+    "https://www.gadgetreview.com/starlinks-signal-leakage-is-threatening-radio-astronomys-most-critical-frequencies": {
+      "title": "Starlink Signal Leakage Threatens Radio Astronomy's Most Critical Frequencies",
+      "date": "2026-09-12T06:57:31.482Z"
+    },
+    "https://www.rubyhack.ai/": {
+      "title": "OpenAI agents carried out an undisclosed attack on RubyGems",
+      "date": "2026-09-12T06:57:31.483Z"
+    },
+    "https://blinkenlights.de/en/": {
+      "title": "Project Blinkenlights",
+      "date": "2026-09-12T06:57:31.483Z"
+    },
+    "https://github.com/mirza-rizvi/ResolveHQ": {
+      "title": "Show HN: ResolveHQ – A Helpdesk Built on Cloudflare Workers, D1, R2 and Queues",
+      "date": "2026-09-12T06:57:31.483Z"
+    },
+    "https://www.dwarkesh.com/p/john-beren-charlie": {
+      "title": "AI researchers debate how close we are to recursive self-improvement",
+      "date": "2026-09-12T06:57:31.483Z"
+    },
+    "https://github.com/GrapheneOS/Messaging/releases/tag/13": {
+      "title": "GrapheneOS' rewritten Messages app is released",
+      "date": "2026-09-12T06:57:31.483Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqxvzdx4d10o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "習近平七年來首次訪印前瞻：中印回暖背後的美國陰影與西藏問題",
+      "date": "2026-09-12T06:57:31.914Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cq63868gq5qo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "香港支聯會「煽動顛覆」案：被告們的伴侶與戰友",
+      "date": "2026-09-12T06:57:31.915Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ced75zwgd1lo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "911事件25年後 美國機場安檢醞釀「鬆綁」",
+      "date": "2026-09-12T06:57:31.915Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ckgxyvrel0ko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "香港記協主席訴《華爾街日報》解僱案 法庭判局部有罪",
+      "date": "2026-09-12T06:57:31.915Z"
+    },
+    "https://www.infoq.com/news/2026/09/nvidia-pair-ai-task-router/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "NVIDIA Personal AI Router Distributes AI Tasks across Local Compute",
+      "date": "2026-09-12T06:57:32.343Z"
+    },
+    "https://www.infoq.com/news/2026/09/netflix-conductor-4-workflow/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Netflix Reworks Conductor for 420 Million Monthly Workflow Executions and 10X Larger Workflows",
+      "date": "2026-09-12T06:57:32.344Z"
+    },
+    "https://www.infoq.com/news/2026/09/tsgolint-oxlint-typescript/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "tsgolint Reaches Stable v7, Bringing Go-Powered Type-Aware Linting to Oxlint",
+      "date": "2026-09-12T06:57:32.344Z"
+    },
+    "https://www.infoq.com/news/2026/09/terraform-aws-provider-6-62/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Terraform AWS Provider Continues Rapid Expansion as AWS Infrastructure Becomes More Complex",
+      "date": "2026-09-12T06:57:32.344Z"
+    },
+    "https://www.infoq.com/presentations/form3-multicloud-architecture/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: How To Run on Three Clouds at Once, and When Not To",
+      "date": "2026-09-12T06:57:32.344Z"
+    },
+    "https://www.infoq.com/news/2026/09/linkedin-ai-multi-teacher/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "How LinkedIn Trains AI Job Search 8x Faster with Multi-Teacher Distillation",
+      "date": "2026-09-12T06:57:32.345Z"
+    },
+    "https://www.infoq.com/news/2026/09/observability-ai-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Session Traces and Cost Controls Help Diagnose AI Agent Failures",
+      "date": "2026-09-12T06:57:32.345Z"
     }
   },
-  "lastRun": "2026-09-11T07:05:07.529Z"
+  "lastRun": "2026-09-12T06:57:32.345Z"
 }
