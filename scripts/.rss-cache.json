@@ -5435,7 +5435,87 @@
     "https://www.infoq.com/news/2026/09/dropbox-datacenter/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Dropbox Outlines How Focusing on Existing Infrastructure Efficiency Can Create Headroom for AI",
       "date": "2026-09-17T07:18:07.086Z"
+    },
+    "https://github.com/jemalloc/jemalloc/releases/tag/5.4.0": {
+      "title": "Jemalloc 5.4.0",
+      "date": "2026-09-18T07:09:37.270Z"
+    },
+    "https://fex-emu.com/Scourge-of-emulation/": {
+      "title": "The scourge of x86 emulation",
+      "date": "2026-09-18T07:09:37.270Z"
+    },
+    "https://waymo.com/waymo-in-singapore/": {
+      "title": "Waymo in Singapore",
+      "date": "2026-09-18T07:09:37.270Z"
+    },
+    "https://linguisticdiscovery.com/posts/pre-greek/": {
+      "title": "Pre-Greek: The lost language hidden within Ancient Greek",
+      "date": "2026-09-18T07:09:37.270Z"
+    },
+    "https://devin.ai/blog/introducing-code-scans": {
+      "title": "Code Scans",
+      "date": "2026-09-18T07:09:37.271Z"
+    },
+    "https://www.hacktron.ai/blog/hacking-openai": {
+      "title": "Hacking OpenAI",
+      "date": "2026-09-18T07:09:37.271Z"
+    },
+    "https://byteshape.com/blogs/Qwen3.8-27B/": {
+      "title": "Shapelearn Qwen 3.8 27B (13.1 GB VRAM)",
+      "date": "2026-09-18T07:09:37.271Z"
+    },
+    "https://minimalcompany.com/": {
+      "title": "Minimal Phone 2",
+      "date": "2026-09-18T07:09:37.272Z"
+    },
+    "https://askamonk.online": {
+      "title": "Ask A Monk – A digital wilderness for thoughts with no immediate answer",
+      "date": "2026-09-18T07:09:37.272Z"
+    },
+    "https://www.netnod.se/blog/telstra-outage-night-network-decided-year-was-2006": {
+      "title": "Telstra outage: The night a network decided the year was 2006",
+      "date": "2026-09-18T07:09:37.272Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cq62j7my13l3o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "習近平訪美前瞻：當白宮舉行宴會時，台灣會出現在「菜單」上嗎？",
+      "date": "2026-09-18T07:09:37.700Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cx24jdd1j59po/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "澳洲收緊移民政策：管制留學生、背包客，打擊「簽證跳轉」",
+      "date": "2026-09-18T07:09:37.700Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c8y5z7y521eeo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美國科技巨頭呼籲放緩AI發展速度——中國怎麼看？",
+      "date": "2026-09-18T07:09:37.700Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ck980qm3dl3go/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美籍緬甸裔學者涉間諜罪在華監禁　其妻籲特朗普晤習近平時重提此案",
+      "date": "2026-09-18T07:09:37.700Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c63rezxeyw9qo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "領英高層分享6個人脈竅門，幫你更快找到工作",
+      "date": "2026-09-18T07:09:37.701Z"
+    },
+    "https://www.infoq.com/news/2026/09/openai-misalignment-framework/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "OpenAI Introduces Triage Framework and Case Studies to Report Model Misalignment",
+      "date": "2026-09-18T07:09:38.535Z"
+    },
+    "https://www.infoq.com/news/2026/09/platform-artificial-intelligence/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Building an Internal Developer Platform with Artificial Intelligence",
+      "date": "2026-09-18T07:09:38.536Z"
+    },
+    "https://www.infoq.com/news/2026/09/karmada-kubernetes-cncf/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Kubernetes Multi-Cluster Project Karmada Reaches CNCF Graduation",
+      "date": "2026-09-18T07:09:38.536Z"
+    },
+    "https://www.infoq.com/presentations/stream-incidents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: When Incidents Refuse to End",
+      "date": "2026-09-18T07:09:38.536Z"
+    },
+    "https://www.infoq.com/news/2026/09/agent-escape-vm/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Repeated VM Escapes By GPT-5.6-Cyber Based Agents Prove  VMs and OS' Require Better Maintenance",
+      "date": "2026-09-18T07:09:38.536Z"
     }
   },
-  "lastRun": "2026-09-17T07:18:07.086Z"
+  "lastRun": "2026-09-18T07:09:38.537Z"
 }
