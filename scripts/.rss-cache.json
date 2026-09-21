@@ -5611,7 +5611,87 @@
     "https://www.infoq.com/news/2026/09/solid-start-v2/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "SolidStart 2: Replaces Vinxi with a Vite 8 and Enters Maintenance as Its Role Winds Down",
       "date": "2026-09-20T07:32:32.392Z"
+    },
+    "https://github.com/jaredpalmer/kev/tree/main": {
+      "title": "Kev: Tiny Jev-like family of decision models built on top of Qwen3.5",
+      "date": "2026-09-21T07:43:43.245Z"
+    },
+    "http://gameshelf.jmac.org/2008/11/13/GrimPuzzleDoc_small.pdf": {
+      "title": "Grim Fandango Puzzle Document (1996) [pdf]",
+      "date": "2026-09-21T07:43:43.245Z"
+    },
+    "https://github.com/volotat/mini-AGI/": {
+      "title": "Mini-AGI – dynamic continual learning model trained from scratch on 8GB VRAM",
+      "date": "2026-09-21T07:43:43.245Z"
+    },
+    "https://www.ft.com/content/c0cd359d-df84-4208-a789-ffa864b43666": {
+      "title": "AI chatbots give wrong answers to financial queries 'most of the time'",
+      "date": "2026-09-21T07:43:43.245Z"
+    },
+    "https://www.aeaweb.org/research/immigration-restrictions-firms-workers": {
+      "title": "Winning the visa lottery",
+      "date": "2026-09-21T07:43:43.245Z"
+    },
+    "https://outdata.net/blog/260803": {
+      "title": "Deterministic Core, Non-Deterministic Shell",
+      "date": "2026-09-21T07:43:43.246Z"
+    },
+    "https://gregorygundersen.com/blog/2018/04/15/backprop/": {
+      "title": "Why Backprop Goes Backward (2018)",
+      "date": "2026-09-21T07:43:43.246Z"
+    },
+    "https://amigaux.org/": {
+      "title": "Amiga Unix, Again",
+      "date": "2026-09-21T07:43:43.246Z"
+    },
+    "https://libroot.org/posts/what-happened-to-the-snowden-archive": {
+      "title": "What happened to the Snowden archive",
+      "date": "2026-09-21T07:43:43.246Z"
+    },
+    "https://agentexecutor.io": {
+      "title": "AX – Google’s Open Agentic Orchestrator",
+      "date": "2026-09-21T07:43:43.246Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cv5yjx7n85rjo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "Nvidia執行長黃仁勳駁「AI滅絕人類」憂慮：是「末日敘事」",
+      "date": "2026-09-21T07:43:43.625Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c6x2z19dgqn5o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "他們聯手追查校長性侵指控，也在追尋公義的路上成為夫妻",
+      "date": "2026-09-21T07:43:43.626Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ck0j32p3el72o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "莫斯科遭到烏克蘭450架無人機襲擊，市長稱規模「迄今最大」",
+      "date": "2026-09-21T07:43:43.626Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cky9z175jgdlo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "香港首任特首董建華葬禮：規格比照霍英東 石泰峰致悼詞",
+      "date": "2026-09-21T07:43:43.626Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ck5yw8p8jy4zo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普稱美國將組建「人工智能部隊」並任命「AI沙皇」",
+      "date": "2026-09-21T07:43:43.626Z"
+    },
+    "https://www.infoq.com/news/2026/09/kubernetes-1-37/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Kubernetes 1.37 Released: Stable Metrics API  and Rootless Kubelet in Beta",
+      "date": "2026-09-21T07:43:44.436Z"
+    },
+    "https://www.infoq.com/news/2026/09/bun-AI-rewrite-zig-rust-4-months/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Bun Rewrites 535K Lines of Zig into Rust in Four Months, Eliminates Numerous Memory Leaks",
+      "date": "2026-09-21T07:43:44.436Z"
+    },
+    "https://www.infoq.com/news/2026/09/alibaba-opencodereview/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Alibaba Open Sources OpenCodeReview for AI-Assisted Code Review",
+      "date": "2026-09-21T07:43:44.436Z"
+    },
+    "https://www.infoq.com/news/2026/09/google-adk-1-0-released/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Google Agent Development Kit for Kotlin Reaches Feature Parity with Python, Supports On-Device AI",
+      "date": "2026-09-21T07:43:44.436Z"
+    },
+    "https://www.infoq.com/news/2026/09/cloudflare-automatic-key-exchang/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Measures Origin TLS Preferences, Cutting Handshake Retries from 52% to 3.7%",
+      "date": "2026-09-21T07:43:44.436Z"
     }
   },
-  "lastRun": "2026-09-20T07:32:32.392Z"
+  "lastRun": "2026-09-21T07:43:44.437Z"
 }
