@@ -5691,7 +5691,107 @@
     "https://www.infoq.com/news/2026/09/cloudflare-automatic-key-exchang/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Cloudflare Measures Origin TLS Preferences, Cutting Handshake Retries from 52% to 3.7%",
       "date": "2026-09-21T07:43:44.436Z"
+    },
+    "https://nathan.rs/posts/gzip-lm/": {
+      "title": "Can gzip be a language model?",
+      "date": "2026-09-22T07:26:19.463Z"
+    },
+    "https://www.bbc.com/news/articles/c607l2j2rj8ro": {
+      "title": "Apple Music to open concert venue in Battersea Power Station",
+      "date": "2026-09-22T07:26:19.464Z"
+    },
+    "https://www.bobble.tech/free-stuff/used-thinkpad-buyers-guide": {
+      "title": "Used ThinkPad Buyer's Guide (2019)",
+      "date": "2026-09-22T07:26:19.464Z"
+    },
+    "https://artificialanalysis.ai/models/mimo-v2-6-pro": {
+      "title": "MiMo-v2.6-Pro: Intelligence, Performance and Price Analysis",
+      "date": "2026-09-22T07:26:19.464Z"
+    },
+    "https://status.claude.com/incidents/7g1qpkyz5gxh": {
+      "title": "Claude Status – Elevated errors for multiple models",
+      "date": "2026-09-22T07:26:19.464Z"
+    },
+    "https://wondermark.com/socrates-vs-writing/": {
+      "title": "Socrates vs. the Written Word (2011)",
+      "date": "2026-09-22T07:26:19.465Z"
+    },
+    "https://lwn.net/SubscriberLink/1094575/2385e98583715c2b/": {
+      "title": "Looking forward to Git 2.56 – and 3.0",
+      "date": "2026-09-22T07:26:19.465Z"
+    },
+    "https://brand.io/article/spymarks/": {
+      "title": "Spymarks, Not Watermarks",
+      "date": "2026-09-22T07:26:19.465Z"
+    },
+    "https://blog.colinbreck.com/i-dont-want-to-read-what-you-didnt-write/": {
+      "title": "I don't want to read what you didn't write",
+      "date": "2026-09-22T07:26:19.466Z"
+    },
+    "https://mimo.xiaomi.com/mimo-v2-6": {
+      "title": "MiMo v2.6",
+      "date": "2026-09-22T07:26:19.466Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c9zrz24j8pdvo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "從年輕縣官到國家主席：習近平41年來的訪美影像",
+      "date": "2026-09-22T07:26:19.748Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c98r687436nvo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "習近平：從失去一切的「太子」到中國最有權勢的領導人",
+      "date": "2026-09-22T07:26:19.748Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c65y501pjww4o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "香港提出「用人民幣支付政府開支」，為何引發「去美元化」憂慮？",
+      "date": "2026-09-22T07:26:19.748Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cjp30pv25xd7o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "CNN 等三家美國媒體被禁入白宮後 起訴特朗普政府",
+      "date": "2026-09-22T07:26:19.749Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c6vgyzdjzl9ko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中共五中全會日期敲定 習近平政治地位新提法成看點",
+      "date": "2026-09-22T07:26:19.749Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c83v4236470lo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中國與巴基斯坦新邊界安排為何引起印度不滿？",
+      "date": "2026-09-22T07:26:19.749Z"
+    },
+    "https://www.infoq.com/news/2026/09/changesets-v3-release/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Changesets v3: Bumps Peer Dependents by Patch and Ships ESM Only with an 88% Smaller Install",
+      "date": "2026-09-22T07:26:20.550Z"
+    },
+    "https://www.infoq.com/news/2026/09/native-deferred-html-streaming/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Out-of-Order HTML Streaming Moves from JS Frameworks into the Browser",
+      "date": "2026-09-22T07:26:20.550Z"
+    },
+    "https://www.infoq.com/news/2026/09/java-news-roundup-sep14-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: JDK 27, Open J Proxy, A2A Jakarta, Azul Payara, BoxLang, Netflix ja",
+      "date": "2026-09-22T07:26:20.551Z"
+    },
+    "https://www.infoq.com/news/2026/09/uber-m3db-subcluster-sharding/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Uber Redesigns M3DB Sharding with Subclusters to Limit Failure Impact",
+      "date": "2026-09-22T07:26:20.551Z"
+    },
+    "https://www.infoq.com/news/2026/09/cloudflare-adlc-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Introduces the Agent Development Stack Lifecycle to Replace Traditional SDLC",
+      "date": "2026-09-22T07:26:20.551Z"
+    },
+    "https://www.infoq.com/articles/architecture-enterprise-personalization-relevance-governance/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Beyond Relevance: A Governance-First Architecture for Enterprise Personalization",
+      "date": "2026-09-22T07:26:20.551Z"
+    },
+    "https://www.infoq.com/podcasts/securing-ai-agents-identity-authorization/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: Securing AI Agents: Identity, Authorization, and the DPACT Framework",
+      "date": "2026-09-22T07:26:20.551Z"
+    },
+    "https://www.infoq.com/presentations/ai-agent-harness/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: The Agent Harness: Control Planes, Invariants, and Approval Boundaries for Production AI Agents",
+      "date": "2026-09-22T07:26:20.551Z"
+    },
+    "https://www.infoq.com/news/2026/09/aws-middle-east-data-loss/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Cannot Restore Data Held Only in Damaged Middle East Availability Zones",
+      "date": "2026-09-22T07:26:20.552Z"
     }
   },
-  "lastRun": "2026-09-21T07:43:44.437Z"
+  "lastRun": "2026-09-22T07:26:20.552Z"
 }
