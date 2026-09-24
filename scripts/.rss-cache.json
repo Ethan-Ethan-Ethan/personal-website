@@ -5867,7 +5867,111 @@
     "https://www.infoq.com/presentations/lessons-startup-engineering/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Presentation: Maximizing Success with Limited Time, Resources, and Energy: Lessons from Startup Engineering",
       "date": "2026-09-23T07:29:05.551Z"
+    },
+    "https://github.com/rudratoshs/buried-injections": {
+      "title": "Can open-source prompt-injection detectors catch realistic AI agent attacks?",
+      "date": "2026-09-24T07:21:34.949Z"
+    },
+    "https://transluce.org/agent-activity": {
+      "title": "Early rogue AI agent activity and attempts to hack found on urlquery.net",
+      "date": "2026-09-24T07:21:34.949Z"
+    },
+    "https://www.youtube.com/watch?v=UCMRgvyTm08": {
+      "title": "Six-year-old breaks women's world Rubik's Cube record [video]",
+      "date": "2026-09-24T07:21:34.949Z"
+    },
+    "https://contrastive-lm.notion.site/": {
+      "title": "Contrastive Language Models",
+      "date": "2026-09-24T07:21:34.949Z"
+    },
+    "https://lwn.net/SubscriberLink/1095425/2d9f411252325784/": {
+      "title": "Ideas on modernizing the open-source desktop",
+      "date": "2026-09-24T07:21:34.950Z"
+    },
+    "https://github.com/nestrilabs/virtio-nvgpu": {
+      "title": "Virtio-nvgpu: Near-native Nvidia GPU access inside a KVM guest",
+      "date": "2026-09-24T07:21:34.950Z"
+    },
+    "https://carbon.ms/self-hosted": {
+      "title": "Show HN: An open-source manufacturing ERP/MES/QMS",
+      "date": "2026-09-24T07:21:34.950Z"
+    },
+    "https://www.kenklippenstein.com/p/feds-think-ai-critics-are-foreign": {
+      "title": "Feds Target AI Critics as \"Foreign Agents\"",
+      "date": "2026-09-24T07:21:34.950Z"
+    },
+    "https://www.meta.com/vr-glasses/": {
+      "title": "Meta VR Glasses",
+      "date": "2026-09-24T07:21:34.951Z"
+    },
+    "https://blog.arxiv.org/2026/09/23/arxiv-receives-multiyear-investment/": {
+      "title": "ArXiv receives multiyear commitments to support it as an independent nonprofit",
+      "date": "2026-09-24T07:21:34.951Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cjzxze5peg76o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "習近平訪美首日看點：誰同行？第一夫人角色？高規格接待引反彈？",
+      "date": "2026-09-24T07:21:35.116Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqvgyl2k378go/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普迎接習近平開展對美國事訪問 貝森特宣佈兩國貿易戰繼續「停火」",
+      "date": "2026-09-24T07:21:35.116Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cq39me0emplyo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "OpenAI智能體入侵澳洲政府網站竊取資料 官方兩月後才發覺 ",
+      "date": "2026-09-24T07:21:35.117Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c6zjzl7gl9ero/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "俄羅斯佔領烏克蘭城市：居民靠院中野菜維生，死者無法下葬，遺體「棄置街頭」",
+      "date": "2026-09-24T07:21:35.117Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c9kgv31pg8eeo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "習近平訪美晤特朗普：中美AI超級強國的雄心成為焦點",
+      "date": "2026-09-24T07:21:35.117Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwp847n9n7m2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中國希望伊朗戰爭結束，但不是以特朗普想要的方式",
+      "date": "2026-09-24T07:21:35.117Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqjdvg991dmxo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普與習近平會面在即，中國的AI雄心正在烏蘭察布高歌猛進",
+      "date": "2026-09-24T07:21:35.118Z"
+    },
+    "https://www.infoq.com/news/2026/09/canvas-ui-webgl/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Canvas UI Ships 35 HTML-in-Canvas Components That Run WebGL and WebGPU Effects Over Live DOM",
+      "date": "2026-09-24T07:21:36.080Z"
+    },
+    "https://www.infoq.com/news/2026/09/apple-reference-image-provenance/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Apple Reference Image Signs Photos at the Sensor, Moving Provenance Trust Away from C2PA",
+      "date": "2026-09-24T07:21:36.080Z"
+    },
+    "https://www.infoq.com/news/2026/09/graphify-codebase-exploration/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Graphify: Unifying Codebase Context to Streamline Agentic Software Engineering",
+      "date": "2026-09-24T07:21:36.080Z"
+    },
+    "https://www.infoq.com/news/2026/09/modal-scaling-sandboxes/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Beyond Kubernetes at Modal: How to Scale 1 Million Concurrent Sandboxes in Seconds",
+      "date": "2026-09-24T07:21:36.080Z"
+    },
+    "https://www.infoq.com/news/2026/09/cloudflare-dns-cache/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Cuts 100 TB of Memory from 1.1.1.1 DNS Cache",
+      "date": "2026-09-24T07:21:36.080Z"
+    },
+    "https://www.infoq.com/presentations/mcp-calm-api-architecture/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: APIs for Agents: Rethinking API Programs in the MCP Era",
+      "date": "2026-09-24T07:21:36.080Z"
+    },
+    "https://www.infoq.com/news/2026/09/andrew-kelley-zig-no-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Andrew Kelley Interview: Why He Built Zig, Banned AI Contributions, and Moved Zig off GitHub",
+      "date": "2026-09-24T07:21:36.081Z"
+    },
+    "https://www.infoq.com/news/2026/09/google-tpu-xprof/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Google Adds Cycle-Level Kernel Profiling to XProf",
+      "date": "2026-09-24T07:21:36.081Z"
+    },
+    "https://www.infoq.com/articles/modular-edge-computing/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Modular Edge Computing at Multi-Tenant SaaS Scale on Cloudflare Workers",
+      "date": "2026-09-24T07:21:36.081Z"
     }
   },
-  "lastRun": "2026-09-23T07:29:05.551Z"
+  "lastRun": "2026-09-24T07:21:36.081Z"
 }
