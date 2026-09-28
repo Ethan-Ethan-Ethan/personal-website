@@ -6167,7 +6167,87 @@
     "https://www.infoq.com/news/2026/09/cloudflare-emdash-migration/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Cloudflare Details Its Migration from WordPress to EmDash",
       "date": "2026-09-27T07:44:16.797Z"
+    },
+    "https://news.ycombinator.com/item?id=49874609": {
+      "title": "An Antidote to Roko's Basilisk",
+      "date": "2026-09-28T08:22:11.614Z"
+    },
+    "https://felixrieseberg.com/made-by-mechanical-means/": {
+      "title": "Made by Mechanical Means",
+      "date": "2026-09-28T08:22:11.614Z"
+    },
+    "https://arxiv.org/abs/2110.01834": {
+      "title": "Thinking fast and slow in AI: The role of metacognition (2021)",
+      "date": "2026-09-28T08:22:11.614Z"
+    },
+    "https://colo.to/nvidia-stock-narrative.html": {
+      "title": "Owed a billion dollars in Nvidia stock",
+      "date": "2026-09-28T08:22:11.614Z"
+    },
+    "https://hereticpleb.vercel.app/blog/packing-binary-is-fun-actually": {
+      "title": "Packing Binary Is Fun",
+      "date": "2026-09-28T08:22:11.614Z"
+    },
+    "https://www.historyofinformation.com/detail.php?entryid=4341": {
+      "title": "Was silent reading unusual during Augustine's time?",
+      "date": "2026-09-28T08:22:11.615Z"
+    },
+    "https://sancho.bearblog.dev/google-weird/": {
+      "title": "When did Google get so weird?",
+      "date": "2026-09-28T08:22:11.615Z"
+    },
+    "https://david.alvarezrosa.com/posts/self-hosting-on-the-dark-web/": {
+      "title": "Self-Hosting on the Dark Web",
+      "date": "2026-09-28T08:22:11.615Z"
+    },
+    "https://www.quora.com/Did-the-ENIAC-have-a-BIOS/answer/Alan-Kay-11": {
+      "title": "Alan Kay's answer to “Did the ENIAC have a BIOS”?",
+      "date": "2026-09-28T08:22:11.615Z"
+    },
+    "https://github.com/deepfates/imp": {
+      "title": "Imp is a full port of DSPy to the BEAM",
+      "date": "2026-09-28T08:22:11.615Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cx5yln334jq5o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中美峰會後 伊朗提出七天達成協議 被特朗普拒絕",
+      "date": "2026-09-28T08:22:11.924Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c30rel7xdql1o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "英國美軍在用基地發生反恐案件：我們目前知道什麼？",
+      "date": "2026-09-28T08:22:11.925Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crgjq913xgxgo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "FBI遭黑客入侵起底 特工們的恐懼與憤怒",
+      "date": "2026-09-28T08:22:11.925Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqdr78l1x1mjo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特習峰會成果盤點：關稅休戰、AI對話、未提台灣、暗指日本",
+      "date": "2026-09-28T08:22:11.925Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ckjrxw02e7q3o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "BigBang倫敦開唱：K-pop之王回來了",
+      "date": "2026-09-28T08:22:11.925Z"
+    },
+    "https://www.infoq.com/news/2026/09/linear-stylex-meta/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Linear Completes 1,000-PR Migration From styled-components to Meta's StyleX",
+      "date": "2026-09-28T08:22:12.388Z"
+    },
+    "https://www.infoq.com/news/2026/09/aurora-dsql-foreign-keys/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Introduces Foreign Key Constraints in Aurora DSQL",
+      "date": "2026-09-28T08:22:12.388Z"
+    },
+    "https://www.infoq.com/news/2026/09/java-news-roundup-sep21-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: TornadoVM 7.0, Groovy 6.0, GraalVM, Hibernate, Quarkus, Gradle, Maven",
+      "date": "2026-09-28T08:22:12.389Z"
+    },
+    "https://www.infoq.com/news/2026/09/c-rust-rewrite/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Google Rewrites Critical C Dependencies to Rust Using AI and Differential Fuzzing",
+      "date": "2026-09-28T08:22:12.389Z"
+    },
+    "https://www.infoq.com/news/2026/09/swift-6-4-released/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Swift 6.4 Brings Subprocess 1.0, Improved Interoperability, Faster Wasm, and More",
+      "date": "2026-09-28T08:22:12.389Z"
     }
   },
-  "lastRun": "2026-09-27T07:44:16.797Z"
+  "lastRun": "2026-09-28T08:22:12.389Z"
 }
