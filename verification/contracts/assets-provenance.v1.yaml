@@ -1,0 +1,8 @@
+# assets-provenance.v1.yaml — assets layers provenance 契約（Task 6）
+# 對齊 Idle SHA 與 window aperture；本 Task 只定契約，asset 回填由網站 runtime 另案消費。
+version: "1"
+asset:
+  assetHash: {type: string, required: true, note: "匯出檔 sha256（與 Idle SHA 對拍）"}
+  sourceRGB: {type: string, required: true, note: "來源 RGB（1672x941 PNG）路徑或 hash"}
+  alphaMask: {type: string, required: true, note: "Alpha 前景 WebP（桌機/手機）路徑或 hash"}
+  aperture: {type: string, required: true, note: "window aperture 參數（與 site-system 對齊）"}

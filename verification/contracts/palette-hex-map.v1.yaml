@@ -1,0 +1,6 @@
+# palette-hex-map.v1.yaml — visual.palette→hex 解析表（Task 6，canonical）
+# dark_cool 實證來源：src/styles/workspace/shell.css `.workspace-scene background:#10132a`
+# TS 側 derived：src/features/workspace/core/recipe-runtime-binding.ts HEXMAP（單測斷言與本檔一致）
+version: "1"
+dark_cool: "#10132a"
+_default: "#6b7280"
