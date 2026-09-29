@@ -6247,7 +6247,103 @@
     "https://www.infoq.com/news/2026/09/swift-6-4-released/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Swift 6.4 Brings Subprocess 1.0, Improved Interoperability, Faster Wasm, and More",
       "date": "2026-09-28T08:22:12.389Z"
+    },
+    "https://twitter.com/thsottiaux/status/2104823812042940713": {
+      "title": "OpenAI: Tomorrow we are re-opening the Pro $200 subscription",
+      "date": "2026-09-29T08:00:18.024Z"
+    },
+    "https://www.reuters.com/world/middle-east/us-forces-exit-iraq-after-two-decades-leaving-opening-iran-2026-09-29/": {
+      "title": "US Forces Exit Iraq",
+      "date": "2026-09-29T08:00:18.025Z"
+    },
+    "http://www.jimsitu.com": {
+      "title": "Tank Body Problem",
+      "date": "2026-09-29T08:00:18.025Z"
+    },
+    "https://lolchat.rip/": {
+      "title": "1996 chat room simulator connected to Win95 and System 7 web desktops",
+      "date": "2026-09-29T08:00:18.025Z"
+    },
+    "https://jonclegg.github.io/pacman-bakeoff/": {
+      "title": "Show HN: Pac-Bench – How well can models one-shot a Pac-Man game?",
+      "date": "2026-09-29T08:00:18.025Z"
+    },
+    "https://github.com/Low-Zi-Hong/ESP32s3-LLM-Cluster": {
+      "title": "ESP32S3 cluster running 1.58-bit (BitNet) Language model",
+      "date": "2026-09-29T08:00:18.026Z"
+    },
+    "https://github.com/firelex/jeff": {
+      "title": "Jeff – Jev-compatible 0.8B decision models, trained at home, ~30 ms",
+      "date": "2026-09-29T08:00:18.026Z"
+    },
+    "https://www.worldlabs.ai/blog/amd-announcement": {
+      "title": "World Labs Is Joining AMD",
+      "date": "2026-09-29T08:00:18.026Z"
+    },
+    "https://www.kqed.org/news/12101534/california-farmers-are-struggling-to-sell-grapes-as-demand-for-wine-drops": {
+      "title": "California farmers are struggling to sell grapes as demand for wine drops",
+      "date": "2026-09-29T08:00:18.026Z"
+    },
+    "https://arstechnica.com/science/2026/09/scientists-solve-1840s-space-weather-mystery/": {
+      "title": "Scientists solve 1840s space weather mystery",
+      "date": "2026-09-29T08:00:18.027Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c6lyq5d3g9j8o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "亦敵亦友：澳洲如何在超級大國競爭中找平衡？",
+      "date": "2026-09-29T08:00:18.095Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cmzxzl450p2no/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普習近平峰會：沒有說出口的議題可能更重要",
+      "date": "2026-09-29T08:00:18.095Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm3wjgpxdjxxo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美國檢方重啟調查康奈爾大學輪姦案指控",
+      "date": "2026-09-29T08:00:18.096Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cq5yj1dd5wxyo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "伊朗女歌手演出不戴頭巾遭判笞刑74鞭 上訴遭駁回",
+      "date": "2026-09-29T08:00:18.096Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwly54drj5l1o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "在印尼一座熱帶島嶼上，備受珍視的「永恆積雪」即將永遠消失",
+      "date": "2026-09-29T08:00:18.096Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm9w4zv14lz2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "帶一杯冰咖啡去面試，會令你失去工作機會嗎？",
+      "date": "2026-09-29T08:00:18.097Z"
+    },
+    "https://www.infoq.com/news/2026/09/cloudflare-python-workers-ga/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Python Workers Reach GA on Cloudflare, with Questions About Cold Starts and Upstream Maintenance",
+      "date": "2026-09-29T08:00:19.045Z"
+    },
+    "https://www.infoq.com/news/2026/09/artifactory-vulnerabilities/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Artifactory Vulnerabilities Under Active Exploitation Enable Authentication Bypass and Admin Access",
+      "date": "2026-09-29T08:00:19.045Z"
+    },
+    "https://www.infoq.com/news/2026/09/radicle-network-vulnerabilities/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Radicle Discloses Critical Flaws Exposing Private Repositories in Plain Text",
+      "date": "2026-09-29T08:00:19.045Z"
+    },
+    "https://www.infoq.com/news/2026/09/meta-zgateway-zippydb-proxy/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Meta’s ZGateway Cuts ZippyDB Connections 19x While Handling 1B+ Operations per Second",
+      "date": "2026-09-29T08:00:19.046Z"
+    },
+    "https://www.infoq.com/articles/ai-agents-improve-software-architecture/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Five Ways To Use AI Coding Agents to Improve Your Software Architecture",
+      "date": "2026-09-29T08:00:19.046Z"
+    },
+    "https://www.infoq.com/podcasts/ai-revolution-psychological-safety/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: The AI Revolution Fails Without Psychological Safety For Developers: A Conversation with Erin Doyle",
+      "date": "2026-09-29T08:00:19.046Z"
+    },
+    "https://www.infoq.com/presentations/building-internal-ai-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: From Consumers to Builders: Turning 200 of our Team into Agent Creators in 2 Weeks",
+      "date": "2026-09-29T08:00:19.046Z"
+    },
+    "https://www.infoq.com/news/2026/09/uber-kubernetes-scaling/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Uber Separates Scaling Intent From Execution on Kubernetes Platform",
+      "date": "2026-09-29T08:00:19.046Z"
     }
   },
-  "lastRun": "2026-09-28T08:22:12.389Z"
+  "lastRun": "2026-09-29T08:00:19.047Z"
 }
