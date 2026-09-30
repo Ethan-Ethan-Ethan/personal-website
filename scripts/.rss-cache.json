@@ -6343,7 +6343,103 @@
     "https://www.infoq.com/news/2026/09/uber-kubernetes-scaling/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Uber Separates Scaling Intent From Execution on Kubernetes Platform",
       "date": "2026-09-29T08:00:19.046Z"
+    },
+    "https://github.com/Sparticle62ops/pssa": {
+      "title": "PSSA: A non-transformer language model written from scratch in Rust",
+      "date": "2026-09-30T08:08:40.633Z"
+    },
+    "https://lfm.xiffy.nl/": {
+      "title": "RSS Feeds for Last.fm",
+      "date": "2026-09-30T08:08:40.634Z"
+    },
+    "https://agmai.org/general-sep29/": {
+      "title": "Responsible Release of AI-Generated Mathematics",
+      "date": "2026-09-30T08:08:40.634Z"
+    },
+    "https://en.wikipedia.org/wiki/Ballmer_Peak": {
+      "title": "Ballmer Peak",
+      "date": "2026-09-30T08:08:40.634Z"
+    },
+    "https://www.gevernova.com/news/press-releases/nrc-issues-first-us-construction-permit-bwrx-300-small-modular-reactor-tva-clinch-river": {
+      "title": "NRC issues first U.S. construction permit for a BWRX-300 small modular reactor",
+      "date": "2026-09-30T08:08:40.634Z"
+    },
+    "https://github.com/ninjahawk/livenerf": {
+      "title": "Livenerf: Has Opus 5.5 been nerfed yet?",
+      "date": "2026-09-30T08:08:40.635Z"
+    },
+    "https://postalemployeenetwork.com/news/2026/09/26/u-s-postal-inspectors-shut-down-website-selling-millions-of-counterfeit-postage-labels/": {
+      "title": "U.S. postal inspectors shut down website selling counterfeit postage labels",
+      "date": "2026-09-30T08:08:40.635Z"
+    },
+    "https://space.bl2.net/": {
+      "title": "Show HN: Real-time Solar System with 526k asteroids and all tracked satellites",
+      "date": "2026-09-30T08:08:40.635Z"
+    },
+    "https://www.theguardian.com/environment/2026/sep/29/night-sky-darkness-city-regulation": {
+      "title": "We’re forgetting what darkness feels like",
+      "date": "2026-09-30T08:08:40.636Z"
+    },
+    "https://www.bbc.com/future/article/20260928-a-virtual-power-plant-hidden-in-vermont-homes-is-keeping-the-lights-on-during-storms": {
+      "title": "Vermont replacing power plants with home batteries",
+      "date": "2026-09-30T08:08:40.636Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm5ye14v6n8xo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普排除美中合作開發人工智能",
+      "date": "2026-09-30T08:08:40.945Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c64grn5g7em2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中國人工智慧工具「教導」研究人員製造生物武器",
+      "date": "2026-09-30T08:08:40.946Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cr5ye133p55qo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美軍撤離伊拉克：駐軍20年留下什麼遺產？接下來會發生什麼？",
+      "date": "2026-09-30T08:08:40.946Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ck0e3v1zjvj9o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "我付了3萬英鎊讀個「網紅」學位，這是為什麼",
+      "date": "2026-09-30T08:08:40.946Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crz9zd51289jo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "貓眼如何啟發機器人的照相機技術發展",
+      "date": "2026-09-30T08:08:40.946Z"
+    },
+    "https://www.infoq.com/news/2026/09/agentic-refactoring-case-study/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Agents Refactor 300K Lines in Three Weeks, and Practitioners Ask What It Proves",
+      "date": "2026-09-30T08:08:41.386Z"
+    },
+    "https://www.infoq.com/news/2026/09/sveltekit-3-vite/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "SvelteKit 3 Reaches Release Candidate, Moving Config to Vite and Retiring the $lib Alias",
+      "date": "2026-09-30T08:08:41.386Z"
+    },
+    "https://www.infoq.com/news/2026/09/aws-cloudwatchomni-observability/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Amazon CloudWatch Omni Extends CloudWatch into the Agent Era",
+      "date": "2026-09-30T08:08:41.387Z"
+    },
+    "https://www.infoq.com/news/2026/09/cloudflare-http-vary/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Adds Configurable HTTP Vary Header Support to Prevent Cache Thrashing",
+      "date": "2026-09-30T08:08:41.387Z"
+    },
+    "https://www.infoq.com/news/2026/09/kubernetes-gpu-metrics/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Kubernetes Teams Get a Safer Way to See Their Own GPU Metrics",
+      "date": "2026-09-30T08:08:41.388Z"
+    },
+    "https://www.infoq.com/news/2026/09/spring-news-roundup-sep21-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Spring News Roundup: Second Milestone Releases of Boot, Framework, Data, Security, Integration",
+      "date": "2026-09-30T08:08:41.388Z"
+    },
+    "https://www.infoq.com/presentations/staff-founder-lessons/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: From Staff Platform Engineer to a16z Founder: What I Wish I'd Known",
+      "date": "2026-09-30T08:08:41.388Z"
+    },
+    "https://www.infoq.com/news/2026/09/atlassian-opentelemetry/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Atlassian Rebuilds Metrics Pipeline Around OpenTelemetry at Massive Scale",
+      "date": "2026-09-30T08:08:41.388Z"
+    },
+    "https://www.infoq.com/news/2026/09/cloudflare-worker-agent/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Worker Previews: Per-Branch Environments for Workers",
+      "date": "2026-09-30T08:08:41.388Z"
     }
   },
-  "lastRun": "2026-09-29T08:00:19.047Z"
+  "lastRun": "2026-09-30T08:08:41.388Z"
 }
