@@ -5,10 +5,6 @@ import PlushCharacter from './PlushCharacter';
 import ComputerHotspots from './ComputerHotspots';
 
 type Props = {
-  sceneLabel: string;
-  onPreview: (id: WorkspaceWindowId) => void;
-  onClearPreview: () => void;
-  onOpen: (id: WorkspaceWindowId, launcher: HTMLButtonElement) => void;
   registerLauncher: (id: WorkspaceWindowId, node: HTMLButtonElement | null) => void;
 };
 
@@ -23,9 +19,9 @@ export default function WorkspaceScene(props: Props) {
     </header>
     <div className="workspace-copy">
       <p>ETHAN YANG · AI SYSTEM BUILDER</p>
-      <h1 id="workspace-title">Your cozy corner<br/>of the AI galaxy</h1>
+      <h1 id="workspace-title">A cozy corner<br/>of the AI galaxy</h1>
       <span>把 AI、知識圖譜、影片理解與量化研究，做成可測試、可重複的工具。</span>
     </div>
-    <ComputerHotspots {...props} />
+    <ComputerHotspots registerLauncher={props.registerLauncher} />
   </section>;
 }

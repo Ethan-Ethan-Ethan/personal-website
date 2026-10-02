@@ -22,6 +22,8 @@ const content = [
   },
 ];
 
+const MOBILE_MEDIA_QUERY = '(max-width: 520px), (min-width: 521px) and (max-width: 767px) and (pointer: coarse)';
+
 beforeEach(() => {
   Object.defineProperty(window, 'innerWidth', { configurable: true, value: 1024 });
   Object.defineProperty(window, 'matchMedia', {
@@ -49,7 +51,7 @@ const setMobileViewport = () => {
   Object.defineProperty(window, 'matchMedia', {
     configurable: true,
     value: (query: string) => ({
-      matches: query === '(max-width: 767px)',
+      matches: query === MOBILE_MEDIA_QUERY,
       media: query,
       onchange: null,
       addEventListener: () => {},
@@ -62,16 +64,16 @@ const setMobileViewport = () => {
 };
 
 describe('WorkspaceDesktop', () => {
-  test('opens an accessible projects window from a real button', () => {
+  test('opens an accessible projects window from a shared hash', () => {
+    window.history.replaceState(null, '', '/#projects');
     render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-    fireEvent.click(screen.getAllByRole('button', { name: /projects/i })[0]);
     expect(screen.getByRole('dialog', { name: /projects/i })).toBeTruthy();
     expect(screen.getByText('Demo Project')).toBeTruthy();
   });
 
   test('Escape closes the active window and clears its hash', () => {
+    window.history.replaceState(null, '', '/#ai-lab');
     render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-    fireEvent.click(screen.getAllByRole('button', { name: /ai lab/i })[0]);
     expect(window.location.hash).toBe('#ai-lab');
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(screen.queryByRole('dialog', { name: /ai lab/i })).toBeNull();
@@ -87,10 +89,9 @@ describe('WorkspaceDesktop', () => {
 
 
 test('moves focus into the opened window and restores it to the launcher', async () => {
+  window.history.replaceState(null, '', '/#projects');
   render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-  const launcher = screen.getAllByRole('button', { name: /projects/i })[0];
-  launcher.focus();
-  fireEvent.click(launcher);
+  const launcher = screen.getByRole('button', { name: 'Preview Projects from monitor' });
   const dialog = screen.getByRole('dialog', { name: /projects/i });
   await waitFor(() => expect(document.activeElement).toBe(dialog));
   fireEvent.click(screen.getByRole('button', { name: /close projects/i }));
@@ -98,8 +99,8 @@ test('moves focus into the opened window and restores it to the launcher', async
 });
 
 test('reopening the active window from the dock preserves state and returns focus to the dialog', async () => {
+  window.history.replaceState(null, '', '/#projects');
   const { container } = render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-  fireEvent.click(screen.getAllByRole('button', { name: /projects/i })[0]);
   const dialog = screen.getByRole('dialog', { name: /projects/i });
   await waitFor(() => expect(document.activeElement).toBe(dialog));
   const zIndex = dialog.style.zIndex;
@@ -125,10 +126,10 @@ test('a hidden dock is removed from accessibility and tab navigation', () => {
 });
 
 test('using the dock does not replace the scene launcher used for focus restoration', async () => {
+  window.history.replaceState(null, '', '/#projects');
   const { container } = render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
   const monitor = container.querySelector('.monitor-screen') as HTMLElement;
-  const sceneLauncher = within(monitor).getByRole('button', { name: /projects/i });
-  fireEvent.click(sceneLauncher);
+  const sceneLauncher = within(monitor).getByRole('button', { name: 'Preview Projects from monitor' });
   const dialog = screen.getByRole('dialog', { name: /projects/i });
   await waitFor(() => expect(document.activeElement).toBe(dialog));
 
@@ -148,8 +149,6 @@ test('dock activation reports only the window id and never claims launcher owner
     state: createInitialWorkspaceState(),
     visible: true,
     blocked: false,
-    onPreview: () => {},
-    onClearPreview: () => {},
     onOpen,
   }));
   fireEvent.click(screen.getByRole('button', { name: /projects/i }));
@@ -158,9 +157,8 @@ test('dock activation reports only the window id and never claims launcher owner
 
 test('mobile modal state makes the scene, dock, and inactive dialogs non-interactive', async () => {
   setMobileViewport();
+  window.history.replaceState(null, '', '/#projects');
   const { container } = render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-  const monitor = container.querySelector('.monitor-screen') as HTMLElement;
-  fireEvent.click(within(monitor).getByRole('button', { name: /projects/i }));
   const projects = screen.getByRole('dialog', { name: /projects/i });
   await waitFor(() => expect(projects.getAttribute('aria-modal')).toBe('true'));
 
@@ -174,45 +172,39 @@ test('mobile modal state makes the scene, dock, and inactive dialogs non-interac
     expect(button.tabIndex).toBe(-1);
   }
 
-  fireEvent.click(monitor.querySelector('[data-app-id="ai-lab"]') as HTMLButtonElement);
-  const inactiveProjects = container.querySelector('.window-projects') as HTMLElement;
-  const activeAiLab = screen.getByRole('dialog', { name: /ai lab/i });
-  expect(inactiveProjects.hasAttribute('inert')).toBe(true);
-  expect(inactiveProjects.getAttribute('aria-hidden')).toBe('true');
-  expect(activeAiLab.hasAttribute('inert')).toBe(false);
-  expect(activeAiLab.getAttribute('aria-modal')).toBe('true');
+  expect(projects.hasAttribute('inert')).toBe(false);
 });
 
 test('desktop keeps background windows available for multi-window focus', async () => {
+  window.history.replaceState(null, '', '/#projects');
   const { container } = render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-  const monitor = container.querySelector('.monitor-screen') as HTMLElement;
-  fireEvent.click(within(monitor).getByRole('button', { name: /projects/i }));
-  fireEvent.click(within(monitor).getByRole('button', { name: /ai lab/i }));
+  const dock = container.querySelector('.workspace-dock') as HTMLElement;
+  fireEvent.click(within(dock).getByRole('button', { name: /ai lab/i }));
   const projects = screen.getByRole('dialog', { name: /projects/i });
   expect(projects.hasAttribute('inert')).toBe(false);
   expect(projects.getAttribute('aria-hidden')).toBeNull();
   expect(projects.getAttribute('aria-modal')).toBe('false');
 });
 
-test('server-rendered app buttons are disabled until hydration', () => {
+test('server-rendered preview controls are disabled until hydration', () => {
   const html = renderToString(React.createElement(ComputerHotspots, {
-    sceneLabel: 'EXPLORE THE WORKSHOP',
-    onPreview: () => {},
-    onClearPreview: () => {},
-    onOpen: () => {},
     registerLauncher: () => {},
   }));
   const shell = document.createElement('div');
   shell.innerHTML = html;
-  const buttons = Array.from(shell.querySelectorAll<HTMLButtonElement>('.app-button'));
-  expect(buttons).toHaveLength(4);
+  expect(shell.querySelectorAll('[data-trigger-source="hotspot"]')).toHaveLength(4);
+  expect(shell.querySelectorAll('[data-trigger-source="bottom-link"]')).toHaveLength(4);
+  const buttons = Array.from(shell.querySelectorAll<HTMLButtonElement>(
+    '[data-trigger-source="hotspot"],[data-trigger-source="bottom-link"]',
+  ));
+  expect(buttons).toHaveLength(8);
   expect(buttons.every((button) => button.disabled)).toBe(true);
 });
 
 test('history reconciliation that closes the final window restores focus to its launcher', async () => {
+  window.history.replaceState(null, '', '/#projects');
   render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-  const launcher = screen.getAllByRole('button', { name: /projects/i })[0];
-  fireEvent.click(launcher);
+  const launcher = screen.getByRole('button', { name: 'Preview Projects from monitor' });
   const dialog = screen.getByRole('dialog', { name: /projects/i });
   await waitFor(() => expect(document.activeElement).toBe(dialog));
   window.history.replaceState(null, '', '/');
@@ -222,9 +214,10 @@ test('history reconciliation that closes the final window restores focus to its 
 });
 
 test('keyboard focus entering a background dialog promotes it without moving focus off the control', async () => {
-  render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-  fireEvent.click(screen.getAllByRole('button', { name: /projects/i })[0]);
-  fireEvent.click(screen.getAllByRole('button', { name: /ai lab/i })[0]);
+  window.history.replaceState(null, '', '/#projects');
+  const { container } = render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
+  const dock = container.querySelector('.workspace-dock') as HTMLElement;
+  fireEvent.click(within(dock).getByRole('button', { name: /ai lab/i }));
   const projectsDialog = screen.getByRole('dialog', { name: /projects/i });
   const aiDialog = screen.getByRole('dialog', { name: /ai lab/i });
   const projectsClose = within(projectsDialog).getByRole('button', { name: /close projects/i });
@@ -235,8 +228,8 @@ test('keyboard focus entering a background dialog promotes it without moving foc
 });
 
 test('does not load a third-party trading iframe before explicit consent', () => {
+  window.history.replaceState(null, '', '/#trading-lab');
   render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
-  fireEvent.click(screen.getAllByRole('button', { name: /trading lab/i })[0]);
   expect(screen.queryByTitle(/market overview/i)).toBeNull();
   fireEvent.click(screen.getByRole('button', { name: /load tradingview/i }));
   expect(screen.getByTitle(/market overview/i)).toBeTruthy();
@@ -251,15 +244,17 @@ test('renders visible ambient motion layers independently of WebGL', () => {
 });
 
 
-test('uses one hero scene state machine for all workspace hover feedback', () => {
+test('keeps hotspot preview local without changing scene hash or windows', () => {
   const { container } = render(React.createElement(WorkspaceDesktop, { content: content as any, recentArticles: [] }));
   const root = container.querySelector('.workspace-page');
-  const aiButton = screen.getAllByRole('button', { name: /ai lab/i })[0];
+  const aiButton = screen.getByRole('button', { name: 'Preview AI Lab from monitor' });
   expect(root?.getAttribute('data-scene-state')).toBe('idle');
-  fireEvent.mouseEnter(aiButton);
-  expect(root?.getAttribute('data-scene-state')).toBe('ai-lab');
-  fireEvent.mouseLeave(aiButton);
+  fireEvent.pointerEnter(aiButton);
+  expect(screen.getByRole('status').textContent).toContain('AI Lab');
   expect(root?.getAttribute('data-scene-state')).toBe('idle');
+  fireEvent.click(aiButton);
+  expect(window.location.hash).toBe('');
+  expect(screen.queryByRole('dialog', { name: /ai lab/i })).toBeNull();
 });
 
 

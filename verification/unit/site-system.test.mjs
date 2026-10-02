@@ -25,6 +25,52 @@ describe('site-system contract metadata', () => {
   });
 });
 
+describe('visual-compositing DSH contract metadata', () => {
+  test('keeps visual rubric version and weight totals aligned', async () => {
+    const { parse } = await import('yaml');
+    const rubric = parse(await readFile(new URL('../contracts/visual-compositing/docs/rubric.yaml', import.meta.url), 'utf8'));
+    const config = parse(await readFile(new URL('../contracts/visual-compositing/config/self-evolve.yaml', import.meta.url), 'utf8'));
+    const weightTotal = rubric.items.reduce((total, item) => total + (item.weight ?? 1), 0);
+    expect(config.meta.version).toBe(String(rubric.version));
+    expect(config.metric.weights_sum).toBe(weightTotal);
+    expect(config.metric.pass_threshold).toBe(1);
+    expect(config.metric.required_pass_ratio).toBe(1);
+  });
+
+  test('visual rubric rejects fake probes and requires real-frame timeline evidence', async () => {
+    const rubric = await readFile(new URL('../contracts/visual-compositing/docs/rubric.yaml', import.meta.url), 'utf8');
+    expect(rubric).toContain('not_contains_text');
+    expect(rubric).toContain('#ff00ff');
+    expect(rubric).toContain('evaluateMeteorEvidence');
+    expect(rubric).toContain('shell_check');
+    expect(rubric).not.toContain("p.endsWith('visual-fusion.spec.ts')");
+    expect(rubric).not.toContain('export\\s+function\\s+evaluateMeteorEvidence');
+    expect(rubric).toContain('neverReappears');
+  });
+
+  test('verify contracts executes the real browser harness plus the visual current artifact and every frozen fixture', async () => {
+    const verifySource = await readFile(new URL('../../scripts/commands/verify.mjs', import.meta.url), 'utf8');
+    const visualSource = await readFile(new URL('../e2e/visual-fusion.spec.ts', import.meta.url), 'utf8');
+    const capability = await readFile(new URL('../contracts/visual-compositing/CAPABILITY.md', import.meta.url), 'utf8');
+    expect(verifySource).toContain('runOwnedVisualContract');
+    expect(verifySource).toContain("expected: 2");
+    expect(verifySource).toContain("expected: 1");
+    expect(verifySource).toContain("skipped: 1");
+    expect(verifySource).toContain("skipped: 0");
+    expect(verifySource).toContain('`${visualBase}/evaluator.ts`');
+    expect(visualSource).toContain("from '../contracts/visual-compositing/evaluator.ts'");
+    expect(visualSource).not.toContain('export function evaluateMeteorEvidence');
+    expect(capability).toContain('evaluator.ts');
+    expect(capability).toContain('frozen');
+    for (const target of [
+      'good.ts',
+      'bad-magenta-probe.ts',
+      'bad-hidden-header.ts',
+      'bad-sparse-timeline.ts',
+    ]) expect(verifySource).toContain(target);
+  });
+});
+
 describe('site-system canonical YAML', () => {
   test('accepts the frozen good contract', async () => {
     const config = parseSiteSystem(await goodYaml());

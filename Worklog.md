@@ -11,69 +11,142 @@ source_exempt: true
 
 > 合併專案工作紀錄：原 Personal-Website（Astro 7 重建）+ Website Design System（設計方法論）
 
+## 2026-09-06 Replan 2 — 真實 Window Mask 接入
+
+## 2026-09-06 Replan 3 — 移除實心背景與前景重繪
+
+## 2026-09-06 Replan 4 — 流星位於電腦後方
+
+### 精確需求
+
+完整流星在窗戶內移動；路徑和電腦／玩偶重疊時，由上方透明前景圖自然遮住，不再用 visible-glass mask 預先挖掉電腦形狀。
+
+### 最終合成
+
+```text
+reference room
+└── geometric window aperture
+    └── stars + meteor
+        └── unmasked foreground occluder
+            └── HTML hotspots
+```
+
+### 素材與程式約束
+
+- `window-aperture-v3.png`：visible-glass Alpha 加上 Window box 內被 foreground 遮住的區域。
+- `foreground-occluder-v3.webp`：reference PNG RGB＋desktop foreground Alpha。
+- `foreground-occluder-mobile-v3.webp`：mobile base RGB＋mobile foreground Alpha。
+- Window mask 只套 `.sky-aperture`。
+- `.computer-foreground` 不得有 `mask-image`、`clip-path`、父層 opacity 或 blend mode。
+- Foreground `z-index:3`；sky `z-index:2`；hotspots `z-index:5`。
+
+### 驗證
+
+| Gate | Result |
+|---|---|
+| Targeted unit | 7/7 PASS |
+| Desktop depth probes | glass visible；wall／monitor／plush blocked |
+| Tablet depth probes | glass visible；wall／monitor／plush blocked |
+| Playwright | 38 PASS、16 expected skip、0 FAIL |
+| Astro build | 860 pages，exit 0 |
+| Human visual gate | 待 localhost 目測 |
+
+## 2026-09-06 Replan 5 — 驗證改用真實流星幀
+
+### 舊驗證為何假陽性
+
+- 關閉真正動畫後注入整片 magenta pseudo-element。
+- 只檢查四個人工挑選 pixels。
+- Visual baseline 未批准，因此 screenshot tests 維持 skip。
+- PASS 只能證明 z-index 單點關係，不能證明真實流星路徑與視覺連續性。
+
+### 新驗證契約
+
+- Web Animations API pause＋currentTime 控制真正 `.shooting-star`。
+- Progress 0.14–0.86，每 0.02 採樣。
+- 四張 paired screenshots 隔離完整 meteor 與 foreground 後的 visible meteor。
+- Travel／fade／exit 分段驗證。
+- 相對 viewport 最大 meteor pixels 正規化。
+- 每個 occluded travel frame 必須以 computer ROI 為主要遮擋來源。
+- 最大遮擋不得超過 90%；至少兩幀部分遮擋；late travel 需重新出現。
+
+### 主題修正
+
+```text
+短流星 120–210px
+└── 長流星 clamp(280px,42%,620px)
+
+viewport translate(-72vw,26vh)
+└── scene-relative right/top keyframes
+```
+
+實測 travel：
+
+- 初段遮擋率 0%。
+- 中段逐步進入 computer ROI，存在多個 partial frames。
+- 最大遮擋低於 90%，流星未完全消失。
+- Progress 0.64 離開電腦後重新顯示。
+- 0.68–0.82 為 aperture exit／fade，不與 foreground occlusion 混為一談。
+
+### Stale preview pitfall
+
+Background Astro dev server 曾未載入最新 CSS；computed style 仍顯示舊 `width:14vw` 與 `translate(-72vw,26vh)`，造成新實作被舊 preview 驗證。修正流程固定為：
+
+```text
+CSS 修改
+├── 強制重啟 dev server
+├── 讀 computed style 確認新值
+└── 再跑真實動畫 frame tests
+```
+
+### 驗證結果
+
+- Targeted real-frame E2E：Desktop／Tablet PASS。
+- Full E2E：38 PASS、16 expected skip、0 FAIL。
+- Unit：7/7 PASS。
+- Build：860 pages。
+- Final reviewer：Approved，無 Critical／Important。
+
+## 2026-09-06 Replan 6 — Tablet Header 造成全場 Blur
+
+### 真正根因
+
+在 808×771 viewport 中檢查所有大型 DOM layer，發現 `.workspace-brand` 實際為 772×418.7，幾乎等於完整 808×454.7 scene。
+
+原因：
+
+```css
+@media (max-width:900px) {
+  .workspace-brand { inset:18px }
+}
+```
+
+而 header 同時帶有：
+
+```css
+background: rgba(30,25,54,.28);
+backdrop-filter: blur(8px);
+```
+
+因此使用者看到的不是 Window Alpha mask，而是被拉伸成全場大小的透明模糊導覽列。
+
+### 為何之前漏掉
+
+- 調查集中在 `.sky-aperture`、foreground Alpha、Three.js 與 mask。
+- Pixel depth tests 主動隱藏 `.workspace-brand`，所以永遠不會重現全場 blur。
+- 原 visual tests 關閉 UI layer，導致真正問題被測試 harness 排除。
+- Responsive `.workspace-brand{inset:18px}` 沒有 compact-header regression。
+
+### 修正與驗證
+
+- Tablet header 改為明確 `top/right/left:18px; bottom:auto; height:auto`。
+- 新增 808×771 回歸測試：header height <80px，且只位於 scene 上方 100px 範圍。
+- RED：418.734px。
+- GREEN：compact header PASS。
+- Full E2E：39 PASS、17 expected skip、0 FAIL。
+- Astro build：860 pages。
+
 ## 2026-09-06 現況更新 — 星空與電腦景深
-
-### 現況
-
-```text
-已完成
-├── Astro／React／Three.js 場景骨架
-├── 四個 HTML 工作視窗與 Command Bus
-├── 公開內容 projection 與隱私閘門
-├── Unit／E2E／contract／build 驗證
-└── 860 個靜態頁面 build
-
-待修正
-└── 星空與前景物件的真實遮擋關係
-```
-
-### 問題與決策
-
-| 問題 | 根因 | 已否決做法 | 核准做法 | 狀態 |
-|------|------|------------|----------|------|
-| 星空應位於電腦後方，但畫面像是把星星硬裁掉 | `workspace-foreground.webp` 是無 Alpha 的完整扁平圖；目前用 polygon `clip-path` 重畫一小塊前景，無法符合真實輪廓 | 繼續擴大矩形／polygon 遮罩 | 將場景拆成背景 → 星空動畫 → 透明電腦／玩偶／桌面前景 | 候選已接入，待人工視覺驗收 |
-
-### 本地模型執行結果
-
-| 階段 | 結果 | 判定 |
-|------|------|------|
-| macOS Vision foreground mask | 桌機玩偶區約 2.8%、桌面約 7%；錯留約 27% 窗外背景 | ❌ 不可用 |
-| 本地 Qwen3.8-27B 視覺複驗 | 確認 Vision 為中央實心區塊，漏電腦配件、玩偶與桌面 | ❌ Vision 路線停止 |
-| Qwen boxes → SAM 2.1 | 電腦／玩偶可辨識，但桌面與小物件不完整 | ⚠️ 不直接採用 |
-| BiRefNet HR-matting | 補依賴後仍遇到 MPS dtype 相容問題；兩次失敗後停止同路徑 | ❌ 停止迭代 |
-| Grounding DINO Tiny → SAM 2.1 Hiera Small | 逐物件定位電腦、鍵盤、滑鼠、玩偶、桌面、植物、燈與書本 | ✅ 採用候選 |
-
-產出：
-
-```text
-public/assets/galaxy/
-├── workspace-foreground-alpha.webp         # 1672×941，241 KB
-└── workspace-mobile-foreground-alpha.webp  # 940×1672，96 KB
-```
-
-驗證：
-
-- Unit：Alpha WebP 尺寸、ALPH channel、無電腦／玩偶 polygon、layer order。
-- Playwright：桌機／手機各驗證實際 `currentSrc`、`object-fit`、`object-position`。
-- Pixel contract：各取三個前景點必須不透明、三個天空／空隙點必須透明。
-- 舊無 Alpha WebP 保留作 rollback，但不再由現役前景元件載入。
-
-### 下一步 SOP
-
-1. 從原始工作室圖分離桌機版電腦、玩偶與桌面物件，輸出透明 PNG／WebP。
-2. 保留房間底圖為最底層，將 Three.js 星空放在背景與透明前景之間。
-3. 移除 `.computer-foreground` 的粗略 polygon `clip-path`。
-4. 先以靜態星點檢查電腦外殼、螢幕框、玩偶與桌緣是否完全遮擋。
-5. 再開啟星空、星雲與流星動畫，執行桌機／手機 Playwright regression。
-6. 桌機視覺確認後，使用獨立手機透明前景重複驗證。
-
-### 驗收條件
-
-- 星星可從電腦後方經過，但不能顯示在電腦本體上。
-- 電腦與玩偶的遮擋使用實際 Alpha 輪廓，不使用粗略矩形代替。
-- `prefers-reduced-motion` 下保持靜態背景與相同遮擋關係。
-- WebGL fallback 下仍維持相同 layer order。
-- 未通過人工視覺確認前，不合併 `main` 或部署 production。
 
 ## 問題與解法
 
@@ -160,24 +233,38 @@ public/assets/galaxy/
 - 畢業原子筆記：[[第三方 widget 與 SPA 非同步初始化衝突時用 iframe 隔離]]
 - 畢業 Reference：[[Personal Website#設計-Tokens]]（Design Tokens 內嵌於專案主頁「設計 Tokens」章節，尚未獨立畢業至 05_Reference）
 
+## 2026-09-06 Replan 7 — Visual DSH 與假通過修復
+
+### 根因
+
+```text
+舊驗證假通過
+├── rubric 只比對 source token
+├── current／candidate 使用不同 oracle
+├── candidate 同時擁有 evaluator 與 browser test，可改成 no-op
+├── Playwright 只看 exit code，未確認必要測試數
+├── dev server 監看測試輸出，可能 HMR reload
+└── 固定 time-0 baseline 被後續 raster/compositor 變化污染
+```
+
+### 修正
+
+- 新增唯一可演化的 `verification/contracts/visual-compositing/evaluator.ts`。
+- `visual-fusion.spec.ts` 與 `workspace.spec.ts` 改為 frozen browser oracle。
+- 每個 animation progress 都擷取同時間四張 paired screenshots，不再和早期 baseline 比較。
+- DSH shell evaluator 用六組 frozen adversarial evidence 執行真實函式。
+- Playwright JSON reporter 精確檢查 Desktop／Tablet meteor 與 Tablet header 的 passed／skipped／unexpected 數量。
+- E2E 先 fresh build，再以 Astro static preview 執行；output 移到 TMPDIR，避免 dev HMR。
+
+### 驗證
+
+- Unit：99/99 PASS。
+- Full E2E：39 PASS、17 expected skip。
+- Stress：Desktop meteor 3 workers × repeat 3，3/3 PASS。
+- DSH：current 35/35 PASS；golden-good 35/35 PASS；三份 bad fixture 均 FAIL；leak 0。
+- Standalone contracts：PASS。
+- Build：860 pages。
+- Reviewer：Approved，無 Critical／Important。
+- 人工視覺 Gate 尚待使用者確認；不以 DSH 取代溫馨感與構圖審核。
+
 ---
-
-## 歷史紀錄（保留最近 3 條）
-
-### 2026-07-11 ~ 07-12 Astro 7 重建 Phase 1-6
-
-- 成功部署 Astro 7 到 Cloudflare Pages，域名 `ethanyang.dpdns.org` 綁定生效
-- 建立 RSS 聚合管線：純 Node.js + GitHub Actions 每日排程，零外部依賴
-- 設定 Decap CMS + GitHub Actions 自動部署
-- 建立 Gmail 擷取管線：Google Apps Script + Gemini API
-- 整合 TradingView 交易圖表（iframe embed）
-- GitHub Secrets 設定完成，自動部署上線
-
-### 2026-07-10 ~ 07-11 Website Design System
-
-- 建立 website-analyzer skill（6+4 維度分析框架）
-- 完成 5 份標竿網站分析報告（共 2847 行），提煉 36 個設計模式
-- 設計 4 個控制台腳本（token 提取、a11y、perf、SEO）
-- 完成 Phase 5 重新設計方案（design tokens + 4px spacing + CSS 重構）
-- CSS 抽離為 styles.css + 10 個 component CSS 檔
-- JS 互動：scroll fade-in + History API panel routing + TradingView lazy load

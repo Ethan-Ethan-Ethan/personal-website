@@ -3,7 +3,7 @@ type: dashboard
 project: personal-website
 status: active
 created: 2026-08-27
-updated: 2026-08-27
+updated: 2026-09-06
 tags:
   - project/personal-website
 ---
@@ -23,7 +23,7 @@ tags:
 | Repo | `Ethan-Ethan-Ethan/personal-website` |
 | 部署觸發 | `git push` → `main` → `.github/workflows/deploy.yml` 自動部署 |
 | RSS 排程 | `.github/workflows/rss-aggregate.yml` 每日 UTC 02:00 |
-| 整體狀態 | Phase 1-6 完成；Decap 清理已收尾；現轉向**網站樣式優化**（評估開源 skill `dembrandt/dembrandt-skills`） |
+| 整體狀態 | Cozy Galaxy P0 視覺重構進行中：房間、流星遮擋、披風微動畫與 responsive runtime 已建立；螢幕小方框＋底部連結 preview 已完成本地實作與自動驗證，目前等待人工確認構圖，再決定第二階段直接連結或 floating window |
 
 ## 代辦清單（正本，已去重）
 
@@ -38,6 +38,8 @@ tags:
 - [ ] **#7 檢查履歷公開 / 私人邊界** — ✅ 已做公開「摘要版履歷頁」：`src/pages/resume.astro`（職稱/時間/雇主/技能/學歷/摘要，**去機密**：隱藏電話、客戶名稱與量化細節），導覽「履歷」與首頁卡片改指向 `/resume`；完整版仍留 `/protected/resume`（Cloudflare Access）。`astro build` 859 頁通過。**待 push 上線（使用者 2026-08-27 選本地保留，未推）**。
 - [x] **#8 工作台卡片滑動面板功能** — ✅ 2026-08-27 實作：首頁新增「工作台」區塊，3 卡片（待辦健康度 / 週報 / 經驗沉澱）點擊後用 `grid-template-rows: 0fr→1fr` 滑出下方面板；`astro build` 35 頁通過。週報 / 經驗沉澱面板內容待填。
 - [ ] **#9 網站樣式優化** — 2026-08-27 使用者表態想做網頁樣式；採用開源 skill `dembrandt/dembrandt-skills`（已 clone 至 `Agent-Skills/dembrandt-skills`，41 個 UX/design-system 技能，經 `~/.config/opencode/skills → Agent-Skills` 既有 symlink 自動載入；MIT）。dembrandt MCP 引擎已接（本地 stdio，`opencode.jsonc` 的 `mcpServers.dembrandt`）；實測 `dembrandt https://ethanyang.dpdns.org` 擷取成功（顏色 9 / 字體 19 / 間距 12 / 圓角 4 / 按鈕 2 變體，與 global.css 一致），Cloudflare 未擋。MCP 工具需重啟 OpenCode 才載入；CLI 已可直接用。下一步：把 tokens 存到 `design-system/` 供 `website-analyze` 用，並挑子技能（color-mode-and-theme / algorithmic-color-palette / component-family-consistency / wcag-accessibility）套用優化。
+- [x] **#10 Cozy Galaxy 玩偶披風微動畫** — Desktop／Tablet／Mobile 已接入照片披風 Alpha 三段 CSS rig，使用者已確認可見且速度調整後可接受；未做 clean plate 或 AI inpainting。設計正本：`/Users/ethan/Documents/memory/design/2026-09-06-personal-website-plush-cape-motion-design.md`。
+- [x] **#11 螢幕小方框與底部連結 Preview（第一階段）** — 已隱藏頂部導覽與常駐文字卡片；四個螢幕方框和四個底部 UI 共用局部小視窗與 SVG 指向線。Pointer／focus ownership、Escape、resize、Tablet fallback、Mobile tap 與不霧化 pixel contract 均完成。第一階段刻意不導航、不改 hash、不開 floating window；等待人工構圖確認後再決定第二階段連結方式。計畫：`plan/2026-09-06-monitor-hotspot-popover-implementation.md`。
 
 ## 網域續簽專區（#5）
 
@@ -122,6 +124,9 @@ npm run dev          # 或 astro dev --background
 - 踩坑紀錄：[[04-踩坑紀錄]]
 
 ## 處理日誌
+- 2026-09-06：螢幕小方框 Preview 第一階段完成 — 頂部 brand 與四個常駐文字卡片已隱藏；新增 icon-only monitor hotspots、底部 controls、共享 HTML popover 與 scene-relative SVG guide。Preview state 已與 global scene/window command bus 解耦，URL、dialog、星空、玩偶與披風不受 hover/tap 影響。驗證：119 unit PASS、54 E2E PASS／28 expected skip、contracts PASS、artifact build 860 pages、三組 reviewer 最終 0 Critical／0 Important。`npm run verify` 最後仍被既有 public projection source drift 阻擋，未越權同步。下一步只做 localhost 人工構圖確認；實際連結 deferred。
+- 2026-09-06：Responsive 假通過修正 — 找到 660px fine-pointer 窄桌機同時混用 Desktop CSS、Mobile React modal 與 Mobile foreground 的根因。CSS、React `matchMedia`、拖曳／resize 判斷、`<picture>` source 與 unit fixture 已統一成同一 capability query；新增 660px fine/coarse runtime 回歸。Fresh evidence：100 unit PASS、42 E2E PASS／20 expected skip、contracts PASS、860 pages build、reviewer 0 findings。披風尚未實作，下一步先做 Desktop／Mobile 真實 Alpha 靜態預覽。
+- 2026-09-06：Cozy Galaxy 現況更新 — 房間清晰度、window aperture、computer foreground 景深、流星固定右上→左下與左側細頭已完成自動驗證；目前進入玩偶披風微動畫設計。使用者確認 Desktop／Tablet／Mobile 一起做；既有 `.scarf-tail` 僅為漸層，後續改接真實披風 Alpha 三段 rig。Public projection 仍有 `trading-automation.updatedAt` drift，未在本視覺任務中越權同步。
 - 2026-08-27：建立 Dashboard，去重代辦；確認 #1 缺口為 config.yml 缺 `auth: github` + `client_id`。
 - 2026-08-27：#1 補上 config.yml 的 `auth: github` + `client_id` 佔位；剩餘需使用者在 GitHub 註冊 OAuth App 並填入真實 client_id（外部操作，我未擅自執行）。
 - 2026-08-27：#3 調查 — `/protected/resume`、`/protected/vlog` 已存在但**目前未受 Cloudflare Access 保護**（僅佔位文字）；本地無 Cloudflare 憑證，已將手動設定步驟寫入 Dashboard，待使用者在 Cloudflare 後台執行。

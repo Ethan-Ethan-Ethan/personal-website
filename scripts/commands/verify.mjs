@@ -2,8 +2,7 @@ import { resolve } from 'node:path';
 import {
   runExternal,
   spawnOwnedProcess,
-  stopOwnedAstroServer,
-  waitForOwnedAstroServer,
+  stopOwnedProcess,
 } from '../lib/command-runtime.mjs';
 import { verifyGeneratedSiteSystem } from '../lib/site-system.mjs';
 import { runContentSync } from '../lib/sync-public-content.mjs';
@@ -11,6 +10,35 @@ import { runContentSync } from '../lib/sync-public-content.mjs';
 const E2E_HOST = '127.0.0.1';
 const E2E_PORT = 4321;
 const E2E_BASE_URL = `http://${E2E_HOST}:${E2E_PORT}`;
+const PLAYWRIGHT_OUTPUT_DIR = resolve(process.env.TMPDIR || '/tmp', `personal-website-playwright-${process.pid}`);
+const delay = (ms) => new Promise((resolveDelay) => setTimeout(resolveDelay, ms));
+
+async function waitForOwnedPreview(
+  _root,
+  child,
+  expectedUrl,
+  { timeoutMs = 30_000, intervalMs = 100, fetchImpl = fetch } = {},
+) {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (child.exitCode !== null || child.signalCode) {
+      throw new Error(`owned Astro preview exited before readiness${child.output ? `:\n${child.output}` : ''}`);
+    }
+    if (child.output?.includes(expectedUrl)) {
+      try {
+        const response = await fetchImpl(expectedUrl, {
+          cache: 'no-store',
+          headers: { 'x-e2e-owner-pid': String(child.pid) },
+        });
+        if (response.ok) return;
+      } catch {
+        // The owned preview announced its URL but the listener may still be warming up.
+      }
+    }
+    await delay(intervalMs);
+  }
+  throw new Error(`owned Astro preview did not become ready at ${expectedUrl} within ${timeoutMs}ms`);
+}
 
 function runBenchmark(root, artifact, rubric, expectedVerdict) {
   const engine = resolve(process.env.HOME, 'Documents/scripts/benchmark_gate.py');
@@ -20,24 +48,26 @@ function runBenchmark(root, artifact, rubric, expectedVerdict) {
   if (protocol.score?.verdict !== expectedVerdict) throw new Error(`${artifact} expected ${expectedVerdict}, got ${protocol.score?.verdict}`);
 }
 
-export async function runOwnedE2E(root, dependencies = {}) {
+export async function runOwnedE2E(root, dependencies = {}, testArgs = []) {
+  const buildSite = dependencies.buildSite || runExternal;
   const spawnServer = dependencies.spawnServer || spawnOwnedProcess;
-  const waitForReady = dependencies.waitForReady || waitForOwnedAstroServer;
+  const waitForReady = dependencies.waitForReady || waitForOwnedPreview;
   const runTests = dependencies.runTests || runExternal;
-  const stopServer = dependencies.stopServer || ((child) => stopOwnedAstroServer(root, child));
-  const serverEnv = { ...process.env, ASTRO_DEV_BACKGROUND: '0' };
+  const stopServer = dependencies.stopServer || stopOwnedProcess;
+  const serverEnv = { ...process.env, ASTRO_DEV_BACKGROUND: '0', ASTRO_PREVIEW_BACKGROUND: '0' };
+  buildSite(root, 'npx', ['astro', 'build']);
   const serverArgs = [
     resolve(root, 'node_modules/astro/bin/astro.mjs'),
-    'dev',
+    'preview',
     '--host', E2E_HOST,
     '--port', String(E2E_PORT),
-    '--force',
   ];
   const child = spawnServer(root, process.execPath, serverArgs, { env: serverEnv });
 
   try {
     await waitForReady(root, child, E2E_BASE_URL);
-    runTests(root, 'npm', ['run', 'test:e2e:raw'], {
+    const commandArgs = ['run', 'test:e2e:raw', '--', ...testArgs, '--output', PLAYWRIGHT_OUTPUT_DIR];
+    runTests(root, 'npm', commandArgs, {
       env: {
         ...process.env,
         E2E_BASE_URL,
@@ -45,6 +75,106 @@ export async function runOwnedE2E(root, dependencies = {}) {
         E2E_SERVER_OWNED: '1',
       },
     });
+  } finally {
+    await stopServer(child);
+  }
+}
+
+function assertPlaywrightStats(output, expectedStats, label) {
+  const report = JSON.parse(output);
+  const stats = report.stats || {};
+  for (const [key, expected] of Object.entries(expectedStats)) {
+    if (stats[key] !== expected) {
+      throw new Error(`${label} expected Playwright stats.${key}=${expected}, got ${stats[key]}`);
+    }
+  }
+}
+
+export async function runOwnedVisualContract(root, dependencies = {}) {
+  const buildSite = dependencies.buildSite || runExternal;
+  const spawnServer = dependencies.spawnServer || spawnOwnedProcess;
+  const waitForReady = dependencies.waitForReady || waitForOwnedPreview;
+  const runTests = dependencies.runTests || runExternal;
+  const stopServer = dependencies.stopServer || stopOwnedProcess;
+  const serverEnv = { ...process.env, ASTRO_DEV_BACKGROUND: '0', ASTRO_PREVIEW_BACKGROUND: '0' };
+  buildSite(root, 'npx', ['astro', 'build']);
+  const child = spawnServer(root, process.execPath, [
+    resolve(root, 'node_modules/astro/bin/astro.mjs'),
+    'preview',
+    '--host', E2E_HOST,
+    '--port', String(E2E_PORT),
+  ], { env: serverEnv });
+
+  const checks = [
+    {
+      label: 'real meteor browser evidence',
+      file: 'verification/e2e/visual-fusion.spec.ts',
+      grep: 'real meteor frames keep visual continuity while passing behind foreground',
+      project: 'desktop-chrome',
+      stats: { expected: 2, skipped: 1, unexpected: 0 },
+    },
+    {
+      label: 'local hotspot preview',
+      file: 'verification/e2e/hotspot-popover.spec.ts',
+      grep: 'monitor and bottom controls share one local preview without changing the scene',
+      project: 'desktop-chrome',
+      stats: { expected: 1, skipped: 0, unexpected: 0 },
+    },
+    {
+      label: 'hotspot controls without painted button chrome',
+      file: 'verification/e2e/visual-fusion.spec.ts',
+      grep: 'idle and active hotspot controls keep hit targets without painted button chrome',
+      project: 'desktop-chrome',
+      stats: { expected: 1, skipped: 0, unexpected: 0 },
+    },
+    {
+      label: 'desktop hotspot pixel locality',
+      file: 'verification/e2e/visual-fusion.spec.ts',
+      grep: 'hotspot preview changes only local UI in desktop',
+      project: 'desktop-chrome',
+      stats: { expected: 1, skipped: 0, unexpected: 0 },
+    },
+    {
+      label: 'tablet hotspot pixel locality',
+      file: 'verification/e2e/visual-fusion.spec.ts',
+      grep: 'hotspot preview changes only local UI in tablet',
+      project: 'desktop-chrome',
+      stats: { expected: 1, skipped: 0, unexpected: 0 },
+    },
+    {
+      label: 'mobile hotspot pixel locality',
+      file: 'verification/e2e/visual-fusion.spec.ts',
+      grep: 'hotspot preview changes only local UI in mobile',
+      project: 'mobile-chrome',
+      stats: { expected: 1, skipped: 0, unexpected: 0 },
+    },
+  ];
+
+  try {
+    await waitForReady(root, child, E2E_BASE_URL);
+    const env = {
+      ...process.env,
+      FORCE_COLOR: '0',
+      NO_COLOR: '1',
+      E2E_BASE_URL,
+      E2E_SERVER_PID: String(child.pid),
+      E2E_SERVER_OWNED: '1',
+    };
+    for (const check of checks) {
+      const output = runTests(root, 'npx', [
+        'playwright',
+        'test',
+        check.file,
+        '--grep',
+        check.grep,
+        '--project',
+        check.project,
+        '--reporter=json',
+        '--output',
+        PLAYWRIGHT_OUTPUT_DIR,
+      ], { capture: true, env });
+      assertPlaywrightStats(output, check.stats, check.label);
+    }
   } finally {
     await stopServer(child);
   }
@@ -76,6 +206,16 @@ export async function handleVerifyCommand(root, action) {
       'unsafe-hash.json',
       'unsafe-sensitive.json',
     ]) runBenchmark(root, `${publicBase}/benchmark/artifacts/_golden/${fixture}`, `${publicBase}/docs/rubric.yaml`, 'FAIL');
+
+    const visualBase = 'verification/contracts/visual-compositing';
+    await runOwnedVisualContract(root);
+    runBenchmark(root, `${visualBase}/evaluator.ts`, `${visualBase}/docs/rubric.yaml`, 'PASS');
+    runBenchmark(root, `${visualBase}/benchmark/artifacts/_golden/good.ts`, `${visualBase}/docs/rubric.yaml`, 'PASS');
+    for (const fixture of [
+      'bad-magenta-probe.ts',
+      'bad-hidden-header.ts',
+      'bad-sparse-timeline.ts',
+    ]) runBenchmark(root, `${visualBase}/benchmark/artifacts/_golden/${fixture}`, `${visualBase}/docs/rubric.yaml`, 'FAIL');
   } else if (action === 'build') runExternal(root, 'npx', ['astro', 'build']);
   else if (action === 'all') {
     for (const step of ['unit', 'e2e', 'contracts']) await handleVerifyCommand(root, step);

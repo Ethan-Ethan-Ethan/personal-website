@@ -23,12 +23,13 @@ function fakeChild(pid = 4242) {
 }
 
 describe('owned E2E server lifecycle', () => {
-  test('waits for readiness, passes the owned URL to Playwright, and always cleans up', async () => {
+  test('builds a static preview, waits for readiness, passes the owned URL to Playwright, and always cleans up', async () => {
     expect(typeof verifyModule.runOwnedE2E).toBe('function');
     if (typeof verifyModule.runOwnedE2E !== 'function') return;
 
     const events = [];
     const child = fakeChild();
+    const buildSite = vi.fn(() => events.push('build'));
     const spawnServer = vi.fn(() => {
       events.push('spawn');
       return child;
@@ -44,18 +45,19 @@ describe('owned E2E server lifecycle', () => {
     const stopServer = vi.fn(async () => events.push('cleanup'));
 
     await expect(verifyModule.runOwnedE2E('/project', {
+      buildSite,
       spawnServer,
       waitForReady,
       runTests,
       stopServer,
     })).rejects.toThrow('synthetic Playwright failure');
 
-    expect(events).toEqual(['spawn', 'ready', 'tests', 'cleanup']);
+    expect(events).toEqual(['build', 'spawn', 'ready', 'tests', 'cleanup']);
     expect(stopServer).toHaveBeenCalledWith(child);
     expect(spawnServer).toHaveBeenCalledWith(
       '/project',
       process.execPath,
-      expect.arrayContaining(['dev', '--host', '127.0.0.1', '--port', '4321', '--force']),
+      expect.arrayContaining(['preview', '--host', '127.0.0.1', '--port', '4321']),
       expect.objectContaining({ env: expect.any(Object) }),
     );
   });
@@ -135,5 +137,53 @@ describe('owned E2E server lifecycle', () => {
 
     expect(result.status).not.toBe(0);
     expect(`${result.stdout}\n${result.stderr}`).toMatch(/owned server|internal-only/i);
+  });
+
+  test('runs local preview, no-painted button chrome, and pixel-locality browser oracles', async () => {
+    const child = fakeChild();
+    const calls = [];
+    const runTests = vi.fn((_root, _command, args) => {
+      calls.push(args);
+      return JSON.stringify({
+        stats: calls.length === 1
+          ? { expected: 2, skipped: 1, unexpected: 0 }
+          : { expected: 1, skipped: 0, unexpected: 0 },
+      });
+    });
+
+    await verifyModule.runOwnedVisualContract('/project', {
+      buildSite: vi.fn(),
+      spawnServer: vi.fn(() => child),
+      waitForReady: vi.fn(),
+      runTests,
+      stopServer: vi.fn(),
+    });
+
+    expect(calls).toHaveLength(6);
+    expect(calls[1]).toEqual(expect.arrayContaining([
+      'verification/e2e/hotspot-popover.spec.ts',
+      'monitor and bottom controls share one local preview without changing the scene',
+      'desktop-chrome',
+    ]));
+    expect(calls[2]).toEqual(expect.arrayContaining([
+      'verification/e2e/visual-fusion.spec.ts',
+      'idle and active hotspot controls keep hit targets without painted button chrome',
+      'desktop-chrome',
+    ]));
+    expect(calls[3]).toEqual(expect.arrayContaining([
+      'verification/e2e/visual-fusion.spec.ts',
+      'hotspot preview changes only local UI in desktop',
+      'desktop-chrome',
+    ]));
+    expect(calls[4]).toEqual(expect.arrayContaining([
+      'verification/e2e/visual-fusion.spec.ts',
+      'hotspot preview changes only local UI in tablet',
+      'desktop-chrome',
+    ]));
+    expect(calls[5]).toEqual(expect.arrayContaining([
+      'verification/e2e/visual-fusion.spec.ts',
+      'hotspot preview changes only local UI in mobile',
+      'mobile-chrome',
+    ]));
   });
 });
