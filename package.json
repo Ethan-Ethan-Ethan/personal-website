@@ -23,7 +23,9 @@
     "system:generate": "node scripts/site.mjs system generate",
     "content:verify": "node scripts/site.mjs content check --source-mode auto",
     "test:e2e:raw": "playwright test",
-    "commit:safe": "sh /Users/ethan/Documents/scripts/safe-commit.sh --repo . --verify --"
+    "commit:safe": "sh /Users/ethan/Documents/scripts/safe-commit.sh --repo . --verify --",
+    "verify:n-budget": "node scripts/n-budget-check.mjs",
+    "verify:baseline-hashes": "node scripts/baseline-hash-check.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.5",

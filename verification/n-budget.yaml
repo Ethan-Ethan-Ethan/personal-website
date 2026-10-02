@@ -1,0 +1,11 @@
+# N-budget registry (G2). Gate: `npm run site -- verify n-budget`.
+# Any entry with used > N FAILS the gate. New trial cases register here
+# BEFORE their first run (fail-closed: missing file also fails).
+- case: nebula-trial
+  n: 3
+  used: 3
+  status: closed
+# - case: <kebab-id>
+#   n: <int>
+#   used: 0
+#   status: open
