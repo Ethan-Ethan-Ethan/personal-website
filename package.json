@@ -22,7 +22,8 @@
     "system:validate": "node scripts/site.mjs system validate",
     "system:generate": "node scripts/site.mjs system generate",
     "content:verify": "node scripts/site.mjs content check --source-mode auto",
-    "test:e2e:raw": "playwright test"
+    "test:e2e:raw": "playwright test",
+    "commit:safe": "sh /Users/ethan/Documents/scripts/safe-commit.sh --repo . --verify --"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.5",
