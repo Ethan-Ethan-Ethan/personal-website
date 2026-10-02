@@ -1,0 +1,16 @@
+# Test-harness UI-hide allowlist (G3)
+# Rule: any test-side `display:none` / `visibility:hidden` (e.g. via addStyleTag)
+# must have BOTH an inline TRIAL/ALLOWLIST comment AND an entry here.
+# Production CSS (responsive/reduced-motion) is out of scope.
+- anchor: .workspace-scene>*
+  file: verification/e2e/visual-fusion.spec.ts
+  reason: calibration-overlay isolation helper (hide scene children except the overlay under calibration)
+  legacy: grandfathered-2026-10-02 (inline comment added same day; review on next harness change)
+- anchor: .workspace-brand
+  file: verification/e2e/visual-fusion.spec.ts
+  reason: meteorFrameHarness determinism set (brand/copy/shell/motion/reactor/starfield hidden for meteor frame tests)
+  legacy: grandfathered-2026-10-02 (inline comment added same day; review on next harness change)
+- anchor: .trial-nebula
+  file: verification/e2e/visual-fusion.spec.ts
+  reason: B' locality determinism (background drift excluded; nebula covered by unit/manual/sky tests)
+  expires: revisit on merge-to-main review

@@ -36,6 +36,8 @@ async function renderCalibrationOverlay(
   await page.setViewportSize({ width: 1672, height: 941 });
   await page.goto('/');
   await expect(page.locator('.workspace-page')).toHaveAttribute('data-hydrated', 'true');
+  // ALLOWLIST harness-hide#calibration: isolate the calibration overlay
+  // (hide scene children except .calibration-overlay; see harness-hide-allowlist.yaml).
   await page.addStyleTag({
     content: `
       html,body,.workspace-page{width:1672px!important;height:941px!important;min-width:1672px!important;min-height:941px!important;margin:0!important;overflow:hidden!important}
@@ -303,6 +305,8 @@ const freezeMotion = `
   * { animation: none !important; transition: none !important; caret-color: transparent !important; }
 `;
 
+// ALLOWLIST harness-hide#meteor-set: determinism set for meteor frame tests
+// (brand/copy/shell/motion/reactor/starfield; see harness-hide-allowlist.yaml).
 const meteorFrameHarness = `
   .workspace-brand,
   .workspace-copy,

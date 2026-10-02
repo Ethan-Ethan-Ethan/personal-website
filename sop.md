@@ -42,3 +42,7 @@ source_exempt: true
 
 ## 時間記錄
 - 開始時間：2026-03-13
+
+## 網站治理入口（G5，與履歷無關，勿刪）
+
+本站行為約束正本：`plan/` 計畫 Global Constraints、`verification/contracts/`、`website-style-recipe.ts` validate；本檔其餘為履歷 SOP，衝突以正本為準。

@@ -20,3 +20,7 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+## Governance entry (G5)
+
+本站真約束在 plan Global Constraints＋`verification/contracts/`＋recipe fail-closed（`src/features/workspace/core/website-style-recipe.ts`）；本檔僅開發通用指引，衝突以正本為準。
