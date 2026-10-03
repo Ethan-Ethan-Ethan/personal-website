@@ -6611,7 +6611,87 @@
     "https://www.infoq.com/articles/high-availability-not-resilience-cloud/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Article: High Availability Is Not Resilience: Why Cloud Systems Fail When It Matters Most",
       "date": "2026-10-02T08:04:04.816Z"
+    },
+    "https://blog.kagi.com/update-orion-linux-windows": {
+      "title": "An Update on Orion for Linux and Windows",
+      "date": "2026-10-03T07:44:18.770Z"
+    },
+    "https://www.extrabigassintelligence.com/": {
+      "title": "Extra Big Ass Intelligence",
+      "date": "2026-10-03T07:44:18.770Z"
+    },
+    "https://blog.cloudflare.com/announcing-cloudflare-ohttp-gateway/": {
+      "title": "Cloudflare OHTTP gateway",
+      "date": "2026-10-03T07:44:18.771Z"
+    },
+    "https://www.newgrounds.com/": {
+      "title": "Newgrounds.com – A community of games, music, and art",
+      "date": "2026-10-03T07:44:18.771Z"
+    },
+    "http://whereistheplanet.com": {
+      "title": "Where Is the Planet",
+      "date": "2026-10-03T07:44:18.771Z"
+    },
+    "https://www.breakthroughjournal.org/p/things-that-apparently-cause-cancer": {
+      "title": "Things that apparently cause cancer",
+      "date": "2026-10-03T07:44:18.771Z"
+    },
+    "https://thehustle.co/originals/why-barcodes-are-about-to-go-extinct": {
+      "title": "Barcodes are about to go extinct",
+      "date": "2026-10-03T07:44:18.771Z"
+    },
+    "https://github.com/anteloc/ldraw-nova": {
+      "title": "Show HN: Made an open-source Lego AI generator",
+      "date": "2026-10-03T07:44:18.771Z"
+    },
+    "https://developer.apple.com/news/?id=p6zjojqw": {
+      "title": "Updates to Full Disk Access in macOS",
+      "date": "2026-10-03T07:44:18.772Z"
+    },
+    "https://matduggan.com/what-does-my-dream-os-ui-look-like/": {
+      "title": "Make Tmux the OS",
+      "date": "2026-10-03T07:44:18.772Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cq62yr0ndd5zo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "為什麼有些人坐電動車更容易暈車？",
+      "date": "2026-10-03T07:44:19.108Z"
+    },
+    "https://www.infoq.com/news/2026/10/open-source-ai-security/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AI Agents Are Disrupting Open Source Security Disclosure",
+      "date": "2026-10-03T07:44:20.017Z"
+    },
+    "https://www.infoq.com/news/2026/10/uber-eats-search-latency/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Uber Eats Rebuilds Search Pipeline to Cut End-to-End Latency by 50%",
+      "date": "2026-10-03T07:44:20.017Z"
+    },
+    "https://www.infoq.com/news/2026/10/envoy-gateway-1-9-1/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Envoy Gateway 1.9.1 Tightens Security and Addresses a Difficult Upgrade Path",
+      "date": "2026-10-03T07:44:20.017Z"
+    },
+    "https://www.infoq.com/presentations/managing-async-apis/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Managing Asynchronous APIs at Scale",
+      "date": "2026-10-03T07:44:20.017Z"
+    },
+    "https://www.infoq.com/news/2026/10/openai-devday-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "OpenAI DevDay 2026 Recap for Developers",
+      "date": "2026-10-03T07:44:20.017Z"
+    },
+    "https://www.infoq.com/news/2026/10/qconsf-2026-sessions/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Engineering Production Systems for an Agentic Era: QCon San Francisco 2026",
+      "date": "2026-10-03T07:44:20.017Z"
+    },
+    "https://www.infoq.com/articles/regeneratable-ui-component-library/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: From Reusable to Regeneratable: Rethinking the Shared UI Component Library",
+      "date": "2026-10-03T07:44:20.017Z"
+    },
+    "https://www.infoq.com/news/2026/10/docker-sandbox-ai-agent/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Docker Sandbox Kit Spec: Packaging AI Agent Permissions as OCI Images",
+      "date": "2026-10-03T07:44:20.017Z"
+    },
+    "https://www.infoq.com/news/2026/10/digitalocean-managed-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "DigitalOcean Managed Agents Brings Managed Cloud Infrastructure to AI Agents",
+      "date": "2026-10-03T07:44:20.018Z"
     }
   },
-  "lastRun": "2026-10-02T08:04:04.816Z"
+  "lastRun": "2026-10-03T07:44:20.018Z"
 }
