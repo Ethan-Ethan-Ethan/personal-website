@@ -104,6 +104,16 @@ export default function GalaxyCanvas() {
     let pointerY = 0;
     let animationId = 0;
     let visible = !document.hidden;
+    // threeui borrow (energy-orb pattern): react to mid-session
+    // prefers-reduced-motion changes instead of checking once at boot.
+    let motionReduced = false;
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onMotionChange = () => {
+      if (motionQuery.matches) {
+        motionReduced = true;
+        host.dataset.webgl = 'reduced';
+      }
+    };
     let meteorStart = 8;
     let lastTime = performance.now();
     const startedAt = lastTime;
@@ -132,10 +142,11 @@ export default function GalaxyCanvas() {
     };
     host.addEventListener('pointermove', onPointerMove, { passive: true });
     document.addEventListener('visibilitychange', onVisibility);
+    motionQuery.addEventListener('change', onMotionChange);
 
     const animate = (time: number) => {
       animationId = 0;
-      if (!visible) return;
+      if (!visible || motionReduced) return;
       const delta = Math.min(time - lastTime, 40);
       lastTime = time;
       const elapsed = (time - startedAt) / 1000;
@@ -157,13 +168,14 @@ export default function GalaxyCanvas() {
         }
       }
       renderer.render(scene, camera);
-      if (!reduceMotion) animationId = requestAnimationFrame(animate);
+      if (!reduceMotion && !motionReduced) animationId = requestAnimationFrame(animate);
     };
     animate(performance.now());
 
     cleanup = () => {
       cancelAnimationFrame(animationId);
       resizeObserver.disconnect();
+      motionQuery.removeEventListener('change', onMotionChange);
       host.removeEventListener('pointermove', onPointerMove);
       document.removeEventListener('visibilitychange', onVisibility);
       scene.traverse((object) => {
