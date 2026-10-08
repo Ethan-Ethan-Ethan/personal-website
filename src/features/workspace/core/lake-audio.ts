@@ -1,21 +1,16 @@
-// 音樂落地契約：靜態檔＋授權先行。AVAILABLE 為空＝正式曲目未授權，
-// resolveTrackSrc 回 null，播放器呈 disabled（Task 5 驗收門）；授權確定後
-// 把 trackId 登入 AVAILABLE 並放檔至 public/audio/，播放器自動解鎖。
-export const AUDIO_BASE = '/audio';
-
-export const TRACK_FILES: Record<string, string> = {
-  'phase-dawn': 'phase-dawn.mp3',
-  'phase-noon': 'phase-noon.mp3',
-  'phase-dusk': 'phase-dusk.mp3',
-  'phase-night': 'phase-night.mp3',
+// 合成水聲契約（WebAudio 程序白噪音，無檔案、無授權問題）。
+// 每時段一組濾波參數：水聲隨時段變（夜低沉、正午開闊）。
+export type WaterVoice = {
+  filterFreq: number;
+  q: number;
+  gain: number;
+  lfoRate: number;
+  lfoDepth: number;
 };
 
-// 已授權並已放檔的曲目（目前空；見 public/audio/README.md）。
-export const AVAILABLE_TRACKS: string[] = [];
-
-export function resolveTrackSrc(trackId: string): string | null {
-  const file = TRACK_FILES[trackId];
-  if (!file) return null;
-  if (!AVAILABLE_TRACKS.includes(trackId)) return null;
-  return `${AUDIO_BASE}/${file}`;
-}
+export const WATER_VOICES: Record<string, WaterVoice> = {
+  'phase-dawn': { filterFreq: 900, q: 0.8, gain: 0.14, lfoRate: 0.12, lfoDepth: 220 },
+  'phase-noon': { filterFreq: 1400, q: 0.6, gain: 0.11, lfoRate: 0.2, lfoDepth: 320 },
+  'phase-dusk': { filterFreq: 700, q: 1.0, gain: 0.15, lfoRate: 0.09, lfoDepth: 180 },
+  'phase-night': { filterFreq: 420, q: 1.2, gain: 0.16, lfoRate: 0.07, lfoDepth: 120 },
+};

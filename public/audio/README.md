@@ -1,16 +1,18 @@
-# 音樂授權門（lake-landing Task 5）
+# 水聲（lake-landing Task 7，白噪音合成）
 
-狀態：**未授權，無正式曲目**。`src/features/workspace/core/lake-audio.ts` 的
-`AVAILABLE_TRACKS` 為空，播放器呈 disabled（驗收門）；授權確定前不生成、不上架。
+狀態：**已上線，無檔案、無授權問題**。水聲由 WebAudio 現場合成
+（白噪音 buffer → 低通濾波 → 慢速 LFO 推濾波頻率），不需任何音檔，
+`public/audio/` 保持為空（本文件為唯一內容）。
 
-## 授權確定後三步
+## 行為
 
-1. 選 AI 生成服務，確認商用條款（Suno／Udio 二選一；條款截圖存本目錄）。
-2. 轉檔：`mp3 128k` 起（流量與品質折衷），有餘力加 `opus` 備選。
-3. 放檔 `public/audio/phase-{dawn,noon,dusk,night}.mp3`，把 trackId 登入 `AVAILABLE_TRACKS`，播放器自動解鎖。
+- 首次點擊播放鍵才建 AudioContext（自動播放政策要求手勢解鎖）。
+- 切時段：濾波頻率／Q／音量／LFO 以 0.8 秒斜率滑過去，不爆音。
+- 四段預設：夜低沉（420Hz）／黃昏暖（700Hz）／黎明清（900Hz）／正午開闊（1400Hz），
+  見 `src/features/workspace/core/lake-audio.ts` WATER_VOICES。
+- 解除安裝時關 context；減動畫模式不影響聲音（只管動態）。
 
-##  Credits（開源致謝，B 路線波紋做法來源）
+## 若將來要真錄音
 
-- Water ripple interaction: martinRenou/threejs-water（BSD-3-Clause）https://github.com/martinRenou/threejs-water
-- Interactive water demo: charlieamer/threejs-water（MIT）https://github.com/charlieamer/threejs-water
-- 僅借做法與調參思路，未複製整套；授權全文見各倉庫 LICENSE。
+把曲目放 `public/audio/phase-*.mp3` 並在 useLakeAudio 另接 `<audio>` 即可；
+本合成器保留作無檔回退。

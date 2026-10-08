@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { LAKE_PHASES, PHASE_COUNT, normalizePhase } from './lake-palette';
-import { AVAILABLE_TRACKS, resolveTrackSrc } from './lake-audio';
+import { WATER_VOICES } from './lake-audio';
 import { createPhaseController, PHASE_WINDOW_MS } from '../elements/useLakePhase';
 
 describe('lake palette', () => {
@@ -38,13 +38,17 @@ describe('phase controller throttle', () => {
   });
 });
 
-describe('audio license gate', () => {
-  it('stays locked until licensed', () => {
-    expect(AVAILABLE_TRACKS).toEqual([]);
-    expect(resolveTrackSrc('phase-dawn')).toBeNull();
-  });
-
-  it('rejects unknown tracks', () => {
-    expect(resolveTrackSrc('nope')).toBeNull();
+describe('water voices', () => {
+  it('covers all phases with sane ranges', () => {
+    for (const p of LAKE_PHASES) {
+      const v = WATER_VOICES[p.trackId];
+      expect(v, p.trackId).toBeDefined();
+      expect(v.filterFreq).toBeGreaterThanOrEqual(200);
+      expect(v.filterFreq).toBeLessThanOrEqual(2000);
+      expect(v.gain).toBeGreaterThan(0);
+      expect(v.gain).toBeLessThanOrEqual(0.25);
+      expect(v.lfoRate).toBeGreaterThan(0);
+      expect(v.lfoRate).toBeLessThanOrEqual(1);
+    }
   });
 });

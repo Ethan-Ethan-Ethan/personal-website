@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
-import { resolveTrackSrc } from '../core/lake-audio';
 
 const SERIF = 'Georgia, "Times New Roman", "Noto Serif TC", serif';
 const INK = '#f5f1e6';
@@ -26,8 +25,7 @@ function useLocalTime(): string {
 export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, trackPlaying, onTogglePlay }: Props) {
   const time = useLocalTime();
   // 連結落點沿用站內既有路由（About→履歷，Selected work→交易實驗室）；可改名。
-  const src = resolveTrackSrc(phase.trackId);
-  const canPlay = src !== null;
+  // 白噪音現場合成，無檔案無授權問題，播放鍵恆可按。
   const tiny: React.CSSProperties = { fontFamily: SERIF, fontSize: 11, letterSpacing: '0.08em', color: INK, textShadow: '0 1px 8px rgba(0,0,0,0.65)' };
   const link: React.CSSProperties = { ...tiny, textDecoration: 'none', pointerEvents: 'auto' };
 
@@ -71,14 +69,13 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         <button
           type="button"
           onClick={onTogglePlay}
-          disabled={!canPlay}
           aria-pressed={trackPlaying}
-          aria-label={canPlay ? (trackPlaying ? '暫停音樂' : '播放音樂') : '音樂授權確定後上線'}
-          title={canPlay ? phase.trackId : '音樂授權確定後上線'}
+          aria-label={trackPlaying ? '暫停水聲' : '播放水聲'}
+          title={trackPlaying ? '暫停水聲' : '播放水聲'}
           style={{
             width: 30, height: 30, borderRadius: '50%', border: `1px solid ${INK}`,
-            background: 'transparent', color: INK, fontSize: 11, cursor: canPlay ? 'pointer' : 'not-allowed',
-            opacity: canPlay ? 1 : 0.45, pointerEvents: 'auto',
+            background: trackPlaying ? 'rgba(245,241,230,0.18)' : 'transparent',
+            color: INK, fontSize: 11, cursor: 'pointer', pointerEvents: 'auto',
           }}
         >
           {trackPlaying ? '❚❚' : '▶'}
