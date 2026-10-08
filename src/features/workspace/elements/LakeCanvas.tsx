@@ -102,14 +102,14 @@ export default function LakeCanvas({ phase }: Props) {
               float age=uTime-r.z;
               float amp=r.w*step(0.0,age)*exp(-age*1.5);
               float d=distance(uv,r.xy);
-              float grow=clamp((r.w-0.55)/2.0,0.0,1.0);
-              float R=mix(200.0,55.0,grow);
-              float K=mix(70.0,42.0,grow);
+              float grow=clamp((r.w-0.35)/1.5,0.0,1.0);
+              float R=mix(260.0,90.0,grow);
+              float K=mix(85.0,55.0,grow);
               float ring=amp*exp(-d*d*R)*sin(d*K-age*9.0);
               w+=ring;
-              refr+=(uv-r.xy)*ring*0.06;
+              refr+=(uv-r.xy)*ring*0.035;
             }
-            vec2 bedUv=coverUv(uv)+(vec2(n,detail)-0.5)*0.018+refr;
+            vec2 bedUv=coverUv(uv)+(vec2(n,detail)-0.5)*0.010+refr;
             vec3 bedTex=texture2D(uBed,bedUv).rgb;
             vec3 procBase=mix(uWaterA,uWaterB,pow(uv.y,0.7));
             vec3 bed=mix(procBase,bedTex,uUseBed);
@@ -202,7 +202,7 @@ export default function LakeCanvas({ phase }: Props) {
         lastPush = now;
         lastPX = x;
         lastPY = y;
-        pointer.push(x, y, now, 0.55);
+        pointer.push(x, y, now, 0.35);
       };
       let lastSplash = -1;
       const onLakeSplash = (event: PointerEvent) => {
@@ -215,7 +215,7 @@ export default function LakeCanvas({ phase }: Props) {
           (event.clientX - rect.left) / Math.max(rect.width, 1),
           1 - (event.clientY - rect.top) / Math.max(rect.height, 1),
           now,
-          2.6,
+          1.8,
         );
       };
       document.addEventListener('visibilitychange', onVisibility);
