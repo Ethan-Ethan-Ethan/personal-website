@@ -55,6 +55,7 @@ export default function LakeCanvas({ phase }: Props) {
         glint: target0.glint,
       };
       const tmpColor = new THREE.Color();
+      const screenU = new THREE.Vector2(1, 1);
 
       const ripples: Vector4[] = Array.from({ length: 12 }, () => new THREE.Vector4(0, 0, 0, 0));
       const material: ShaderMaterial = new THREE.ShaderMaterial({
@@ -69,6 +70,10 @@ export default function LakeCanvas({ phase }: Props) {
           uSunPos: { value: new THREE.Vector2(cur.sunPos, cur.sunPosY) },
           uExposure: { value: cur.exposure },
           uGlint: { value: cur.glint },
+          uBed: { value: null },
+          uUseBed: { value: 0 },
+          uScreen: { value: screenU },
+          uTexAspect: { value: 4 / 3 },
           uRipples: { value: ripples },
         },
         vertexShader: `varying vec2 vUv; void main(){vUv=uv; gl_Position=vec4(position.xy,0.0,1.0);}`,
@@ -76,37 +81,81 @@ export default function LakeCanvas({ phase }: Props) {
           varying vec2 vUv; uniform float uTime;
           uniform vec3 uSkyA; uniform vec3 uSkyB; uniform vec3 uWaterA; uniform vec3 uWaterB; uniform vec3 uSun;
           uniform vec2 uSunPos; uniform float uExposure; uniform vec4 uRipples[12]; uniform float uGlint;
+          uniform sampler2D uBed; uniform float uUseBed; uniform vec2 uScreen; uniform float uTexAspect;
           float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
           float noise(vec2 p){vec2 i=floor(p),f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
           float fbm(vec2 p){float v=0.; float a=.5; for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.03+17.2;a*=.5;} return v;}
+          vec2 coverUv(vec2 uv){
+            float screenAspect=uScreen.x/uScreen.y;
+            vec2 s=screenAspect>uTexAspect?vec2(1.0,uTexAspect/screenAspect):vec2(screenAspect/uTexAspect,1.0);
+            return (uv-0.5)*s+0.5;
+          }
           void main(){
-            // 全屏皆水：無天空分支；頂部遠水混一點天空反射色，時段只改變水光。
+            // 河床照片＋水層：床靜止，水紋往屏幕下方流；時段管水光。
             vec2 uv=vUv;
-            vec3 base=mix(uWaterA,uWaterB,pow(uv.y,0.7));
-            base=mix(base,uSkyB*0.4,smoothstep(0.55,1.0,uv.y));
-            float n=fbm(uv*vec2(6.0,14.0)+vec2(uTime*0.05,uTime*0.12));
-            float detail=fbm(uv*vec2(26.0,44.0)+vec2(-uTime*0.09,uTime*0.22));
-            float streak=exp(-pow((uv.x-uSunPos.x)*6.0,2.0))*(0.35+0.65*uv.y);
-            vec3 col=base+uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
-            col+=base*detail*0.15;
-            float w=0.0;
+            vec2 flowUv=uv+vec2(0.0,uTime*0.030);
+            float n=fbm(flowUv*vec2(6.0,14.0)+vec2(uTime*0.05,uTime*0.12));
+            float detail=fbm(flowUv*vec2(26.0,44.0)+vec2(-uTime*0.09,uTime*0.22));
+            float w=0.0; vec2 refr=vec2(0.0);
             for(int i=0;i<12;i++){
               vec4 r=uRipples[i];
               float age=uTime-r.z;
               float amp=r.w*step(0.0,age)*exp(-age*1.5);
               float d=distance(uv,r.xy);
-                // 大小隨強度：移動小圈（amp~0.55），點擊大浪花（amp~2.6）。
-                float grow=clamp((r.w-0.55)/2.0,0.0,1.0);
-                float R=mix(200.0,55.0,grow);
-                float K=mix(70.0,42.0,grow);
-              w+=amp*exp(-d*d*R)*sin(d*K-age*9.0);
+              float grow=clamp((r.w-0.55)/2.0,0.0,1.0);
+              float R=mix(200.0,55.0,grow);
+              float K=mix(70.0,42.0,grow);
+              float ring=amp*exp(-d*d*R)*sin(d*K-age*9.0);
+              w+=ring;
+              refr+=(uv-r.xy)*ring*0.06;
             }
+            vec2 bedUv=coverUv(uv)+(vec2(n,detail)-0.5)*0.018+refr;
+            vec3 bedTex=texture2D(uBed,bedUv).rgb;
+            vec3 procBase=mix(uWaterA,uWaterB,pow(uv.y,0.7));
+            vec3 bed=mix(procBase,bedTex,uUseBed);
+            float depth=smoothstep(0.0,1.0,uv.y);
+            vec3 col=bed*(0.55+0.45*uExposure);
+            col=mix(col,col*uSun+uWaterB*0.15,0.35);
+            col=mix(col,uWaterB,depth*0.45);
+            float streak=exp(-pow((uv.x-uSunPos.x)*6.0,2.0))*(0.35+0.65*uv.y);
+            col+=uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
             col+=uSun*w*0.7*uGlint;
             col*=uExposure;
             gl_FragColor=vec4(col,1.0);
           }
         `,
       });
+
+      // 河床圖：就緒前保持程序底（uUseBed=0），5 秒載不到就維持程序底。
+      const loadBed = (): Promise<void> => new Promise((resolve) => {
+        let done = false;
+        const finish = () => { if (!done) { done = true; resolve(); } };
+        try {
+          new THREE.TextureLoader().load(
+            '/assets/lake/riverbed-25.png',
+            (t) => {
+              t.colorSpace = THREE.SRGBColorSpace;
+              try {
+                t.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
+                const w = t.image.width as number;
+                const h = t.image.height as number;
+                if (w > 0 && h > 0) material.uniforms.uTexAspect.value = w / h;
+              } catch { /* keep defaults */ }
+              material.uniforms.uBed.value = t;
+              material.uniforms.uUseBed.value = 1;
+              finish();
+            },
+            undefined,
+            () => finish(),
+          );
+          window.setTimeout(finish, 5000);
+        } catch {
+          finish();
+        }
+      });
+      await loadBed();
+      if (disposed) return;
+
       const quad: Mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
       quad.frustumCulled = false;
       scene.add(quad);
@@ -129,6 +178,7 @@ export default function LakeCanvas({ phase }: Props) {
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.15 : 1.55));
         // updateStyle 必須 true：false 會讓 canvas 按繪圖像素顯示（dpr 倍溢出），全屏錯位。
         renderer.setSize(width, height, true);
+        screenU.set(width, height);
       };
       const resizeObserver = new ResizeObserver(resize);
       resizeObserver.observe(host);
@@ -198,6 +248,7 @@ export default function LakeCanvas({ phase }: Props) {
         if (!visible || motionReduced) return;
         const delta = Math.min(time - lastTime, 40);
         lastTime = time;
+        void delta;
         const elapsed = (time - startedAt) / 1000;
         material.uniforms.uTime.value = elapsed;
         const want = normalizePhase(phaseRef.current);
@@ -240,6 +291,8 @@ export default function LakeCanvas({ phase }: Props) {
         host.removeEventListener('pointermove', onLakePointer);
         host.removeEventListener('pointerdown', onLakeSplash);
         document.removeEventListener('visibilitychange', onVisibility);
+        const bed = material.uniforms.uBed.value as unknown as { dispose?: () => void } | null;
+        try { bed?.dispose?.(); } catch { /* keep going */ }
         scene.traverse((object) => {
           if ('geometry' in object) (object as Mesh).geometry?.dispose?.();
           if ('material' in object) {
