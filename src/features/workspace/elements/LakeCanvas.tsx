@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { Mesh, OrthographicCamera, Scene, ShaderMaterial, Vector4, WebGLRenderer } from 'three';
+import { useLakePointer } from './useLakePointer';
 
 export type LakePalette = {
   skyA: string;
@@ -25,6 +26,7 @@ export default function LakeCanvas({ phase }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const phaseRef = useRef(phase);
   phaseRef.current = phase;
+  const pointer = useLakePointer(12);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -143,8 +145,25 @@ export default function LakeCanvas({ phase }: Props) {
         visible = !document.hidden;
         if (visible && !animationId) animate(performance.now());
       };
+      let lastPush = -1;
+      let lastPX = -1;
+      let lastPY = -1;
+      const onLakePointer = (event: PointerEvent) => {
+        if (!pointer.enabled) return;
+        const rect = host.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / Math.max(rect.width, 1);
+        const y = 1 - (event.clientY - rect.top) / Math.max(rect.height, 1);
+        const now = (performance.now() - startedAt) / 1000;
+        if (now - lastPush < 0.05) return;
+        if (lastPX >= 0 && Math.hypot(x - lastPX, y - lastPY) < 0.02) return;
+        lastPush = now;
+        lastPX = x;
+        lastPY = y;
+        pointer.push(x, y, now, 0.9);
+      };
       document.addEventListener('visibilitychange', onVisibility);
       motionQuery.addEventListener('change', onMotionChange);
+      host.addEventListener('pointermove', onLakePointer, { passive: true });
 
       let lastTime = performance.now();
       const startedAt = lastTime;
@@ -175,6 +194,12 @@ export default function LakeCanvas({ phase }: Props) {
         (material.uniforms.uSunPos.value as { x: number; y: number }).x = cur.sunPos;
         (material.uniforms.uSunPos.value as { x: number; y: number }).y = cur.sunPosY;
         material.uniforms.uExposure.value = cur.exposure;
+        const items = pointer.list;
+        for (let i = 0; i < 12; i++) {
+          const r = items[i];
+          if (r) ripples[i].set(r.x, r.y, r.t0, r.amp);
+          else ripples[i].set(0, 0, 0, 0);
+        }
         renderer.render(scene, camera);
         if (!motionReduced) animationId = requestAnimationFrame(animate);
       };
@@ -184,6 +209,7 @@ export default function LakeCanvas({ phase }: Props) {
         cancelAnimationFrame(animationId);
         resizeObserver.disconnect();
         motionQuery.removeEventListener('change', onMotionChange);
+        host.removeEventListener('pointermove', onLakePointer);
         document.removeEventListener('visibilitychange', onVisibility);
         scene.traverse((object) => {
           if ('geometry' in object) (object as Mesh).geometry?.dispose?.();
