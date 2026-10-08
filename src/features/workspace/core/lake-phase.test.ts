@@ -8,7 +8,7 @@ describe('lake palette', () => {
     expect(PHASE_COUNT).toBe(4);
     expect(LAKE_PHASES.map((p) => p.id)).toEqual(['dawn', 'noon', 'dusk', 'night']);
     for (const p of LAKE_PHASES) {
-      for (const k of ['id', 'name', 'sub', 'skyA', 'skyB', 'waterA', 'waterB', 'sun', 'sunPos', 'exposure', 'trackId'] as const) {
+      for (const k of ['id', 'name', 'sub', 'skyA', 'skyB', 'waterA', 'waterB', 'sun', 'sunPos', 'exposure', 'glint', 'trackId'] as const) {
         expect(p[k], `${p.id}.${k}`).toBeDefined();
       }
     }

@@ -52,6 +52,7 @@ export default function LakeCanvas({ phase }: Props) {
         sunPos: target0.sunPos[0] as number,
         sunPosY: target0.sunPos[1] as number,
         exposure: target0.exposure,
+        glint: target0.glint,
       };
       const tmpColor = new THREE.Color();
 
@@ -67,13 +68,14 @@ export default function LakeCanvas({ phase }: Props) {
           uSun: { value: cur.sun },
           uSunPos: { value: new THREE.Vector2(cur.sunPos, cur.sunPosY) },
           uExposure: { value: cur.exposure },
+          uGlint: { value: cur.glint },
           uRipples: { value: ripples },
         },
         vertexShader: `varying vec2 vUv; void main(){vUv=uv; gl_Position=vec4(position.xy,0.0,1.0);}`,
         fragmentShader: `
           varying vec2 vUv; uniform float uTime;
           uniform vec3 uSkyA; uniform vec3 uSkyB; uniform vec3 uWaterA; uniform vec3 uWaterB; uniform vec3 uSun;
-          uniform vec2 uSunPos; uniform float uExposure; uniform vec4 uRipples[12];
+          uniform vec2 uSunPos; uniform float uExposure; uniform vec4 uRipples[12]; uniform float uGlint;
           float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
           float noise(vec2 p){vec2 i=floor(p),f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
           float fbm(vec2 p){float v=0.; float a=.5; for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.03+17.2;a*=.5;} return v;}
@@ -88,17 +90,19 @@ export default function LakeCanvas({ phase }: Props) {
               float t=(horizon-uv.y)/horizon;
               vec3 base=mix(uWaterA,uWaterB,pow(t,0.65));
               float n=fbm(uv*vec2(6.0,14.0)+vec2(uTime*0.05,uTime*0.12));
+              float detail=fbm(uv*vec2(26.0,44.0)+vec2(-uTime*0.09,uTime*0.22));
               float streak=exp(-pow((uv.x-uSunPos.x)*7.0,2.0))*(1.0-t);
-              col=base+uSun*streak*(0.22+0.38*n);
+              col=base+uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
+              col+=base*detail*0.12;
               float w=0.0;
               for(int i=0;i<12;i++){
                 vec4 r=uRipples[i];
                 float age=uTime-r.z;
                 float amp=r.w*step(0.0,age)*exp(-age*1.5);
                 float d=distance(uv,r.xy);
-                w+=amp*exp(-d*d*320.0)*sin(d*90.0-age*10.0);
+                w+=amp*exp(-d*d*140.0)*sin(d*60.0-age*9.0);
               }
-              col+=uSun*w*0.6;
+              col+=uSun*w*0.7*uGlint;
             }
             col*=uExposure;
             gl_FragColor=vec4(col,1.0);
@@ -125,7 +129,8 @@ export default function LakeCanvas({ phase }: Props) {
         const height = Math.max(host.clientHeight, 1);
         const mobile = width < 768;
         renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.15 : 1.55));
-        renderer.setSize(width, height, false);
+        // updateStyle 必須 true：false 會讓 canvas 按繪圖像素顯示（dpr 倍溢出），全屏錯位。
+        renderer.setSize(width, height, true);
       };
       const resizeObserver = new ResizeObserver(resize);
       resizeObserver.observe(host);
@@ -158,8 +163,8 @@ export default function LakeCanvas({ phase }: Props) {
       let lastTime = performance.now();
       const startedAt = lastTime;
       // GSAP 統管過渡（Minh 前例：同套 easing 語言管 DOM＋shader）；gsap 缺席即硬切。
-      type Snap = { skyA: InstanceType<typeof THREE.Color>; skyB: InstanceType<typeof THREE.Color>; waterA: InstanceType<typeof THREE.Color>; waterB: InstanceType<typeof THREE.Color>; sun: InstanceType<typeof THREE.Color>; sunX: number; sunY: number; exposure: number };
-      const snap = (): Snap => ({ skyA: cur.skyA.clone(), skyB: cur.skyB.clone(), waterA: cur.waterA.clone(), waterB: cur.waterB.clone(), sun: cur.sun.clone(), sunX: cur.sunPos, sunY: cur.sunPosY, exposure: cur.exposure });
+      type Snap = { skyA: InstanceType<typeof THREE.Color>; skyB: InstanceType<typeof THREE.Color>; waterA: InstanceType<typeof THREE.Color>; waterB: InstanceType<typeof THREE.Color>; sun: InstanceType<typeof THREE.Color>; sunX: number; sunY: number; exposure: number; glint: number };
+      const snap = (): Snap => ({ skyA: cur.skyA.clone(), skyB: cur.skyB.clone(), waterA: cur.waterA.clone(), waterB: cur.waterB.clone(), sun: cur.sun.clone(), sunX: cur.sunPos, sunY: cur.sunPosY, exposure: cur.exposure, glint: cur.glint });
       let from: Snap = snap();
       let activeIdx = normalizePhase(phaseRef.current);
       let activeRec: LakePhase = pick(activeIdx);
@@ -197,9 +202,11 @@ export default function LakeCanvas({ phase }: Props) {
         cur.sunPos = from.sunX + (to.sunPos[0] - from.sunX) * e;
         cur.sunPosY = from.sunY + (to.sunPos[1] - from.sunY) * e;
         cur.exposure = from.exposure + (to.exposure - from.exposure) * e;
+        cur.glint = from.glint + (to.glint - from.glint) * e;
         (material.uniforms.uSunPos.value as { x: number; y: number }).x = cur.sunPos;
         (material.uniforms.uSunPos.value as { x: number; y: number }).y = cur.sunPosY;
         material.uniforms.uExposure.value = cur.exposure;
+        material.uniforms.uGlint.value = cur.glint;
         const items = pointer.list;
         for (let i = 0; i < 12; i++) {
           const r = items[i];
