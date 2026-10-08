@@ -88,14 +88,18 @@ export default function LakeCanvas({ phase }: Props) {
             float detail=fbm(uv*vec2(26.0,44.0)+vec2(-uTime*0.09,uTime*0.22));
             float streak=exp(-pow((uv.x-uSunPos.x)*6.0,2.0))*(0.35+0.65*uv.y);
             vec3 col=base+uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
-            col+=base*detail*0.20;
+            col+=base*detail*0.15;
             float w=0.0;
             for(int i=0;i<12;i++){
               vec4 r=uRipples[i];
               float age=uTime-r.z;
               float amp=r.w*step(0.0,age)*exp(-age*1.5);
               float d=distance(uv,r.xy);
-              w+=amp*exp(-d*d*140.0)*sin(d*60.0-age*9.0);
+                // 大小隨強度：移動小圈（amp~0.55），點擊大浪花（amp~2.6）。
+                float grow=clamp((r.w-0.55)/2.0,0.0,1.0);
+                float R=mix(200.0,55.0,grow);
+                float K=mix(70.0,42.0,grow);
+              w+=amp*exp(-d*d*R)*sin(d*K-age*9.0);
             }
             col+=uSun*w*0.7*uGlint;
             col*=uExposure;
@@ -148,11 +152,26 @@ export default function LakeCanvas({ phase }: Props) {
         lastPush = now;
         lastPX = x;
         lastPY = y;
-        pointer.push(x, y, now, 0.9);
+        pointer.push(x, y, now, 0.55);
+      };
+      let lastSplash = -1;
+      const onLakeSplash = (event: PointerEvent) => {
+        if (!pointer.enabled) return;
+        const rect = host.getBoundingClientRect();
+        const now = (performance.now() - startedAt) / 1000;
+        if (now - lastSplash < 0.15) return;
+        lastSplash = now;
+        pointer.push(
+          (event.clientX - rect.left) / Math.max(rect.width, 1),
+          1 - (event.clientY - rect.top) / Math.max(rect.height, 1),
+          now,
+          2.6,
+        );
       };
       document.addEventListener('visibilitychange', onVisibility);
       motionQuery.addEventListener('change', onMotionChange);
       host.addEventListener('pointermove', onLakePointer, { passive: true });
+      host.addEventListener('pointerdown', onLakeSplash, { passive: true });
 
       let lastTime = performance.now();
       const startedAt = lastTime;
@@ -219,6 +238,7 @@ export default function LakeCanvas({ phase }: Props) {
         resizeObserver.disconnect();
         motionQuery.removeEventListener('change', onMotionChange);
         host.removeEventListener('pointermove', onLakePointer);
+        host.removeEventListener('pointerdown', onLakeSplash);
         document.removeEventListener('visibilitychange', onVisibility);
         scene.traverse((object) => {
           if ('geometry' in object) (object as Mesh).geometry?.dispose?.();
