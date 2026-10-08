@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -26,6 +27,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:url" content={canonicalUrl} />
   {ogImage && <meta property="og:image" content={ogImage} />}
   <meta name="twitter:card" content="summary" />
+  <ClientRouter />
   <script is:inline>
     (function () {
       try {
