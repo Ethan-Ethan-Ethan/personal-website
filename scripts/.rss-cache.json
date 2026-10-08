@@ -7019,7 +7019,111 @@
     "https://www.infoq.com/presentations/infrastructure-financial-services-platform/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Presentation: Building Resilient Platforms: Insights from 20+ Years in Mission-Critical Infrastructure",
       "date": "2026-10-07T08:16:04.131Z"
+    },
+    "https://dat-ecosystem.org/": {
+      "title": "Dat-ecosystem: high level applications built on top of P2P protocols",
+      "date": "2026-10-08T08:32:06.616Z"
+    },
+    "https://sheets.works/data-viz/holding-up-the-internet": {
+      "title": "The people holding up the internet",
+      "date": "2026-10-08T08:32:06.617Z"
+    },
+    "https://treylorswift.github.io/demoscene-recomp/web/": {
+      "title": "Classic PC demoscene productions running natively in the browser",
+      "date": "2026-10-08T08:32:06.617Z"
+    },
+    "https://mathstodon.xyz/@tao/117395269325940185": {
+      "title": "“Math 2.0” will need to value mathematical progress more holistically",
+      "date": "2026-10-08T08:32:06.617Z"
+    },
+    "https://github.com/zerobrewhq/zerobrew": {
+      "title": "A 100x faster* alternative to homebrew",
+      "date": "2026-10-08T08:32:06.617Z"
+    },
+    "https://github.com/pingdotgg/ts-rust": {
+      "title": "Port of the TypeScript compiler, checker and lsp to Rust, by LLM",
+      "date": "2026-10-08T08:32:06.617Z"
+    },
+    "https://news.mit.edu/2026/margaret-hamilton-computing-pioneer-dies-1007": {
+      "title": "Margaret Hamilton has died",
+      "date": "2026-10-08T08:32:06.618Z"
+    },
+    "https://www.404media.co/oldest-living-land-animal-jonathan-the-tortoise/": {
+      "title": "'Jonathan' is the oldest land animal on Earth",
+      "date": "2026-10-08T08:32:06.618Z"
+    },
+    "https://scottaaronson.blog/?p=10169": {
+      "title": "The Mathocalypse",
+      "date": "2026-10-08T08:32:06.618Z"
+    },
+    "https://debasishg.github.io/blog/push-ifs-up-fors-down/": {
+      "title": "Push ifs up and fors down: The idiom, its algebra, and its limits",
+      "date": "2026-10-08T08:32:06.618Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/ckwyq35pnxjno/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "俄羅斯鼠疫引發關注：距離一場全球疫情有多遠？",
+      "date": "2026-10-08T08:32:06.879Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cq5ynx00d4leo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美國中期選舉是甚麼？這是一份簡易指南",
+      "date": "2026-10-08T08:32:06.879Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cmd7q5glg9llo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "口譯與施壓：台灣楊双子德國活動捲入政治爭議的前前後後",
+      "date": "2026-10-08T08:32:06.880Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c615j9n1xlkpo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "以色列大選：哈馬斯襲擊三年後，以色列民眾要求追究責任",
+      "date": "2026-10-08T08:32:06.880Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cr4g1w328qxqo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "加州一對華裔夫婦被控虐待至少14名代孕子女",
+      "date": "2026-10-08T08:32:06.880Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c8wy910lv7q6o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "到底是鼠疫嗎？俄羅斯實驗室人員死因說法不斷變化",
+      "date": "2026-10-08T08:32:06.881Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwvgdlgq3110o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "派拉蒙合併華納兄弟：可能以四種方式影響你的生活",
+      "date": "2026-10-08T08:32:06.881Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c69wzrwr2z1eo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「地球不只有一個北極」——怎麼講？",
+      "date": "2026-10-08T08:32:06.881Z"
+    },
+    "https://www.infoq.com/news/2026/10/technological-sovereignity-panel/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Technological Sovereignty Requires Choice, Skills, and Support, Panelists Say During OSS EU",
+      "date": "2026-10-08T08:32:07.688Z"
+    },
+    "https://www.infoq.com/news/2026/10/clef-decision-models/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Open Sources Decision Models for AI Agents",
+      "date": "2026-10-08T08:32:07.688Z"
+    },
+    "https://www.infoq.com/news/2026/10/survey-complex-codebases-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Survey Finds AI-Generated Code Increases Debugging and Failure Rates and Creates a Comprehension Gap",
+      "date": "2026-10-08T08:32:07.688Z"
+    },
+    "https://www.infoq.com/news/2026/10/linux-amp-analysis/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "The Async Multiprocessing Has Sound Foundations in Linux, But Further Testing Is Needed",
+      "date": "2026-10-08T08:32:07.688Z"
+    },
+    "https://www.infoq.com/news/2026/10/grab-counter-aerospike-migration/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Grab Redesigns Counter Service Storage for 50% Lower P99 Latency",
+      "date": "2026-10-08T08:32:07.688Z"
+    },
+    "https://www.infoq.com/news/2026/10/infoq-ai-webinar/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AI in Production: What Breaks, What Works, and Who Approves It? | InfoQ Webinar",
+      "date": "2026-10-08T08:32:07.688Z"
+    },
+    "https://www.infoq.com/presentations/agentic-dev-teams/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: The Reinvention of the Dev Team",
+      "date": "2026-10-08T08:32:07.688Z"
+    },
+    "https://www.infoq.com/articles/apache-kafka-golang-session-ordered-pipeline/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Building a Session-Ordered Kafka Pipeline in Go",
+      "date": "2026-10-08T08:32:07.688Z"
     }
   },
-  "lastRun": "2026-10-07T08:16:04.131Z"
+  "lastRun": "2026-10-08T08:32:07.688Z"
 }
