@@ -1,24 +1,7 @@
 import { useEffect, useRef } from 'react';
 import type { Mesh, OrthographicCamera, Scene, ShaderMaterial, Vector4, WebGLRenderer } from 'three';
 import { useLakePointer } from './useLakePointer';
-
-export type LakePalette = {
-  skyA: string;
-  skyB: string;
-  waterA: string;
-  waterB: string;
-  sun: string;
-  sunPos: [number, number];
-  exposure: number;
-};
-
-// Task 4 會搬進 lake-palette.ts＋GSAP 接管；此處僅 Task 2 基座用暫定值。
-const DEFAULT_PALETTES: LakePalette[] = [
-  { skyA: '#2b3a5e', skyB: '#e8a06a', waterA: '#3a4a6b', waterB: '#141c33', sun: '#ffd9a0', sunPos: [0.5, 0.62], exposure: 1.0 },
-  { skyA: '#3f7ec2', skyB: '#bcd9ef', waterA: '#2e6b8f', waterB: '#0f2f47', sun: '#fff4d6', sunPos: [0.5, 0.78], exposure: 1.05 },
-  { skyA: '#3a2b5c', skyB: '#ef7d54', waterA: '#4a3560', waterB: '#1a1430', sun: '#ffb36b', sunPos: [0.5, 0.56], exposure: 1.0 },
-  { skyA: '#060913', skyB: '#16233d', waterA: '#0d1626', waterB: '#04070f', sun: '#cfe0ff', sunPos: [0.68, 0.7], exposure: 0.95 },
-];
+import { LAKE_PHASES, normalizePhase, type LakePhase } from '../core/lake-palette';
 
 type Props = { phase: number };
 
@@ -38,6 +21,13 @@ export default function LakeCanvas({ phase }: Props) {
     const boot = async () => {
       const THREE = await import('three');
       if (disposed) return;
+      let gsap: { to: (target: object, vars: Record<string, unknown>) => { kill: () => void } } | null = null;
+      try {
+        gsap = (await import('gsap')).gsap;
+      } catch {
+        gsap = null;
+      }
+      if (disposed) return;
       let renderer: WebGLRenderer;
       try {
         renderer = new THREE.WebGLRenderer({ alpha: false, antialias: false, powerPreference: 'high-performance' });
@@ -51,17 +41,17 @@ export default function LakeCanvas({ phase }: Props) {
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       host.appendChild(renderer.domElement);
 
-      const pick = (index: number): LakePalette => DEFAULT_PALETTES[((index % 4) + 4) % 4];
-      const target = pick(phaseRef.current);
+      const pick = (index: number): LakePhase => LAKE_PHASES[normalizePhase(index)];
+      const target0 = pick(phaseRef.current);
       const cur = {
-        skyA: new THREE.Color(target.skyA),
-        skyB: new THREE.Color(target.skyB),
-        waterA: new THREE.Color(target.waterA),
-        waterB: new THREE.Color(target.waterB),
-        sun: new THREE.Color(target.sun),
-        sunPos: target.sunPos[0] as number,
-        sunPosY: target.sunPos[1] as number,
-        exposure: target.exposure,
+        skyA: new THREE.Color(target0.skyA),
+        skyB: new THREE.Color(target0.skyB),
+        waterA: new THREE.Color(target0.waterA),
+        waterB: new THREE.Color(target0.waterB),
+        sun: new THREE.Color(target0.sun),
+        sunPos: target0.sunPos[0] as number,
+        sunPosY: target0.sunPos[1] as number,
+        exposure: target0.exposure,
       };
       const tmpColor = new THREE.Color();
 
@@ -167,11 +157,22 @@ export default function LakeCanvas({ phase }: Props) {
 
       let lastTime = performance.now();
       const startedAt = lastTime;
-      const damp = (color: { r: number; g: number; b: number }, targetHex: string, k: number) => {
-        tmpColor.set(targetHex);
-        color.r += (tmpColor.r - color.r) * k;
-        color.g += (tmpColor.g - color.g) * k;
-        color.b += (tmpColor.b - color.b) * k;
+      // GSAP 統管過渡（Minh 前例：同套 easing 語言管 DOM＋shader）；gsap 缺席即硬切。
+      type Snap = { skyA: InstanceType<typeof THREE.Color>; skyB: InstanceType<typeof THREE.Color>; waterA: InstanceType<typeof THREE.Color>; waterB: InstanceType<typeof THREE.Color>; sun: InstanceType<typeof THREE.Color>; sunX: number; sunY: number; exposure: number };
+      const snap = (): Snap => ({ skyA: cur.skyA.clone(), skyB: cur.skyB.clone(), waterA: cur.waterA.clone(), waterB: cur.waterB.clone(), sun: cur.sun.clone(), sunX: cur.sunPos, sunY: cur.sunPosY, exposure: cur.exposure });
+      let from: Snap = snap();
+      let activeIdx = normalizePhase(phaseRef.current);
+      let activeRec: LakePhase = pick(activeIdx);
+      const prog = { t: 1 };
+      let tween: { kill: () => void } | null = null;
+      const retarget = (next: LakePhase) => {
+        from = snap();
+        activeRec = next;
+        prog.t = 0;
+        tween?.kill();
+        tween = null;
+        if (gsap) tween = gsap.to(prog, { t: 1, duration: 0.9, ease: 'power2.inOut' });
+        else prog.t = 1;
       };
 
       const animate = (time: number) => {
@@ -181,16 +182,21 @@ export default function LakeCanvas({ phase }: Props) {
         lastTime = time;
         const elapsed = (time - startedAt) / 1000;
         material.uniforms.uTime.value = elapsed;
-        const next = pick(phaseRef.current);
-        const k = 1 - Math.exp((-delta / 1000) * 3);
-        damp(cur.skyA, next.skyA, k);
-        damp(cur.skyB, next.skyB, k);
-        damp(cur.waterA, next.waterA, k);
-        damp(cur.waterB, next.waterB, k);
-        damp(cur.sun, next.sun, k);
-        cur.sunPos += (next.sunPos[0] - cur.sunPos) * k;
-        cur.sunPosY += (next.sunPos[1] - cur.sunPosY) * k;
-        cur.exposure += (next.exposure - cur.exposure) * k;
+        const want = normalizePhase(phaseRef.current);
+        if (want !== activeIdx) {
+          activeIdx = want;
+          retarget(pick(want));
+        }
+        const e = prog.t;
+        const to = activeRec;
+        cur.skyA.copy(from.skyA).lerp(tmpColor.set(to.skyA), e);
+        cur.skyB.copy(from.skyB).lerp(tmpColor.set(to.skyB), e);
+        cur.waterA.copy(from.waterA).lerp(tmpColor.set(to.waterA), e);
+        cur.waterB.copy(from.waterB).lerp(tmpColor.set(to.waterB), e);
+        cur.sun.copy(from.sun).lerp(tmpColor.set(to.sun), e);
+        cur.sunPos = from.sunX + (to.sunPos[0] - from.sunX) * e;
+        cur.sunPosY = from.sunY + (to.sunPos[1] - from.sunY) * e;
+        cur.exposure = from.exposure + (to.exposure - from.exposure) * e;
         (material.uniforms.uSunPos.value as { x: number; y: number }).x = cur.sunPos;
         (material.uniforms.uSunPos.value as { x: number; y: number }).y = cur.sunPosY;
         material.uniforms.uExposure.value = cur.exposure;
@@ -206,6 +212,8 @@ export default function LakeCanvas({ phase }: Props) {
       animate(performance.now());
 
       cleanup = () => {
+        tween?.kill();
+        tween = null;
         cancelAnimationFrame(animationId);
         resizeObserver.disconnect();
         motionQuery.removeEventListener('change', onMotionChange);
