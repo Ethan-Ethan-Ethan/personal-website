@@ -110,7 +110,7 @@ export default function LakeCanvas({ phase }: Props) {
               vec2 toFrag=(uv-r.xy)/max(d,1e-3);
               vec2 toLight=uSunPos-r.xy;
               float dl=dot(toFrag,toLight/max(length(toLight),1e-3));
-              w+=ring*(0.6+0.9*dl);
+              w+=ring*(0.7+0.8*dl);
               refr+=(uv-r.xy)*ring*0.035;
             }
             vec2 bedUv=coverUv(uv)+(vec2(n,detail)-0.5)*0.010+refr;
