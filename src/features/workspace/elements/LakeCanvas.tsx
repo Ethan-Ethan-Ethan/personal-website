@@ -106,7 +106,11 @@ export default function LakeCanvas({ phase }: Props) {
               float R=mix(260.0,90.0,grow);
               float K=mix(85.0,55.0,grow);
               float ring=amp*exp(-d*d*R)*sin(d*K-age*9.0);
-              w+=ring;
+              // 方向性明暗：朝光面亮、背光面暗，随 uSunPos（時段）走。
+              vec2 toFrag=(uv-r.xy)/max(d,1e-3);
+              vec2 toLight=uSunPos-r.xy;
+              float dl=dot(toFrag,toLight/max(length(toLight),1e-3));
+              w+=ring*(0.6+0.9*dl);
               refr+=(uv-r.xy)*ring*0.035;
             }
             vec2 bedUv=coverUv(uv)+(vec2(n,detail)-0.5)*0.010+refr;
