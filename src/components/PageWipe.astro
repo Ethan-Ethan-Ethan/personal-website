@@ -1,0 +1,183 @@
+---
+// PageWipe：換頁水波帶石掃過（左→右，不蓋滿；石上即新頁內文區）。
+// 掛法：BaseLayout body 尾，transition:persist 跨 swap 存活；腳本以 window 旗標防重綁。
+// 跳過條件：同路徑（含 hash 窗口開關）、減動畫、異常即放行（try/finally 保證撕掉）。
+---
+
+<div id="page-wipe" transition:persist="page-wipe" aria-hidden="true"></div>
+
+<script is:inline>
+  (function () {
+    if (window.__pageWipeInit) return;
+    window.__pageWipeInit = true;
+
+    var COVER = 0.66; // 掃到 66% 即停，不蓋滿主畫面
+    var MS_IN = 620;
+    var MS_OUT = 620;
+    var reduceMotion = function () {
+      try {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      } catch (e) {
+        return false;
+      }
+    };
+
+    var bedImg = null;
+    try {
+      bedImg = new Image();
+      bedImg.src = '/assets/lake/riverbed-25.png';
+    } catch (e) {
+      bedImg = null;
+    }
+
+    function makeCanvas() {
+      var host = document.getElementById('page-wipe');
+      if (!host) return null;
+      host.innerHTML = '';
+      var canvas = document.createElement('canvas');
+      canvas.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;z-index:90;pointer-events:none;';
+      host.appendChild(canvas);
+      return canvas;
+    }
+
+    function teardown() {
+      var host = document.getElementById('page-wipe');
+      if (host) host.innerHTML = '';
+    }
+
+    // progress 0→1：波前從左 -20% 掃到 COVER；dir=1 進場，dir=-1 從 COVER 退到 115%。
+    function paint(ctx, W, H, progress, dir, splashes, t) {
+      var start = dir === 1 ? -0.2 : COVER;
+      var end = dir === 1 ? COVER : 1.15;
+      var front = start + (end - start) * progress;
+      ctx.clearRect(0, 0, W, H);
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(-10, -10);
+      var steps = 24;
+      for (var i = 0; i <= steps; i++) {
+        var y = (H + 20) * (i / steps) - 10;
+        var x = (front + Math.sin((y / H) * 6.0 + t * 0.006) * 0.035) * W;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(-10, H + 10);
+      ctx.closePath();
+      ctx.clip();
+      // 石：河床圖 cover＋白灰 wash（不蓋滿，石上即內文區）。
+      if (bedImg && bedImg.complete && bedImg.naturalWidth > 0) {
+        var sa = W / H;
+        var ta = bedImg.naturalWidth / bedImg.naturalHeight;
+        var dw, dh;
+        if (sa > ta) { dw = W; dh = W / ta; } else { dh = H; dw = H * ta; }
+        ctx.drawImage(bedImg, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      } else {
+        ctx.fillStyle = '#8a8f98';
+        ctx.fillRect(0, 0, W, H);
+      }
+      ctx.fillStyle = 'rgba(238,240,243,0.42)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.restore();
+      // 浪花：波前沿線生圈，擴散淡出。
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255,255,255,0.75)';
+      for (var s = 0; s < splashes.length; s++) {
+        var sp = splashes[s];
+        var age = t - sp.born;
+        if (age < 0 || age > 700) continue;
+        var k = age / 700;
+        ctx.globalAlpha = 0.7 * (1 - k);
+        ctx.lineWidth = 2.5 * (1 - k) + 0.5;
+        ctx.beginPath();
+        ctx.ellipse(sp.x, sp.y, sp.r * (0.4 + k), sp.r * (0.25 + k * 0.7), 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.restore();
+      ctx.globalAlpha = 1;
+    }
+
+    function runPhase(dir, ms) {
+      return new Promise(function (resolve) {
+        var canvas = makeCanvas();
+        if (!canvas) { resolve(); return; }
+        var W = window.innerWidth;
+        var H = window.innerHeight;
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.max(1, Math.floor(W * dpr));
+        canvas.height = Math.max(1, Math.floor(H * dpr));
+        var ctx = canvas.getContext('2d');
+        if (!ctx) { teardown(); resolve(); return; }
+        ctx.scale(dpr, dpr);
+        var splashes = [];
+        var t0 = performance.now();
+        var raf = 0;
+        var done = false;
+        var finish = function () {
+          if (done) return;
+          done = true;
+          cancelAnimationFrame(raf);
+          teardown();
+          resolve();
+        };
+        var stopAt = window.setTimeout(finish, ms + 400);
+        var tick = function () {
+          var now = performance.now();
+          var p = Math.min(1, (now - t0) / ms);
+          var eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          var front = (dir === 1 ? -0.2 + (COVER + 0.2) * eased : COVER + (1.15 - COVER) * eased) * W;
+          if (Math.random() < 0.55) {
+            splashes.push({
+              x: front + (Math.random() - 0.5) * 60,
+              y: Math.random() * H,
+              r: 14 + Math.random() * 26,
+              born: now,
+            });
+            if (splashes.length > 40) splashes.splice(0, splashes.length - 40);
+          }
+          try {
+            paint(ctx, W, H, eased, dir, splashes, now);
+          } catch (err) {
+            window.clearTimeout(stopAt);
+            finish();
+            return;
+          }
+          if (p >= 1) {
+            window.clearTimeout(stopAt);
+            finish();
+            return;
+          }
+          raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+      });
+    }
+
+    function samePath(from, to) {
+      try {
+        return new URL(from, location.href).pathname === new URL(to, location.href).pathname;
+      } catch (e) {
+        return true;
+      }
+    }
+
+    document.addEventListener('astro:before-preparation', function (ev) {
+      try {
+        if (reduceMotion() || samePath(ev.from && ev.from.href, ev.to && ev.to.href)) return;
+        var orig = ev.loader;
+        ev.loader = function () {
+          return runPhase(1, MS_IN).then(function () { return orig(); });
+        };
+      } catch (e) { /* 放行 */ }
+    });
+
+    document.addEventListener('astro:before-swap', function (ev) {
+      try {
+        if (reduceMotion()) return;
+        var origSwap = ev.swap;
+        ev.swap = function () {
+          try { origSwap(); } catch (e) { /* 內容已換或失敗都繼續退場 */ }
+          return runPhase(-1, MS_OUT);
+        };
+      } catch (e) { /* 放行 */ }
+    });
+  })();
+</script>
