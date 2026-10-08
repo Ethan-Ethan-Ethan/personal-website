@@ -1,0 +1,89 @@
+import { useEffect, useState } from 'react';
+import type { LakePhase } from '../core/lake-palette';
+import { resolveTrackSrc } from '../core/lake-audio';
+
+const SERIF = 'Georgia, "Times New Roman", "Noto Serif TC", serif';
+const INK = '#f5f1e6';
+
+type Props = {
+  phase: LakePhase;
+  phaseIndex: number;
+  phaseCount: number;
+  goTo: (i: number) => void;
+  trackPlaying: boolean;
+  onTogglePlay: () => void;
+};
+
+function useLocalTime(): string {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(new Date()), 30000);
+    return () => window.clearInterval(id);
+  }, []);
+  return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, trackPlaying, onTogglePlay }: Props) {
+  const time = useLocalTime();
+  // 連結落點沿用站內既有路由（About→履歷，Selected work→交易實驗室）；可改名。
+  const src = resolveTrackSrc(phase.trackId);
+  const canPlay = src !== null;
+  const tiny: React.CSSProperties = { fontFamily: SERIF, fontSize: 11, letterSpacing: '0.08em', color: INK, textShadow: '0 1px 8px rgba(0,0,0,0.65)' };
+  const link: React.CSSProperties = { ...tiny, textDecoration: 'none', pointerEvents: 'auto' };
+
+  return (
+    <div className="lake-overlay" aria-hidden="false" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2 }}>
+      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}`}</style>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
+
+      <a href="/" aria-label="Ethan Yang 首頁" style={{ ...link, position: 'absolute', top: 20, left: 24 }}>Ethan Yang</a>
+
+      <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
+        <span style={tiny} aria-label="當地時間">{time}</span>
+        <a href="/resume" style={link}>About</a>
+        <a href="/trading/" style={link}>Selected work</a>
+      </div>
+
+      <div key={phase.id} className="fadein" style={{ position: 'absolute', left: 24, bottom: 24 }}>
+        <div style={{ ...tiny, fontSize: 15 }}>{phase.name}</div>
+        <div style={{ ...tiny, opacity: 0.75 }}>{phase.sub}</div>
+      </div>
+
+      <div style={{ position: 'absolute', right: 24, bottom: 24, display: 'flex', gap: 10, alignItems: 'center' }}>
+        <div role="group" aria-label="時段選擇" style={{ display: 'flex', gap: 4 }}>
+          {Array.from({ length: phaseCount }, (_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`切換到第 ${i + 1} 時段`}
+              aria-current={i === phaseIndex ? 'true' : undefined}
+              style={{
+                width: 32, height: 32, display: 'grid', placeItems: 'center',
+                background: 'transparent', border: 'none', cursor: 'pointer', pointerEvents: 'auto',
+              }}
+            >
+              <span style={{ width: i === phaseIndex ? 14 : 5, height: 5, borderRadius: 3, background: INK, opacity: i === phaseIndex ? 1 : 0.45 }} />
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={onTogglePlay}
+          disabled={!canPlay}
+          aria-pressed={trackPlaying}
+          aria-label={canPlay ? (trackPlaying ? '暫停音樂' : '播放音樂') : '音樂授權確定後上線'}
+          title={canPlay ? phase.trackId : '音樂授權確定後上線'}
+          style={{
+            width: 30, height: 30, borderRadius: '50%', border: `1px solid ${INK}`,
+            background: 'transparent', color: INK, fontSize: 11, cursor: canPlay ? 'pointer' : 'not-allowed',
+            opacity: canPlay ? 1 : 0.45, pointerEvents: 'auto',
+          }}
+        >
+          {trackPlaying ? '❚❚' : '▶'}
+        </button>
+      </div>
+    </div>
+  );
+}

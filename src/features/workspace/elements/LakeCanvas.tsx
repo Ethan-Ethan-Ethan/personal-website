@@ -241,5 +241,5 @@ export default function LakeCanvas({ phase }: Props) {
     return () => { disposed = true; cancelStart(); cleanup(); };
   }, []);
 
-  return <div ref={hostRef} className="lake-canvas" aria-hidden="true" />;
+  return <div ref={hostRef} className="lake-canvas" aria-hidden="true" style={{ position: 'absolute', inset: 0 }} />;
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { LAKE_PHASES, PHASE_COUNT, normalizePhase } from './lake-palette';
+import { AVAILABLE_TRACKS, resolveTrackSrc } from './lake-audio';
 import { createPhaseController, PHASE_WINDOW_MS } from '../elements/useLakePhase';
 
 describe('lake palette', () => {
@@ -34,5 +35,16 @@ describe('phase controller throttle', () => {
     const c = createPhaseController(4, PHASE_WINDOW_MS);
     expect(c.goTo(3, 3000)).toBe(true);
     expect(c.get()).toBe(3);
+  });
+});
+
+describe('audio license gate', () => {
+  it('stays locked until licensed', () => {
+    expect(AVAILABLE_TRACKS).toEqual([]);
+    expect(resolveTrackSrc('phase-dawn')).toBeNull();
+  });
+
+  it('rejects unknown tracks', () => {
+    expect(resolveTrackSrc('nope')).toBeNull();
   });
 });

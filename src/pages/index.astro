@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkspaceDesktop from '../components/workspace/WorkspaceDesktop';
-import LakeCanvas from '../components/workspace/LakeCanvas';
+import LakeLanding from '../components/workspace/LakeLanding';
 import publicContent from '../data/generated/public-content.json';
 import { getCollection } from 'astro:content';
 import { getArticleHref } from '../features/articles/routing.mjs';
@@ -14,13 +14,13 @@ const recentArticles = posts.slice(0, 6).map((post) => ({
   href: getArticleHref(post),
   category: post.data.category,
 }));
-// Task 2: lake mount behind flag (default off → behavior unchanged; flip in Task 5 with overlay)
-const USE_LAKE = false;
+// Task 5: lake live（開關已開；push／merge 另批）。回滾：改回 false。
+const USE_LAKE = true;
 ---
 
 <BaseLayout title="Ethan Yang｜AI 系統創作者" description="建立可驗證、可組合並能持續演化的 AI、知識圖譜、影片理解與量化研究系統。">
   {USE_LAKE
-    ? <LakeCanvas client:load phase={0} />
+    ? <LakeLanding client:load />
     : <WorkspaceDesktop client:load content={homepageContent} recentArticles={recentArticles} />}
   <noscript>
     <section class="nojs-workspace" aria-label="網站導覽">
