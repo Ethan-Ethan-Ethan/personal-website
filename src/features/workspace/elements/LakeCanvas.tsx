@@ -80,30 +80,24 @@ export default function LakeCanvas({ phase }: Props) {
           float noise(vec2 p){vec2 i=floor(p),f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
           float fbm(vec2 p){float v=0.; float a=.5; for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.03+17.2;a*=.5;} return v;}
           void main(){
-            vec2 uv=vUv; float horizon=0.52; vec3 col;
-            if(uv.y>horizon){
-              float t=(uv.y-horizon)/(1.0-horizon);
-              col=mix(uSkyB,uSkyA,pow(t,0.8));
-              col+=uSun*exp(-dot(uv-uSunPos,uv-uSunPos)*36.0)*0.9;
-              col+=uSun*fbm(uv*4.0+vec2(uTime*0.008,0.0))*0.03;
-            } else {
-              float t=(horizon-uv.y)/horizon;
-              vec3 base=mix(uWaterA,uWaterB,pow(t,0.65));
-              float n=fbm(uv*vec2(6.0,14.0)+vec2(uTime*0.05,uTime*0.12));
-              float detail=fbm(uv*vec2(26.0,44.0)+vec2(-uTime*0.09,uTime*0.22));
-              float streak=exp(-pow((uv.x-uSunPos.x)*7.0,2.0))*(1.0-t);
-              col=base+uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
-              col+=base*detail*0.12;
-              float w=0.0;
-              for(int i=0;i<12;i++){
-                vec4 r=uRipples[i];
-                float age=uTime-r.z;
-                float amp=r.w*step(0.0,age)*exp(-age*1.5);
-                float d=distance(uv,r.xy);
-                w+=amp*exp(-d*d*140.0)*sin(d*60.0-age*9.0);
-              }
-              col+=uSun*w*0.7*uGlint;
+            // 全屏皆水：無天空分支；頂部遠水混一點天空反射色，時段只改變水光。
+            vec2 uv=vUv;
+            vec3 base=mix(uWaterA,uWaterB,pow(uv.y,0.7));
+            base=mix(base,uSkyB*0.4,smoothstep(0.55,1.0,uv.y));
+            float n=fbm(uv*vec2(6.0,14.0)+vec2(uTime*0.05,uTime*0.12));
+            float detail=fbm(uv*vec2(26.0,44.0)+vec2(-uTime*0.09,uTime*0.22));
+            float streak=exp(-pow((uv.x-uSunPos.x)*6.0,2.0))*(0.35+0.65*uv.y);
+            vec3 col=base+uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
+            col+=base*detail*0.20;
+            float w=0.0;
+            for(int i=0;i<12;i++){
+              vec4 r=uRipples[i];
+              float age=uTime-r.z;
+              float amp=r.w*step(0.0,age)*exp(-age*1.5);
+              float d=distance(uv,r.xy);
+              w+=amp*exp(-d*d*140.0)*sin(d*60.0-age*9.0);
             }
+            col+=uSun*w*0.7*uGlint;
             col*=uExposure;
             gl_FragColor=vec4(col,1.0);
           }
