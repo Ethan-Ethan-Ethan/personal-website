@@ -7123,7 +7123,79 @@
     "https://www.infoq.com/articles/apache-kafka-golang-session-ordered-pipeline/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Article: Building a Session-Ordered Kafka Pipeline in Go",
       "date": "2026-10-08T08:32:07.688Z"
+    },
+    "https://blog.glyph.im/2026/10/programming-isnt-special.html": {
+      "title": "Programming Isn't Special",
+      "date": "2026-10-09T08:35:48.970Z"
+    },
+    "https://opentelemetry.io/blog/2026/otel-native-by-design/": {
+      "title": "OTel-Native by Design – Building Products That Export to Any Observability Stack",
+      "date": "2026-10-09T08:35:48.970Z"
+    },
+    "https://www.oldroll.io/": {
+      "title": "Show HN: OldRoll, a free vintage photo editor for the browser",
+      "date": "2026-10-09T08:35:48.970Z"
+    },
+    "https://github.com/microsoft/mxc": {
+      "title": "MXC - a sandboxed code execution system",
+      "date": "2026-10-09T08:35:48.970Z"
+    },
+    "https://quake-srp.pages.dev/": {
+      "title": "Show HN: Quake ported to safe Rust, playable in browser",
+      "date": "2026-10-09T08:35:48.970Z"
+    },
+    "https://unsung.aresluna.org/deeper-dive-keyboard-differences-between-windows-and-macs/": {
+      "title": "Keyboard differences between Windows and Macs",
+      "date": "2026-10-09T08:35:48.971Z"
+    },
+    "https://terrytao.wordpress.com/2026/10/08/what-should-we-tell-our-students/": {
+      "title": "What should we tell our students?",
+      "date": "2026-10-09T08:35:48.971Z"
+    },
+    "https://lwn.net/Articles/1095811/": {
+      "title": "Reducing undefined behavior in the C language",
+      "date": "2026-10-09T08:35:48.971Z"
+    },
+    "https://karagila.org/2026/openai-pp/": {
+      "title": "OpenAI, the Partition Principle, and Mathematics",
+      "date": "2026-10-09T08:35:48.971Z"
+    },
+    "https://bevy.org/news/bevy-0-20/": {
+      "title": "Bevy 0.20",
+      "date": "2026-10-09T08:35:48.971Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cmwy48r8ex41o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "老撾的班根軍用機場 中國能用來做甚麼？",
+      "date": "2026-10-09T08:35:49.409Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cvj6jz6e89n2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "扎克伯格有形象問題，為何Meta的業務卻蒸蒸日上？",
+      "date": "2026-10-09T08:35:49.409Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqr7yvg2n4kvo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美國要網上直播軍法槍決胡德堡基地槍擊案兇手",
+      "date": "2026-10-09T08:35:49.409Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqlymyyze8mjo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "台灣AV盛極而衰：中國市場如何催生這場成人片熱潮？",
+      "date": "2026-10-09T08:35:49.410Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c6d09ed707jxo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「那揮之不去的恐懼」：「宿醉焦慮」真的存在嗎？",
+      "date": "2026-10-09T08:35:49.410Z"
+    },
+    "https://www.infoq.com/news/2026/10/terraform-google-cloud-provider/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "HashiCorp Relased Terraform Google Cloud Provider 8.0 in General Availability",
+      "date": "2026-10-09T08:35:50.183Z"
+    },
+    "https://www.infoq.com/news/2026/10/cloudflare-k2-serverless-streams/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare K2 Builds Event Streams on R2 Object Storage, at a Second of Produce Latency",
+      "date": "2026-10-09T08:35:50.183Z"
+    },
+    "https://www.infoq.com/presentations/spotify-multi-agent-ai-architecture/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Multi-Agent Patterns from Spotify’s AI Powered Advertising Platform",
+      "date": "2026-10-09T08:35:50.183Z"
     }
   },
-  "lastRun": "2026-10-08T08:32:07.688Z"
+  "lastRun": "2026-10-09T08:35:50.183Z"
 }
