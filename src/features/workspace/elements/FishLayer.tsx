@@ -173,7 +173,7 @@ export default function FishLayer({ tint }: Props) {
           // 整條 rigid 貼（擺尾先拿掉：接縫會斷）。
           const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
           const breathe = 1 + 0.02 * Math.sin(t * 3 + f.seed);
-          const len = L * 3.5 * breathe;
+          const len = L * 1.75 * breathe;
           const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
           ctx.save();
           ctx.translate(x, y);
