@@ -170,18 +170,32 @@ export default function FishLayer({ tint }: Props) {
         const heading = Math.atan2(f.vy, f.vx);
         const wag = Math.sin(t * 9 + f.seed) * 0.55;
         if (sprites.length > 0) {
-          // 照片錦鯉貼圖（去背）：呼吸微縮代替擺尾，轉向對齊朝向。
+          // 照片錦鯉：頭定住、尾段轉動擺尾；另修之前寬高比寫反（過胖）並縮到剪影時代尺寸。
           const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
-          const breathe = 1 + 0.03 * Math.sin(t * 3 + f.seed);
-          const len = L * 2.1 * breathe;
-          const wid = len * (sp.c.height / Math.max(sp.c.width, 1));
+          const len = L * 0.9;
+          const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
+          const tailWag = Math.sin(t * 9 + f.seed) * 0.38;
+          const headFrac = 0.62;
+          const headLen = len * headFrac;
+          const tailLen = len - headLen;
+          const px = -len / 2 + tailLen;
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base);
           ctx.globalAlpha = 0.93;
           ctx.shadowColor = tintRef.current;
           ctx.shadowBlur = 5;
-          ctx.drawImage(sp.c, -len / 2, -wid / 2, len, wid);
+          ctx.drawImage(
+            sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
+            px, -wid / 2, headLen, wid,
+          );
+          ctx.translate(px, 0);
+          ctx.rotate(tailWag);
+          ctx.shadowBlur = 0;
+          ctx.drawImage(
+            sp.c, 0, sp.c.height * headFrac, sp.c.width, sp.c.height * (1 - headFrac),
+            -tailLen, -wid / 2, tailLen, wid,
+          );
           ctx.restore();
           continue;
         }
