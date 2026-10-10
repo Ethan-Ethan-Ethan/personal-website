@@ -196,9 +196,8 @@ export default function FishLayer({ tint }: Props) {
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
-          if (vi === 3) ctx.filter = 'saturate(1.25) brightness(1.05)';
-          else if (vi === 0) ctx.filter = 'brightness(0.55) saturate(0.8)';
-          else if (vi === 2) ctx.filter = 'hue-rotate(-30deg) saturate(1.3)';
+          if (vi === 3) ctx.filter = 'saturate(1.2) brightness(1.03)';
+          else if (vi === 0) ctx.filter = 'brightness(0.9) saturate(0.95)';
           ctx.drawImage(
             sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
             -wid / 2, -len / 2, wid, headLen,
