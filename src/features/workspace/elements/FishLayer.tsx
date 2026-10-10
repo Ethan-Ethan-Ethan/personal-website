@@ -181,7 +181,7 @@ export default function FishLayer({ tint }: Props) {
           ctx.globalAlpha = 0.93;
           ctx.shadowColor = tintRef.current;
           ctx.shadowBlur = 5;
-          ctx.drawImage(sp.c, -len / 2, -wid / 2, len, wid);
+          ctx.drawImage(sp.c, -wid / 2, -len / 2, wid, len);
           ctx.restore();
           continue;
         }
