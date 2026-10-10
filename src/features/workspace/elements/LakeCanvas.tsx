@@ -136,7 +136,7 @@ export default function LakeCanvas({ phase }: Props) {
         const finish = () => { if (!done) { done = true; resolve(); } };
         try {
           new THREE.TextureLoader().load(
-            '/assets/lake/riverbed-25.png',
+            '/assets/lake/riverbed-26.png',
             (t) => {
               t.colorSpace = THREE.SRGBColorSpace;
               try {
