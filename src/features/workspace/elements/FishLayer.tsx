@@ -1,15 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { createSchool, stepSchool, type Fish } from '../core/fish-school';
+import { FISH_SPRITES } from '../core/fish-sprites';
+import { KOI_SHEET_PATH } from '../core/lake-assets';
 
 type Props = { tint: string };
-
-// 貼圖錦鯉：koi-sheet.png 三條裁切（分數座標），base 為圖中朝向。
-// 讀不到圖時退回向量錦鯉（下方案）。
-const SPRITES = [
-  { x: 0.09, y: 0.15, w: 0.22, h: 0.72, base: Math.PI / 2 },
-  { x: 0.375, y: 0.09, w: 0.255, h: 0.8, base: -Math.PI / 2 },
-  { x: 0.715, y: 0.15, w: 0.23, h: 0.73, base: Math.PI / 2 },
-];
 
 function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
   try {
@@ -77,12 +71,12 @@ export default function FishLayer({ tint }: Props) {
 
     const fish: Fish[] = createSchool(8);
     const sheet = new Image();
-    sheet.src = '/assets/lake/koi-sheet.png';
+    sheet.src = KOI_SHEET_PATH;
     sheet.onload = () => {
       const keyed = keyOutGreen(sheet);
       if (!keyed) return;
       const out: { c: HTMLCanvasElement; base: number }[] = [];
-      for (const s of SPRITES) {
+      for (const s of FISH_SPRITES) {
         const c = document.createElement('canvas');
         c.width = Math.max(1, Math.floor(keyed.width * s.w));
         c.height = Math.max(1, Math.floor(keyed.height * s.h));
@@ -170,32 +164,17 @@ export default function FishLayer({ tint }: Props) {
         const heading = Math.atan2(f.vy, f.vx);
         const wag = Math.sin(t * 9 + f.seed) * 0.55;
         if (sprites.length > 0) {
-          // 全身擺動＋尾段反相：底圖靜止時也看得出游感；尾段拉到 30%。
+          // 整條 rigid＋全身微搖：尾部分段重貼已證實按裁切邊距錯位（SOME 異常根因），先退回不斷裂版。
           const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
           const breathe = 1 + 0.02 * Math.sin(t * 3 + f.seed);
           const len = L * 1.75 * breathe;
           const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
-          const phase = t * 9 + f.seed;
-          const bodySway = Math.sin(phase) * 0.05;
-          const tailWag = Math.sin(phase + Math.PI * 0.7) * 0.28;
-          const headFrac = 0.7;
-          const headLen = len * headFrac;
-          const tailLen = len - headLen;
+          const bodySway = Math.sin(t * 9 + f.seed) * 0.05;
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
-          ctx.shadowColor = tintRef.current;
-          ctx.shadowBlur = 5;
           ctx.drawImage(sp.c, -wid / 2, -len / 2, wid, len);
-          ctx.shadowBlur = 0;
-          // 尾段覆蓋：繞關節（頭尾交界）轉 tailWag
-          ctx.translate(0, -len / 2 + headLen);
-          ctx.rotate(tailWag);
-          ctx.drawImage(
-            sp.c, 0, sp.c.height * headFrac, sp.c.width, sp.c.height * (1 - headFrac),
-            -wid / 2, -tailLen / 2, wid, tailLen,
-          );
           ctx.restore();
           continue;
         }

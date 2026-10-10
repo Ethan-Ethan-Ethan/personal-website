@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import type { Mesh, OrthographicCamera, Scene, ShaderMaterial, Vector4, WebGLRenderer } from 'three';
 import { useLakePointer } from './useLakePointer';
 import { LAKE_PHASES, normalizePhase, type LakePhase } from '../core/lake-palette';
+import { RIVERBED_PATH } from '../core/lake-assets';
 
 type Props = { phase: number };
 
@@ -136,7 +137,7 @@ export default function LakeCanvas({ phase }: Props) {
         const finish = () => { if (!done) { done = true; resolve(); } };
         try {
           new THREE.TextureLoader().load(
-            '/assets/lake/riverbed-26.png',
+            RIVERBED_PATH,
             (t) => {
               t.colorSpace = THREE.SRGBColorSpace;
               try {
