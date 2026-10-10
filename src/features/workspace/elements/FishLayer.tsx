@@ -164,17 +164,37 @@ export default function FishLayer({ tint }: Props) {
         const heading = Math.atan2(f.vy, f.vx);
         const wag = Math.sin(t * 9 + f.seed) * 0.55;
         if (sprites.length > 0) {
-          // 整條 rigid＋全身微搖：尾部分段重貼已證實按裁切邊距錯位（SOME 異常根因），先退回不斷裂版。
+          // 頭定住＋尾段繞關節轉：關節錨定（非居中），尾源向上多取 3% 蓋住接縫。
           const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
+          const vi = Math.abs(Math.floor(f.seed * 7)) % 4;
+          const scale = [0.85, 1.0, 1.15, 1.3][vi];
           const breathe = 1 + 0.02 * Math.sin(t * 3 + f.seed);
-          const len = L * 1.75 * breathe;
+          const len = L * 1.75 * breathe * scale;
           const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
           const bodySway = Math.sin(t * 9 + f.seed) * 0.05;
+          const tailWag = Math.sin(t * 9 + f.seed + Math.PI * 0.7) * 0.22;
+          const headFrac = 0.8;
+          const headLen = len * headFrac;
+          const tailLen = len - headLen;
+          const overlap = len * 0.03;
+          const srcOverlap = 0.03;
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
-          ctx.drawImage(sp.c, -wid / 2, -len / 2, wid, len);
+          if (vi === 3) ctx.filter = 'saturate(1.2) brightness(1.03)';
+          else if (vi === 0) ctx.filter = 'brightness(0.9) saturate(0.95)';
+          ctx.drawImage(
+            sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
+            -wid / 2, -len / 2, wid, headLen,
+          );
+          ctx.translate(0, -len / 2 + headLen);
+          ctx.rotate(tailWag);
+          ctx.drawImage(
+            sp.c, 0, sp.c.height * (headFrac - srcOverlap), sp.c.width, sp.c.height * (1 - headFrac + srcOverlap),
+            -wid / 2, -overlap, wid, tailLen + overlap,
+          );
+          ctx.filter = 'none';
           ctx.restore();
           continue;
         }
