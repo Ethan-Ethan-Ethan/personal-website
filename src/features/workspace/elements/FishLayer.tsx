@@ -77,7 +77,7 @@ export default function FishLayer({ tint }: Props) {
       if (!keyed) return;
       const out: { c: HTMLCanvasElement; base: number }[] = [];
       for (const s of FISH_SPRITES) {
-        const c = document.createElement('canvas');
+        let c = document.createElement('canvas');
         c.width = Math.max(1, Math.floor(keyed.width * s.w));
         c.height = Math.max(1, Math.floor(keyed.height * s.h));
         const g = c.getContext('2d');
@@ -87,7 +87,21 @@ export default function FishLayer({ tint }: Props) {
           s.x * keyed.width, s.y * keyed.height, c.width, c.height,
           0, 0, c.width, c.height,
         );
-        out.push({ c, base: s.base });
+        let base = s.base;
+        if (base > 0) {
+          // 頭朝下 → 垂直翻成頭朝上：全場統一頭上尾下，尾段才彎得對地方。
+          const f = document.createElement('canvas');
+          f.width = c.width;
+          f.height = c.height;
+          const fg = f.getContext('2d');
+          if (!fg) continue;
+          fg.translate(0, c.height);
+          fg.scale(1, -1);
+          fg.drawImage(c, 0, 0);
+          c = f;
+          base = -Math.PI / 2;
+        }
+        out.push({ c, base });
       }
       if (out.length > 0) spritesRef.current = out;
     };
