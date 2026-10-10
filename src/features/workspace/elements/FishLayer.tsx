@@ -172,7 +172,7 @@ export default function FishLayer({ tint }: Props) {
         if (sprites.length > 0) {
           // 照片錦鯉：頭定住、尾段轉動擺尾；另修之前寬高比寫反（過胖）並縮到剪影時代尺寸。
           const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
-          const len = L * 0.9;
+          const len = L * 1.35;
           const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
           const tailWag = Math.sin(t * 9 + f.seed) * 0.38;
           const headFrac = 0.62;
