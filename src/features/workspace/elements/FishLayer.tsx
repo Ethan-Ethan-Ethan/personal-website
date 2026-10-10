@@ -170,11 +170,15 @@ export default function FishLayer({ tint }: Props) {
         const heading = Math.atan2(f.vy, f.vx);
         const wag = Math.sin(t * 9 + f.seed) * 0.55;
         if (sprites.length > 0) {
-          // 整條 rigid 貼（擺尾先拿掉：接縫會斷）。
+          // 些微擺尾：先貼整條（不斷），再把尾段 22% 以小角度重貼覆蓋。
           const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
           const breathe = 1 + 0.02 * Math.sin(t * 3 + f.seed);
           const len = L * 1.75 * breathe;
           const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
+          const tailWag = Math.sin(t * 9 + f.seed) * 0.06;
+          const headFrac = 0.78;
+          const headLen = len * headFrac;
+          const tailLen = len - headLen;
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base);
@@ -182,6 +186,14 @@ export default function FishLayer({ tint }: Props) {
           ctx.shadowColor = tintRef.current;
           ctx.shadowBlur = 5;
           ctx.drawImage(sp.c, -wid / 2, -len / 2, wid, len);
+          ctx.shadowBlur = 0;
+          // 尾段覆蓋：繞關節（頭尾交界）轉 tailWag
+          ctx.translate(0, -len / 2 + headLen);
+          ctx.rotate(tailWag);
+          ctx.drawImage(
+            sp.c, 0, sp.c.height * headFrac, sp.c.width, sp.c.height * (1 - headFrac),
+            -wid / 2, -tailLen / 2, wid, tailLen,
+          );
           ctx.restore();
           continue;
         }
