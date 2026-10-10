@@ -44,9 +44,19 @@ export function stepSchool(
   for (const f of fish) {
     let ax = Math.sin(t * 0.7 + f.seed) * 0.008;
     let ay = Math.cos(t * 0.5 + f.seed * 1.7) * 0.008;
-    // 鬆散跟群
+    // 鬆散跟群＋互斥（不疊在一起）
     ax += (cx - f.x) * 0.06;
     ay += (cy - f.y) * 0.06;
+    for (const o of fish) {
+      if (o === f) continue;
+      const sx = f.x - o.x;
+      const sy = f.y - o.y;
+      const sd = Math.hypot(sx, sy);
+      if (sd < 0.045 && sd > 1e-4) {
+        ax += (sx / sd) * 0.1 * (1 - sd / 0.045);
+        ay += (sy / sd) * 0.1 * (1 - sd / 0.045);
+      }
+    }
     if (pointer) {
       const dx = pointer.x - f.x;
       const dy = pointer.y - f.y;

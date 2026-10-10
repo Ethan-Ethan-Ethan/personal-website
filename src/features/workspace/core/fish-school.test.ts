@@ -41,4 +41,16 @@ describe('fish school', () => {
       }
     }
   });
+
+  it('separates overlapped fish', () => {
+    const s = createSchool(4, () => 0.5);
+    for (let i = 0; i < 200; i++) stepSchool(s, 1 / 60, i / 60, null, null);
+    let min = Infinity;
+    for (let a = 0; a < s.length; a++) {
+      for (let b = a + 1; b < s.length; b++) {
+        min = Math.min(min, Math.hypot(s[a].x - s[b].x, s[a].y - s[b].y));
+      }
+    }
+    expect(min).toBeGreaterThan(0.01);
+  });
 });
