@@ -172,7 +172,7 @@ export default function FishLayer({ tint }: Props) {
       const L = Math.min(W, H) * 0.05;
       const frac = (n: number) => n - Math.floor(n);
       const sprites = spritesRef.current;
-      for (const [idx, f] of fish.entries()) {
+      for (const f of fish) {
         const x = f.x * W;
         const y = f.y * H;
         const heading = Math.atan2(f.vy, f.vx);
@@ -196,7 +196,8 @@ export default function FishLayer({ tint }: Props) {
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
-          if (idx === 0) ctx.filter = 'brightness(0.55) saturate(0.8)';
+          if (vi === 3) ctx.filter = 'saturate(1.2) brightness(1.03)';
+          else if (vi === 0) ctx.filter = 'brightness(0.9) saturate(0.95)';
           ctx.drawImage(
             sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
             -wid / 2, -len / 2, wid, headLen,
