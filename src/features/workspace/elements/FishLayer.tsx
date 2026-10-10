@@ -3,10 +3,66 @@ import { createSchool, stepSchool, type Fish } from '../core/fish-school';
 
 type Props = { tint: string };
 
+// 貼圖錦鯉：koi-sheet.png 三條裁切（分數座標），base 為圖中朝向。
+// 讀不到圖時退回向量錦鯉（下方案）。
+const SPRITES = [
+  { x: 0.09, y: 0.15, w: 0.22, h: 0.72, base: Math.PI / 2 },
+  { x: 0.375, y: 0.09, w: 0.255, h: 0.8, base: -Math.PI / 2 },
+  { x: 0.715, y: 0.15, w: 0.23, h: 0.73, base: Math.PI / 2 },
+];
+
+function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
+  try {
+    const c = document.createElement('canvas');
+    c.width = img.naturalWidth;
+    c.height = img.naturalHeight;
+    const g = c.getContext('2d', { willReadFrequently: true });
+    if (!g) return null;
+    g.drawImage(img, 0, 0);
+    const data = g.getImageData(0, 0, c.width, c.height);
+    const px = data.data;
+    // 背景綠取四角平均
+    const corners = [0, c.width - 1, (c.height - 1) * c.width, c.height * c.width - 1];
+    let br = 0;
+    let bg = 0;
+    let bb = 0;
+    for (const ci of corners) {
+      br += px[ci * 4];
+      bg += px[ci * 4 + 1];
+      bb += px[ci * 4 + 2];
+    }
+    br /= corners.length;
+    bg /= corners.length;
+    bb /= corners.length;
+    for (let i = 0; i < px.length / 4; i++) {
+      const r = px[i * 4];
+      const gg = px[i * 4 + 1];
+      const b = px[i * 4 + 2];
+      const dist = Math.hypot(r - br, gg - bg, b - bb);
+      if (dist < 42) {
+        px[i * 4 + 3] = 0;
+      } else if (dist < 72) {
+        px[i * 4 + 3] = Math.floor(255 * ((dist - 42) / 30));
+        // 去綠溢色
+        const m = Math.min(r, b);
+        if (gg > m) {
+          const cut = Math.min(gg - m, 60);
+          px[i * 4 + 1] = gg - cut * 0.6;
+        }
+      }
+    }
+    g.putImageData(data, 0, 0);
+    return c;
+  } catch {
+    return null;
+  }
+}
+
 export default function FishLayer({ tint }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const tintRef = useRef(tint);
   tintRef.current = tint;
+  const spritesRef = useRef<{ c: HTMLCanvasElement; base: number }[]>([]);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -20,6 +76,27 @@ export default function FishLayer({ tint }: Props) {
     if (!ctx) return;
 
     const fish: Fish[] = createSchool(8);
+    const sheet = new Image();
+    sheet.src = '/assets/lake/koi-sheet.png';
+    sheet.onload = () => {
+      const keyed = keyOutGreen(sheet);
+      if (!keyed) return;
+      const out: { c: HTMLCanvasElement; base: number }[] = [];
+      for (const s of SPRITES) {
+        const c = document.createElement('canvas');
+        c.width = Math.max(1, Math.floor(keyed.width * s.w));
+        c.height = Math.max(1, Math.floor(keyed.height * s.h));
+        const g = c.getContext('2d');
+        if (!g) continue;
+        g.drawImage(
+          keyed,
+          s.x * keyed.width, s.y * keyed.height, c.width, c.height,
+          0, 0, c.width, c.height,
+        );
+        out.push({ c, base: s.base });
+      }
+      if (out.length > 0) spritesRef.current = out;
+    };
     let pointer: { x: number; y: number; at: number } | null = null;
     let splash: { x: number; y: number; t0: number } | null = null;
     let raf = 0;
@@ -86,11 +163,28 @@ export default function FishLayer({ tint }: Props) {
       ctx.clearRect(0, 0, W, H);
       const L = Math.min(W, H) * 0.05;
       const frac = (n: number) => n - Math.floor(n);
+      const sprites = spritesRef.current;
       for (const f of fish) {
         const x = f.x * W;
         const y = f.y * H;
         const heading = Math.atan2(f.vy, f.vx);
         const wag = Math.sin(t * 9 + f.seed) * 0.55;
+        if (sprites.length > 0) {
+          // 照片錦鯉貼圖（去背）：呼吸微縮代替擺尾，轉向對齊朝向。
+          const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
+          const breathe = 1 + 0.03 * Math.sin(t * 3 + f.seed);
+          const len = L * 2.1 * breathe;
+          const wid = len * (sp.c.height / Math.max(sp.c.width, 1));
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(heading - sp.base);
+          ctx.globalAlpha = 0.93;
+          ctx.shadowColor = tintRef.current;
+          ctx.shadowBlur = 5;
+          ctx.drawImage(sp.c, -len / 2, -wid / 2, len, wid);
+          ctx.restore();
+          continue;
+        }
         const s1 = frac(f.seed * 0.37);
         const s2 = frac(f.seed * 0.73);
         ctx.save();
