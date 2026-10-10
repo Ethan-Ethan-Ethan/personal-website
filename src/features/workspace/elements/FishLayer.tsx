@@ -6,9 +6,9 @@ type Props = { tint: string };
 // 貼圖錦鯉：koi-sheet.png 三條裁切（分數座標），base 為圖中朝向。
 // 讀不到圖時退回向量錦鯉（下方案）。
 const SPRITES = [
-  { x: 0.0, y: 0.0, w: 0.355, h: 1.0, base: -Math.PI / 2 },
-  { x: 0.355, y: 0.27, w: 0.31, h: 0.6, base: Math.PI / 2 },
-  { x: 0.665, y: 0.0, w: 0.335, h: 0.93, base: Math.PI / 2 },
+  { x: 0.09, y: 0.15, w: 0.22, h: 0.72, base: Math.PI / 2 },
+  { x: 0.375, y: 0.09, w: 0.255, h: 0.8, base: -Math.PI / 2 },
+  { x: 0.715, y: 0.15, w: 0.23, h: 0.73, base: Math.PI / 2 },
 ];
 
 function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
@@ -77,7 +77,7 @@ export default function FishLayer({ tint }: Props) {
 
     const fish: Fish[] = createSchool(8);
     const sheet = new Image();
-    sheet.src = '/assets/lake/koi-bold.png';
+    sheet.src = '/assets/lake/koi-sheet.png';
     sheet.onload = () => {
       const keyed = keyOutGreen(sheet);
       if (!keyed) return;
