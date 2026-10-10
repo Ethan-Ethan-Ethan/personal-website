@@ -52,37 +52,6 @@ function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
   }
 }
 
-// 橘轉黑：只染橘斑（紅藍差大），白肚白鰭不動。衍生自同一正本，無新資產。
-function orangeToBlack(src: HTMLCanvasElement): HTMLCanvasElement | null {
-  try {
-    const c = document.createElement('canvas');
-    c.width = src.width;
-    c.height = src.height;
-    const g = c.getContext('2d', { willReadFrequently: true });
-    if (!g) return null;
-    g.drawImage(src, 0, 0);
-    const data = g.getImageData(0, 0, c.width, c.height);
-    const px = data.data;
-    for (let i = 0; i < px.length / 4; i++) {
-      if (px[i * 4 + 3] === 0) continue;
-      const r = px[i * 4];
-      const gg = px[i * 4 + 1];
-      const b = px[i * 4 + 2];
-      if (r > 140 && r - b > 60) {
-        const lum = (r + gg + b) / 3 / 255;
-        const v = Math.floor(lum * 38);
-        px[i * 4] = v;
-        px[i * 4 + 1] = v;
-        px[i * 4 + 2] = Math.min(255, v + 5);
-      }
-    }
-    g.putImageData(data, 0, 0);
-    return c;
-  } catch {
-    return null;
-  }
-}
-
 export default function FishLayer({ tint }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const tintRef = useRef(tint);
@@ -133,11 +102,6 @@ export default function FishLayer({ tint }: Props) {
           base = -Math.PI / 2;
         }
         out.push({ c, base });
-      }
-      // 第 4 條：黑 variant（取中間那條衍生），只給第 0 條魚。
-      if (out[1]) {
-        const black = orangeToBlack(out[1].c);
-        if (black) out.push({ c: black, base: out[1].base });
       }
       if (out.length > 0) spritesRef.current = out;
     };
@@ -208,17 +172,14 @@ export default function FishLayer({ tint }: Props) {
       const L = Math.min(W, H) * 0.05;
       const frac = (n: number) => n - Math.floor(n);
       const sprites = spritesRef.current;
-      for (const [idx, f] of fish.entries()) {
+      for (const f of fish) {
         const x = f.x * W;
         const y = f.y * H;
         const heading = Math.atan2(f.vy, f.vx);
         const wag = Math.sin(t * 9 + f.seed) * 0.55;
         if (sprites.length > 0) {
           // 頭定住＋尾段繞關節轉：關節錨定（非居中），尾源向上多取 3% 蓋住接縫。
-          // 第 0 條固定黑 variant（sprites[3]），其餘三條原色輪流。
-          const sp = idx === 0 && sprites.length > 3
-            ? sprites[3]
-            : sprites[Math.abs(Math.floor(f.seed)) % 3];
+          const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
           const vi = Math.abs(Math.floor(f.seed * 7)) % 4;
           const scale = [0.85, 1.0, 1.15, 1.3][vi];
           const breathe = 1 + 0.02 * Math.sin(t * 3 + f.seed);
@@ -235,6 +196,8 @@ export default function FishLayer({ tint }: Props) {
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
+          if (vi === 3) ctx.filter = 'saturate(1.2) brightness(1.03)';
+          else if (vi === 0) ctx.filter = 'brightness(0.9) saturate(0.95)';
           ctx.drawImage(
             sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
             -wid / 2, -len / 2, wid, headLen,
@@ -245,6 +208,7 @@ export default function FishLayer({ tint }: Props) {
             sp.c, 0, sp.c.height * (headFrac - srcOverlap), sp.c.width, sp.c.height * (1 - headFrac + srcOverlap),
             -wid / 2, -overlap, wid, tailLen + overlap,
           );
+          ctx.filter = 'none';
           ctx.restore();
           continue;
         }
