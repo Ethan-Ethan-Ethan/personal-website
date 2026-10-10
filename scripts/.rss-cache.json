@@ -7195,7 +7195,95 @@
     "https://www.infoq.com/presentations/spotify-multi-agent-ai-architecture/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Presentation: Multi-Agent Patterns from Spotify’s AI Powered Advertising Platform",
       "date": "2026-10-09T08:35:50.183Z"
+    },
+    "https://wiki.cateat.fish/art:computers_cannot_make_decisions": {
+      "title": "Computers Cannot Make Decisions",
+      "date": "2026-10-10T08:11:44.212Z"
+    },
+    "https://news.vt.edu/articles/2026/10/research_fralinbiomed_upfhutelin.html": {
+      "title": "Food processing influences metabolism and brain activity",
+      "date": "2026-10-10T08:11:44.212Z"
+    },
+    "https://beaksec.github.io/posts/telegram-desktop-one-click-account-takeover/": {
+      "title": "Telegram Desktop vulnerability allowed any user's file to be stolen",
+      "date": "2026-10-10T08:11:44.212Z"
+    },
+    "https://alexwang.ai/posts/put-a-price-on-breakthroughs/": {
+      "title": "Put a price on breakthroughs",
+      "date": "2026-10-10T08:11:44.212Z"
+    },
+    "https://rea.tools/": {
+      "title": "REA Reverse – Engineer Anything",
+      "date": "2026-10-10T08:11:44.212Z"
+    },
+    "https://www.broadinstitute.org/news/clinical-trial-prion-disease-drug-candidate-begins-enrolling-participants": {
+      "title": "Clinical trial of a prion disease drug candidate begins enrolling participants",
+      "date": "2026-10-10T08:11:44.213Z"
+    },
+    "https://lwn.net/Articles/1055211/": {
+      "title": "Compiling Rust to readable C with Eurydice",
+      "date": "2026-10-10T08:11:44.213Z"
+    },
+    "https://atarimuseum.nl/atari-falcon/": {
+      "title": "Atari Falcon",
+      "date": "2026-10-10T08:11:44.213Z"
+    },
+    "https://gizmodo.com/youtuber-says-cops-paid-him-a-visit-after-he-built-flock-style-camera-to-track-cops-2000824306": {
+      "title": "YouTuber Says Cops Visited Him After He Built a Flock-Style Camera to Track Cops",
+      "date": "2026-10-10T08:11:44.213Z"
+    },
+    "https://carrierexplode.com/": {
+      "title": "Show HN: Carrier-Explode: iPhone, Pixel and Galaxy carrier settings decoded",
+      "date": "2026-10-10T08:11:44.213Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwg7xz103032o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普與普京達成協議允俄國出售柴油，澤連斯基批評「送大禮」",
+      "date": "2026-10-10T08:11:44.770Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c58jz8w7kmjyo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "賴清德雙十講話：台灣強化防衛不是放棄對話",
+      "date": "2026-10-10T08:11:44.771Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c60rlq5d24wwo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "這位丈夫15年來潛水760次，就為了「靠近」海嘯失蹤的妻子",
+      "date": "2026-10-10T08:11:44.771Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crz98g94n9k5o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "法國學生示威：憤怒背後隱藏著什麼？",
+      "date": "2026-10-10T08:11:44.771Z"
+    },
+    "https://www.infoq.com/news/2026/10/cloudflare-traces-open-beta/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare Traces Turns the Proxy Layer into OpenTelemetry Spans, with New Volume-Based Pricing",
+      "date": "2026-10-10T08:11:45.835Z"
+    },
+    "https://www.infoq.com/news/2026/10/android-bench-2/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Android Bench 2 Adds Support for Long-Horizon Tasks, Agentic Evaluation, and Continuous Scoring",
+      "date": "2026-10-10T08:11:45.835Z"
+    },
+    "https://www.infoq.com/news/2026/10/shopify-web-components/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Shopify Upgrades Checkout Blocks to Polaris Web Components, Cutting Bundle Sizes up to 85%",
+      "date": "2026-10-10T08:11:45.835Z"
+    },
+    "https://www.infoq.com/news/2026/10/github-copilot-rust-migration/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Github Migrates Copilot Runtime to Rust with AI-Assisted Rewrite",
+      "date": "2026-10-10T08:11:45.835Z"
+    },
+    "https://www.infoq.com/news/2026/10/circleci-machine-runner/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "CircleCI Makes Machine Runner Orchestrator Generally Available",
+      "date": "2026-10-10T08:11:45.835Z"
+    },
+    "https://www.infoq.com/presentations/netflix-observability-aiops-ontology-scale/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: Ontology‐Driven Observability: Building the E2E Knowledge Graph at Netflix Scale",
+      "date": "2026-10-10T08:11:45.836Z"
+    },
+    "https://www.infoq.com/news/2026/10/valkey-evolution/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Olson and Söderqvist Discuss Valkey’s Evolution and Future Past Caching Use Cases at OSS EU",
+      "date": "2026-10-10T08:11:45.836Z"
+    },
+    "https://www.infoq.com/podcasts/building-trust-feedback-alignment/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: The Minimum Viable Manager: Building Trust, Feedback, and Alignment",
+      "date": "2026-10-10T08:11:45.836Z"
     }
   },
-  "lastRun": "2026-10-09T08:35:50.183Z"
+  "lastRun": "2026-10-10T08:11:45.836Z"
 }
