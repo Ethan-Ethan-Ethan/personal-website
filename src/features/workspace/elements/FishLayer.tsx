@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { createSchool, stepSchool, type Fish } from '../core/fish-school';
 import { FISH_SPRITES } from '../core/fish-sprites';
-import { KOI_SHEET_PATH } from '../core/lake-assets';
+import { KOI_BLACK_PATH, KOI_SHEET_PATH } from '../core/lake-assets';
 
 type Props = { tint: string };
 
@@ -104,6 +104,16 @@ export default function FishLayer({ tint }: Props) {
         out.push({ c, base });
       }
       if (out.length > 0) spritesRef.current = out;
+      // 黑鯉獨立圖：同去背，第 0 條魚專用（在用正本＋1）。
+      const blackImg = new Image();
+      blackImg.src = KOI_BLACK_PATH;
+      blackImg.onload = () => {
+        if (disposed) return;
+        const keyed = keyOutGreen(blackImg);
+        if (!keyed) return;
+        // 整張即一條（頭朝上），直接用全幅。
+        spritesRef.current = [...spritesRef.current.slice(0, 3), { c: keyed, base: -Math.PI / 2 }];
+      };
     };
     let pointer: { x: number; y: number; at: number } | null = null;
     let splash: { x: number; y: number; t0: number } | null = null;
@@ -172,14 +182,17 @@ export default function FishLayer({ tint }: Props) {
       const L = Math.min(W, H) * 0.05;
       const frac = (n: number) => n - Math.floor(n);
       const sprites = spritesRef.current;
-      for (const f of fish) {
+      for (const [idx, f] of fish.entries()) {
         const x = f.x * W;
         const y = f.y * H;
         const heading = Math.atan2(f.vy, f.vx);
         const wag = Math.sin(t * 9 + f.seed) * 0.55;
         if (sprites.length > 0) {
           // 頭定住＋尾段繞關節轉：關節錨定（非居中），尾源向上多取 3% 蓋住接縫。
-          const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
+          // 第 0 條固定黑鯉（sprites[3]，獨立圖），其餘原色三條輪流。
+          const sp = idx === 0 && sprites.length > 3
+            ? sprites[3]
+            : sprites[Math.abs(Math.floor(f.seed)) % 3];
           const vi = Math.abs(Math.floor(f.seed * 7)) % 4;
           const scale = [0.85, 1.0, 1.15, 1.3][vi];
           const breathe = 1 + 0.02 * Math.sin(t * 3 + f.seed);
@@ -196,8 +209,6 @@ export default function FishLayer({ tint }: Props) {
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
-          if (vi === 3) ctx.filter = 'saturate(1.2) brightness(1.03)';
-          else if (vi === 0) ctx.filter = 'brightness(0.9) saturate(0.95)';
           ctx.drawImage(
             sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
             -wid / 2, -len / 2, wid, headLen,
@@ -208,7 +219,6 @@ export default function FishLayer({ tint }: Props) {
             sp.c, 0, sp.c.height * (headFrac - srcOverlap), sp.c.width, sp.c.height * (1 - headFrac + srcOverlap),
             -wid / 2, -overlap, wid, tailLen + overlap,
           );
-          ctx.filter = 'none';
           ctx.restore();
           continue;
         }
