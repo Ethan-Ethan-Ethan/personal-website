@@ -170,18 +170,20 @@ export default function FishLayer({ tint }: Props) {
         const heading = Math.atan2(f.vy, f.vx);
         const wag = Math.sin(t * 9 + f.seed) * 0.55;
         if (sprites.length > 0) {
-          // 些微擺尾：先貼整條（不斷），再把尾段 22% 以小角度重貼覆蓋。
+          // 全身擺動＋尾段反相：底圖靜止時也看得出游感；尾段拉到 30%。
           const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
           const breathe = 1 + 0.02 * Math.sin(t * 3 + f.seed);
           const len = L * 1.75 * breathe;
           const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
-          const tailWag = Math.sin(t * 9 + f.seed) * 0.18;
-          const headFrac = 0.78;
+          const phase = t * 9 + f.seed;
+          const bodySway = Math.sin(phase) * 0.05;
+          const tailWag = Math.sin(phase + Math.PI * 0.7) * 0.28;
+          const headFrac = 0.7;
           const headLen = len * headFrac;
           const tailLen = len - headLen;
           ctx.save();
           ctx.translate(x, y);
-          ctx.rotate(heading - sp.base);
+          ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
           ctx.shadowColor = tintRef.current;
           ctx.shadowBlur = 5;
