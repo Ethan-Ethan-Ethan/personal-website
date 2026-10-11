@@ -111,7 +111,8 @@ export default function LakeCanvas({ phase }: Props) {
               vec2 toFrag=(uv-r.xy)/max(d,1e-3);
               vec2 toLight=uSunPos-r.xy;
               float dl=dot(toFrag,toLight/max(length(toLight),1e-3));
-              w+=ring*(0.9+0.25*dl);
+              // 只取亮部：負半週會壓出黑圈（2026-10-12 用戶目擊），直接裁掉，只亮不暗。
+              w+=max(ring,0.0)*(0.9+0.25*dl);
               refr+=(uv-r.xy)*ring*0.035;
             }
             vec2 bedUv=coverUv(uv)+(vec2(n,detail)-0.5)*0.010+refr;

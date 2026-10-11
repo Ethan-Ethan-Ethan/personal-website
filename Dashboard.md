@@ -143,6 +143,7 @@ npm run dev          # 或 astro dev --background
 - 踩坑紀錄：[[04-踩坑紀錄]]
 
 ## 處理日誌
+- 2026-10-12：點水黑圈拿掉（`LakeCanvas.tsx`：波紋只取亮部，負半週裁掉；build 860＋ego 實拍點擊處只有亮光無黑圈）。
 - 2026-10-11：M1 修好（`VolumeChart.astro`：讀 CSS var 上色＋data-theme 監聽重上，零硬編碼；154/154＋build 860；ego 淺色實拍圖表全亮）。
 - 2026-10-11：分頁 NICE 一行級（PostCard tag rounded-sm、trading pt-20→14、404＋protected×2 補 Footer；N3/N5/N6 零改註記）。M1（VolumeChart light）／M2（湖面導覽重構＋轉場銜接）／M3（湖面 light 映射）列待辦（分頁可能重構，用戶 2026-10-11 指示）。
 - 2026-10-11：pond-06/07 已進垃圾桶（經批准；只剩 koi-mix＋pond-08）。方向：主頁凍結不推，下一步做分頁一致性（articles/trading/resume/404）；Dashboard 外部參考表自動更新方案待批（草擬＋人批，不全自動）。
