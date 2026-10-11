@@ -8,8 +8,8 @@ type Props = { light: number };
 // 荷葉浮層：第一版荷葉叢整幅貼（左右各一，右鏡像），魚從葉底游過。
 // 每叢自帶接觸陰影（水面壓痕）＋邊緣預烤柔化；減動畫時靜止一幀。
 const CLUSTERS = [
-  { ax: -0.14, ay: 0.16, size: 0.62, mirror: false, phase: 0 },
-  { ax: 1.14, ay: 0.82, size: 0.7, mirror: true, phase: 2.1 },
+  { ax: -0.09, ay: 0.24, size: 0.58, mirror: false, phase: 0 },
+  { ax: 1.09, ay: 0.74, size: 0.62, mirror: true, phase: 2.1 },
 ];
 
 export default function LotusLayer({ light }: Props) {

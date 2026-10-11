@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { FISH_SPRITES } from './fish-sprites';
-import { KOI_BLACK_PATH, KOI_SHEET_PATH, LOTUS_PATH, RETIRED_ASSETS, RIVERBED_PATH } from './lake-assets';
+import { KOI_SHEET_PATH, LOTUS_PATH, RETIRED_ASSETS, RIVERBED_PATH } from './lake-assets';
 import { DPR_CAP_2D, fishLightFilter, lotusLightFilter } from './lake-light';
 import { LAKE_PHASES } from './lake-palette';
 
@@ -21,7 +21,6 @@ describe('lake canonical', () => {
 
   it('single asset paths', () => {
     expect(KOI_SHEET_PATH).toBe('/assets/lake/koi-mix.png');
-    expect(KOI_BLACK_PATH).toBe('/assets/lake/koi-black.png');
     expect(LOTUS_PATH).toBe('/assets/lake/lotus-cluster.png');
     expect(RIVERBED_PATH).toBe('/assets/lake/pond-01.png');
     expect(RETIRED_ASSETS).toEqual(['koi-bold.png', 'riverbed-25.png', 'koi-sheet.png', 'koi-black.png', 'riverbed-26.png', 'lotus-small.png', 'pond-bed.png']);
