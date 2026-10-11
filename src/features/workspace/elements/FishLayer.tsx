@@ -106,6 +106,18 @@ export default function FishLayer({ tint, light }: Props) {
         }
         out.push({ c, base });
       }
+      // 水下柔邊預烤：blur 只付一次，幀內不再糊。
+      for (let i = 0; i < out.length; i++) {
+        const src = out[i].c;
+        const soft = document.createElement('canvas');
+        soft.width = src.width;
+        soft.height = src.height;
+        const sg = soft.getContext('2d');
+        if (!sg) continue;
+        sg.filter = 'blur(0.8px)';
+        sg.drawImage(src, 0, 0);
+        out[i] = { c: soft, base: out[i].base };
+      }
       if (out.length > 0) spritesRef.current = out;
     };
     let pointer: { x: number; y: number; at: number } | null = null;
@@ -115,8 +127,10 @@ export default function FishLayer({ tint, light }: Props) {
     const t0 = last;
     let disposed = false;
 
+    let lastFilterKey = -1;
+    let dimFilter = 'none';
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.max(1, Math.floor(host.clientWidth * dpr));
       canvas.height = Math.max(1, Math.floor(host.clientHeight * dpr));
     };
@@ -166,15 +180,19 @@ export default function FishLayer({ tint, light }: Props) {
           ? { x: splash.x, y: splash.y, age: (now - splash.t0) / 1000 }
           : null;
       stepSchool(fish, dt, t, livePointer, liveSplash);
-      // 亮度跟時段：用小步趨近，避免切段時閃跳。
+      // 亮度跟時段：用小步趨近，避免切段時閃跳；字串量化快取，靜止時零分配。
       curRef.current += (targetRef.current - curRef.current) * (1 - Math.exp(-dt * 3));
       const lightT = Math.min(1, Math.max(0, curRef.current));
       // 夜暗晝亮＋夜退飽和：跟水光同曲線走。
       const dimB = 0.45 + 0.55 * lightT;
       const dimS = 0.7 + 0.4 * lightT;
-      const dimFilter = `brightness(${dimB.toFixed(3)}) saturate(${dimS.toFixed(3)}) blur(0.8px)`;
+      const fKey = Math.round(dimB * 50) * 1000 + Math.round(dimS * 50);
+      if (fKey !== lastFilterKey) {
+        lastFilterKey = fKey;
+        dimFilter = `brightness(${(Math.round(dimB * 50) / 50).toFixed(2)}) saturate(${(Math.round(dimS * 50) / 50).toFixed(2)})`;
+      }
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const W = host.clientWidth;
       const H = host.clientHeight;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -209,6 +227,12 @@ export default function FishLayer({ tint, light }: Props) {
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
           ctx.filter = dimFilter;
+          if (Math.abs(tailWag) < 0.02) {
+            // 尾巴近直：單筆整貼，省一次變換＋一次 blit。
+            ctx.drawImage(sp.c, -wid / 2, -len / 2, wid, len);
+            ctx.restore();
+            continue;
+          }
           ctx.drawImage(
             sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
             -wid / 2, -len / 2, wid, headLen,
