@@ -12,8 +12,8 @@ describe('lake canonical', () => {
   it('single asset paths', () => {
     expect(KOI_SHEET_PATH).toBe('/assets/lake/koi-mix.png');
     expect(KOI_BLACK_PATH).toBe('/assets/lake/koi-black.png');
-    expect(RIVERBED_PATH).toBe('/assets/lake/riverbed-26.png');
-    expect(RETIRED_ASSETS).toEqual(['koi-bold.png', 'riverbed-25.png', 'koi-sheet.png', 'koi-black.png']);
+    expect(RIVERBED_PATH).toBe('/assets/lake/pond-01.png');
+    expect(RETIRED_ASSETS).toEqual(['koi-bold.png', 'riverbed-25.png', 'koi-sheet.png', 'koi-black.png', 'riverbed-26.png']);
   });
 
   it('single palette', () => {
