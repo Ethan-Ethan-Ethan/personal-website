@@ -178,7 +178,9 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
           ctx.rotate(heading - sp.base + bodySway);
           // 位置光：游進太陽倒影帶就被照亮（跟水面同一條 streak 公式，曲線在 lake-light.ts）。
           const streak = Math.exp(-Math.pow((f.x - sx) * 6, 2)) * (0.35 + 0.65 * (1 - f.y));
-          ctx.globalAlpha = 0.93 * (0.3 + 0.7 * spotVisibility(streak * sg));
+          // 可見度走透明度（iOS Safari 不吃 ctx.filter，亮度濾鏡會被整組忽略）
+          const vis = spotVisibility(streak * sg);
+          ctx.globalAlpha = 0.93 * Math.pow(vis, 1.5);
           ctx.filter = fishLightFilter(lightT, streak * sg);
           if (Math.abs(tailWag) < 0.02) {
             // 尾巴近直：單筆整貼，省一次變換＋一次 blit。
