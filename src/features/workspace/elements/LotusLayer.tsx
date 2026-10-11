@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { RIVERBED_PATH } from '../core/lake-assets';
+import { lotusLightFilter } from '../core/lake-light';
 
-type Props = { exposure: number; waterB: string };
+type Props = { light: number };
 
 // 荷葉浮層：直接從底圖 pond-01 裁荷葉區，同一張照片保證不違和。
 // 蓋放位置用跟水 shader 同一套 cover 映射，靜止時像素對齊；微漂 ±3px 看起來像浮動。
@@ -11,14 +12,7 @@ const CROPS = [
   { fx: 0.71, fy: 0, fw: 0.29, fh: 1, phase: 2.1 },
 ];
 
-type Crop = { c: HTMLCanvasElement; base: HTMLCanvasElement; fx: number; fy: number; fw: number; fh: number; phase: number };
-
-function hexToRgb(hex: string): [number, number, number] {
-  const m = /^#?([0-9a-f]{6})$/i.exec(hex.trim());
-  if (!m) return [20, 28, 51];
-  const v = parseInt(m[1], 16);
-  return [(v >> 16) & 255, (v >> 8) & 255, v & 255];
-}
+type Crop = { c: HTMLCanvasElement; fx: number; fy: number; fw: number; fh: number; phase: number };
 
 function featheredCrop(
   bed: HTMLImageElement,
@@ -54,12 +48,10 @@ function featheredCrop(
   }
 }
 
-export default function LotusLayer({ exposure, waterB }: Props) {
+export default function LotusLayer({ light }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
-  const exposureRef = useRef(exposure);
-  exposureRef.current = exposure;
-  const waterBRef = useRef(waterB);
-  waterBRef.current = waterB;
+  const lightRef = useRef(light);
+  lightRef.current = light;
 
   useEffect(() => {
     const host = hostRef.current;
@@ -73,39 +65,7 @@ export default function LotusLayer({ exposure, waterB }: Props) {
     if (!ctx) return;
 
     let crops: Crop[] = [];
-    let base: Crop[] = [];
-    let lastBakeKey = '';
     let texAspect = 16 / 9;
-    const bakeGraded = () => {
-      // 跟水 shader 同調：亮度×曝光＋上暗下亮罩水色；只在時段切換時烤一次。
-      const key = `${exposureRef.current}|${waterBRef.current}`;
-      if (key === lastBakeKey || base.length === 0) return;
-      const [wr, wg, wb] = hexToRgb(waterBRef.current);
-      const k = (0.55 + 0.45 * exposureRef.current) * exposureRef.current;
-      const graded: Crop[] = [];
-      for (const r of base) {
-        const c = document.createElement('canvas');
-        c.width = r.base.width;
-        c.height = r.base.height;
-        const gg = c.getContext('2d');
-        if (!gg) continue;
-        gg.filter = `brightness(${k.toFixed(3)})`;
-        gg.drawImage(r.base, 0, 0);
-        gg.filter = 'none';
-        gg.globalCompositeOperation = 'source-atop';
-        const grad = gg.createLinearGradient(0, 0, 0, c.height);
-        grad.addColorStop(0, `rgba(${wr},${wg},${wb},0.45)`);
-        grad.addColorStop(1, `rgba(${wr},${wg},${wb},0)`);
-        gg.fillStyle = grad;
-        gg.fillRect(0, 0, c.width, c.height);
-        gg.globalCompositeOperation = 'source-over';
-        graded.push({ ...r, c });
-      }
-      if (graded.length > 0) {
-        crops = graded;
-        lastBakeKey = key;
-      }
-    };
     const img = new Image();
     img.src = RIVERBED_PATH;
     img.onload = () => {
@@ -115,11 +75,10 @@ export default function LotusLayer({ exposure, waterB }: Props) {
       const out: Crop[] = [];
       for (const r of CROPS) {
         const c = featheredCrop(img, r.fx, r.fy, r.fw, r.fh, 34);
-        if (c) out.push({ c, base: c, ...r });
+        if (c) out.push({ c, ...r });
       }
       if (out.length > 0) {
-        base = out;
-        bakeGraded();
+        crops = out;
         if (reduced) draw(0);
       }
     };
@@ -145,7 +104,7 @@ export default function LotusLayer({ exposure, waterB }: Props) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
       if (crops.length === 0) return;
-      // 調色已烤進圖裡，幀內不再掛 filter。
+      ctx.filter = lotusLightFilter(lightRef.current);
       // 跟 LakeCanvas coverUv 同式：可視區＝中央 ± s/2
       const sax = W / Math.max(H, 1);
       const s = sax > texAspect ? { x: 1, y: texAspect / sax } : { x: sax / texAspect, y: 1 };
@@ -158,6 +117,7 @@ export default function LotusLayer({ exposure, waterB }: Props) {
         const dh = (r.fh / s.y) * H;
         ctx.drawImage(r.c, dx, dy, dw, dh);
       }
+      ctx.filter = 'none';
     };
 
     if (!reduced) {
@@ -165,7 +125,6 @@ export default function LotusLayer({ exposure, waterB }: Props) {
         if (disposed) return;
         raf = requestAnimationFrame(tick);
         if (document.hidden) return;
-        bakeGraded();
         draw((performance.now() - t0) / 1000);
       };
       raf = requestAnimationFrame(tick);
