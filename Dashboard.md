@@ -143,6 +143,9 @@ npm run dev          # 或 astro dev --background
 - 踩坑紀錄：[[04-踩坑紀錄]]
 
 ## 處理日誌
+- 2026-10-12：去英文名（About 卡只留楊宥綸；首頁左上只留 Ethan；build 1664；ego 實拍）。
+- 2026-10-12：線上更新確認（about-dialog×6＋open-about-dialog＋First Light 全在 live；部署成功；CI 另修 pages-action 下架＋補 hotspot-layout 孤兒；recipe 孤兒未動留檔）。
+- 2026-10-12：發佈上線（main 998c7bf→8ffc588：吃遠端 RSS＋lake-landing 97 包；Selected work 下架；About 彈框 live；構建 1664 頁；live/pages 皆 200；Cloudflare Pages 部署中）。
 - 2026-10-12：About 卡深色透（湖面色＋88% 不透＋模糊；文字鎖淺色不跟主題；完整履歷連結拿掉，只留 ×；build 860；ego 實拍）。
 - 2026-10-12：About 灰底彈框上線（原生 dialog 零依賴；開/焦點/ESC/外點/減動畫全過；置中修正；build 860＋154/154；ego 實拍；計劃關閉）。
 - 2026-10-12：擺尾調小（0.10＋0.16→0.07＋0.11，最大約 10°；154/154＋build 860；ego 雙拍無撕裂）。

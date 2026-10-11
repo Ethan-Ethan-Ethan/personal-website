@@ -42,7 +42,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
-      <a href="/" aria-label="Ethan Yang 首頁" style={{ ...link, position: 'absolute', top: 20, left: 24 }}>Ethan Yang</a>
+      <a href="/" aria-label="Ethan 首頁" style={{ ...link, position: 'absolute', top: 20, left: 24 }}>Ethan</a>
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>
