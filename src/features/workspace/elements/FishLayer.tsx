@@ -3,7 +3,7 @@ import { createSchool, stepSchool, type Fish } from '../core/fish-school';
 import { FISH_SPRITES } from '../core/fish-sprites';
 import { KOI_SHEET_PATH } from '../core/lake-assets';
 import { keyOutGreen } from '../core/green-key';
-import { DPR_CAP_2D, fishLightFilter } from '../core/lake-light';
+import { DPR_CAP_2D, fishLightFilter, lotusLightFilter, spotVisibility } from '../core/lake-light';
 
 type Props = { tint: string; light: number; sunX: number; sunGlow: number };
 
@@ -176,9 +176,9 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
-          ctx.globalAlpha = 0.93;
           // 位置光：游進太陽倒影帶就被照亮（跟水面同一條 streak 公式，曲線在 lake-light.ts）。
           const streak = Math.exp(-Math.pow((f.x - sx) * 6, 2)) * (0.35 + 0.65 * (1 - f.y));
+          ctx.globalAlpha = 0.93 * (0.3 + 0.7 * spotVisibility(streak * sg));
           ctx.filter = fishLightFilter(lightT, streak * sg);
           if (Math.abs(tailWag) < 0.02) {
             // 尾巴近直：單筆整貼，省一次變換＋一次 blit。

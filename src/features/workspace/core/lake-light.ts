@@ -15,10 +15,16 @@ export function lightFilter(
   return `brightness(${(bBase + bSpan * c).toFixed(2)}) saturate(${(sBase + sSpan * c).toFixed(2)})`;
 }
 
-export function fishLightFilter(t: number, streakGlow: number = 0): string {
+export function fishLightFilter(t: number, glow: number = 1): string {
   const c = Math.min(1, Math.max(0, t));
-  const b = (0.45 + 0.55 * c) * (1 + streakGlow * 0.4);
+  const b = (0.45 + 0.55 * c) * spotVisibility(glow);
   return `brightness(${b.toFixed(2)}) saturate(${(0.7 + 0.4 * c).toFixed(2)})`;
+}
+
+// 光斑可見度：游出光帶就暗到接近消失（0.12 保底一口氣），光裡全亮。
+export function spotVisibility(glow: number): number {
+  const g = Math.min(1, Math.max(0, glow * 1.2));
+  return 0.12 + 0.88 * Math.pow(g, 1.5);
 }
 
 export function lotusLightFilter(t: number): string {

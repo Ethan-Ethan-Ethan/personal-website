@@ -1,14 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { FISH_SPRITES } from './fish-sprites';
 import { KOI_SHEET_PATH, RETIRED_ASSETS, RIVERBED_PATH } from './lake-assets';
-import { DPR_CAP_2D, fishLightFilter, lotusLightFilter } from './lake-light';
+import { DPR_CAP_2D, fishLightFilter, lotusLightFilter, spotVisibility } from './lake-light';
 import { LAKE_PHASES } from './lake-palette';
 
 describe('lake canonical', () => {
   it('light curves stay in sane ranges', () => {
     expect(fishLightFilter(0)).toBe('brightness(0.45) saturate(0.70)');
     expect(fishLightFilter(1)).toBe('brightness(1.00) saturate(1.10)');
-    expect(fishLightFilter(1, 1)).toBe('brightness(1.40) saturate(1.10)');
+    expect(fishLightFilter(1, 1)).toBe('brightness(1.00) saturate(1.10)');
+    expect(fishLightFilter(1, 0)).toBe('brightness(0.12) saturate(1.10)');
+    expect(spotVisibility(0)).toBeCloseTo(0.12, 2);
     expect(lotusLightFilter(0)).toBe('brightness(0.60) saturate(0.85)');
     expect(lotusLightFilter(1)).toBe('brightness(1.00) saturate(1.15)');
     expect(DPR_CAP_2D).toBe(1.5);
