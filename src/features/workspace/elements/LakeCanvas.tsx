@@ -10,7 +10,7 @@ export default function LakeCanvas({ phase }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const phaseRef = useRef(phase);
   phaseRef.current = phase;
-  const pointer = useLakePointer(12);
+  const pointer = useLakePointer(8);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -58,7 +58,7 @@ export default function LakeCanvas({ phase }: Props) {
       const tmpColor = new THREE.Color();
       const screenU = new THREE.Vector2(1, 1);
 
-      const ripples: Vector4[] = Array.from({ length: 12 }, () => new THREE.Vector4(0, 0, 0, 0));
+      const ripples: Vector4[] = Array.from({ length: 8 }, () => new THREE.Vector4(0, 0, 0, 0));
       const material: ShaderMaterial = new THREE.ShaderMaterial({
         depthWrite: false,
         uniforms: {
@@ -81,7 +81,7 @@ export default function LakeCanvas({ phase }: Props) {
         fragmentShader: `
           varying vec2 vUv; uniform float uTime;
           uniform vec3 uSkyA; uniform vec3 uSkyB; uniform vec3 uWaterA; uniform vec3 uWaterB; uniform vec3 uSun;
-          uniform vec2 uSunPos; uniform float uExposure; uniform vec4 uRipples[12]; uniform float uGlint;
+          uniform vec2 uSunPos; uniform float uExposure; uniform vec4 uRipples[8]; uniform float uGlint;
           uniform sampler2D uBed; uniform float uUseBed; uniform vec2 uScreen; uniform float uTexAspect;
           float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
           float noise(vec2 p){vec2 i=floor(p),f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
@@ -98,14 +98,14 @@ export default function LakeCanvas({ phase }: Props) {
             float n=fbm(flowUv*vec2(6.0,14.0)+vec2(uTime*0.05,uTime*0.12));
             float detail=fbm(flowUv*vec2(26.0,44.0)+vec2(-uTime*0.09,uTime*0.22));
             float w=0.0; vec2 refr=vec2(0.0);
-            for(int i=0;i<12;i++){
+            for(int i=0;i<8;i++){
               vec4 r=uRipples[i];
               float age=uTime-r.z;
               float amp=r.w*step(0.0,age)*exp(-age*1.5);
               float d=distance(uv,r.xy);
-              float grow=clamp((r.w-0.35)/1.5,0.0,1.0);
-              float R=mix(260.0,90.0,grow);
-              float K=mix(85.0,55.0,grow);
+              float grow=clamp((r.w-0.22)/0.9,0.0,1.0);
+              float R=mix(420.0,150.0,grow);
+              float K=mix(100.0,70.0,grow);
               float ring=amp*exp(-d*d*R)*sin(d*K-age*9.0);
               // 方向性明暗：朝光面亮、背光面暗，随 uSunPos（時段）走。
               vec2 toFrag=(uv-r.xy)/max(d,1e-3);
@@ -207,7 +207,7 @@ export default function LakeCanvas({ phase }: Props) {
         lastPush = now;
         lastPX = x;
         lastPY = y;
-        pointer.push(x, y, now, 0.35);
+        pointer.push(x, y, now, 0.22);
       };
       let lastSplash = -1;
       const onLakeSplash = (event: PointerEvent) => {
@@ -220,7 +220,7 @@ export default function LakeCanvas({ phase }: Props) {
           (event.clientX - rect.left) / Math.max(rect.width, 1),
           1 - (event.clientY - rect.top) / Math.max(rect.height, 1),
           now,
-          1.8,
+          1.1,
         );
       };
       document.addEventListener('visibilitychange', onVisibility);
@@ -277,7 +277,7 @@ export default function LakeCanvas({ phase }: Props) {
         material.uniforms.uExposure.value = cur.exposure;
         material.uniforms.uGlint.value = cur.glint;
         const items = pointer.list;
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 8; i++) {
           const r = items[i];
           if (r) ripples[i].set(r.x, r.y, r.t0, r.amp);
           else ripples[i].set(0, 0, 0, 0);

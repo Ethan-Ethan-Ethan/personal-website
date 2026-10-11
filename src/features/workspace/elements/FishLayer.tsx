@@ -3,7 +3,7 @@ import { createSchool, stepSchool, type Fish } from '../core/fish-school';
 import { FISH_SPRITES } from '../core/fish-sprites';
 import { KOI_SHEET_PATH } from '../core/lake-assets';
 
-type Props = { tint: string; light: number };
+type Props = { tint: string; light: number; sunX: number; sunGlow: number };
 
 function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
   try {
@@ -52,13 +52,17 @@ function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
   }
 }
 
-export default function FishLayer({ tint, light }: Props) {
+export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const tintRef = useRef(tint);
   tintRef.current = tint;
   const targetRef = useRef(light);
   targetRef.current = light;
   const curRef = useRef(light);
+  const sunXRef = useRef(sunX);
+  sunXRef.current = sunX;
+  const sunGlowRef = useRef(sunGlow);
+  sunGlowRef.current = sunGlow;
   const spritesRef = useRef<{ c: HTMLCanvasElement; base: number }[]>([]);
 
   useEffect(() => {
@@ -127,8 +131,6 @@ export default function FishLayer({ tint, light }: Props) {
     const t0 = last;
     let disposed = false;
 
-    let lastFilterKey = -1;
-    let dimFilter = 'none';
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.max(1, Math.floor(host.clientWidth * dpr));
@@ -186,11 +188,8 @@ export default function FishLayer({ tint, light }: Props) {
       // 夜暗晝亮＋夜退飽和：跟水光同曲線走。
       const dimB = 0.45 + 0.55 * lightT;
       const dimS = 0.7 + 0.4 * lightT;
-      const fKey = Math.round(dimB * 50) * 1000 + Math.round(dimS * 50);
-      if (fKey !== lastFilterKey) {
-        lastFilterKey = fKey;
-        dimFilter = `brightness(${(Math.round(dimB * 50) / 50).toFixed(2)}) saturate(${(Math.round(dimS * 50) / 50).toFixed(2)})`;
-      }
+      const sx = sunXRef.current;
+      const sg = sunGlowRef.current;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const W = host.clientWidth;
@@ -226,7 +225,10 @@ export default function FishLayer({ tint, light }: Props) {
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
-          ctx.filter = dimFilter;
+          // 位置光：游進太陽倒影帶就被照亮（跟水面同一條 streak 公式）。
+          const streak = Math.exp(-Math.pow((f.x - sx) * 6, 2)) * (0.35 + 0.65 * (1 - f.y));
+          const litB = dimB * (1 + streak * 0.4 * sg);
+          ctx.filter = `brightness(${litB.toFixed(2)}) saturate(${dimS.toFixed(2)})`;
           if (Math.abs(tailWag) < 0.02) {
             // 尾巴近直：單筆整貼，省一次變換＋一次 blit。
             ctx.drawImage(sp.c, -wid / 2, -len / 2, wid, len);

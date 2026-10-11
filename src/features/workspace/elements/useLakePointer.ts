@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 export type Ripple = { x: number; y: number; t0: number; amp: number };
 
-export const RIPPLE_MAX = 12;
+export const RIPPLE_MAX = 8;
 // 與 LakeCanvas shader 內 exp(-age*1.5) 同式；CPU 側只做測試與上限判斷。
 export function rippleWeight(r: Ripple, now: number): number {
   const age = now - r.t0;
