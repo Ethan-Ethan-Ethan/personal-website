@@ -74,7 +74,7 @@ export default function LotusLayer({ light }: Props) {
       }
       const out: Crop[] = [];
       for (const r of CROPS) {
-        const c = featheredCrop(img, r.fx, r.fy, r.fw, r.fh, 22);
+        const c = featheredCrop(img, r.fx, r.fy, r.fw, r.fh, 34);
         if (c) out.push({ c, ...r });
       }
       if (out.length > 0) {
@@ -111,8 +111,8 @@ export default function LotusLayer({ light }: Props) {
       const ox = 0.5 - s.x / 2;
       const oy = 0.5 - s.y / 2;
       for (const r of crops) {
-        const dx = ((r.fx - ox) / s.x) * W + (reduced ? 0 : Math.sin(t * 0.23 + r.phase) * 1.5);
-        const dy = ((r.fy - oy) / s.y) * H + (reduced ? 0 : Math.cos(t * 0.19 + r.phase) * 1);
+        const dx = ((r.fx - ox) / s.x) * W + (reduced ? 0 : Math.sin(t * 0.23 + r.phase) * 0.8);
+        const dy = ((r.fy - oy) / s.y) * H + (reduced ? 0 : Math.cos(t * 0.19 + r.phase) * 0.5);
         const dw = (r.fw / s.x) * W;
         const dh = (r.fh / s.y) * H;
         ctx.drawImage(r.c, dx, dy, dw, dh);
