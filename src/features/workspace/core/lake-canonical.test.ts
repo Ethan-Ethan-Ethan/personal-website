@@ -9,8 +9,8 @@ describe('lake canonical', () => {
     expect(fishLightFilter(0)).toBe('brightness(0.45) saturate(0.70)');
     expect(fishLightFilter(1)).toBe('brightness(1.00) saturate(1.10)');
     expect(fishLightFilter(1, 1)).toBe('brightness(1.00) saturate(1.10)');
-    expect(fishLightFilter(1, 0)).toBe('brightness(0.25) saturate(1.10)');
-    expect(spotVisibility(0)).toBeCloseTo(0.25, 2);
+    expect(fishLightFilter(1, 0)).toBe('brightness(0.40) saturate(1.10)');
+    expect(spotVisibility(0)).toBeCloseTo(0.4, 2);
     expect(lotusLightFilter(0)).toBe('brightness(0.60) saturate(0.85)');
     expect(lotusLightFilter(1)).toBe('brightness(1.00) saturate(1.15)');
     expect(DPR_CAP_2D).toBe(1.5);
