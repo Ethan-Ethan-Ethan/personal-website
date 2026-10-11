@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkspaceDesktop from '../components/workspace/WorkspaceDesktop';
 import LakeLanding from '../components/workspace/LakeLanding';
+import AboutDialog from '../components/AboutDialog.astro';
 import publicContent from '../data/generated/public-content.json';
 import { getCollection } from 'astro:content';
 import { getArticleHref } from '../features/articles/routing.mjs';
@@ -22,6 +23,7 @@ const USE_LAKE = true;
   {USE_LAKE
     ? <LakeLanding client:load />
     : <WorkspaceDesktop client:load content={homepageContent} recentArticles={recentArticles} />}
+  <AboutDialog />
   <noscript>
     <section class="nojs-workspace" aria-label="網站導覽">
       <h1>Ethan Yang｜AI 系統創作者</h1>

@@ -46,8 +46,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>
-        <a href="/resume" style={link}>About</a>
-        <a href="/trading/" style={link}>Selected work</a>
+        <a href="/resume" style={link} onClick={(event) => { event.preventDefault(); window.dispatchEvent(new CustomEvent('open-about-dialog')); }}>About</a>
       </div>
 
       <div key={phase.id} className="fadein" style={{ position: 'absolute', left: 24, bottom: 24 }}>

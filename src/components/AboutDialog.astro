@@ -1,0 +1,101 @@
+---
+// About 灰底彈框（about-dialog 計畫 Phase 1+2）：原生 <dialog>，零依賴。
+// 內容為 resume.astro 精簡版（逐字摘錄：職稱/公司/期間＋摘要＋前 6 技能；雙正本漂移時以 /resume 為準，屆時再抽共享 data）。
+// 開啟：監聽 window 'open-about-dialog' 事件（LakeOverlay 按鈕發）；關閉：右上 ×／點灰底／ESC（原生）。
+---
+<dialog id="about-dialog" aria-labelledby="about-dialog-title" class="about-dialog">
+  <div class="about-card">
+    <div class="flex items-start justify-between gap-4 mb-3">
+      <div>
+        <p class="text-xs text-amber tracking-widest uppercase mb-1">About</p>
+        <h2 id="about-dialog-title" class="text-2xl font-extrabold tracking-tight">楊宥綸 Ethan Yang</h2>
+        <p class="text-sm text-muted mt-1">資深 FAE 應用工程師 ／ 硬體研發 ／ 電源與 EMC 設計</p>
+      </div>
+      <button type="button" data-close class="about-close" aria-label="關閉關於視窗">✕</button>
+    </div>
+    <p class="text-sm text-muted leading-relaxed mb-4">
+      15+ 年硬體研發與 FAE 經驗：伺服器電源架構設計（VRD、DC-DC）與 EMC 對策，後轉任 FAE 專注客戶技術支援、NPI 導入與海外量產管理。
+    </p>
+    <ul class="about-jobs">
+      <li><strong>資深 FAE 應用工程師</strong> · 偉詮電子 <span>2020/10 – 2026/05</span></li>
+      <li><strong>研發工程師</strong> · 雅蒂斯登（廈門） <span>2017 – 2020</span></li>
+      <li><strong>硬體研發工程師（Power DC）</strong> · 緯創資通 <span>2011 – 2016</span></li>
+      <li><strong>EMC 工程師</strong> · 緯創資通 <span>2007 – 2011</span></li>
+    </ul>
+    <div class="flex flex-wrap gap-1.5 my-4">
+      <span class="about-chip">FAE / 客戶技術支援</span>
+      <span class="about-chip">NPI 導入</span>
+      <span class="about-chip">電源設計 (VRD·DC-DC)</span>
+      <span class="about-chip">PCB 設計 (OrCAD·Allegro)</span>
+      <span class="about-chip">EMC 與安規</span>
+      <span class="about-chip">測試自動化 (Python·GPIB)</span>
+    </div>
+    <div class="flex items-center justify-between gap-4">
+      <p class="text-xs text-soft">台灣 · 中文母語／英文商務流利</p>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .about-dialog {
+    padding: 0;
+    border: none;
+    background: transparent;
+    margin: auto;
+    max-width: min(560px, calc(100vw - 48px));
+    max-height: calc(100dvh - 96px);
+  }
+  .about-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+  }
+  .about-dialog[open] { animation: about-in 0.25s ease both; }
+  .about-dialog[open]::backdrop { animation: about-fade 0.25s ease both; }
+  @keyframes about-in { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes about-fade { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .about-dialog[open], .about-dialog[open]::backdrop { animation: none; }
+  }
+  .about-card {
+    padding: 26px;
+    overflow: auto;
+    background: rgba(27, 27, 24, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+    /* 鎖深夜配色：湖面永遠是夜，不跟 data-theme 跑（M3 決議前） */
+    color: #f3f0e8;
+  }
+  .about-card .text-muted { color: #b9b3a5; }
+  .about-card .text-soft { color: #8f897b; }
+  .about-card .text-amber { color: #d4a34b; }
+  .about-close {
+    flex: none; width: 30px; height: 30px; border-radius: 50%;
+    border: 1px solid var(--color-line); background: transparent;
+    color: var(--color-muted); font-size: 13px; cursor: pointer;
+  }
+  .about-close:hover { color: var(--color-text); border-color: var(--color-soft); }
+  .about-card .about-jobs { margin: 0 0 4px; padding: 0; list-style: none; font-size: 13px; color: #b9b3a5; line-height: 1.9; }
+  .about-card .about-jobs strong { color: #f3f0e8; font-weight: 600; }
+  .about-card .about-jobs span { color: #8f897b; font-size: 12px; }
+  .about-card .about-chip {
+    font-size: 12px; color: #b9b3a5;
+    background: rgba(255, 255, 255, 0.09); border-radius: 999px; padding: 3px 10px;
+  }
+  .about-card .about-close { color: #b9b3a5; border-color: rgba(255, 255, 255, 0.22); }
+</style>
+
+<script>
+  (function () {
+    const dialog = document.getElementById('about-dialog');
+    if (!dialog || typeof dialog.showModal !== 'function') return;
+    window.addEventListener('open-about-dialog', () => {
+      if (!dialog.open) dialog.showModal();
+    });
+    dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  })();
+</script>
