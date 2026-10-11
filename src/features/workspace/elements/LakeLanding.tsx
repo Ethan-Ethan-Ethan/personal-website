@@ -1,6 +1,7 @@
 import LakeCanvas from './LakeCanvas';
 import LakeOverlay from './LakeOverlay';
 import FishLayer from './FishLayer';
+import LotusLayer from './LotusLayer';
 import { useLakePhase } from './useLakePhase';
 import { useLakeAudio } from './useLakeAudio';
 import { PHASE_COUNT } from '../core/lake-palette';
@@ -15,6 +16,7 @@ export default function LakeLanding() {
     <div className="lake-landing" style={{ position: 'fixed', inset: 0, overflow: 'hidden', background: '#060913' }}>
       <LakeCanvas phase={phaseIndex} />
       <FishLayer tint={phase.sun} light={fishLight} sunX={phase.sunPos[0]} sunGlow={phase.glint} />
+      <LotusLayer light={fishLight} />
       <LakeOverlay
         phase={phase}
         phaseIndex={phaseIndex}
