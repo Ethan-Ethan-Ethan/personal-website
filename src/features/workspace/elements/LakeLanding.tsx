@@ -13,8 +13,8 @@ export default function LakeLanding() {
 
   return (
     <div className="lake-landing" style={{ position: 'fixed', inset: 0, overflow: 'hidden', background: '#060913' }}>
-      <FishLayer tint={phase.sun} brightness={fishBrightness} />
       <LakeCanvas phase={phaseIndex} />
+      <FishLayer tint={phase.sun} brightness={fishBrightness} />
       <LakeOverlay
         phase={phase}
         phaseIndex={phaseIndex}

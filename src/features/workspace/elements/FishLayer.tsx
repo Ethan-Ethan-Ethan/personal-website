@@ -307,5 +307,5 @@ export default function FishLayer({ tint, brightness }: Props) {
     };
   }, []);
 
-  return <div ref={hostRef} className="fish-layer" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }} />;
+  return <div ref={hostRef} className="fish-layer" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }} />;
 }
