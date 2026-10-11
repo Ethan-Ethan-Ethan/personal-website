@@ -8,8 +8,8 @@ type Props = { light: number };
 // 蓋放位置用跟水 shader 同一套 cover 映射，靜止時像素對齊；微漂 ±3px 看起來像浮動。
 // z 在最頂（含 UI 之上），魚從葉底游過。減動畫時靜止一幀。
 const CROPS = [
-  { fx: 0, fy: 0, fw: 0.37, fh: 1, phase: 0 },
-  { fx: 0.71, fy: 0, fw: 0.29, fh: 1, phase: 2.1 },
+  { fx: 0, fy: 0.02, fw: 0.3, fh: 0.96, phase: 0 },
+  { fx: 0.76, fy: 0.02, fw: 0.24, fh: 0.96, phase: 2.1 },
 ];
 
 type Crop = { c: HTMLCanvasElement; fx: number; fy: number; fw: number; fh: number; phase: number };
@@ -66,6 +66,28 @@ export default function LotusLayer({ light }: Props) {
 
     let crops: Crop[] = [];
     let texAspect = 16 / 9;
+    // 本地漣漪：自己聽點擊，水波盪開時把附近的葉子推開（跟水 shader 同步感覺）。
+    // 座標跟魚層同系（x、y 皆螢幕分數，y 上小下大）。
+    type Push = { x: number; y: number; t0: number };
+    const pushes: Push[] = [];
+    const toLocal = (clientX: number, clientY: number) => {
+      const rect = host.getBoundingClientRect();
+      return {
+        x: (clientX - rect.left) / Math.max(rect.width, 1),
+        y: (clientY - rect.top) / Math.max(rect.height, 1),
+      };
+    };
+    let lastPushAt = -1;
+    const t0 = performance.now();
+    const onPush = (event: PointerEvent) => {
+      const now = (performance.now() - t0) / 1000;
+      if (now - lastPushAt < 0.15) return;
+      lastPushAt = now;
+      const p = toLocal(event.clientX, event.clientY);
+      pushes.push({ ...p, t0: now });
+      if (pushes.length > 8) pushes.shift();
+    };
+    host.parentElement?.addEventListener('pointerdown', onPush, { passive: true });
     const img = new Image();
     img.src = RIVERBED_PATH;
     img.onload = () => {
@@ -85,7 +107,6 @@ export default function LotusLayer({ light }: Props) {
 
     let raf = 0;
     let disposed = false;
-    const t0 = performance.now();
 
     const dprOf = () => Math.min(window.devicePixelRatio || 1, 1.5);
     const resize = () => {
@@ -111,8 +132,32 @@ export default function LotusLayer({ light }: Props) {
       const ox = 0.5 - s.x / 2;
       const oy = 0.5 - s.y / 2;
       for (const r of crops) {
-        const dx = ((r.fx - ox) / s.x) * W + (reduced ? 0 : Math.sin(t * 0.23 + r.phase) * 0.8);
-        const dy = ((r.fy - oy) / s.y) * H + (reduced ? 0 : Math.cos(t * 0.19 + r.phase) * 0.5);
+        // 被推開：附近有點擊漣漪時，沿徑向推（0.6 秒衰完，最大約 26px）。
+        let pushX = 0;
+        let pushY = 0;
+        if (!reduced && pushes.length > 0) {
+          const nowS = t;
+          const ccx = r.fx + r.fw / 2;
+          const ccy = r.fy + r.fh / 2;
+          for (let i = pushes.length - 1; i >= 0; i--) {
+            const p = pushes[i];
+            const age = nowS - p.t0;
+            if (age > 0.9) {
+              pushes.splice(i, 1);
+              continue;
+            }
+            const ddx = ccx - p.x;
+            const ddy = (ccy - p.y) * (W / Math.max(H, 1));
+            const d = Math.hypot(ddx, ddy);
+            if (d < 0.45 && d > 1e-4) {
+              const k = (1 - age / 0.9) * Math.exp(-d * d * 18) * 0.05;
+              pushX += (ddx / d) * k * W;
+              pushY += (ddy / d) * k * H;
+            }
+          }
+        }
+        const dx = ((r.fx - ox) / s.x) * W + (reduced ? 0 : Math.sin(t * 0.23 + r.phase) * 0.8) + pushX;
+        const dy = ((r.fy - oy) / s.y) * H + (reduced ? 0 : Math.cos(t * 0.19 + r.phase) * 0.5) + pushY;
         const dw = (r.fw / s.x) * W;
         const dh = (r.fh / s.y) * H;
         ctx.drawImage(r.c, dx, dy, dw, dh);
@@ -133,6 +178,7 @@ export default function LotusLayer({ light }: Props) {
     return () => {
       disposed = true;
       cancelAnimationFrame(raf);
+      host.parentElement?.removeEventListener('pointerdown', onPush);
       ro.disconnect();
       canvas.remove();
     };
