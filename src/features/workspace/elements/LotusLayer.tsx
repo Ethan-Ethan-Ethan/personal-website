@@ -1,16 +1,52 @@
 import { useEffect, useRef } from 'react';
-import { LOTUS_PATH } from '../core/lake-assets';
-import { keyOutGreen } from '../core/green-key';
-import { DPR_CAP_2D, lotusLightFilter } from '../core/lake-light';
+import { RIVERBED_PATH } from '../core/lake-assets';
+import { lotusLightFilter } from '../core/lake-light';
 
 type Props = { light: number };
 
-// 荷葉浮層：第一版荷葉叢整幅貼（左右各一，右鏡像），魚從葉底游過。
-// 每叢自帶接觸陰影（水面壓痕）＋邊緣預烤柔化；減動畫時靜止一幀。
-const CLUSTERS = [
-  { ax: 0.02, ay: 0.22, size: 0.58, mirror: false, phase: 0 },
-  { ax: 0.98, ay: 0.74, size: 0.62, mirror: true, phase: 2.1 },
+// 荷葉浮層：直接從底圖 pond-01 裁荷葉區，同一張照片保證不違和。
+// 蓋放位置用跟水 shader 同一套 cover 映射，靜止時像素對齊；微漂 ±3px 看起來像浮動。
+// z 在最頂（含 UI 之上），魚從葉底游過。減動畫時靜止一幀。
+const CROPS = [
+  { fx: 0, fy: 0, fw: 0.37, fh: 1, phase: 0 },
+  { fx: 0.71, fy: 0, fw: 0.29, fh: 1, phase: 2.1 },
 ];
+
+type Crop = { c: HTMLCanvasElement; fx: number; fy: number; fw: number; fh: number; phase: number };
+
+function featheredCrop(
+  bed: HTMLImageElement,
+  fx: number,
+  fy: number,
+  fw: number,
+  fh: number,
+  feather: number,
+): HTMLCanvasElement | null {
+  try {
+    const w = Math.max(1, Math.round(bed.naturalWidth * fw));
+    const h = Math.max(1, Math.round(bed.naturalHeight * fh));
+    const c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    const g = c.getContext('2d');
+    if (!g) return null;
+    g.drawImage(bed, fx * bed.naturalWidth, fy * bed.naturalHeight, w, h, 0, 0, w, h);
+    const m = document.createElement('canvas');
+    m.width = w;
+    m.height = h;
+    const mg = m.getContext('2d');
+    if (!mg) return c;
+    mg.filter = `blur(${feather}px)`;
+    mg.fillStyle = '#fff';
+    mg.fillRect(feather, feather, w - feather * 2, h - feather * 2);
+    g.globalCompositeOperation = 'destination-in';
+    g.drawImage(m, 0, 0);
+    g.globalCompositeOperation = 'source-over';
+    return c;
+  } catch {
+    return null;
+  }
+}
 
 export default function LotusLayer({ light }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -28,30 +64,32 @@ export default function LotusLayer({ light }: Props) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let cluster: HTMLCanvasElement | null = null;
+    let crops: Crop[] = [];
+    let texAspect = 16 / 9;
     const img = new Image();
-    img.src = LOTUS_PATH;
+    img.src = RIVERBED_PATH;
     img.onload = () => {
-      const keyed = keyOutGreen(img);
-      if (!keyed) return;
-      // 邊緣預烤柔化，幀內不再糊。
-      const soft = document.createElement('canvas');
-      soft.width = keyed.width;
-      soft.height = keyed.height;
-      const sg = soft.getContext('2d');
-      if (!sg) return;
-      sg.filter = 'blur(0.6px)';
-      sg.drawImage(keyed, 0, 0);
-      cluster = soft;
-      if (reduced) draw(0);
+      if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+        texAspect = img.naturalWidth / img.naturalHeight;
+      }
+      const out: Crop[] = [];
+      for (const r of CROPS) {
+        const c = featheredCrop(img, r.fx, r.fy, r.fw, r.fh, 14);
+        if (c) out.push({ c, ...r });
+      }
+      if (out.length > 0) {
+        crops = out;
+        if (reduced) draw(0);
+      }
     };
 
     let raf = 0;
     let disposed = false;
     const t0 = performance.now();
 
+    const dprOf = () => Math.min(window.devicePixelRatio || 1, 1.5);
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP_2D);
+      const dpr = dprOf();
       canvas.width = Math.max(1, Math.floor(host.clientWidth * dpr));
       canvas.height = Math.max(1, Math.floor(host.clientHeight * dpr));
     };
@@ -60,36 +98,25 @@ export default function LotusLayer({ light }: Props) {
     ro.observe(host);
 
     const draw = (t: number) => {
-      const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP_2D);
+      const dpr = dprOf();
       const W = host.clientWidth;
       const H = host.clientHeight;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
-      if (!cluster) return;
-      // 葉不透：亮度下限保實色，只跟光走明暗，不動 alpha（曲線在 lake-light.ts）。
+      if (crops.length === 0) return;
       ctx.filter = lotusLightFilter(lightRef.current);
-      const S = Math.min(W, H);
-      CLUSTERS.forEach((C) => {
-        const size = S * C.size;
-        // 浮感跟水波紋同級（轉 0.02、漂 5px）＋2px 沉浮。
-        const sway = reduced ? 0 : Math.sin(t * 0.3 + C.phase) * 0.02;
-        const drift = reduced ? 0 : Math.sin(t * 0.23 + C.phase) * 5;
-        const bob = reduced ? 0 : Math.sin(t * 0.5 + C.phase * 1.7) * 2;
-        const cx = C.ax * W + drift;
-        const cy = C.ay * H + drift * 0.6 + bob;
-        // 接觸陰影：葉下水面壓痕（徑向漸層，無濾鏡成本）
-        const sh = ctx.createRadialGradient(cx, cy + size * 0.03, size * 0.1, cx, cy + size * 0.03, size * 0.55);
-        sh.addColorStop(0, 'rgba(0,0,0,0.32)');
-        sh.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = sh;
-        ctx.fillRect(cx - size * 0.6, cy - size * 0.5, size * 1.2, size * 1.1);
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(sway);
-        if (C.mirror) ctx.scale(-1, 1);
-        ctx.drawImage(cluster, -size / 2, -size / 2, size, size);
-        ctx.restore();
-      });
+      // 跟 LakeCanvas coverUv 同式：可視區＝中央 ± s/2
+      const sax = W / Math.max(H, 1);
+      const s = sax > texAspect ? { x: 1, y: texAspect / sax } : { x: sax / texAspect, y: 1 };
+      const ox = 0.5 - s.x / 2;
+      const oy = 0.5 - s.y / 2;
+      for (const r of crops) {
+        const dx = ((r.fx - ox) / s.x) * W + (reduced ? 0 : Math.sin(t * 0.23 + r.phase) * 3);
+        const dy = ((r.fy - oy) / s.y) * H + (reduced ? 0 : Math.cos(t * 0.19 + r.phase) * 2);
+        const dw = (r.fw / s.x) * W;
+        const dh = (r.fh / s.y) * H;
+        ctx.drawImage(r.c, dx, dy, dw, dh);
+      }
       ctx.filter = 'none';
     };
 
