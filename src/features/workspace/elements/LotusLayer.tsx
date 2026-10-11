@@ -4,7 +4,7 @@ import { lotusLightFilter } from '../core/lake-light';
 
 type Props = { light: number };
 
-// 荷葉浮層：直接從底圖 pond-01 裁荷葉區，同一張照片保證不違和。
+// 荷葉浮層：直接從底圖 pond-02 裁荷葉區，同一張照片保證不違和。
 // 蓋放位置用跟水 shader 同一套 cover 映射，靜止時像素對齊；微漂 ±3px 看起來像浮動。
 // z 在最頂（含 UI 之上），魚從葉底游過。減動畫時靜止一幀。
 const CROPS = [
