@@ -8,8 +8,8 @@ type Props = { light: number };
 // 蓋放位置用跟水 shader 同一套 cover 映射，靜止時像素對齊；微漂 ±3px 看起來像浮動。
 // z 在最頂（含 UI 之上），魚從葉底游過。減動畫時靜止一幀。
 const CROPS = [
-  { fx: 0, fy: 0, fw: 0.37, fh: 1, phase: 0 },
-  { fx: 0.71, fy: 0, fw: 0.29, fh: 1, phase: 2.1 },
+  { fx: 0, fy: 0, fw: 0.34, fh: 1, phase: 0 },
+  { fx: 0.74, fy: 0, fw: 0.26, fh: 1, phase: 2.1 },
 ];
 
 type Crop = { c: HTMLCanvasElement; fx: number; fy: number; fw: number; fh: number; phase: number };
@@ -117,6 +117,15 @@ export default function LotusLayer({ light }: Props) {
         const dh = (r.fh / s.y) * H;
         ctx.drawImage(r.c, dx, dy, dw, dh);
       }
+      // 深度調色：跟水 shader 同方向（上暗下亮），浮層才跟底同色。
+      ctx.save();
+      ctx.globalCompositeOperation = 'multiply';
+      const dg = ctx.createLinearGradient(0, 0, 0, H);
+      dg.addColorStop(0, 'rgb(158,158,158)');
+      dg.addColorStop(1, 'rgb(242,242,242)');
+      ctx.fillStyle = dg;
+      ctx.fillRect(0, 0, W, H);
+      ctx.restore();
       ctx.filter = 'none';
     };
 
