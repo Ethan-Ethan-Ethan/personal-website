@@ -3,7 +3,7 @@ import { createSchool, stepSchool, type Fish } from '../core/fish-school';
 import { FISH_SPRITES } from '../core/fish-sprites';
 import { KOI_BLACK_PATH, KOI_SHEET_PATH } from '../core/lake-assets';
 
-type Props = { tint: string; brightness: number };
+type Props = { tint: string; light: number };
 
 function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
   try {
@@ -52,13 +52,13 @@ function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
   }
 }
 
-export default function FishLayer({ tint, brightness }: Props) {
+export default function FishLayer({ tint, light }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const tintRef = useRef(tint);
   tintRef.current = tint;
-  const targetRef = useRef(brightness);
-  targetRef.current = brightness;
-  const curRef = useRef(brightness);
+  const targetRef = useRef(light);
+  targetRef.current = light;
+  const curRef = useRef(light);
   const spritesRef = useRef<{ c: HTMLCanvasElement; base: number }[]>([]);
 
   useEffect(() => {
@@ -178,7 +178,11 @@ export default function FishLayer({ tint, brightness }: Props) {
       stepSchool(fish, dt, t, livePointer, liveSplash);
       // 亮度跟時段：用小步趨近，避免切段時閃跳。
       curRef.current += (targetRef.current - curRef.current) * (1 - Math.exp(-dt * 3));
-      const dim = curRef.current;
+      const lightT = Math.min(1, Math.max(0, curRef.current));
+      // 夜暗晝亮＋夜退飽和：跟水光同曲線走。
+      const dimB = 0.45 + 0.55 * lightT;
+      const dimS = 0.7 + 0.4 * lightT;
+      const dimFilter = `brightness(${dimB.toFixed(3)}) saturate(${dimS.toFixed(3)})`;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const W = host.clientWidth;
@@ -215,7 +219,7 @@ export default function FishLayer({ tint, brightness }: Props) {
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
-          if (dim < 0.999) ctx.filter = `brightness(${dim.toFixed(3)})`;
+          ctx.filter = dimFilter;
           ctx.drawImage(
             sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
             -wid / 2, -len / 2, wid, headLen,

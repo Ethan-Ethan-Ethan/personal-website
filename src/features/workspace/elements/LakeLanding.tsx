@@ -8,13 +8,13 @@ import { PHASE_COUNT } from '../core/lake-palette';
 export default function LakeLanding() {
   const { phaseIndex, phase, goTo } = useLakePhase();
   const { playing, toggle } = useLakeAudio(phase.trackId);
-  // 魚亮度跟水光：水層蓋了 0.86 透明度，魚側調亮一點補（夜 0.76／晝 0.92）。
-  const fishBrightness = 0.68 + 0.32 * Math.min(1, Math.max(0, (phase.exposure - 0.9) / 0.2));
+  // 魚光跟水光：exposure 映射到 0..1，夜低晝高（FishLayer 內再轉亮度＋飽和）。
+  const fishLight = Math.min(1, Math.max(0, (phase.exposure - 0.88) / 0.24));
 
   return (
     <div className="lake-landing" style={{ position: 'fixed', inset: 0, overflow: 'hidden', background: '#060913' }}>
       <LakeCanvas phase={phaseIndex} />
-      <FishLayer tint={phase.sun} brightness={fishBrightness} />
+      <FishLayer tint={phase.sun} light={fishLight} />
       <LakeOverlay
         phase={phase}
         phaseIndex={phaseIndex}
