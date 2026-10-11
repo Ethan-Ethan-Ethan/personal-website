@@ -6,11 +6,11 @@ import { LAKE_PHASES } from './lake-palette';
 
 describe('lake canonical', () => {
   it('light curves stay in sane ranges', () => {
-    expect(fishLightFilter(0)).toBe('brightness(0.45) saturate(0.70)');
-    expect(fishLightFilter(1)).toBe('brightness(1.00) saturate(1.10)');
-    expect(fishLightFilter(1, 1)).toBe('brightness(1.00) saturate(1.10)');
-    expect(fishLightFilter(1, 0)).toBe('brightness(0.30) saturate(1.10)');
-    expect(spotVisibility(0)).toBeCloseTo(0.3, 2);
+    expect(fishLightFilter(0)).toBe('brightness(0.45) saturate(0.72)');
+    expect(fishLightFilter(1)).toBe('brightness(1.10) saturate(1.25)');
+    expect(fishLightFilter(1, 1)).toBe('brightness(1.10) saturate(1.25)');
+    expect(fishLightFilter(1, 0)).toBe('brightness(0.61) saturate(1.25)');
+    expect(spotVisibility(0)).toBeCloseTo(0.55, 2);
     expect(lotusLightFilter(0)).toBe('brightness(0.60) saturate(0.85)');
     expect(lotusLightFilter(1)).toBe('brightness(1.00) saturate(1.15)');
     expect(DPR_CAP_2D).toBe(1.5);
@@ -23,7 +23,7 @@ describe('lake canonical', () => {
 
   it('single asset paths', () => {
     expect(KOI_SHEET_PATH).toBe('/assets/lake/koi-mix.png');
-    expect(RIVERBED_PATH).toBe('/assets/lake/pond-02.png');
+    expect(RIVERBED_PATH).toBe('/assets/lake/pond-08.png');
     expect(RETIRED_ASSETS).toEqual([]);
   });
 

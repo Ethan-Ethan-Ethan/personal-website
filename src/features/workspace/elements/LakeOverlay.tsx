@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
+import SplitText from '../../../components/reactbits/SplitText';
+import '../../../components/reactbits/SplitText.css';
 
 const SERIF = 'Georgia, "Times New Roman", "Noto Serif TC", serif';
 const INK = '#f5f1e6';
@@ -24,6 +26,11 @@ function useLocalTime(): string {
 
 export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, trackPlaying, onTogglePlay }: Props) {
   const time = useLocalTime();
+  // 動態偏好：使用者開了「減少動態」→ 場景名用靜態字（不播逐字動畫）。
+  const [reducedMotion, setReducedMotion] = useState(false);
+  useEffect(() => {
+    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
   // 連結落點沿用站內既有路由（About→履歷，Selected work→交易實驗室）；可改名。
   // 白噪音現場合成，無檔案無授權問題，播放鍵恆可按。
   const tiny: React.CSSProperties = { fontFamily: SERIF, fontSize: 11, letterSpacing: '0.08em', color: INK, textShadow: '0 1px 8px rgba(0,0,0,0.65)' };
@@ -31,7 +38,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
 
   return (
     <div className="lake-overlay" aria-hidden="false" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2 }}>
-      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}`}</style>
+      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}`}</style>
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
@@ -44,7 +51,23 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       </div>
 
       <div key={phase.id} className="fadein" style={{ position: 'absolute', left: 24, bottom: 24 }}>
-        <div style={{ ...tiny, fontSize: 15 }}>{phase.name}</div>
+        <div style={{ ...tiny, fontSize: 15 }}>
+          {reducedMotion ? (
+            phase.name
+          ) : (
+            <SplitText
+              text={phase.name}
+              tag="p"
+              textAlign="left"
+              splitType="chars"
+              delay={30}
+              duration={0.9}
+              ease="power2.out"
+              from={{ opacity: 0, y: 14 }}
+              to={{ opacity: 1, y: 0 }}
+            />
+          )}
+        </div>
         <div style={{ ...tiny, opacity: 0.75 }}>{phase.sub}</div>
       </div>
 
@@ -62,7 +85,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
                 background: 'transparent', border: 'none', cursor: 'pointer', pointerEvents: 'auto',
               }}
             >
-              <span style={{ width: i === phaseIndex ? 14 : 5, height: 5, borderRadius: 3, background: INK, opacity: i === phaseIndex ? 1 : 0.45 }} />
+              <span className="dot" style={{ width: i === phaseIndex ? 14 : 5, height: 5, borderRadius: 3, background: INK, opacity: i === phaseIndex ? 1 : 0.45 }} />
             </button>
           ))}
         </div>
@@ -73,9 +96,10 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
           aria-label={trackPlaying ? '暫停水聲' : '播放水聲'}
           title={trackPlaying ? '暫停水聲' : '播放水聲'}
           style={{
-            width: 30, height: 30, borderRadius: '50%', border: `1px solid ${INK}`,
-            background: trackPlaying ? 'rgba(245,241,230,0.18)' : 'transparent',
-            color: INK, fontSize: 11, cursor: 'pointer', pointerEvents: 'auto',
+            width: 36, height: 36, borderRadius: '50%', border: `1.5px solid ${INK}`,
+            background: trackPlaying ? 'rgba(245,241,230,0.18)' : 'rgba(0,0,0,0.30)',
+            color: INK, fontSize: 13, cursor: 'pointer', pointerEvents: 'auto',
+            textShadow: '0 1px 6px rgba(0,0,0,0.8)',
           }}
         >
           {trackPlaying ? '❚❚' : '▶'}

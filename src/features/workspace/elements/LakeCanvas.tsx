@@ -106,12 +106,12 @@ export default function LakeCanvas({ phase }: Props) {
               float grow=clamp((r.w-0.22)/0.9,0.0,1.0);
               float R=mix(420.0,150.0,grow);
               float K=mix(100.0,70.0,grow);
-              float ring=amp*exp(-d*d*R)*sin(d*K-age*9.0);
-              // 方向性明暗：朝光面亮、背光面暗，随 uSunPos（時段）走。
+              float ring=amp*exp(-d*d*R)*sin(d*K-age*9.0+3.14159);
+              // 方向性明暗（俯視日光：只留一點朝向感，不做點光源明暗）。
               vec2 toFrag=(uv-r.xy)/max(d,1e-3);
               vec2 toLight=uSunPos-r.xy;
               float dl=dot(toFrag,toLight/max(length(toLight),1e-3));
-              w+=ring*(0.7+0.8*dl);
+              w+=ring*(0.9+0.25*dl);
               refr+=(uv-r.xy)*ring*0.035;
             }
             vec2 bedUv=coverUv(uv)+(vec2(n,detail)-0.5)*0.010+refr;
@@ -122,9 +122,10 @@ export default function LakeCanvas({ phase }: Props) {
             vec3 col=bed*(0.55+0.45*uExposure);
             col=mix(col,col*uSun+uWaterB*0.15,0.35);
             col=mix(col,uWaterB,depth*0.45);
-            float streak=exp(-pow((uv.x-uSunPos.x)*6.0,2.0))*(0.35+0.65*uv.y);
+            // 俯視日光：右亮左柔的方向漸層（右→左），亮度跟底圖走，不再是聚光柱。
+            float streak=(0.55+0.45*uv.x)*(0.70+0.30*uv.y);
             col+=uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
-            col+=uSun*w*0.7*uGlint;
+            col+=uSun*w*1.0*uGlint;
             col*=uExposure;
             gl_FragColor=vec4(col,1.0);
           }
@@ -220,7 +221,7 @@ export default function LakeCanvas({ phase }: Props) {
           (event.clientX - rect.left) / Math.max(rect.width, 1),
           1 - (event.clientY - rect.top) / Math.max(rect.height, 1),
           now,
-          1.1,
+          1.3,
         );
       };
       document.addEventListener('visibilitychange', onVisibility);

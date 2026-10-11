@@ -1,0 +1,14 @@
+/**
+ * SplitText companion CSS（本地撰寫，非上游 verbatim：上游 TS-CSS 目錄僅含 .tsx，版式由 inline style 承載）。
+ * 此檔僅定義 GSAP 切分產生的 class hooks，供站內 palette／排版覆寫用；預設行為與上游一致。
+ */
+.split-parent {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.split-line,
+.split-word,
+.split-char {
+  will-change: transform, opacity;
+}

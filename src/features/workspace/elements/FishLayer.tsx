@@ -3,11 +3,11 @@ import { createSchool, stepSchool, type Fish } from '../core/fish-school';
 import { FISH_SPRITES } from '../core/fish-sprites';
 import { KOI_SHEET_PATH } from '../core/lake-assets';
 import { keyOutGreen } from '../core/green-key';
-import { DPR_CAP_2D, fishLightFilter, lotusLightFilter, spotVisibility } from '../core/lake-light';
+import { DPR_CAP_2D, fishLightFilter } from '../core/lake-light';
 
-type Props = { tint: string; light: number; sunX: number; sunGlow: number };
+type Props = { tint: string; light: number; sunX: number; sunGlow: number; water?: string };
 
-export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
+export default function FishLayer({ tint, light, sunX, sunGlow, water }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const tintRef = useRef(tint);
   tintRef.current = tint;
@@ -19,6 +19,32 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
   const sunGlowRef = useRef(sunGlow);
   sunGlowRef.current = sunGlow;
   const spritesRef = useRef<{ c: HTMLCanvasElement; base: number }[]>([]);
+  // 未調色原片（水色罩只在切時段重烤一回，幀內零成本）。
+  const masterRef = useRef<{ c: HTMLCanvasElement; base: number }[]>([]);
+  const lastWashRef = useRef<string | undefined>(undefined);
+  const waterRef = useRef(water);
+  waterRef.current = water;
+  // 水色罩：往當段深水色靠 6%（只跟色調不壓暗），只染魚身不染透明區（source-atop）。
+  const washSprites = (color: string | undefined) => {
+    const masters = masterRef.current;
+    if (!color) {
+      spritesRef.current = masters;
+      return;
+    }
+    spritesRef.current = masters.map(({ c, base }) => {
+      const t = document.createElement('canvas');
+      t.width = c.width;
+      t.height = c.height;
+      const g = t.getContext('2d');
+      if (!g) return { c, base };
+      g.drawImage(c, 0, 0);
+      g.globalCompositeOperation = 'source-atop';
+      g.globalAlpha = 0.06;
+      g.fillStyle = color;
+      g.fillRect(0, 0, t.width, t.height);
+      return { c: t, base };
+    });
+  };
 
   useEffect(() => {
     const host = hostRef.current;
@@ -66,18 +92,23 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
         out.push({ c, base });
       }
       // 水下柔邊預烤：blur 只付一次，幀內不再糊。
+      // 底色提亮（2026-10-11：底圖換亮，魚片按舊暗底調的，直接提 25%＋5% 飽和跟上亮底）。
       for (let i = 0; i < out.length; i++) {
         const src = out[i].c;
         const soft = document.createElement('canvas');
         soft.width = src.width;
         soft.height = src.height;
-        const sg = soft.getContext('2d');
-        if (!sg) continue;
-        sg.filter = 'blur(0.8px)';
-        sg.drawImage(src, 0, 0);
+        const sg2 = soft.getContext('2d');
+        if (!sg2) continue;
+        sg2.filter = 'blur(0.8px) brightness(1.25) saturate(1.05)';
+        sg2.drawImage(src, 0, 0);
         out[i] = { c: soft, base: out[i].base };
       }
-      if (out.length > 0) spritesRef.current = out;
+      if (out.length > 0) {
+        masterRef.current = out;
+        washSprites(waterRef.current);
+        lastWashRef.current = waterRef.current;
+      }
     };
     let pointer: { x: number; y: number; at: number } | null = null;
     let splash: { x: number; y: number; t0: number } | null = null;
@@ -140,7 +171,11 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
       // 亮度跟時段：用小步趨近，避免切段時閃跳（曲線見 lake-light.ts）。
       curRef.current += (targetRef.current - curRef.current) * (1 - Math.exp(-dt * 3));
       const lightT = Math.min(1, Math.max(0, curRef.current));
-      const sx = sunXRef.current;
+      // 切時段換水色：重烤一次調色片（平時比字串就好，零成本）。
+      if (lastWashRef.current !== waterRef.current) {
+        washSprites(waterRef.current);
+        lastWashRef.current = waterRef.current;
+      }
       const sg = sunGlowRef.current;
 
       const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP_2D);
@@ -151,7 +186,8 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
       const L = Math.min(W, H) * 0.05;
       const frac = (n: number) => n - Math.floor(n);
       const sprites = spritesRef.current;
-      for (const f of fish) {
+      for (let fi = 0; fi < fish.length; fi++) {
+        const f = fish[fi];
         const x = f.x * W;
         const y = f.y * H;
         const heading = Math.atan2(f.vy, f.vx);
@@ -159,9 +195,12 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
         if (sprites.length > 0) {
           // 頭定住＋尾段繞關節轉：關節錨定（非居中），尾源向上多取 3% 蓋住接縫。
           // 五色輪流（橘／白／墨斑／紅白／金），第 4 條載入時已翻正。
-          const sp = sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
+          const sp = fi === 0 && sprites.length > 3
+            ? sprites[3]
+            : sprites[Math.abs(Math.floor(f.seed)) % sprites.length];
           const vi = Math.abs(Math.floor(f.seed * 7)) % 4;
-          const scale = [0.85, 1.0, 1.15, 1.3][vi];
+          // 魚王：第 0 條 2.6 倍（其他最大 1.3 的兩倍），其餘照舊 0.85–1.3。
+          const scale = fi === 0 ? 2.6 : [0.85, 1.0, 1.15, 1.3][vi];
           const breathe = 1 + 0.02 * Math.sin(t * 3 + f.seed);
           const len = L * 1.75 * breathe * scale;
           const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
@@ -171,16 +210,17 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
           const headFrac = 0.8;
           const headLen = len * headFrac;
           const tailLen = len - headLen;
-          const overlap = len * 0.03;
-          const srcOverlap = 0.03;
+          // 接縫重疊 6%：尾擺最大約 15° 時外側掀開約 4.5% 身長，3% 會露縫；
+          // 9% 雙層疊出灰環，6% 是中線（2026-10-11 用戶目擊灰圈後收斂）。
+          const overlap = len * 0.06;
+          const srcOverlap = 0.06;
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
-          // 位置光：游進太陽倒影帶就被照亮（跟水面同一條 streak 公式，曲線在 lake-light.ts）。
-          const streak = Math.exp(-Math.pow((f.x - sx) * 6, 2)) * (0.35 + 0.65 * (1 - f.y));
-          // 可見度走透明度（iOS Safari 不吃 ctx.filter，亮度濾鏡會被整組忽略）
-          const vis = spotVisibility(streak * sg);
-          ctx.globalAlpha = 0.93 * Math.pow(vis, 1.5);
+          // 位置光：跟水面同方向（右亮左柔），俯視無遮擋。
+          const streak = (0.55 + 0.45 * f.x) * (0.7 + 0.3 * (1 - f.y));
+          // 不透明：全程 alpha 1，夜間只靠亮度濾鏡壓暗（iOS 無濾鏡會偏亮，已告知）。
+          ctx.globalAlpha = 1;
           ctx.filter = fishLightFilter(lightT, streak * sg);
           if (Math.abs(tailWag) < 0.02) {
             // 尾巴近直：單筆整貼，省一次變換＋一次 blit。

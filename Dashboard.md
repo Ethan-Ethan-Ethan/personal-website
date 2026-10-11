@@ -3,7 +3,7 @@ type: dashboard
 project: personal-website
 status: active
 created: 2026-08-27
-updated: 2026-09-06
+updated: 2026-10-11
 tags:
   - project/personal-website
 ---
@@ -117,6 +117,25 @@ npm run dev          # 或 astro dev --background
 - 任何推送到 `main` → GitHub Actions `deploy.yml` → `astro build` → Cloudflare Pages。
 - 未推送前不會上線；可用 `npm run preview` 本地預覽 build 結果。
 
+## 外部參考/開源來源（2026-10-11 建立，唯一記錄正本）
+
+> 規則：本站引用的外部開源/服務逐項登記於此（名稱｜版本/方案｜用途｜授權/費用）。完整盤點見 `memory/explore/2026-10-11-personal-website-external-oss-inventory.md`；ReactBits 評估見 `plan/reactbits-personal-website-eval.md`。
+> 依賴政策認領（2026-10-11）：本表即本站的第三方依賴登記，認領自開源專案自動評估《第三方依賴政策》v1.0（正本不複製，全文以該檔為準）。新增依賴須記：上游 URL＋版本/pin＋檢索日期＋使用範圍＋SHA256（上游無雜湊則自驗註明）；LICENSE 全文旁載（ReactBits 見下 pin 行）；未知授權＝拒絕。跨專案推廣（其餘 23 MISSING 專案）逐專案另批，不在本表批量代決。
+
+| 名稱 | 版本/方案 | 用途 | 授權/費用 |
+|---|---|---|---|
+| Astro／@astrojs/react／React 19／Tailwind v4 | ^7.0.7／^6.0.5／^19.2.8／^4.3.2 | SSG 框架＋islands＋樣式 | MIT（免費） |
+| GSAP／@gsap/react | ^3.15.0／^2.1.2（後者 2026-10-11 新增） | 動畫引擎＋useGSAP | GSAP 標準授權（非 OSI，免費可用） |
+| three.js | ^0.185.1 | 星空/星雲 WebGL | MIT |
+| lightweight-charts | ^5.2.0 | K 線圖（v5 API） | Apache-2.0 |
+| ReactBits 免費庫（SplitText TS-CSS 手抄） | DavidHDev/react-bits（blob 3255e56） | 文字動畫試點 | MIT＋Commons Clause（商用 OK，禁販售/再分發元件） |
+| ReactBits pin（政策 §2） | 上游 https://github.com/DavidHDev/react-bits／檢索 2026-10-11／範圍：試點未掛真頁／SHA256 自驗：tsx `1b93617…c4bb5a4`＋css `352234f…a011a6f`（全值見處理日誌行） | — | LICENSE 旁載：上游 LICENSE.md（MIT+Commons Clause），本地未改動 |
+| Google Fonts（Inter＋Source Serif 4） | CDN | 字體 | OFL（免費） |
+| Cloudflare Pages／Access（50人） | 免費層 | 託管＋/protected 保護 | 免費（免綁卡） |
+| DigitalPlat FreeDomain（ethanyang.dpdns.org） | 免費 | 網域（~150 天手動續，見 #5 專區） | 免費（需續簽） |
+| dembrandt-skills（41 技能） | GitHub 開源 | #9 樣式優化 | MIT |
+| GitHub Actions／Decap CMS（已放棄）／TinaCMS（候選） | — | CI／歷史 CMS／候選 | 免費開源（見代辦 #1/#2） |
+
 ## 快速連結
 - 專案主頁：[[01-Personal Website]]
 - 重建計畫：[[網站重建計畫 2026]]
@@ -124,6 +143,28 @@ npm run dev          # 或 astro dev --background
 - 踩坑紀錄：[[04-踩坑紀錄]]
 
 ## 處理日誌
+- 2026-10-11：水道換彩色石頭 pond-08（Agnes 2.5-flash：灰白橘紅炭多色卵石＋兩邊密葉＋左一花；正本＋守門已切，154/154＋build 860 頁；ego 黎明實拍多色石＋紅白魚王居中＋播放鍵在框；pond-06/07 留檔可回滾；預覽 :4338 續開，手機 http://192.168.0.196:4338）。
+- 2026-10-11：ego 看不到播放器＝分頁停在已關的舊位址，已重導到 :4338 活頁並交還（按鈕在 1380,840 框內實錘）；手機測試：預覽已綁 0.0.0.0，同 Wi-Fi 開 http://192.168.0.196:4338（服務留著別關）。
+- 2026-10-11：魚去灰＋不透明＋魚王換橘白（水色罩 12%→6%、透明度全程 1、魚王指定第 4 片紅白；154/154＋build 860 頁；ego 實拍紅白魚王居中、魚群實心；預覽 :4338 留著）。
+- 2026-10-11：魚王上線（第 0 條 2.6 倍＝其他最大 1.3 的兩倍；154/154＋build 860 頁；ego 實拍白色大魚王巡游；預覽 :4338 留著）。
+- 2026-10-11：水花縮小＋魚加飽和＋水花先亮（點擊 1.6→1.3、飽和頂端 1.15→1.25、波紋相位反轉先亮後暗；154/154＋build 860 頁；ego 實拍水花亮白一團、魚色濃；預覽 :4338 留著）。
+- 2026-10-11：點水反應調強（`LakeCanvas.tsx`：點擊力度 1.1→1.6、波紋亮度 0.7→1.0；154/154＋build 860 頁；ego 實拍：點下去有光圈＋魚散開；預覽服務 :4338 留著給你玩）。
+- 2026-10-11：陰影拿掉＋最強光加亮（接觸陰影整段刪除；亮度曲線頂端 1.00→1.10、飽和 1.10→1.15，夜間幾乎不動；守門期望同步；154/154＋build 860 頁；ego 正午實拍金魚亮眼、紅魚飽和）。
+- 2026-10-11：魚陰影加深到看得見（alpha 0.16→0.28，影幅維持身內；154/154＋build 860 頁；ego 黎明實拍：中間白魚身下有影，魚沉進水裡）。
+- 2026-10-11：魚提亮跟亮底（`FishLayer.tsx`：原片預烤提亮 25%＋5% 飽和、水色罩 22%→12% 只跟色不壓暗；154/154＋build 860 頁；ego 正午魚身亮白融入、黃昏整片橘魚跟著橘）。
+- 2026-10-11：四件齊修（光改右→左方向漸層＋魚位置光同步；魚尾接縫 9%→6%＋陰影收進身內，灰圈消除；播放鍵放大加對比，未播時也有底色；pond-05 已進垃圾桶，只剩 koi-mix＋pond-06；154/154＋build 860 頁；ego 實拍右亮左柔、播放鍵清楚、魚身完整）。
+- 2026-10-11：無光斑底圖 pond-06 上線（Agnes 2.5-flash：均勻日光、無光柱、左葉一花；魚尾接縫 3%→9%，轉彎不再露縫；正本＋守門已切，154/154＋build 860 頁；ego 雙拍魚身完整；pond-05 留檔可秒回滾）。
+- 2026-10-11：魚加接觸陰影（`FishLayer.tsx`：魚身下先壓水色暗影＋6px 柔邊，沉進水裡；154/154＋build 860 頁；ego 三連拍：魚群完整，未抓到明確斷裂，右側一處疑似兩魚重疊待你指認）。
+- 2026-10-11：光源改俯視日光（`LakeCanvas.tsx`：光柱高斯 6.0→1.4 攤成寬日光、漣漪方向明暗 0.7+0.8→0.9+0.25；`FishLayer.tsx` 魚位置光同步攤寬；154/154＋build 860 頁；ego 正午＋黃昏雙拍：無手電筒光柱、魚群全幅分布、黃昏整片暖橘融合）。
+- 2026-10-11：魚半透明修（光帶外只壓暗不隱形：spot 下限 0.3→0.55、透明度下限 0.15→0.83；守門期望同步；154/154＋build 860 頁；ego 正午實拍整群魚清楚在游；舊底圖 pond-02/03/04 已進垃圾桶，只剩 koi-mix＋pond-05）。
+- 2026-10-11：底圖換正俯視 pond-05（Agnes 2.5-flash：平視角、無地平線無岸、亮石＋左葉一花＋中央全空；對齊魚的俯視角；正本＋守門已切，154/154＋build 860 頁；ego 正午實拍魚在空水上游動；pond-02/03/04 留檔待你點頭再刪）。
+- 2026-10-11：魚跟光融合修（`FishLayer.tsx`＋`LakeLanding.tsx`：魚身罩當段深水色 22%，切時段重烤一回；正午魚身明顯融進暖水、深夜自然隱沒；154/154＋build 860 頁；ego 正午/深夜雙拍確認）。
+- 2026-10-11：河底換亮底圖 pond-03（Agnes 2.5-flash，2K 16:9：亮鵝卵石＋中央光道＋左右荷葉＋左一花＋無魚；光道對齊站內太陽倒影公式；正本 `lake-assets.ts`＋守門測試已切，154/154＋build 860 頁；ego 實拍魚群正常游動；pond-02 留檔待你點頭再刪）。
+- 2026-10-11：桌面小窗開關動畫先凍結（使用者指示主頁先不用：4 檔改動已 `git stash` 收起 `WIP-desktop-window-anim-parked-20261011`，可恢復；源樹已還原，154/154 綠）。重心轉河流設計。
+- 2026-10-11：桌面小窗開關動畫（`WorkspaceDesktop.tsx`＋`WorkspaceWindows.tsx`＋`windows.css`：開窗淡入＋縮放 0.25s；關窗先播 0.22s 收尾再真正關，0.24s 內重開取消；減少動態者直接開關無等待；vitest 154/154（關窗測試改兩段式）＋build 860 頁；ego 實測：開窗 90ms 半透明、關窗 110ms 掛收尾中、600ms 後移除；臨時頁已進垃圾桶）。
+- 2026-10-11：湖面場景名換逐字浮現（`LakeOverlay.tsx` 接 SplitText：每字 30ms 錯開、0.9 秒由下浮上；開了減少動態者顯示靜態字；vitest 154/154＋build 860 頁；ego 截圖確認「First Light」正常顯示、錦鯉荷花正常、第一顆圓點已拉長）。
+- 2026-10-11：湖面 B3 dots 轉場一行修（`LakeOverlay.tsx`：dot 加 `transition:width/opacity .3s`＋reduced-motion 關閉；vitest 154/154＋astro build 860 頁）。切換點盤點：硬切 TOP5＝A1 視窗開關／A7 內容切換／A6 popover／B3 dots（已修）／C1 列表→內文；A 類前提切回 Workspace（現 hero 為湖面），詳 `memory/explore/2026-10-11-personal-website-transition-switch-points.md`。
+- 2026-10-11：建立「外部參考/開源來源」章節（全站 27 專案審計：僅開源專案自動評估有明文記錄規則，23 專案 MISSING，本站補上；詳 `memory/explore/2026-10-11-project-external-source-rule-audit.md`）。同日 ReactBits SplitText-TS-CSS 手抄入庫＋@gsap/react 已裝（esbuild PASS、astro build 861 頁 PASS、palette 零 hex）；隔離驗證臨時頁 `rb-verify-temp.astro` 已由使用者刪除（源樹確認乾淨），待落點（hero vs 卡片）後掛真頁＋跑全鏈 verify。
 - 2026-09-06：螢幕小方框 Preview 第一階段完成 — 頂部 brand 與四個常駐文字卡片已隱藏；新增 icon-only monitor hotspots、底部 controls、共享 HTML popover 與 scene-relative SVG guide。Preview state 已與 global scene/window command bus 解耦，URL、dialog、星空、玩偶與披風不受 hover/tap 影響。驗證：119 unit PASS、54 E2E PASS／28 expected skip、contracts PASS、artifact build 860 pages、三組 reviewer 最終 0 Critical／0 Important。`npm run verify` 最後仍被既有 public projection source drift 阻擋，未越權同步。下一步只做 localhost 人工構圖確認；實際連結 deferred。
 - 2026-09-06：Responsive 假通過修正 — 找到 660px fine-pointer 窄桌機同時混用 Desktop CSS、Mobile React modal 與 Mobile foreground 的根因。CSS、React `matchMedia`、拖曳／resize 判斷、`<picture>` source 與 unit fixture 已統一成同一 capability query；新增 660px fine/coarse runtime 回歸。Fresh evidence：100 unit PASS、42 E2E PASS／20 expected skip、contracts PASS、860 pages build、reviewer 0 findings。披風尚未實作，下一步先做 Desktop／Mobile 真實 Alpha 靜態預覽。
 - 2026-09-06：Cozy Galaxy 現況更新 — 房間清晰度、window aperture、computer foreground 景深、流星固定右上→左下與左側細頭已完成自動驗證；目前進入玩偶披風微動畫設計。使用者確認 Desktop／Tablet／Mobile 一起做；既有 `.scarf-tail` 僅為漸層，後續改接真實披風 Alpha 三段 rig。Public projection 仍有 `trading-automation.updatedAt` drift，未在本視覺任務中越權同步。
