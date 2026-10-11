@@ -37,7 +37,7 @@ describe('fish school', () => {
       for (const f of s) {
         expect(f.x).toBeGreaterThanOrEqual(0);
         expect(f.x).toBeLessThanOrEqual(1);
-        expect(Math.hypot(f.vx, f.vy)).toBeLessThanOrEqual(0.2);
+        expect(Math.hypot(f.vx, f.vy)).toBeLessThanOrEqual(0.3);
       }
     }
   });

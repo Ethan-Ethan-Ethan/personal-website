@@ -1,12 +1,12 @@
 // 魚群純邏輯（無 DOM，可測）：座標正規化 0..1，y 軸向下（2D canvas 系）。
-export type Fish = { x: number; y: number; vx: number; vy: number; seed: number; boost: number };
+export type Fish = { x: number; y: number; vx: number; vy: number; seed: number; boost: number; tail: number; next: number };
 export type Pointer = { x: number; y: number };
 export type Scatter = { x: number; y: number; age: number };
 
 export const FISH_COUNT = 8;
 const ATTRACT_R = 0.28;
 const MIN_DIST = 0.035;
-const MAX_SPEED = 0.055;
+const MAX_SPEED = 0.085;
 const SCATTER_R = 0.3;
 
 export function createSchool(count: number = FISH_COUNT, rand: () => number = Math.random): Fish[] {
@@ -20,6 +20,8 @@ export function createSchool(count: number = FISH_COUNT, rand: () => number = Ma
       vy: Math.sin(a) * MAX_SPEED * 0.5,
       seed: rand() * 100,
       boost: 0,
+      tail: rand() * Math.PI * 2,
+      next: 1 + rand() * 3,
     });
   }
   return out;
@@ -31,6 +33,7 @@ export function stepSchool(
   t: number,
   pointer: Pointer | null,
   scatter: Scatter | null,
+  rand: () => number = Math.random,
 ): void {
   let cx = 0;
   let cy = 0;
@@ -42,8 +45,8 @@ export function stepSchool(
   cy /= Math.max(fish.length, 1);
 
   for (const f of fish) {
-    let ax = Math.sin(t * 0.7 + f.seed) * 0.008;
-    let ay = Math.cos(t * 0.5 + f.seed * 1.7) * 0.008;
+    let ax = Math.sin(t * 0.7 + f.seed) * 0.012;
+    let ay = Math.cos(t * 0.5 + f.seed * 1.7) * 0.012;
     // 鬆散跟群＋互斥（不疊在一起）
     ax += (cx - f.x) * 0.06;
     ay += (cy - f.y) * 0.06;
@@ -86,6 +89,21 @@ export function stepSchool(
       f.vx = (f.vx / sp) * cap;
       f.vy = (f.vy / sp) * cap;
     }
+    // 忽快忽慢：順著當前面向 burst 一下，再滑行
+    f.next -= dt;
+    if (f.next <= 0) {
+      f.next = 1.5 + rand() * 3.5;
+      const hd = Math.atan2(f.vy, f.vx);
+      f.vx += Math.cos(hd) * 0.045;
+      f.vy += Math.sin(hd) * 0.045;
+      const sp2 = Math.hypot(f.vx, f.vy);
+      if (sp2 > cap && sp2 > 1e-6) {
+        f.vx = (f.vx / sp2) * cap;
+        f.vy = (f.vy / sp2) * cap;
+      }
+    }
+    // 擺尾跟速度：游得快擺得快
+    f.tail += dt * (5 + Math.min(Math.hypot(f.vx, f.vy), 0.12) * 130);
     f.x += f.vx * dt;
     f.y += f.vy * dt;
     // 軟邊界轉向

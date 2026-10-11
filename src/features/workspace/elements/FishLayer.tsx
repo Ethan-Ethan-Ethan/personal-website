@@ -197,7 +197,8 @@ export default function FishLayer({ tint, light }: Props) {
           const len = L * 1.75 * breathe * scale;
           const wid = len * (sp.c.width / Math.max(sp.c.height, 1));
           const bodySway = 0;
-          const tailWag = Math.sin(t * 9 + f.seed + Math.PI * 0.7) * 0.22;
+          const swim = Math.min(Math.hypot(f.vx, f.vy) / 0.09, 1);
+          const tailWag = Math.sin(f.tail + f.seed) * (0.1 + swim * 0.16);
           const headFrac = 0.8;
           const headLen = len * headFrac;
           const tailLen = len - headLen;
