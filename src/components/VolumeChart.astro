@@ -35,43 +35,77 @@ const dataAttr = typeof data === 'string' ? data : JSON.stringify(data);
 <script>
   import { createChart, CandlestickSeries, HistogramSeries } from 'lightweight-charts';
 
+  function themeColors() {
+    // 單一來源：讀 data-theme 下的 CSS var（深/淺由全域 token 定義，此處零硬編碼色）。
+    const css = getComputedStyle(document.documentElement);
+    const pick = (name: string, fallback: string) => css.getPropertyValue(name).trim() || fallback;
+    return {
+      bg: pick('--color-bg', '#11110f'),
+      text: pick('--color-muted', '#b9b3a5'),
+      line: pick('--color-line', '#37372f'),
+      green: pick('--color-green', '#88b56b'),
+      red: pick('--color-red', '#c46f5a'),
+      blue: pick('--color-blue', '#76a7bd'),
+    };
+  }
+
+  function chartOptions(c: ReturnType<typeof themeColors>) {
+    return {
+      layout: {
+        background: { color: c.bg },
+        textColor: c.text,
+        fontFamily: 'Inter, sans-serif',
+      },
+      grid: {
+        vertLines: { color: c.line },
+        horzLines: { color: c.line },
+      },
+      crosshair: {
+        mode: 0,
+        vertLine: { color: c.green, labelBackgroundColor: c.green },
+        horzLine: { color: c.green, labelBackgroundColor: c.green },
+      },
+      rightPriceScale: { borderColor: c.line },
+      timeScale: { borderColor: c.line, timeVisible: true },
+    };
+  }
+
   function initVolumeChart(el: HTMLElement) {
     const raw = el.dataset.data;
     if (!raw) return;
 
-    const chart = createChart(el, {
-      layout: {
-        background: { color: '#1b1b18' },
-        textColor: '#b9b3a5',
-        fontFamily: 'Inter, sans-serif',
-      },
-      grid: {
-        vertLines: { color: '#37372f' },
-        horzLines: { color: '#37372f' },
-      },
-      crosshair: {
-        mode: 0,
-        vertLine: { color: '#88b56b', labelBackgroundColor: '#88b56b' },
-        horzLine: { color: '#88b56b', labelBackgroundColor: '#88b56b' },
-      },
-      rightPriceScale: { borderColor: '#37372f' },
-      timeScale: { borderColor: '#37372f', timeVisible: true },
-    });
+    const c = themeColors();
+    const chart = createChart(el, chartOptions(c));
 
     const candlestickSeries = chart.addSeries(CandlestickSeries, {
-      upColor: '#88b56b',
-      downColor: '#c46f5a',
-      borderUpColor: '#88b56b',
-      borderDownColor: '#c46f5a',
-      wickUpColor: '#88b56b',
-      wickDownColor: '#c46f5a',
+      upColor: c.green,
+      downColor: c.red,
+      borderUpColor: c.green,
+      borderDownColor: c.red,
+      wickUpColor: c.green,
+      wickDownColor: c.red,
     });
 
     const volumeSeries = chart.addSeries(HistogramSeries, {
-      color: '#76a7bd',
+      color: c.blue,
       priceFormat: { type: 'volume' },
       priceScaleId: 'volume',
     });
+    // 主題切換跟著走：data-theme 變就重讀 var 重上色（系列色重建，最穩）。
+    const retheme = () => {
+      const n = themeColors();
+      chart.applyOptions(chartOptions(n));
+      candlestickSeries.applyOptions({
+        upColor: n.green, downColor: n.red,
+        borderUpColor: n.green, borderDownColor: n.red,
+        wickUpColor: n.green, wickDownColor: n.red,
+      });
+      volumeSeries.applyOptions({ color: n.blue });
+    };
+    const themeObserver = new MutationObserver((mutations) => {
+      if (mutations.some((m) => m.attributeName === 'data-theme')) retheme();
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     chart.priceScale('volume').applyOptions({
       scaleMargins: { top: 0.85, bottom: 0 },
