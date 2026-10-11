@@ -71,7 +71,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         <div style={{ ...tiny, opacity: 0.75 }}>{phase.sub}</div>
       </div>
 
-      <div style={{ position: 'absolute', right: 24, bottom: 24, display: 'flex', gap: 10, alignItems: 'center' }}>
+      <div style={{ position: 'absolute', right: 24, bottom: 24, display: 'flex', gap: 10, alignItems: 'center', background: 'rgba(0,0,0,0.35)', borderRadius: 999, padding: '6px 12px', pointerEvents: 'none' }}>
         <div role="group" aria-label="時段選擇" style={{ display: 'flex', gap: 4 }}>
           {Array.from({ length: phaseCount }, (_, i) => (
             <button
@@ -85,7 +85,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
                 background: 'transparent', border: 'none', cursor: 'pointer', pointerEvents: 'auto',
               }}
             >
-              <span className="dot" style={{ width: i === phaseIndex ? 14 : 5, height: 5, borderRadius: 3, background: INK, opacity: i === phaseIndex ? 1 : 0.45 }} />
+              <span className="dot" style={{ width: i === phaseIndex ? 14 : 5, height: 5, borderRadius: 3, background: INK, opacity: i === phaseIndex ? 1 : 0.65, boxShadow: '0 1px 4px rgba(0,0,0,0.7)' }} />
             </button>
           ))}
         </div>

@@ -94,9 +94,9 @@ export default function LakeCanvas({ phase }: Props) {
           void main(){
             // 河床照片＋水層：床靜止，水紋往屏幕下方流；時段管水光。
             vec2 uv=vUv;
-            vec2 flowUv=uv+vec2(0.0,uTime*0.030);
-            float n=fbm(flowUv*vec2(6.0,14.0)+vec2(uTime*0.05,uTime*0.12));
-            float detail=fbm(flowUv*vec2(26.0,44.0)+vec2(-uTime*0.09,uTime*0.22));
+            vec2 flowUv=uv+vec2(0.0,uTime*0.050);
+            float n=fbm(flowUv*vec2(6.0,14.0)+vec2(uTime*0.08,uTime*0.19));
+            float detail=fbm(flowUv*vec2(26.0,44.0)+vec2(-uTime*0.14,uTime*0.35));
             float w=0.0; vec2 refr=vec2(0.0);
             for(int i=0;i<8;i++){
               vec4 r=uRipples[i];
@@ -120,12 +120,13 @@ export default function LakeCanvas({ phase }: Props) {
             vec3 procBase=mix(uWaterA,uWaterB,pow(uv.y,0.7));
             vec3 bed=mix(procBase,bedTex,uUseBed);
             float depth=smoothstep(0.0,1.0,uv.y);
-            vec3 col=bed*(0.55+0.45*uExposure);
+            vec3 col=bed*(0.62+0.43*uExposure);
             col=mix(col,col*uSun+uWaterB*0.15,0.35);
-            col=mix(col,uWaterB,depth*0.45);
+            col=mix(col,uWaterB,depth*0.32);
             // 俯視日光：右亮左柔的方向漸層（右→左），亮度跟底圖走，不再是聚光柱。
             float streak=(0.55+0.45*uv.x)*(0.70+0.30*uv.y);
-            col+=uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
+            // 染色水光：散光染一半水色（2026-10-12 煙感來自非彩色白霧；muse 共議 S1，0.5 起跳）。
+            col+=mix(uSun,uWaterB,0.5)*streak*(0.08+0.18*n+0.14*detail)*uGlint;
             col+=uSun*w*1.0*uGlint;
             col*=uExposure;
             gl_FragColor=vec4(col,1.0);
