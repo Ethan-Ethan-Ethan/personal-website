@@ -1,6 +1,7 @@
-// 綠幕去背唯一正本：四角平均取背景色＋42/72 雙門檻羽化＋去綠溢色。
+// 綠幕去背唯一正本：四角平均取背景色＋雙門檻羽化＋去綠溢色。
 // FishLayer（錦鯉）與 LotusLayer（荷葉）共用，禁另存第二份。
-export function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
+// solid/edge 可調：荷葉背景純、吃重一點（60/84）讓實心更大；錦鯉沿用預設。
+export function keyOutGreen(img: HTMLImageElement, solid: number = 42, edge: number = 72): HTMLCanvasElement | null {
   try {
     const c = document.createElement('canvas');
     c.width = img.naturalWidth;
@@ -28,10 +29,10 @@ export function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
       const gg = px[i * 4 + 1];
       const b = px[i * 4 + 2];
       const dist = Math.hypot(r - br, gg - bg, b - bb);
-      if (dist < 42) {
+      if (dist < solid) {
         px[i * 4 + 3] = 0;
-      } else if (dist < 72) {
-        px[i * 4 + 3] = Math.floor(255 * ((dist - 42) / 30));
+      } else if (dist < edge) {
+        px[i * 4 + 3] = Math.floor(255 * ((dist - solid) / (edge - solid)));
         // 去綠溢色
         const m = Math.min(r, b);
         if (gg > m) {

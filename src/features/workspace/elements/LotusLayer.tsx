@@ -32,7 +32,7 @@ export default function LotusLayer({ light }: Props) {
     const img = new Image();
     img.src = LOTUS_PATH;
     img.onload = () => {
-      const keyed = keyOutGreen(img);
+      const keyed = keyOutGreen(img, 60, 84);
       if (!keyed) return;
       const out: HTMLCanvasElement[] = [];
       for (const L of LEAVES) {
@@ -84,10 +84,12 @@ export default function LotusLayer({ light }: Props) {
       leaves.forEach((leaf, i) => {
         const L = LEAVES[i % LEAVES.length];
         const size = S * L.size;
-        const sway = reduced ? 0 : Math.sin(t * 0.3 + L.phase) * 0.02;
-        const drift = reduced ? 0 : Math.sin(t * 0.23 + L.phase) * 5;
+        // 浮感：比水波紋小一個量級（轉 0.008、漂 2px、沉浮 1.5px）
+        const sway = reduced ? 0 : Math.sin(t * 0.3 + L.phase) * 0.008;
+        const drift = reduced ? 0 : Math.sin(t * 0.23 + L.phase) * 2;
+        const bob = reduced ? 0 : Math.sin(t * 0.5 + L.phase * 1.7) * 1.5;
         const cx = L.ax * W + drift;
-        const cy = L.ay * H + drift * 0.6;
+        const cy = L.ay * H + drift * 0.6 + bob;
         // 接觸陰影：葉下水面壓痕（徑向漸層，無濾鏡成本）
         const sh = ctx.createRadialGradient(cx, cy + size * 0.03, size * 0.1, cx, cy + size * 0.03, size * 0.55);
         sh.addColorStop(0, 'rgba(0,0,0,0.32)');
