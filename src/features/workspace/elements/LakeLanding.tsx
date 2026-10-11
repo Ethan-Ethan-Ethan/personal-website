@@ -16,7 +16,7 @@ export default function LakeLanding() {
     <div className="lake-landing" style={{ position: 'fixed', inset: 0, overflow: 'hidden', background: '#060913' }}>
       <LakeCanvas phase={phaseIndex} />
       <FishLayer tint={phase.sun} light={fishLight} sunX={phase.sunPos[0]} sunGlow={phase.glint} />
-      <LotusLayer light={fishLight} />
+      <LotusLayer exposure={phase.exposure} waterB={phase.waterB} />
       <LakeOverlay
         phase={phase}
         phaseIndex={phaseIndex}
