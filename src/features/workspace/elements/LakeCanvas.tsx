@@ -31,7 +31,7 @@ export default function LakeCanvas({ phase }: Props) {
       if (disposed) return;
       let renderer: WebGLRenderer;
       try {
-        renderer = new THREE.WebGLRenderer({ alpha: false, antialias: false, powerPreference: 'high-performance' });
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false, powerPreference: 'high-performance' });
       } catch {
         host.dataset.webgl = 'fallback';
         return;
@@ -40,6 +40,7 @@ export default function LakeCanvas({ phase }: Props) {
       const scene: Scene = new THREE.Scene();
       const camera: OrthographicCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setClearColor(0x000000, 0);
       host.appendChild(renderer.domElement);
 
       const pick = (index: number): LakePhase => LAKE_PHASES[normalizePhase(index)];
@@ -75,6 +76,7 @@ export default function LakeCanvas({ phase }: Props) {
           uUseBed: { value: 0 },
           uScreen: { value: screenU },
           uTexAspect: { value: 4 / 3 },
+          uWaterAlpha: { value: 0.86 },
           uRipples: { value: ripples },
         },
         vertexShader: `varying vec2 vUv; void main(){vUv=uv; gl_Position=vec4(position.xy,0.0,1.0);}`,
@@ -83,6 +85,7 @@ export default function LakeCanvas({ phase }: Props) {
           uniform vec3 uSkyA; uniform vec3 uSkyB; uniform vec3 uWaterA; uniform vec3 uWaterB; uniform vec3 uSun;
           uniform vec2 uSunPos; uniform float uExposure; uniform vec4 uRipples[12]; uniform float uGlint;
           uniform sampler2D uBed; uniform float uUseBed; uniform vec2 uScreen; uniform float uTexAspect;
+          uniform float uWaterAlpha;
           float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
           float noise(vec2 p){vec2 i=floor(p),f=fract(p); f=f*f*(3.0-2.0*f); return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}
           float fbm(vec2 p){float v=0.; float a=.5; for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.03+17.2;a*=.5;} return v;}
@@ -126,7 +129,7 @@ export default function LakeCanvas({ phase }: Props) {
             col+=uSun*streak*(0.20+0.34*n+0.30*detail)*uGlint;
             col+=uSun*w*0.7*uGlint;
             col*=uExposure;
-            gl_FragColor=vec4(col,1.0);
+            gl_FragColor=vec4(col,uWaterAlpha);
           }
         `,
       });
@@ -320,5 +323,5 @@ export default function LakeCanvas({ phase }: Props) {
     return () => { disposed = true; cancelStart(); cleanup(); };
   }, []);
 
-  return <div ref={hostRef} className="lake-canvas" aria-hidden="true" style={{ position: 'absolute', inset: 0 }} />;
+  return <div ref={hostRef} className="lake-canvas" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 1 }} />;
 }

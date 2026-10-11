@@ -3,7 +3,7 @@ import { createSchool, stepSchool, type Fish } from '../core/fish-school';
 import { FISH_SPRITES } from '../core/fish-sprites';
 import { KOI_BLACK_PATH, KOI_SHEET_PATH } from '../core/lake-assets';
 
-type Props = { tint: string };
+type Props = { tint: string; brightness: number };
 
 function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
   try {
@@ -52,10 +52,13 @@ function keyOutGreen(img: HTMLImageElement): HTMLCanvasElement | null {
   }
 }
 
-export default function FishLayer({ tint }: Props) {
+export default function FishLayer({ tint, brightness }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const tintRef = useRef(tint);
   tintRef.current = tint;
+  const targetRef = useRef(brightness);
+  targetRef.current = brightness;
+  const curRef = useRef(brightness);
   const spritesRef = useRef<{ c: HTMLCanvasElement; base: number }[]>([]);
 
   useEffect(() => {
@@ -173,6 +176,9 @@ export default function FishLayer({ tint }: Props) {
           ? { x: splash.x, y: splash.y, age: (now - splash.t0) / 1000 }
           : null;
       stepSchool(fish, dt, t, livePointer, liveSplash);
+      // 亮度跟時段：用小步趨近，避免切段時閃跳。
+      curRef.current += (targetRef.current - curRef.current) * (1 - Math.exp(-dt * 3));
+      const dim = curRef.current;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const W = host.clientWidth;
@@ -209,6 +215,7 @@ export default function FishLayer({ tint }: Props) {
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
+          if (dim < 0.999) ctx.filter = `brightness(${dim.toFixed(3)})`;
           ctx.drawImage(
             sp.c, 0, 0, sp.c.width, sp.c.height * headFrac,
             -wid / 2, -len / 2, wid, headLen,
@@ -300,5 +307,5 @@ export default function FishLayer({ tint }: Props) {
     };
   }, []);
 
-  return <div ref={hostRef} className="fish-layer" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }} />;
+  return <div ref={hostRef} className="fish-layer" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }} />;
 }
