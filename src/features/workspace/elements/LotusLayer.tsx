@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { LOTUS_PATH } from '../core/lake-assets';
 import { keyOutGreen } from '../core/green-key';
+import { DPR_CAP_2D, lotusLightFilter } from '../core/lake-light';
 
 type Props = { light: number };
 
@@ -50,7 +51,7 @@ export default function LotusLayer({ light }: Props) {
     const t0 = performance.now();
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP_2D);
       canvas.width = Math.max(1, Math.floor(host.clientWidth * dpr));
       canvas.height = Math.max(1, Math.floor(host.clientHeight * dpr));
     };
@@ -59,15 +60,14 @@ export default function LotusLayer({ light }: Props) {
     ro.observe(host);
 
     const draw = (t: number) => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP_2D);
       const W = host.clientWidth;
       const H = host.clientHeight;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
       if (!cluster) return;
-      const l = Math.min(1, Math.max(0, lightRef.current));
-      // 葉不透：亮度下限 0.6 保實色，只跟光走明暗，不動 alpha。
-      ctx.filter = `brightness(${(0.6 + 0.4 * l).toFixed(2)}) saturate(${(0.85 + 0.3 * l).toFixed(2)})`;
+      // 葉不透：亮度下限保實色，只跟光走明暗，不動 alpha（曲線在 lake-light.ts）。
+      ctx.filter = lotusLightFilter(lightRef.current);
       const S = Math.min(W, H);
       CLUSTERS.forEach((C) => {
         const size = S * C.size;

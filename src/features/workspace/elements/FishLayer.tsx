@@ -3,6 +3,7 @@ import { createSchool, stepSchool, type Fish } from '../core/fish-school';
 import { FISH_SPRITES } from '../core/fish-sprites';
 import { KOI_SHEET_PATH } from '../core/lake-assets';
 import { keyOutGreen } from '../core/green-key';
+import { DPR_CAP_2D, fishLightFilter } from '../core/lake-light';
 
 type Props = { tint: string; light: number; sunX: number; sunGlow: number };
 
@@ -86,7 +87,7 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
     let disposed = false;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP_2D);
       canvas.width = Math.max(1, Math.floor(host.clientWidth * dpr));
       canvas.height = Math.max(1, Math.floor(host.clientHeight * dpr));
     };
@@ -136,16 +137,13 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
           ? { x: splash.x, y: splash.y, age: (now - splash.t0) / 1000 }
           : null;
       stepSchool(fish, dt, t, livePointer, liveSplash);
-      // 亮度跟時段：用小步趨近，避免切段時閃跳；字串量化快取，靜止時零分配。
+      // 亮度跟時段：用小步趨近，避免切段時閃跳（曲線見 lake-light.ts）。
       curRef.current += (targetRef.current - curRef.current) * (1 - Math.exp(-dt * 3));
       const lightT = Math.min(1, Math.max(0, curRef.current));
-      // 夜暗晝亮＋夜退飽和：跟水光同曲線走。
-      const dimB = 0.45 + 0.55 * lightT;
-      const dimS = 0.7 + 0.4 * lightT;
       const sx = sunXRef.current;
       const sg = sunGlowRef.current;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP_2D);
       const W = host.clientWidth;
       const H = host.clientHeight;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -179,10 +177,9 @@ export default function FishLayer({ tint, light, sunX, sunGlow }: Props) {
           ctx.translate(x, y);
           ctx.rotate(heading - sp.base + bodySway);
           ctx.globalAlpha = 0.93;
-          // 位置光：游進太陽倒影帶就被照亮（跟水面同一條 streak 公式）。
+          // 位置光：游進太陽倒影帶就被照亮（跟水面同一條 streak 公式，曲線在 lake-light.ts）。
           const streak = Math.exp(-Math.pow((f.x - sx) * 6, 2)) * (0.35 + 0.65 * (1 - f.y));
-          const litB = dimB * (1 + streak * 0.4 * sg);
-          ctx.filter = `brightness(${litB.toFixed(2)}) saturate(${dimS.toFixed(2)})`;
+          ctx.filter = fishLightFilter(lightT, streak * sg);
           if (Math.abs(tailWag) < 0.02) {
             // 尾巴近直：單筆整貼，省一次變換＋一次 blit。
             ctx.drawImage(sp.c, -wid / 2, -len / 2, wid, len);
