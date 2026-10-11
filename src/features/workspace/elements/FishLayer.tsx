@@ -182,7 +182,7 @@ export default function FishLayer({ tint, light }: Props) {
       // 夜暗晝亮＋夜退飽和：跟水光同曲線走。
       const dimB = 0.45 + 0.55 * lightT;
       const dimS = 0.7 + 0.4 * lightT;
-      const dimFilter = `brightness(${dimB.toFixed(3)}) saturate(${dimS.toFixed(3)}) blur(1.2px)`;
+      const dimFilter = `brightness(${dimB.toFixed(3)}) saturate(${dimS.toFixed(3)}) blur(0.8px)`;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const W = host.clientWidth;
