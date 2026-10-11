@@ -19,14 +19,14 @@ const recentArticles = posts.slice(0, 6).map((post) => ({
 const USE_LAKE = true;
 ---
 
-<BaseLayout title="Ethan Yang｜AI 系統創作者" description="建立可驗證、可組合並能持續演化的 AI、知識圖譜、影片理解與量化研究系統。">
+<BaseLayout title="Ethan｜AI 系統創作者" description="建立可驗證、可組合並能持續演化的 AI、知識圖譜、影片理解與量化研究系統。">
   {USE_LAKE
     ? <LakeLanding client:load />
     : <WorkspaceDesktop client:load content={homepageContent} recentArticles={recentArticles} />}
   <AboutDialog />
   <noscript>
     <section class="nojs-workspace" aria-label="網站導覽">
-      <h1>Ethan Yang｜AI 系統創作者</h1>
+      <h1>Ethan｜AI 系統創作者</h1>
       <p>目前瀏覽器未啟用 JavaScript；仍可直接瀏覽公開內容。</p>
       <nav><a href="/articles/">Articles</a><a href="/trading/">Trading Lab</a><a href="/resume">Resume</a></nav>
     </section>

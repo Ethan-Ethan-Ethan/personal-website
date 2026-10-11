@@ -14,7 +14,7 @@ const posts = articles.map(({ post }) => post);
 const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))];
 ---
 
-<BaseLayout title="文章 | Ethan Yang" description="所有公開文章 — 工作經驗、AI 工作流、公開筆記與 RSS 聚合內容。">
+<BaseLayout title="文章 | Ethan" description="所有公開文章 — 工作經驗、AI 工作流、公開筆記與 RSS 聚合內容。">
   <Topbar />
 
   <main class="pt-14 max-w-[var(--container-default)] mx-auto px-4 py-10">

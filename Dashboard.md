@@ -143,6 +143,7 @@ npm run dev          # 或 astro dev --background
 - 踩坑紀錄：[[04-踩坑紀錄]]
 
 ## 處理日誌
+- 2026-10-12：標題去 Yang（全站 title＋noscript h1；內文描述／履歷 h1 未動）；Selected work 本地先行不上網（待辦）；build 1664。
 - 2026-10-12：去英文名（About 卡只留楊宥綸；首頁左上只留 Ethan；build 1664；ego 實拍）。
 - 2026-10-12：線上更新確認（about-dialog×6＋open-about-dialog＋First Light 全在 live；部署成功；CI 另修 pages-action 下架＋補 hotspot-layout 孤兒；recipe 孤兒未動留檔）。
 - 2026-10-12：發佈上線（main 998c7bf→8ffc588：吃遠端 RSS＋lake-landing 97 包；Selected work 下架；About 彈框 live；構建 1664 頁；live/pages 皆 200；Cloudflare Pages 部署中）。
