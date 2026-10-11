@@ -7,9 +7,9 @@ type Props = { light: number };
 // 荷葉浮層：三片小單葉散放水面之上（z 在魚之上、UI 之下），魚從葉底游過。
 // 每片自帶接觸陰影（水面壓痕）＋邊緣預烤柔化；減動畫時靜止一幀。
 const LEAVES = [
-  { sx: 0.29, sy: 0.14, sw: 0.28, sh: 0.22, ax: 0.1, ay: 0.2, size: 0.2, phase: 0 },
-  { sx: 0.14, sy: 0.59, sw: 0.29, sh: 0.28, ax: 0.88, ay: 0.3, size: 0.22, phase: 2.1 },
-  { sx: 0.59, sy: 0.49, sw: 0.27, sh: 0.22, ax: 0.2, ay: 0.78, size: 0.24, phase: 4.2 },
+  { sx: 0.21, sy: 0.26, sw: 0.2, sh: 0.19, ax: 0.1, ay: 0.2, size: 0.2, phase: 0 },
+  { sx: 0.63, sy: 0.42, sw: 0.22, sh: 0.2, ax: 0.88, ay: 0.3, size: 0.22, phase: 2.1 },
+  { sx: 0.33, sy: 0.67, sw: 0.21, sh: 0.2, ax: 0.2, ay: 0.78, size: 0.24, phase: 4.2 },
 ];
 
 export default function LotusLayer({ light }: Props) {
@@ -32,7 +32,8 @@ export default function LotusLayer({ light }: Props) {
     const img = new Image();
     img.src = LOTUS_PATH;
     img.onload = () => {
-      const keyed = keyOutGreen(img, 60, 84);
+      // 品紅底：葉綠跟背景色差大，去背用預設門檻即可實心。
+      const keyed = keyOutGreen(img);
       if (!keyed) return;
       const out: HTMLCanvasElement[] = [];
       for (const L of LEAVES) {
@@ -84,10 +85,10 @@ export default function LotusLayer({ light }: Props) {
       leaves.forEach((leaf, i) => {
         const L = LEAVES[i % LEAVES.length];
         const size = S * L.size;
-        // 浮感：比水波紋小一個量級（轉 0.008、漂 2px、沉浮 1.5px）
-        const sway = reduced ? 0 : Math.sin(t * 0.3 + L.phase) * 0.008;
-        const drift = reduced ? 0 : Math.sin(t * 0.23 + L.phase) * 2;
-        const bob = reduced ? 0 : Math.sin(t * 0.5 + L.phase * 1.7) * 1.5;
+        // 浮感跟水波紋同級（轉 0.02、漂 5px）＋2px 沉浮。
+        const sway = reduced ? 0 : Math.sin(t * 0.3 + L.phase) * 0.02;
+        const drift = reduced ? 0 : Math.sin(t * 0.23 + L.phase) * 5;
+        const bob = reduced ? 0 : Math.sin(t * 0.5 + L.phase * 1.7) * 2;
         const cx = L.ax * W + drift;
         const cy = L.ay * H + drift * 0.6 + bob;
         // 接觸陰影：葉下水面壓痕（徑向漸層，無濾鏡成本）
