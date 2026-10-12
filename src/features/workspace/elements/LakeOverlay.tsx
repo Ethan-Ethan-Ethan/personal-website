@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
 import { ETHAN_BRAND_IMAGE } from '../core/lake-assets';
+import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
+import ForecastGlass from './ForecastGlass';
 import SplitText from '../../../components/reactbits/SplitText';
 import '../../../components/reactbits/SplitText.css';
 
@@ -46,6 +48,8 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <a href="/" aria-label="Ethan 首頁" style={{ ...link, position: 'absolute', top: 20, left: 24 }}>
         <img src={ETHAN_BRAND_IMAGE.src} alt={ETHAN_BRAND_IMAGE.alt} width={ETHAN_BRAND_IMAGE.width} height={ETHAN_BRAND_IMAGE.height} style={{ display: 'block', filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.55))' }} />
       </a>
+
+      <ForecastGlass data={FORECAST_PLACEHOLDER} />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>
