@@ -63,7 +63,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       </button>
       {forecastOpen && (
         <>
-          <ForecastSideRail />
+          <ForecastSideRail onClose={() => setForecastOpen(false)} />
           <ForecastGlass data={FORECAST_PLACEHOLDER} />
         </>
       )}

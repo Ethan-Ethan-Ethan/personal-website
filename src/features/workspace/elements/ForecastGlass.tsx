@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import SplitText from '../../../components/reactbits/SplitText';
 import type { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import useReducedMotion from './useReducedMotion';
@@ -15,10 +15,12 @@ export default function ForecastGlass({ data }: Props) {
   const reducedMotion = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const railRef = useRef<HTMLElement>(null);
-  // GSAP 錨定生長：原點逐次取房子中心（房子永不在縮放容器內）；gsap 缺席即靜態呈現。
+  // 單一連續生長：面板先長（GSAP 錨定房子中心），字再現（grew 後掛 SplitText），避免雙系統同時動。
+  const [grew, setGrew] = useState(false);
   useLayoutEffect(() => {
     if (reducedMotion) return;
     let cancelled = false;
+    const fallback = window.setTimeout(() => { if (!cancelled) setGrew(true); }, 700);
     (async () => {
       let gsap: { fromTo: (...args: unknown[]) => void } | null = null;
       try {
@@ -31,17 +33,19 @@ export default function ForecastGlass({ data }: Props) {
       if (!house) return;
       const hx = house.left + house.width / 2;
       const hy = house.top + house.height / 2;
+      let done = 0;
+      const finish = () => { done += 1; if (done >= 2 && !cancelled) { window.clearTimeout(fallback); setGrew(true); } };
       for (const el of [heroRef.current, railRef.current]) {
-        if (!el) continue;
+        if (!el) { finish(); continue; }
         const r = el.getBoundingClientRect();
         gsap.fromTo(
           el,
           { opacity: 0, scale: 0.92, y: -10, transformOrigin: `${hx - r.left}px ${hy - r.top}px` },
-          { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'expo.out', overwrite: 'auto' }
+          { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'expo.out', overwrite: 'auto', onComplete: finish }
         );
       }
     })();
-    return () => { cancelled = true; };
+    return () => { cancelled = true; window.clearTimeout(fallback); };
   }, [reducedMotion]);
   const main = data.railMain;
   return (
@@ -66,7 +70,7 @@ export default function ForecastGlass({ data }: Props) {
         </span>
         <h1 style={{ margin: 0, color: INK, fontSize: 'clamp(32px, 4.5vw, 56px)', lineHeight: 1.02, letterSpacing: '-0.02em', fontWeight: 600 }}>
           {data.heroLines.map((line) =>
-            reducedMotion ? (
+            reducedMotion || !grew ? (
               <span key={line} style={{ display: 'block' }}>{line}</span>
             ) : (
               <SplitText
