@@ -39,9 +39,9 @@ site_highlights:
 - **第二代 Astro 7 站**：`https://personal-website-bvk.pages.dev`（Cloudflare Pages，push to main 自動部署）
 - **Repo**：`Ethan-Ethan-Ethan/personal-website`
 - **狀態**：系統重構與自動驗證已通過；本地 Grounding DINO＋SAM 2.1 透明前景已接入，等待人工視覺驗收
-- **待完成**：Decap CMS OAuth 驗證、瀏覽器寫文測試、網域續約（2026-11-12）、Reddit 替代源、履歷公開邊界（Cloudflare Access / 停用舊 Workers 已於 2026-08-27 完成）
+- **待完成**：Decap CMS OAuth 驗證、瀏覽器寫文測試、網域續約（2027-02-15 窗口，到期 Jun 15, 2027）、Reddit 替代源、履歷公開邊界（Cloudflare Access / 停用舊 Workers 已於 2026-08-27 完成）
 - **技術棧**：Astro 7 + React island + Three.js + Tailwind CSS v4 + Playwright/Vitest + Cloudflare Pages
-- **域名**：`ethanyang.dpdns.org`（DigitalPlat FreeDomain，續期檢查 2026-11-12）
+- **域名**：`ethanyang.dpdns.org`（DigitalPlat FreeDomain，續期檢查 2027-02-15，到期 Jun 15, 2027）
 - **成本**：全站零成本基礎設施（$0/月）
 - **AI Lab 模組**：[[04_Projects/個人網站/ai-lab/README|AI Lab]]（網站組裝與公開映射；專案正文仍留原 Canonical Source）
 
@@ -276,6 +276,7 @@ Cozy Galaxy AI Workshop
 - 桌機使用可拖曳視窗；手機使用單一全螢幕 active card。
 - URL hash、瀏覽器返回鍵、鍵盤與 reduced-motion 均納入互動契約。
 - 架構正本：`config/site-system.yaml`；指令入口：`npm run site -- <domain> <action>`。
+- 2026-10-12 現況補充：首頁已切湖面（LakeLanding live，USE_LAKE=true），導覽為浮空極簡（左上品牌 Ethan、右上時間＋About 彈框）；Selected work 已下架（trading 未好）；About 為原生 dialog 灰底彈框（`src/components/AboutDialog.astro`），/resume 整頁保留。
 
 ## 網站部署
 
@@ -319,7 +320,7 @@ git push (main)
 - **Nameservers**：`camilo.ns.cloudflare.com` / `sonia.ns.cloudflare.com`
 - **DNS record**：CNAME `ethanyang.dpdns.org` → `personal-website-bvk.pages.dev`（proxied: true）
 - **SSL**：Full (strict)
-- **Domain source**：DigitalPlat FreeDomain（續期檢查 2026-11-12）
+- **Domain source**：DigitalPlat FreeDomain（續期檢查 2027-02-15，到期 Jun 15, 2027）
 
 ### 驗證 checklist
 
@@ -378,8 +379,8 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 | 2026-07-24 | WebFetch + console scripts 雙軌分析 | 工作流 | `01_Notes/` |
 | 2026-07-24 | 4px base 遷移策略 | 設計決策 | `01_Notes/` |
 | 2026-07-24 | 品牌特徵優先於趨勢 | 設計原則 | `01_Notes/` |
-| 2026-07-24 | GitHub Actions 兩階段認證 | SOP | `05_Reference/個人自動化/` |
-| 2026-07-24 | Design token 系統化方法論 | 方法論 | 內嵌於本頁「設計 Tokens」章節（未獨立畢業至 05_Reference/設計/） |
+| 2026-07-24 | GitHub Actions 兩階段認證 | SOP | `02 Domain/AI編程代理系/Domain artifact/個人自動化/` |
+| 2026-07-24 | Design token 系統化方法論 | 方法論 | 內嵌於本頁「設計 Tokens」章節（未獨立畢業至 02 Domain/AI編程代理系/Domain artifact/設計/） |
 
 ## 相關筆記
 
