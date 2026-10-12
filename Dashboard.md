@@ -143,6 +143,7 @@ npm run dev          # 或 astro dev --background
 - 踩坑紀錄：[[04-踩坑紀錄]]
 
 ## 處理日誌
+- 2026-10-12：全站去 Yang 上線（title／品牌／頁尾／履歷全改；live 標題 Ethan｜AI 系統創作者實錘；部署成功）。
 - 2026-10-12：標題去 Yang（全站 title＋noscript h1；內文描述／履歷 h1 未動）；Selected work 本地先行不上網（待辦）；build 1664。
 - 2026-10-12：去英文名（About 卡只留楊宥綸；首頁左上只留 Ethan；build 1664；ego 實拍）。
 - 2026-10-12：線上更新確認（about-dialog×6＋open-about-dialog＋First Light 全在 live；部署成功；CI 另修 pages-action 下架＋補 hotspot-layout 孤兒；recipe 孤兒未動留檔）。
@@ -218,3 +219,6 @@ npm run dev          # 或 astro dev --background
 - 2026-08-27：#9 E 盤點完成 — 使用者選「先盤點字型再動」。grep 全 src：`text-[…]`/inline `font-size` 均無命中，所有標題/正文皆用 `text-*` token 工具類，與 `global.css` scale 完全對齊；dembrandt 觀察的 52.5px/21px 為 computed 量測誤差。結論：E 無修改清單，字型已對齊。剩 A/B/C 待確認、D 待決策。
 - 2026-08-27：#9 實作完成（A+B+C+D2）— A `global.css` 加 `:focus-visible` accent ring；B 定義 `--shadow-card` token（dark 0.3 / light 0.12）並全站可點卡片補 `hover:shadow-card`（PostCard 改用 token、index 資料卡/workbench 卡補齊）；C 2 處裸 `rounded`→`rounded-sm`（PostCard:44、articles/[slug]:61）；D2 light mode：`global.css` 加 `[data-theme="light"]` 覆寫全部語意 token + Topbar `#theme-toggle` 鈕 + BaseLayout 防 FOUC 腳本。`astro build` 通過（859 頁）＋ Playwright 驗證 dark/light 切換與 localStorage 持久化正確（light bodyBg #f4f1e9、card #fff、line #ddd6c7）。未提交（待使用者確認是否 push）。附註：首頁 VolumeChart 報 `lightweight-charts` module 解析錯誤，屬預存非 #9 範圍問題。
 - 2026-08-27：VolumeChart 修復 — 根因 `<script is:inline>` + `import('lightweight-charts')` 不被 Vite 打包，瀏覽器收到裸 specifier 無法解析；且 v5 API 已改（`addCandlestickSeries` 不存在）。修法：移除 `is:inline`（改打包腳本）、靜態 `import { createChart, CandlestickSeries, HistogramSeries }`、改用 v5 `chart.addSeries(CandlestickSeries/HistogramSeries, ...)`、資料經 `data-data` 屬性傳入。驗證：`astro build` 通過 + Playwright 首頁 console 0 error、`.trading-chart` 內出現 canvas（圖表初始化成功）。dembrandt 生成物（design-system/extract.err、theme.css、tokens.json、output/）已移出 repo。
+- 2026-10-12：hero 決策定案（方案A：Lake 背景保留＋forecast glass 疊加；Q1-A＋G2a＋G4 全過，carousel 排除另案）。commits：`edbfbf0→05684d9`（`edbfbf0..05684d9` 實測 7 個＋基底 edbfbf0；派發單寫 6，以 git log 實測為準）。
+- 2026-10-12：hero 證據（Phase 5 進行中）：`system validate` 綠（BUILD_EXIT 0）／`vitest` 21 files／160 tests 綠（VITEST_EXIT 0）／本次 e2e brand-image 6/6 綠（desktop＋mobile，EXIT 0）／reduced-motion 終態＋手機 rail 堆疊不斷裂。
+- 2026-10-12：hero 待辦：①對比度待真機 human acceptance（靜態儀器值無意義，沿 lake 前例）②全量 e2e 47 failed＝pre-existing 非回歸（WorkspaceDesktop 停用分支，基線 f73326d 已寫死，本次零改 index.astro）③真資料後補（只改 forecast-placeholder.ts）＋carousel 真資料後另案。計畫：`plan/homepage-hero-ethan-image.md`（Task 7／Phase 5 待 Dashboard＋Worklog 同步後 commit）。
