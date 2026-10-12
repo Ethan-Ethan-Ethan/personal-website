@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from 'react';
 import SplitText from '../../../components/reactbits/SplitText';
 import type { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import useReducedMotion from './useReducedMotion';
@@ -12,15 +13,45 @@ const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
 
 export default function ForecastGlass({ data }: Props) {
   const reducedMotion = useReducedMotion();
+  const heroRef = useRef<HTMLElement>(null);
+  const railRef = useRef<HTMLElement>(null);
+  // GSAP 錨定生長：原點逐次取房子中心（房子永不在縮放容器內）；gsap 缺席即靜態呈現。
+  useLayoutEffect(() => {
+    if (reducedMotion) return;
+    let cancelled = false;
+    (async () => {
+      let gsap: { fromTo: (...args: unknown[]) => void } | null = null;
+      try {
+        ({ default: gsap } = await import('gsap'));
+      } catch {
+        return;
+      }
+      if (cancelled || !gsap) return;
+      const house = document.querySelector('[aria-label="Ethan 首頁"]')?.getBoundingClientRect();
+      if (!house) return;
+      const hx = house.left + house.width / 2;
+      const hy = house.top + house.height / 2;
+      for (const el of [heroRef.current, railRef.current]) {
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        gsap.fromTo(
+          el,
+          { opacity: 0, scale: 0.92, y: -10, transformOrigin: `${hx - r.left}px ${hy - r.top}px` },
+          { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'expo.out', overwrite: 'auto' }
+        );
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [reducedMotion]);
   const main = data.railMain;
   return (
     <>
     <section
+      ref={heroRef}
       aria-label="Forecast"
-      className="growin"
       // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
-      // 生長原點：左上（房子方向）
-      style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3, transformOrigin: 'top left' }}
+      // 生長由上方 GSAP 錨定（原點＝房子中心），此處不掛 CSS scale 類
+      style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .split-parent,.forecast-glass .split-char,.forecast-glass .split-word{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
       <div className={`forecast-glass ${GLASS}`} style={{ padding: '20px 24px' }}>
@@ -94,9 +125,10 @@ export default function ForecastGlass({ data }: Props) {
       </div>
     </section>
     <aside
+      ref={railRef}
       aria-label="Saved locations"
-      className="forecast-rail growin"
-      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3, transformOrigin: 'top left' }}
+      className="forecast-rail"
+      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
       <div className={`forecast-glass ${GLASS}`} style={{ padding: '18px 20px' }}>

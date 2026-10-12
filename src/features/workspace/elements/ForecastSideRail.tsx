@@ -85,13 +85,14 @@ export default function ForecastSideRail({ homeExpanded, onHomeToggle }: {
   return (
     <nav
       aria-label="功能選單"
-      className="forecast-side-rail growin"
+      // clip 揭示：只裁 painting、不 transform，房子從第一幀即完整（防跳動）
+      className="forecast-side-rail rail-reveal"
       style={{
         position: 'absolute', top: 20, left: 24, zIndex: 3, pointerEvents: 'auto',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10, transformOrigin: 'top center',
       }}
     >
-      <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.20);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}}`}</style>
+      <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.20);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}.rail-reveal{animation:railreveal .45s cubic-bezier(0.16,1,0.3,1) both;}@keyframes railreveal{from{clip-path:inset(0 0 100% 0);}to{clip-path:inset(0 0 0 0);}}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}.rail-reveal{animation:none;}}`}</style>
       <button
         type="button"
         aria-label="Ethan 首頁"
