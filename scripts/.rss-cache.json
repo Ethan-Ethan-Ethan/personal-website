@@ -7355,7 +7355,75 @@
     "https://www.infoq.com/news/2026/10/aws-enhanced-eventbridge-buses/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "AWS Introduces Enhanced Custom Event Buses for EventBridge",
       "date": "2026-10-11T08:24:58.004Z"
+    },
+    "https://github.com/colinhacks/zod/commit/d821685ea6732436fcdf786a81d076958471e467": {
+      "title": "Zod 4.6.6 malware infection?",
+      "date": "2026-10-12T08:46:17.411Z"
+    },
+    "https://clickhouse.com/blog/posette-talk-recap-postgres-isnt-slow-your-storage-is": {
+      "title": "Postgres isn't slow, your storage is",
+      "date": "2026-10-12T08:46:17.412Z"
+    },
+    "https://www.cnbc.com/2026/10/07/anthropic-will-be-most-ridiculous-ipo-of-year-analyst-says.html": {
+      "title": "Research Firm Calls Anthropic's IPO 'Unprecedented Test of Investor Gullibity'",
+      "date": "2026-10-12T08:46:17.412Z"
+    },
+    "https://lalinsky.com/2026/10/11/type-safe-html-templating-in-zig.html": {
+      "title": "Type-safe HTML templating in Zig",
+      "date": "2026-10-12T08:46:17.412Z"
+    },
+    "https://amosbbatto.wordpress.com/2026/10/05/linux-phones-alternative/": {
+      "title": "Will Linux phones become a viable alternative to the Android/iOS duopoly?",
+      "date": "2026-10-12T08:46:17.412Z"
+    },
+    "https://crestbrowser.com/": {
+      "title": "Crest – an Arc-inspired open-source browser for Mac",
+      "date": "2026-10-12T08:46:17.413Z"
+    },
+    "https://github.com/shaongitbd/doory": {
+      "title": "Doory – Open-Source Canva",
+      "date": "2026-10-12T08:46:17.413Z"
+    },
+    "https://tedhaley.ca/pensieve/": {
+      "title": "Local Indexing to reduce tool calling and token usage",
+      "date": "2026-10-12T08:46:17.413Z"
+    },
+    "https://www.americanscientist.org/article/whatever-became-of-holography": {
+      "title": "Whatever became of holography? (2011)",
+      "date": "2026-10-12T08:46:17.413Z"
+    },
+    "https://terrytao.wordpress.com/2026/10/11/illustration-beyond-proof/": {
+      "title": "Illustration Beyond Proof",
+      "date": "2026-10-12T08:46:17.414Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm4g1d4p2k2no/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普計劃從俄羅斯進口柴油 反對聲浪趨漲",
+      "date": "2026-10-12T08:46:17.544Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqy0rd16x33lo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "胡塞武裝空襲對華重要窗口利雅德機場 中東衝突又一危險時刻",
+      "date": "2026-10-12T08:46:17.544Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c6lyk8d5d7ygo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美國停止公開處決已近一個世紀，如今為何重啟？",
+      "date": "2026-10-12T08:46:17.545Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3vgx1jxyejyo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "走進印度新一輪Z世代主導的「蟑螂」抗議",
+      "date": "2026-10-12T08:46:17.545Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c63el43dw8pko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "緬甸年輕人的恐懼：走在街頭，隨時被「抓壯丁」賣給軍方",
+      "date": "2026-10-12T08:46:17.545Z"
+    },
+    "https://www.infoq.com/news/2026/10/context-language-models/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Context Language Models: Self-Managing Context to Improve Performance and Reduce Compute Costs",
+      "date": "2026-10-12T08:46:17.999Z"
+    },
+    "https://www.infoq.com/news/2026/10/gremlin-foresight-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Foresight AI Brings Gremlin Agents to Reliability Engineering",
+      "date": "2026-10-12T08:46:17.999Z"
     }
   },
-  "lastRun": "2026-10-11T08:24:58.004Z"
+  "lastRun": "2026-10-12T08:46:17.999Z"
 }
