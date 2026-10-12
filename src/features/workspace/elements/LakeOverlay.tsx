@@ -57,13 +57,14 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         aria-label="Ethan 首頁"
         aria-expanded={forecastOpen}
         onClick={() => setForecastOpen((v) => !v)}
-        style={{ position: 'absolute', top: 31, left: 35, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK, zIndex: 4 }}
+        // 同框內槽幾何（框 top:20＋border 1＋padding 12 → 按鍵 40×40 位於 top:33 left:46）
+        style={{ position: 'absolute', top: 33, left: 46, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK, zIndex: 4 }}
       >
         <HouseIcon size={24} />
       </button>
       {forecastOpen && (
         <>
-          <ForecastSideRail />
+          <ForecastSideRail onClose={() => setForecastOpen(false)} />
           <ForecastGlass data={FORECAST_PLACEHOLDER} />
         </>
       )}
