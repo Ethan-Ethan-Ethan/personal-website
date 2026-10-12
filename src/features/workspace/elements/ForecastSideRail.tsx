@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
+import useReducedMotion from './useReducedMotion';
 
 const INK = '#ffffff';
 
@@ -80,6 +81,8 @@ const ICONS: IconDef[] = [
 // 底部停在 phase 文字之上（bottom:110），不壓字。
 export default function ForecastSideRail({ onClose, live }: { onClose: () => void; live: boolean }) {
   const [active, setActive] = useState('grid');
+  const reducedMotion = useReducedMotion();
+  const preEnter = !reducedMotion && !live;
   return (
     <nav
       aria-label="功能選單"
@@ -92,6 +95,7 @@ export default function ForecastSideRail({ onClose, live }: { onClose: () => voi
         background: 'rgba(255,255,255,0.10)',
         backdropFilter: live ? 'blur(12px)' : 'none',
         WebkitBackdropFilter: live ? 'blur(12px)' : 'none',
+        opacity: preEnter ? 0 : undefined,
       }}
     >
       <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}}`}</style>

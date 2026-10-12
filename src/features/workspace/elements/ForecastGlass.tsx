@@ -19,6 +19,9 @@ export default function ForecastGlass({ data, live }: Props) {
   // 字只在 orchestrator 點火且非減動畫時才播（其餘一律靜態字，版式先撐住）。
   const animateText = live && !reducedMotion;
   const glass = `forecast-glass ${GLASS}${live ? ` ${GLASS_BLUR}` : ''}`;
+  // 同步預藏：gsap 動態 import 是非同步的，未回來前瀏覽器會先畫出終態造成閃現；
+  // 此处先 opacity 0，GSAP fromTo 同值起播，live 後放行（減動畫永不藏）。
+  const preEnter = !reducedMotion && !live;
   const main = data.railMain;
   return (
     <>
@@ -27,7 +30,7 @@ export default function ForecastGlass({ data, live }: Props) {
       aria-label="Forecast"
       // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       // 進場由 useForecastEntrance 單一 orchestrator 驅動，此處不掛任何動畫
-      style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
+      style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3, opacity: preEnter ? 0 : undefined }}
     >
       <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .split-parent,.forecast-glass .split-char,.forecast-glass .split-word{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
       <div className={glass} style={{ padding: '20px 24px' }}>
@@ -64,7 +67,7 @@ export default function ForecastGlass({ data, live }: Props) {
           {data.blurb}
         </p>
       </div>
-      <div className={`${glass}${live ? " chart-live" : ""}`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px' }} data-entrance="strip">
+      <div className={`${glass}${live ? " chart-live" : ""}`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px', opacity: preEnter ? 0 : undefined }} data-entrance="strip">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {data.temps.map((t, i) => (
             <span key={i} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px' }}>{t}°</span>
@@ -104,7 +107,7 @@ export default function ForecastGlass({ data, live }: Props) {
       data-entrance="aside"
       aria-label="Saved locations"
       className="forecast-rail"
-      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3 }}
+      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3, opacity: preEnter ? 0 : undefined }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
       <div className={glass} style={{ padding: '18px 20px' }}>

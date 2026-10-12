@@ -1,10 +1,23 @@
 // @vitest-environment jsdom
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ForecastSideRail from "./ForecastSideRail";
 
 afterEach(() => cleanup());
+
+beforeAll(() => {
+  Object.defineProperty(window, "matchMedia", {
+    value: vi.fn(() => ({
+      matches: false,
+      addEventListener() {},
+      removeEventListener() {},
+      addListener() {},
+      removeListener() {},
+    })),
+    configurable: true,
+  });
+});
 
 describe("ForecastSideRail", () => {
   it("renders 5 icon buttons with grid active by default", () => {
