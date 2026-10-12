@@ -35,4 +35,16 @@ describe("ForecastGlass hero", () => {
     expect(h1?.textContent).toContain("with Heavy Rain");
     expect(screen.getByText(/Partly cloudy/)).toBeTruthy();
   });
+  it("renders 6 temps, 7 days with active highlight and wave svg end-state", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} />);
+    const strip = document.querySelector('[aria-label="Hourly forecast"]');
+    for (const t of ["11°", "13°", "14°", "10°", "19°", "12°"]) {
+      expect(strip?.textContent).toContain(t);
+    }
+    for (const d of ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]) {
+      expect(strip?.textContent).toContain(d);
+    }
+    expect(document.querySelectorAll("path.draw")).toHaveLength(3);
+    expect(document.querySelector("clipPath#wclip")).toBeTruthy();
+  });
 });
