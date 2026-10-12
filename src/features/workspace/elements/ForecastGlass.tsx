@@ -1,60 +1,29 @@
-import { useLayoutEffect, useRef, useState } from 'react';
 import SplitText from '../../../components/reactbits/SplitText';
 import type { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import useReducedMotion from './useReducedMotion';
 
 type Props = {
   data: typeof FORECAST_PLACEHOLDER;
+  /** orchestrator 點火後才播字＋波形（單一正本：useForecastEntrance，LakeOverlay 持有）。 */
+  live: boolean;
 };
 
 const GLASS = 'backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl';
 const INK = '#ffffff';
 const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
 
-export default function ForecastGlass({ data }: Props) {
+export default function ForecastGlass({ data, live }: Props) {
   const reducedMotion = useReducedMotion();
-  const heroRef = useRef<HTMLElement>(null);
-  const railRef = useRef<HTMLElement>(null);
-  // 單一連續生長：面板先長（GSAP 錨定房子中心），字再現（grew 後掛 SplitText），避免雙系統同時動。
-  const [grew, setGrew] = useState(false);
-  useLayoutEffect(() => {
-    if (reducedMotion) return;
-    let cancelled = false;
-    const fallback = window.setTimeout(() => { if (!cancelled) setGrew(true); }, 700);
-    (async () => {
-      let gsap: { fromTo: (...args: unknown[]) => void } | null = null;
-      try {
-        ({ default: gsap } = await import('gsap'));
-      } catch {
-        return;
-      }
-      if (cancelled || !gsap) return;
-      const house = document.querySelector('[aria-label="Ethan 首頁"]')?.getBoundingClientRect();
-      if (!house) return;
-      const hx = house.left + house.width / 2;
-      const hy = house.top + house.height / 2;
-      let done = 0;
-      const finish = () => { done += 1; if (done >= 2 && !cancelled) { window.clearTimeout(fallback); setGrew(true); } };
-      for (const el of [heroRef.current, railRef.current]) {
-        if (!el) { finish(); continue; }
-        const r = el.getBoundingClientRect();
-        gsap.fromTo(
-          el,
-          { opacity: 0, scale: 0.92, y: -10, transformOrigin: `${hx - r.left}px ${hy - r.top}px` },
-          { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'expo.out', overwrite: 'auto', onComplete: finish }
-        );
-      }
-    })();
-    return () => { cancelled = true; window.clearTimeout(fallback); };
-  }, [reducedMotion]);
+  // 字只在 orchestrator 點火且非減動畫時才播（其餘一律靜態字，版式先撐住）。
+  const animateText = live && !reducedMotion;
   const main = data.railMain;
   return (
     <>
     <section
-      ref={heroRef}
+      data-entrance="hero"
       aria-label="Forecast"
       // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
-      // 生長由上方 GSAP 錨定（原點＝房子中心），此處不掛 CSS scale 類
+      // 進場由 useForecastEntrance 單一 orchestrator 驅動，此處不掛任何動畫
       style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .split-parent,.forecast-glass .split-char,.forecast-glass .split-word{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
@@ -70,7 +39,7 @@ export default function ForecastGlass({ data }: Props) {
         </span>
         <h1 style={{ margin: 0, color: INK, fontSize: 'clamp(32px, 4.5vw, 56px)', lineHeight: 1.02, letterSpacing: '-0.02em', fontWeight: 600 }}>
           {data.heroLines.map((line) =>
-            reducedMotion || !grew ? (
+            !animateText ? (
               <span key={line} style={{ display: 'block' }}>{line}</span>
             ) : (
               <SplitText
@@ -92,7 +61,7 @@ export default function ForecastGlass({ data }: Props) {
           {data.blurb}
         </p>
       </div>
-      <div className={`forecast-glass ${GLASS}`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px' }}>
+      <div className={`forecast-glass ${GLASS}${live ? ' chart-live' : ''}`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px' }} data-entrance="strip">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {data.temps.map((t, i) => (
             <span key={i} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px' }}>{t}°</span>
@@ -111,7 +80,7 @@ export default function ForecastGlass({ data }: Props) {
           <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="6.2" opacity=".17" pathLength={1} className="draw" />
           <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="4.6" opacity=".26" pathLength={1} className="draw" />
           <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="3.4" pathLength={1} className="draw" />
-          <style>{`@keyframes drawLine{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:drawLine 1.6s ease forwards}.wipe{transform:scaleX(0);transform-origin:left;animation:wipeIn 1.2s .9s ease forwards}@keyframes wipeIn{to{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.draw,.wipe{animation:none}.draw{stroke-dashoffset:0}.wipe{transform:scaleX(1)}}`}</style>
+          <style>{`@keyframes drawLine{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.draw{stroke-dasharray:1;stroke-dashoffset:0;}.wipe{transform:scaleX(1);transform-origin:left;}.chart-live .draw{stroke-dashoffset:1;animation:drawLine 1.6s ease forwards;}.chart-live .wipe{transform:scaleX(0);animation:wipeIn 1.2s .9s ease forwards;}@keyframes wipeIn{to{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.draw,.wipe,.chart-live .draw,.chart-live .wipe{animation:none}.draw,.chart-live .draw{stroke-dashoffset:0}.wipe,.chart-live .wipe{transform:scaleX(1)}}`}</style>
         </svg>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: -18 }}>
           {data.days.map((d, i) => (
@@ -129,7 +98,7 @@ export default function ForecastGlass({ data }: Props) {
       </div>
     </section>
     <aside
-      ref={railRef}
+      data-entrance="aside"
       aria-label="Saved locations"
       className="forecast-rail"
       style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3 }}

@@ -3,6 +3,7 @@ import type { LakePhase } from '../core/lake-palette';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import ForecastGlass from './ForecastGlass';
 import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
+import useForecastEntrance from './useForecastEntrance';
 import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
 import '../../../components/reactbits/SplitText.css';
@@ -34,6 +35,8 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
   const reducedMotion = useReducedMotion();
   // forecast 面板平常收起不遮魚，點房子鍵才彈出（2026-10-12 使用者回饋）。
   const [forecastOpen, setForecastOpen] = useState(false);
+  // 過場唯一正本：開關狀態進 hook，rail→hero→strip→aside 單 timeline 錨定生長，live 再點火字＋波形。
+  const panelsLive = useForecastEntrance(forecastOpen);
   useEffect(() => {
     if (!forecastOpen) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setForecastOpen(false); };
@@ -64,7 +67,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       {forecastOpen && (
         <>
           <ForecastSideRail onClose={() => setForecastOpen(false)} />
-          <ForecastGlass data={FORECAST_PLACEHOLDER} />
+          <ForecastGlass data={FORECAST_PLACEHOLDER} live={panelsLive} />
         </>
       )}
 

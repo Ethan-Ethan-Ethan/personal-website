@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import type { ComponentType } from "react";
 import { FORECAST_PLACEHOLDER } from "../core/forecast-placeholder";
 
@@ -33,7 +33,7 @@ beforeAll(async () => {
 
 describe("ForecastGlass hero", () => {
   it("renders chip, two hero lines and blurb", () => {
-    render(<ForecastGlass data={FORECAST_PLACEHOLDER} />);
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} live={false} />);
     expect(screen.getByText("Weather Forecast")).toBeTruthy();
     // SplitText 逐字拆散 h1：改斷言 h1 全文（含兩行）。
     const h1 = document.querySelector("h1");
@@ -42,7 +42,7 @@ describe("ForecastGlass hero", () => {
     expect(screen.getByText(/Partly cloudy/)).toBeTruthy();
   });
   it("renders 6 temps, 7 days with active highlight and wave svg end-state", () => {
-    render(<ForecastGlass data={FORECAST_PLACEHOLDER} />);
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} live={false} />);
     const strip = document.querySelector('[aria-label="Hourly forecast"]');
     for (const t of ["11°", "13°", "14°", "10°", "19°", "12°"]) {
       expect(strip?.textContent).toContain(t);
@@ -54,13 +54,21 @@ describe("ForecastGlass hero", () => {
     expect(document.querySelector("clipPath#wclip")).toBeTruthy();
   });
   it("renders rail main card and 3 city cards", () => {
-    render(<ForecastGlass data={FORECAST_PLACEHOLDER} />);
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} live={false} />);
     const rail = document.querySelector('[aria-label="Saved locations"]');
     expect(rail?.textContent).toContain("Central Jakarta");
     expect(rail?.textContent).toContain("10°");
     for (const c of ["North Jakarta", "Bandung", "South Jakarta"]) {
       expect(rail?.textContent).toContain(c);
     }
+  });
+});
+
+describe("ForecastGlass live", () => {
+  it("mounts SplitText chars and live chart once orchestrator fires", async () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} live />);
+    await waitFor(() => expect(document.querySelectorAll(".split-char").length).toBeGreaterThan(0));
+    expect(document.querySelector(".chart-live")).toBeTruthy();
   });
 });
 
@@ -80,7 +88,7 @@ describe("ForecastGlass reduced motion", () => {
     ({ default: ForecastGlass } = await import("./ForecastGlass"));
   });
   it("renders static hero text without SplitText chars", () => {
-    render(<ForecastGlass data={FORECAST_PLACEHOLDER} />);
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} live={false} />);
     // 靜態分支：裸 span 直書全文，無逐字拆散。
     expect(screen.getByText("Strom")).toBeTruthy();
     expect(screen.getByText("with Heavy Rain")).toBeTruthy();
