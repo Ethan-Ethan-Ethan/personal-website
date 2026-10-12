@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
-import { ETHAN_BRAND_IMAGE } from '../core/lake-assets';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import ForecastGlass from './ForecastGlass';
 import useReducedMotion from './useReducedMotion';
@@ -32,6 +31,14 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
   const time = useLocalTime();
   // 動態偏好：使用者開了「減少動態」→ 場景名用靜態字（不播逐字動畫）；跟隨 OS 即時切換。
   const reducedMotion = useReducedMotion();
+  // forecast 面板平常收起不遮魚，點房子鍵才彈出（2026-10-12 使用者回饋）。
+  const [forecastOpen, setForecastOpen] = useState(false);
+  useEffect(() => {
+    if (!forecastOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setForecastOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [forecastOpen]);
   // 連結落點沿用站內既有路由（About→履歷，Selected work→交易實驗室）；可改名。
   // 白噪音現場合成，無檔案無授權問題，播放鍵恆可按。
   const tiny: React.CSSProperties = { fontFamily: SERIF, fontSize: 11, letterSpacing: '0.08em', color: INK, textShadow: '0 1px 8px rgba(0,0,0,0.65)' };
@@ -43,11 +50,21 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
-      <a href="/" aria-label="Ethan 首頁" style={{ ...link, position: 'absolute', top: 20, left: 24 }}>
-        <img src={ETHAN_BRAND_IMAGE.src} alt={ETHAN_BRAND_IMAGE.alt} width={ETHAN_BRAND_IMAGE.width} height={ETHAN_BRAND_IMAGE.height} style={{ display: 'block', filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.55))' }} />
-      </a>
+      <button
+        type="button"
+        aria-label="Ethan 首頁"
+        aria-expanded={forecastOpen}
+        onClick={() => setForecastOpen((v) => !v)}
+        style={{ ...link, position: 'absolute', top: 20, left: 24, background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+      >
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={INK} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block', filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.55))' }}>
+          <path d="M3 10.5 12 3l9 7.5" />
+          <path d="M5 9.5V21h14V9.5" />
+          <path d="M9 21v-6h6v6" />
+        </svg>
+      </button>
 
-      <ForecastGlass data={FORECAST_PLACEHOLDER} />
+      {forecastOpen && <ForecastGlass data={FORECAST_PLACEHOLDER} />}
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>

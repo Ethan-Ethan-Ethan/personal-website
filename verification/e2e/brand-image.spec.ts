@@ -1,17 +1,30 @@
 import { expect, test } from '@playwright/test';
 
-test('brand link shows Ethan homepage image with alt text', async ({ page }) => {
+test('brand button shows home icon for Ethan homepage', async ({ page }) => {
   await page.goto('/');
-  const brand = page.getByRole('link', { name: 'Ethan 首頁' });
+  const brand = page.getByRole('button', { name: 'Ethan 首頁' });
   await expect(brand).toBeVisible();
-  const img = brand.locator('img');
-  await expect(img).toHaveAttribute('alt', 'Ethan 首頁');
-  await expect(img).toHaveAttribute('src', /ethan-brand\.png$/);
+  await expect(brand.locator('svg')).toHaveCount(1);
+});
+
+test('forecast panels stay hidden until house button opens them', async ({ page }) => {
+  await page.goto('/');
+  const brand = page.getByRole('button', { name: 'Ethan 首頁' });
+  await expect(page.getByLabel('Forecast', { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel('Saved locations')).toHaveCount(0);
+  await brand.click();
+  await expect(page.getByLabel('Forecast', { exact: true })).toBeVisible();
+  await expect(page.getByLabel('Saved locations')).toBeVisible();
+  await expect(brand).toHaveAttribute('aria-expanded', 'true');
+  await page.keyboard.press('Escape');
+  await expect(page.getByLabel('Forecast', { exact: true })).toHaveCount(0);
+  await expect(brand).toHaveAttribute('aria-expanded', 'false');
 });
 
 test('forecast glass hero, strip and rail render with placeholder data', async ({ page }) => {
   await page.goto('/');
-  const hero = page.getByLabel('Forecast');
+  await page.getByRole('button', { name: 'Ethan 首頁' }).click();
+  const hero = page.getByLabel('Forecast', { exact: true });
   await expect(hero.getByText('Weather Forecast')).toBeVisible();
   await expect(hero.getByRole('heading')).toContainText(/Strom/);
   const strip = page.getByLabel('Hourly forecast');
@@ -26,7 +39,8 @@ test('forecast glass hero, strip and rail render with placeholder data', async (
 test('forecast content stays readable with reduced motion', async ({ page, context }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
-  await expect(page.getByRole('link', { name: 'Ethan 首頁' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Ethan 首頁' })).toBeVisible();
+  await page.getByRole('button', { name: 'Ethan 首頁' }).click();
   await expect(page.getByRole('heading')).toContainText(/Heavy Rain/);
   await expect(page.getByLabel('Saved locations')).toContainText('Central Jakarta');
 });
@@ -34,6 +48,7 @@ test('forecast content stays readable with reduced motion', async ({ page, conte
 test('rail does not overlap bottom controls on desktop', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop-chrome', 'desktop layout only');
   await page.goto('/');
+  await page.getByRole('button', { name: 'Ethan 首頁' }).click();
   const rail = page.getByLabel('Saved locations');
   const play = page.getByRole('button', { name: /水聲/ });
   const rb = await rail.boundingBox();

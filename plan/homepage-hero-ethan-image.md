@@ -105,6 +105,8 @@ status: active
 
 ## Deferred（硬規則五欄，ethyl 2026-10-12）
 
+- F1 使用者回饋 2026-10-12 下午：版面超框→全組件緊湊化（hero 56px／strip chart 150／rail 300 寬，1280×720 實拍收斂）；ETHAN 像素圖→房子 SVG 首頁鍵；面板預設收起、點房子彈出（aria-expanded＋Escape 收，fadein 進場，減動畫安全）｜owner: 主 agent 已執行｜revisit: 下方 D1 人眼複驗時一併看｜blocks_current_closure: 否
+
 - D1 對比度 human acceptance｜target: glass hero 真機對比確認｜owner: 使用者｜reason: live shader 底靜態儀器值無意義，需人眼＋真機｜revisit_when: 2026-11-12 前真機驗收｜blocks_current_closure: 否
 - D2 真資料＋carousel 另案｜target: `forecast-placeholder.ts` 換真值＋carousel 新 Task｜owner: 使用者（給資料）｜reason: 目前無資料｜revisit_when: 資料回來後另開計畫｜blocks_current_closure: 否
 - D3 Worklog scribe 6 行未 commit｜target: Worklog.md 末尾 6 行｜owner: 使用者｜reason: 檔內另有 165 deletions 非本次變更，不可掃入（Commit Scope Gate）｜revisit_when: 使用者確認 Worklog diff 後｜blocks_current_closure: 否
