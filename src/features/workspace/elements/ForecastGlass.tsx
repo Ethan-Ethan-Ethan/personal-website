@@ -27,8 +27,8 @@ export default function ForecastGlass({ data, open }: Props) {
       // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
-      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transition:opacity .45s cubic-bezier(0.16,1,0.3,1),visibility 0s .45s;}.fc-node.is-open{opacity:1;visibility:visible;transition:opacity .45s cubic-bezier(0.16,1,0.3,1),visibility 0s;}@media (prefers-reduced-motion: reduce){.fc-node{transition:none;}.fc-node.is-open{opacity:1;visibility:visible;}}`}</style>
-      <div className={`${glass} ${cls('hero')}`} style={{ padding: '20px 24px', ...delay('hero') }}>
+      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transform:scale(.92) translateY(-10px);transition:opacity .45s cubic-bezier(0.16,1,0.3,1),transform .45s cubic-bezier(0.16,1,0.3,1),visibility 0s .45s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;transition:opacity .45s cubic-bezier(0.16,1,0.3,1),transform .45s cubic-bezier(0.16,1,0.3,1),visibility 0s;}.fc-origin-tl{transform-origin:top left;}.fc-origin-tc{transform-origin:top center;}@media (prefers-reduced-motion: reduce){.fc-node{transition:none;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;}}`}</style>
+      <div className={`${glass} ${cls('hero')} fc-origin-tl`} style={{ padding: '20px 24px', ...delay('hero') }}>
         <span
           style={{
             display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -47,7 +47,7 @@ export default function ForecastGlass({ data, open }: Props) {
           {data.blurb}
         </p>
       </div>
-      <div className={`${glass} ${cls('strip')}`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px', ...delay('strip') }} >
+      <div className={`${glass} ${cls('strip')} fc-origin-tl`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px', ...delay('strip') }} >
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {data.temps.map((t, i) => (
             <span key={i} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px' }}>{t}°</span>
@@ -85,7 +85,7 @@ export default function ForecastGlass({ data, open }: Props) {
     </section>
     <aside
       aria-label="Saved locations"
-      className={`forecast-rail ${cls('aside')}`}
+      className={`forecast-rail ${cls('aside')} fc-origin-tl`}
       style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3, ...delay('aside') }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>

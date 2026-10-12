@@ -84,7 +84,7 @@ export default function ForecastSideRail({ onClose, open }: { onClose: () => voi
   return (
     <nav
       aria-label="功能選單"
-      className={`forecast-side-rail fc-node${open ? ' is-open' : ''}`}
+      className={`forecast-side-rail fc-node fc-origin-tc${open ? ' is-open' : ''}`}
       style={{
         position: 'absolute', top: 20, bottom: 110, left: 24, width: 60, zIndex: 3, pointerEvents: open ? 'auto' : 'none',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10,
