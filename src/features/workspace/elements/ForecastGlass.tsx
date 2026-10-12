@@ -20,7 +20,9 @@ function useReducedMotion(): boolean {
 
 export default function ForecastGlass({ data }: Props) {
   const reducedMotion = useReducedMotion();
+  const main = data.railMain;
   return (
+    <>
     <section
       aria-label="Forecast"
       style={{ position: 'absolute', top: '15%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'auto', zIndex: 3 }}
@@ -96,5 +98,33 @@ export default function ForecastGlass({ data }: Props) {
         </div>
       </div>
     </section>
+    <aside
+      aria-label="Saved locations"
+      className="forecast-rail"
+      style={{ position: 'absolute', top: '15%', right: 38, width: 310, display: 'flex', flexDirection: 'column', gap: 20, pointerEvents: 'auto', zIndex: 3 }}
+    >
+      <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
+      <div className={`forecast-glass ${GLASS}`} style={{ padding: '24px 26px' }}>
+        <div style={{ color: 'rgba(255,255,255,.9)', fontSize: 15, fontWeight: 500 }}>{main.city}</div>
+        <div style={{ color: INK, fontSize: 92, fontWeight: 500, letterSpacing: '-4.4px', lineHeight: 1 }}>
+          {main.temp}°<span style={{ fontSize: 32 }}>C</span>
+        </div>
+        <div style={{ display: 'flex', gap: 18, marginTop: 12, color: 'rgba(255,255,255,.9)', fontSize: 14 }}>
+          <span>{main.wind} mph 風速</span>
+          <span>{main.humidity}% 濕度</span>
+          <span>{main.gust} km/h 陣風</span>
+        </div>
+      </div>
+      {data.cities.map((c) => (
+        <div key={c.area} className={`forecast-glass ${GLASS}`} style={{ padding: '14px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div>
+            <div style={{ color: 'rgba(255,255,255,.75)', fontSize: 13 }}>Indonesia／{c.area}</div>
+            <div style={{ color: INK, fontSize: 16, fontWeight: 500 }}>{c.cond}</div>
+          </div>
+          <div style={{ color: INK, fontSize: 28 }}>{c.temp}°</div>
+        </div>
+      ))}
+    </aside>
+    </>
   );
 }

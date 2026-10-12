@@ -53,4 +53,13 @@ describe("ForecastGlass hero", () => {
     expect(document.querySelectorAll("path.draw")).toHaveLength(3);
     expect(document.querySelector("clipPath#wclip")).toBeTruthy();
   });
+  it("renders rail main card and 3 city cards", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} />);
+    const rail = document.querySelector('[aria-label="Saved locations"]');
+    expect(rail?.textContent).toContain("Central Jakarta");
+    expect(rail?.textContent).toContain("10°");
+    for (const c of ["North Jakarta", "Bandung", "South Jakarta"]) {
+      expect(rail?.textContent).toContain(c);
+    }
+  });
 });
