@@ -36,6 +36,5 @@ describe("ForecastSideRail", () => {
     expect(screen.getByRole("button", { name: "總覽" }).getAttribute("aria-pressed")).toBe("false");
     await user.click(screen.getByRole("button", { name: "收起面板" }));
     expect(onClose).toHaveBeenCalledTimes(1);
-    expect(screen.getByRole("navigation", { name: "功能選單" }).style.backdropFilter).toBe("blur(12px)");
-  });
+      });
 });

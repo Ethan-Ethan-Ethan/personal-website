@@ -93,8 +93,8 @@ export default function ForecastSideRail({ onClose, live }: { onClose: () => voi
         position: 'absolute', top: 20, bottom: 110, left: 24, width: 60, zIndex: 3, pointerEvents: 'auto',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10, transformOrigin: 'top center',
         background: 'rgba(255,255,255,0.10)',
-        backdropFilter: live ? 'blur(12px)' : 'none',
-        WebkitBackdropFilter: live ? 'blur(12px)' : 'none',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         opacity: preEnter ? 0 : undefined,
       }}
     >

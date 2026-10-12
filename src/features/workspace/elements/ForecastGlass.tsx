@@ -9,7 +9,7 @@ type Props = {
 };
 
 const GLASS = 'bg-white/10 border border-white/20 rounded-2xl';
-/** 進場完成才掛霧化：動畫中 backdrop-filter 會與位移打架造成兩段跳（2026-10-12 無 blur 對照實證）。 */
+/** 霧化全程掛載（與淡入同一包絡；進場中途掛載會造成第二段跳，見 2026-10-13 根因）。 */
 const GLASS_BLUR = 'backdrop-blur-md';
 const INK = '#ffffff';
 const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
@@ -18,7 +18,7 @@ export default function ForecastGlass({ data, live }: Props) {
   const reducedMotion = useReducedMotion();
   // 字只在 orchestrator 點火且非減動畫時才播（其餘一律靜態字，版式先撐住）。
   const animateText = live && !reducedMotion;
-  const glass = `forecast-glass ${GLASS}${live ? ` ${GLASS_BLUR}` : ''}`;
+  const glass = `forecast-glass ${GLASS} ${GLASS_BLUR}`;
   // 同步預藏：gsap 動態 import 是非同步的，未回來前瀏覽器會先畫出終態造成閃現；
   // 此处先 opacity 0，GSAP fromTo 同值起播，live 後放行（減動畫永不藏）。
   const preEnter = !reducedMotion && !live;
