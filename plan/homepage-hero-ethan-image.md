@@ -56,7 +56,7 @@ status: active
 | 2 | 玻璃 hero | ForecastGlass hero 卡＋entrance（SplitText 複用） | ForecastGlass.tsx（新）、LakeOverlay.tsx | done |
 | 3 | 氣溫 strip | 氣溫列＋SVG wave draw/fill | ForecastGlass.tsx、forecast-placeholder.ts（新） | done |
 | 4 | 右欄 | 310u 右欄大卡＋三城市小卡 | ForecastGlass.tsx | done |
-| 5 | 全鏈驗證 | 對比／減動畫／e2e／preview 門＋Dashboard 同步 | verification/contracts、Dashboard.md | in_progress |
+| 5 | 全鏈驗證 | 對比／減動畫／e2e／preview 門＋Dashboard 同步 | verification/contracts、Dashboard.md | done |
 
 ## Key Files
 
@@ -100,7 +100,14 @@ status: active
 - [x] Phase 2：hero glass 卡＋SplitText entrance＋hover
 - [x] Phase 3：氣溫列＋SVG wave draw→fill wipe
 - [x] Phase 4：右欄大卡＋三小卡（靜態；carousel 已排除，revisit 見 Task 6）
-- [ ] Phase 5：全鏈驗證＋Dashboard/Worklog 同步＋commit
+- [x] Phase 5：全鏈驗證＋Dashboard/Worklog 同步＋commit
+
+## Deferred（硬規則五欄，ethyl 2026-10-12）
+
+- D1 對比度 human acceptance｜target: glass hero 真機對比確認｜owner: 使用者｜reason: live shader 底靜態儀器值無意義，需人眼＋真機｜revisit_when: 2026-11-12 前真機驗收｜blocks_current_closure: 否
+- D2 真資料＋carousel 另案｜target: `forecast-placeholder.ts` 換真值＋carousel 新 Task｜owner: 使用者（給資料）｜reason: 目前無資料｜revisit_when: 資料回來後另開計畫｜blocks_current_closure: 否
+- D3 Worklog scribe 6 行未 commit｜target: Worklog.md 末尾 6 行｜owner: 使用者｜reason: 檔內另有 165 deletions 非本次變更，不可掃入（Commit Scope Gate）｜revisit_when: 使用者確認 Worklog diff 後｜blocks_current_closure: 否
+- D4 全量 e2e 47 failed 跟進｜target: workspace/visual-fusion/hotspot 舊分支 specs｜owner: 維護者另案｜reason: pre-existing（USE_LAKE=true 基線既有，index.astro 零改動）｜revisit_when: 切回 WorkspaceDesktop 或 specs 改寫時｜blocks_current_closure: 否
 
 ---
 
