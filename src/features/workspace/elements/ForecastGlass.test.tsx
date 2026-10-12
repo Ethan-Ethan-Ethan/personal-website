@@ -69,6 +69,7 @@ describe("ForecastGlass live", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} live />);
     await waitFor(() => expect(document.querySelectorAll(".split-char").length).toBeGreaterThan(0));
     expect(document.querySelector(".chart-live")).toBeTruthy();
+    expect(document.querySelector(".backdrop-blur-md")).toBeTruthy();
   });
 });
 

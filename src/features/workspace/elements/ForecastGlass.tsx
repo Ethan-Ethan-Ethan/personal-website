@@ -8,7 +8,9 @@ type Props = {
   live: boolean;
 };
 
-const GLASS = 'backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl';
+const GLASS = 'bg-white/10 border border-white/20 rounded-2xl';
+/** 進場完成才掛霧化：動畫中 backdrop-filter 會與位移打架造成兩段跳（2026-10-12 無 blur 對照實證）。 */
+const GLASS_BLUR = 'backdrop-blur-md';
 const INK = '#ffffff';
 const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
 
@@ -16,6 +18,7 @@ export default function ForecastGlass({ data, live }: Props) {
   const reducedMotion = useReducedMotion();
   // 字只在 orchestrator 點火且非減動畫時才播（其餘一律靜態字，版式先撐住）。
   const animateText = live && !reducedMotion;
+  const glass = `forecast-glass ${GLASS}${live ? ` ${GLASS_BLUR}` : ''}`;
   const main = data.railMain;
   return (
     <>
@@ -27,7 +30,7 @@ export default function ForecastGlass({ data, live }: Props) {
       style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .split-parent,.forecast-glass .split-char,.forecast-glass .split-word{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
-      <div className={`forecast-glass ${GLASS}`} style={{ padding: '20px 24px' }}>
+      <div className={glass} style={{ padding: '20px 24px' }}>
         <span
           style={{
             display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -61,7 +64,7 @@ export default function ForecastGlass({ data, live }: Props) {
           {data.blurb}
         </p>
       </div>
-      <div className={`forecast-glass ${GLASS}${live ? ' chart-live' : ''}`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px' }} data-entrance="strip">
+      <div className={`${glass}${live ? " chart-live" : ""}`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px' }} data-entrance="strip">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {data.temps.map((t, i) => (
             <span key={i} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px' }}>{t}°</span>
@@ -104,7 +107,7 @@ export default function ForecastGlass({ data, live }: Props) {
       style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
-      <div className={`forecast-glass ${GLASS}`} style={{ padding: '18px 20px' }}>
+      <div className={glass} style={{ padding: '18px 20px' }}>
         <div style={{ color: 'rgba(255,255,255,.9)', fontSize: 14, fontWeight: 500 }}>{main.city}</div>
         <div style={{ color: INK, fontSize: 72, fontWeight: 500, letterSpacing: '-3.5px', lineHeight: 1 }}>
           {main.temp}°<span style={{ fontSize: 26 }}>C</span>
@@ -116,7 +119,7 @@ export default function ForecastGlass({ data, live }: Props) {
         </div>
       </div>
       {data.cities.map((c) => (
-        <div key={c.area} className={`forecast-glass ${GLASS}`} style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div key={c.area} className={glass} style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
             <div style={{ color: 'rgba(255,255,255,.75)', fontSize: 12 }}>Indonesia／{c.area}</div>
             <div style={{ color: INK, fontSize: 15, fontWeight: 500 }}>{c.cond}</div>

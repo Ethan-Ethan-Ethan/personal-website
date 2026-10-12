@@ -78,7 +78,7 @@ const ICONS: IconDef[] = [
 // 左側欄（膠囊佔比＋參考圓角 20px；頂房子槽、中五鍵、底收起鍵）。
 // 框體開關由 LakeOverlay 控制；房子常駐框外（同槽幾何），永不卸載防閃爍。
 // 底部停在 phase 文字之上（bottom:110），不壓字。
-export default function ForecastSideRail({ onClose }: { onClose: () => void }) {
+export default function ForecastSideRail({ onClose, live }: { onClose: () => void; live: boolean }) {
   const [active, setActive] = useState('grid');
   return (
     <nav
@@ -89,9 +89,12 @@ export default function ForecastSideRail({ onClose }: { onClose: () => void }) {
       style={{
         position: 'absolute', top: 20, bottom: 110, left: 24, width: 60, zIndex: 3, pointerEvents: 'auto',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10, transformOrigin: 'top center',
+        background: 'rgba(255,255,255,0.10)',
+        backdropFilter: live ? 'blur(12px)' : 'none',
+        WebkitBackdropFilter: live ? 'blur(12px)' : 'none',
       }}
     >
-      <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.20);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}}`}</style>
+      <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}}`}</style>
       <div aria-hidden="true" style={{ width: 40, height: 40 }} />
       <div aria-hidden="true" style={{ width: 24, height: 1, background: 'rgba(255,255,255,0.25)' }} />
       {ICONS.map((icon) => {
