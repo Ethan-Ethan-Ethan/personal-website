@@ -63,3 +63,27 @@ describe("ForecastGlass hero", () => {
     }
   });
 });
+
+describe("ForecastGlass reduced motion", () => {
+  beforeAll(async () => {
+    vi.resetModules();
+    Object.defineProperty(window, "matchMedia", {
+      value: vi.fn(() => ({
+        matches: true,
+        addEventListener() {},
+        removeEventListener() {},
+        addListener() {},
+        removeListener() {},
+      })),
+      configurable: true,
+    });
+    ({ default: ForecastGlass } = await import("./ForecastGlass"));
+  });
+  it("renders static hero text without SplitText chars", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} />);
+    // 靜態分支：裸 span 直書全文，無逐字拆散。
+    expect(screen.getByText("Strom")).toBeTruthy();
+    expect(screen.getByText("with Heavy Rain")).toBeTruthy();
+    expect(document.querySelectorAll(".split-char")).toHaveLength(0);
+  });
+});

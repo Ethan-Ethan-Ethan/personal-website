@@ -88,12 +88,13 @@ status: active
 - [x] `verify e2e` 本次範圍綠（brand-image.spec 6/6：品牌圖＋glass 三區＋reduced-motion，desktop＋mobile，EXIT 0）
 - [x] reduced-motion：emulated reduce 下內容完整可讀（e2e 實證）；動畫 CSS 側全有 `@media` 終態
 - [ ] 對比度量測：儀器量測值 MISSING——glass 白字壓 live shader，靜態儀器值無意義；已做 drop-shadow＋sheen＋減動畫終態；**待真機 human acceptance**（沿 lake-landing 前例）
-- [ ] 全量 e2e 47 failed＝**pre-existing 非回歸**：失敗斷言全指向 `.workspace-page`／hotspot trigger（WorkspaceDesktop 停用分支）；`USE_LAKE=true` 在基線 f73326d 已寫死（L19），`index.astro` 本次零改動；我的 6 個新斷言全綠且 island 正常 hydrate，排除整頁 crash 可能性
+- [ ] 全量 e2e 47 failed＝**已證 pre-existing 非回歸**：36 條 waiting-for 定位器逐一映射到停用分支來源（見 appendix [muse-review-evidence.md](homepage-hero-ethan-image-appendix/muse-review-evidence.md) §2）；`USE_LAKE=true` 在基線 f73326d 已寫死（L19），`index.astro` 本次 diff 零行；17 passed（含新 glass 7 斷言）證 island 正常 hydrate
 - [x] 手機版右欄改堆疊不斷裂（`forecast-rail` ≤900px 媒體查詢＋mobile-chrome e2e 實證）
 
 ## TODO
 
 > G4 verdict: `G4-Issues Found`→3 項已修（簽名单一正本／SVG 可執行定義＋終態斷言／carousel 排除＋revisit），詳 [verdict-g4.md](homepage-hero-ethan-image-appendix/verdict-g4.md)；待使用者批准進 Phase 5。
+> muse 執行後審查：`G-Issues`→Q1 兩實修（hero reduced-motion 死選擇器→split 終態＋共用 useReducedMotion hook；皆已修＋單測）＋Q2 證據包（本 appendix [muse-review-evidence.md](homepage-hero-ethan-image-appendix/muse-review-evidence.md)，47 failed＝已證 pre-existing）＋保留異議（rail 不重疊 e2e 已補，7/7 綠）。
 
 - [x] Phase 0：註冊 palette＋provenance，跑 system validate 見綠
 - [x] Phase 1：Ethan 換圖＋alt＋pointerEvents 保留，單測＋e2e

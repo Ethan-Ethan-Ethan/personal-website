@@ -30,3 +30,16 @@ test('forecast content stays readable with reduced motion', async ({ page, conte
   await expect(page.getByRole('heading')).toContainText(/Heavy Rain/);
   await expect(page.getByLabel('Saved locations')).toContainText('Central Jakarta');
 });
+
+test('rail does not overlap bottom controls on desktop', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop-chrome', 'desktop layout only');
+  await page.goto('/');
+  const rail = page.getByLabel('Saved locations');
+  const play = page.getByRole('button', { name: /水聲/ });
+  const rb = await rail.boundingBox();
+  const pb = await play.boundingBox();
+  expect(rb).toBeTruthy();
+  expect(pb).toBeTruthy();
+  const disjoint = rb!.y + rb!.height <= pb!.y || rb!.x >= pb!.x + pb!.width;
+  expect(disjoint).toBe(true);
+});

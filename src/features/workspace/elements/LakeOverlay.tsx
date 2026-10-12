@@ -3,6 +3,7 @@ import type { LakePhase } from '../core/lake-palette';
 import { ETHAN_BRAND_IMAGE } from '../core/lake-assets';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import ForecastGlass from './ForecastGlass';
+import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
 import '../../../components/reactbits/SplitText.css';
 
@@ -29,11 +30,8 @@ function useLocalTime(): string {
 
 export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, trackPlaying, onTogglePlay }: Props) {
   const time = useLocalTime();
-  // 動態偏好：使用者開了「減少動態」→ 場景名用靜態字（不播逐字動畫）。
-  const [reducedMotion, setReducedMotion] = useState(false);
-  useEffect(() => {
-    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }, []);
+  // 動態偏好：使用者開了「減少動態」→ 場景名用靜態字（不播逐字動畫）；跟隨 OS 即時切換。
+  const reducedMotion = useReducedMotion();
   // 連結落點沿用站內既有路由（About→履歷，Selected work→交易實驗室）；可改名。
   // 白噪音現場合成，無檔案無授權問題，播放鍵恆可按。
   const tiny: React.CSSProperties = { fontFamily: SERIF, fontSize: 11, letterSpacing: '0.08em', color: INK, textShadow: '0 1px 8px rgba(0,0,0,0.65)' };

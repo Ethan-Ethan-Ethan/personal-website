@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import SplitText from '../../../components/reactbits/SplitText';
 import type { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
+import useReducedMotion from './useReducedMotion';
 
 type Props = {
   data: typeof FORECAST_PLACEHOLDER;
@@ -9,14 +9,6 @@ type Props = {
 const GLASS = 'backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl';
 const INK = '#ffffff';
 const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
-
-function useReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }, []);
-  return reduced;
-}
 
 export default function ForecastGlass({ data }: Props) {
   const reducedMotion = useReducedMotion();
@@ -28,7 +20,7 @@ export default function ForecastGlass({ data }: Props) {
       // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       style={{ position: 'absolute', top: '15%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
-      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .hero-line{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
+      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .split-parent,.forecast-glass .split-char,.forecast-glass .split-word{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
       <div className={`forecast-glass ${GLASS}`} style={{ padding: '28px 32px' }}>
         <span
           style={{
