@@ -1,4 +1,4 @@
-# N-budget registry (G2). Gate: `npm run site -- verify n-budget`.
+# N-budget registry (G2). Gate: `npm run verify:n-budget`.
 # Any entry with used > N FAILS the gate. New trial cases register here
 # BEFORE their first run (fail-closed: missing file also fails).
 - case: nebula-trial

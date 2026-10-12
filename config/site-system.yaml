@@ -55,4 +55,6 @@ commands:
     all: { owner: site-shell, input: {}, result: verification-passed, failure: verification-failed }
 verification:
   commands:
+    # NOTE 2026-10-13：此處 content 指 content check（auto 模式，verify.mjs 內以 runContentSync 直調補位），
+    # 並非 verify.* action；CLI 無 verify.content 系有意（命令歸 content.*），勿另建。
     verify-all: [unit, e2e, contracts, content, build]

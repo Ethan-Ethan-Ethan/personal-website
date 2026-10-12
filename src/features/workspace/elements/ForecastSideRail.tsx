@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
-import useReducedMotion from './useReducedMotion';
 
 const INK = '#ffffff';
 

@@ -25,7 +25,8 @@
     "test:e2e:raw": "playwright test",
     "commit:safe": "sh /Users/ethan/Documents/scripts/safe-commit.sh --repo . --verify --",
     "verify:n-budget": "node scripts/n-budget-check.mjs",
-    "verify:baseline-hashes": "node scripts/baseline-hash-check.mjs"
+    "verify:baseline-hashes": "node scripts/baseline-hash-check.mjs",
+    "verify:transition": "node scripts/check-transition-single-source.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.5",

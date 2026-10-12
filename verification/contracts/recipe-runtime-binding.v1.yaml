@@ -1,6 +1,10 @@
-# recipe-runtime-binding.v1.yaml — Recipe→site-system 綁定表契約（Task 6）
+# recipe-runtime-binding.v1.yaml — Recipe→site-system 綁定表契約（Task 6，runtime legacy contract）
 # 上游：website-recipe.v1.schema.yaml＋Task 2 recipe_hash（scene/visual/motion 語意層）
 # 規則：缺值一律降級靜態可讀頁，絕不猜測補值。本 Task 不改 components/CSS/Three.js。
+# NOTE 2026-10-13（binding 對齊）：WebsiteRecipeV1（website-style-recipe.ts L37）已演進為
+# scene.{depth,atmosphere,motionDensity}／visual.{palette:string,lighting,contrast,glow}／motion.{hero,transitions,continuity}；
+# 本表為 bindRecipe() 實際消費的 legacy runtime 形（scene.id／visual.palette[]／visual.hotspot／motion.loop），
+# 後續另案對齊前勿直接混用兩形；bindRecipe 改形前本表凍結。
 version: "1"
 bindings:
   - {recipe: "scene.id", runtime: "route key", type: "string", unknown: "拒絕渲染（staticFallback=true）"}
