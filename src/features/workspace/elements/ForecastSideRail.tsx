@@ -83,7 +83,7 @@ export default function ForecastSideRail({ onClose, open }: { onClose: () => voi
   return (
     <nav
       aria-label="功能選單"
-      className={`forecast-side-rail fc-node fc-origin-tc${open ? ' is-open' : ''}`}
+      className={`forecast-side-rail fc-node fc-dir-l${open ? ' is-open' : ''}`}
       style={{
         position: 'absolute', top: 20, bottom: 110, left: 24, width: 60, zIndex: 3, pointerEvents: open ? 'auto' : 'none',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10,
@@ -92,7 +92,7 @@ export default function ForecastSideRail({ onClose, open }: { onClose: () => voi
         WebkitBackdropFilter: 'blur(12px)',
       }}
     >
-      <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}}`}</style>
+      <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.fc-node{opacity:0;visibility:hidden;transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),visibility 0s .7s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),visibility 0s;}.fc-dir-l{transform:translateX(-26px);}.fc-dir-up{transform:translateY(14px);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}.fc-node{transition:none;transition-delay:0s !important;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;}}`}</style>
       <div aria-hidden="true" style={{ width: 40, height: 40 }} />
       <div aria-hidden="true" style={{ width: 24, height: 1, background: 'rgba(255,255,255,0.25)' }} />
       {ICONS.map((icon) => {

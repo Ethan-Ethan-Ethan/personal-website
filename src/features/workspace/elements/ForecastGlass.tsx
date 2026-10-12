@@ -2,7 +2,9 @@ import type { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 
 type Props = {
   data: typeof FORECAST_PLACEHOLDER;
-  /** 過場唯一正本：開關只翻 open，所有動畫皆純 CSS（無 JS staging、無掛載開關）。 */
+  /** 過場唯一正本：開關只翻 open，所有動畫皆純 CSS（無 JS staging、無掛載開關）。
+   * 進場語言對齊 forecast-center 參考編舞：slideL/slideR/riseIn＋mask reveal＋wipe，
+   * hero／strip 無玻璃卡（裸字直落背景），玻璃只在 chip／右欄卡／側軌。 */
   open: boolean;
 };
 
@@ -11,48 +13,46 @@ const GLASS_BLUR = 'backdrop-blur-md';
 const INK = '#ffffff';
 const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
 
-/** 進場 stagger（ms）：rail 0 → hero 80 → strip 160 → aside 0（右欄與容器同幀，消先透後實）。關閉一律 0ms 同收。 */
-const DELAY = { hero: 80, strip: 160, aside: 0 } as const;
+/** 開場 stagger（ms，toggle 壓縮版參考 beats）：chip 100 → h1 160/260 → blurb 380 → 右卡 250/320/390/460 → 氣溫 500+i*60 → 波形 700 → 星期 1100+i*55。關閉一律 0ms 同收。 */
+const D = { chip: 100, line1: 160, line2: 260, blurb: 380, card0: 250, cardStep: 70, temp0: 500, tempStep: 60, wave: 700, day0: 1100, dayStep: 55 } as const;
 
 export default function ForecastGlass({ data, open }: Props) {
   const main = data.railMain;
   // blur 與 is-open 原子同 commit：開時才霧化，避免 opacity 跑完才霧化的第二段跳
   const glass = `forecast-glass ${GLASS_BASE}${open ? ` ${GLASS_BLUR}` : ''}`;
-  const cls = (name: 'hero' | 'strip' | 'aside') => `fc-node${open ? ' is-open' : ''}`;
-  const delay = (name: 'hero' | 'strip' | 'aside'): { transitionDelay: string } => ({
-    transitionDelay: open ? `${DELAY[name]}ms` : '0ms',
-  });
+  const on = open ? ' is-open' : '';
+  const dl = (ms: number): { transitionDelay: string } => ({ transitionDelay: open ? `${ms}ms` : '0ms' });
   return (
     <>
     <section
       aria-label="Forecast"
-      // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
+      // hero／strip 無卡：靜態定位殼，pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
-      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transform:scale(.92) translateY(-10px);transition:opacity .45s cubic-bezier(0.16,1,0.3,1),transform .45s cubic-bezier(0.16,1,0.3,1),visibility 0s .45s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;transition:opacity .45s cubic-bezier(0.16,1,0.3,1),transform .45s cubic-bezier(0.16,1,0.3,1),visibility 0s;}.fc-origin-tl{transform-origin:top left;}.fc-origin-tc{transform-origin:top center;}@media (prefers-reduced-motion: reduce){.fc-node,.fc-node.is-open{transition:none;transition-delay:0s;opacity:1;visibility:visible;transform:none;}.fc-node:not(.is-open){opacity:0;visibility:hidden;}}`}</style>
-      <div className={`${glass} ${cls('hero')} fc-origin-tl`} style={{ padding: '20px 24px', ...delay('hero') }}>
-        <span
-          style={{
-            display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
-            color: INK, opacity: 0.85, border: '1px solid rgba(255,255,255,0.35)',
-            borderRadius: 999, padding: '3px 10px', marginBottom: 12,
-          }}
-        >
+      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s .7s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s;}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}@media (prefers-reduced-motion: reduce){.fc-node{transition:none;transition-delay:0s !important;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);}.mask-line>span{transition:none;transform:none;}}`}</style>
+      <div style={{ marginBottom: 12 }}>
+        <span className={`fc-node fc-wipe-r${on}`} style={{
+          display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
+          color: INK, border: '1px solid rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.15)',
+          borderRadius: 999, padding: '3px 10px', ...dl(D.chip),
+        }}>
           {data.chip}
         </span>
-        <h1 style={{ margin: 0, color: INK, fontSize: 'clamp(32px, 4.5vw, 56px)', lineHeight: 1.02, letterSpacing: '-0.02em', fontWeight: 600 }}>
-          {data.heroLines.map((line) => (
-            <span key={line} style={{ display: 'block' }}>{line}</span>
-          ))}
-        </h1>
-        <p style={{ margin: '12px 0 0', maxWidth: 480, fontSize: 14, lineHeight: '22px', fontWeight: 500, letterSpacing: '-0.3px', color: 'rgba(255,255,255,0.95)' }}>
-          {data.blurb}
-        </p>
       </div>
-      <div className={`${glass} ${cls('strip')} fc-origin-tl`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px', ...delay('strip') }} >
+      <h1 style={{ margin: 0, color: INK, fontSize: 'clamp(32px, 4.5vw, 56px)', lineHeight: 1.02, letterSpacing: '-0.02em', fontWeight: 600 }}>
+        {data.heroLines.map((line, i) => (
+          <span key={line} className="mask-line">
+            <span style={{ transitionDelay: open ? `${i === 0 ? D.line1 : D.line2}ms` : '0ms', ...(open ? {} : { transform: 'translateY(115%)' }) }} className={open ? 'is-open' : ''}>{line}</span>
+          </span>
+        ))}
+      </h1>
+      <p className={`fc-node fc-wipe-d${on}`} style={{ margin: '12px 0 0', maxWidth: 480, fontSize: 14, lineHeight: '22px', fontWeight: 500, letterSpacing: '-0.3px', color: 'rgba(255,255,255,0.95)', ...dl(D.blurb) }}>
+        {data.blurb}
+      </p>
+      <div className={open ? 'is-open' : ''} aria-label="Hourly forecast" style={{ marginTop: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {data.temps.map((t, i) => (
-            <span key={i} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px' }}>{t}°</span>
+            <span key={i} className={`fc-node fc-dir-up${on}`} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px', ...dl(D.temp0 + i * D.tempStep) }}>{t}°</span>
           ))}
         </div>
         <svg viewBox="0 0 835 230" preserveAspectRatio="none" style={{ width: '100%', height: 150, marginTop: 24 }}>
@@ -68,15 +68,16 @@ export default function ForecastGlass({ data, open }: Props) {
           <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="6.2" opacity=".17" pathLength={1} className="draw" />
           <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="4.6" opacity=".26" pathLength={1} className="draw" />
           <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="3.4" pathLength={1} className="draw" />
-          <style>{`@keyframes drawLine{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.draw{stroke-dasharray:1;stroke-dashoffset:0;}.wipe{transform:scaleX(1);transform-origin:left;}.is-open .draw{stroke-dashoffset:1;animation:drawLine 1.6s ease forwards;}.is-open .wipe{transform:scaleX(0);animation:wipeIn 1.2s .9s ease forwards;}@keyframes wipeIn{to{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.draw,.wipe,.is-open .draw,.is-open .wipe{animation:none}.draw,.is-open .draw{stroke-dashoffset:0}.wipe,.is-open .wipe{transform:scaleX(1)}}`}</style>
+          <style>{`@keyframes drawLine{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.draw{stroke-dasharray:1;stroke-dashoffset:0;}.wipe{transform:scaleX(1);transform-origin:left;}.is-open .draw{stroke-dashoffset:1;animation:drawLine 1.6s ease forwards;animation-delay:${D.wave}ms;}.is-open .wipe{transform:scaleX(0);animation:wipeIn 1.2s ease forwards;animation-delay:${D.wave + 220}ms;}@keyframes wipeIn{to{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.draw,.wipe,.is-open .draw,.is-open .wipe{animation:none;animation-delay:0s;}.draw,.is-open .draw{stroke-dashoffset:0;}.wipe,.is-open .wipe{transform:scaleX(1);}}`}</style>
         </svg>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: -18 }}>
           {data.days.map((d, i) => (
             <span
               key={d}
+              className={`fc-node fc-dir-up${on}`}
               style={{
                 color: i === data.activeDay ? '#fff' : 'rgba(255,255,255,.88)',
-                fontWeight: i === data.activeDay ? 600 : 500, fontSize: 15,
+                fontWeight: i === data.activeDay ? 600 : 500, fontSize: 15, ...dl(D.day0 + i * D.dayStep),
               }}
             >
               {d}
@@ -91,7 +92,7 @@ export default function ForecastGlass({ data, open }: Props) {
       style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3, visibility: open ? 'visible' : 'hidden' }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
-      <div className={`${glass} ${cls('aside')}`} style={{ padding: '18px 20px', ...delay('aside') }}>
+      <div className={`${glass} fc-node fc-dir-r${on}`} style={{ padding: '18px 20px', ...dl(D.card0) }}>
         <div style={{ color: 'rgba(255,255,255,.9)', fontSize: 14, fontWeight: 500 }}>{main.city}</div>
         <div style={{ color: INK, fontSize: 72, fontWeight: 500, letterSpacing: '-3.5px', lineHeight: 1 }}>
           {main.temp}°<span style={{ fontSize: 26 }}>C</span>
@@ -102,8 +103,8 @@ export default function ForecastGlass({ data, open }: Props) {
           <span>{main.gust} km/h 陣風</span>
         </div>
       </div>
-      {data.cities.map((c) => (
-        <div key={c.area} className={`${glass} ${cls('aside')}`} style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', ...delay('aside') }}>
+      {data.cities.map((c, i) => (
+        <div key={c.area} className={`${glass} fc-node fc-dir-r${on}`} style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', ...dl(D.card0 + (i + 1) * D.cardStep) }}>
           <div>
             <div style={{ color: 'rgba(255,255,255,.75)', fontSize: 12 }}>Indonesia／{c.area}</div>
             <div style={{ color: INK, fontSize: 15, fontWeight: 500 }}>{c.cond}</div>

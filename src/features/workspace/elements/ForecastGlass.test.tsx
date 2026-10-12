@@ -46,7 +46,8 @@ describe("ForecastGlass", () => {
     for (const d of ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]) {
       expect(strip?.textContent).toContain(d);
     }
-    expect(document.querySelectorAll(".fc-node.is-open")).toHaveLength(6);
+    expect(document.querySelectorAll(".fc-node.is-open").length).toBeGreaterThanOrEqual(18);
+    expect(document.querySelectorAll(".mask-line > span.is-open")).toHaveLength(2);
     expect(document.querySelectorAll("path.draw")).toHaveLength(3);
     expect(document.querySelector("clipPath#wclip")).toBeTruthy();
   });

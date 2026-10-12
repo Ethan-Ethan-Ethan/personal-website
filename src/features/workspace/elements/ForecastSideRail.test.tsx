@@ -8,12 +8,17 @@ afterEach(() => cleanup());
 
 describe("ForecastSideRail", () => {
   it("renders 5 icon buttons with grid active by default", () => {
-    render(<ForecastSideRail onClose={() => {}} open={false} />);
+    // 按鍵只在開啟態可及（關閉態 visibility:hidden 整棵藏起）：在此渲染開啟態驗證
+    render(<ForecastSideRail onClose={() => {}} open />);
     for (const label of ["總覽", "圖表", "地區", "日曆", "搜尋"]) {
       expect(screen.getByRole("button", { name: label })).toBeTruthy();
     }
     expect(screen.getByRole("button", { name: "總覽" }).getAttribute("aria-pressed")).toBe("true");
+  });
+  it("hides whole rail when closed", () => {
+    render(<ForecastSideRail onClose={() => {}} open={false} />);
     expect(document.querySelector(".fc-node.is-open")).toBeFalsy();
+    expect(getComputedStyle(document.querySelector(".forecast-side-rail") as Element).visibility).toBe("hidden");
   });
   it("switches active on click and closes via bottom button", async () => {
     const user = userEvent.setup();
