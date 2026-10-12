@@ -47,7 +47,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
 
   return (
     <div className="lake-overlay" aria-hidden="false" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2 }}>
-      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}`}</style>
+      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .growin{animation:growin .45s cubic-bezier(0.16,1,0.3,1) both;}@keyframes growin{from{opacity:0;transform:scale(.92) translateY(-10px);}to{opacity:1;transform:none;}}@media (prefers-reduced-motion: reduce){.lake-overlay .growin{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}`}</style>
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
@@ -56,7 +56,8 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         aria-label="Ethan 首頁"
         aria-expanded={forecastOpen}
         onClick={() => setForecastOpen((v) => !v)}
-        style={{ ...link, position: 'absolute', top: 20, left: 24, background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+        // 中線對齊：房子 26px 置中於下方 60px 側軌（24＋30−13＝41）
+        style={{ ...link, position: 'absolute', top: 20, left: 41, background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
       >
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={INK} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block', filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.55))' }}>
           <path d="M3 10.5 12 3l9 7.5" />

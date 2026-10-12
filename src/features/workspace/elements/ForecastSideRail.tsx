@@ -71,10 +71,10 @@ export default function ForecastSideRail() {
   return (
     <nav
       aria-label="功能選單"
-      className="forecast-side-rail fadein"
+      className="forecast-side-rail growin"
       style={{
         position: 'absolute', top: 76, left: 24, zIndex: 3, pointerEvents: 'auto',
-        display: 'flex', flexDirection: 'column', gap: 6, padding: 10,
+        display: 'flex', flexDirection: 'column', gap: 6, padding: 10, transformOrigin: 'top center',
       }}
     >
       <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.20);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}}`}</style>

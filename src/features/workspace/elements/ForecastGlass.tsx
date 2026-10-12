@@ -17,9 +17,10 @@ export default function ForecastGlass({ data }: Props) {
     <>
     <section
       aria-label="Forecast"
-      className="fadein"
+      className="growin"
       // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
-      style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
+      // 生長原點：左上（房子方向）
+      style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3, transformOrigin: 'top left' }}
     >
       <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .split-parent,.forecast-glass .split-char,.forecast-glass .split-word{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
       <div className={`forecast-glass ${GLASS}`} style={{ padding: '20px 24px' }}>
@@ -94,8 +95,8 @@ export default function ForecastGlass({ data }: Props) {
     </section>
     <aside
       aria-label="Saved locations"
-      className="forecast-rail fadein"
-      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3 }}
+      className="forecast-rail growin"
+      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3, transformOrigin: 'top left' }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
       <div className={`forecast-glass ${GLASS}`} style={{ padding: '18px 20px' }}>
