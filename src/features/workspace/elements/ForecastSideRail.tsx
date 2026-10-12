@@ -3,6 +3,16 @@ import type { ReactNode } from 'react';
 
 const INK = '#ffffff';
 
+export function HouseIcon({ size = 24 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block', filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.55))' }}>
+      <path d="M3 10.5 12 3l9 7.5" />
+      <path d="M5 9.5V21h14V9.5" />
+      <path d="M9 21v-6h6v6" />
+    </svg>
+  );
+}
+
 type IconDef = { id: string; label: string; path: ReactNode };
 
 const ICONS: IconDef[] = [
@@ -92,11 +102,7 @@ export default function ForecastSideRail({ homeExpanded, onHomeToggle }: {
           display: 'grid', placeItems: 'center', background: 'transparent', color: INK,
         }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block', filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.55))' }}>
-          <path d="M3 10.5 12 3l9 7.5" />
-          <path d="M5 9.5V21h14V9.5" />
-          <path d="M9 21v-6h6v6" />
-        </svg>
+        <HouseIcon size={24} />
       </button>
       <div aria-hidden="true" style={{ width: 24, height: 1, background: 'rgba(255,255,255,0.25)' }} />
       {ICONS.map((icon) => {

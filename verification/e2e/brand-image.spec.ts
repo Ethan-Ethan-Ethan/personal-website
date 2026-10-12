@@ -6,12 +6,13 @@ test('brand button shows home icon for Ethan homepage', async ({ page }) => {
   await expect(brand).toBeVisible();
   await expect(brand.locator('svg')).toHaveCount(1);
   const rail = page.getByRole('navigation', { name: '功能選單' });
-  await expect(rail).toBeVisible();
+  await expect(rail).toHaveCount(0);
   await brand.click();
+  await expect(rail).toBeVisible();
   await expect(rail.getByRole('button', { name: '總覽' })).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByLabel('Forecast', { exact: true })).toBeVisible();
   await page.keyboard.press('Escape');
-  await expect(rail).toBeVisible();
+  await expect(rail).toHaveCount(0);
   await expect(page.getByLabel('Forecast', { exact: true })).toHaveCount(0);
 });
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import ForecastGlass from './ForecastGlass';
-import ForecastSideRail from './ForecastSideRail';
+import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
 import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
 import '../../../components/reactbits/SplitText.css';
@@ -51,9 +51,23 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
-      <ForecastSideRail homeExpanded={forecastOpen} onHomeToggle={() => setForecastOpen((v) => !v)} />
-
-      {forecastOpen && <ForecastGlass data={FORECAST_PLACEHOLDER} />}
+      {forecastOpen ? (
+        <>
+          <ForecastSideRail homeExpanded={forecastOpen} onHomeToggle={() => setForecastOpen((v) => !v)} />
+          <ForecastGlass data={FORECAST_PLACEHOLDER} />
+        </>
+      ) : (
+        // 收起態：只留房子（中線對齊框內位置：框內房子中心 (54,50)，26px icon 置於 top:37 left:41）
+        <button
+          type="button"
+          aria-label="Ethan 首頁"
+          aria-expanded={false}
+          onClick={() => setForecastOpen(true)}
+          style={{ position: 'absolute', top: 37, left: 41, background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK }}
+        >
+          <HouseIcon size={26} />
+        </button>
+      )}
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>
