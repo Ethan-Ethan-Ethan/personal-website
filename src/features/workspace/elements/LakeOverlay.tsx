@@ -3,7 +3,6 @@ import type { LakePhase } from '../core/lake-palette';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import ForecastGlass from './ForecastGlass';
 import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
-import useForecastEntrance from './useForecastEntrance';
 import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
 import '../../../components/reactbits/SplitText.css';
@@ -33,10 +32,8 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
   const time = useLocalTime();
   // 動態偏好：使用者開了「減少動態」→ 場景名用靜態字（不播逐字動畫）；跟隨 OS 即時切換。
   const reducedMotion = useReducedMotion();
-  // forecast 面板平常收起不遮魚，點房子鍵才彈出（2026-10-12 使用者回饋）。
+  // forecast 開關：面板常駐 DOM，開關只翻 open class（全 CSS 過場，無掛載開關、無 JS staging）。
   const [forecastOpen, setForecastOpen] = useState(false);
-  // 過場唯一正本：開關狀態進 hook，rail→hero→strip→aside 單 timeline 錨定生長，live 再點火字＋波形。
-  const panelsLive = useForecastEntrance(forecastOpen);
   useEffect(() => {
     if (!forecastOpen) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setForecastOpen(false); };
@@ -64,12 +61,8 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       >
         <HouseIcon size={24} />
       </button>
-      {forecastOpen && (
-        <>
-          <ForecastSideRail onClose={() => setForecastOpen(false)} live={panelsLive} />
-          <ForecastGlass data={FORECAST_PLACEHOLDER} live={panelsLive} />
-        </>
-      )}
+      <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} />
+      <ForecastGlass data={FORECAST_PLACEHOLDER} open={forecastOpen} />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>

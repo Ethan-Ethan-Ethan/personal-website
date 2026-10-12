@@ -6,27 +6,27 @@ test('brand button shows home icon for Ethan homepage', async ({ page }) => {
   await expect(brand).toBeVisible();
   await expect(brand.locator('svg')).toHaveCount(1);
   const rail = page.getByRole('navigation', { name: '功能選單' });
-  await expect(rail).toHaveCount(0);
+  await expect(rail).toBeHidden();
   await brand.click();
   await expect(rail).toBeVisible();
   await expect(rail.getByRole('button', { name: '總覽' })).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.getByLabel('Forecast', { exact: true })).toBeVisible();
+  await expect(page.getByText('Weather Forecast')).toBeVisible();
   await page.keyboard.press('Escape');
-  await expect(rail).toHaveCount(0);
-  await expect(page.getByLabel('Forecast', { exact: true })).toHaveCount(0);
+  await expect(rail).toBeHidden();
+  await expect(page.getByText('Weather Forecast')).toBeHidden();
 });
 
 test('forecast panels stay hidden until house button opens them', async ({ page }) => {
   await page.goto('/');
   const brand = page.getByRole('button', { name: 'Ethan 首頁' });
-  await expect(page.getByLabel('Forecast', { exact: true })).toHaveCount(0);
-  await expect(page.getByLabel('Saved locations')).toHaveCount(0);
+  await expect(page.getByText('Weather Forecast')).toBeHidden();
+  await expect(page.getByLabel('Saved locations')).toBeHidden();
   await brand.click();
-  await expect(page.getByLabel('Forecast', { exact: true })).toBeVisible();
+  await expect(page.getByText('Weather Forecast')).toBeVisible();
   await expect(page.getByLabel('Saved locations')).toBeVisible();
   await expect(brand).toHaveAttribute('aria-expanded', 'true');
   await page.keyboard.press('Escape');
-  await expect(page.getByLabel('Forecast', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Weather Forecast')).toBeHidden();
   await expect(brand).toHaveAttribute('aria-expanded', 'false');
 });
 

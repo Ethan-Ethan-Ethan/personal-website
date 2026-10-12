@@ -79,23 +79,18 @@ const ICONS: IconDef[] = [
 // 左側欄（膠囊佔比＋參考圓角 20px；頂房子槽、中五鍵、底收起鍵）。
 // 框體開關由 LakeOverlay 控制；房子常駐框外（同槽幾何），永不卸載防閃爍。
 // 底部停在 phase 文字之上（bottom:110），不壓字。
-export default function ForecastSideRail({ onClose, live }: { onClose: () => void; live: boolean }) {
+export default function ForecastSideRail({ onClose, open }: { onClose: () => void; open: boolean }) {
   const [active, setActive] = useState('grid');
-  const reducedMotion = useReducedMotion();
-  const preEnter = !reducedMotion && !live;
   return (
     <nav
       aria-label="功能選單"
-      // clip 揭示：只裁 painting、不 transform，房子在框外獨立渲染故不受影響
-      className="forecast-side-rail"
-      data-entrance="rail"
+      className={`forecast-side-rail fc-node${open ? ' is-open' : ''}`}
       style={{
-        position: 'absolute', top: 20, bottom: 110, left: 24, width: 60, zIndex: 3, pointerEvents: 'auto',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10, transformOrigin: 'top center',
+        position: 'absolute', top: 20, bottom: 110, left: 24, width: 60, zIndex: 3, pointerEvents: open ? 'auto' : 'none',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10,
         background: 'rgba(255,255,255,0.10)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-        opacity: preEnter ? 0 : undefined,
       }}
     >
       <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}}`}</style>
