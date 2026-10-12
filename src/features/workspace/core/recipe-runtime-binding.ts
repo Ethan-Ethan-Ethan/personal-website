@@ -8,9 +8,10 @@
 
 export const GRAY = "#6b7280";
 
-// Derived from palette-hex-map.v1.yaml (dark_cool 實證：shell.css .workspace-scene #10132a)
+// Derived from palette-hex-map.v1.yaml (dark_cool 實證：shell.css .workspace-scene #10132a；forecast_deep：forecast 參考 fallback bg #04121b)
 export const HEXMAP: Record<string, string> = {
   dark_cool: "#10132a",
+  forecast_deep: "#04121b",
   _default: GRAY,
 };
 

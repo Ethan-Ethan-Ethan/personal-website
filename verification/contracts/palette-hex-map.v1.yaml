@@ -1,6 +1,8 @@
 # palette-hex-map.v1.yaml — visual.palette→hex 解析表（Task 6，canonical）
 # dark_cool 實證來源：src/styles/workspace/shell.css `.workspace-scene background:#10132a`
+# forecast_deep 實證來源：forecast-center 參考規格 fallback page bg #04121b（plan/homepage-hero-ethan-image-appendix/agent-4-reference-forecast-center.md）；glass 疊加層失效時底色
 # TS 側 derived：src/features/workspace/core/recipe-runtime-binding.ts HEXMAP（單測斷言與本檔一致）
 version: "1"
 dark_cool: "#10132a"
+forecast_deep: "#04121b"
 _default: "#6b7280"
