@@ -57,15 +57,15 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
           <ForecastGlass data={FORECAST_PLACEHOLDER} />
         </>
       ) : (
-        // 收起態：只留房子（中線對齊框內位置：框內房子中心 (54,50)，26px icon 置於 top:37 left:41）
+        // 收起態：與框內房子同幾何（框 top:20＋padding 10 → 按鍵 40×40 位於 top:30 left:34，icon 24px），過場無跳動
         <button
           type="button"
           aria-label="Ethan 首頁"
           aria-expanded={false}
           onClick={() => setForecastOpen(true)}
-          style={{ position: 'absolute', top: 37, left: 41, background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK }}
+          style={{ position: 'absolute', top: 30, left: 34, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK }}
         >
-          <HouseIcon size={26} />
+          <HouseIcon size={24} />
         </button>
       )}
 
