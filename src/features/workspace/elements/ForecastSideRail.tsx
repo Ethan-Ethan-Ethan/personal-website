@@ -65,19 +65,40 @@ const ICONS: IconDef[] = [
   },
 ];
 
-// 左側直式 icon 軌（參考 forecast-center 儀表板側欄風格）：常駐、可點切換 active，外觀 glimpse，不導航。
-export default function ForecastSideRail() {
+// 左側直式 icon 軌（參考 forecast-center 儀表板側欄風格）：房子鍵收進同一玻璃框頂端，
+// 整根為常駐 chrome；點房子開關 forecast 面板（由 LakeOverlay 傳入狀態）。
+export default function ForecastSideRail({ homeExpanded, onHomeToggle }: {
+  homeExpanded: boolean;
+  onHomeToggle: () => void;
+}) {
   const [active, setActive] = useState('grid');
   return (
     <nav
       aria-label="功能選單"
       className="forecast-side-rail growin"
       style={{
-        position: 'absolute', top: 76, left: 24, zIndex: 3, pointerEvents: 'auto',
-        display: 'flex', flexDirection: 'column', gap: 6, padding: 10, transformOrigin: 'top center',
+        position: 'absolute', top: 20, left: 24, zIndex: 3, pointerEvents: 'auto',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: 10, transformOrigin: 'top center',
       }}
     >
       <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.20);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}}`}</style>
+      <button
+        type="button"
+        aria-label="Ethan 首頁"
+        aria-expanded={homeExpanded}
+        onClick={onHomeToggle}
+        style={{
+          width: 40, height: 40, borderRadius: '50%', border: 'none', cursor: 'pointer',
+          display: 'grid', placeItems: 'center', background: 'transparent', color: INK,
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block', filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.55))' }}>
+          <path d="M3 10.5 12 3l9 7.5" />
+          <path d="M5 9.5V21h14V9.5" />
+          <path d="M9 21v-6h6v6" />
+        </svg>
+      </button>
+      <div aria-hidden="true" style={{ width: 24, height: 1, background: 'rgba(255,255,255,0.25)' }} />
       {ICONS.map((icon) => {
         const isActive = icon.id === active;
         return (

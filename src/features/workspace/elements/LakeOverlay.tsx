@@ -51,24 +51,9 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
-      <button
-        type="button"
-        aria-label="Ethan 首頁"
-        aria-expanded={forecastOpen}
-        onClick={() => setForecastOpen((v) => !v)}
-        // 中線對齊：房子 26px 置中於下方 60px 側軌（24＋30−13＝41）
-        style={{ ...link, position: 'absolute', top: 20, left: 41, background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
-      >
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={INK} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block', filter: 'drop-shadow(0 1px 6px rgba(0,0,0,0.55))' }}>
-          <path d="M3 10.5 12 3l9 7.5" />
-          <path d="M5 9.5V21h14V9.5" />
-          <path d="M9 21v-6h6v6" />
-        </svg>
-      </button>
+      <ForecastSideRail homeExpanded={forecastOpen} onHomeToggle={() => setForecastOpen((v) => !v)} />
 
       {forecastOpen && <ForecastGlass data={FORECAST_PLACEHOLDER} />}
-
-      {forecastOpen && <ForecastSideRail />}
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>
