@@ -87,11 +87,11 @@ export default function ForecastGlass({ data, open }: Props) {
     </section>
     <aside
       aria-label="Saved locations"
-      className={`forecast-rail ${cls('aside')} fc-origin-tl`}
-      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3, ...delay('aside') }}
+      className="forecast-rail"
+      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3, visibility: open ? 'visible' : 'hidden' }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
-      <div className={glass} style={{ padding: '18px 20px' }}>
+      <div className={`${glass} ${cls('aside')}`} style={{ padding: '18px 20px', ...delay('aside') }}>
         <div style={{ color: 'rgba(255,255,255,.9)', fontSize: 14, fontWeight: 500 }}>{main.city}</div>
         <div style={{ color: INK, fontSize: 72, fontWeight: 500, letterSpacing: '-3.5px', lineHeight: 1 }}>
           {main.temp}°<span style={{ fontSize: 26 }}>C</span>
@@ -103,7 +103,7 @@ export default function ForecastGlass({ data, open }: Props) {
         </div>
       </div>
       {data.cities.map((c) => (
-        <div key={c.area} className={glass} style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div key={c.area} className={`${glass} ${cls('aside')}`} style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', ...delay('aside') }}>
           <div>
             <div style={{ color: 'rgba(255,255,255,.75)', fontSize: 12 }}>Indonesia／{c.area}</div>
             <div style={{ color: INK, fontSize: 15, fontWeight: 500 }}>{c.cond}</div>

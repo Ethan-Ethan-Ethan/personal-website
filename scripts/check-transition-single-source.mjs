@@ -5,6 +5,7 @@
 //  1. 同一檔案禁同時出現 GSAP tween 與 CSS transition/animation 驅動 opacity/transform（並存即違規，除非有 // transition-guard: allow 註記）
 //  2. 條件掛載（{open && <X/>}）的元件禁自帶進場 transition（應用常駐 + class 翻轉，見 LakeOverlay 常駐渲染）
 //  3. backdrop-blur 類必須與 is-open/open 同 commit 切換（禁延後掛載造成第二段霧化跳）
+//  4. 祖先跑 opacity transition 時，子孫禁掛 backdrop-blur（parent opacity<1 會關子孫 blur，造成先透後霧兩段跳；blur 必須與 opacity 同元素）
 // 用法：node scripts/check-transition-single-source.mjs [--json]
 import fs from 'node:fs';
 import path from 'node:path';
@@ -40,6 +41,12 @@ for (const rel of TARGETS) {
     if (/opacity[\s\S]{0,400}live|live[\s\S]{0,400}backdrop/i.test(src)) {
       violations.push({ file: rel, rule: 'no-deferred-blur', detail: 'blur 疑似延後於 opacity 掛載，請確認與 is-open 原子同 commit', level: 'warn' });
     }
+  }
+  // 規則4：祖先跑 opacity + 子孫掛 blur（父子分家必兩段跳）
+  const hasOuterFcNode = /<(aside|section)[^>]*fc-node|forecast-rail \$\{cls/.test(src);
+  const hasInnerBlurWithoutNode = /className=\{glass\}/.test(src);
+  if (hasOuterFcNode && hasInnerBlurWithoutNode) {
+    violations.push({ file: rel, rule: 'no-ancestor-opacity-with-descendant-blur', detail: '外層跑 opacity、內層掛 blur：parent opacity<1 會關子孫 blur，blur 須與 opacity 同元素' });
   }
 }
 
