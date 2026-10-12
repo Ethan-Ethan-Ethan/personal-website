@@ -105,6 +105,9 @@ status: active
 
 ## Deferred（硬規則五欄，ethyl 2026-10-12）
 
+- F2 過場語言鎖定（2026-10-12 使用者定版）：常駐房子（永不卸載、同節點）＋側軌 clip 揭示（不 transform 房子）＋面板 GSAP 錨定生長（原點逐次取房子中心，expo.out .45s）＋全線減動畫終態｜後續轉場改動須另案經使用者確認｜blocks_current_closure: 否
+- F3 側軌框形鎖定：膠囊佔比（60 寬浮動）＋圓角 20px 矩形（參考 forecast-center 海報框形）；veil／深色底／全高欄不做（已回滾 d6313d4、a861e6e）｜blocks_current_closure: 否
+
 - F1 使用者回饋 2026-10-12 下午：版面超框→全組件緊湊化（hero 56px／strip chart 150／rail 300 寬，1280×720 實拍收斂）；ETHAN 像素圖→房子 SVG 首頁鍵；面板預設收起、點房子彈出（aria-expanded＋Escape 收，fadein 進場，減動畫安全）｜owner: 主 agent 已執行｜revisit: 下方 D1 人眼複驗時一併看｜blocks_current_closure: 否
 
 - D1 對比度 human acceptance｜target: glass hero 真機對比確認｜owner: 使用者｜reason: live shader 底靜態儀器值無意義，需人眼＋真機｜revisit_when: 2026-11-12 前真機驗收｜blocks_current_closure: 否

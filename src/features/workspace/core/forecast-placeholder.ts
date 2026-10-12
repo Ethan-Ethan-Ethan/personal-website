@@ -1,5 +1,5 @@
-// forecast-placeholder.ts — forecast glass dashboard 全 placeholder 資料常數（單一正本）。
-// 後補真資料只改此檔；品牌圖常數唯一住 lake-assets.ts（ETHAN_BRAND_IMAGE），此處不重複。
+// forecast-placeholder.ts — forecast glass dashboard 全 placeholder 資料常數（單一正本，介面已鎖定）。
+// 後補真資料只改此檔（同欄位、同型別，不動消費端）；品牌為房子 SVG（見 ForecastSideRail.HouseIcon），無圖片常數。
 export const FORECAST_PLACEHOLDER = {
   chip: "Weather Forecast",
   heroLines: ["Strom", "with Heavy Rain"],
