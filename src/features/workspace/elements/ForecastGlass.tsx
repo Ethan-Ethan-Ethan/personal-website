@@ -13,7 +13,8 @@ const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
 
 export default function ForecastGlass({ data }: Props) {
   const reducedMotion = useReducedMotion();
-  const heroRef = useRef<HTMLElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLElement>(null);
   // GSAP 錨定生長：原點逐次取房子中心（房子永不在縮放容器內）；gsap 缺席即靜態呈現。
   useLayoutEffect(() => {
@@ -31,7 +32,7 @@ export default function ForecastGlass({ data }: Props) {
       if (!house) return;
       const hx = house.left + house.width / 2;
       const hy = house.top + house.height / 2;
-      for (const el of [heroRef.current, railRef.current]) {
+      for (const el of [heroRef.current, stripRef.current, railRef.current]) {
         if (!el) continue;
         const r = el.getBoundingClientRect();
         gsap.fromTo(
@@ -46,15 +47,18 @@ export default function ForecastGlass({ data }: Props) {
   const main = data.railMain;
   return (
     <>
+      {/* 深色 veil＋綠紫環境光（參考 forecast-center 深色儀表板底，1357×871 構圖） */}
+      <div aria-hidden="true" className="fadein" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2, background: 'linear-gradient(180deg, rgba(4,18,27,0.72), rgba(4,18,27,0.80))' }} />
+      <div aria-hidden="true" style={{ position: 'absolute', top: '-10%', left: '-5%', width: '45%', height: '55%', pointerEvents: 'none', zIndex: 2, background: 'radial-gradient(closest-side, rgba(52,211,153,0.22), transparent)', filter: 'blur(60px)' }} />
+      <div aria-hidden="true" style={{ position: 'absolute', bottom: '-12%', right: '-6%', width: '50%', height: '60%', pointerEvents: 'none', zIndex: 2, background: 'radial-gradient(closest-side, rgba(167,139,250,0.20), transparent)', filter: 'blur(60px)' }} />
     <section
-      ref={heroRef}
       aria-label="Forecast"
       // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       // 生長由上方 GSAP 錨定（原點＝房子中心），此處不掛 CSS scale 類
-      style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
+      style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .split-parent,.forecast-glass .split-char,.forecast-glass .split-word{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
-      <div className={`forecast-glass ${GLASS}`} style={{ padding: '20px 24px' }}>
+      <div ref={heroRef} className={`forecast-glass ${GLASS}`} style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', padding: '20px 24px' }}>
         <span
           style={{
             display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -88,7 +92,7 @@ export default function ForecastGlass({ data }: Props) {
           {data.blurb}
         </p>
       </div>
-      <div className={`forecast-glass ${GLASS}`} aria-label="Hourly forecast" style={{ marginTop: 16, padding: '16px 20px' }}>
+      <div ref={stripRef} className={`forecast-glass ${GLASS}`} aria-label="Hourly forecast" style={{ position: 'absolute', left: '9%', bottom: '8%', width: 'min(780px, 74vw)', padding: '16px 20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {data.temps.map((t, i) => (
             <span key={i} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px' }}>{t}°</span>
@@ -128,7 +132,7 @@ export default function ForecastGlass({ data }: Props) {
       ref={railRef}
       aria-label="Saved locations"
       className="forecast-rail"
-      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3 }}
+      style={{ position: 'absolute', top: '12%', right: 38, width: 310, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
       <div className={`forecast-glass ${GLASS}`} style={{ padding: '18px 20px' }}>
