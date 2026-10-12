@@ -75,17 +75,14 @@ const ICONS: IconDef[] = [
   },
 ];
 
-// 左側直式 icon 軌（參考 forecast-center 儀表板側欄風格）：房子鍵收進同一玻璃框頂端，
-// 整根為常駐 chrome；點房子開關 forecast 面板（由 LakeOverlay 傳入狀態）。
-export default function ForecastSideRail({ homeExpanded, onHomeToggle }: {
-  homeExpanded: boolean;
-  onHomeToggle: () => void;
-}) {
+// 左側直式 icon 軌（參考 forecast-center 儀表板側欄風格）：框體常駐開關，
+// 頂端留 40px 空槽給 LakeOverlay 的常駐房子鍵（房子永不卸載、不參與動畫，防閃爍）。
+export default function ForecastSideRail() {
   const [active, setActive] = useState('grid');
   return (
     <nav
       aria-label="功能選單"
-      // clip 揭示：只裁 painting、不 transform，房子從第一幀即完整（防跳動）
+      // clip 揭示：只裁 painting、不 transform，房子在框外獨立渲染故不受影響
       className="forecast-side-rail rail-reveal"
       style={{
         position: 'absolute', top: 20, left: 24, zIndex: 3, pointerEvents: 'auto',
@@ -93,18 +90,7 @@ export default function ForecastSideRail({ homeExpanded, onHomeToggle }: {
       }}
     >
       <style>{`.forecast-side-rail{background:rgba(255,255,255,0.10);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.20);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-side-rail button{transition:background .2s ease,transform .2s ease;}.forecast-side-rail button:hover{background:rgba(255,255,255,0.18);}.forecast-side-rail button:active{transform:scale(.94);}.rail-reveal{animation:railreveal .45s cubic-bezier(0.16,1,0.3,1) both;}@keyframes railreveal{from{clip-path:inset(0 0 100% 0);}to{clip-path:inset(0 0 0 0);}}@media (max-width: 640px){.forecast-side-rail{display:none;}}@media (prefers-reduced-motion: reduce){.forecast-side-rail button{transition:none;}.rail-reveal{animation:none;}}`}</style>
-      <button
-        type="button"
-        aria-label="Ethan 首頁"
-        aria-expanded={homeExpanded}
-        onClick={onHomeToggle}
-        style={{
-          width: 40, height: 40, borderRadius: '50%', border: 'none', cursor: 'pointer',
-          display: 'grid', placeItems: 'center', background: 'transparent', color: INK,
-        }}
-      >
-        <HouseIcon size={24} />
-      </button>
+      <div aria-hidden="true" style={{ width: 40, height: 40 }} />
       <div aria-hidden="true" style={{ width: 24, height: 1, background: 'rgba(255,255,255,0.25)' }} />
       {ICONS.map((icon) => {
         const isActive = icon.id === active;

@@ -51,22 +51,21 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
-      {forecastOpen ? (
+      {/* 房子常駐：永不卸載、不進任何動畫容器，開關只動框＋面板（防閃爍） */}
+      <button
+        type="button"
+        aria-label="Ethan 首頁"
+        aria-expanded={forecastOpen}
+        onClick={() => setForecastOpen((v) => !v)}
+        style={{ position: 'absolute', top: 31, left: 35, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK, zIndex: 4 }}
+      >
+        <HouseIcon size={24} />
+      </button>
+      {forecastOpen && (
         <>
-          <ForecastSideRail homeExpanded={forecastOpen} onHomeToggle={() => setForecastOpen((v) => !v)} />
+          <ForecastSideRail />
           <ForecastGlass data={FORECAST_PLACEHOLDER} />
         </>
-      ) : (
-        // 收起態：與框內房子同幾何（框 top:20＋border 1＋padding 10 → 按鍵 40×40 位於 top:31 left:35，icon 24px），過場無跳動
-        <button
-          type="button"
-          aria-label="Ethan 首頁"
-          aria-expanded={false}
-          onClick={() => setForecastOpen(true)}
-          style={{ position: 'absolute', top: 31, left: 35, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK }}
-        >
-          <HouseIcon size={24} />
-        </button>
       )}
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
