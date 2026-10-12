@@ -6,16 +6,18 @@ type Props = {
   open: boolean;
 };
 
-const GLASS = 'bg-white/10 border border-white/20 rounded-2xl backdrop-blur-md';
+const GLASS_BASE = 'bg-white/10 border border-white/20 rounded-2xl';
+const GLASS_BLUR = 'backdrop-blur-md';
 const INK = '#ffffff';
 const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
 
-/** 進場 stagger（ms）：rail 0 → hero 80 → strip 160 → aside 240。關閉一律 0ms 同收。 */
-const DELAY = { hero: 80, strip: 160, aside: 240 } as const;
+/** 進場 stagger（ms）：rail 0 → hero 80 → strip 160 → aside 0（右欄與容器同幀，消先透後實）。關閉一律 0ms 同收。 */
+const DELAY = { hero: 80, strip: 160, aside: 0 } as const;
 
 export default function ForecastGlass({ data, open }: Props) {
   const main = data.railMain;
-  const glass = `forecast-glass ${GLASS}`;
+  // blur 與 is-open 原子同 commit：開時才霧化，避免 opacity 跑完才霧化的第二段跳
+  const glass = `forecast-glass ${GLASS_BASE}${open ? ` ${GLASS_BLUR}` : ''}`;
   const cls = (name: 'hero' | 'strip' | 'aside') => `fc-node${open ? ' is-open' : ''}`;
   const delay = (name: 'hero' | 'strip' | 'aside'): { transitionDelay: string } => ({
     transitionDelay: open ? `${DELAY[name]}ms` : '0ms',
@@ -27,7 +29,7 @@ export default function ForecastGlass({ data, open }: Props) {
       // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
-      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transform:scale(.92) translateY(-10px);transition:opacity .45s cubic-bezier(0.16,1,0.3,1),transform .45s cubic-bezier(0.16,1,0.3,1),visibility 0s .45s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;transition:opacity .45s cubic-bezier(0.16,1,0.3,1),transform .45s cubic-bezier(0.16,1,0.3,1),visibility 0s;}.fc-origin-tl{transform-origin:top left;}.fc-origin-tc{transform-origin:top center;}@media (prefers-reduced-motion: reduce){.fc-node{transition:none;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;}}`}</style>
+      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transform:scale(.92) translateY(-10px);transition:opacity .45s cubic-bezier(0.16,1,0.3,1),transform .45s cubic-bezier(0.16,1,0.3,1),visibility 0s .45s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;transition:opacity .45s cubic-bezier(0.16,1,0.3,1),transform .45s cubic-bezier(0.16,1,0.3,1),visibility 0s;}.fc-origin-tl{transform-origin:top left;}.fc-origin-tc{transform-origin:top center;}@media (prefers-reduced-motion: reduce){.fc-node,.fc-node.is-open{transition:none;transition-delay:0s;opacity:1;visibility:visible;transform:none;}.fc-node:not(.is-open){opacity:0;visibility:hidden;}}`}</style>
       <div className={`${glass} ${cls('hero')} fc-origin-tl`} style={{ padding: '20px 24px', ...delay('hero') }}>
         <span
           style={{
