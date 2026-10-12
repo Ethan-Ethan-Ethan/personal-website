@@ -1,8 +1,10 @@
 // @vitest-environment jsdom
-import { beforeAll, describe, expect, it, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
 import type { ComponentType } from "react";
 import { FORECAST_PLACEHOLDER } from "../core/forecast-placeholder";
+
+afterEach(() => cleanup());
 
 // jsdom 無 matchMedia，gsap ScrollTrigger 在 import 時即呼叫：先 stub 再動態 import（不動全域 vitest 設定）。
 let ForecastGlass: ComponentType<{ data: typeof FORECAST_PLACEHOLDER }>;
@@ -19,7 +21,11 @@ beforeAll(async () => {
   });
   // jsdom 無 document.fonts（SplitText 起播前檢查）：給 loaded 終態。
   Object.defineProperty(document, "fonts", {
-    value: { status: "loaded" },
+    value: {
+      status: "loaded",
+      addEventListener() {},
+      removeEventListener() {},
+    },
     configurable: true,
   });
   ({ default: ForecastGlass } = await import("./ForecastGlass"));
