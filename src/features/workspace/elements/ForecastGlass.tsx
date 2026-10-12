@@ -25,7 +25,8 @@ export default function ForecastGlass({ data }: Props) {
     <>
     <section
       aria-label="Forecast"
-      style={{ position: 'absolute', top: '15%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'auto', zIndex: 3 }}
+      // 靜態展示卡：pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
+      style={{ position: 'absolute', top: '15%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}@media (prefers-reduced-motion: reduce){.forecast-glass .hero-line{animation:none !important;opacity:1 !important;transform:none !important;}}`}</style>
       <div className={`forecast-glass ${GLASS}`} style={{ padding: '28px 32px' }}>
@@ -101,7 +102,7 @@ export default function ForecastGlass({ data }: Props) {
     <aside
       aria-label="Saved locations"
       className="forecast-rail"
-      style={{ position: 'absolute', top: '15%', right: 38, width: 310, display: 'flex', flexDirection: 'column', gap: 20, pointerEvents: 'auto', zIndex: 3 }}
+      style={{ position: 'absolute', top: '15%', right: 38, width: 310, display: 'flex', flexDirection: 'column', gap: 20, pointerEvents: 'none', zIndex: 3 }}
     >
       <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
       <div className={`forecast-glass ${GLASS}`} style={{ padding: '24px 26px' }}>
@@ -109,7 +110,7 @@ export default function ForecastGlass({ data }: Props) {
         <div style={{ color: INK, fontSize: 92, fontWeight: 500, letterSpacing: '-4.4px', lineHeight: 1 }}>
           {main.temp}°<span style={{ fontSize: 32 }}>C</span>
         </div>
-        <div style={{ display: 'flex', gap: 18, marginTop: 12, color: 'rgba(255,255,255,.9)', fontSize: 14 }}>
+        <div style={{ display: 'flex', gap: 12, marginTop: 12, color: 'rgba(255,255,255,.9)', fontSize: 13, whiteSpace: 'nowrap' }}>
           <span>{main.wind} mph 風速</span>
           <span>{main.humidity}% 濕度</span>
           <span>{main.gust} km/h 陣風</span>
