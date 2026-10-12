@@ -67,7 +67,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
 
       {forecastOpen && <ForecastGlass data={FORECAST_PLACEHOLDER} />}
 
-      <ForecastSideRail />
+      {forecastOpen && <ForecastSideRail />}
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>

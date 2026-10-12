@@ -71,7 +71,7 @@ export default function ForecastSideRail() {
   return (
     <nav
       aria-label="功能選單"
-      className="forecast-side-rail"
+      className="forecast-side-rail fadein"
       style={{
         position: 'absolute', top: 76, left: 24, zIndex: 3, pointerEvents: 'auto',
         display: 'flex', flexDirection: 'column', gap: 6, padding: 10,
