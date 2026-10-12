@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import ForecastGlass from './ForecastGlass';
+import ForecastSideRail from './ForecastSideRail';
 import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
 import '../../../components/reactbits/SplitText.css';
@@ -65,6 +66,8 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       </button>
 
       {forecastOpen && <ForecastGlass data={FORECAST_PLACEHOLDER} />}
+
+      <ForecastSideRail />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>

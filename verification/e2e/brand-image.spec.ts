@@ -5,6 +5,9 @@ test('brand button shows home icon for Ethan homepage', async ({ page }) => {
   const brand = page.getByRole('button', { name: 'Ethan 首頁' });
   await expect(brand).toBeVisible();
   await expect(brand.locator('svg')).toHaveCount(1);
+  const rail = page.getByRole('navigation', { name: '功能選單' });
+  await expect(rail).toBeVisible();
+  await expect(rail.getByRole('button', { name: '總覽' })).toHaveAttribute('aria-pressed', 'true');
 });
 
 test('forecast panels stay hidden until house button opens them', async ({ page }) => {
