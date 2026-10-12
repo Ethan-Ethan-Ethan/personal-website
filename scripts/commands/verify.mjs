@@ -216,9 +216,10 @@ export async function handleVerifyCommand(root, action) {
       'bad-hidden-header.ts',
       'bad-sparse-timeline.ts',
     ]) runBenchmark(root, `${visualBase}/benchmark/artifacts/_golden/${fixture}`, `${visualBase}/docs/rubric.yaml`, 'FAIL');
-  } else if (action === 'build') runExternal(root, 'npx', ['astro', 'build']);
+  } else if (action === 'transition') runExternal(root, 'node', ['scripts/check-transition-single-source.mjs']);
+  else if (action === 'build') runExternal(root, 'npx', ['astro', 'build']);
   else if (action === 'all') {
-    for (const step of ['unit', 'e2e', 'contracts']) await handleVerifyCommand(root, step);
+    for (const step of ['unit', 'transition', 'e2e', 'contracts']) await handleVerifyCommand(root, step);
     await runContentSync({ projectRoot: root, mode: 'check', sourceMode: 'auto' });
     await handleVerifyCommand(root, 'build');
   } else throw new Error(`unknown command: verify.${action}`);

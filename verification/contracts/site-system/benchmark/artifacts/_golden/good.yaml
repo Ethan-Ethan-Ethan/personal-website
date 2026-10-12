@@ -51,6 +51,7 @@ commands:
     unit: { owner: site-shell, input: {}, result: unit-tests-passed, failure: unit-tests-failed }
     e2e: { owner: site-shell, input: {}, result: e2e-tests-passed, failure: e2e-tests-failed }
     contracts: { owner: site-shell, input: {}, result: contracts-passed, failure: contracts-failed }
+    transition: { owner: site-shell, input: {}, result: transition-single-source-ok, failure: transition-conflict }
     build: { owner: site-shell, input: {}, result: build-passed, failure: build-failed }
     all: { owner: site-shell, input: {}, result: verification-passed, failure: verification-failed }
 verification:
