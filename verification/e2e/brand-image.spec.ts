@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('brand button shows home icon for Ethan homepage', async ({ page }) => {
+test('brand button shows home icon for Ethan homepage', async ({ page }, testInfo) => {
   await page.goto('/');
   const brand = page.getByRole('button', { name: 'Ethan 首頁' });
   await expect(brand).toBeVisible();
@@ -8,6 +8,14 @@ test('brand button shows home icon for Ethan homepage', async ({ page }) => {
   const rail = page.getByRole('navigation', { name: '功能選單' });
   await expect(rail).toBeHidden();
   await brand.click();
+  if (testInfo.project.name !== 'desktop-chrome') {
+    // mobile：側軌按設計常駐隱藏（≤640px display:none），只驗 hero 開啟
+    await expect(rail).toBeHidden();
+    await expect(page.getByText('Weather Forecast')).toBeVisible();
+    await page.keyboard.press('Escape');
+    await expect(page.getByText('Weather Forecast')).toBeHidden();
+    return;
+  }
   await expect(rail).toBeVisible();
   await expect(rail.getByRole('button', { name: '總覽' })).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByText('Weather Forecast')).toBeVisible();
@@ -30,7 +38,7 @@ test('forecast panels stay hidden until house button opens them', async ({ page 
   await expect(brand).toHaveAttribute('aria-expanded', 'false');
 });
 
-test('forecast glass hero, strip and rail render with placeholder data', async ({ page }) => {
+test('forecast glass hero, strip and rail render with placeholder data', async ({ page }, testInfo) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Ethan 首頁' }).click();
   const hero = page.getByLabel('Forecast', { exact: true });
@@ -39,6 +47,13 @@ test('forecast glass hero, strip and rail render with placeholder data', async (
   const strip = page.getByLabel('Hourly forecast');
   await expect(strip).toBeVisible();
   await expect(strip).toContainText('Wednesday');
+  if (testInfo.project.name !== 'desktop-chrome') {
+    const sat = strip.getByText('Saturday');
+    const bb = await sat.boundingBox();
+    const vw = page.viewportSize()?.width ?? 0;
+    expect(bb).toBeTruthy();
+    expect(bb!.x + bb!.width).toBeLessThanOrEqual(vw + 1);
+  }
   const rail = page.getByLabel('Saved locations');
   await expect(rail).toBeVisible();
   await expect(rail).toContainText('Central Jakarta');

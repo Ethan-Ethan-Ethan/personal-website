@@ -29,7 +29,7 @@ export default function ForecastGlass({ data, open }: Props) {
       // hero／strip 無卡：靜態定位殼，pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
-      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s .7s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s;}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}@media (prefers-reduced-motion: reduce){.fc-node{transition:none;transition-delay:0s !important;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);}.mask-line>span{transition:none;transform:none;}}`}</style>
+      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s .7s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s;}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}.fc-day{font-size:15px;}@media (max-width:640px){.fc-day{font-size:12px;letter-spacing:-0.2px;}}@media (prefers-reduced-motion: reduce){.fc-node{transition:none;transition-delay:0s !important;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);}.mask-line>span{transition:none;transform:none;}}`}</style>
       <div style={{ marginBottom: 12 }}>
         <span className={`fc-node fc-wipe-r${on}`} style={{
           display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -74,10 +74,10 @@ export default function ForecastGlass({ data, open }: Props) {
           {data.days.map((d, i) => (
             <span
               key={d}
-              className={`fc-node fc-dir-up${on}`}
+              className={`fc-node fc-dir-up fc-day${on}`}
               style={{
                 color: i === data.activeDay ? '#fff' : 'rgba(255,255,255,.88)',
-                fontWeight: i === data.activeDay ? 600 : 500, fontSize: 15, ...dl(D.day0 + i * D.dayStep),
+                fontWeight: i === data.activeDay ? 600 : 500, ...dl(D.day0 + i * D.dayStep),
               }}
             >
               {d}

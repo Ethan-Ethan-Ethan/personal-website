@@ -57,6 +57,12 @@ describe("ForecastGlass", () => {
     expect(svg?.classList.contains("fc-node")).toBe(true);
     expect(svg?.classList.contains("is-open")).toBe(false);
   });
+  it("leaves day font-size to stylesheet so mobile can shrink it", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    const sat = screen.getByText("Saturday");
+    expect(sat.classList.contains("fc-day")).toBe(true);
+    expect((sat as HTMLElement).style.fontSize).toBe("");
+  });
   it("shows wave svg when open", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
     const svg = document.querySelector('[aria-label="Hourly forecast"] svg');

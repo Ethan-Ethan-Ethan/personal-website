@@ -20,6 +20,11 @@ describe("ForecastSideRail", () => {
     expect(document.querySelector(".fc-node.is-open")).toBeFalsy();
     expect(getComputedStyle(document.querySelector(".forecast-side-rail") as Element).visibility).toBe("hidden");
   });
+  it("leaves display to stylesheet so mobile media query can hide it", () => {
+    render(<ForecastSideRail onClose={() => {}} open={false} />);
+    const nav = document.querySelector(".forecast-side-rail") as HTMLElement;
+    expect(nav.style.display).toBe("");
+  });
   it("switches active on click and closes via bottom button", async () => {
     const user = userEvent.setup();
     const onClose = vi.fn();
