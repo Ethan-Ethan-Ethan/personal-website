@@ -207,6 +207,25 @@ backdrop-filter: blur(8px);
 - GitHub Actions 的 GITHUB_TOKEN scope 管理
 - CI/CD 兩階段認證：gh CLI（推程式碼）≠ Secrets（部署）
 
+### lake-landing 湖面開頭頁（2026-10-08～10-11，未 push，分支 lake-landing）
+- 貼圖長寬映射鐵律：直向原圖只能進窄寬高框（`drawImage(sp, -wid/2, -len/2, wid, len)`），長對長、寬對寬；塞反會把魚壓扁拉寬，且與另一處反向筆誤互抵時會「看似正常」，修一半才現形
+- 多朝向貼圖正規化：三條魚頭向不一（左下／中上／右下）時，載入期垂直翻成全頭上，尾段關節才彎得對地方；關節用錨定＋上搭 3% 蓋縫，不用居中貼
+- 綠幕去背：四角平均取背景色＋42/72 雙門檻羽化＋去綠溢色；小尺寸下光暈會吃掉剪影，shadowBlur 從 5 降到 0
+- 魚光跟水光：亮度 0.45＋0.55t／飽和 0.7＋0.4t＋幀內趨近防閃跳；映射太窄（0.16）肉眼無感，拉開才看得出
+- 底圖住 shader 裡就別拆三層：bed→魚→水半透要求 bed 獨立成層＝石頭變靜態＋漣漪折射丟失，不划算；魚實體＋光跟走已兩全
+- HF musicgen 全系列無 Inference Provider 部署：403 不是授權問題，打勾也沒用，別追同意框；要 AI 音樂走本機跑或 Suno 開帳號
+- Agnes 生圖：`agnes-image-3.0` 不存在（503），當期最新 `agnes-image-2.5-flash`；單條主體＋純綠大邊距最好去背
+- Astro 換頁水波：`loader`/`swap` 覆寫可做帶石掃場，但出問題即退回（本案已 revert，淡入淡出保留）
+- 白噪音水聲可用 WebAudio 現場合成（零檔零授權），但人耳驗收不過即換 AI 音樂，不硬拗
+- reviewer 假說要拿原圖驗：Muse 判「中魚轉反」被原圖三朝向證偽，真兇是裁切邊距差；審查意見一律回原圖／行號複驗才收
+- 黑鯉策略定案：程式染色（整條染／橘轉黑）全退回，真黑用生圖獨立一張；染色只救急不留檔
+- 魚群行為三件套：基礎速度＋burst＋擺尾頻率跟速度走，慢游小擺快游大擺；測試先抓到趨近太弱（修加速度＋驗證窗）
+- 底圖住 shader 就別拆三層：bed→魚→水半透要求 bed 獨立＝石頭變靜態＋折射丟失；半透 overlay 另有整屏罩霧坑（blend 連透明區一起算）
+- 浮層白邊三段式：羽化→錯位→調色差；根治靠裁切收進葉核＋調色烤進裁切（只切時段重烤）；整屏 multiply 是反模式
+- 綠色主體永遠別用綠幕：綠葉去綠幕必吃葉肉，換品紅底一刀乾淨；錦鯉橘白黑沒事是因為色差大
+- 守門測試會立功：擋過舊路徑期望、import 掉落、速度上限；留著別刪
+- Agnes 當期型號要現查（3.0 不存在／2.5-flash 最新），單主體＋純色大邊距最好去背；單花布局用文字約束（exactly ONE）一次成
+
 ## 可引用素材（履歷用）
 
 **一句話描述：**
@@ -268,3 +287,17 @@ backdrop-filter: blur(8px);
 - 人工視覺 Gate 尚待使用者確認；不以 DSH 取代溫馨感與構圖審核。
 
 ---
+
+## 2026-10-12 hero glass 踩坑（plan/homepage-hero-ethan-image.md，Phase 5 進行中）
+
+- (a) glass 疊加層 `pointerEvents:auto` 擋湖面熱區 → 靜態卡改全 `none` 穿透（品牌 `<a>` 保留 auto 可點；commit `05684d9` 實證）。
+- (b) vitest pipefail 陷阱：`| tail` 吃掉非零 exit → 後續一律 `set -o pipefail`＋回報 EXIT（如 VITEST_EXIT／BUILD_EXIT），不只貼 tail 截圖。
+- (c) TDD 紅中 commit 一次（strip test 清理缺失）→ fix-forward 補 `b51d221`（jsdom stubs 穩定＋清理）；教訓：EXIT 實證才 commit。
+
+## 2026-10-14 YAML 共用優先補登（使用者裁示，AGENTS.md 已立條文）
+
+- 6 契約登記：recipe-runtime-binding 正式分支（derived_from website-recipe.v1.schema.yaml）；
+  其餘 5 標 standalone-experiment（theme-switch 另註 validated 產物 stale；style/demo、recipe
+  領域源頭、palette 領域源頭、assets 領域契約）。
+- fossil trio：留標本（manifest 加 disposition 欄；trace/validated.yaml 不動；刪需另批）。
+- 規則正本：AGENTS.md 正本原則節「YAML 共用優先（2026-10-14）」。
