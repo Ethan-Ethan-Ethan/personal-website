@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { ReactNode } from 'react';
+import { HEXMAP } from '../core/recipe-runtime-binding';
 
-const INK = '#ffffff';
+const INK = HEXMAP["forecast_ink"];
 
 export function HouseIcon({ size = 24 }: { size?: number }) {
   return (

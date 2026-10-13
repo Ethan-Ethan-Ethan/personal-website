@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
+import { HEXMAP } from '../core/recipe-runtime-binding';
 import ForecastGlass from './ForecastGlass';
 import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
 import useReducedMotion from './useReducedMotion';
@@ -57,7 +58,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         aria-label="Ethan 首頁"
         aria-expanded={forecastOpen}
         onClick={() => setForecastOpen((v) => !v)}
-        style={{ position: 'absolute', top: 31, left: 35, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK, zIndex: 4 }}
+        style={{ position: 'absolute', top: 31, left: 35, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: HEXMAP["forecast_ink"], zIndex: 4 }}
       >
         <HouseIcon size={20} />
       </button>

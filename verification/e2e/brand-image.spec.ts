@@ -5,6 +5,8 @@ test('brand button shows home icon for Ethan homepage', async ({ page }, testInf
   const brand = page.getByRole('button', { name: 'Ethan 首頁' });
   await expect(brand).toBeVisible();
   await expect(brand.locator('svg')).toHaveCount(1);
+  await expect(brand.locator('svg')).toHaveAttribute('width', '20');
+  await expect(brand).toHaveCSS('color', 'rgb(255, 255, 255)');
   const rail = page.getByRole('navigation', { name: '功能選單' });
   await expect(rail).toBeHidden();
   await brand.click();
@@ -17,6 +19,8 @@ test('brand button shows home icon for Ethan homepage', async ({ page }, testInf
     return;
   }
   await expect(rail).toBeVisible();
+  await expect(rail.getByRole('button', { name: '總覽' }).locator('svg')).toHaveAttribute('width', '20');
+  await expect(rail.getByRole('button', { name: '總覽' })).toHaveCSS('color', 'rgb(255, 255, 255)');
   await expect(rail.getByRole('button', { name: '總覽' })).toHaveAttribute('aria-pressed', 'true');
   await expect(page.getByText('Weather Forecast')).toBeVisible();
   await page.keyboard.press('Escape');
