@@ -112,7 +112,7 @@ status: active
 
 - D1 對比度 human acceptance｜target: glass hero 真機對比確認｜owner: 使用者｜reason: live shader 底靜態儀器值無意義，需人眼＋真機｜revisit_when: 2026-11-12 前真機驗收｜blocks_current_closure: 否
 - D2 真資料＋carousel 另案｜target: `forecast-placeholder.ts` 換真值＋carousel 新 Task｜owner: 使用者（給資料）｜reason: 目前無資料｜revisit_when: 資料回來後另開計畫｜blocks_current_closure: 否
-- D3 Worklog scribe 6 行未 commit｜target: Worklog.md 末尾 6 行｜owner: 使用者｜reason: 檔內另有 165 deletions 非本次變更，不可掃入（Commit Scope Gate）｜revisit_when: 使用者確認 Worklog diff 後｜blocks_current_closure: 否
+- D3 Worklog 誤刪恢復＋commit（2026-10-14 CLOSED：commit `30a2d02`，1 file 33+/0-，scope gate PASS）｜target: Worklog.md Replan 4–7（163 行誤刪已取回；誤判成立：無授權記錄／repo 內無第二份／5 節功能全未取消僅停用）＋3 新增塊保留（lake-landing／hero／YAML）｜owner: 主 agent 已執行（使用者批 A；誤刪版備份 $TMPDIR/worklog-20261014-pre-restore.md）｜reason: 原 165 deletions 經查為重寫掉段誤傷（Replan 4 空標題殘留），非刻意封存｜revisit_when: 無｜blocks_current_closure: 否
 - D4 全量 e2e 47 failed 跟進｜target: workspace/visual-fusion/hotspot 舊分支 specs｜owner: 維護者另案｜reason: pre-existing（USE_LAKE=true 基線既有，index.astro 零改動）｜revisit_when: 切回 WorkspaceDesktop 或 specs 改寫時｜blocks_current_closure: 否
 
 ---
