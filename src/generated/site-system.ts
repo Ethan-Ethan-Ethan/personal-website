@@ -1,5 +1,5 @@
 // @generated from config/site-system.yaml; do not edit
-// source-sha256: 927879a5e520891ab940c31e3bb50e8cf334b3b125ff0f11f5644bfe3ead82f6
+// source-sha256: a555c3445d7c4bd0199a90091dbc2f230d8fe39f51f32b58c7f73dc86a417833
 
 export const siteSystem = {
   "version": 1,

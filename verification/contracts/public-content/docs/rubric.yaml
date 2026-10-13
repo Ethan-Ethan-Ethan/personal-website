@@ -1,4 +1,5 @@
 benchmark: personal-website-public-projection
+# 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜本契約專屬 rubric（benchmark-gate 方法論，不分支內容）。
 version: 3
 title: 個人網站公開 projection deterministic 安全契約
 pass_threshold: 1.0

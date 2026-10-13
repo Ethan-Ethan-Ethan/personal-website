@@ -1,4 +1,5 @@
 # DSH Runtime project task registry — generated-state, build-only website pilot.
+# 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜DSH 生成態（機器生成，非手寫契約），無共用正本可分支。
 tasks:
   - id: website.build.scoped
     trigger: source.changed
