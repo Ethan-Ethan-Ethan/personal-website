@@ -87,7 +87,7 @@ status: active
 - [x] `npx vitest run` 綠（21 files／160 tests，VITEST_EXIT 0）
 - [x] `verify e2e` 本次範圍綠（brand-image.spec 6/6：品牌圖＋glass 三區＋reduced-motion，desktop＋mobile，EXIT 0）
 - [x] reduced-motion：emulated reduce 下內容完整可讀（e2e 實證）；動畫 CSS 側全有 `@media` 終態
-- [ ] 對比度量測：儀器量測值 MISSING——glass 白字壓 live shader，靜態儀器值無意義；已做 drop-shadow＋sheen＋減動畫終態；**待真機 human acceptance**（沿 lake-landing 前例）
+- [x] 對比度量測：儀器量測值 MISSING——glass 白字壓 live shader，靜態儀器值無意義；已做 drop-shadow＋sheen＋減動畫終態；**2026-10-14 使用者真機人眼驗收通過（D1 CLOSED）**
 - [ ] 全量 e2e 47 failed＝**已證 pre-existing 非回歸**：36 條 waiting-for 定位器逐一映射到停用分支來源（見 appendix [muse-review-evidence.md](homepage-hero-ethan-image-appendix/muse-review-evidence.md) §2）；`USE_LAKE=true` 在基線 f73326d 已寫死（L19），`index.astro` 本次 diff 零行；17 passed（含新 glass 7 斷言）證 island 正常 hydrate
 - [x] 手機版右欄改堆疊不斷裂（`forecast-rail` ≤900px 媒體查詢＋mobile-chrome e2e 實證）
 
@@ -110,8 +110,8 @@ status: active
 
 - F1 使用者回饋 2026-10-12 下午：版面超框→全組件緊湊化（hero 56px／strip chart 150／rail 300 寬，1280×720 實拍收斂）；ETHAN 像素圖→房子 SVG 首頁鍵；面板預設收起、點房子彈出（aria-expanded＋Escape 收，fadein 進場，減動畫安全）｜owner: 主 agent 已執行｜revisit: 下方 D1 人眼複驗時一併看｜blocks_current_closure: 否
 
-- D1 對比度 human acceptance｜target: glass hero 真機對比確認｜owner: 使用者｜reason: live shader 底靜態儀器值無意義，需人眼＋真機｜revisit_when: 2026-11-12 前真機驗收｜blocks_current_closure: 否
-- D2 真資料＋carousel 另案｜target: `forecast-placeholder.ts` 換真值＋carousel 新 Task｜owner: 使用者（給資料）｜reason: 目前無資料｜revisit_when: 資料回來後另開計畫｜blocks_current_closure: 否
+- D1 對比度 human acceptance（2026-10-14 CLOSED：使用者真機人眼通過）｜target: glass hero 真機對比確認｜owner: 使用者已驗｜reason: live shader 底靜態儀器值無意義，已人眼＋真機｜revisit_when: 無｜blocks_current_closure: 否
+- D2 真資料＋carousel 另案（2026-10-14 啟動：氣象署＋自動偵測）｜target: `forecast-placeholder.ts` 換真值（氣象署 API）＋定位（Geolocation 優先、拒絕/失敗回退預設城市）＋carousel 新 Task｜owner: 使用者（註冊取 key 中）＋主 agent（key 到後施工）｜reason: 目前無資料；城市待定（預設台北，回退用）｜revisit_when: key 到後另開施工｜blocks_current_closure: 否
 - D3 Worklog 誤刪恢復＋commit（2026-10-14 CLOSED：commit `30a2d02`，1 file 33+/0-，scope gate PASS）｜target: Worklog.md Replan 4–7（163 行誤刪已取回；誤判成立：無授權記錄／repo 內無第二份／5 節功能全未取消僅停用）＋3 新增塊保留（lake-landing／hero／YAML）｜owner: 主 agent 已執行（使用者批 A；誤刪版備份 $TMPDIR/worklog-20261014-pre-restore.md）｜reason: 原 165 deletions 經查為重寫掉段誤傷（Replan 4 空標題殘留），非刻意封存｜revisit_when: 無｜blocks_current_closure: 否
 - D4 全量 e2e 47 failed 跟進｜target: workspace/visual-fusion/hotspot 舊分支 specs｜owner: 維護者另案｜reason: pre-existing（USE_LAKE=true 基線既有，index.astro 零改動）｜revisit_when: 切回 WorkspaceDesktop 或 specs 改寫時｜blocks_current_closure: 否
 
