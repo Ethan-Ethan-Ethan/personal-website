@@ -47,7 +47,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
 
   return (
     <div className="lake-overlay" aria-hidden="false" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2 }}>
-      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}.forecast-house{width:40px;height:40px;display:grid;place-items:center;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:50%;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(0,0,0,0.35);cursor:pointer;padding:0;color:#f5f1e6;pointer-events:auto;}`}</style>
+      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}`}</style>
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
@@ -57,10 +57,9 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         aria-label="Ethan 首頁"
         aria-expanded={forecastOpen}
         onClick={() => setForecastOpen((v) => !v)}
-        className="forecast-house"
-        style={{ position: 'absolute', top: 31, left: 35, zIndex: 4 }}
+        style={{ position: 'absolute', top: 31, left: 35, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: INK, zIndex: 4 }}
       >
-        <HouseIcon size={24} />
+        <HouseIcon size={20} />
       </button>
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} />
       <ForecastGlass data={FORECAST_PLACEHOLDER} open={forecastOpen} />
