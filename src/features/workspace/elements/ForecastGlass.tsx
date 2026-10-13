@@ -55,7 +55,7 @@ export default function ForecastGlass({ data, open }: Props) {
             <span key={i} className={`fc-node fc-dir-up${on}`} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px', ...dl(D.temp0 + i * D.tempStep) }}>{t}°</span>
           ))}
         </div>
-        <svg viewBox="0 0 835 230" preserveAspectRatio="none" style={{ width: '100%', height: 150, marginTop: 24 }}>
+        <svg viewBox="0 0 835 230" preserveAspectRatio="none" className={`fc-node${on}`} style={{ width: '100%', height: 150, marginTop: 24 }}>
           <defs>
             <linearGradient id="wg" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stopColor="#fff" stopOpacity=".17" />

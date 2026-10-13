@@ -51,6 +51,18 @@ describe("ForecastGlass", () => {
     expect(document.querySelectorAll("path.draw")).toHaveLength(3);
     expect(document.querySelector("clipPath#wclip")).toBeTruthy();
   });
+  it("gates wave svg with fc-node when closed", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open={false} />);
+    const svg = document.querySelector('[aria-label="Hourly forecast"] svg');
+    expect(svg?.classList.contains("fc-node")).toBe(true);
+    expect(svg?.classList.contains("is-open")).toBe(false);
+  });
+  it("shows wave svg when open", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    const svg = document.querySelector('[aria-label="Hourly forecast"] svg');
+    expect(svg?.classList.contains("fc-node")).toBe(true);
+    expect(svg?.classList.contains("is-open")).toBe(true);
+  });
   it("renders rail main card and 3 city cards", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
     const rail = document.querySelector('[aria-label="Saved locations"]');
