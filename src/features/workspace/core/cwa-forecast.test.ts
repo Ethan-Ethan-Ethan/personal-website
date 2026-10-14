@@ -7,6 +7,7 @@ import {
   selectForecastData,
   toForecastData,
   type CwaCounty,
+  type CwaSlot,
 } from "./cwa-forecast";
 import snapshotDoc from "./cwa-snapshot.json";
 
@@ -197,11 +198,38 @@ describe("cwa-forecast", () => {
     const tp = countyByName(counties, "臺北市") as CwaCounty;
     const data = toForecastData(tp, [counties[1]]);
     expect(data.heroLines).toEqual(["晴時多雲", "臺北市"]);
-    expect(data.temps).toEqual([26, 24]);
+    expect(data.temps).toEqual([25]);
+    expect(data.days).toEqual(["Wednesday"]);
     expect(data.railMain).toMatchObject({ city: "臺北市", temp: 26, wind: 3, humidity: 70, pop: 10 });
     expect(data.cities).toHaveLength(1);
     expect(data.cities[0]).toMatchObject({ area: "高雄市", cond: "晴", temp: 29 });
     expect(data.attribution).toContain("中央氣象署");
+  });
+  it("aligns one temp per day in order", () => {
+    const day = (date: string, t: number): CwaSlot => ({
+      start: `${date}T06:00:00+08:00`,
+      end: `${date}T18:00:00+08:00`,
+      temp: t,
+      maxT: t + 2,
+      minT: t - 2,
+      rh: 70,
+      wind: 3,
+      beaufort: 2,
+      pop: 10,
+      wx: "晴",
+      wxCode: "01",
+      ci: "舒適",
+    });
+    const main: CwaCounty = {
+      name: "臺北市",
+      lat: 25.05,
+      lon: 121.55,
+      slots: [day("2026-10-14", 26), day("2026-10-14", 24), day("2026-10-15", 28)],
+    };
+    const data = toForecastData(main, []);
+    expect(data.temps).toEqual([25, 28]);
+    expect(data.days).toEqual(["Wednesday", "Thursday"]);
+    expect(data.activeDay).toBe(0);
   });
   it("selects Taipei by default, nearest with geo, placeholder when stale", () => {
     const doc = { ...RAW, fetchedAt: new Date().toISOString() };
@@ -230,7 +258,7 @@ describe("cwa-forecast", () => {
     const sel = selectForecastData(snapshotDoc, null);
     expect(sel.source).toBe("cwa");
     expect(sel.data?.railMain.city).toBe("臺北市");
-    expect(sel.data?.temps).toHaveLength(6);
+    expect(sel.data?.temps).toHaveLength(7);
     expect(sel.data?.days.length).toBeGreaterThanOrEqual(2);
   });
 });

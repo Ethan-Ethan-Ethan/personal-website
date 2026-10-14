@@ -221,22 +221,38 @@ export function selectForecastData(
 }
 
 const weekdayEn = new Intl.DateTimeFormat("en-US", { weekday: "long", timeZone: "Asia/Taipei" });
+const taipeiDate = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Taipei",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
 
-/** 縣市＋候選城市 → forecast UI 資料（temps 取前 6 個 12h 均溫；days 取覆蓋日期的星期）。 */
+/** 氣溫列與星期列一一對應：同日 slots 取均溫（四捨五入），只取前 7 個有資料日。 */
+
+/** 縣市＋候選城市 → forecast UI 資料（temps 為每日均溫，與 days 一一對應）。 */
 export function toForecastData(main: CwaCounty, others: CwaCounty[]): ForecastUIData {
   const s0 = main.slots[0];
   if (!s0) throw new Error(`cwa: ${main.name} 無 slots`);
-  const seen: string[] = [];
+  const byDay = new Map<string, CwaSlot[]>();
   for (const s of main.slots) {
-    const d = weekdayEn.format(new Date(s.start));
-    if (!seen.includes(d)) seen.push(d);
+    const k = taipeiDate.format(new Date(s.start));
+    const arr = byDay.get(k);
+    if (arr) arr.push(s);
+    else byDay.set(k, [s]);
   }
+  const dates = [...byDay.keys()].slice(0, 7);
+  const temps = dates.map((d) => {
+    const arr = byDay.get(d) as CwaSlot[];
+    return Math.round(arr.reduce((a, s) => a + s.temp, 0) / arr.length);
+  });
+  const days = dates.map((d) => weekdayEn.format(new Date(`${d}T12:00:00+08:00`)));
   return {
     chip: "Weather Forecast",
     heroLines: [s0.wx, main.name],
     blurb: `${s0.wx}，${s0.ci}。`,
-    temps: main.slots.slice(0, 6).map((s) => s.temp),
-    days: seen.slice(0, 7),
+    temps,
+    days,
     activeDay: 0,
     railMain: { city: main.name, temp: s0.temp, wind: s0.wind, humidity: s0.rh, pop: s0.pop },
     cities: others.slice(0, 3).map((c) => ({
