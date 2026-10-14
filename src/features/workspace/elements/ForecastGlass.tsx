@@ -35,7 +35,7 @@ export default function ForecastGlass({ data, open }: Props) {
       // hero／strip 無卡：靜態定位殼，pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       style={{ position: 'absolute', top: '12%', left: '9%', maxWidth: 560, width: 'min(560px, 82vw)', pointerEvents: 'none', zIndex: 3 }}
     >
-      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s .7s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s;}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}.fc-day{font-size:15px;}@media (max-width:640px){.fc-day{font-size:12px;letter-spacing:-0.2px;}}@media (prefers-reduced-motion: reduce){.fc-node{transition:none;transition-delay:0s !important;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);}.mask-line>span{transition:none;transform:none;}}`}</style>
+      <style>{`.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}.fc-node{opacity:0;visibility:hidden;transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s .7s;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);transition:opacity .7s cubic-bezier(0.16,1,0.3,1),transform .7s cubic-bezier(0.16,1,0.3,1),clip-path .8s cubic-bezier(0.22,0.61,0.36,1),visibility 0s;}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}.fc-day{font-size:15px;}.fc-days-row{display:flex;}@media (max-width:640px){.fc-day{font-size:12px;letter-spacing:-0.2px;}}@media (max-width:900px){.fc-wave{display:none;}.fc-days-row{display:none;}}@media (prefers-reduced-motion: reduce){.fc-node{transition:none;transition-delay:0s !important;}.fc-node.is-open{opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 0 0);}.mask-line>span{transition:none;transform:none;}}`}</style>
       <div style={{ marginBottom: 12 }}>
         <span className={`fc-node fc-wipe-r${on}`} style={{
           display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -66,7 +66,7 @@ export default function ForecastGlass({ data, open }: Props) {
             <span key={i} className={`fc-node fc-dir-up${on}`} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px', ...dl(D.temp0 + i * D.tempStep) }}>{t}°</span>
           ))}
         </div>
-        <svg viewBox="0 0 835 230" preserveAspectRatio="none" className={`fc-node${on}`} style={{ width: '100%', height: 150, marginTop: 24 }}>
+        <svg viewBox="0 0 835 230" preserveAspectRatio="none" className={`fc-node fc-wave${on}`} style={{ width: '100%', height: 150, marginTop: 24 }}>
           <defs>
             <linearGradient id="wg" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stopColor="#fff" stopOpacity=".17" />
@@ -81,7 +81,7 @@ export default function ForecastGlass({ data, open }: Props) {
           <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="3.4" pathLength={1} className="draw" />
           <style>{`@keyframes drawLine{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.draw{stroke-dasharray:1;stroke-dashoffset:0;}.wipe{transform:scaleX(1);transform-origin:left;}.is-open .draw{stroke-dashoffset:1;animation:drawLine 1.6s ease forwards;animation-delay:${D.wave}ms;}.is-open .wipe{transform:scaleX(0);animation:wipeIn 1.2s ease forwards;animation-delay:${D.wave + 220}ms;}@keyframes wipeIn{to{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.draw,.wipe,.is-open .draw,.is-open .wipe{animation:none;animation-delay:0s;}.draw,.is-open .draw{stroke-dashoffset:0;}.wipe,.is-open .wipe{transform:scaleX(1);}}`}</style>
         </svg>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: -18 }}>
+        <div className="fc-days-row" style={{ justifyContent: 'space-between', marginTop: -18 }}>
           {data.days.map((d, i) => (
             <span
               key={d}
@@ -100,9 +100,9 @@ export default function ForecastGlass({ data, open }: Props) {
     <aside
       aria-label="Saved locations"
       className="forecast-rail"
-      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, pointerEvents: 'none', zIndex: 3, visibility: open ? 'visible' : 'hidden' }}
+      style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, zIndex: 3, visibility: open ? 'visible' : 'hidden' }}
     >
-      <style>{`@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;}}`}</style>
+      <style>{`.forecast-rail{pointer-events:none;}@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;max-height:46vh;overflow-y:auto;pointer-events:auto;}}`}</style>
       <div className={`${glass} fc-node fc-dir-r${on}`} style={{ padding: '18px 20px', ...dl(D.card0) }}>
         <div style={{ color: 'rgba(255,255,255,.9)', fontSize: 14, fontWeight: 500 }}>{main.city}</div>
         <div style={{ color: INK, fontSize: 72, fontWeight: 500, letterSpacing: '-3.5px', lineHeight: 1 }}>
