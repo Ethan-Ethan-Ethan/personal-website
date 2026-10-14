@@ -143,18 +143,6 @@
   },
   {
    "topic": "study",
-   "angle": "因果",
-   "claim": "Claude Haiku 5.5 登場：比 Haiku 4.5 便宜約 75%，處理大量重複工作；Sonnet 5.5 快取讀取砍半",
-   "date": "2026-10-08",
-   "source": "免費資源網",
-   "featured": true,
-   "link": "https://free.com.tw/claude-haiku-5-5/",
-   "links": [
-    "https://free.com.tw/claude-haiku-5-5/"
-   ]
-  },
-  {
-   "topic": "study",
    "angle": "功用",
    "claim": "Discord vs LINE：伺服器／頻道／身分組新手教學",
    "date": "2026-09-02",
@@ -193,6 +181,7 @@
    "claim": "Gemini Skills 免費開放、Gems 11 月退場：官方撰寫指南 8 招",
    "date": "2026-10-12",
    "source": "數位早報；bnext回補",
+   "featured": true,
    "link": "https://www.bnext.com.tw/article/92466/gemini-skills-how-to-write-free",
    "links": [
     "https://www.bnext.com.tw/article/92466/gemini-skills-how-to-write-free"
@@ -689,7 +678,6 @@
    "claim": "Ashampoo 27 週年：最高 85% off",
    "date": "2026-10-13",
    "source": "Ashampoo News",
-   "featured": true,
    "link": "https://news.ashampoo.com/optiext/optiextension.dll?ID=XCOdxdpRVzZjIWbMciHWCY1Km3jzRXgTzKxfnGTjE3HH8Tt34m-CNyC8v2lNwGCKg-sJrSGsSKdQec8IfLw",
    "links": [
     "https://news.ashampoo.com/optiext/optiextension.dll?ID=XCOdxdpRVzZjIWbMciHWCY1Km3jzRXgTzKxfnGTjE3HH8Tt34m-CNyC8v2lNwGCKg-sJrSGsSKdQec8IfLw"
@@ -702,6 +690,18 @@
    "date": "2026-10-07",
    "source": "ASUS",
    "expiry": "限定 3 天"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "Claude Haiku 5.5 登場：比 Haiku 4.5 便宜約 75%，處理大量重複工作；Sonnet 5.5 快取讀取砍半",
+   "date": "2026-10-08",
+   "source": "免費資源網",
+   "featured": true,
+   "link": "https://free.com.tw/claude-haiku-5-5/",
+   "links": [
+    "https://free.com.tw/claude-haiku-5-5/"
+   ]
   },
   {
    "topic": "promo",

@@ -27,7 +27,7 @@ describe("sync-gmail bake", () => {
   it("dry-run 綠：三段皆有卡＋SKIP 明示行", () => {
     const r = run(["--dry-run"]);
     expect(r.code).toBe(0);
-    expect(r.out).toMatch(/study=27 invest=27 promo=17/);
+    expect(r.out).toMatch(/study=26 invest=27 promo=18/);
     expect(r.out).toContain("SKIP");
   });
   it("落地 JSON 形狀：三主題齊／angle+claim 非空／link 全 http／每段精選恰3", () => {

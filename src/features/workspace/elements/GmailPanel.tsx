@@ -111,11 +111,10 @@ function FullCard({ item, on }: { item: DigestItem; on: string }) {
     <article
       key={`${item.topic}:${item.claim}`}
       className={`fc-node fc-dir-l${on}`}
-      aria-label={`${item.angle}：${item.claim}`}
+      aria-label={`${item.claim}`}
       style={{ ...CARD, opacity: expired ? 0.55 : 1 }}
     >
       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
-        <span style={CHIP}>【{item.angle}】</span>
         {expired ? (
           <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.25)', borderRadius: 999, padding: '1px 8px' }}>
             已過期
@@ -190,19 +189,17 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
               <div style={{ marginBottom: 14 }}>
                 <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.1em', color: INK, marginBottom: 4 }}>
                   精選
-                  <span style={{ ...CHIP, marginLeft: 8, fontWeight: 400 }}>忙人只看 {featured.length} 條</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {featured.map((item) => (
                     <article
                       key={`star:${item.topic}:${item.claim}`}
                       className={`fc-node fc-dir-l${on}`}
-                      aria-label={`精選｜${item.angle}：${item.claim}`}
+                      aria-label={`精選｜${item.claim}`}
                       style={{ ...CARD, borderColor: 'rgba(255,255,255,0.35)' }}
                     >
                       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
                         <span style={CHIP}>{TOPIC_SHORT[item.topic]}</span>
-                        <span style={CHIP}>【{item.angle}】</span>
                       </div>
                       <p style={{ margin: '8px 0 0', fontSize: 14, lineHeight: '22px', fontWeight: 500, color: INK }}>
                         {item.claim}
