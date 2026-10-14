@@ -9,7 +9,7 @@ afterEach(() => cleanup());
 describe("GmailPanel", () => {
   it("renders header plus three fixed sections with claim cards (no angle pills)", () => {
     render(<GmailPanel open />);
-    expect(screen.getByText((_, el) => el?.textContent === "本週重點 2026-W42")).toBeTruthy();
+    expect(screen.getByText((_, el) => el?.textContent === "本週重點 2026-W42 · 10/07–10/14")).toBeTruthy();
     expect(screen.getByText("Gmail 整理專案")).toBeTruthy();
     for (const label of ["學習資訊", "投資", "本月促銷優惠"]) {
       // 段標＋rail 精選 Top3 各一列

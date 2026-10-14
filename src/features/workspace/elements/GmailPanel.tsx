@@ -17,6 +17,7 @@ export type DigestItem = {
 export type DigestDoc = {
   _generated: string;
   week: string;
+  weekRange?: string;
   sources: string[];
   items: DigestItem[];
 };
@@ -179,7 +180,7 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
                 color: INK, border: '1px solid rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.15)',
                 borderRadius: 999, padding: '3px 10px',
               }}>
-                本週重點 {doc.week}
+                本週重點 {doc.week}{doc.weekRange ? ` · ${doc.weekRange}` : ""}
               </span>
               <div style={{ marginTop: 8, fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)' }}>
                 Gmail 整理專案

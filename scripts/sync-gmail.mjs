@@ -19,6 +19,8 @@ const IN2 = resolve(process.env.GMAIL_IN2 || DEFAULT_IN2);
 const OUT = resolve(process.env.GMAIL_OUT || resolve(ROOT, "src/features/workspace/core/gmail-digest.json"));
 const LOCK = resolve(process.env.TMPDIR || "/tmp", "personal-website-gmail-sync.lock");
 const WEEK = "2026-W42";
+// 本週報覆蓋範圍（出處：00_Inbox/週報-2026-W42-大綱.md L8 source 行 `10/07–10/14`；bnext 回補 2026-07-15–10/14 是累積回補不取其起日）。僅展示用，week 維持 W42 保可重現。
+const WEEK_RANGE = "10/07–10/14";
 
 // 段映射（spec §資料流）：附註段一律排除不 bake。
 const SECTION_MAP = {
@@ -204,7 +206,7 @@ function splitMeta(meta) {
 function stableStringify(doc) {
   const items = [...doc.items].sort((a, b) =>
     SECTION_ORDER.indexOf(a.topic) - SECTION_ORDER.indexOf(b.topic) || a.claim.localeCompare(b.claim, "zh-Hant"));
-  return JSON.stringify({ _generated: doc._generated, week: doc.week, sources: doc.sources, items }, null, 1) + "\n";
+  return JSON.stringify({ _generated: doc._generated, week: doc.week, weekRange: doc.weekRange, sources: doc.sources, items }, null, 1) + "\n";
 }
 
 function assertDigest(doc) {
@@ -246,6 +248,7 @@ function bake() {
   const doc = {
     _generated: "scripts/sync-gmail.mjs — 手動改會被覆蓋",
     week: WEEK,
+    weekRange: WEEK_RANGE,
     sources: ["00_Inbox/週報-2026-W42-大綱.md", "00_Inbox/bnext-回補-大綱-2026-W42.md"],
     items: all,
   };

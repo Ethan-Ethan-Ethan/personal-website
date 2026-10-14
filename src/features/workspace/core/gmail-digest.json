@@ -1,6 +1,7 @@
 {
  "_generated": "scripts/sync-gmail.mjs — 手動改會被覆蓋",
  "week": "2026-W42",
+ "weekRange": "10/07–10/14",
  "sources": [
   "00_Inbox/週報-2026-W42-大綱.md",
   "00_Inbox/bnext-回補-大綱-2026-W42.md"

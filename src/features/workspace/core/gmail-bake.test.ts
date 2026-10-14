@@ -33,6 +33,7 @@ describe("sync-gmail bake", () => {
   it("落地 JSON 形狀：三主題齊／angle+claim 非空／link 全 http／每段精選恰3", () => {
     const doc = JSON.parse(readFileSync(join(ROOT, "src/features/workspace/core/gmail-digest.json"), "utf-8"));
     expect(doc.week).toBe("2026-W42");
+    expect(doc.weekRange).toBe("10/07–10/14");
     for (const t of ["study", "invest", "promo"]) {
       expect(doc.items.filter((i: { topic: string }) => i.topic === t).length).toBeGreaterThan(0);
       expect(doc.items.filter((i: { topic: string; featured?: boolean }) => i.topic === t && i.featured === true).length).toBe(3);
