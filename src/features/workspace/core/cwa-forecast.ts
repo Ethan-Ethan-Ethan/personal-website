@@ -263,3 +263,38 @@ export function toForecastData(main: CwaCounty, others: CwaCounty[]): ForecastUI
     attribution: CWA_ATTRIBUTION,
   };
 }
+
+const WAVE_W = 835;
+const WAVE_TOP = 50;
+const WAVE_BOTTOM = 180;
+const WAVE_MID = 115;
+
+const r1 = (v: number): number => Math.round(v * 10) / 10;
+
+/**
+ * 日均溫 → SVG 波形路徑（viewBox 835×230；高溫在上）。
+ * Catmull-Rom 轉 bezier 平滑；全等溫走中線直線。純函式可測。
+ */
+export function wavePath(temps: number[]): string {
+  if (!Array.isArray(temps) || temps.length < 2) throw new Error("cwa: wave 至少需 2 筆氣溫");
+  const lo = Math.min(...temps);
+  const hi = Math.max(...temps);
+  const pts = temps.map((t, i) => {
+    const x = r1((i * WAVE_W) / (temps.length - 1));
+    const y = hi === lo ? WAVE_MID : r1(WAVE_BOTTOM - ((t - lo) / (hi - lo)) * (WAVE_BOTTOM - WAVE_TOP));
+    return { x, y };
+  });
+  let d = `M${pts[0].x},${pts[0].y}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(0, i - 1)];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[Math.min(pts.length - 1, i + 2)];
+    const c1x = r1(p1.x + (p2.x - p0.x) / 6);
+    const c1y = r1(p1.y + (p2.y - p0.y) / 6);
+    const c2x = r1(p2.x - (p3.x - p1.x) / 6);
+    const c2y = r1(p2.y - (p3.y - p1.y) / 6);
+    d += ` C${c1x},${c1y} ${c2x},${c2y} ${p2.x},${p2.y}`;
+  }
+  return d;
+}
