@@ -133,6 +133,7 @@ npm run dev          # 或 astro dev --background
 | Google Fonts（Inter＋Source Serif 4） | CDN | 字體 | OFL（免費） |
 | Cloudflare Pages／Access（50人） | 免費層 | 託管＋/protected 保護 | 免費（免綁卡） |
 | DigitalPlat FreeDomain（ethanyang.dpdns.org） | 免費 | 網域（到期前 120 天免費續，見 #5 專區） | 免費（窗口內續簽） |
+| 中央氣象署開放資料（F-D0047-091 逐12小時週預報） | 免費會員制（key 在 Keychain service=`cwa`，明文禁落地；CI 用已提交 snapshot 不必帶 key） | 首頁 forecast 真資料（`sync:cwa` build-time 抓＋bake，瀏覽器端零 key；拒絕定位回退臺北） | 免費（須標示出處，面板已掛署名小字） |
 | dembrandt-skills（41 技能） | GitHub 開源 | #9 樣式優化 | MIT |
 | GitHub Actions／Decap CMS（已放棄）／TinaCMS（候選） | — | CI／歷史 CMS／候選 | 免費開源（見代辦 #1/#2） |
 

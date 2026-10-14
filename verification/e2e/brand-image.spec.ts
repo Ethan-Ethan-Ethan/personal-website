@@ -42,26 +42,28 @@ test('forecast panels stay hidden until house button opens them', async ({ page 
   await expect(brand).toHaveAttribute('aria-expanded', 'false');
 });
 
-test('forecast glass hero, strip and rail render with placeholder data', async ({ page }, testInfo) => {
+test('forecast glass hero, strip and rail render with live snapshot data', async ({ page }, testInfo) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Ethan 首頁' }).click();
   const hero = page.getByLabel('Forecast', { exact: true });
   await expect(hero.getByText('Weather Forecast')).toBeVisible();
-  await expect(hero.getByRole('heading')).toContainText(/Strom/);
+  await expect(hero.getByRole('heading')).toContainText(/\S/);
   const strip = page.getByLabel('Hourly forecast');
   await expect(strip).toBeVisible();
-  await expect(strip).toContainText('Wednesday');
+  await expect(strip.getByText(/^\d+°$/).first()).toBeVisible();
+  await expect(page.getByText('中央氣象署')).toBeVisible();
   if (testInfo.project.name !== 'desktop-chrome') {
-    const sat = strip.getByText('Saturday');
-    const bb = await sat.boundingBox();
+    const lastDay = strip.locator('.fc-day').last();
+    const bb = await lastDay.boundingBox();
     const vw = page.viewportSize()?.width ?? 0;
     expect(bb).toBeTruthy();
     expect(bb!.x + bb!.width).toBeLessThanOrEqual(vw + 1);
   }
   const rail = page.getByLabel('Saved locations');
   await expect(rail).toBeVisible();
-  await expect(rail).toContainText('Central Jakarta');
-  await expect(rail).toContainText('Bandung');
+  await expect(rail.getByText('臺北市')).toBeVisible();
+  await expect(rail.getByText(/^\d+°$/).first()).toBeVisible();
+  await expect(rail.getByText('降雨機率')).toBeVisible();
 });
 
 test('forecast content stays readable with reduced motion', async ({ page, context }) => {
@@ -69,8 +71,9 @@ test('forecast content stays readable with reduced motion', async ({ page, conte
   await page.goto('/');
   await expect(page.getByRole('button', { name: 'Ethan 首頁' })).toBeVisible();
   await page.getByRole('button', { name: 'Ethan 首頁' }).click();
-  await expect(page.getByRole('heading')).toContainText(/Heavy Rain/);
-  await expect(page.getByLabel('Saved locations')).toContainText('Central Jakarta');
+  await expect(page.getByRole('heading')).toContainText(/\S/);
+  await expect(page.getByLabel('Saved locations')).toContainText('°');
+  await expect(page.getByText('中央氣象署')).toBeVisible();
 });
 
 test('rail does not overlap bottom controls on desktop', async ({ page }, testInfo) => {

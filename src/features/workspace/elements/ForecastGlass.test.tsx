@@ -69,6 +69,15 @@ describe("ForecastGlass", () => {
     expect(svg?.classList.contains("fc-node")).toBe(true);
     expect(svg?.classList.contains("is-open")).toBe(true);
   });
+  it("shows attribution only when data carries it", () => {
+    const { unmount } = render(
+      <ForecastGlass data={{ ...FORECAST_PLACEHOLDER, attribution: "資料來源：X" }} open />
+    );
+    expect(screen.getByText("資料來源：X")).toBeTruthy();
+    unmount();
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    expect(screen.queryByText(/資料來源/)).toBeFalsy();
+  });
   it("renders rail main card and 3 city cards", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
     const rail = document.querySelector('[aria-label="Saved locations"]');

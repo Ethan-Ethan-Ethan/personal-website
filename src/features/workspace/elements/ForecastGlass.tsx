@@ -1,7 +1,7 @@
-import type { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
+import type { ForecastUIData } from '../core/cwa-forecast';
 
 type Props = {
-  data: typeof FORECAST_PLACEHOLDER;
+  data: ForecastUIData;
   /** 過場唯一正本：開關只翻 open，所有動畫皆純 CSS（無 JS staging、無掛載開關）。
    * 進場語言對齊 forecast-center 參考編舞：slideL/slideR/riseIn＋mask reveal＋wipe，
    * hero／strip 無玻璃卡（裸字直落背景），玻璃只在 chip／右欄卡／側軌。 */
@@ -49,6 +49,11 @@ export default function ForecastGlass({ data, open }: Props) {
       <p className={`fc-node fc-wipe-d${on}`} style={{ margin: '12px 0 0', maxWidth: 480, fontSize: 14, lineHeight: '22px', fontWeight: 500, letterSpacing: '-0.3px', color: 'rgba(255,255,255,0.95)', ...dl(D.blurb) }}>
         {data.blurb}
       </p>
+      {data.attribution ? (
+        <div className={`fc-node fc-wipe-d${on}`} style={{ margin: '8px 0 0', fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)', ...dl(D.blurb) }}>
+          {data.attribution}
+        </div>
+      ) : null}
       <div className={open ? 'is-open' : ''} aria-label="Hourly forecast" style={{ marginTop: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {data.temps.map((t, i) => (
@@ -98,15 +103,15 @@ export default function ForecastGlass({ data, open }: Props) {
           {main.temp}°<span style={{ fontSize: 26 }}>C</span>
         </div>
         <div style={{ display: 'flex', gap: 12, marginTop: 12, color: 'rgba(255,255,255,.9)', fontSize: 13, whiteSpace: 'nowrap' }}>
-          <span>{main.wind} mph 風速</span>
+          <span>{main.wind} m/s 風速</span>
           <span>{main.humidity}% 濕度</span>
-          <span>{main.gust} km/h 陣風</span>
+          <span>{main.pop === null ? "–" : `${main.pop}%`} 降雨機率</span>
         </div>
       </div>
       {data.cities.map((c, i) => (
         <div key={c.area} className={`${glass} fc-node fc-dir-r${on}`} style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', ...dl(D.card0 + (i + 1) * D.cardStep) }}>
           <div>
-            <div style={{ color: 'rgba(255,255,255,.75)', fontSize: 12 }}>Indonesia／{c.area}</div>
+            <div style={{ color: 'rgba(255,255,255,.75)', fontSize: 12 }}>臺灣／{c.area}</div>
             <div style={{ color: INK, fontSize: 15, fontWeight: 500 }}>{c.cond}</div>
           </div>
           <div style={{ color: INK, fontSize: 24 }}>{c.temp}°</div>

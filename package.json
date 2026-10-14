@@ -16,6 +16,7 @@
     "content:sync": "node scripts/site.mjs content sync",
     "content:sync:dry": "node scripts/site.mjs content sync --dry-run",
     "test:e2e": "node scripts/site.mjs verify e2e",
+    "sync:cwa": "node scripts/sync-cwa.mjs",
     "content:dsh": "node scripts/run-content-dsh.mjs",
     "verify": "node scripts/site.mjs verify all",
     "site": "node scripts/site.mjs",

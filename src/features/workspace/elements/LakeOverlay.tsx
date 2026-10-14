@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
+import { selectForecastData } from '../core/cwa-forecast';
+import snapshotDoc from '../core/cwa-snapshot.json';
 import { HEXMAP } from '../core/recipe-runtime-binding';
 import ForecastGlass from './ForecastGlass';
 import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
@@ -35,6 +37,21 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
   const reducedMotion = useReducedMotion();
   // forecast 開關：面板常駐 DOM，開關只翻 open class（全 CSS 過場，無掛載開關、無 JS staging）。
   const [forecastOpen, setForecastOpen] = useState(false);
+  // 真資料：snapshot 新鮮即用，定位成功換最近縣市；拒絕／超時／SSR 一律回退預設（臺北）→ placeholder。
+  const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
+  useEffect(() => {
+    const g = navigator.geolocation;
+    if (!g) return;
+    g.getCurrentPosition(
+      (p) => setGeo({ lat: p.coords.latitude, lon: p.coords.longitude }),
+      () => {},
+      { timeout: 6000, maximumAge: 3600000 }
+    );
+  }, []);
+  const forecastData = useMemo(
+    () => selectForecastData(snapshotDoc, geo).data ?? FORECAST_PLACEHOLDER,
+    [geo]
+  );
   useEffect(() => {
     if (!forecastOpen) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setForecastOpen(false); };
@@ -63,7 +80,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         <HouseIcon size={20} />
       </button>
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} />
-      <ForecastGlass data={FORECAST_PLACEHOLDER} open={forecastOpen} />
+      <ForecastGlass data={forecastData} open={forecastOpen} />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>
