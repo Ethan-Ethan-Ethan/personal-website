@@ -69,6 +69,20 @@ describe("ForecastGlass", () => {
     expect(svg?.classList.contains("fc-node")).toBe(true);
     expect(svg?.classList.contains("is-open")).toBe(true);
   });
+  it("uses open tracking for CJK hero, tight tracking for Latin", () => {
+    const { unmount } = render(
+      <ForecastGlass
+        data={{ ...FORECAST_PLACEHOLDER, heroLines: ["多雲時晴", "臺北市"], blurb: "多雲時晴，舒適。" }}
+        open
+      />
+    );
+    const h1 = document.querySelector('[aria-label="Forecast"] h1') as HTMLElement;
+    expect(h1.style.letterSpacing).toBe("0.05em");
+    unmount();
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    const h1en = document.querySelector('[aria-label="Forecast"] h1') as HTMLElement;
+    expect(h1en.style.letterSpacing).toBe("-0.02em");
+  });
   it("shows attribution only when data carries it", () => {
     const { unmount } = render(
       <ForecastGlass data={{ ...FORECAST_PLACEHOLDER, attribution: "資料來源：X" }} open />

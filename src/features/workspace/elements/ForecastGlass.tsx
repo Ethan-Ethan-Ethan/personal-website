@@ -13,11 +13,17 @@ const GLASS_BLUR = 'backdrop-blur-md';
 const INK = '#ffffff';
 const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
 
+/** 中日韓字宜正追蹤（全形字 love 間距），拉丁才用負追蹤收緊：有 CJK 即開 0.05em。 */
+const hasCjk = (s: string): boolean => /[\u4e00-\u9fff]/.test(s);
+
 /** 開場 stagger（ms，toggle 壓縮版參考 beats）：chip 100 → h1 160/260 → blurb 380 → 右卡 250/320/390/460 → 氣溫 500+i*60 → 波形 700 → 星期 1100+i*55。關閉一律 0ms 同收。 */
 const D = { chip: 100, line1: 160, line2: 260, blurb: 380, card0: 250, cardStep: 70, temp0: 500, tempStep: 60, wave: 700, day0: 1100, dayStep: 55 } as const;
 
 export default function ForecastGlass({ data, open }: Props) {
   const main = data.railMain;
+  const cjk = data.heroLines.some(hasCjk) || hasCjk(data.blurb);
+  const heroTracking = cjk ? '0.05em' : '-0.02em';
+  const blurbTracking = cjk ? '0.04em' : '-0.3px';
   // blur 與 is-open 原子同 commit：開時才霧化，避免 opacity 跑完才霧化的第二段跳
   const glass = `forecast-glass ${GLASS_BASE}${open ? ` ${GLASS_BLUR}` : ''}`;
   const on = open ? ' is-open' : '';
@@ -39,14 +45,14 @@ export default function ForecastGlass({ data, open }: Props) {
           {data.chip}
         </span>
       </div>
-      <h1 style={{ margin: 0, color: INK, fontSize: 'clamp(32px, 4.5vw, 56px)', lineHeight: 1.02, letterSpacing: '-0.02em', fontWeight: 600 }}>
+      <h1 style={{ margin: 0, color: INK, fontSize: 'clamp(32px, 4.5vw, 56px)', lineHeight: 1.02, letterSpacing: heroTracking, fontWeight: 600 }}>
         {data.heroLines.map((line, i) => (
           <span key={line} className="mask-line">
             <span style={{ transitionDelay: open ? `${i === 0 ? D.line1 : D.line2}ms` : '0ms', ...(open ? {} : { transform: 'translateY(115%)' }) }} className={open ? 'is-open' : ''}>{line}</span>
           </span>
         ))}
       </h1>
-      <p className={`fc-node fc-wipe-d${on}`} style={{ margin: '12px 0 0', maxWidth: 480, fontSize: 14, lineHeight: '22px', fontWeight: 500, letterSpacing: '-0.3px', color: 'rgba(255,255,255,0.95)', ...dl(D.blurb) }}>
+      <p className={`fc-node fc-wipe-d${on}`} style={{ margin: '12px 0 0', maxWidth: 480, fontSize: 14, lineHeight: '22px', fontWeight: 500, letterSpacing: blurbTracking, color: 'rgba(255,255,255,0.95)', ...dl(D.blurb) }}>
         {data.blurb}
       </p>
       {data.attribution ? (
