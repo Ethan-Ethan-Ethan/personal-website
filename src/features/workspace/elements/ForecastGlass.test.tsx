@@ -57,6 +57,12 @@ describe("ForecastGlass", () => {
     expect(svg?.classList.contains("fc-node")).toBe(true);
     expect(svg?.classList.contains("is-open")).toBe(false);
   });
+  it("leaves temp font-size to stylesheet for small screens", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    const temps = document.querySelectorAll('[aria-label="Hourly forecast"] span.fc-temp');
+    expect(temps.length).toBeGreaterThanOrEqual(6);
+    temps.forEach((t) => expect((t as HTMLElement).style.fontSize).toBe(""));
+  });
   it("leaves day font-size to stylesheet so mobile can shrink it", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
     const sat = screen.getByText("Saturday");
@@ -97,8 +103,9 @@ describe("ForecastGlass", () => {
     const css = Array.from(document.querySelectorAll("style"))
       .map((s) => s.textContent ?? "")
       .join("\n");
-    expect(css).toContain("max-height:500px");
     expect(css).toContain("max-width:1100px");
+    expect(css).not.toContain(".fc-days-row{display:none");
+    expect(css).not.toContain(".fc-wave{display:none");
   });
   it("marks wave and days row for mobile compaction", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);

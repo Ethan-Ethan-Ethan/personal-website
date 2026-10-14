@@ -6,6 +6,7 @@ import {
   parseCwaWeekly,
   selectForecastData,
   toForecastData,
+  wavePath,
   type CwaCounty,
   type CwaSlot,
 } from "./cwa-forecast";
@@ -242,7 +243,8 @@ describe("cwa-forecast", () => {
     expect(kh.data?.cities[0]?.area).toBe("臺北市");
     expect(selectForecastData(doc, null).data?.attribution).toContain("中央氣象署");
   });
-  it("falls back to placeholder on stale/empty/broken snapshot", () => {    expect(selectForecastData(null, null)).toMatchObject({ source: "placeholder", reason: "no-snapshot" });
+  it("falls back to placeholder on stale/empty/broken snapshot", () => {
+    expect(selectForecastData(null, null)).toMatchObject({ source: "placeholder", reason: "no-snapshot" });
     expect(
       selectForecastData({ ...RAW, fetchedAt: new Date(Date.now() - 72 * 3600 * 1000).toISOString() }, null)
     ).toMatchObject({ source: "placeholder", reason: "stale" });
@@ -260,5 +262,31 @@ describe("cwa-forecast", () => {
     expect(sel.data?.railMain.city).toBe("臺北市");
     expect(sel.data?.temps).toHaveLength(7);
     expect(sel.data?.days.length).toBeGreaterThanOrEqual(2);
+  });
+});
+
+describe("wavePath", () => {
+  const ys = (d: string): number[] => {
+    const nums = d.match(/-?\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+    return nums.filter((_, i) => i % 2 === 1);
+  };
+  it("rises with temperature (high temp = small y)", () => {
+    const d = wavePath([10, 20, 30]);
+    expect(d.startsWith("M0,")).toBe(true);
+    expect(d).toContain("C");
+    const y = ys(d);
+    expect(y[0]).toBeGreaterThan(y[y.length - 1]);
+  });
+  it("draws flat line for constant temps", () => {
+    const y = ys(wavePath([22, 22, 22, 22]));
+    expect(new Set(y.map((v) => Math.round(v))).size).toBe(1);
+  });
+  it("changes when data changes, spans full width", () => {
+    expect(wavePath([10, 20, 30])).not.toBe(wavePath([30, 20, 10]));
+    expect(wavePath([10, 20, 30])).toContain("835,");
+  });
+  it("needs at least two points", () => {
+    expect(() => wavePath([10])).toThrow();
+    expect(() => wavePath([])).toThrow();
   });
 });

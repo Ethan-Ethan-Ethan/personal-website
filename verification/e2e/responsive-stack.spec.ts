@@ -38,6 +38,10 @@ for (const [w, h] of BANDS) {
       for (const [name, b] of [['hero', hero], ['rail', rail]] as const) {
         if (b && (b.r > vw + 1 || b.l < -1)) out.push(`${name} h-clip`);
       }
+      // strip 內文字（氣溫＋星期）不得溢出視口（容器合但內容溢是另一種遮）
+      const inner = [...document.querySelectorAll('[aria-label="Hourly forecast"] span')]
+        .map((el) => (el as HTMLElement).getBoundingClientRect());
+      if (inner.some((r) => r.right > vw + 1)) out.push('strip inner h-clip');
       // 右欄可達性：直接可見，或在可滾容器內
       if (rail) {
         const st = document.querySelector('.forecast-stack') as HTMLElement | null;

@@ -1,5 +1,6 @@
 import type { ForecastUIData } from '../core/cwa-forecast';
 import { FC_TRANSITION_CSS } from '../core/forecast-transitions';
+import { wavePath } from '../core/cwa-forecast';
 
 type Props = {
   data: ForecastUIData;
@@ -12,7 +13,6 @@ type Props = {
 const GLASS_BASE = 'bg-white/10 border border-white/20 rounded-2xl';
 const GLASS_BLUR = 'backdrop-blur-md';
 const INK = '#ffffff';
-const WAVE_D = 'M0,79 C120,60 200,120 300,100 S520,40 640,90 S780,80 835,86';
 
 /** 中日韓字宜正追蹤（全形字 love 間距），拉丁才用負追蹤收緊：有 CJK 即開 0.05em。 */
 const hasCjk = (s: string): boolean => /[\u4e00-\u9fff]/.test(s);
@@ -25,6 +25,7 @@ export default function ForecastGlass({ data, open }: Props) {
   const cjk = data.heroLines.some(hasCjk) || hasCjk(data.blurb);
   const heroTracking = cjk ? '0.05em' : '-0.02em';
   const blurbTracking = cjk ? '0.04em' : '-0.3px';
+  const waveD = wavePath(data.temps);
   // blur 與 is-open 原子同 commit：開時才霧化，避免 opacity 跑完才霧化的第二段跳
   const glass = `forecast-glass ${GLASS_BASE}${open ? ` ${GLASS_BLUR}` : ''}`;
   const on = open ? ' is-open' : '';
@@ -37,7 +38,7 @@ export default function ForecastGlass({ data, open }: Props) {
       // hero／strip 無卡：靜態定位殼，pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       style={{ position: 'absolute', top: '12%', left: '9%', pointerEvents: 'none', zIndex: 3 }}
     >
-      <style>{`.forecast-hero{max-width:560px;width:min(560px,82vw);}.forecast-stack{display:contents;}@media (max-width:900px),(max-height:500px){.forecast-stack{display:block;position:absolute;inset:0;overflow-y:auto;pointer-events:none;padding:0 0 130px;}.forecast-stack.is-open{pointer-events:auto;}.forecast-stack .forecast-hero{position:static !important;width:auto !important;max-width:none !important;margin:96px 9% 0;}.forecast-stack .forecast-rail{position:static !important;width:auto !important;max-width:none;margin:16px 5% 0;max-height:none;overflow:visible;}}.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}.fc-day{font-size:15px;}.fc-days-row{display:flex;}@media (max-width:640px){.fc-day{font-size:12px;letter-spacing:-0.2px;}}@media (max-width:900px){.fc-wave{display:none;}.fc-days-row{display:none;}}@media (max-height:500px){.fc-wave{display:none;}.fc-days-row{display:none;}}@media (min-width:901px) and (max-width:1100px){.forecast-hero{max-width:46vw;}.forecast-rail{width:260px !important;right:20px !important;}}@media (prefers-reduced-motion: reduce){.mask-line>span{transition:none;transform:none;}}`}</style>
+      <style>{`.forecast-hero{max-width:560px;width:min(560px,82vw);}.forecast-stack{display:contents;}@media (max-width:900px),(max-height:500px){.forecast-stack{display:block;position:absolute;inset:0;overflow-y:auto;pointer-events:none;padding:0 0 130px;}.forecast-stack.is-open{pointer-events:auto;}.forecast-stack .forecast-hero{position:static !important;width:auto !important;max-width:none !important;margin:96px 9% 0;}.forecast-stack .forecast-rail{position:static !important;width:auto !important;max-width:none;margin:16px 5% 0;max-height:none;overflow:visible;}}.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}.fc-day{font-size:15px;}.fc-temp{font-size:28px;}.fc-days-row{display:flex;flex-wrap:wrap;row-gap:6px;}@media (max-width:640px){.fc-day{font-size:12px;letter-spacing:-0.2px;}.fc-temp{font-size:20px;}}@media (min-width:901px) and (max-width:1100px){.forecast-hero{max-width:46vw;}.forecast-rail{width:260px !important;right:20px !important;}}@media (prefers-reduced-motion: reduce){.mask-line>span{transition:none;transform:none;}}`}</style>
       <div style={{ marginBottom: 12 }}>
         <span className={`fc-node fc-wipe-r${on}`} style={{
           display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -65,7 +66,7 @@ export default function ForecastGlass({ data, open }: Props) {
       <div className={open ? 'is-open' : ''} aria-label="Hourly forecast" style={{ marginTop: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {data.temps.map((t, i) => (
-            <span key={i} className={`fc-node fc-dir-up${on}`} style={{ color: INK, fontSize: 28, fontWeight: 400, letterSpacing: '-0.7px', ...dl(D.temp0 + i * D.tempStep) }}>{t}°</span>
+            <span key={i} className={`fc-node fc-dir-up fc-temp${on}`} style={{ color: INK, fontWeight: 400, letterSpacing: '-0.7px', ...dl(D.temp0 + i * D.tempStep) }}>{t}°</span>
           ))}
         </div>
         <svg viewBox="0 0 835 230" preserveAspectRatio="none" className={`fc-node fc-wave${on}`} style={{ width: '100%', height: 150, marginTop: 24 }}>
@@ -77,10 +78,10 @@ export default function ForecastGlass({ data, open }: Props) {
             </linearGradient>
             <clipPath id="wclip"><rect x="0" y="0" width="835" height="230" className="wipe" /></clipPath>
           </defs>
-          <g clipPath="url(#wclip)"><path d={WAVE_D} fill="rgba(255,255,255,.08)" /></g>
-          <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="6.2" opacity=".17" pathLength={1} className="draw" />
-          <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="4.6" opacity=".26" pathLength={1} className="draw" />
-          <path d={WAVE_D} fill="none" stroke="url(#wg)" strokeWidth="3.4" pathLength={1} className="draw" />
+          <g clipPath="url(#wclip)"><path d={waveD} fill="rgba(255,255,255,.08)" /></g>
+          <path d={waveD} fill="none" stroke="url(#wg)" strokeWidth="6.2" opacity=".17" pathLength={1} className="draw" />
+          <path d={waveD} fill="none" stroke="url(#wg)" strokeWidth="4.6" opacity=".26" pathLength={1} className="draw" />
+          <path d={waveD} fill="none" stroke="url(#wg)" strokeWidth="3.4" pathLength={1} className="draw" />
           <style>{`@keyframes drawLine{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.draw{stroke-dasharray:1;stroke-dashoffset:0;}.wipe{transform:scaleX(1);transform-origin:left;}.is-open .draw{stroke-dashoffset:1;animation:drawLine 1.6s ease forwards;animation-delay:${D.wave}ms;}.is-open .wipe{transform:scaleX(0);animation:wipeIn 1.2s ease forwards;animation-delay:${D.wave + 220}ms;}@keyframes wipeIn{to{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.draw,.wipe,.is-open .draw,.is-open .wipe{animation:none;animation-delay:0s;}.draw,.is-open .draw{stroke-dashoffset:0;}.wipe,.is-open .wipe{transform:scaleX(1);}}`}</style>
         </svg>
         <div className="fc-days-row" style={{ justifyContent: 'space-between', marginTop: -18 }}>
