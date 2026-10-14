@@ -27,19 +27,21 @@ describe("sync-gmail bake", () => {
   it("dry-run 綠：三段皆有卡＋SKIP 明示行", () => {
     const r = run(["--dry-run"]);
     expect(r.code).toBe(0);
-    expect(r.out).toMatch(/study=30 invest=30 promo=17/);
+    expect(r.out).toMatch(/study=27 invest=27 promo=17/);
     expect(r.out).toContain("SKIP");
   });
-  it("落地 JSON 形狀：三主題齊／angle+claim 非空／link 全 http", () => {
+  it("落地 JSON 形狀：三主題齊／angle+claim 非空／link 全 http／每段精選恰3", () => {
     const doc = JSON.parse(readFileSync(join(ROOT, "src/features/workspace/core/gmail-digest.json"), "utf-8"));
     expect(doc.week).toBe("2026-W42");
     for (const t of ["study", "invest", "promo"]) {
       expect(doc.items.filter((i: { topic: string }) => i.topic === t).length).toBeGreaterThan(0);
+      expect(doc.items.filter((i: { topic: string; featured?: boolean }) => i.topic === t && i.featured === true).length).toBe(3);
     }
     for (const i of doc.items) {
-      expect(["功用", "因果", "解決"]).toContain(i.angle);
+      expect(["功用", "因果", "解決", "資訊"]).toContain(i.angle);
       expect(i.claim.trim().length).toBeGreaterThan(0);
       if (i.link) expect(i.link).toMatch(/^https?:\/\//);
+      for (const u of i.links || []) expect(u).toMatch(/^https?:\/\//);
     }
   });
   it("壞行 fail-closed：無 angle 前綴 exit 非零並列行號", () => {
@@ -58,5 +60,20 @@ describe("sync-gmail bake", () => {
     const all = JSON.stringify(doc.items);
     expect(all).not.toContain("部署失敗");
     expect(all).not.toContain("Passkey");
+  });
+  it("新文法隔離驗證：★資訊＋多連結 bake 綠", () => {
+    const dir = mkdtempSync(join(tmpdir(), "gmail-bake-"));
+    const topics = (star: boolean) => {
+      const s = star ? "★" : "";
+      return `## 二、投資（金融必連個股）\n\n- ${s}【因果】投精選一（2026-10-13，來源）\n- ${s}【因果】投精選二（2026-10-12，來源）\n- ${s}【因果】投精選三（2026-10-11，來源）\n\n## 三、本月促銷優惠（含時效）\n\n- ${s}【功用】促精選一（2026-10-10，來源）\n- ${s}【功用】促精選二（2026-10-09，來源）\n- ${s}【功用】促精選三（2026-10-08，來源）\n`;
+    };
+    const good1 = join(dir, "a.md");
+    const good2 = join(dir, "b.md");
+    // ★合計：study 3（兩檔合併算）、invest 3、promo 3；多連結一條驗 links 全收
+    writeFileSync(good1, `## 一、學習資訊\n\n- ★【資訊】學精選放假通知（2026-10-12，來源）\n- 【功用】學普通卡（2026-10-11，來源）— https://a.example/x ／ https://b.example/y\n\n${topics(true)}`);
+    writeFileSync(good2, `## 一、學習資訊\n\n- ★【解決】學精選解法（2026-10-10，來源）\n- ★【因果】學精選三（2026-10-09，來源）\n\n${topics(false)}`);
+    const r = run(["--dry-run"], { GMAIL_IN1: good1, GMAIL_IN2: good2 });
+    expect(r.code).toBe(0);
+    expect(r.out).toMatch(/study=4 invest=6 promo=6/);
   });
 });

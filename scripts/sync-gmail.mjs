@@ -2,7 +2,7 @@
 /**
  * sync-gmail.mjs — 兩份 W42 大綱（Vault 00_Inbox）→ src/features/workspace/core/gmail-digest.json。
  * 靜態 bake：同輸入同 JSON（key 排序＋固定欄序，兩次 bake hash 相等即重現）。
- * angle 永不分類：條目須帶【功用|因果|解決】前綴（人工提案＋Ethan 確認），缺前綴或文法不合即非零退出並列行號（fail-closed，回源頭修再 bake）。
+ * angle 永不分類：條目須帶【功用|因果|解決|資訊】前綴（人工提案＋Ethan 確認），缺前綴或文法不合即非零退出並列行號（fail-closed，回源頭修再 bake）。★=精選（每主題恰 3）。
  * 用法: node scripts/sync-gmail.mjs [--dry-run] [--unlock] [--check] [--help]
  * Env 覆寫（僅測用）：GMAIL_IN1 / GMAIL_IN2（輸入大綱）、GMAIL_OUT（輸出 JSON）。
  */
@@ -39,7 +39,7 @@ const LINK_RE = /https?:\/\/\S+/g;
 
 const ERROR_HINTS = {
   "missing-input": "輸入大綱缺失：確認兩檔在 00_Inbox（測用可用 GMAIL_IN1/GMAIL_IN2 指暫存檔）",
-  "parse-fail": "條目文法不合：回源頭大綱修該行（加【功用|因果|解決】前綴＋（date，source）），再重跑 bake",
+  "parse-fail": "條目文法不合：回源頭大綱修該行（加【功用|因果|解決|資訊】前綴＋（date，source），精選加★），再重跑 bake",
   locked: "lock 仍在：若無其他實例在跑，加 --unlock 清掉後重跑",
 };
 
@@ -53,7 +53,7 @@ if (args.includes("--help")) {
   --check    只檢查已落地 JSON（存在＋可解析＋三段皆有卡＋angle/claim 非空），不 bake
 輸入: 00_Inbox/週報-2026-W42-大綱.md ＋ bnext-回補-大綱-2026-W42.md
 段映射: ## 一、學習資訊→study／## 二、投資→invest／## 三、本月促銷優惠→promo；## 附註排除
-條目文法: - 【angle】claim（date，source）[— link]（angle=功用|因果|解決必填；連結僅收錄大綱已有的，不編造）
+條目文法: - [★]【angle】claim（date，source）[— link]（angle=功用|因果|解決|資訊必填；★=精選每段恰3；連結僅收錄大綱已有的，不編造）
 顯式跳過（SKIP，不算失敗）: 無…產出／不列…優惠／非投資…備查行；其餘解析失敗行 exit 非零並列行號`);
   process.exit(0);
 }
@@ -136,12 +136,14 @@ export function parseOutline(text, file) {
   return { items, skipped };
 }
 
-/** - 【angle】claim（meta）[— tail]；meta=末個全形括號；tail 無 http 即附 claim（不編 link）。 */
+/** - [★]【angle】claim（meta）[— tail]；meta=末個全形括號；tail 無 http 即附 claim（不編 link）。
+ *  ★=精選（每主題恰 3，bake 斷言）；angle=功用|因果|解決|資訊（資訊=直陳無痛點：放假政策／版本更新／功能通知等）。 */
 export function parseEntry(body, topic) {
-  const m = body.match(/^【(功用|因果|解決)】\s*(.+)$/s);
-  if (!m) throw new Error("缺【功用|因果|解決】前綴");
-  let rest = m[2].trim();
-  const angle = m[1];
+  const m = body.match(/^(★?)【(功用|因果|解決|資訊)】\s*(.+)$/s);
+  if (!m) throw new Error("缺【功用|因果|解決|資訊】前綴");
+  const featured = m[1] === "★";
+  let rest = m[3].trim();
+  const angle = m[2];
   // tail：最後一個 "—" 之後；含 http 才算連結。
   let links = [];
   let note = "";
@@ -162,9 +164,10 @@ export function parseEntry(body, topic) {
   if (note) claim = `${claim} — ${note}`;
   const { date, source } = splitMeta(meta);
   const item = { topic, angle, claim, date, source };
+  if (featured) item.featured = true;
   if (links.length) {
     item.link = links[0];
-    if (links.length > 1) item.links = links;
+    item.links = links;
   }
   if (topic === "promo") {
     const ex = EXPIRY_PATTERNS.map((p) => (claim + meta).match(p)?.[0]).find(Boolean);
@@ -208,11 +211,16 @@ function assertDigest(doc) {
   for (const t of SECTION_ORDER) {
     const n = doc.items.filter((i) => i.topic === t).length;
     if (!n) fail("parse-fail", `段 ${t}（${SECTION_LABEL[t]}）無卡`);
+    const stars = doc.items.filter((i) => i.topic === t && i.featured === true).length;
+    if (stars !== 3) fail("parse-fail", `段 ${t}（${SECTION_LABEL[t]}）精選★需恰 3（現 ${stars}）：回源頭大綱該段加★／刪★再 bake`);
   }
   for (const [i, it] of doc.items.entries()) {
-    if (!["功用", "因果", "解決"].includes(it.angle)) fail("parse-fail", `items[${i}] angle 非法`);
+    if (!["功用", "因果", "解決", "資訊"].includes(it.angle)) fail("parse-fail", `items[${i}] angle 非法`);
     if (!it.claim?.trim()) fail("parse-fail", `items[${i}] claim 空`);
     if (it.link && !/^https?:\/\//.test(it.link)) fail("parse-fail", `items[${i}] link 非 http（編造嫌疑）`);
+    for (const u of it.links || []) {
+      if (!/^https?:\/\//.test(u)) fail("parse-fail", `items[${i}] links 非 http（編造嫌疑）`);
+    }
   }
 }
 
