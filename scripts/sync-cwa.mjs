@@ -3,7 +3,7 @@
  * sync-cwa.mjs — 中央氣象署 F-D0047-091（逐12小時1週預報）→ src/features/workspace/core/cwa-snapshot.json。
  * key 由環境變數 CWA_API_KEY 來（Keychain；明文永不落地）：CWA_API_KEY=$(security find-generic-password -s cwa -w) npm run sync:cwa
  * 落地只有去 key 的 snapshot；抓取失敗／結構不合即非零退出，不寫半成品。
- * 用法: node scripts/sync-cwa.mjs [--dry-run] [--limit N] [--help]
+ * 用法: node scripts/sync-cwa.mjs [--dry-run] [--limit N] [--unlock] [--check] [--help]
  */
 import { writeFileSync, readFileSync, unlinkSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
@@ -24,13 +24,27 @@ const ERROR_HINTS = {
 
 const args = process.argv.slice(2);
 if (args.includes("--help")) {
-  console.log(`sync-cwa.mjs — 抓氣象署週預報落地 snapshot\n\n用法: node scripts/sync-cwa.mjs [--dry-run] [--limit N] [--unlock] [--help]\n  --dry-run  只 preflight＋抓 1 筆驗形狀，不寫檔\n  --limit N  每頁筆數（預設 100，22 縣市一次取完）\n  --unlock   清 lock 後退出\n環境: CWA_API_KEY（Keychain service=cwa；CI 請用已提交的 snapshot，不必帶 key）`);
+  console.log(`sync-cwa.mjs — 抓氣象署週預報落地 snapshot\n\n用法: node scripts/sync-cwa.mjs [--dry-run] [--limit N] [--unlock] [--check] [--help]\n  --dry-run  只 preflight＋抓 1 筆驗形狀，不寫檔\n  --limit N  每頁筆數（預設 100，22 縣市一次取完）\n  --unlock   清 lock 後退出\n  --check    只檢查已落地 snapshot（存在＋可解析＋36h 內＋县市數），不抓取\n環境: CWA_API_KEY（Keychain service=cwa；CI 請用已提交的 snapshot，不必帶 key）`);
   process.exit(0);
 }
 if (args.includes("--unlock")) {
   if (existsSync(LOCK)) unlinkSync(LOCK);
   console.log("lock cleared");
   process.exit(0);
+}
+if (args.includes("--check")) {
+  // 健康探針（不抓取）：給 gate/CI 用，壞在源頭不壞在 render。
+  try {
+    const doc = JSON.parse(readFileSync(OUT, "utf-8"));
+    const n = doc?.records?.Locations?.[0]?.Location?.length ?? 0;
+    const ageH = (Date.now() - Date.parse(doc?.fetchedAt)) / 3600000;
+    if (!n) fail("bad-shape", "snapshot 無縣市");
+    if (!Number.isFinite(ageH) || ageH > 36 || ageH < 0) fail("bad-shape", `snapshot 過期 ${Number.isFinite(ageH) ? ageH.toFixed(1) : "?"}h（>36h 請重跑 sync）`);
+    console.log(`CHECK-OK: ${n} 縣市，年齡 ${ageH.toFixed(1)}h`);
+    process.exit(0);
+  } catch (e) {
+    fail("bad-shape", `snapshot 不可讀：${e?.message || e}`);
+  }
 }
 const DRY = args.includes("--dry-run");
 const limitIdx = args.indexOf("--limit");

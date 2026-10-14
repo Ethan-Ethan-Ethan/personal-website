@@ -83,6 +83,15 @@ describe("ForecastGlass", () => {
     const h1en = document.querySelector('[aria-label="Forecast"] h1') as HTMLElement;
     expect(h1en.style.letterSpacing).toBe("-0.02em");
   });
+  it("wraps hero and rail in a stack container toggled by open", () => {
+    const { unmount } = render(<ForecastGlass data={FORECAST_PLACEHOLDER} open={false} />);
+    const closed = document.querySelector(".forecast-stack");
+    expect(closed).toBeTruthy();
+    expect(closed?.classList.contains("is-open")).toBe(false);
+    unmount();
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    expect(document.querySelector(".forecast-stack.is-open")).toBeTruthy();
+  });
   it("declares short-height and narrow-desktop compaction queries", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
     const css = Array.from(document.querySelectorAll("style"))

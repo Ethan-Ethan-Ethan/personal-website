@@ -30,14 +30,14 @@ export default function ForecastGlass({ data, open }: Props) {
   const on = open ? ' is-open' : '';
   const dl = (ms: number): { transitionDelay: string } => ({ transitionDelay: open ? `${ms}ms` : '0ms' });
   return (
-    <>
+    <div className={`forecast-stack${on}`}>
     <section
       aria-label="Forecast"
       className="forecast-hero"
       // hero／strip 無卡：靜態定位殼，pointerEvents 全 none，點擊穿透給湖面熱區（2026-10-12 hotspot 回歸實證）
       style={{ position: 'absolute', top: '12%', left: '9%', pointerEvents: 'none', zIndex: 3 }}
     >
-      <style>{`.forecast-hero{max-width:560px;width:min(560px,82vw);}.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}.fc-day{font-size:15px;}.fc-days-row{display:flex;}@media (max-width:640px){.fc-day{font-size:12px;letter-spacing:-0.2px;}}@media (max-width:900px){.fc-wave{display:none;}.fc-days-row{display:none;}}@media (max-height:500px){.fc-wave{display:none;}.fc-days-row{display:none;}}@media (min-width:901px) and (max-width:1100px){.forecast-hero{max-width:46vw;}.forecast-rail{width:260px !important;right:20px !important;}}@media (prefers-reduced-motion: reduce){.mask-line>span{transition:none;transform:none;}}`}</style>
+      <style>{`.forecast-hero{max-width:560px;width:min(560px,82vw);}.forecast-stack{display:contents;}@media (max-width:900px),(max-height:500px){.forecast-stack{display:block;position:absolute;inset:0;overflow-y:auto;pointer-events:none;padding:0 0 130px;}.forecast-stack.is-open{pointer-events:auto;}.forecast-stack .forecast-hero{position:static !important;width:auto !important;max-width:none !important;margin:96px 9% 0;}.forecast-stack .forecast-rail{position:static !important;width:auto !important;max-width:none;margin:16px 5% 0;max-height:none;overflow:visible;}}.forecast-glass{position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);}.forecast-glass::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0.03) 28%,transparent 45%);}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-dir-up{transform:translateY(14px);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.fc-wipe-d{clip-path:inset(0 0 100% 0);transform:none;}.mask-line{display:block;overflow:hidden;}.mask-line>span{display:block;transform:translateY(115%);transition:transform 1.05s cubic-bezier(0.16,1,0.3,1);}.mask-line>span.is-open{transform:none;}.fc-day{font-size:15px;}.fc-days-row{display:flex;}@media (max-width:640px){.fc-day{font-size:12px;letter-spacing:-0.2px;}}@media (max-width:900px){.fc-wave{display:none;}.fc-days-row{display:none;}}@media (max-height:500px){.fc-wave{display:none;}.fc-days-row{display:none;}}@media (min-width:901px) and (max-width:1100px){.forecast-hero{max-width:46vw;}.forecast-rail{width:260px !important;right:20px !important;}}@media (prefers-reduced-motion: reduce){.mask-line>span{transition:none;transform:none;}}`}</style>
       <div style={{ marginBottom: 12 }}>
         <span className={`fc-node fc-wipe-r${on}`} style={{
           display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -127,6 +127,6 @@ export default function ForecastGlass({ data, open }: Props) {
         </div>
       ))}
     </aside>
-    </>
+    </div>
   );
 }
