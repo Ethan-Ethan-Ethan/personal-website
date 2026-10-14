@@ -6,8 +6,10 @@ type Props = {
   data: ForecastUIData;
   /** 過場唯一正本：開關只翻 open，所有動畫皆純 CSS（無 JS staging、無掛載開關）。
    * 進場語言對齊 forecast-center 參考編舞：slideL/slideR/riseIn＋mask reveal＋wipe，
-   * hero／strip 無玻璃卡（裸字直落背景），玻璃只在 chip／右欄卡／側軌。 */
+   * hero／strip 無玻璃卡（裸字直落背景），玻璃只在 chip／右欄卡／側軌。
+   * instant：首開播完後重開即全終態（防快點重啟 stagger 時鐘，使用者回報案）。 */
   open: boolean;
+  instant?: boolean;
 };
 
 const GLASS_BASE = 'bg-white/10 border border-white/20 rounded-2xl';
@@ -20,16 +22,17 @@ const hasCjk = (s: string): boolean => /[\u4e00-\u9fff]/.test(s);
 /** 開場 stagger（ms，toggle 壓縮版參考 beats）：chip 100 → h1 160/260 → blurb 380 → 右卡 250/320/390/460 → 氣溫 500+i*60 → 波形 700 → 星期 1100+i*55。關閉一律 0ms 同收。 */
 const D = { chip: 100, line1: 160, line2: 260, blurb: 380, card0: 250, cardStep: 70, temp0: 500, tempStep: 60, wave: 700, day0: 1100, dayStep: 55 } as const;
 
-export default function ForecastGlass({ data, open }: Props) {
+export default function ForecastGlass({ data, open, instant = false }: Props) {
   const main = data.railMain;
   const cjk = data.heroLines.some(hasCjk) || hasCjk(data.blurb);
   const heroTracking = cjk ? '0.05em' : '-0.02em';
   const blurbTracking = cjk ? '0.04em' : '-0.3px';
   const waveD = wavePath(data.temps);
+  const eff = (ms: number): number => (instant ? 0 : ms);
   // blur 與 is-open 原子同 commit：開時才霧化，避免 opacity 跑完才霧化的第二段跳
   const glass = `forecast-glass ${GLASS_BASE}${open ? ` ${GLASS_BLUR}` : ''}`;
   const on = open ? ' is-open' : '';
-  const dl = (ms: number): { transitionDelay: string } => ({ transitionDelay: open ? `${ms}ms` : '0ms' });
+  const dl = (ms: number): { transitionDelay: string } => ({ transitionDelay: open ? `${eff(ms)}ms` : '0ms' });
   return (
     <div className={`forecast-stack${on}`}>
     <section
@@ -51,7 +54,7 @@ export default function ForecastGlass({ data, open }: Props) {
       <h1 style={{ margin: 0, color: INK, fontSize: 'clamp(32px, 4.5vw, 56px)', lineHeight: 1.02, letterSpacing: heroTracking, fontWeight: 600 }}>
         {data.heroLines.map((line, i) => (
           <span key={line} className="mask-line">
-            <span style={{ transitionDelay: open ? `${i === 0 ? D.line1 : D.line2}ms` : '0ms', ...(open ? {} : { transform: 'translateY(115%)' }) }} className={open ? 'is-open' : ''}>{line}</span>
+            <span style={{ transitionDelay: open ? `${eff(i === 0 ? D.line1 : D.line2)}ms` : '0ms', ...(open ? {} : { transform: 'translateY(115%)' }) }} className={open ? 'is-open' : ''}>{line}</span>
           </span>
         ))}
       </h1>
@@ -82,7 +85,7 @@ export default function ForecastGlass({ data, open }: Props) {
           <path d={waveD} fill="none" stroke="url(#wg)" strokeWidth="6.2" opacity=".17" pathLength={1} className="draw" />
           <path d={waveD} fill="none" stroke="url(#wg)" strokeWidth="4.6" opacity=".26" pathLength={1} className="draw" />
           <path d={waveD} fill="none" stroke="url(#wg)" strokeWidth="3.4" pathLength={1} className="draw" />
-          <style>{`@keyframes drawLine{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.draw{stroke-dasharray:1;stroke-dashoffset:0;}.wipe{transform:scaleX(1);transform-origin:left;}.is-open .draw{stroke-dashoffset:1;animation:drawLine 1.6s ease forwards;animation-delay:${D.wave}ms;}.is-open .wipe{transform:scaleX(0);animation:wipeIn 1.2s ease forwards;animation-delay:${D.wave + 220}ms;}@keyframes wipeIn{to{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.draw,.wipe,.is-open .draw,.is-open .wipe{animation:none;animation-delay:0s;}.draw,.is-open .draw{stroke-dashoffset:0;}.wipe,.is-open .wipe{transform:scaleX(1);}}`}</style>
+          <style>{`@keyframes drawLine{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.draw{stroke-dasharray:1;stroke-dashoffset:0;}.wipe{transform:scaleX(1);transform-origin:left;}.is-open .draw{stroke-dashoffset:1;animation:drawLine 1.6s ease forwards;animation-delay:${eff(D.wave)}ms;}.is-open .wipe{transform:scaleX(0);animation:wipeIn 1.2s ease forwards;animation-delay:${eff(D.wave + 220)}ms;}@keyframes wipeIn{to{transform:scaleX(1)}}@media (prefers-reduced-motion: reduce){.draw,.wipe,.is-open .draw,.is-open .wipe{animation:none;animation-delay:0s;}.draw,.is-open .draw{stroke-dashoffset:0;}.wipe,.is-open .wipe{transform:scaleX(1);}}`}</style>
         </svg>
         <div className="fc-days-row" style={{ justifyContent: 'space-between', marginTop: -18 }}>
           {data.days.map((d, i) => (

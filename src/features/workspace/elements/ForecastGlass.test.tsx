@@ -57,6 +57,16 @@ describe("ForecastGlass", () => {
     expect(svg?.classList.contains("fc-node")).toBe(true);
     expect(svg?.classList.contains("is-open")).toBe(false);
   });
+  it("opens instantly after first play (no stagger restart)", () => {
+    const { unmount } = render(<ForecastGlass data={FORECAST_PLACEHOLDER} open instant />);
+    const temps = document.querySelectorAll('[aria-label="Hourly forecast"] .fc-temp');
+    expect(temps.length).toBeGreaterThanOrEqual(6);
+    temps.forEach((t) => expect((t as HTMLElement).style.transitionDelay).toBe("0ms"));
+    unmount();
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    const first = document.querySelector('[aria-label="Hourly forecast"] .fc-temp') as HTMLElement;
+    expect(first.style.transitionDelay).not.toBe("0ms");
+  });
   it("leaves temp font-size to stylesheet for small screens", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
     const temps = document.querySelectorAll('[aria-label="Hourly forecast"] span.fc-temp');
