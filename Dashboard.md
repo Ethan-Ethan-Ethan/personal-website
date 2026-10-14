@@ -33,7 +33,7 @@ tags:
 - [ ] **#2 測試「瀏覽器寫文章 → commit → 自動部署」** — ❌ 隨 #1 放棄 Decap 而取消；改用 #C 手動寫文流程（直接新增 `src/content/posts/*.md` 並 `git push`）。
 - [x] **#3 Cloudflare Access 設定（`/protected/*` 路由保護）** — ✅ 2026-08-27 實測生效：未帶憑證訪問 /protected/resume 回傳 302 導向 cloudflareaccess.com 登入；App「Ethan Personal Website Protected」允許 isitoled@gmail.com（GitHub IdP）。原計畫書「待完成」為過期狀態。
 - [x] **#4 停用舊 Workers 部署（`steep-glitter-0952`）** — ✅ 2026-08-27 已透過 Cloudflare API 刪除 script（剩 isitoled / red-mode-ea77，非目標）。舊站徹底停用。
-- [ ] **#5 網域續簽** — 期限 **2026-11-12**；SOP 與追蹤已建（見專區）。續簽窗口約 2026-10-13 起，**現過早不續，待窗口內執行**
+- [ ] **#5 網域續簽** — 到期 Jun 15, 2027，免費續期窗口約 2027-02-15 起（到期前 120 天）；SOP 與追蹤已建（見專區）。2026-10-13 實查無需動作，待窗口內執行
 - [ ] **#6 Reddit 替代 RSS 源評估** — 已評估：Reddit 伺服器端 403 早已由「改用 RSSHub 36Kr 源」緩解（feeds 現無 Reddit，見 踩坑紀錄/Worklog）。若要真 Reddit 內容，替代方案：①Reddit OAuth API（需建 Reddit app + 憑證）②穩定 RSSHub/Redlib 實例（公共實例不穩）。待你決定是否要真 Reddit。
 - [ ] **#7 檢查履歷公開 / 私人邊界** — ✅ 已做公開「摘要版履歷頁」：`src/pages/resume.astro`（職稱/時間/雇主/技能/學歷/摘要，**去機密**：隱藏電話、客戶名稱與量化細節），導覽「履歷」與首頁卡片改指向 `/resume`；完整版仍留 `/protected/resume`（Cloudflare Access）。`astro build` 859 頁通過。**待 push 上線（使用者 2026-08-27 選本地保留，未推）**。
 - [x] **#8 工作台卡片滑動面板功能** — ✅ 2026-08-27 實作：首頁新增「工作台」區塊，3 卡片（待辦健康度 / 週報 / 經驗沉澱）點擊後用 `grid-template-rows: 0fr→1fr` 滑出下方面板；`astro build` 35 頁通過。週報 / 經驗沉澱面板內容待填。
@@ -47,8 +47,8 @@ tags:
 |---|---|
 | 網域 | `ethanyang.dpdns.org` |
 | 來源 | DigitalPlat FreeDomain（免費方案） |
-| 續期方式 | 每 ~150 天**手動**續期 |
-| 下次檢查日 | **2026-11-12** ⚠️ |
+| 續期方式 | 到期前 120 天內**免費續期**（永久域名；提早續需用點數） |
+| 下次檢查日 | **2027-02-15**（到期 Jun 15, 2027 前 120 天窗口開） |
 | 管理後台 | https://dash.domain.digitalplat.org （GitHub OAuth 登入） |
 | API key | `DIGITALPLAT_API_KEY`（Keychain service=`digitalplat`）已確認可取；但續簽 endpoint 需從 Dashboard API 文件取得，不對外硬編 |
 
@@ -64,8 +64,8 @@ tags:
 
 ### 追蹤
 - 免費方案無自動續期，**必須在到期前手動續**，否則網域可能被釋出（同時中斷 DNS 委派 / 網站 / 憑證）。
-- FreeDomain 通常僅在到期前 ~30 天開放續簽 → **建議動作日：~2026-10-13 起**。
-- 現狀（2026-08-27）：距到期 ~2.5 個月，過早續簽會浪費天數且可能被拒，**暫不續**，待窗口內再執行。
+- 免費續期僅在到期前 120 天開放（到期 Jun 15, 2027 → 窗口約 2027-02-15 起）；提早續需點數（餘額 $0.00）。
+- 實查（2026-10-13）：狀態 ok／永久／免費；儀表板「30 天內到期：無」；續期頁「剩餘少於 120 天時可用」，剩 ~245 天 → **本次無需動作**。
 - 實際續簽：優先用後台手動（最穩）；若走 API，需先從 Dashboard 取得正確 endpoint 並確認在窗口內，且不得對 ambiguous 回應自動重試。
 
 ## #3 執行步驟（Cloudflare 後台，需手動）
@@ -132,7 +132,8 @@ npm run dev          # 或 astro dev --background
 | ReactBits pin（政策 §2） | 上游 https://github.com/DavidHDev/react-bits／檢索 2026-10-11／範圍：試點未掛真頁／SHA256 自驗：tsx `1b93617…c4bb5a4`＋css `352234f…a011a6f`（全值見處理日誌行） | — | LICENSE 旁載：上游 LICENSE.md（MIT+Commons Clause），本地未改動 |
 | Google Fonts（Inter＋Source Serif 4） | CDN | 字體 | OFL（免費） |
 | Cloudflare Pages／Access（50人） | 免費層 | 託管＋/protected 保護 | 免費（免綁卡） |
-| DigitalPlat FreeDomain（ethanyang.dpdns.org） | 免費 | 網域（~150 天手動續，見 #5 專區） | 免費（需續簽） |
+| DigitalPlat FreeDomain（ethanyang.dpdns.org） | 免費 | 網域（到期前 120 天免費續，見 #5 專區） | 免費（窗口內續簽） |
+| 中央氣象署開放資料（F-D0047-091 逐12小時週預報） | 免費會員制（key 在 Keychain service=`cwa`，明文禁落地；CI 用已提交 snapshot 不必帶 key） | 首頁 forecast 真資料（`sync:cwa` build-time 抓＋bake，瀏覽器端零 key；拒絕定位回退臺北） | 免費（須標示出處，面板已掛署名小字） |
 | dembrandt-skills（41 技能） | GitHub 開源 | #9 樣式優化 | MIT |
 | GitHub Actions／Decap CMS（已放棄）／TinaCMS（候選） | — | CI／歷史 CMS／候選 | 免費開源（見代辦 #1/#2） |
 
@@ -143,6 +144,7 @@ npm run dev          # 或 astro dev --background
 - 踩坑紀錄：[[04-踩坑紀錄]]
 
 ## 處理日誌
+- 2026-10-12：全站去 Yang 上線（title／品牌／頁尾／履歷全改；live 標題 Ethan｜AI 系統創作者實錘；部署成功）。
 - 2026-10-12：標題去 Yang（全站 title＋noscript h1；內文描述／履歷 h1 未動）；Selected work 本地先行不上網（待辦）；build 1664。
 - 2026-10-12：去英文名（About 卡只留楊宥綸；首頁左上只留 Ethan；build 1664；ego 實拍）。
 - 2026-10-12：線上更新確認（about-dialog×6＋open-about-dialog＋First Light 全在 live；部署成功；CI 另修 pages-action 下架＋補 hotspot-layout 孤兒；recipe 孤兒未動留檔）。
@@ -218,3 +220,6 @@ npm run dev          # 或 astro dev --background
 - 2026-08-27：#9 E 盤點完成 — 使用者選「先盤點字型再動」。grep 全 src：`text-[…]`/inline `font-size` 均無命中，所有標題/正文皆用 `text-*` token 工具類，與 `global.css` scale 完全對齊；dembrandt 觀察的 52.5px/21px 為 computed 量測誤差。結論：E 無修改清單，字型已對齊。剩 A/B/C 待確認、D 待決策。
 - 2026-08-27：#9 實作完成（A+B+C+D2）— A `global.css` 加 `:focus-visible` accent ring；B 定義 `--shadow-card` token（dark 0.3 / light 0.12）並全站可點卡片補 `hover:shadow-card`（PostCard 改用 token、index 資料卡/workbench 卡補齊）；C 2 處裸 `rounded`→`rounded-sm`（PostCard:44、articles/[slug]:61）；D2 light mode：`global.css` 加 `[data-theme="light"]` 覆寫全部語意 token + Topbar `#theme-toggle` 鈕 + BaseLayout 防 FOUC 腳本。`astro build` 通過（859 頁）＋ Playwright 驗證 dark/light 切換與 localStorage 持久化正確（light bodyBg #f4f1e9、card #fff、line #ddd6c7）。未提交（待使用者確認是否 push）。附註：首頁 VolumeChart 報 `lightweight-charts` module 解析錯誤，屬預存非 #9 範圍問題。
 - 2026-08-27：VolumeChart 修復 — 根因 `<script is:inline>` + `import('lightweight-charts')` 不被 Vite 打包，瀏覽器收到裸 specifier 無法解析；且 v5 API 已改（`addCandlestickSeries` 不存在）。修法：移除 `is:inline`（改打包腳本）、靜態 `import { createChart, CandlestickSeries, HistogramSeries }`、改用 v5 `chart.addSeries(CandlestickSeries/HistogramSeries, ...)`、資料經 `data-data` 屬性傳入。驗證：`astro build` 通過 + Playwright 首頁 console 0 error、`.trading-chart` 內出現 canvas（圖表初始化成功）。dembrandt 生成物（design-system/extract.err、theme.css、tokens.json、output/）已移出 repo。
+- 2026-10-12：hero 決策定案（方案A：Lake 背景保留＋forecast glass 疊加；Q1-A＋G2a＋G4 全過，carousel 排除另案）。commits：`edbfbf0→05684d9`（`edbfbf0..05684d9` 實測 7 個＋基底 edbfbf0；派發單寫 6，以 git log 實測為準）。
+- 2026-10-12：hero 證據（Phase 5 進行中）：`system validate` 綠（BUILD_EXIT 0）／`vitest` 21 files／160 tests 綠（VITEST_EXIT 0）／本次 e2e brand-image 6/6 綠（desktop＋mobile，EXIT 0）／reduced-motion 終態＋手機 rail 堆疊不斷裂。
+- 2026-10-12：hero 待辦：①對比度待真機 human acceptance（靜態儀器值無意義，沿 lake 前例）②全量 e2e 47 failed＝pre-existing 非回歸（WorkspaceDesktop 停用分支，基線 f73326d 已寫死，本次零改 index.astro）③真資料後補（只改 forecast-placeholder.ts）＋carousel 真資料後另案。計畫：`plan/homepage-hero-ethan-image.md`（Task 7／Phase 5 待 Dashboard＋Worklog 同步後 commit）。

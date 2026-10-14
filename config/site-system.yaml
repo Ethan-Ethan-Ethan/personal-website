@@ -1,4 +1,6 @@
 version: 1
+# 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜本專案 canonical（system registry），
+# 無共用 YAML 可分支；src/generated/site-system.ts 由此衍生（system:generate，sha 鎖定）。
 system:
   id: personal-website
   generated_types: src/generated/site-system.ts
@@ -51,8 +53,11 @@ commands:
     unit: { owner: site-shell, input: {}, result: unit-tests-passed, failure: unit-tests-failed }
     e2e: { owner: site-shell, input: {}, result: e2e-tests-passed, failure: e2e-tests-failed }
     contracts: { owner: site-shell, input: {}, result: contracts-passed, failure: contracts-failed }
+    transition: { owner: site-shell, input: {}, result: transition-single-source-ok, failure: transition-conflict }
     build: { owner: site-shell, input: {}, result: build-passed, failure: build-failed }
     all: { owner: site-shell, input: {}, result: verification-passed, failure: verification-failed }
 verification:
   commands:
+    # NOTE 2026-10-13：此處 content 指 content check（auto 模式，verify.mjs 內以 runContentSync 直調補位），
+    # 並非 verify.* action；CLI 無 verify.content 系有意（命令歸 content.*），勿另建。
     verify-all: [unit, e2e, contracts, content, build]

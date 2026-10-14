@@ -30,6 +30,7 @@ const REQUIRED_COMMANDS = [
   'verify.unit',
   'verify.e2e',
   'verify.contracts',
+  'verify.transition',
   'verify.build',
   'verify.all',
 ];

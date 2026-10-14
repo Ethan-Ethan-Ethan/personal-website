@@ -1,6 +1,12 @@
 # palette-hex-map.v1.yaml — visual.palette→hex 解析表（Task 6，canonical）
+# 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜領域源頭解析表（design-system 下無共用 token YAML 可分支）。
 # dark_cool 實證來源：src/styles/workspace/shell.css `.workspace-scene background:#10132a`
+# forecast_deep 實證來源：forecast-center 參考規格 fallback page bg #04121b（plan/homepage-hero-ethan-image-appendix/agent-4-reference-forecast-center.md）；glass 疊加層失效時底色
+# forecast_ink 實證來源：forecast-center 參考圖標純白（側軌五鍵＋房子首頁鍵統一語言，2026-10-14 使用者定版；muse 共議落 contracts (b)）；LakeOverlay 房子鍵＋ForecastSideRail 圖標鍵共讀 HEXMAP
+# 註：本期無 runtime 引用（治理佔位，防誤刪；待 glass 失效底色實作時再接）
 # TS 側 derived：src/features/workspace/core/recipe-runtime-binding.ts HEXMAP（單測斷言與本檔一致）
 version: "1"
 dark_cool: "#10132a"
+forecast_deep: "#04121b"
+forecast_ink: "#ffffff"
 _default: "#6b7280"

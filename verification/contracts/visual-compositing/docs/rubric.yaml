@@ -1,0 +1,15 @@
+benchmark: personal-website-visual-compositing
+# 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜本契約專屬 rubric（benchmark-gate 方法論，不分支內容）。
+version: 1
+title: Visual compositing deterministic verification harness
+pass_threshold: 1.0
+items:
+  - { id: V01, description: 禁止舊 depthProbe 假 oracle, assertion: not_contains_text, text: "depthProbe", weight: 4 }
+  - { id: V02, description: 禁止 magenta 替代動畫, assertion: not_contains_text, text: "#ff00ff", weight: 4 }
+  - { id: V03, description: 禁止已知會拉伸全場的 Tablet header shorthand, assertion: not_contains_text, text: ".workspace-brand{inset:18px}", weight: 4 }
+  - id: V04
+    description: 以同一組 frozen evidence 執行 evaluator，必須接受良好樣本並拒絕六種對抗退化
+    assertion: shell_check
+    command: >-
+      node --input-type=module -e "import {pathToFileURL} from 'node:url'; import {resolve} from 'node:path'; process.env.VISUAL_CONTRACT_EVALUATOR_ONLY='1'; const mod=await import(pathToFileURL(resolve(process.argv[1])).href+'?contract='+Date.now()); const evaluate=mod.evaluateMeteorEvidence; if(typeof evaluate!=='function') process.exit(1); const good=Array.from({length:37},(_,index)=>{const progress=Number((0.14+index*0.02).toFixed(2)); let totalPixels=100; if(progress>=0.66&&progress<0.82) totalPixels=Math.max(4,100-Math.round((progress-0.66)/0.02)*12); if(progress>=0.82) totalPixels=0; let occludedRatio=0; if(progress>=0.30&&progress<0.50) occludedRatio=0.35; else if(progress>=0.50&&progress<0.64) occludedRatio=0.55; else if(progress>=0.64) occludedRatio=0.10; return {progress,totalPixels,visiblePixels:totalPixels*(1-occludedRatio),occludedRatio,computerShare:occludedRatio>=0.08?0.8:0};}); const sparse=good.filter((_,index)=>index%12===0); const wrongComputer=good.map((frame)=>({...frame,computerShare:frame.occludedRatio>=0.08?0.2:0})); const erased=good.map((frame)=>frame.progress===0.50?{...frame,visiblePixels:2,occludedRatio:0.98}:frame); const risingFade=good.map((frame)=>frame.progress===0.72?{...frame,totalPixels:95,visiblePixels:85.5}:frame); const visibleExit=good.map((frame)=>frame.progress>=0.82?{...frame,totalPixels:10,visiblePixels:9}:frame); const neverReappears=good.map((frame)=>frame.progress>=0.64&&frame.progress<0.66?{...frame,visiblePixels:frame.totalPixels*0.4,occludedRatio:0.6,computerShare:0.8}:frame); const goodResult=evaluate(good); const badCases=[sparse,wrongComputer,erased,risingFade,visibleExit,neverReappears]; if(!goodResult?.pass||badCases.some((frames)=>evaluate(frames)?.pass)) process.exit(1);" {artifact}
+    weight: 23

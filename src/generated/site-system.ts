@@ -1,5 +1,5 @@
 // @generated from config/site-system.yaml; do not edit
-// source-sha256: 89d7e2adb0336edfce5f2f6916dc9f261629153b56a8f7d89d4758239fb41e91
+// source-sha256: a555c3445d7c4bd0199a90091dbc2f230d8fe39f51f32b58c7f73dc86a417833
 
 export const siteSystem = {
   "version": 1,
@@ -323,6 +323,12 @@ export const siteSystem = {
         "result": "contracts-passed",
         "failure": "contracts-failed"
       },
+      "transition": {
+        "owner": "site-shell",
+        "input": {},
+        "result": "transition-single-source-ok",
+        "failure": "transition-conflict"
+      },
       "build": {
         "owner": "site-shell",
         "input": {},
@@ -368,6 +374,7 @@ export const SITE_COMMANDS = [
   "verify.unit",
   "verify.e2e",
   "verify.contracts",
+  "verify.transition",
   "verify.build",
   "verify.all"
 ] as const;

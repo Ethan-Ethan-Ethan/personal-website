@@ -1,5 +1,6 @@
 meta:
   project: personal-website
+  # 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜DSH 演化配置（benchmark-gate 方法論），無共用正本可分支。
   title: Site System YAML contract
   version: "3"
   standalone: false

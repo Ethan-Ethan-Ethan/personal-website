@@ -1,4 +1,5 @@
-# N-budget registry (G2). Gate: `npm run site -- verify n-budget`.
+# N-budget registry (G2). Gate: `npm run verify:n-budget`.
+# 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜專案治理 registry，無共用正本可分支。
 # Any entry with used > N FAILS the gate. New trial cases register here
 # BEFORE their first run (fail-closed: missing file also fails).
 - case: nebula-trial

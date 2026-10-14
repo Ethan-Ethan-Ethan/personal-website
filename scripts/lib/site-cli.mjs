@@ -6,7 +6,7 @@ import { handleContentCommand } from '../commands/content.mjs';
 import { handleRssCommand } from '../commands/rss.mjs';
 import { handleVerifyCommand } from '../commands/verify.mjs';
 
-export const SITE_HELP = `Usage: npm run site -- <domain> <action> [options]\n\nDomains:\n  system   validate | generate\n  command  list\n  content  check | sync\n  rss      run\n  verify   unit | e2e | contracts | build | all\n\nOptions:\n  --dry-run\n  --source-mode <auto|artifact>\n  --project-root <path>\n  --help\n`;
+export const SITE_HELP = `Usage: npm run site -- <domain> <action> [options]\n\nDomains:\n  system   validate | generate\n  command  list\n  content  check | sync\n  rss      run\n  verify   unit | e2e | contracts | transition | build | all\n\nOptions:\n  --dry-run\n  --source-mode <auto|artifact>\n  --project-root <path>\n  --help\n`;
 
 const CONTRACT_OPTION_NAMES = new Map([
   ['--dry-run', 'dry-run'],

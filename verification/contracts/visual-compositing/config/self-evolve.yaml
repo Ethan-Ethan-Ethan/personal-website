@@ -1,0 +1,21 @@
+meta:
+  project: personal-website
+  # 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜DSH 演化配置（benchmark-gate 方法論），無共用正本可分支。
+  title: Visual compositing verification contract
+  version: "1"
+  standalone: false
+engine:
+  framework: benchmark-gate
+prompt:
+  statement: benchmark/statements/visual-compositing.md
+  seed: docs/prompt.seed.md
+metric:
+  pass_threshold: 1.0
+  required_pass_ratio: 1.0
+  weights_sum: 35
+gate:
+  vault_write: manual
+  rule: Visual automation may prevent regression but cannot replace the human visual gate.
+layout:
+  docs_dir: docs
+  benchmark_dir: benchmark
