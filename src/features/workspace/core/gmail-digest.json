@@ -1,0 +1,567 @@
+{
+ "_generated": "scripts/sync-gmail.mjs — 手動改會被覆蓋",
+ "week": "2026-W42",
+ "sources": [
+  "00_Inbox/週報-2026-W42-大綱.md",
+  "00_Inbox/bnext-回補-大綱-2026-W42.md"
+ ],
+ "items": [
+  {
+   "topic": "study",
+   "angle": "解決",
+   "claim": "2027 辦公日曆／請假攻略：全年 121 天、0 補班，春節請 5 休 16",
+   "date": "2026-10-08",
+   "source": "數位早報"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "叫 AI 精簡沒用學豐田 A3；原廠 PPT 4 段指令套模板；Grill Me 每晚 3 題養 AI",
+   "date": "2026-09-08、09-09、09-08",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "解決",
+   "claim": "台灣學生遇無標準答案卡關：李宏毅談 AI Agent 時代 3 種能力",
+   "date": "2026-10-01",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "解決",
+   "claim": "安靜離職退場、高調工作潮：裁員陰影下的搶案子生存戰",
+   "date": "2026-10-09",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "解決",
+   "claim": "安靜離職退場、高調工作潮：搶案子搶曝光的生存戰，專家建議對準主管痛點",
+   "date": "2026-10-09",
+   "source": "數位早報；職場學習"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "吳恩達警告模型隨時能被關、各國轉向中國開源 AI（2026-08-03）；把老子做成 AI Skill；免費會議紀錄整理師；Jev 決策模型暴紅",
+   "date": "2026-09-22、09-17",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "故宮南院小編一句幹嘛引爆 9.5 萬讚：Threads 經營法",
+   "date": "2026-09-07",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "無人機考照互動題庫：免註冊刷民航局學科題，答錯重出＋詳解",
+   "date": "2026-10-07",
+   "source": "免費資源網",
+   "link": "https://free.com.tw/drone-license-quiz/"
+  },
+  {
+   "topic": "study",
+   "angle": "解決",
+   "claim": "跟 AI 對話的 9 大隱私防線：ChatGPT／Claude 怎麼存、誰能讀",
+   "date": "2026-09-17",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "因果",
+   "claim": "AI 巨頭同喊踩煞車：Anthropic 三步計畫，馬斯克、奧特曼跟進",
+   "date": "2026-09-15",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "因果",
+   "claim": "Claude 自寫 Code 兩週快 3 倍：先建量化基準再讓 AI 驗收",
+   "date": "2026-09-29",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "Claude Code 新版專案功能：給目標即多線平行開發",
+   "date": "2026-09-21",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "因果",
+   "claim": "Claude Cowork 改上雲端：10/6 起 Pro／Max 新任務不再可選本機",
+   "date": "2026-10-08",
+   "source": "見數位早報內文"
+  },
+  {
+   "topic": "study",
+   "angle": "因果",
+   "claim": "Claude Haiku 5.5 登場：比 Haiku 4.5 便宜約 75%，處理大量重複工作；Sonnet 5.5 快取讀取砍半",
+   "date": "2026-10-08",
+   "source": "免費資源網",
+   "link": "https://free.com.tw/claude-haiku-5-5/"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "Discord vs LINE：伺服器／頻道／身分組新手教學",
+   "date": "2026-09-02",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "Disk Prices 硬碟比價：HDD／SSD／記憶卡每 TB 單價",
+   "date": "2026-10-11",
+   "source": "免費資源網",
+   "link": "https://free.com.tw/diskprices/"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "Gemini Notebook 教學地圖 27 篇／電子書 4 步驟匯入／8 組讀書指令",
+   "date": "2026-09-08、09-03、09-07",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "Gemini Skills 免費開放、Gems 11 月退場：官方 8 招寫法",
+   "date": "2026-10-12",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "Gemini Skills 免費開放、Gems 11 月退場：官方撰寫指南 8 招",
+   "date": "2026-10-12",
+   "source": "數位早報"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "Gmail 139 技巧大全；Codex 入門 10 步驟；別再兩邊複製貼上快捷鍵",
+   "date": "2026-09-16",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "GPT-6 Astra 上線反該大掃除 Skill 檔；別再給 AI 寫範例（Claude 5 新規）；叫 AI 再檢查一次更花錢（Opus 5 指南）；Claude 金融 Agent 10 款",
+   "date": "2026-09-08、07-28、07-31、07-27",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "HBR 10 月號：第六屆鼎革獎，人機協作落實數位轉型；醫療 AI 聚焦一線痛點；動態學習引領轉型",
+   "date": "2026-10-07",
+   "source": "HBR"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "HBR 本週熱門：AI 鬆綁認知限制做長贏決策；工作圖譜＋RML 解 AI 導入無效；日常淬鍊勇氣；擺脫 5 大局限心態；不確定性下重塑競爭力",
+   "date": "2026-10-12",
+   "source": "HBR"
+  },
+  {
+   "topic": "study",
+   "angle": "解決",
+   "claim": "HiNet 晚上 X 圖片／Twitch／GitHub 慢：Fastly 連線改善 3 招（WARP、hosts、IPv6）",
+   "date": "2026-10-12",
+   "source": "免費資源網",
+   "link": "https://free.com.tw/hinet-fastly-slow-fix/"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "iPhone 18 Pro 相機可變光圈＋Siri 大升級（2026-09-11）；摺疊機技術難關 4 關（2026-09-10）；9/10 發表會 5 大亮點預測",
+   "date": "2026-09-09",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "因果",
+   "claim": "LOVFEE 結束營業始末：送貨司機網拍起家→月賣 3 千萬→欠薪熄燈，退款與未出貨處理",
+   "date": "2026-10-14",
+   "source": "–"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "PIME 輸入法 2.0 beta 復活：核心改用 Rust 重寫，Win11 注音／酷倉／大易測試版",
+   "date": "2026-10-07",
+   "source": "免費資源網",
+   "link": "https://free.com.tw/pime-input-method/"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "ROHM 技術社群熱門：LDO 的 EMC 對策、ΨJT 熱設計、SiC MOSFET 閘極驅動、電機驅動基礎",
+   "date": "2026-10-08",
+   "source": "ROHM"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "ROHM 高壓電壓檢測：高耐壓貼片電阻 KTR 系列，低價高精度替代 IC 方案",
+   "date": "2026-10-12",
+   "source": "ROHM"
+  },
+  {
+   "topic": "study",
+   "angle": "功用",
+   "claim": "Snipboard Beta 2：可拖曳 Snip Bar、預覽、Temporary copy（Win+Alt+C）",
+   "date": "2026-10-13",
+   "source": "Stardock",
+   "link": "https://www.stardock.com/products/snipboard/",
+   "links": [
+    "https://www.stardock.com/products/snipboard/",
+    "https://www.stardock.com/blog/542620/snipboard-beta-2-brings-a-movable-snip-bar-previews-and-more"
+   ]
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "0056 第 4 季配息 1.72 元創新高＋挑戰 1.662 元兩報",
+   "date": "2026-10-02、09-30",
+   "source": "個股：0056"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "00878／00881／00891 同步發息創掛牌新高（2026-09-14）；8 月配息 19 檔：00878 破 1 元、00929 殖利率逾 16%（2026-08-05）；00919 配息三連報、法人喊 1.1 元",
+   "date": "2026-08-26、27、28",
+   "source": "內容重複三封；個股：00919"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "10 月 ETF 配息 42 檔：00947 配 2 元暴增 6.7 倍（2026-10-06 內文）；9 月配息 15 檔：00940 創高",
+   "date": "2026-09-02",
+   "source": "–"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "21 檔 ETF 本週發 421 億、00919 占 208 億；信驊衝 2 萬元、19 檔 ETF 持股報酬",
+   "date": "2026-10-14、09-25",
+   "source": "個股：00919／信驊"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "友達二把手裸辭；全聯最大店破百萬；OK 超商藍白變身；母子鱷魚蚵技鞋；振宇五金 98 店；四季百貨熄燈；7-Eleven 印度全關；小美砸 10 億做麵條",
+   "date": "2026-08-07、08-04、09-22、09-28、09-15、09-15、10-08、09-18",
+   "source": "–"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "台泥歐洲 IPO 股東會過關：94.74% 贊成；亞洲營運不賺錢、歐洲事業獨立上市",
+   "date": "2026-10-14",
+   "source": "見數位早報內文；個股：台泥"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "台泥歐洲 IPO 過關＋水泥袋股東紀念品",
+   "date": "2026-10-14、09-23",
+   "source": "個股：台泥"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "台積電矽中介層委外擴大：世界先進已獲委託，聯電規劃產能翻倍、力積電爬坡，另傳格羅方德",
+   "date": "2026-10-13",
+   "source": "見數位早報內文；個股：台積電／世界先進／聯電／力積電"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "全球 AI 伺服器 19 檔基建拆解（鴻海／廣達／緯穎）；台灣供應鏈 Made with Taiwan；AI 封裝功耗 5 年飆 6 倍",
+   "date": "2026-08-10、09-04、09-02",
+   "source": "–"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "合晶 7→130 元一年半 8 倍：矽晶圓漲價＋12 吋擴產＋方形晶圓",
+   "date": "2026-10-05",
+   "source": "個股：合晶"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "汎銓飆 224%：半導體檢測轉設備",
+   "date": "2026-09-22、09-21",
+   "source": "個股：汎銓"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "金居 2 年漲 745%、大摩喊 730 元：AI 隱藏骨幹（台光電／台燿）",
+   "date": "2026-09-16",
+   "source": "個股：金居／台光電／台燿"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "金像電 12→1120 元：亞馬遜私募入股；川湖滑軌卡住 AI 伺服器",
+   "date": "2026-10-01、08-12",
+   "source": "個股：金像電／川湖"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "南茂 1.5 年翻 6 倍：記憶體封測搶產能；美光財報營收暴增 379%",
+   "date": "2026-10-06、10-08",
+   "source": "個股：南茂／美光"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "封測史上最強漲價潮：急單報價翻倍，日月光今年股價飆 204%，7 檔受惠股盤點",
+   "date": "2026-10-13",
+   "source": "見數位早報內文；個股：日月光"
+  },
+  {
+   "topic": "invest",
+   "angle": "功用",
+   "claim": "政治取金融角度：2026 九合一 11/28 併核電公投、最多領 6 張票 — 僅記行事曆／消費影響，不做純政治摘要。",
+   "date": "2026-10-14",
+   "source": "見數位早報內文"
+  },
+  {
+   "topic": "invest",
+   "angle": "功用",
+   "claim": "政治取金融角度：普發一萬 2027 上路；勞保年金月領 1.95 萬＋20 筆時程；婚假 8→14 天；特留分刪除修法；10 月發錢盤點 — 僅記金額／時程，不做純政治摘要。",
+   "date": "2026-08-18、10-06、09-18、07-29、10-06",
+   "source": "–"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "玻璃基板突破＋AMD 快閃＋傳產轉型：韓廠 JNTC 填銅半天縮至幾分鐘（欣興／群創）；蘇姿丰快閃拜會台積電鴻海、加碼百億美元；路易莎營收創新高淨利暴跌 56%；和桐跨足半導體清洗劑一年漲 151%",
+   "date": "2026-10-09",
+   "source": "見數位早報內文；個股：欣興／群創／AMD／路易莎／和桐"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "特力屋撤 6 成商品業績翻倍：14 萬次到府服務＋併購清潔淨水",
+   "date": "2026-10-07",
+   "source": "–"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "黃崇仁談三菱授權；張忠謀商業模式創新；庫克市值翻 13 倍；林之晨 7 年半改造台灣大",
+   "date": "2026-08-13、09-14、09-04、09-16",
+   "source": "–"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "嘉晶熬 19 年翻 18 倍：矽光子磊晶產能擴 4 倍",
+   "date": "2026-09-30",
+   "source": "個股：嘉晶"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "漢測連虧 10 年翻 50 倍登興櫃股王；富喬毛利率轉負後豪賭翻身",
+   "date": "2026-09-15、09-10",
+   "source": "個股：漢測／富喬"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "德宏玻纖布 9→400 元：連虧 14 季老廠翻身＋停輸中國套管",
+   "date": "2026-10-13",
+   "source": "個股：德宏"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "德宏玻纖布：連虧 14 季、減資 2 次，股價一年 9.45→400→101 再翻倍；經濟部停輸中國玻纖矽質套管",
+   "date": "2026-10-13",
+   "source": "數位早報；個股：德宏"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "緯創德州 D1 廠開幕產能滿載；台廠赴美黃仁勳稱自願；台達電電源黑馬；大立光 CPO 潑冷水；上詮擁抱 AI 光通訊；矽電容最純股＋力積電打進英特爾；NPO vs CPO 6 台廠",
+   "date": "2026-07-24、07-23、07-30、07-20、08-17、08-19、09-11",
+   "source": "個股：緯創／台達電／大立光／上詮／力積電"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "聯發科第二座神山：Google TPU＋ASIC；輝達 35 億美元認購可轉債；緯穎除權 1 變 3",
+   "date": "2026-09-24、09-01、09-04",
+   "source": "個股：聯發科／輝達／緯穎"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "CPO 難量產 3 瓶頸：可靠度／人工／光電整合；非紅供應鏈台廠機會，不只台積電",
+   "date": "2026-10-14",
+   "source": "見數位早報內文"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "ETF 本週發錢：21 檔豪發 421 億，00919 一檔 208 億",
+   "date": "2026-10-14",
+   "source": "見數位早報內文；個股：00919"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "Fed 升息 1 碼、央行連十凍：房貸／定存／股民 7 族群影響",
+   "date": "2026-09-18",
+   "source": "金融角度"
+  },
+  {
+   "topic": "invest",
+   "angle": "因果",
+   "claim": "LOVFEE 結束營業：10/12 宣布熄燈，欠薪＋儲值金退款、未出貨訂單處理",
+   "date": "2026-10-14",
+   "source": "數位早報；消費商業案例"
+  },
+  {
+   "topic": "promo",
+   "angle": "解決",
+   "claim": "2026 行動支付怎麼選：LINE Pay／街口／Apple Pay／TWQR",
+   "date": "2026-09-18",
+   "source": "–"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "8 款 App 走路搭車換回饋：LINE POINTS／小樹點（2026-09-08 內文）；揮汗有禮 9/1 開跑換雞胸肉豆漿（2026-08-31）；健康幣 1350 幣超商折抵",
+   "date": "09-01",
+   "source": "–"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "交通部機車零違規抽 iPhone／重機（2026-09-02 內文）；Taiwan PASS 台鐵半價＋住宿券（2026-09-02 內文）；國民體適能免費上課",
+   "date": "09-22",
+   "source": "–"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "免費領 Gemini 一年 Google AI Plus、年底前截止（2026-08-21）；ChatGPT 7 種訂閱比一比；Claude 收費方案比一比",
+   "date": "2026-09-03、09-30",
+   "source": "–",
+   "expiry": "年底前截止"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "國泰 CUBE 秋日遊旅日 10% 回饋",
+   "date": "2026-10-06",
+   "source": "–"
+  },
+  {
+   "topic": "promo",
+   "angle": "功用",
+   "claim": "街口攜酷遊卡 eSIM 用滿 365 天",
+   "date": "2026-09-08、09-02、09-07",
+   "source": "–"
+  },
+  {
+   "topic": "promo",
+   "angle": "功用",
+   "claim": "敬老卡 22 縣市整理；長照補助最高 18 萬；國保老年年金逾 6 千；兄弟特留分修法",
+   "date": "2026-10-06、09-15、09-07、07-29",
+   "source": "–"
+  },
+  {
+   "topic": "promo",
+   "angle": "功用",
+   "claim": "Adobe Acrobat 行銷：PDF 合約整理",
+   "date": "2026-10-07",
+   "source": "Adobe；行銷信；無明確時效"
+  },
+  {
+   "topic": "promo",
+   "angle": "功用",
+   "claim": "Affinity 照片編輯大更新：RAW 控制＋智慧校正",
+   "date": "2026-10-08",
+   "source": "Affinity；純更新通知；無明確折扣"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "Ashampoo 27 週年：最高 85% off",
+   "date": "2026-10-13",
+   "source": "Ashampoo News",
+   "link": "https://news.ashampoo.com/optiext/optiextension.dll?ID=XCOdxdpRVzZjIWbMciHWCY1Km3jzRXgTzKxfnGTjE3HH8Tt34m-CNyC8v2lNwGCKg-sJrSGsSKdQec8IfLw"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "ASUS WebStorage：1TB NT$50/月，老客戶限定 3 天",
+   "date": "2026-10-07",
+   "source": "ASUS",
+   "expiry": "限定 3 天"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "Cloudflare Connect 舊金山 10/19–21：LASTCHANCE 折 $100＋閉幕 Noah Kahan 演唱會",
+   "date": "2026-10-12、10-08",
+   "source": "Cloudflare ×2 封",
+   "expiry": "10/19–21"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "ClouDNS 監控服務 40% off：10/25 前",
+   "date": "2026-10-07",
+   "source": "ClouDNS",
+   "expiry": "10/25 前"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "FSWX 子站互動抽 50 元京東 E 卡",
+   "date": "2026-10-13",
+   "source": "电子发烧友",
+   "link": "http://sub.elecfans.net/display.php?M=73021916&C=0634f6c8bdd269614e8d1e5fe0e7f966&S=104031&L=43184&N=6937"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "iPhone 18 刷卡：10 家銀行比一比（09-21 內文）；9 家銀行優惠（09-10 內文）；iPhone 18 Pro 資費三雄比較",
+   "date": "09-17",
+   "source": "–"
+  },
+  {
+   "topic": "promo",
+   "angle": "功用",
+   "claim": "ITIS D-眺望研討會 11/2（石化與新材料＋特用與綠色化學）：報名至 10/23，點數報名",
+   "date": "2026-10-12",
+   "source": "ITIS",
+   "expiry": "至 10/23"
+  },
+  {
+   "topic": "promo",
+   "angle": "因果",
+   "claim": "Krea Pro 40% 優惠：$21/月（原 $35），Pro 試用 3 小時；Seedance 2.5／Veo 3.1／Kling",
+   "date": "2026-10-08、10-09",
+   "source": "Krea ×3 封",
+   "link": "https://www.krea.ai/api/billing/promo?campaign=EMAIL-ONBOARDING-PRO-40-QJ4H&utm_source=customerio&utm_medium=email&utm_campaign=onboarding-propass&utm_content=e3_cta"
+  }
+ ]
+}

@@ -6,6 +6,7 @@ import snapshotDoc from '../core/cwa-snapshot.json';
 import { HEXMAP } from '../core/recipe-runtime-binding';
 import ForecastGlass from './ForecastGlass';
 import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
+import GmailPanel from './GmailPanel';
 import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
 import '../../../components/reactbits/SplitText.css';
@@ -37,6 +38,8 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
   const reducedMotion = useReducedMotion();
   // forecast 開關：面板常駐 DOM，開關只翻 open class（全 CSS 過場，無掛載開關、無 JS staging）。
   const [forecastOpen, setForecastOpen] = useState(false);
+  // 側軌 active 上提（受控；預設 grid）：mail 掛 GmailPanel，他鍵只亮燈不掛面板（deferred）。
+  const [activeId, setActiveId] = useState('grid');
   // 真資料：snapshot 新鮮即用，定位成功換最近縣市；拒絕／超時／SSR 一律回退預設（臺北）→ placeholder。
   const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
   useEffect(() => {
@@ -79,8 +82,9 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       >
         <HouseIcon size={20} />
       </button>
-      <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} />
-      <ForecastGlass data={forecastData} open={forecastOpen} />
+      <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} activeId={activeId} onSelect={setActiveId} />
+      <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
+      {activeId === 'mail' ? <GmailPanel open={forecastOpen} /> : null}
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>

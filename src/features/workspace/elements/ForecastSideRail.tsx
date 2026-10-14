@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { HEXMAP } from '../core/recipe-runtime-binding';
 import { FC_TRANSITION_CSS } from '../core/forecast-transitions';
@@ -27,6 +26,16 @@ const ICONS: IconDef[] = [
         <rect x="14" y="3" width="7" height="7" rx="1.5" />
         <rect x="3" y="14" width="7" height="7" rx="1.5" />
         <rect x="14" y="14" width="7" height="7" rx="1.5" />
+      </>
+    ),
+  },
+  {
+    id: 'mail',
+    label: 'Gmail',
+    path: (
+      <>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="M3 7l9 6 9-6" />
       </>
     ),
   },
@@ -80,8 +89,17 @@ const ICONS: IconDef[] = [
 // 左側欄（膠囊佔比＋參考圓角 20px；頂房子槽、中五鍵、底收起鍵）。
 // 框體開關由 LakeOverlay 控制；房子常駐框外（同槽幾何），永不卸載防閃爍。
 // 底部停在 phase 文字之上（bottom:110），不壓字。
-export default function ForecastSideRail({ onClose, open }: { onClose: () => void; open: boolean }) {
-  const [active, setActive] = useState('grid');
+// 路徑依賴標記：muse 原路線五鍵（總覽→圖表→地區→日曆→搜尋）無 Gmail；
+// 2026-10-15 用戶拍板次鍵插 Gmail、圖表順延（Gmail 重點閱讀優先於圖表面板）。
+// active 上提 LakeOverlay 受控（預設 grid）；他鍵只亮燈不掛面板（deferred，D3 為圖表）。
+export type RailId = 'grid' | 'mail' | 'chart' | 'globe' | 'calendar' | 'search';
+
+export default function ForecastSideRail({ onClose, open, activeId = 'grid', onSelect }: {
+  onClose: () => void;
+  open: boolean;
+  activeId?: string;
+  onSelect?: (id: string) => void;
+}) {
   return (
     <nav
       aria-label="功能選單"
@@ -98,14 +116,14 @@ export default function ForecastSideRail({ onClose, open }: { onClose: () => voi
       <div aria-hidden="true" style={{ width: 40, height: 40 }} />
       <div aria-hidden="true" style={{ width: 24, height: 1, background: 'rgba(255,255,255,0.25)' }} />
       {ICONS.map((icon) => {
-        const isActive = icon.id === active;
+        const isActive = icon.id === activeId;
         return (
           <button
             key={icon.id}
             type="button"
             aria-label={icon.label}
             aria-pressed={isActive}
-            onClick={() => setActive(icon.id)}
+            onClick={() => onSelect?.(icon.id)}
             style={{
               width: 40, height: 40, borderRadius: '50%', border: 'none', cursor: 'pointer',
               display: 'grid', placeItems: 'center',
