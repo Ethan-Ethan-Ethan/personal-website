@@ -1,8 +1,10 @@
 ---
-status: active
+status: done
 ---
 
 # Plan: 首頁 Ethan 品牌圖＋forecast-center 玻璃 dashboard
+
+> 2026-10-14 全案收尾：Phase 0–5＋D1/D2/D3 全 CLOSED；D4 舊分支 specs 凍結另案；carousel 維持靜態三卡（不做）。上線見部署紀錄。
 
 **Goal**：首頁左上 Ethan 文字換成主頁圖片，並疊加 forecast-center 式 liquid-glass dashboard（hero＋氣溫 strip＋右欄），資料全 placeholder 後補。
 
