@@ -1,6 +1,14 @@
 version: 1
 # 治理登記（2026-10-14 YAML 共用優先）：standalone-experiment｜本專案 canonical（system registry），
 # 無共用 YAML 可分支；src/generated/site-system.ts 由此衍生（system:generate，sha 鎖定）。
+# 資料清單（2026-10-15 muse 共議：只加索引註解，不動 schema、不搬檔）：
+# 抓取→bake→生成→人工→暫存→契約
+# - 氣象 bake：src/features/workspace/core/cwa-snapshot.json｜產出者 scripts/sync-cwa.mjs（入口 npm run sync:cwa，key 在 Keychain service=cwa）｜36h 新鮮門（--check；e2e 臺北市為哨兵）
+# - 公開內容生成：src/data/generated/public-content.json｜產出者 content:sync｜artifact 模式校验（content:check）
+# - 人工維護：src/data/public-content.json、sources.json（根目錄）｜產出者人工｜改後跑 content:check
+# - 暫存：.astro/（build 產物，不進版控判斷、不引用）
+# - 契約：verification/contracts/（20 檔）＋本檔｜產出者各域｜verify contracts gate
+# - 凍結（D4，標記不刪除）：scene.*／window.*（WorkspaceDesktop 停用分支 runtime-only 命令）
 system:
   id: personal-website
   generated_types: src/generated/site-system.ts
@@ -34,9 +42,11 @@ commands:
     generate: { owner: site-shell, input: { dry-run: boolean }, result: registry-generated, failure: generated-registry-drift }
   command:
     list: { owner: site-shell, input: {}, result: commands-listed, failure: command-registry-invalid }
+  # DEPRECATED（D4 凍結：WorkspaceDesktop 停用分支，runtime-only，verify e2e 預設剔除；重啟見 E2E_INCLUDE_LEGACY=1）
   scene:
     preview: { owner: scene-state, input: { target: scene-state }, result: scene-updated, failure: invalid-scene-target }
     reset: { owner: scene-state, input: {}, result: scene-reset, failure: scene-reset-failed }
+  # DEPRECATED（同上：window.* 凍結，runtime-only）
   window:
     open: { owner: window-state, input: { id: window-id, history: history-mode }, result: window-opened, failure: invalid-window-id }
     close: { owner: window-state, input: { id: window-id }, result: window-closed, failure: invalid-window-id }
