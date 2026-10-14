@@ -83,6 +83,11 @@ describe("ForecastGlass", () => {
     const h1en = document.querySelector('[aria-label="Forecast"] h1') as HTMLElement;
     expect(h1en.style.letterSpacing).toBe("-0.02em");
   });
+  it("marks wave and days row for mobile compaction", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    expect(document.querySelector('[aria-label="Hourly forecast"] svg.fc-wave')).toBeTruthy();
+    expect(document.querySelector('[aria-label="Hourly forecast"] .fc-days-row')).toBeTruthy();
+  });
   it("shows attribution only when data carries it", () => {
     const { unmount } = render(
       <ForecastGlass data={{ ...FORECAST_PLACEHOLDER, attribution: "資料來源：X" }} open />

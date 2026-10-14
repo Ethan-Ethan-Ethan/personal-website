@@ -53,6 +53,9 @@ test('forecast glass hero, strip and rail render with live snapshot data', async
   await expect(strip.getByText(/^\d+°$/).first()).toBeVisible();
   await expect(page.getByText('中央氣象署')).toBeVisible();
   if (testInfo.project.name !== 'desktop-chrome') {
+    await expect(strip.locator('.fc-day').first()).toBeHidden();
+    await expect(strip.locator('.fc-wave')).toBeHidden();
+  } else {
     const lastDay = strip.locator('.fc-day').last();
     const bb = await lastDay.boundingBox();
     const vw = page.viewportSize()?.width ?? 0;
