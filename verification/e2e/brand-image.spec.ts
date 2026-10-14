@@ -62,6 +62,7 @@ test('forecast glass hero, strip and rail render with live snapshot data', async
   const rail = page.getByLabel('Saved locations');
   await expect(rail).toBeVisible();
   await expect(rail.getByText('臺北市')).toBeVisible();
+  await expect(rail.getByText('現在')).toBeVisible();
   await expect(rail.getByText(/^\d+°$/).first()).toBeVisible();
   await expect(rail.getByText('降雨機率')).toBeVisible();
 });

@@ -97,6 +97,7 @@ describe("ForecastGlass", () => {
     const rail = document.querySelector('[aria-label="Saved locations"]');
     expect(rail?.textContent).toContain("Central Jakarta");
     expect(rail?.textContent).toContain("10°");
+    expect(rail?.textContent).toContain("現在");
     for (const c of ["North Jakarta", "Bandung", "South Jakarta"]) {
       expect(rail?.textContent).toContain(c);
     }

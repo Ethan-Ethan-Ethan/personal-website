@@ -106,6 +106,7 @@ export default function ForecastGlass({ data, open }: Props) {
       <div className={`${glass} fc-node fc-dir-r${on}`} style={{ padding: '18px 20px', ...dl(D.card0) }}>
         <div style={{ color: 'rgba(255,255,255,.9)', fontSize: 14, fontWeight: 500 }}>{main.city}</div>
         <div style={{ color: INK, fontSize: 72, fontWeight: 500, letterSpacing: '-3.5px', lineHeight: 1 }}>
+          <span style={{ fontSize: 22, letterSpacing: '0.12em', fontWeight: 500 }}>現在</span>{' '}
           {main.temp}°<span style={{ fontSize: 26 }}>C</span>
         </div>
         <div style={{ display: 'flex', gap: 12, marginTop: 12, color: 'rgba(255,255,255,.9)', fontSize: 13, whiteSpace: 'nowrap' }}>
