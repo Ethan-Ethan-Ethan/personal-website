@@ -105,7 +105,7 @@ export default function ForecastGlass({ data, open }: Props) {
       className="forecast-rail"
       style={{ position: 'absolute', top: '12%', right: 38, width: 300, display: 'flex', flexDirection: 'column', gap: 14, zIndex: 3, visibility: open ? 'visible' : 'hidden' }}
     >
-      <style>{`.forecast-rail{pointer-events:none;max-height:80vh;overflow-y:auto;}@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;max-height:46vh;overflow-y:auto;pointer-events:auto;}}`}</style>
+      <style>{`.forecast-rail{pointer-events:none;max-height:80vh;overflow-y:auto;overflow-x:hidden;}@media (max-width: 900px){.forecast-rail{top:auto !important;bottom:150px !important;right:5% !important;left:5% !important;width:auto !important;max-height:46vh;overflow-y:auto;overflow-x:hidden;pointer-events:auto;}}`}</style>
       <div className={`${glass} fc-node fc-dir-r${on}`} style={{ padding: '18px 20px', ...dl(D.card0) }}>
         <div style={{ color: 'rgba(255,255,255,.9)', fontSize: 14, fontWeight: 500 }}>{main.city}</div>
         <div style={{ color: INK, fontSize: 72, fontWeight: 500, letterSpacing: '-3.5px', lineHeight: 1 }}>
