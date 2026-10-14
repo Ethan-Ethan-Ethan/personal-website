@@ -20,6 +20,13 @@ describe("ForecastSideRail", () => {
     expect(document.querySelector(".fc-node.is-open")).toBeFalsy();
     expect(getComputedStyle(document.querySelector(".forecast-side-rail") as Element).visibility).toBe("hidden");
   });
+  it("hides icon rail at stacked breakpoint so hero text stays clear", () => {
+    render(<ForecastSideRail onClose={() => {}} open />);
+    const css = Array.from(document.querySelectorAll("style"))
+      .map((s) => s.textContent ?? "")
+      .join("\n");
+    expect(css).toContain("max-width: 900px");
+  });
   it("leaves display to stylesheet so mobile media query can hide it", () => {
     render(<ForecastSideRail onClose={() => {}} open={false} />);
     const nav = document.querySelector(".forecast-side-rail") as HTMLElement;

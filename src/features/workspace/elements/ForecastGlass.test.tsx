@@ -83,6 +83,14 @@ describe("ForecastGlass", () => {
     const h1en = document.querySelector('[aria-label="Forecast"] h1') as HTMLElement;
     expect(h1en.style.letterSpacing).toBe("-0.02em");
   });
+  it("declares short-height and narrow-desktop compaction queries", () => {
+    render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
+    const css = Array.from(document.querySelectorAll("style"))
+      .map((s) => s.textContent ?? "")
+      .join("\n");
+    expect(css).toContain("max-height:500px");
+    expect(css).toContain("max-width:1100px");
+  });
   it("marks wave and days row for mobile compaction", () => {
     render(<ForecastGlass data={FORECAST_PLACEHOLDER} open />);
     expect(document.querySelector('[aria-label="Hourly forecast"] svg.fc-wave')).toBeTruthy();
