@@ -7519,7 +7519,103 @@
     "https://www.infoq.com/news/2026/10/xcode-json-project-format/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Xcode 27.2 Introduces an Agent- and Merge-Friendly JSON Format for Project Configuration",
       "date": "2026-10-13T09:04:25.413Z"
+    },
+    "https://github.com/android/ndk/issues/2260": {
+      "title": "AOSP Source Releases Are So Late Developers Disassemble Libraries to Report Bugs",
+      "date": "2026-10-14T07:14:23.119Z"
+    },
+    "https://felixrieseberg.com/": {
+      "title": "Felix Rieseberg Homepage",
+      "date": "2026-10-14T07:14:23.119Z"
+    },
+    "https://blumify.io/people": {
+      "title": "I built a tool to track what AI leaders say and how their views change on video",
+      "date": "2026-10-14T07:14:23.119Z"
+    },
+    "https://brookslybrand.com/posts/do-frameworks-matter-anymore/": {
+      "title": "Do Frameworks Matter Anymore?",
+      "date": "2026-10-14T07:14:23.120Z"
+    },
+    "https://pulseos.finance": {
+      "title": "Show HN: Pulse Local, a Mac budgeting app whose AI models run on your machine",
+      "date": "2026-10-14T07:14:23.120Z"
+    },
+    "https://anitab.org/press-release": {
+      "title": "Grace Hopper Celebration Cancelled",
+      "date": "2026-10-14T07:14:23.120Z"
+    },
+    "https://www.cphiri.dev/presentations/recreational-programming": {
+      "title": "Recreational Programming",
+      "date": "2026-10-14T07:14:23.120Z"
+    },
+    "https://alpha-nist.github.io/": {
+      "title": "AlphaNIST",
+      "date": "2026-10-14T07:14:23.121Z"
+    },
+    "https://jobs.lever.co/postera/c7d50a36-db0a-4574-bfe4-8700b74a22c0": {
+      "title": "PostEra (YC W20) Is Hiring AI Researchers for Drug Discovery",
+      "date": "2026-10-14T07:14:23.121Z"
+    },
+    "https://sfstandard.com/2026/10/13/openai-engineer-arrested-alleged-bugging-executive-conference-room/": {
+      "title": "OpenAI engineer arrested in bugging of executive conference room",
+      "date": "2026-10-14T07:14:23.121Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3n07pkpk5ggo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "台灣選舉解讀：「北藍南綠」的政治版圖是否「鐵板一塊」？",
+      "date": "2026-10-14T07:14:23.394Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crpdgz701dyzo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "梵蒂岡證實教宗患上肺腺癌，但手術成功",
+      "date": "2026-10-14T07:14:23.395Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c63r584g9xwpo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中共中央紀委：薄熙來前搭檔黃奇帆接受調查",
+      "date": "2026-10-14T07:14:23.395Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crvg9n72v9p2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "AI翻譯：還有多久會完全取代人類？",
+      "date": "2026-10-14T07:14:23.395Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c862yzkgzwero/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "華為尊界V800事件：一場煞車測試如何演變成中國輿論風暴",
+      "date": "2026-10-14T07:14:23.395Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwly388njx3go/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "人類身高的起伏變化：哪些歷史事件影響最大？",
+      "date": "2026-10-14T07:14:23.396Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cmg47k6z44w7o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「黑珍珠」瑪麗亞：表演中國川劇的塞拉利昂女子",
+      "date": "2026-10-14T07:14:23.396Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cxzd63n7e631o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中期選舉前夕油價降不下，特朗普難題加劇",
+      "date": "2026-10-14T07:14:23.396Z"
+    },
+    "https://www.infoq.com/news/2026/10/cloudflare-viteplus-stable/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflares Newly Acquired Vite+ Reaches 1.0 with GitLab CI Support, Hooks, and tsup Migration",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/news/2026/10/backstage-1-55-task-recovery/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Backstage 1.55 Adds Scaffolder Task Recovery and Removes Deprecated Catalog APIs",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/news/2026/10/zimbra-command-injection/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "ZCS Command Injection via SNMP Handlers Enables Unauthenticated Remote Code Execution",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/news/2026/10/qcon-ai-newyork-2026-sessionsv2/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Production Patterns for Agents, Evals, and LLM Costs: QCon AI New York 2026",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/news/2026/10/aws-eventbridge-scaling/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Reworks EventBridge Custom Buses for Enterprise-Scale Event-Driven Architectures",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/presentations/eve-observability-head-sampling/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: How Eve Online Leverages Head Based Sampling to Observe \"Fun\"",
+      "date": "2026-10-14T07:14:23.809Z"
     }
   },
-  "lastRun": "2026-10-13T09:04:25.413Z"
+  "lastRun": "2026-10-14T07:14:23.809Z"
 }
