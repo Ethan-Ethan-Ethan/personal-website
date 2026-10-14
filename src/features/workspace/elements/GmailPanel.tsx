@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useState, type CSSProperties } from 'react';
 import gmailDigest from '../core/gmail-digest.json';
 import { FC_TRANSITION_CSS } from '../core/forecast-transitions';
 
@@ -141,6 +141,9 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
   const doc = digest === undefined ? asValidDigest(gmailDigest) : digest ? asValidDigest(digest) : null;
   const on = open ? ' is-open' : '';
   const featured = doc?.items.filter((i) => i.featured) ?? [];
+  // 左欄精選預設折疊（點才展開）；右欄 Top3／全表邏輯不動。受控 details：
+  // jsdom 無原生 toggle，以 React state 為準；summary 原生鍵盤可達（Enter/Space 觸 click）。
+  const [starsOpen, setStarsOpen] = useState(false);
   const expiring = (doc?.items ?? [])
     .filter((i) => i.topic === 'promo' && i.expiry)
     .sort((a, b) => expiryKey(a) - expiryKey(b));
@@ -187,10 +190,20 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
               </div>
             </div>
             {featured.length ? (
-              <div style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.1em', color: INK, marginBottom: 4 }}>
-                  精選
-                </div>
+              <details
+                data-testid="featured-fold"
+                open={starsOpen ? true : undefined}
+                onToggle={(e) => setStarsOpen((e.target as HTMLDetailsElement).open)}
+                style={{ marginBottom: 14 }}
+              >
+                <summary
+                  aria-label={`精選（${featured.length} 條，點按展開）`}
+                  onClick={(e) => { e.preventDefault(); setStarsOpen((v) => !v); }}
+                  style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.1em', color: INK, marginBottom: 4 }}
+                >
+                  精選（{featured.length} 條）
+                </summary>
+                {starsOpen ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {featured.map((item) => (
                     <article
@@ -212,7 +225,8 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
                     </article>
                   ))}
                 </div>
-              </div>
+                ) : null}
+              </details>
             ) : null}
             {TOPICS.map((t) => {
               const cards = doc.items.filter((i) => i.topic === t.key);

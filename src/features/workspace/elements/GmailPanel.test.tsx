@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it } from "vitest";
-import { cleanup, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import GmailPanel, { cardLinks, expiryKey, isExpired } from "./GmailPanel";
 import digest from "../core/gmail-digest.json";
 
@@ -74,24 +74,40 @@ describe("GmailPanel", () => {
   });
   it("renders featured zone, count chips, rail, and multi-link rows", () => {
     render(<GmailPanel open />);
-    // 精選區：9 條（每段 ★3，Haiku 已搬 promo）
-    expect(screen.getByText("精選")).toBeTruthy();
+    // 精選區 summary 常在（左欄），預設折疊不斷言卡片
+    expect(screen.getByText(/精選（9 條）/)).toBeTruthy();
+    expect(screen.getByTestId("featured-fold")).toBeTruthy();
     expect(screen.queryByText(/忙人只看/)).toBeNull();
-    expect(screen.getByLabelText(/精選｜.*Haiku/)).toBeTruthy();
     // 段標計數 chip（study 26／invest 27／promo 18）
     expect(screen.getByText("26 條")).toBeTruthy();
     expect(screen.getByText("27 條")).toBeTruthy();
     expect(screen.getByText("18 條")).toBeTruthy();
-    // 右 rail：精選 Top3＋促銷時效榜
+    // 右 rail：精選 Top3＋促銷時效榜（不受左欄折疊影響）
     const rail = screen.getByLabelText("重點側欄");
     expect(within(rail).getByText("精選 Top3")).toBeTruthy();
     expect(within(rail).getByText("促銷時效榜")).toBeTruthy();
-    // 多連結列：Snipboard 兩連結渲染 原文連結1／2
+    // 多連結列：Snipboard 全表卡兩連結渲染 原文連結1／2（收合前即查全表卡，避免展開後精選卡重名）
     const snip = screen.getByLabelText(/Snipboard/);
     expect(snip.textContent).toContain("原文連結1");
     expect(snip.textContent).toContain("原文連結2");
-    // 全表收合
+    // 全表收合（既有邏輯不動）
     expect(screen.getAllByText(/看全表/).length).toBe(3);
+  });
+  it("left featured defaults collapsed, expands to 9 cards on click (native details+summary, keyboard reachable)", () => {
+    render(<GmailPanel open />);
+    const fold = screen.getByTestId("featured-fold");
+    expect(fold.tagName).toBe("DETAILS");
+    // 預設收合：無 open 屬性＋精選卡不在 DOM
+    expect(fold.hasAttribute("open")).toBe(false);
+    expect(screen.queryAllByLabelText(/^精選｜/).length).toBe(0);
+    // summary 原生鍵盤可達：SUMMARY 元素＋click 展開
+    const summary = screen.getByText(/精選（9 條）/);
+    expect(summary.tagName).toBe("SUMMARY");
+    fireEvent.click(summary);
+    expect(screen.getByTestId("featured-fold").hasAttribute("open")).toBe(true);
+    // 展開後 9 卡可見（每段 ★3，Haiku 已搬 promo）
+    expect(screen.getAllByLabelText(/^精選｜/).length).toBe(9);
+    expect(screen.getByLabelText(/精選｜.*Haiku/)).toBeTruthy();
   });
   it("cardLinks caps at 3 and expiryKey orders promos by date", () => {
     expect(cardLinks({ link: "https://a.example/" })).toEqual(["https://a.example/"]);
