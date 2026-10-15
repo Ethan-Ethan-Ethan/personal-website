@@ -84,7 +84,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       </button>
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} activeId={activeId} onSelect={setActiveId} />
       <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
-      {activeId === 'mail' ? <GmailPanel open={forecastOpen} /> : null}
+      <GmailPanel open={forecastOpen && activeId === 'mail'} />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>

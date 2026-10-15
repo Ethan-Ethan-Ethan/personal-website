@@ -46,17 +46,30 @@ describe("LakeOverlay house button", () => {
 });
 
 describe("LakeOverlay rail panel mapping", () => {
-  it("mail mounts GmailPanel, other keys mount nothing, grid keeps ForecastGlass", async () => {
+  it("GmailPanel stays mounted, open class flips (resident, stagger-safe)", async () => {
     const user = userEvent.setup();
     render(<LakeOverlay {...props} />);
+    // 常駐：初始即在 DOM，但關閉態（無 is-open、hidden）
+    const panel = screen.getByLabelText("Gmail 本週重點");
+    expect(panel).toBeTruthy();
+    expect(panel.className).not.toContain("is-open");
+    expect((panel as HTMLElement).style.visibility).toBe("hidden");
+    // 開 forecast（預設 grid）：Gmail 仍常駐但保持關閉
     await user.click(screen.getByRole("button", { name: "Ethan 首頁" }));
-    expect(screen.queryByLabelText("Gmail 本週重點")).toBeNull();
-    await user.click(screen.getByRole("button", { name: "Gmail" }));
     expect(screen.getByLabelText("Gmail 本週重點")).toBeTruthy();
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
+    // 切 mail：同幀翻 open（closed→open 過程完整，stagger 可跑）
+    await user.click(screen.getByRole("button", { name: "Gmail" }));
+    const openPanel = screen.getByLabelText("Gmail 本週重點");
+    expect(openPanel.className).toContain("is-open");
+    expect((openPanel as HTMLElement).style.visibility).toBe("visible");
+    // 切他鍵：DOM 常在，僅關閉（不卸載）
     await user.click(screen.getByRole("button", { name: "圖表" }));
-    expect(screen.queryByLabelText("Gmail 本週重點")).toBeNull();
+    expect(screen.getByLabelText("Gmail 本週重點")).toBeTruthy();
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
     await user.click(screen.getByRole("button", { name: "總覽" }));
-    expect(screen.queryByLabelText("Gmail 本週重點")).toBeNull();
+    expect(screen.getByLabelText("Gmail 本週重點")).toBeTruthy();
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
     expect(screen.getByLabelText("Forecast")).toBeTruthy();
   });
 });
