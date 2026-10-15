@@ -6,6 +6,7 @@ import snapshotDoc from '../core/cwa-snapshot.json';
 import { HEXMAP } from '../core/recipe-runtime-binding';
 import ForecastGlass from './ForecastGlass';
 import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
+import ForecastBottomBar from './ForecastBottomBar';
 import GmailPanel from './GmailPanel';
 import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
@@ -68,7 +69,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
 
   return (
     <div className="lake-overlay" aria-hidden="false" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2 }}>
-      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}.lake-mail-fab{display:none;}@media (max-width: 900px){.lake-mail-fab{display:grid;place-items:center;}}`}</style>
+      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}@media (max-width: 900px){.lake-phase-label{bottom:96px !important;}.lake-player-cluster{bottom:96px !important;}}`}</style>
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
@@ -78,7 +79,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         aria-label="Ethan 首頁"
         aria-expanded={forecastOpen}
         onClick={() => {
-          // 房子＝回家＝天氣總覽：打開時一併回 grid；關閉時不動 activeId（附帶 FAB 收起保持只關面板）。
+          // 房子＝回家＝天氣總覽：打開時一併回 grid；關閉時不動 activeId（只關面板）。
           if (!forecastOpen) { setActiveId('grid'); setForecastOpen(true); }
           else { setForecastOpen(false); }
         }}
@@ -86,31 +87,9 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       >
         <HouseIcon size={20} />
       </button>
-      {/* 手機 Gmail 浮鈕：窄屏專用（≤900px 才顯示，桌機隱藏）；房子鍵下方同槽幾何（同 left/40px 圓）；面板未開直開 mail，面板開著轉收起鍵（關面板，防浮在文字上） */}
-      <button
-        type="button"
-        aria-label={forecastOpen && activeId === 'mail' ? '收起面板' : 'Gmail'}
-        className="lake-mail-fab"
-        onClick={() => {
-          if (forecastOpen && activeId === 'mail') setForecastOpen(false);
-          else { setForecastOpen(true); setActiveId('mail'); }
-        }}
-        style={{ position: 'absolute', top: 79, left: 35, width: 40, height: 40, placeItems: 'center', background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)', borderRadius: '50%', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: HEXMAP["forecast_ink"], backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', zIndex: 4 }}
-      >
-        {(forecastOpen && activeId === 'mail') ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block' }}>
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-            <path d="m16 17 5-5-5-5" />
-            <path d="M21 12H9" />
-          </svg>
-        ) : (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block' }}>
-            <rect x="3" y="5" width="18" height="14" rx="2" />
-            <path d="M3 7l9 6 9-6" />
-          </svg>
-        )}
-      </button>
+      {/* 手機底欄（≤900px 專用，與側軌同狀態機、互斥顯示；FAB 已退役，見 spec 修訂節） */}
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} activeId={activeId} onSelect={setActiveId} />
+      <ForecastBottomBar activeId={activeId} onSelect={setActiveId} />
       <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
       <GmailPanel open={forecastOpen && activeId === 'mail'} />
 
@@ -119,7 +98,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         <a href="/resume" style={link} onClick={(event) => { event.preventDefault(); window.dispatchEvent(new CustomEvent('open-about-dialog')); }}>About</a>
       </div>
 
-      <div key={phase.id} className="fadein" style={{ position: 'absolute', left: 24, bottom: 24 }}>
+      <div key={phase.id} className="fadein lake-phase-label" style={{ position: 'absolute', left: 24, bottom: 24 }}>
         <div style={{ ...tiny, fontSize: 15 }}>
           {reducedMotion ? (
             phase.name
@@ -140,7 +119,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         <div style={{ ...tiny, opacity: 0.75 }}>{phase.sub}</div>
       </div>
 
-      <div style={{ position: 'absolute', right: 24, bottom: 24, display: 'flex', gap: 10, alignItems: 'center', background: 'rgba(0,0,0,0.35)', borderRadius: 999, padding: '6px 12px', pointerEvents: 'none' }}>
+      <div className="lake-player-cluster" style={{ position: 'absolute', right: 24, bottom: 24, display: 'flex', gap: 10, alignItems: 'center', background: 'rgba(0,0,0,0.35)', borderRadius: 999, padding: '6px 12px', pointerEvents: 'none' }}>
         <div role="group" aria-label="時段選擇" style={{ display: 'flex', gap: 4 }}>
           {Array.from({ length: phaseCount }, (_, i) => (
             <button

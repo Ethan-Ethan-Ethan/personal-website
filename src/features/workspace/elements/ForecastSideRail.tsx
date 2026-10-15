@@ -16,7 +16,8 @@ export function HouseIcon({ size = 24 }: { size?: number }) {
 
 type IconDef = { id: string; label: string; path: ReactNode };
 
-const ICONS: IconDef[] = [
+// ICONS 為側軌＋底欄共用語言正本（ForecastBottomBar 唯讀引用，禁 inline 第二份）。
+export const ICONS: IconDef[] = [
   {
     id: 'grid',
     label: '總覽',

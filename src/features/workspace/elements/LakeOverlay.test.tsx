@@ -49,16 +49,16 @@ describe("LakeOverlay house button", () => {
     // 初始關閉：Gmail 面板無 is-open
     expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
     await user.click(screen.getByRole("button", { name: "Ethan 首頁" }));
-    // 開→grid：Gmail 仍關閉，側軌總覽亮燈
+    // 開→grid：Gmail 仍關閉，側軌總覽亮燈（底欄同狀態機，燈號一致）
     expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
     expect(screen.getByLabelText("Forecast")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "總覽" }).getAttribute("aria-pressed")).toBe("true");
+    expect(document.querySelector('.forecast-side-rail button[aria-label="總覽"]')?.getAttribute("aria-pressed")).toBe("true");
   });
   it("mail → close → house returns to grid (no stuck on mail)", async () => {
     const user = userEvent.setup();
     render(<LakeOverlay {...props} />);
     const house = () => screen.getByRole("button", { name: "Ethan 首頁" });
-    // 先經側軌 Gmail 鍵進 mail（避開手機 FAB 同名）
+    // 先經側軌 Gmail 鍵進 mail
     await user.click(house());
     await user.click(document.querySelector('.forecast-side-rail button[aria-label="Gmail"]') as HTMLElement);
     expect(screen.getByLabelText("Gmail 本週重點").className).toContain("is-open");
@@ -69,7 +69,7 @@ describe("LakeOverlay house button", () => {
     await user.click(house());
     expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
     expect(screen.getByLabelText("Forecast")).toBeTruthy();
-    expect(screen.getByRole("button", { name: "總覽" }).getAttribute("aria-pressed")).toBe("true");
+    expect(document.querySelector('.forecast-side-rail button[aria-label="總覽"]')?.getAttribute("aria-pressed")).toBe("true");
   });
 });
 
@@ -86,98 +86,105 @@ describe("LakeOverlay rail panel mapping", () => {
     await user.click(screen.getByRole("button", { name: "Ethan 首頁" }));
     expect(screen.getByLabelText("Gmail 本週重點")).toBeTruthy();
     expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
-    // 切 mail：同幀翻 open（closed→open 過程完整，stagger 可跑；側軌內 Gmail 鍵，避開手機浮鈕同名）
+    // 切 mail：同幀翻 open（closed→open 過程完整，stagger 可跑；側軌 Gmail 鍵）
     await user.click(document.querySelector('.forecast-side-rail button[aria-label="Gmail"]') as HTMLElement);
     const openPanel = screen.getByLabelText("Gmail 本週重點");
     expect(openPanel.className).toContain("is-open");
     expect((openPanel as HTMLElement).style.visibility).toBe("visible");
-    // 切他鍵：DOM 常在，僅關閉（不卸載）
-    await user.click(screen.getByRole("button", { name: "圖表" }));
+    // 切他鍵：DOM 常在，僅關閉（不卸載；側軌作用域查詢，底欄同名鍵不干擾）
+    await user.click(document.querySelector('.forecast-side-rail button[aria-label="圖表"]') as HTMLElement);
     expect(screen.getByLabelText("Gmail 本週重點")).toBeTruthy();
     expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
-    await user.click(screen.getByRole("button", { name: "總覽" }));
+    await user.click(document.querySelector('.forecast-side-rail button[aria-label="總覽"]') as HTMLElement);
     expect(screen.getByLabelText("Gmail 本週重點")).toBeTruthy();
     expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
     expect(screen.getByLabelText("Forecast")).toBeTruthy();
   });
 });
 
-describe("LakeOverlay mobile Gmail FAB", () => {
-  // jsdom 會套用 base display:none（桌機態），故用 querySelector 取 DOM；
-  // 窄屏可見/桌機隱藏契約由下方 CSS 文字斷言覆蓋（沿 ForecastSideRail 既有模式）。
-  const getFab = () => document.querySelector(".lake-mail-fab") as HTMLElement;
-  it("hidden on desktop, shown at narrow breakpoint (CSS assertion)", () => {
-    render(<LakeOverlay {...props} />);
-    const fab = getFab();
-    expect(fab).toBeTruthy();
-    expect(fab.getAttribute("aria-label")).toBe("Gmail");
-    // display 交給 stylesheet（桌機 none、窄屏 grid），inline 不寫死 display
-    expect(fab.style.display).toBe("");
-    const css = Array.from(document.querySelectorAll("style"))
+describe("LakeOverlay mobile bottom bar", () => {
+  // 底欄在 jsdom 為桌機態 display:none（沿 FAB 舊例），可見性由 CSS 文字斷言覆蓋；
+  // 點擊走 fireEvent 直驗 handler（與側軌同狀態機），可見性不擋 handler。
+  const css = () =>
+    Array.from(document.querySelectorAll("style"))
       .map((s) => s.textContent ?? "")
       .join("\n");
-    expect(css).toContain(".lake-mail-fab");
-    expect(css).toContain("max-width: 900px");
-    expect(css).toContain(".lake-mail-fab{display:none");
-  });
-  it("40px circle glass blur12 INK, house same-slot geometry below house key", () => {
+  it("renders six tab keys sharing rail state machine; hidden on desktop, shown ≤900px", () => {
     render(<LakeOverlay {...props} />);
-    const fab = getFab();
-    const house = screen.getByRole("button", { name: "Ethan 首頁" }) as HTMLElement;
-    expect(fab.style.width).toBe("40px");
-    expect(fab.style.height).toBe("40px");
-    expect(fab.style.borderRadius).toBe("50%");
-    expect(fab.style.backdropFilter).toContain("blur(12px)");
-    expect(getComputedStyle(fab).color).toBe(getComputedStyle(house).color);
-    // 同槽幾何：同 left，房子鍵下方（top 大於房子 bottom=31+40=71）
-    expect(fab.style.left).toBe(house.style.left);
-    expect(parseFloat(fab.style.top)).toBeGreaterThan(71);
+    const bar = document.querySelector(".forecast-bottom-bar") as HTMLElement;
+    expect(bar).toBeTruthy();
+    expect(
+      Array.from(bar.querySelectorAll("button")).map((b) =>
+        b.getAttribute("aria-label")
+      )
+    ).toEqual(["總覽", "Gmail", "圖表", "地區", "日曆", "搜尋"]);
+    // display 交給 stylesheet（桌機 none、窄屏 flex），inline 不寫死 display
+    expect(bar.style.display).toBe("");
+    expect(css()).toContain(".forecast-bottom-bar{display:none");
+    expect(css()).toContain("max-width: 900px");
+    expect(css()).toContain(
+      "@media (max-width: 900px){.forecast-bottom-bar{display:flex;"
+    );
   });
-  it("click opens Gmail panel directly (forecast open + mail active)", () => {
+  it("bottom-bar tap switches active with side rail (same state machine)", async () => {
+    const user = userEvent.setup();
     render(<LakeOverlay {...props} />);
-    const fab = getFab();
-    // 初始關閉
-    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
-    // jsdom 桌機態 display:none 擋 userEvent，改 fireEvent 直驗 handler
-    //（setForecastOpen(true)＋setActiveId('mail')）；可見性由 CSS 斷言覆蓋
-    fireEvent.click(fab);
-    const openPanel = screen.getByLabelText("Gmail 本週重點");
-    expect(openPanel.className).toContain("is-open");
-    expect((openPanel as HTMLElement).style.visibility).toBe("visible");
+    // 房子鍵行為不動：開→grid
+    await user.click(screen.getByRole("button", { name: "Ethan 首頁" }));
+    expect(screen.getByLabelText("Forecast")).toBeTruthy();
+    // 底欄 Gmail 鍵切 mail：面板開＋兩欄燈號一致
+    fireEvent.click(
+      document.querySelector(
+        '.forecast-bottom-bar button[aria-label="Gmail"]'
+      ) as HTMLElement
+    );
+    expect(screen.getByLabelText("Gmail 本週重點").className).toContain(
+      "is-open"
+    );
+    expect(
+      (
+        document.querySelector(
+          '.forecast-bottom-bar button[aria-label="Gmail"]'
+        ) as HTMLElement
+      ).getAttribute("aria-pressed")
+    ).toBe("true");
+    expect(
+      (
+        document.querySelector(
+          '.forecast-side-rail button[aria-label="Gmail"]'
+        ) as HTMLElement
+      ).getAttribute("aria-pressed")
+    ).toBe("true");
+    // 底欄總覽鍵回 grid：Forecast 在席＋Gmail 關閉
+    fireEvent.click(
+      document.querySelector(
+        '.forecast-bottom-bar button[aria-label="總覽"]'
+      ) as HTMLElement
+    );
+    expect(screen.getByLabelText("Forecast")).toBeTruthy();
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain(
+      "is-open"
+    );
   });
-  it("toggles: closed shows Gmail and opens; mail-open shows 收起面板 and closes", () => {
+  it("bottom player + phase label yield to bar at ≤900px; desktop inline untouched", () => {
     render(<LakeOverlay {...props} />);
-    const getFabNow = () => document.querySelector(".lake-mail-fab") as HTMLElement;
-    // 關態：Gmail 直開
-    expect(getFabNow().getAttribute("aria-label")).toBe("Gmail");
-    fireEvent.click(getFabNow());
-    expect(screen.getByLabelText("Gmail 本週重點").className).toContain("is-open");
-    // 開態（forecastOpen && mail）：轉收起鍵（防浮在文字上）
-    expect(getFabNow().getAttribute("aria-label")).toBe("收起面板");
-    fireEvent.click(getFabNow());
-    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
-    // 關後恢復 Gmail 直開
-    expect(getFabNow().getAttribute("aria-label")).toBe("Gmail");
+    const c = css();
+    expect(c).toContain("max-width: 900px");
+    expect(c).toContain(".lake-player-cluster{bottom:96px !important;}");
+    expect(c).toContain(".lake-phase-label{bottom:96px !important;}");
+    // 桌機零變化：inline bottom 仍 24px（讓位只走手機 media !important）
+    expect(
+      (document.querySelector(".lake-player-cluster") as HTMLElement).style
+        .bottom
+    ).toBe("24px");
+    expect(
+      (document.querySelector(".lake-phase-label") as HTMLElement).style.bottom
+    ).toBe("24px");
   });
-  it("swaps icon with state: closed shows envelope, mail-open shows collapse arrow", () => {
+  it("FAB fully retired: zero references in DOM and CSS", () => {
     render(<LakeOverlay {...props} />);
-    const getFabNow = () => document.querySelector(".lake-mail-fab") as HTMLElement;
-    const hasPath = (fab: HTMLElement, d: string) =>
-      Array.from(fab.querySelectorAll("path")).some((p) => p.getAttribute("d") === d);
-    // 關態：信封（直開 Gmail）
-    expect(getFabNow().querySelector("rect")).toBeTruthy();
-    expect(hasPath(getFabNow(), "M3 7l9 6 9-6")).toBe(true);
-    expect(hasPath(getFabNow(), "M21 12H9")).toBe(false);
-    // 開態：側軌收起鍵同形箭頭（20px／stroke2 同規格），無信封（易混已除）
-    fireEvent.click(getFabNow());
-    expect(getFabNow().getAttribute("aria-label")).toBe("收起面板");
-    expect(getFabNow().querySelector("rect")).toBeNull();
-    expect(hasPath(getFabNow(), "M21 12H9")).toBe(true);
-    expect(hasPath(getFabNow(), "m16 17 5-5-5-5")).toBe(true);
-    expect((getFabNow().querySelector("svg") as Element).getAttribute("width")).toBe("20");
-    // 關後恢復信封直開
-    fireEvent.click(getFabNow());
-    expect(getFabNow().querySelector("rect")).toBeTruthy();
-    expect(hasPath(getFabNow(), "M21 12H9")).toBe(false);
+    expect(document.querySelector(".lake-mail-fab")).toBeNull();
+    expect(css()).not.toContain("lake-mail-fab");
+    expect(css()).not.toContain("mail-fab");
   });
 });
