@@ -109,7 +109,7 @@ describe("LakeOverlay mobile bottom bar", () => {
     Array.from(document.querySelectorAll("style"))
       .map((s) => s.textContent ?? "")
       .join("\n");
-  it("renders six tab keys sharing rail state machine; hidden on desktop, shown ≤900px", () => {
+  it("renders five tab keys without grid; hidden on desktop, shown ≤900px", () => {
     render(<LakeOverlay {...props} />);
     const bar = document.querySelector(".forecast-bottom-bar") as HTMLElement;
     expect(bar).toBeTruthy();
@@ -117,7 +117,11 @@ describe("LakeOverlay mobile bottom bar", () => {
       Array.from(bar.querySelectorAll("button")).map((b) =>
         b.getAttribute("aria-label")
       )
-    ).toEqual(["總覽", "Gmail", "圖表", "地區", "日曆", "搜尋"]);
+    ).toEqual(["Gmail", "圖表", "地區", "日曆", "搜尋"]);
+    // 總覽缺席：底欄無總覽鍵（回家走房子鍵；側軌六鍵不動）
+    expect(
+      bar.querySelector('button[aria-label="總覽"]')
+    ).toBeNull();
     // display 交給 stylesheet（桌機 none、窄屏 flex），inline 不寫死 display
     expect(bar.style.display).toBe("");
     expect(css()).toContain(".forecast-bottom-bar{display:none");
@@ -155,16 +159,29 @@ describe("LakeOverlay mobile bottom bar", () => {
         ) as HTMLElement
       ).getAttribute("aria-pressed")
     ).toBe("true");
-    // 底欄總覽鍵回 grid：Forecast 在席＋Gmail 關閉
-    fireEvent.click(
-      document.querySelector(
-        '.forecast-bottom-bar button[aria-label="總覽"]'
-      ) as HTMLElement
+    // 底欄無總覽鍵：回 grid 走房子鍵（關→開兩段：先關面板，再回家回 grid）
+    expect(
+      document.querySelector('.forecast-bottom-bar button[aria-label="總覽"]')
+    ).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Ethan 首頁" }));
+    // 第一段：房子鍵關閉時不動 activeId（只關面板，燈號仍 mail）
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain(
+      "is-open"
     );
+    fireEvent.click(screen.getByRole("button", { name: "Ethan 首頁" }));
+    // 第二段：回家回 grid（Forecast 在席＋Gmail 關＋側軌總覽亮燈＋底欄無高亮）
     expect(screen.getByLabelText("Forecast")).toBeTruthy();
     expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain(
       "is-open"
     );
+    expect(
+      document.querySelector('.forecast-side-rail button[aria-label="總覽"]')?.getAttribute("aria-pressed")
+    ).toBe("true");
+    expect(
+      Array.from(
+        document.querySelectorAll(".forecast-bottom-bar button[aria-pressed='true']")
+      ).length
+    ).toBe(0);
   });
   it("bottom-bar tap from closed selects + opens panel (Gmail: active mail + is-open)", async () => {
     render(<LakeOverlay {...props} />);

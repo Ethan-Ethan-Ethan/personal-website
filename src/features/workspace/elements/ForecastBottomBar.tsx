@@ -4,7 +4,8 @@ import { ICONS } from './ForecastSideRail';
 const INK = HEXMAP["forecast_ink"];
 
 // 手機專用底部橫式 tab bar（≤900px 才顯示，＞900px 隱藏；與側軌互斥顯示）。
-// 六鍵沿側軌 ICONS 語言正本（20px／stroke2／round＋墨色 INK），active 高亮同側軌。
+// 五鍵沿側軌 ICONS 語言正本過濾總覽（mail/chart/globe/calendar/search；20px／stroke2／round＋墨色 INK），active 高亮同側軌。
+// 總覽由房子鍵回家，底欄不過濾會重複；activeId 為 grid 時底欄無高亮即正常。
 // 玻璃底 blur12＋safe-area inset-bottom；與側軌同狀態機（activeId／onSelect 直通父層）。
 // 面板開關：底欄點鍵＝選中＋開面板（父層 onSelect 內 setActiveId＋setForecastOpen(true)）；
 // 桌機側軌維持只切 activeId、不動 forecastOpen（開面板走房子鍵）。
@@ -12,6 +13,8 @@ export default function ForecastBottomBar({ activeId = 'grid', onSelect }: {
   activeId?: string;
   onSelect?: (id: string) => void;
 }) {
+  // 底欄五鍵：過濾總覽（grid），回家走房子鍵；ICONS 正本（側軌六鍵）不動。
+  const BOTTOM_ICONS = ICONS.filter((icon) => icon.id !== 'grid');
   return (
     <nav
       aria-label="功能選單"
@@ -26,7 +29,7 @@ export default function ForecastBottomBar({ activeId = 'grid', onSelect }: {
       }}
     >
       <style>{`.forecast-bottom-bar{display:none;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:20px;box-shadow:0 8px 32px rgba(0,0,0,0.35);}@media (max-width: 900px){.forecast-bottom-bar{display:flex;}}.forecast-bottom-bar button{transition:background .2s ease,transform .2s ease;}.forecast-bottom-bar button:active{transform:scale(.94);}@media (prefers-reduced-motion: reduce){.forecast-bottom-bar button{transition:none;}}`}</style>
-      {ICONS.map((icon) => {
+      {BOTTOM_ICONS.map((icon) => {
         const isActive = icon.id === activeId;
         return (
           <button

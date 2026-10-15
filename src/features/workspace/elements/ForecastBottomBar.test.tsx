@@ -10,35 +10,56 @@ const css = () =>
   Array.from(document.querySelectorAll("style"))
     .map((s) => s.textContent ?? "")
     .join("\n");
-const LABELS = ["總覽", "Gmail", "圖表", "地區", "日曆", "搜尋"];
+const LABELS = ["Gmail", "圖表", "地區", "日曆", "搜尋"];
 
 describe("ForecastBottomBar", () => {
-  it("renders 6 tab keys in rail order with grid active by default", () => {
+  it("renders 5 tab keys in rail order without grid; grid active means no highlight", () => {
     render(<ForecastBottomBar />);
     const buttons = Array.from(
       document.querySelectorAll(".forecast-bottom-bar button")
     ) as HTMLElement[];
     expect(buttons.map((b) => b.getAttribute("aria-label"))).toEqual(LABELS);
-    expect(buttons[0].getAttribute("aria-pressed")).toBe("true");
-    expect(buttons[1].getAttribute("aria-pressed")).toBe("false");
+    // 總覽缺席：底欄無總覽鍵（回家走房子鍵）
+    expect(
+      document.querySelector('.forecast-bottom-bar button[aria-label="總覽"]')
+    ).toBeNull();
+    // 預設 activeId=grid：底欄無高亮即正常（五鍵全 false）
+    expect(buttons.map((b) => b.getAttribute("aria-pressed"))).toEqual([
+      "false",
+      "false",
+      "false",
+      "false",
+      "false",
+    ]);
   });
   it("is controlled: click reports id via onSelect without internal state", () => {
     const onSelect = vi.fn();
     render(<ForecastBottomBar activeId="grid" onSelect={onSelect} />);
+    // activeId=grid 時底欄無高亮：Gmail false＋總覽缺席
+    expect(
+      (
+        document.querySelector(
+          '.forecast-bottom-bar button[aria-label="Gmail"]'
+        ) as HTMLElement
+      ).getAttribute("aria-pressed")
+    ).toBe("false");
+    expect(
+      document.querySelector('.forecast-bottom-bar button[aria-label="總覽"]')
+    ).toBeNull();
     const gmail = document.querySelector(
       '.forecast-bottom-bar button[aria-label="Gmail"]'
     ) as HTMLElement;
     fireEvent.click(gmail);
     expect(onSelect).toHaveBeenCalledTimes(1);
     expect(onSelect).toHaveBeenCalledWith("mail");
-    // 受控：父層未改 activeId 前燈號不動
+    // 受控：父層未改 activeId 前燈號不動（仍全滅）
     expect(
       (
         document.querySelector(
-          '.forecast-bottom-bar button[aria-label="總覽"]'
+          '.forecast-bottom-bar button[aria-label="Gmail"]'
         ) as HTMLElement
       ).getAttribute("aria-pressed")
-    ).toBe("true");
+    ).toBe("false");
   });
   it("reflects parent activeId", () => {
     render(<ForecastBottomBar activeId="mail" onSelect={() => {}} />);
@@ -49,13 +70,10 @@ describe("ForecastBottomBar", () => {
         ) as HTMLElement
       ).getAttribute("aria-pressed")
     ).toBe("true");
+    // 總覽缺席：activeId=mail 時底欄也不渲染總覽鍵
     expect(
-      (
-        document.querySelector(
-          '.forecast-bottom-bar button[aria-label="總覽"]'
-        ) as HTMLElement
-      ).getAttribute("aria-pressed")
-    ).toBe("false");
+      document.querySelector('.forecast-bottom-bar button[aria-label="總覽"]')
+    ).toBeNull();
   });
   it("hidden on desktop, shown at stacked breakpoint (mutually exclusive with side rail)", () => {
     render(<ForecastBottomBar />);
@@ -87,12 +105,16 @@ describe("ForecastBottomBar", () => {
     const gmail = document.querySelector(
       '.forecast-bottom-bar button[aria-label="Gmail"]'
     ) as HTMLElement;
-    const grid = document.querySelector(
-      '.forecast-bottom-bar button[aria-label="總覽"]'
+    const chart = document.querySelector(
+      '.forecast-bottom-bar button[aria-label="圖表"]'
     ) as HTMLElement;
     expect(gmail.style.background).toBe("rgba(255, 255, 255, 0.22)");
     expect(gmail.style.opacity).toBe("1");
-    expect(grid.style.background).toBe("transparent");
-    expect(grid.style.opacity).toBe("0.75");
+    expect(chart.style.background).toBe("transparent");
+    expect(chart.style.opacity).toBe("0.75");
+    // 總覽缺席：高亮對照改用圖表鍵（總覽由房子鍵回家）
+    expect(
+      document.querySelector('.forecast-bottom-bar button[aria-label="總覽"]')
+    ).toBeNull();
   });
 });
