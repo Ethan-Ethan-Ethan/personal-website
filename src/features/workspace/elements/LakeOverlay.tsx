@@ -93,10 +93,18 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         }}
         style={{ position: 'absolute', top: 79, left: 35, width: 40, height: 40, placeItems: 'center', background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)', borderRadius: '50%', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: HEXMAP["forecast_ink"], backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', zIndex: 4 }}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block' }}>
-          <rect x="3" y="5" width="18" height="14" rx="2" />
-          <path d="M3 7l9 6 9-6" />
-        </svg>
+        {(forecastOpen && activeId === 'mail') ? (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block' }}>
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <path d="m16 17 5-5-5-5" />
+            <path d="M21 12H9" />
+          </svg>
+        ) : (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block' }}>
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M3 7l9 6 9-6" />
+          </svg>
+        )}
       </button>
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} activeId={activeId} onSelect={setActiveId} />
       <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />

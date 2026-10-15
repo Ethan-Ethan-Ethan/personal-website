@@ -176,7 +176,6 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
   // 仿 ForecastGlass：開場 delay stagger，關閉一律 0ms 同收。
   const dl = (ms: number): { transitionDelay: string } => ({ transitionDelay: open ? `${ms}ms` : '0ms' });
   return (
-    <>
       <section
         aria-label="Gmail 本週重點"
         className={`gmail-panel${on}`}
@@ -187,7 +186,7 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
           visibility: open ? 'visible' : 'hidden',
         }}
       >
-        <style>{`.gmail-panel{scrollbar-width:thin;overflow-x:hidden;}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.gmail-panel details>summary{cursor:pointer;}@media (max-width: 900px){.gmail-panel{left:5% !important;width:auto !important;right:5% !important;max-height:52vh !important;}.gmail-top3-card{background:rgba(0,0,0,0.62) !important;}.gmail-full-card{background:rgba(255,255,255,0.16) !important;border-color:rgba(255,255,255,0.28) !important;}.gmail-rail{position:static !important;width:auto !important;max-width:none !important;margin:16px 5% 0 !important;max-height:none !important;overflow:visible !important;pointer-events:auto !important;}}@media (prefers-reduced-motion: reduce){.gmail-panel .fc-node{transition:none;}}`}</style>
+        <style>{`.gmail-panel{scrollbar-width:thin;overflow-x:hidden;}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.gmail-panel details>summary{cursor:pointer;}@media (max-width: 900px){.gmail-panel{left:5% !important;width:auto !important;right:5% !important;max-height:52vh !important;}.gmail-top3-card{background:rgba(0,0,0,0.62) !important;}.gmail-full-card{background:rgba(255,255,255,0.16) !important;border-color:rgba(255,255,255,0.28) !important;}.gmail-rail{position:static !important;width:auto !important;max-width:none !important;margin:16px 0 0 !important;max-height:none !important;overflow:visible !important;pointer-events:auto !important;}}@media (prefers-reduced-motion: reduce){.gmail-panel .fc-node{transition:none;}}`}</style>
         {!doc ? (
           <div
             className={`fc-node fc-dir-l${on}`}
@@ -235,14 +234,16 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
             </div>
           </>
         )}
-      </section>
       {doc ? (
         <aside
           aria-label="重點側欄"
           className="gmail-rail"
           // 幾何抄 ForecastGlass 右欄：top 12%／right 38／寬 300／80vh 捲動；手機靜態堆疊（見 .gmail-panel style 內 media）。
+          // 桌機 fixed 而非 absolute：aside 已嵌進 section 內（手機同捲動流所需），
+          // section 本身 positioned 會成為 absolute 後代的 containing block（吸進面板內交疊）；
+          // 本站 landing root 為 fixed inset:0 且無 transform 祖先，fixed 座標系與 overlay 重合，像素一致。
           style={{
-            position: 'absolute', top: '12%', right: 38, width: 300, zIndex: 3,
+            position: 'fixed', top: '12%', right: 38, width: 300, zIndex: 3,
             display: 'flex', flexDirection: 'column', gap: 14,
             maxHeight: '80vh', overflowY: 'auto', overflowX: 'hidden',
             pointerEvents: open ? 'auto' : 'none',
@@ -274,6 +275,6 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
           })}
         </aside>
       ) : null}
-    </>
+    </section>
   );
 }

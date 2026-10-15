@@ -131,4 +131,25 @@ describe("LakeOverlay mobile Gmail FAB", () => {
     // 關後恢復 Gmail 直開
     expect(getFabNow().getAttribute("aria-label")).toBe("Gmail");
   });
+  it("swaps icon with state: closed shows envelope, mail-open shows collapse arrow", () => {
+    render(<LakeOverlay {...props} />);
+    const getFabNow = () => document.querySelector(".lake-mail-fab") as HTMLElement;
+    const hasPath = (fab: HTMLElement, d: string) =>
+      Array.from(fab.querySelectorAll("path")).some((p) => p.getAttribute("d") === d);
+    // 關態：信封（直開 Gmail）
+    expect(getFabNow().querySelector("rect")).toBeTruthy();
+    expect(hasPath(getFabNow(), "M3 7l9 6 9-6")).toBe(true);
+    expect(hasPath(getFabNow(), "M21 12H9")).toBe(false);
+    // 開態：側軌收起鍵同形箭頭（20px／stroke2 同規格），無信封（易混已除）
+    fireEvent.click(getFabNow());
+    expect(getFabNow().getAttribute("aria-label")).toBe("收起面板");
+    expect(getFabNow().querySelector("rect")).toBeNull();
+    expect(hasPath(getFabNow(), "M21 12H9")).toBe(true);
+    expect(hasPath(getFabNow(), "m16 17 5-5-5-5")).toBe(true);
+    expect((getFabNow().querySelector("svg") as Element).getAttribute("width")).toBe("20");
+    // 關後恢復信封直開
+    fireEvent.click(getFabNow());
+    expect(getFabNow().querySelector("rect")).toBeTruthy();
+    expect(hasPath(getFabNow(), "M21 12H9")).toBe(false);
+  });
 });

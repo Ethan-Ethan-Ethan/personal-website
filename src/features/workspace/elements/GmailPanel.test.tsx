@@ -18,9 +18,11 @@ describe("GmailPanel", () => {
     expect(screen.getByText("本週精選TOP4")).toBeTruthy();
     const flats = screen.getAllByTestId("top3-flat");
     expect(flats.length).toBe(4);
-    // 左欄無折疊：section 內無 details／看全表
+    // 主欄無折疊：section 內 4 組看全表全歸右欄（主欄零折疊；rail 已嵌進 section 內）
     const section = screen.getByLabelText("Gmail 本週重點");
-    expect(within(section).queryAllByText(/看全表/).length).toBe(0);
+    const railInSection = within(section).getByLabelText("重點側欄");
+    expect(within(section).getAllByText(/看全表/).length).toBe(4);
+    expect(within(railInSection).getAllByText(/看全表/).length).toBe(4);
     expect(within(section).queryByTestId("featured-fold")).toBeNull();
     // 平鋪卡無玻璃類：實底 rgba(0,0,0,0.45)、無 blur、白邊僅極細、圓角 16
     for (const card of flats) {
@@ -206,6 +208,35 @@ describe("GmailPanel", () => {
     for (const card of screen.getAllByTestId("top3-flat")) {
       expect((card as HTMLElement).style.background).toBe("rgba(0, 0, 0, 0.45)");
     }
+  });
+  it("mobile stacking fix: rail nested in section after main flow; desktop coords unchanged", () => {
+    render(<GmailPanel open />);
+    const section = screen.getByLabelText("Gmail 本週重點") as HTMLElement;
+    // rail 在 section 內、主欄之後（DOM 尾）：Top3 四卡皆先於 rail，
+    // 手機 static 自然接在主欄之後，進同一 52vh 捲動流（根因：兄弟節點 static 流入 overlay 頂部交疊）
+    const rail = within(section).getByLabelText("重點側欄") as HTMLElement;
+    const flats = within(section).getAllByTestId("top3-flat");
+    expect(flats.length).toBe(4);
+    for (const c of flats) {
+      expect(c.compareDocumentPosition(rail) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    }
+    expect(section.lastElementChild).toBe(rail);
+    // 桌機座標不變（沿既有 inline 斷言語式）：top 12%／right 38／寬 300／80vh 捲動
+    expect(rail.style.top).toBe("12%");
+    expect(rail.style.right).toBe("38px");
+    expect(rail.style.width).toBe("300px");
+    expect(rail.style.maxHeight).toBe("80vh");
+    // fixed 而非 absolute：section 已 positioned，absolute 會以面板為 containing block 交疊桌機；
+    // landing root fixed inset:0 且無 transform 祖先，fixed 與 overlay 座標系重合，像素一致
+    expect(rail.style.position).toBe("fixed");
+    // 手機 media：rail static 接流（margin 去側縮，與主欄全幅對齊）
+    const css = Array.from(document.querySelectorAll("style"))
+      .map((s) => s.textContent ?? "")
+      .join("\n");
+    const mediaAt = css.indexOf("@media (max-width: 900px)");
+    const railAt = css.indexOf(".gmail-rail{position:static !important");
+    expect(railAt).toBeGreaterThan(mediaAt);
+    expect(css).toContain("margin:16px 0 0 !important");
   });
   it("cardLinks caps at 3 and expiryKey orders promos by date", () => {
     expect(cardLinks({ link: "https://a.example/" })).toEqual(["https://a.example/"]);
