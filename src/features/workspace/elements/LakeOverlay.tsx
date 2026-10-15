@@ -68,7 +68,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
 
   return (
     <div className="lake-overlay" aria-hidden="false" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2 }}>
-      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}`}</style>
+      <style>{`.lake-overlay .fadein{animation:lakefade .6s ease both;}@keyframes lakefade{from{opacity:0;}to{opacity:1;}}@media (prefers-reduced-motion: reduce){.lake-overlay .fadein{animation:none;}}.lake-overlay .dot{transition:width .3s ease,opacity .3s ease;}@media (prefers-reduced-motion: reduce){.lake-overlay .dot{transition:none;}}.lake-overlay .split-parent{margin:0;}.lake-mail-fab{display:none;}@media (max-width: 900px){.lake-mail-fab{display:grid;place-items:center;}}`}</style>
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 96, background: 'linear-gradient(to bottom, rgba(0,0,0,0.38), transparent)' }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 128, background: 'linear-gradient(to top, rgba(0,0,0,0.42), transparent)' }} />
 
@@ -81,6 +81,19 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         style={{ position: 'absolute', top: 31, left: 35, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: HEXMAP["forecast_ink"], zIndex: 4 }}
       >
         <HouseIcon size={20} />
+      </button>
+      {/* 手機 Gmail 浮鈕：窄屏專用（≤900px 才顯示，桌機隱藏）；房子鍵下方同槽幾何（同 left/40px 圓）；直開 mail 面板 */}
+      <button
+        type="button"
+        aria-label="Gmail"
+        className="lake-mail-fab"
+        onClick={() => { setForecastOpen(true); setActiveId('mail'); }}
+        style={{ position: 'absolute', top: 79, left: 35, width: 40, height: 40, placeItems: 'center', background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)', borderRadius: '50%', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: HEXMAP["forecast_ink"], backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', zIndex: 4 }}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block' }}>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="M3 7l9 6 9-6" />
+        </svg>
       </button>
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} activeId={activeId} onSelect={setActiveId} />
       <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
