@@ -7355,7 +7355,267 @@
     "https://www.infoq.com/news/2026/10/aws-enhanced-eventbridge-buses/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "AWS Introduces Enhanced Custom Event Buses for EventBridge",
       "date": "2026-10-11T08:24:58.004Z"
+    },
+    "https://github.com/colinhacks/zod/commit/d821685ea6732436fcdf786a81d076958471e467": {
+      "title": "Zod 4.6.6 malware infection?",
+      "date": "2026-10-12T08:46:17.411Z"
+    },
+    "https://clickhouse.com/blog/posette-talk-recap-postgres-isnt-slow-your-storage-is": {
+      "title": "Postgres isn't slow, your storage is",
+      "date": "2026-10-12T08:46:17.412Z"
+    },
+    "https://www.cnbc.com/2026/10/07/anthropic-will-be-most-ridiculous-ipo-of-year-analyst-says.html": {
+      "title": "Research Firm Calls Anthropic's IPO 'Unprecedented Test of Investor Gullibity'",
+      "date": "2026-10-12T08:46:17.412Z"
+    },
+    "https://lalinsky.com/2026/10/11/type-safe-html-templating-in-zig.html": {
+      "title": "Type-safe HTML templating in Zig",
+      "date": "2026-10-12T08:46:17.412Z"
+    },
+    "https://amosbbatto.wordpress.com/2026/10/05/linux-phones-alternative/": {
+      "title": "Will Linux phones become a viable alternative to the Android/iOS duopoly?",
+      "date": "2026-10-12T08:46:17.412Z"
+    },
+    "https://crestbrowser.com/": {
+      "title": "Crest – an Arc-inspired open-source browser for Mac",
+      "date": "2026-10-12T08:46:17.413Z"
+    },
+    "https://github.com/shaongitbd/doory": {
+      "title": "Doory – Open-Source Canva",
+      "date": "2026-10-12T08:46:17.413Z"
+    },
+    "https://tedhaley.ca/pensieve/": {
+      "title": "Local Indexing to reduce tool calling and token usage",
+      "date": "2026-10-12T08:46:17.413Z"
+    },
+    "https://www.americanscientist.org/article/whatever-became-of-holography": {
+      "title": "Whatever became of holography? (2011)",
+      "date": "2026-10-12T08:46:17.413Z"
+    },
+    "https://terrytao.wordpress.com/2026/10/11/illustration-beyond-proof/": {
+      "title": "Illustration Beyond Proof",
+      "date": "2026-10-12T08:46:17.414Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm4g1d4p2k2no/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普計劃從俄羅斯進口柴油 反對聲浪趨漲",
+      "date": "2026-10-12T08:46:17.544Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqy0rd16x33lo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "胡塞武裝空襲對華重要窗口利雅德機場 中東衝突又一危險時刻",
+      "date": "2026-10-12T08:46:17.544Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c6lyk8d5d7ygo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "美國停止公開處決已近一個世紀，如今為何重啟？",
+      "date": "2026-10-12T08:46:17.545Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3vgx1jxyejyo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "走進印度新一輪Z世代主導的「蟑螂」抗議",
+      "date": "2026-10-12T08:46:17.545Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c63el43dw8pko/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "緬甸年輕人的恐懼：走在街頭，隨時被「抓壯丁」賣給軍方",
+      "date": "2026-10-12T08:46:17.545Z"
+    },
+    "https://www.infoq.com/news/2026/10/context-language-models/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Context Language Models: Self-Managing Context to Improve Performance and Reduce Compute Costs",
+      "date": "2026-10-12T08:46:17.999Z"
+    },
+    "https://www.infoq.com/news/2026/10/gremlin-foresight-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Foresight AI Brings Gremlin Agents to Reliability Engineering",
+      "date": "2026-10-12T08:46:17.999Z"
+    },
+    "https://www.natemeyvis.com/where-is-all-the-new-good-software/": {
+      "title": "Where is all the new, good software?",
+      "date": "2026-10-13T09:04:24.559Z"
+    },
+    "https://www.unsiloed.ai/blog/document-review-unsiloed-typesafe-jev": {
+      "title": "Document Review with Unsiloed and TypeSafe Jev",
+      "date": "2026-10-13T09:04:24.559Z"
+    },
+    "https://www.lemonde.fr/en/international/article/2026/10/10/denmark-set-to-allow-the-return-of-physical-force-to-maintain-order-in-schools_6758443_4.html": {
+      "title": "Denmark set to allow return of 'physical force' in school",
+      "date": "2026-10-13T09:04:24.559Z"
+    },
+    "https://www.argmin.net/p/faster-fourier-transforms": {
+      "title": "A look at the math that OpenAI claims computes faster Fourier transforms",
+      "date": "2026-10-13T09:04:24.559Z"
+    },
+    "https://arxiv.org/abs/2610.13928": {
+      "title": "AI models can provably hide arbitrary capabilities",
+      "date": "2026-10-13T09:04:24.559Z"
+    },
+    "https://github.com/bherbruck/solidcraft": {
+      "title": "Show HN: SolidCraft – Open-Source Parametric CAD in Rust (With MCP Support)",
+      "date": "2026-10-13T09:04:24.559Z"
+    },
+    "https://doi.org/10.1111/acel.70751": {
+      "title": "Blood cells from 80-year-old donor become stem cells with molecular age under 20",
+      "date": "2026-10-13T09:04:24.560Z"
+    },
+    "https://github.com/andrewfader/blokkily": {
+      "title": "Show HN: An experimental pattern-first DAW that supports MCP",
+      "date": "2026-10-13T09:04:24.560Z"
+    },
+    "https://github.com/prabanta-dev/janas": {
+      "title": "Janas: Run LLMs larger than RAM by streaming experts from SSD",
+      "date": "2026-10-13T09:04:24.560Z"
+    },
+    "https://yyhh.org/blog/2026/10/ai-is-a-tool/": {
+      "title": "AI is a tool and using it well takes skill",
+      "date": "2026-10-13T09:04:24.560Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cmeweg5eg7ljo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中國民兵船「首現台灣東部海域」意味著什麼？",
+      "date": "2026-10-13T09:04:24.896Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c9p8gv3dnjmgo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "伊朗與烏克蘭 哪場戰爭對柴油價格影響最大？",
+      "date": "2026-10-13T09:04:24.896Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwly013m3dg7o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "法國超市的冰箱受到網路攻擊 東西熱壞了",
+      "date": "2026-10-13T09:04:24.896Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm20wlw680w9o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "廣州開發電玩遊戲「喚醒」威爾士民間傳說潛力",
+      "date": "2026-10-13T09:04:24.897Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm70pwyl0qxwo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "貝安德：十年前英國脫歐公投俄羅斯「顯然」曾搞局",
+      "date": "2026-10-13T09:04:24.897Z"
+    },
+    "https://www.infoq.com/news/2026/10/cloudflare-ohttp-gateway/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflare’s OHTTP Gateway Refuses to Decrypt Requests That Arrive Through Cloudflare",
+      "date": "2026-10-13T09:04:25.412Z"
+    },
+    "https://www.infoq.com/news/2026/10/spotify-ai-quality-controls/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Spotify More Than Doubled Monthly Code Changes as AI Accelerated Development",
+      "date": "2026-10-13T09:04:25.412Z"
+    },
+    "https://www.infoq.com/articles/liquid-clustering-lakehouse-layout/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: When Should You Use Liquid Clustering? Benchmarking Lakehouse Layout Strategies",
+      "date": "2026-10-13T09:04:25.412Z"
+    },
+    "https://www.infoq.com/podcasts/what-really-mean-program-ai/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Podcast: What Does It Really Mean To Program With AI: A Conversation with Joy Ebertz",
+      "date": "2026-10-13T09:04:25.412Z"
+    },
+    "https://www.infoq.com/presentations/ai-cloud-cost-economics/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: You Can't Trust Your AI Bill. And Neither Can I",
+      "date": "2026-10-13T09:04:25.412Z"
+    },
+    "https://www.infoq.com/news/2026/10/react-19-3-browser-api/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "React 19.3: Adds a browser() API, Giving Client-Only Rendering a First-Class Name",
+      "date": "2026-10-13T09:04:25.412Z"
+    },
+    "https://www.infoq.com/news/2026/10/java-news-roundup-oct05-2026/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Java News Roundup: Grails 8, Open Liberty, GlassFish, Infinispan, LangChain4j, Spock",
+      "date": "2026-10-13T09:04:25.412Z"
+    },
+    "https://www.infoq.com/news/2026/10/gitlab-19-4-goal-driven-agents/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "GitLab 19.4 Adds Goal-Driven Agents and Tighter Cost Controls",
+      "date": "2026-10-13T09:04:25.412Z"
+    },
+    "https://www.infoq.com/news/2026/10/xcode-json-project-format/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Xcode 27.2 Introduces an Agent- and Merge-Friendly JSON Format for Project Configuration",
+      "date": "2026-10-13T09:04:25.413Z"
+    },
+    "https://github.com/android/ndk/issues/2260": {
+      "title": "AOSP Source Releases Are So Late Developers Disassemble Libraries to Report Bugs",
+      "date": "2026-10-14T07:14:23.119Z"
+    },
+    "https://felixrieseberg.com/": {
+      "title": "Felix Rieseberg Homepage",
+      "date": "2026-10-14T07:14:23.119Z"
+    },
+    "https://blumify.io/people": {
+      "title": "I built a tool to track what AI leaders say and how their views change on video",
+      "date": "2026-10-14T07:14:23.119Z"
+    },
+    "https://brookslybrand.com/posts/do-frameworks-matter-anymore/": {
+      "title": "Do Frameworks Matter Anymore?",
+      "date": "2026-10-14T07:14:23.120Z"
+    },
+    "https://pulseos.finance": {
+      "title": "Show HN: Pulse Local, a Mac budgeting app whose AI models run on your machine",
+      "date": "2026-10-14T07:14:23.120Z"
+    },
+    "https://anitab.org/press-release": {
+      "title": "Grace Hopper Celebration Cancelled",
+      "date": "2026-10-14T07:14:23.120Z"
+    },
+    "https://www.cphiri.dev/presentations/recreational-programming": {
+      "title": "Recreational Programming",
+      "date": "2026-10-14T07:14:23.120Z"
+    },
+    "https://alpha-nist.github.io/": {
+      "title": "AlphaNIST",
+      "date": "2026-10-14T07:14:23.121Z"
+    },
+    "https://jobs.lever.co/postera/c7d50a36-db0a-4574-bfe4-8700b74a22c0": {
+      "title": "PostEra (YC W20) Is Hiring AI Researchers for Drug Discovery",
+      "date": "2026-10-14T07:14:23.121Z"
+    },
+    "https://sfstandard.com/2026/10/13/openai-engineer-arrested-alleged-bugging-executive-conference-room/": {
+      "title": "OpenAI engineer arrested in bugging of executive conference room",
+      "date": "2026-10-14T07:14:23.121Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c3n07pkpk5ggo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "台灣選舉解讀：「北藍南綠」的政治版圖是否「鐵板一塊」？",
+      "date": "2026-10-14T07:14:23.394Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crpdgz701dyzo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "梵蒂岡證實教宗患上肺腺癌，但手術成功",
+      "date": "2026-10-14T07:14:23.395Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c63r584g9xwpo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中共中央紀委：薄熙來前搭檔黃奇帆接受調查",
+      "date": "2026-10-14T07:14:23.395Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crvg9n72v9p2o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "AI翻譯：還有多久會完全取代人類？",
+      "date": "2026-10-14T07:14:23.395Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c862yzkgzwero/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "華為尊界V800事件：一場煞車測試如何演變成中國輿論風暴",
+      "date": "2026-10-14T07:14:23.395Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cwly388njx3go/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "人類身高的起伏變化：哪些歷史事件影響最大？",
+      "date": "2026-10-14T07:14:23.396Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cmg47k6z44w7o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「黑珍珠」瑪麗亞：表演中國川劇的塞拉利昂女子",
+      "date": "2026-10-14T07:14:23.396Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cxzd63n7e631o/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中期選舉前夕油價降不下，特朗普難題加劇",
+      "date": "2026-10-14T07:14:23.396Z"
+    },
+    "https://www.infoq.com/news/2026/10/cloudflare-viteplus-stable/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Cloudflares Newly Acquired Vite+ Reaches 1.0 with GitLab CI Support, Hooks, and tsup Migration",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/news/2026/10/backstage-1-55-task-recovery/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Backstage 1.55 Adds Scaffolder Task Recovery and Removes Deprecated Catalog APIs",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/news/2026/10/zimbra-command-injection/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "ZCS Command Injection via SNMP Handlers Enables Unauthenticated Remote Code Execution",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/news/2026/10/qcon-ai-newyork-2026-sessionsv2/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Production Patterns for Agents, Evals, and LLM Costs: QCon AI New York 2026",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/news/2026/10/aws-eventbridge-scaling/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "AWS Reworks EventBridge Custom Buses for Enterprise-Scale Event-Driven Architectures",
+      "date": "2026-10-14T07:14:23.808Z"
+    },
+    "https://www.infoq.com/presentations/eve-observability-head-sampling/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: How Eve Online Leverages Head Based Sampling to Observe \"Fun\"",
+      "date": "2026-10-14T07:14:23.809Z"
     }
   },
-  "lastRun": "2026-10-11T08:24:58.004Z"
+  "lastRun": "2026-10-14T07:14:23.809Z"
 }
