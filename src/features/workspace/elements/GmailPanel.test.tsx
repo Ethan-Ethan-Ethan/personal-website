@@ -113,10 +113,10 @@ describe("GmailPanel", () => {
   });
   it("right rail holds four full-table folds (glass cards); expiry board and rail Top3 gone", () => {
     render(<GmailPanel open />);
-    // 段標計數 chip（study 22／invest 26／promo 18／flash 5）
+    // 段標計數 chip（study 22／invest 26／promo 17／flash 5）
     expect(screen.getByText("22 條")).toBeTruthy();
     expect(screen.getByText("26 條")).toBeTruthy();
-    expect(screen.getByText("18 條")).toBeTruthy();
+    expect(screen.getByText("17 條")).toBeTruthy();
     expect(screen.getByText("5 條")).toBeTruthy();
     // 右 rail：四組看全表；舊精選 Top3 盒＋促銷時效榜刪除
     const rail = screen.getByLabelText("重點側欄");
@@ -126,7 +126,7 @@ describe("GmailPanel", () => {
     const groups = screen.getAllByTestId(/rail-full-/);
     expect(groups.length).toBe(4);
     // summary＝看全表＋計數，預設收合
-    for (const [key, n] of [["study", 22], ["invest", 26], ["promo", 18], ["flash", 5]] as const) {
+    for (const [key, n] of [["study", 22], ["invest", 26], ["promo", 17], ["flash", 5]] as const) {
       const g = screen.getByTestId(`rail-full-${key}`);
       expect(g.tagName).toBe("DETAILS");
       expect(g.hasAttribute("open")).toBe(false);

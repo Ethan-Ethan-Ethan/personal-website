@@ -5,6 +5,7 @@
  * angle 永不分類：條目須帶【功用|因果|解決|資訊】前綴（人工提案＋Ethan 確認），缺前綴或文法不合即非零退出並列行號（fail-closed，回源頭修再 bake）。【頂】=全站精選（恰 4，★標記已廢，殘留★即失敗）。
  * 用法: node scripts/sync-gmail.mjs [--dry-run] [--unlock] [--check] [--help]
  * Env 覆寫（僅測用）：GMAIL_IN1 / GMAIL_IN2（輸入大綱）、GMAIL_OUT（輸出 JSON）。
+ * 修訂 2026-10-15：刪 ASUS WebStorage 過期條（W42 週報大綱 promo 18→17／總 71→70，用戶已批）。
  */
 import { writeFileSync, readFileSync, unlinkSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
