@@ -30,7 +30,6 @@ const TOPICS: { key: DigestTopic; label: string }[] = [
 ];
 // 資訊=直陳無痛點（放假政策／版本更新／功能通知等），bake 只做存在性斷言、永不分類。
 const ANGLES = ['功用', '因果', '解決', '資訊'] as const;
-const TOPIC_SHORT: Record<DigestTopic, string> = { study: '學', invest: '投', promo: '促', flash: '快' };
 
 /** 快照形狀驗證（缺段／空卡／angle-claim 空→視為缺快照，走誠實空態，不假掛）。 */
 function asValidDigest(doc: unknown): DigestDoc | null {
@@ -142,9 +141,8 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
   const doc = digest === undefined ? asValidDigest(gmailDigest) : digest ? asValidDigest(digest) : null;
   const on = open ? ' is-open' : '';
   const featured = doc?.items.filter((i) => i.featured) ?? [];
-  // 左欄精選預設折疊（點才展開）；右欄 Top3／全表邏輯不動。受控 details：
-  // jsdom 無原生 toggle，以 React state 為準；summary 原生鍵盤可達（Enter/Space 觸 click）。
-  const [starsOpen, setStarsOpen] = useState(false);
+  // 右欄四主題折疊（預設收合，點才展開；jsdom 無原生 toggle，以 React state 為準）。
+  const [railOpen, setRailOpen] = useState<Record<string, boolean>>({});
   const expiring = (doc?.items ?? [])
     .filter((i) => i.topic === 'promo' && i.expiry)
     .sort((a, b) => expiryKey(a) - expiryKey(b));
@@ -188,47 +186,12 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
               </span>
               <div style={{ marginTop: 8, fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)' }}>
                 Gmail 整理專案
+                {' · '}
+                <a href="mailto:isitoled@gmail.com" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                  寫信給我
+                </a>
               </div>
             </div>
-            {featured.length ? (
-              <details
-                data-testid="featured-fold"
-                open={starsOpen ? true : undefined}
-                onToggle={(e) => setStarsOpen((e.target as HTMLDetailsElement).open)}
-                style={{ marginBottom: 14 }}
-              >
-                <summary
-                  aria-label={`精選（${featured.length} 條，點按展開）`}
-                  onClick={(e) => { e.preventDefault(); setStarsOpen((v) => !v); }}
-                  style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.1em', color: INK, marginBottom: 4 }}
-                >
-                  精選（{featured.length} 條）
-                </summary>
-                {starsOpen ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  {featured.map((item) => (
-                    <article
-                      key={`star:${item.topic}:${item.claim}`}
-                      className={`fc-node fc-dir-l${on}`}
-                      aria-label={`精選｜${item.claim}`}
-                      style={{ ...CARD, borderColor: 'rgba(255,255,255,0.35)' }}
-                    >
-                      <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
-                        <span style={CHIP}>{TOPIC_SHORT[item.topic]}</span>
-                      </div>
-                      <p style={{ margin: '8px 0 0', fontSize: 14, lineHeight: '22px', fontWeight: 500, color: INK }}>
-                        {item.claim}
-                      </p>
-                      <div style={{ marginTop: 6, fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)' }}>
-                        {item.date || '–'}，{item.source || '–'}
-                        <LinkList item={item} />
-                      </div>
-                    </article>
-                  ))}
-                </div>
-                ) : null}
-              </details>
-            ) : null}
             {TOPICS.map((t) => {
               const cards = doc.items.filter((i) => i.topic === t.key);
               return (
@@ -274,13 +237,40 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               {TOPICS.map((t) => {
-                const first = featured.find((i) => i.topic === t.key);
-                if (!first) return null;
+                const stars = featured.filter((i) => i.topic === t.key);
+                if (!stars.length) return null;
+                const isOpen = !!railOpen[t.key];
                 return (
-                  <div key={t.key} style={{ fontSize: 12, lineHeight: '18px', color: 'rgba(255,255,255,0.9)' }}>
-                    <span style={{ color: 'rgba(255,255,255,0.6)', marginRight: 6 }}>{t.label}</span>
-                    {first.claim.length > 28 ? `${first.claim.slice(0, 28)}…` : first.claim}
-                  </div>
+                  <details
+                    key={t.key}
+                    data-testid={`rail-fold-${t.key}`}
+                    open={isOpen ? true : undefined}
+                    onToggle={(e) => setRailOpen((v) => ({ ...v, [t.key]: (e.target as HTMLDetailsElement).open }))}
+                  >
+                    <summary
+                      onClick={(e) => { e.preventDefault(); setRailOpen((v) => ({ ...v, [t.key]: !v[t.key] })); }}
+                      style={{ fontSize: 12, lineHeight: '18px', color: 'rgba(255,255,255,0.9)', cursor: 'pointer' }}
+                    >
+                      {t.label}精選（{stars.length} 條）
+                    </summary>
+                    {isOpen ? (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 6 }}>
+                        {stars.map((item) => (
+                          <article
+                            key={`rail:${item.topic}:${item.claim}`}
+                            aria-label={`右欄精選｜${item.claim}`}
+                            style={{ fontSize: 12, lineHeight: '18px', color: 'rgba(255,255,255,0.9)' }}
+                          >
+                            <div>{item.claim}</div>
+                            <div style={{ marginTop: 2, fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)' }}>
+                              {item.date || '–'}，{item.source || '–'}
+                              <LinkList item={item} />
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    ) : null}
+                  </details>
                 );
               })}
             </div>

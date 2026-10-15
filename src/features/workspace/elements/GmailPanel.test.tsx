@@ -7,17 +7,23 @@ import digest from "../core/gmail-digest.json";
 afterEach(() => cleanup());
 
 describe("GmailPanel", () => {
-  it("renders header plus four fixed sections with claim cards (no angle pills)", () => {
+  it("renders header plus four fixed sections with claim cards (no angle pills, no left featured)", () => {
     render(<GmailPanel open />);
     expect(screen.getByText((_, el) => el?.textContent === "本週重點 2026-W42 · 10/07–10/14")).toBeTruthy();
-    expect(screen.getByText("Gmail 整理專案")).toBeTruthy();
+    expect(screen.getByText("Gmail 整理專案", { exact: false })).toBeTruthy();
+    // 寫信給我：站內唯一公開郵箱，簡單 mailto 不帶參數
+    const mail = screen.getByRole("link", { name: "寫信給我" });
+    expect(mail.getAttribute("href")).toBe("mailto:isitoled@gmail.com");
     for (const label of ["學習", "投資", "本月促銷優惠", "快訊"]) {
-      // 段標＋rail 精選 Top3 各一列
-      expect(screen.getAllByText(label).length).toBe(2);
+      expect(screen.getByText(label)).toBeTruthy();
     }
-    // angle 只留 JSON／bake，UI 不渲染徽：全表卡 aria 為 claim 精確匹配；精選卡另有 精選｜ 前綴
+    // 左欄精選區已刪：無折疊、無精選卡
+    expect(screen.queryByTestId("featured-fold")).toBeNull();
+    expect(screen.queryByText(/精選（12 條）/)).toBeNull();
+    expect(screen.queryAllByLabelText(/^精選｜/).length).toBe(0);
+    // angle 只留 JSON／bake，UI 不渲染徽：全表卡 aria 為 claim 精確匹配；右欄卡另有 右欄精選｜ 前綴（預設收合不在 DOM）
     expect(screen.getByLabelText('Claude Haiku 5.5 登場：比 Haiku 4.5 便宜約 75%，處理大量重複工作；Sonnet 5.5 快取讀取砍半')).toBeTruthy();
-    expect(screen.getAllByLabelText(/德宏/).length).toBeGreaterThanOrEqual(1); // 合併後全表剩一卡＋精選一列
+    expect(screen.getAllByLabelText(/德宏/).length).toBeGreaterThanOrEqual(1); // 全表一卡（右欄收合不在 DOM）
     expect(screen.getByLabelText('Ashampoo 27 週年：最高 85% off')).toBeTruthy();
     // 徽消失：UI 不渲染任何【angle】pill；忙人 chip 已刪
     expect(screen.queryByText(/【(功用|因果|解決|資訊)】/)).toBeNull();
@@ -73,43 +79,59 @@ describe("GmailPanel", () => {
       for (const u of i.links || []) expect(u).toMatch(/^https?:\/\//);
     }
   });
-  it("renders featured zone, count chips, rail, and multi-link rows", () => {
+  it("right rail feeds featured as four collapsible topic groups, left has no featured", () => {
     render(<GmailPanel open />);
-    // 精選區 summary 常在（左欄），預設折疊不斷言卡片
-    expect(screen.getByText(/精選（12 條）/)).toBeTruthy();
-    expect(screen.getByTestId("featured-fold")).toBeTruthy();
+    // 左欄無精選折疊
+    expect(screen.queryByTestId("featured-fold")).toBeNull();
     expect(screen.queryByText(/忙人只看/)).toBeNull();
     // 段標計數 chip（study 22／invest 26／promo 18／flash 5）
     expect(screen.getByText("22 條")).toBeTruthy();
     expect(screen.getByText("26 條")).toBeTruthy();
     expect(screen.getByText("18 條")).toBeTruthy();
     expect(screen.getByText("5 條")).toBeTruthy();
-    // 右 rail：精選 Top3＋促銷時效榜（不受左欄折疊影響）
+    // 右 rail：精選 Top3 改四主題折疊＋促銷時效榜保留
     const rail = screen.getByLabelText("重點側欄");
     expect(within(rail).getByText("精選 Top3")).toBeTruthy();
     expect(within(rail).getByText("促銷時效榜")).toBeTruthy();
-    // 多連結列：Snipboard 全表卡兩連結渲染 原文連結1／2（收合前即查全表卡，避免展開後精選卡重名）
+    const groups = screen.getAllByTestId(/rail-fold-/);
+    expect(groups.length).toBe(4);
+    // summary＝主題名＋計數，預設收合、卡片不在 DOM
+    for (const [key, label] of [["study", "學習"], ["invest", "投資"], ["promo", "本月促銷優惠"], ["flash", "快訊"]] as const) {
+      const g = screen.getByTestId(`rail-fold-${key}`);
+      expect(g.tagName).toBe("DETAILS");
+      expect(g.hasAttribute("open")).toBe(false);
+      expect(within(rail).getByText(`${label}精選（3 條）`)).toBeTruthy();
+    }
+    expect(screen.queryAllByLabelText(/^右欄精選｜/).length).toBe(0);
+    // 多連結列：Snipboard 全表卡兩連結渲染 原文連結1／2（收合前即查全表卡，避免展開後右欄卡重名）
     const snip = screen.getByLabelText(/Snipboard/);
     expect(snip.textContent).toContain("原文連結1");
     expect(snip.textContent).toContain("原文連結2");
     // 全表收合（既有邏輯不動）
     expect(screen.getAllByText(/看全表/).length).toBe(4);
   });
-  it("left featured defaults collapsed, expands to 9 cards on click (native details+summary, keyboard reachable)", () => {
+  it("rail topic groups expand to 3 star cards with claim+date/source+links (no link → source text only)", () => {
     render(<GmailPanel open />);
-    const fold = screen.getByTestId("featured-fold");
-    expect(fold.tagName).toBe("DETAILS");
-    // 預設收合：無 open 屬性＋精選卡不在 DOM
-    expect(fold.hasAttribute("open")).toBe(false);
-    expect(screen.queryAllByLabelText(/^精選｜/).length).toBe(0);
-    // summary 原生鍵盤可達：SUMMARY 元素＋click 展開
-    const summary = screen.getByText(/精選（12 條）/);
+    const rail = screen.getByLabelText("重點側欄");
+    const group = screen.getByTestId("rail-fold-invest");
+    const summary = within(rail).getByText("投資精選（3 條）");
     expect(summary.tagName).toBe("SUMMARY");
     fireEvent.click(summary);
-    expect(screen.getByTestId("featured-fold").hasAttribute("open")).toBe(true);
-    // 展開後 12 卡可見（每段 ★3，Haiku 已搬 promo）
-    expect(screen.getAllByLabelText(/^精選｜/).length).toBe(12);
-    expect(screen.getByLabelText(/精選｜.*Haiku/)).toBeTruthy();
+    expect(screen.getByTestId("rail-fold-invest").hasAttribute("open")).toBe(true);
+    const cards = within(group).getAllByLabelText(/^右欄精選｜/);
+    expect(cards.length).toBe(3);
+    // 無 link 卡（封測）：顯日期來源文字，不編造原文連結
+    const noLink = within(group).getByLabelText(/右欄精選｜封測史上最強漲價潮/);
+    expect(noLink.textContent).toContain("2026-10-13");
+    expect(noLink.textContent).toContain("見數位早報內文");
+    expect(noLink.textContent).not.toContain("原文連結");
+    // 有 link 卡（台積電）：渲染原文連結
+    const linked = within(group).getByLabelText(/右欄精選｜台積電/);
+    expect(linked.textContent).toContain("原文連結");
+    // 其他三組仍收合
+    for (const key of ["study", "promo", "flash"]) {
+      expect(screen.getByTestId(`rail-fold-${key}`).hasAttribute("open")).toBe(false);
+    }
   });
   it("cardLinks caps at 3 and expiryKey orders promos by date", () => {
     expect(cardLinks({ link: "https://a.example/" })).toEqual(["https://a.example/"]);
