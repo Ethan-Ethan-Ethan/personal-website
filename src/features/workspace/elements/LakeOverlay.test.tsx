@@ -43,6 +43,34 @@ describe("LakeOverlay house button", () => {
     expect(getComputedStyle(house).color).toBe("rgb(255, 255, 255)");
     expect(HEXMAP["forecast_ink"]).toBe("#ffffff");
   });
+  it("opening via house lands on grid (home = weather overview)", async () => {
+    const user = userEvent.setup();
+    render(<LakeOverlay {...props} />);
+    // 初始關閉：Gmail 面板無 is-open
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
+    await user.click(screen.getByRole("button", { name: "Ethan 首頁" }));
+    // 開→grid：Gmail 仍關閉，側軌總覽亮燈
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
+    expect(screen.getByLabelText("Forecast")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "總覽" }).getAttribute("aria-pressed")).toBe("true");
+  });
+  it("mail → close → house returns to grid (no stuck on mail)", async () => {
+    const user = userEvent.setup();
+    render(<LakeOverlay {...props} />);
+    const house = () => screen.getByRole("button", { name: "Ethan 首頁" });
+    // 先經側軌 Gmail 鍵進 mail（避開手機 FAB 同名）
+    await user.click(house());
+    await user.click(document.querySelector('.forecast-side-rail button[aria-label="Gmail"]') as HTMLElement);
+    expect(screen.getByLabelText("Gmail 本週重點").className).toContain("is-open");
+    // 房子鍵關閉時不動 activeId：只關面板（Gmail 關閉，燈號仍 mail）
+    await user.click(house());
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
+    // 再按房子：回家回 grid（Gmail 仍關，總覽亮燈，Forecast 在席）
+    await user.click(house());
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
+    expect(screen.getByLabelText("Forecast")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "總覽" }).getAttribute("aria-pressed")).toBe("true");
+  });
 });
 
 describe("LakeOverlay rail panel mapping", () => {

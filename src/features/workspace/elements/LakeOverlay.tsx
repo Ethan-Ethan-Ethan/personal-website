@@ -77,7 +77,11 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         type="button"
         aria-label="Ethan 首頁"
         aria-expanded={forecastOpen}
-        onClick={() => setForecastOpen((v) => !v)}
+        onClick={() => {
+          // 房子＝回家＝天氣總覽：打開時一併回 grid；關閉時不動 activeId（附帶 FAB 收起保持只關面板）。
+          if (!forecastOpen) { setActiveId('grid'); setForecastOpen(true); }
+          else { setForecastOpen(false); }
+        }}
         style={{ position: 'absolute', top: 31, left: 35, width: 40, height: 40, display: 'grid', placeItems: 'center', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: HEXMAP["forecast_ink"], zIndex: 4 }}
       >
         <HouseIcon size={20} />
