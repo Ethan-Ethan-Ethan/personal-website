@@ -6,7 +6,8 @@ const INK = HEXMAP["forecast_ink"];
 // 手機專用底部橫式 tab bar（≤900px 才顯示，＞900px 隱藏；與側軌互斥顯示）。
 // 六鍵沿側軌 ICONS 語言正本（20px／stroke2／round＋墨色 INK），active 高亮同側軌。
 // 玻璃底 blur12＋safe-area inset-bottom；與側軌同狀態機（activeId／onSelect 直通父層）。
-// 面板開關沿側軌既有語義：只切 activeId，不動 forecastOpen（開面板走房子鍵，行為不動）。
+// 面板開關：底欄點鍵＝選中＋開面板（父層 onSelect 內 setActiveId＋setForecastOpen(true)）；
+// 桌機側軌維持只切 activeId、不動 forecastOpen（開面板走房子鍵）。
 export default function ForecastBottomBar({ activeId = 'grid', onSelect }: {
   activeId?: string;
   onSelect?: (id: string) => void;

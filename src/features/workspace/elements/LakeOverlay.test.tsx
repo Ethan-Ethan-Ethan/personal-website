@@ -166,6 +166,47 @@ describe("LakeOverlay mobile bottom bar", () => {
       "is-open"
     );
   });
+  it("bottom-bar tap from closed selects + opens panel (Gmail: active mail + is-open)", async () => {
+    render(<LakeOverlay {...props} />);
+    // 初始關閉：Gmail 面板無 is-open、燈號 grid
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
+    // 底欄 Gmail 鍵直點（不經房子鍵）：面板開＋active 為 mail
+    fireEvent.click(
+      document.querySelector(
+        '.forecast-bottom-bar button[aria-label="Gmail"]'
+      ) as HTMLElement
+    );
+    expect(screen.getByLabelText("Gmail 本週重點").className).toContain(
+      "is-open"
+    );
+    expect(
+      (
+        document.querySelector(
+          '.forecast-bottom-bar button[aria-label="Gmail"]'
+        ) as HTMLElement
+      ).getAttribute("aria-pressed")
+    ).toBe("true");
+  });
+  it("side rail from closed only switches active, never opens panel (desktop unchanged)", async () => {
+    render(<LakeOverlay {...props} />);
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
+    // 桌機側軌 Gmail 鍵直點：只切 active（燈號 mail），面板不開
+    fireEvent.click(
+      document.querySelector(
+        '.forecast-side-rail button[aria-label="Gmail"]'
+      ) as HTMLElement
+    );
+    expect(
+      (
+        document.querySelector(
+          '.forecast-side-rail button[aria-label="Gmail"]'
+        ) as HTMLElement
+      ).getAttribute("aria-pressed")
+    ).toBe("true");
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain(
+      "is-open"
+    );
+  });
   it("bottom player + phase label yield to bar at ≤900px; desktop inline untouched", () => {
     render(<LakeOverlay {...props} />);
     const c = css();

@@ -88,8 +88,9 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
         <HouseIcon size={20} />
       </button>
       {/* 手機底欄（≤900px 專用，與側軌同狀態機、互斥顯示；FAB 已退役，見 spec 修訂節） */}
+      {/* 底欄點鍵＝選中＋開面板（手機無反應算壞）；桌機側軌維持只切 active 不動 forecastOpen */}
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} activeId={activeId} onSelect={setActiveId} />
-      <ForecastBottomBar activeId={activeId} onSelect={setActiveId} />
+      <ForecastBottomBar activeId={activeId} onSelect={(id) => { setActiveId(id); setForecastOpen(true); }} />
       <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
       <GmailPanel open={forecastOpen && activeId === 'mail'} />
 
