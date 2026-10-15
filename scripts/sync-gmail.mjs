@@ -22,14 +22,15 @@ const WEEK = "2026-W42";
 // 本週報覆蓋範圍（出處：00_Inbox/週報-2026-W42-大綱.md L8 source 行 `10/07–10/14`；bnext 回補 2026-07-15–10/14 是累積回補不取其起日）。僅展示用，week 維持 W42 保可重現。
 const WEEK_RANGE = "10/07–10/14";
 
-// 段映射（spec §資料流）：附註段一律排除不 bake。
+// 段映射（spec §資料流）：附註段一律排除不 bake。快訊=時效通知（行事曆／政策時程／版本退場上線／發表會），第四段。
 const SECTION_MAP = {
   "一、學習資訊": "study",
   "二、投資": "invest",
   "三、本月促銷優惠": "promo",
+  "四、快訊": "flash",
 };
-const SECTION_ORDER = ["study", "invest", "promo"];
-const SECTION_LABEL = { study: "學習資訊", invest: "投資", promo: "本月促銷優惠" };
+const SECTION_ORDER = ["study", "invest", "promo", "flash"];
+const SECTION_LABEL = { study: "學習", invest: "投資", promo: "本月促銷優惠", flash: "快訊" };
 
 // 明示非條目行（有 --help 文件化，dry-run 逐行 SKIP 打點）：其餘 `- ` 行一律走文法，失敗即 exit 非零。
 const SKIP_PATTERNS = [/無.+產出/, /不列(入)?優惠/, /非投資.+備查/];
@@ -52,9 +53,9 @@ if (args.includes("--help")) {
 用法: node scripts/sync-gmail.mjs [--dry-run] [--unlock] [--check] [--help]
   --dry-run  只 preflight＋解析＋列段計數，不寫檔
   --unlock   清 lock 後退出
-  --check    只檢查已落地 JSON（存在＋可解析＋三段皆有卡＋angle/claim 非空），不 bake
+  --check    只檢查已落地 JSON（存在＋可解析＋四段皆有卡＋angle/claim 非空），不 bake
 輸入: 00_Inbox/週報-2026-W42-大綱.md ＋ bnext-回補-大綱-2026-W42.md
-段映射: ## 一、學習資訊→study／## 二、投資→invest／## 三、本月促銷優惠→promo；## 附註排除
+段映射: ## 一、學習資訊→study／## 二、投資→invest／## 三、本月促銷優惠→promo／## 四、快訊→flash；## 附註排除
 條目文法: - [★]【angle】claim（date，source）[— link]（angle=功用|因果|解決|資訊必填；★=精選每段恰3；連結僅收錄大綱已有的，不編造）
 顯式跳過（SKIP，不算失敗）: 無…產出／不列…優惠／非投資…備查行；其餘解析失敗行 exit 非零並列行號`);
   process.exit(0);

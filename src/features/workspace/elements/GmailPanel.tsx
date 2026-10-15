@@ -2,7 +2,7 @@ import { useState, type CSSProperties } from 'react';
 import gmailDigest from '../core/gmail-digest.json';
 import { FC_TRANSITION_CSS } from '../core/forecast-transitions';
 
-export type DigestTopic = 'study' | 'invest' | 'promo';
+export type DigestTopic = 'study' | 'invest' | 'promo' | 'flash';
 export type DigestItem = {
   topic: DigestTopic;
   angle: '功用' | '因果' | '解決' | '資訊';
@@ -23,13 +23,14 @@ export type DigestDoc = {
 };
 
 const TOPICS: { key: DigestTopic; label: string }[] = [
-  { key: 'study', label: '學習資訊' },
+  { key: 'study', label: '學習' },
   { key: 'invest', label: '投資' },
   { key: 'promo', label: '本月促銷優惠' },
+  { key: 'flash', label: '快訊' },
 ];
 // 資訊=直陳無痛點（放假政策／版本更新／功能通知等），bake 只做存在性斷言、永不分類。
 const ANGLES = ['功用', '因果', '解決', '資訊'] as const;
-const TOPIC_SHORT: Record<DigestTopic, string> = { study: '學', invest: '投', promo: '促' };
+const TOPIC_SHORT: Record<DigestTopic, string> = { study: '學', invest: '投', promo: '促', flash: '快' };
 
 /** 快照形狀驗證（缺段／空卡／angle-claim 空→視為缺快照，走誠實空態，不假掛）。 */
 function asValidDigest(doc: unknown): DigestDoc | null {

@@ -9,17 +9,6 @@
  "items": [
   {
    "topic": "study",
-   "angle": "資訊",
-   "claim": "2027 辦公日曆／請假攻略：全年 121 天、0 補班，春節請 5 休 16",
-   "date": "2026-10-08",
-   "source": "數位早報",
-   "link": "https://www.bnext.com.tw/article/92535/2027-calendar-leave-guide-midweek-holidays",
-   "links": [
-    "https://www.bnext.com.tw/article/92535/2027-calendar-leave-guide-midweek-holidays"
-   ]
-  },
-  {
-   "topic": "study",
    "angle": "功用",
    "claim": "叫 AI 精簡沒用學豐田 A3；原廠 PPT 4 段指令套模板；Grill Me 每晚 3 題養 AI",
    "date": "2026-09-08、09-09、09-08",
@@ -133,17 +122,6 @@
   },
   {
    "topic": "study",
-   "angle": "資訊",
-   "claim": "Claude Cowork 改上雲端：10/6 起 Pro／Max 新任務不再可選本機",
-   "date": "2026-10-08",
-   "source": "見數位早報內文",
-   "link": "https://www.bnext.com.tw/article/92536/claude-cowork-cloud-pro-max-october-6",
-   "links": [
-    "https://www.bnext.com.tw/article/92536/claude-cowork-cloud-pro-max-october-6"
-   ]
-  },
-  {
-   "topic": "study",
    "angle": "功用",
    "claim": "Discord vs LINE：伺服器／頻道／身分組新手教學",
    "date": "2026-09-02",
@@ -174,18 +152,6 @@
    "links": [
     "https://www.bnext.com.tw/article/91193/notebooklm-complete-guide-and-use-cases",
     "https://www.bnext.com.tw/article/92111/notebooklm-study-prompts-exam-prep"
-   ]
-  },
-  {
-   "topic": "study",
-   "angle": "功用",
-   "claim": "Gemini Skills 免費開放、Gems 11 月退場：官方撰寫指南 8 招",
-   "date": "2026-10-12",
-   "source": "數位早報；bnext回補",
-   "featured": true,
-   "link": "https://www.bnext.com.tw/article/92466/gemini-skills-how-to-write-free",
-   "links": [
-    "https://www.bnext.com.tw/article/92466/gemini-skills-how-to-write-free"
    ]
   },
   {
@@ -238,22 +204,11 @@
   },
   {
    "topic": "study",
-   "angle": "資訊",
-   "claim": "iPhone 18 Pro 相機可變光圈＋Siri 大升級（2026-09-11）；摺疊機技術難關 4 關（2026-09-10）；9/10 發表會 5 大亮點預測",
-   "date": "2026-09-09",
-   "source": "–",
-   "link": "https://www.bnext.com.tw/article/92190/iphone-18-pro-a20-pro-variable-aperture-2026",
-   "links": [
-    "https://www.bnext.com.tw/article/92190/iphone-18-pro-a20-pro-variable-aperture-2026",
-    "https://www.bnext.com.tw/article/92191/apple-iphone-duo-foldable-phone-2026"
-   ]
-  },
-  {
-   "topic": "study",
    "angle": "功用",
    "claim": "PIME 輸入法 2.0 beta 復活：核心改用 Rust 重寫，Win11 注音／酷倉／大易測試版",
    "date": "2026-10-07",
    "source": "免費資源網",
+   "featured": true,
    "link": "https://free.com.tw/pime-input-method/",
    "links": [
     "https://free.com.tw/pime-input-method/"
@@ -426,17 +381,6 @@
    "date": "2026-10-13",
    "source": "見數位早報內文；個股：日月光",
    "featured": true
-  },
-  {
-   "topic": "invest",
-   "angle": "資訊",
-   "claim": "政治取金融角度：2026 九合一 11/28 併核電公投、最多領 6 張票，僅記行事曆與消費影響",
-   "date": "2026-10-14",
-   "source": "見數位早報內文",
-   "link": "https://www.bnext.com.tw/article/92598/2026-nine-in-one-elections-voting-guide",
-   "links": [
-    "https://www.bnext.com.tw/article/92598/2026-nine-in-one-elections-voting-guide"
-   ]
   },
   {
    "topic": "invest",
@@ -768,6 +712,65 @@
    "link": "https://www.krea.ai/api/billing/promo?campaign=EMAIL-ONBOARDING-PRO-40-QJ4H&utm_source=customerio&utm_medium=email&utm_campaign=onboarding-propass&utm_content=e3_cta",
    "links": [
     "https://www.krea.ai/api/billing/promo?campaign=EMAIL-ONBOARDING-PRO-40-QJ4H&utm_source=customerio&utm_medium=email&utm_campaign=onboarding-propass&utm_content=e3_cta"
+   ]
+  },
+  {
+   "topic": "flash",
+   "angle": "資訊",
+   "claim": "2027 辦公日曆／請假攻略：全年 121 天、0 補班，春節請 5 休 16",
+   "date": "2026-10-08",
+   "source": "數位早報",
+   "featured": true,
+   "link": "https://www.bnext.com.tw/article/92535/2027-calendar-leave-guide-midweek-holidays",
+   "links": [
+    "https://www.bnext.com.tw/article/92535/2027-calendar-leave-guide-midweek-holidays"
+   ]
+  },
+  {
+   "topic": "flash",
+   "angle": "資訊",
+   "claim": "政治取金融角度：2026 九合一 11/28 併核電公投、最多領 6 張票，僅記行事曆與消費影響",
+   "date": "2026-10-14",
+   "source": "見數位早報內文",
+   "featured": true,
+   "link": "https://www.bnext.com.tw/article/92598/2026-nine-in-one-elections-voting-guide",
+   "links": [
+    "https://www.bnext.com.tw/article/92598/2026-nine-in-one-elections-voting-guide"
+   ]
+  },
+  {
+   "topic": "flash",
+   "angle": "資訊",
+   "claim": "Claude Cowork 改上雲端：10/6 起 Pro／Max 新任務不再可選本機",
+   "date": "2026-10-08",
+   "source": "見數位早報內文",
+   "link": "https://www.bnext.com.tw/article/92536/claude-cowork-cloud-pro-max-october-6",
+   "links": [
+    "https://www.bnext.com.tw/article/92536/claude-cowork-cloud-pro-max-october-6"
+   ]
+  },
+  {
+   "topic": "flash",
+   "angle": "功用",
+   "claim": "Gemini Skills 免費開放、Gems 11 月退場：官方撰寫指南 8 招",
+   "date": "2026-10-12",
+   "source": "數位早報；bnext回補",
+   "featured": true,
+   "link": "https://www.bnext.com.tw/article/92466/gemini-skills-how-to-write-free",
+   "links": [
+    "https://www.bnext.com.tw/article/92466/gemini-skills-how-to-write-free"
+   ]
+  },
+  {
+   "topic": "flash",
+   "angle": "資訊",
+   "claim": "iPhone 18 Pro 相機可變光圈＋Siri 大升級（2026-09-11）；摺疊機技術難關 4 關（2026-09-10）；9/10 發表會 5 大亮點預測",
+   "date": "2026-09-09",
+   "source": "–",
+   "link": "https://www.bnext.com.tw/article/92190/iphone-18-pro-a20-pro-variable-aperture-2026",
+   "links": [
+    "https://www.bnext.com.tw/article/92190/iphone-18-pro-a20-pro-variable-aperture-2026",
+    "https://www.bnext.com.tw/article/92191/apple-iphone-duo-foldable-phone-2026"
    ]
   }
  ]

@@ -7,11 +7,11 @@ import digest from "../core/gmail-digest.json";
 afterEach(() => cleanup());
 
 describe("GmailPanel", () => {
-  it("renders header plus three fixed sections with claim cards (no angle pills)", () => {
+  it("renders header plus four fixed sections with claim cards (no angle pills)", () => {
     render(<GmailPanel open />);
     expect(screen.getByText((_, el) => el?.textContent === "本週重點 2026-W42 · 10/07–10/14")).toBeTruthy();
     expect(screen.getByText("Gmail 整理專案")).toBeTruthy();
-    for (const label of ["學習資訊", "投資", "本月促銷優惠"]) {
+    for (const label of ["學習", "投資", "本月促銷優惠", "快訊"]) {
       // 段標＋rail 精選 Top3 各一列
       expect(screen.getAllByText(label).length).toBe(2);
     }
@@ -31,7 +31,7 @@ describe("GmailPanel", () => {
   it("shows honest empty state when snapshot is missing or shapeless", () => {
     const { unmount } = render(<GmailPanel open digest={null} />);
     expect(screen.getByText("本週重點尚未 bake")).toBeTruthy();
-    expect(screen.queryByText("學習資訊")).toBeNull();
+    expect(screen.queryByText("學習")).toBeNull();
     unmount();
     render(<GmailPanel open digest={{ _generated: "x", week: "2026-W42", sources: [], items: [] }} />);
     expect(screen.getByText("本週重點尚未 bake")).toBeTruthy();
@@ -52,6 +52,7 @@ describe("GmailPanel", () => {
             { topic: "study", angle: "功用", claim: "學卡", date: "2026-10-12", source: "s" },
             { topic: "invest", angle: "因果", claim: "投卡", date: "2026-10-13", source: "s" },
             { topic: "promo", angle: "因果", claim: "過期卡", date: "2026-09-01", source: "s", expiry: "9/30 前" },
+            { topic: "flash", angle: "資訊", claim: "快卡", date: "2026-10-14", source: "s" },
           ],
         }}
       />
@@ -61,7 +62,7 @@ describe("GmailPanel", () => {
   });
   it("baked snapshot itself passes shape gate (4 angles, links http, stars 3 per topic)", () => {
     const d = digest as unknown as { week: string; items: { topic: string; angle: string; claim: string; link?: string; links?: string[]; featured?: boolean }[] };
-    for (const t of ["study", "invest", "promo"]) {
+    for (const t of ["study", "invest", "promo", "flash"]) {
       expect(d.items.some((i) => i.topic === t)).toBe(true);
       expect(d.items.filter((i) => i.topic === t && i.featured === true).length).toBe(3);
     }
@@ -75,13 +76,14 @@ describe("GmailPanel", () => {
   it("renders featured zone, count chips, rail, and multi-link rows", () => {
     render(<GmailPanel open />);
     // 精選區 summary 常在（左欄），預設折疊不斷言卡片
-    expect(screen.getByText(/精選（9 條）/)).toBeTruthy();
+    expect(screen.getByText(/精選（12 條）/)).toBeTruthy();
     expect(screen.getByTestId("featured-fold")).toBeTruthy();
     expect(screen.queryByText(/忙人只看/)).toBeNull();
-    // 段標計數 chip（study 26／invest 27／promo 18）
+    // 段標計數 chip（study 22／invest 26／promo 18／flash 5）
+    expect(screen.getByText("22 條")).toBeTruthy();
     expect(screen.getByText("26 條")).toBeTruthy();
-    expect(screen.getByText("27 條")).toBeTruthy();
     expect(screen.getByText("18 條")).toBeTruthy();
+    expect(screen.getByText("5 條")).toBeTruthy();
     // 右 rail：精選 Top3＋促銷時效榜（不受左欄折疊影響）
     const rail = screen.getByLabelText("重點側欄");
     expect(within(rail).getByText("精選 Top3")).toBeTruthy();
@@ -91,7 +93,7 @@ describe("GmailPanel", () => {
     expect(snip.textContent).toContain("原文連結1");
     expect(snip.textContent).toContain("原文連結2");
     // 全表收合（既有邏輯不動）
-    expect(screen.getAllByText(/看全表/).length).toBe(3);
+    expect(screen.getAllByText(/看全表/).length).toBe(4);
   });
   it("left featured defaults collapsed, expands to 9 cards on click (native details+summary, keyboard reachable)", () => {
     render(<GmailPanel open />);
@@ -101,12 +103,12 @@ describe("GmailPanel", () => {
     expect(fold.hasAttribute("open")).toBe(false);
     expect(screen.queryAllByLabelText(/^精選｜/).length).toBe(0);
     // summary 原生鍵盤可達：SUMMARY 元素＋click 展開
-    const summary = screen.getByText(/精選（9 條）/);
+    const summary = screen.getByText(/精選（12 條）/);
     expect(summary.tagName).toBe("SUMMARY");
     fireEvent.click(summary);
     expect(screen.getByTestId("featured-fold").hasAttribute("open")).toBe(true);
-    // 展開後 9 卡可見（每段 ★3，Haiku 已搬 promo）
-    expect(screen.getAllByLabelText(/^精選｜/).length).toBe(9);
+    // 展開後 12 卡可見（每段 ★3，Haiku 已搬 promo）
+    expect(screen.getAllByLabelText(/^精選｜/).length).toBe(12);
     expect(screen.getByLabelText(/精選｜.*Haiku/)).toBeTruthy();
   });
   it("cardLinks caps at 3 and expiryKey orders promos by date", () => {
