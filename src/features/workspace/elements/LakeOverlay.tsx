@@ -82,12 +82,15 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       >
         <HouseIcon size={20} />
       </button>
-      {/* 手機 Gmail 浮鈕：窄屏專用（≤900px 才顯示，桌機隱藏）；房子鍵下方同槽幾何（同 left/40px 圓）；直開 mail 面板 */}
+      {/* 手機 Gmail 浮鈕：窄屏專用（≤900px 才顯示，桌機隱藏）；房子鍵下方同槽幾何（同 left/40px 圓）；面板未開直開 mail，面板開著轉收起鍵（關面板，防浮在文字上） */}
       <button
         type="button"
-        aria-label="Gmail"
+        aria-label={forecastOpen && activeId === 'mail' ? '收起面板' : 'Gmail'}
         className="lake-mail-fab"
-        onClick={() => { setForecastOpen(true); setActiveId('mail'); }}
+        onClick={() => {
+          if (forecastOpen && activeId === 'mail') setForecastOpen(false);
+          else { setForecastOpen(true); setActiveId('mail'); }
+        }}
         style={{ position: 'absolute', top: 79, left: 35, width: 40, height: 40, placeItems: 'center', background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)', borderRadius: '50%', cursor: 'pointer', padding: 0, pointerEvents: 'auto', color: HEXMAP["forecast_ink"], backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', zIndex: 4 }}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: 'block' }}>

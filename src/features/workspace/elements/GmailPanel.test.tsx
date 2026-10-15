@@ -186,6 +186,27 @@ describe("GmailPanel", () => {
       expect(((g as HTMLElement).closest(".fc-node") as HTMLElement).style.transitionDelay).toBe("0ms");
     }
   });
+  it("mobile media: panel height wins over inline 72vh; cards darken (desktop inline untouched)", () => {
+    render(<GmailPanel open />);
+    const css = Array.from(document.querySelectorAll("style"))
+      .map((s) => s.textContent ?? "")
+      .join("\n");
+    // ① 高度：media 內 max-height:52vh 帶 !important（壓過 inline 72vh；Ego 實測 607px 撞底部播放器）
+    expect(css).toContain("max-height:52vh !important");
+    // inline 數值不動（只加 media 權重）
+    expect((screen.getByLabelText("Gmail 本週重點") as HTMLElement).style.maxHeight).toBe("72vh");
+    // ② 好讀：加深規則落在 ≤900px media 內（桌機外無此規則）
+    const mediaAt = css.indexOf("@media (max-width: 900px)");
+    const top3At = css.indexOf(".gmail-top3-card{background:rgba(0,0,0,0.62) !important");
+    const fullAt = css.indexOf(".gmail-full-card{background:rgba(255,255,255,0.16) !important");
+    expect(mediaAt).toBeGreaterThanOrEqual(0);
+    expect(top3At).toBeGreaterThan(mediaAt);
+    expect(fullAt).toBeGreaterThan(mediaAt);
+    // ③ 桌機 inline 不動（TOP3 0.45 實底沿用）
+    for (const card of screen.getAllByTestId("top3-flat")) {
+      expect((card as HTMLElement).style.background).toBe("rgba(0, 0, 0, 0.45)");
+    }
+  });
   it("cardLinks caps at 3 and expiryKey orders promos by date", () => {
     expect(cardLinks({ link: "https://a.example/" })).toEqual(["https://a.example/"]);
     expect(cardLinks({ link: "https://a.example/", links: ["https://a.example/", "https://b.example/", "https://c.example/", "https://d.example/"] }).length).toBe(3);

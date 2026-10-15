@@ -122,7 +122,7 @@ function FullCard({ item, on }: { item: DigestItem; on: string }) {
   return (
     <article
       key={`${item.topic}:${item.claim}`}
-      className={`fc-node fc-dir-l${on}`}
+      className={`fc-node fc-dir-l gmail-full-card${on}`}
       aria-label={`${item.claim}`}
       style={{ ...CARD, opacity: expired ? 0.55 : 1 }}
     >
@@ -153,7 +153,7 @@ function Top3Card({ item, on, delay }: { item: DigestItem; on: string; delay: st
     <article
       key={`top3:${item.topic}:${item.claim}`}
       data-testid="top3-flat"
-      className={`fc-node fc-dir-l${on}`}
+      className={`fc-node fc-dir-l gmail-top3-card${on}`}
       aria-label={`本週精選｜${item.claim}`}
       style={{ ...TOP3_CARD, transitionDelay: delay }}
     >
@@ -187,7 +187,7 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
           visibility: open ? 'visible' : 'hidden',
         }}
       >
-        <style>{`.gmail-panel{scrollbar-width:thin;overflow-x:hidden;}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.gmail-panel details>summary{cursor:pointer;}@media (max-width: 900px){.gmail-panel{left:5% !important;width:auto !important;right:5% !important;max-height:52vh;}.gmail-rail{position:static !important;width:auto !important;max-width:none !important;margin:16px 5% 0 !important;max-height:none !important;overflow:visible !important;pointer-events:auto !important;}}@media (prefers-reduced-motion: reduce){.gmail-panel .fc-node{transition:none;}}`}</style>
+        <style>{`.gmail-panel{scrollbar-width:thin;overflow-x:hidden;}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.gmail-panel details>summary{cursor:pointer;}@media (max-width: 900px){.gmail-panel{left:5% !important;width:auto !important;right:5% !important;max-height:52vh !important;}.gmail-top3-card{background:rgba(0,0,0,0.62) !important;}.gmail-full-card{background:rgba(255,255,255,0.16) !important;border-color:rgba(255,255,255,0.28) !important;}.gmail-rail{position:static !important;width:auto !important;max-width:none !important;margin:16px 5% 0 !important;max-height:none !important;overflow:visible !important;pointer-events:auto !important;}}@media (prefers-reduced-motion: reduce){.gmail-panel .fc-node{transition:none;}}`}</style>
         {!doc ? (
           <div
             className={`fc-node fc-dir-l${on}`}

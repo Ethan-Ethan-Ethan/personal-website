@@ -117,4 +117,18 @@ describe("LakeOverlay mobile Gmail FAB", () => {
     expect(openPanel.className).toContain("is-open");
     expect((openPanel as HTMLElement).style.visibility).toBe("visible");
   });
+  it("toggles: closed shows Gmail and opens; mail-open shows 收起面板 and closes", () => {
+    render(<LakeOverlay {...props} />);
+    const getFabNow = () => document.querySelector(".lake-mail-fab") as HTMLElement;
+    // 關態：Gmail 直開
+    expect(getFabNow().getAttribute("aria-label")).toBe("Gmail");
+    fireEvent.click(getFabNow());
+    expect(screen.getByLabelText("Gmail 本週重點").className).toContain("is-open");
+    // 開態（forecastOpen && mail）：轉收起鍵（防浮在文字上）
+    expect(getFabNow().getAttribute("aria-label")).toBe("收起面板");
+    fireEvent.click(getFabNow());
+    expect(screen.getByLabelText("Gmail 本週重點").className).not.toContain("is-open");
+    // 關後恢復 Gmail 直開
+    expect(getFabNow().getAttribute("aria-label")).toBe("Gmail");
+  });
 });
