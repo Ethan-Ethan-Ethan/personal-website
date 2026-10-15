@@ -244,7 +244,7 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
           style={{
             position: 'absolute', top: '12%', right: 38, width: 300, zIndex: 3,
             display: 'flex', flexDirection: 'column', gap: 14,
-            maxHeight: '80vh', overflowY: 'auto',
+            maxHeight: '80vh', overflowY: 'auto', overflowX: 'hidden',
             pointerEvents: open ? 'auto' : 'none',
             visibility: open ? 'visible' : 'hidden',
           }}

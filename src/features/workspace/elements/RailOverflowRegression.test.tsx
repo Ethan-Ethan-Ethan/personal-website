@@ -35,6 +35,8 @@ describe("rail horizontal-scrollbar regression", () => {
     );
     // 900px 斷點條：直向 auto 保留＋橫向 hidden
     expect(css).toContain("max-height:46vh;overflow-y:auto;overflow-x:hidden;");
+    // 手機堆疊捲動殼：同型 auto 容器（裝 fc-dir 子節點），橫向 hidden 同修
+    expect(css).toContain("inset:0;overflow-y:auto;overflow-x:hidden;");
   });
   it("gmail-panel keeps overflowY auto with overflow-x hidden", () => {
     render(<GmailPanel open />);
@@ -45,5 +47,12 @@ describe("rail horizontal-scrollbar regression", () => {
     // inline overflowY auto 不動（直向捲動保留）
     const panel = document.querySelector(".gmail-panel") as HTMLElement;
     expect(panel.style.overflowY).toBe("auto");
+  });
+  it("gmail-rail keeps overflowY auto with overflow-x hidden", () => {
+    render(<GmailPanel open />);
+    const rail = document.querySelector(".gmail-rail") as HTMLElement;
+    // 直向 auto 保留（80vh 側欄捲動）＋橫向 hidden（fc-dir-r 進場不撐出橫向 scrollbar）
+    expect(rail.style.overflowY).toBe("auto");
+    expect(rail.style.overflowX).toBe("hidden");
   });
 });
