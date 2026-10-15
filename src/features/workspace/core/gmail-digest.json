@@ -81,7 +81,6 @@
    "claim": "跟 AI 對話的 9 大隱私防線：ChatGPT／Claude 怎麼存、誰能讀",
    "date": "2026-09-17",
    "source": "–",
-   "featured": true,
    "link": "https://www.bnext.com.tw/article/92235/chatgpt-claude-privacy-9-stops-opt-out-training",
    "links": [
     "https://www.bnext.com.tw/article/92235/chatgpt-claude-privacy-9-stops-opt-out-training"
@@ -196,7 +195,7 @@
    "claim": "HiNet 晚上 X 圖片／Twitch／GitHub 慢：Fastly 連線改善 3 招（WARP、hosts、IPv6）",
    "date": "2026-10-12",
    "source": "免費資源網",
-   "featured": true,
+   "top3": true,
    "link": "https://free.com.tw/hinet-fastly-slow-fix/",
    "links": [
     "https://free.com.tw/hinet-fastly-slow-fix/"
@@ -208,7 +207,6 @@
    "claim": "PIME 輸入法 2.0 beta 復活：核心改用 Rust 重寫，Win11 注音／酷倉／大易測試版",
    "date": "2026-10-07",
    "source": "免費資源網",
-   "featured": true,
    "link": "https://free.com.tw/pime-input-method/",
    "links": [
     "https://free.com.tw/pime-input-method/"
@@ -302,7 +300,7 @@
    "claim": "台積電矽中介層委外擴大：世界先進已獲委託，聯電規劃產能翻倍、力積電爬坡，另傳格羅方德",
    "date": "2026-10-13",
    "source": "見數位早報內文；個股：台積電／世界先進／聯電／力積電",
-   "featured": true,
+   "top3": true,
    "link": "https://www.bnext.com.tw/article/92587/silicon-interposer-taiwan-stocks",
    "links": [
     "https://www.bnext.com.tw/article/92587/silicon-interposer-taiwan-stocks"
@@ -379,8 +377,7 @@
    "angle": "因果",
    "claim": "封測史上最強漲價潮：急單報價翻倍，日月光今年股價飆 204%，7 檔受惠股盤點",
    "date": "2026-10-13",
-   "source": "見數位早報內文；個股：日月光",
-   "featured": true
+   "source": "見數位早報內文；個股：日月光"
   },
   {
    "topic": "invest",
@@ -457,7 +454,6 @@
    "claim": "德宏玻纖布：連虧 14 季、減資 2 次，股價一年 9.45→400→101 再翻倍；經濟部停輸中國玻纖矽質套管",
    "date": "2026-10-13",
    "source": "數位早報；bnext回補；個股：德宏",
-   "featured": true,
    "link": "https://www.bnext.com.tw/article/92584/glotech-5475-glass-fiber-quartz-cloth",
    "links": [
     "https://www.bnext.com.tw/article/92584/glotech-5475-glass-fiber-quartz-cloth"
@@ -562,7 +558,6 @@
    "claim": "免費領 Gemini 一年 Google AI Plus、年底前截止",
    "date": "2026-08-21",
    "source": "–",
-   "featured": true,
    "link": "https://www.bnext.com.tw/article/91933/google-ai-plus-student-free；ChatGPT",
    "links": [
     "https://www.bnext.com.tw/article/91933/google-ai-plus-student-free；ChatGPT"
@@ -642,7 +637,6 @@
    "claim": "Claude Haiku 5.5 登場：比 Haiku 4.5 便宜約 75%，處理大量重複工作；Sonnet 5.5 快取讀取砍半",
    "date": "2026-10-08",
    "source": "免費資源網",
-   "featured": true,
    "link": "https://free.com.tw/claude-haiku-5-5/",
    "links": [
     "https://free.com.tw/claude-haiku-5-5/"
@@ -708,7 +702,6 @@
    "claim": "Krea Pro 40% 優惠：$21/月（原 $35），Pro 試用 3 小時；Seedance 2.5／Veo 3.1／Kling",
    "date": "2026-10-08、10-09",
    "source": "Krea ×3 封",
-   "featured": true,
    "link": "https://www.krea.ai/api/billing/promo?campaign=EMAIL-ONBOARDING-PRO-40-QJ4H&utm_source=customerio&utm_medium=email&utm_campaign=onboarding-propass&utm_content=e3_cta",
    "links": [
     "https://www.krea.ai/api/billing/promo?campaign=EMAIL-ONBOARDING-PRO-40-QJ4H&utm_source=customerio&utm_medium=email&utm_campaign=onboarding-propass&utm_content=e3_cta"
@@ -720,7 +713,7 @@
    "claim": "2027 辦公日曆／請假攻略：全年 121 天、0 補班，春節請 5 休 16",
    "date": "2026-10-08",
    "source": "數位早報",
-   "featured": true,
+   "top3": true,
    "link": "https://www.bnext.com.tw/article/92535/2027-calendar-leave-guide-midweek-holidays",
    "links": [
     "https://www.bnext.com.tw/article/92535/2027-calendar-leave-guide-midweek-holidays"
@@ -732,7 +725,6 @@
    "claim": "政治取金融角度：2026 九合一 11/28 併核電公投、最多領 6 張票，僅記行事曆與消費影響",
    "date": "2026-10-14",
    "source": "見數位早報內文",
-   "featured": true,
    "link": "https://www.bnext.com.tw/article/92598/2026-nine-in-one-elections-voting-guide",
    "links": [
     "https://www.bnext.com.tw/article/92598/2026-nine-in-one-elections-voting-guide"
@@ -755,7 +747,6 @@
    "claim": "Gemini Skills 免費開放、Gems 11 月退場：官方撰寫指南 8 招",
    "date": "2026-10-12",
    "source": "數位早報；bnext回補",
-   "featured": true,
    "link": "https://www.bnext.com.tw/article/92466/gemini-skills-how-to-write-free",
    "links": [
     "https://www.bnext.com.tw/article/92466/gemini-skills-how-to-write-free"

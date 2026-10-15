@@ -1,6 +1,6 @@
-import { useState, type CSSProperties } from 'react';
 import gmailDigest from '../core/gmail-digest.json';
 import { FC_TRANSITION_CSS } from '../core/forecast-transitions';
+import type { CSSProperties } from 'react';
 
 export type DigestTopic = 'study' | 'invest' | 'promo' | 'flash';
 export type DigestItem = {
@@ -12,7 +12,7 @@ export type DigestItem = {
   link?: string;
   links?: string[];
   expiry?: string;
-  featured?: boolean;
+  top3?: boolean;
 };
 export type DigestDoc = {
   _generated: string;
@@ -31,7 +31,7 @@ const TOPICS: { key: DigestTopic; label: string }[] = [
 // 資訊=直陳無痛點（放假政策／版本更新／功能通知等），bake 只做存在性斷言、永不分類。
 const ANGLES = ['功用', '因果', '解決', '資訊'] as const;
 
-/** 快照形狀驗證（缺段／空卡／angle-claim 空→視為缺快照，走誠實空態，不假掛）。 */
+/** 快照形狀驗證（缺段／空卡／angle-claim 空／【頂】非恰 3→視為缺快照，走誠實空態，不假掛）。 */
 function asValidDigest(doc: unknown): DigestDoc | null {
   if (!doc || typeof doc !== 'object') return null;
   const d = doc as Partial<DigestDoc>;
@@ -42,6 +42,7 @@ function asValidDigest(doc: unknown): DigestDoc | null {
   for (const i of d.items) {
     if (!i || !(ANGLES as readonly string[]).includes(i.angle) || !i.claim?.trim()) return null;
   }
+  if (d.items.filter((i) => i?.top3 === true).length !== 3) return null;
   return d as DigestDoc;
 }
 
@@ -63,7 +64,7 @@ export function cardLinks(item: Pick<DigestItem, 'link' | 'links'>): string[] {
   return all.slice(0, 3);
 }
 
-/** 促銷時效榜排序鍵（expiry 末組 MM/DD；無日期不過期排最後）。 */
+/** 促銷時效排序鍵（expiry 末組 MM/DD；無日期不過期排最後）。保留供測用，時效榜已刪。 */
 export function expiryKey(item: Pick<DigestItem, 'expiry'>): number {
   if (!item.expiry) return 9999;
   const all = [...item.expiry.matchAll(/(\d{1,2})\/(\d{1,2})/g)];
@@ -81,6 +82,13 @@ const CARD: CSSProperties = {
   borderRadius: 16, boxShadow: '0 8px 32px rgba(0,0,0,0.35)',
   backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
   padding: '12px 16px',
+};
+// 左欄 Top3 平鋪卡：實底無玻璃（無 blur、無白邊，僅極細描邊定界，圓角保留 16）。
+const TOP3_CARD: CSSProperties = {
+  background: 'rgba(0,0,0,0.45)',
+  border: '1px solid rgba(255,255,255,0.08)',
+  borderRadius: 16,
+  padding: '16px 18px',
 };
 const CHIP: CSSProperties = {
   fontSize: 11, letterSpacing: '0.1em', color: INK,
@@ -136,16 +144,32 @@ function FullCard({ item, on }: { item: DigestItem; on: string }) {
   );
 }
 
+/** 左欄 Top3 平鋪卡：字體跟氣溫頁（claim 17px 600 白字＋CJK 0.05em 追蹤、meta 11px muted）。 */
+function Top3Card({ item, on }: { item: DigestItem; on: string }) {
+  return (
+    <article
+      key={`top3:${item.topic}:${item.claim}`}
+      data-testid="top3-flat"
+      className={`fc-node fc-dir-l${on}`}
+      aria-label={`本週精選｜${item.claim}`}
+      style={TOP3_CARD}
+    >
+      <p style={{ margin: 0, fontSize: 17, lineHeight: '26px', fontWeight: 600, color: INK, letterSpacing: '0.05em' }}>
+        {item.claim}
+      </p>
+      <div style={{ marginTop: 8, fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)' }}>
+        {item.date || '–'}，{item.source || '–'}
+        <LinkList item={item} />
+      </div>
+    </article>
+  );
+}
+
 export default function GmailPanel({ open, digest }: { open: boolean; digest?: DigestDoc | null }) {
   // 未傳 digest 才讀靜態 bake 產物（build-embed，零 runtime fetch）；傳 null 即強制空態（測用）。
   const doc = digest === undefined ? asValidDigest(gmailDigest) : digest ? asValidDigest(digest) : null;
   const on = open ? ' is-open' : '';
-  const featured = doc?.items.filter((i) => i.featured) ?? [];
-  // 右欄四主題折疊（預設收合，點才展開；jsdom 無原生 toggle，以 React state 為準）。
-  const [railOpen, setRailOpen] = useState<Record<string, boolean>>({});
-  const expiring = (doc?.items ?? [])
-    .filter((i) => i.topic === 'promo' && i.expiry)
-    .sort((a, b) => expiryKey(a) - expiryKey(b));
+  const top3 = (doc?.items ?? []).filter((i) => i.top3 === true);
   return (
     <>
       <section
@@ -192,29 +216,18 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
                 </a>
               </div>
             </div>
-            {TOPICS.map((t) => {
-              const cards = doc.items.filter((i) => i.topic === t.key);
-              return (
-                <div key={t.key} style={{ marginBottom: 14 }}>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
-                    <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.1em', color: INK }}>
-                      {t.label}
-                    </span>
-                    <span style={{ ...CHIP, fontWeight: 400 }}>{cards.length} 條</span>
-                  </div>
-                  <details>
-                    <summary style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', letterSpacing: '0.06em' }}>
-                      看全表（{cards.length} 條）
-                    </summary>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 8 }}>
-                      {cards.map((item) => (
-                        <FullCard key={`${item.topic}:${item.claim}`} item={item} on={on} />
-                      ))}
-                    </div>
-                  </details>
-                </div>
-              );
-            })}
+            <div style={{ marginBottom: 14 }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+                <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.1em', color: INK }}>
+                  本週精選TOP3
+                </span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {top3.map((item) => (
+                  <Top3Card key={`top3:${item.topic}:${item.claim}`} item={item} on={on} />
+                ))}
+              </div>
+            </div>
           </>
         )}
       </section>
@@ -231,68 +244,29 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
             visibility: open ? 'visible' : 'hidden',
           }}
         >
-          <div className={`fc-node fc-dir-l${on}`} style={{ ...CARD, padding: '14px 16px' }}>
-            <div style={{ fontSize: 13, fontWeight: 700, color: INK, letterSpacing: '0.08em', marginBottom: 8 }}>
-              精選 Top3
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {TOPICS.map((t) => {
-                const stars = featured.filter((i) => i.topic === t.key);
-                if (!stars.length) return null;
-                const isOpen = !!railOpen[t.key];
-                return (
-                  <details
-                    key={t.key}
-                    data-testid={`rail-fold-${t.key}`}
-                    open={isOpen ? true : undefined}
-                    onToggle={(e) => setRailOpen((v) => ({ ...v, [t.key]: (e.target as HTMLDetailsElement).open }))}
-                  >
-                    <summary
-                      onClick={(e) => { e.preventDefault(); setRailOpen((v) => ({ ...v, [t.key]: !v[t.key] })); }}
-                      style={{ fontSize: 12, lineHeight: '18px', color: 'rgba(255,255,255,0.9)', cursor: 'pointer' }}
-                    >
-                      {t.label}精選（{stars.length} 條）
-                    </summary>
-                    {isOpen ? (
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 6 }}>
-                        {stars.map((item) => (
-                          <article
-                            key={`rail:${item.topic}:${item.claim}`}
-                            aria-label={`右欄精選｜${item.claim}`}
-                            style={{ fontSize: 12, lineHeight: '18px', color: 'rgba(255,255,255,0.9)' }}
-                          >
-                            <div>{item.claim}</div>
-                            <div style={{ marginTop: 2, fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)' }}>
-                              {item.date || '–'}，{item.source || '–'}
-                              <LinkList item={item} />
-                            </div>
-                          </article>
-                        ))}
-                      </div>
-                    ) : null}
-                  </details>
-                );
-              })}
-            </div>
-          </div>
-          {expiring.length ? (
-            <div className={`fc-node fc-dir-l${on}`} style={{ ...CARD, padding: '14px 16px' }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: INK, letterSpacing: '0.08em', marginBottom: 8 }}>
-                促銷時效榜
+          {TOPICS.map((t) => {
+            const cards = doc.items.filter((i) => i.topic === t.key);
+            return (
+              <div key={t.key} className={`fc-node fc-dir-l${on}`} style={{ ...CARD, padding: '14px 16px' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+                  <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', color: INK }}>
+                    {t.label}
+                  </span>
+                  <span style={{ ...CHIP, fontWeight: 400 }}>{cards.length} 條</span>
+                </div>
+                <details data-testid={`rail-full-${t.key}`}>
+                  <summary style={{ fontSize: 12, color: 'rgba(255,255,255,0.75)', letterSpacing: '0.06em' }}>
+                    看全表（{cards.length} 條）
+                  </summary>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 8 }}>
+                    {cards.map((item) => (
+                      <FullCard key={`${item.topic}:${item.claim}`} item={item} on={on} />
+                    ))}
+                  </div>
+                </details>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {expiring.map((item) => {
-                  const expired = isExpired(item.expiry);
-                  return (
-                    <div key={`exp:${item.claim}`} style={{ fontSize: 12, lineHeight: '18px', color: 'rgba(255,255,255,0.9)', opacity: expired ? 0.55 : 1 }}>
-                      <span style={{ ...CHIP, marginRight: 6 }}>{item.expiry}{expired ? '·已過期' : ''}</span>
-                      {item.claim.length > 26 ? `${item.claim.slice(0, 26)}…` : item.claim}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ) : null}
+            );
+          })}
         </aside>
       ) : null}
     </>

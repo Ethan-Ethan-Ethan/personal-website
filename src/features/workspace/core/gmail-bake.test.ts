@@ -30,14 +30,16 @@ describe("sync-gmail bake", () => {
     expect(r.out).toMatch(/study=22 invest=26 promo=18 flash=5/);
     expect(r.out).toContain("SKIP");
   });
-  it("落地 JSON 形狀：三主題齊／angle+claim 非空／link 全 http／每段精選恰3", () => {
+  it("落地 JSON 形狀：四段皆有卡／angle+claim 非空／link 全 http／全站【頂】恰3", () => {
     const doc = JSON.parse(readFileSync(join(ROOT, "src/features/workspace/core/gmail-digest.json"), "utf-8"));
     expect(doc.week).toBe("2026-W42");
     expect(doc.weekRange).toBe("10/07–10/14");
     for (const t of ["study", "invest", "promo", "flash"]) {
       expect(doc.items.filter((i: { topic: string }) => i.topic === t).length).toBeGreaterThan(0);
-      expect(doc.items.filter((i: { topic: string; featured?: boolean }) => i.topic === t && i.featured === true).length).toBe(3);
     }
+    // 全站【頂】恰 3（★機制已廢，featured 殘留零容忍）
+    expect(doc.items.filter((i: { top3?: boolean }) => i.top3 === true).length).toBe(3);
+    expect(doc.items.some((i: { featured?: boolean }) => i.featured === true)).toBe(false);
     for (const i of doc.items) {
       expect(["功用", "因果", "解決", "資訊"]).toContain(i.angle);
       expect(i.claim.trim().length).toBeGreaterThan(0);
@@ -62,19 +64,26 @@ describe("sync-gmail bake", () => {
     expect(all).not.toContain("部署失敗");
     expect(all).not.toContain("Passkey");
   });
-  it("新文法隔離驗證：★資訊＋多連結 bake 綠", () => {
+  it("新文法隔離驗證：【頂】＋多連結 bake 綠，殘留★即失敗", () => {
     const dir = mkdtempSync(join(tmpdir(), "gmail-bake-"));
-    const topics = (star: boolean) => {
-      const s = star ? "★" : "";
-      return `## 二、投資（金融必連個股）\n\n- ${s}【因果】投精選一（2026-10-13，來源）\n- ${s}【因果】投精選二（2026-10-12，來源）\n- ${s}【因果】投精選三（2026-10-11，來源）\n\n## 三、本月促銷優惠（含時效）\n\n- ${s}【功用】促精選一（2026-10-10，來源）\n- ${s}【功用】促精選二（2026-10-09，來源）\n- ${s}【功用】促精選三（2026-10-08，來源）\n\n## 四、快訊\n\n- ${s}【資訊】快精選一（2026-10-07，來源）\n- ${s}【資訊】快精選二（2026-10-06，來源）\n- ${s}【資訊】快精選三（2026-10-05，來源）\n`;
+    const topics = () => {
+      return `## 二、投資（金融必連個股）\n\n- 【因果】投普通一（2026-10-13，來源）\n- 【因果】投普通二（2026-10-12，來源）\n- 【因果】投普通三（2026-10-11，來源）\n\n## 三、本月促銷優惠（含時效）\n\n- 【功用】促普通一（2026-10-10，來源）\n- 【功用】促普通二（2026-10-09，來源）\n- 【功用】促普通三（2026-10-08，來源）\n\n## 四、快訊\n\n- 【資訊】快普通一（2026-10-07，來源）\n- 【資訊】快普通二（2026-10-06，來源）\n- 【資訊】快普通三（2026-10-05，來源）\n`;
     };
     const good1 = join(dir, "a.md");
     const good2 = join(dir, "b.md");
-    // ★合計：study 3（兩檔合併算）、invest 3、promo 3、flash 3；多連結一條驗 links 全收
-    writeFileSync(good1, `## 一、學習資訊\n\n- ★【資訊】學精選放假通知（2026-10-12，來源）\n- 【功用】學普通卡（2026-10-11，來源）— https://a.example/x ／ https://b.example/y\n\n${topics(true)}`);
-    writeFileSync(good2, `## 一、學習資訊\n\n- ★【解決】學精選解法（2026-10-10，來源）\n- ★【因果】學精選三（2026-10-09，來源）\n\n${topics(false)}`);
+    // 【頂】合計恰 3（兩檔合併算）；多連結一條驗 links 全收
+    writeFileSync(good1, `## 一、學習資訊\n\n- 【頂】【資訊】學頂放假通知（2026-10-12，來源）\n- 【功用】學普通卡（2026-10-11，來源）— https://a.example/x ／ https://b.example/y\n\n${topics()}`);
+    writeFileSync(good2, `## 一、學習資訊\n\n- 【頂】【解決】學頂解法（2026-10-10，來源）\n- 【頂】【因果】學頂三（2026-10-09，來源）\n\n${topics()}`);
     const r = run(["--dry-run"], { GMAIL_IN1: good1, GMAIL_IN2: good2 });
     expect(r.code).toBe(0);
     expect(r.out).toMatch(/study=4 invest=6 promo=6 flash=6/);
+    // 殘留★即失敗（fail-closed，指回【頂】）
+    const bad3 = join(dir, "c.md");
+    const bad4 = join(dir, "d.md");
+    writeFileSync(bad3, `## 一、學習資訊\n\n- ★【資訊】殘留星號（2026-10-12，來源）\n`);
+    writeFileSync(bad4, `## 二、投資\n\n- 【因果】投普通（2026-10-13，來源）\n`);
+    const r2 = run(["--dry-run"], { GMAIL_IN1: bad3, GMAIL_IN2: bad4 });
+    expect(r2.code).not.toBe(0);
+    expect(r2.out).toMatch(/★/);
   });
 });
