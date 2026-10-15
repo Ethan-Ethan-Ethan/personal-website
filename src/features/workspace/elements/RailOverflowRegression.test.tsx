@@ -55,4 +55,15 @@ describe("rail horizontal-scrollbar regression", () => {
     expect(rail.style.overflowY).toBe("auto");
     expect(rail.style.overflowX).toBe("hidden");
   });
+  it("gmail-panel mobile (<=900px) sits below FAB/header-chip: top:132px", () => {
+    render(<GmailPanel open />);
+    const css = Array.from(document.querySelectorAll("style"))
+      .map((s) => s.textContent ?? "")
+      .join("\n");
+    // Ego 390px 實測：FAB 79–119 與 header chip 101–127 交疊 18px；
+    // 修法：手機 media 內 .gmail-panel 加 top:132px（FAB bottom 119＋13px 間隙），桌機不動。
+    expect(css).toContain(
+      "@media (max-width: 900px){.gmail-panel{top:132px !important;"
+    );
+  });
 });
