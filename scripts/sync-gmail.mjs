@@ -2,7 +2,7 @@
 /**
  * sync-gmail.mjs — 兩份 W42 大綱（Vault 00_Inbox）→ src/features/workspace/core/gmail-digest.json。
  * 靜態 bake：同輸入同 JSON（key 排序＋固定欄序，兩次 bake hash 相等即重現）。
- * angle 永不分類：條目須帶【功用|因果|解決|資訊】前綴（人工提案＋Ethan 確認），缺前綴或文法不合即非零退出並列行號（fail-closed，回源頭修再 bake）。【頂】=全站精選（恰 3，★標記已廢，殘留★即失敗）。
+ * angle 永不分類：條目須帶【功用|因果|解決|資訊】前綴（人工提案＋Ethan 確認），缺前綴或文法不合即非零退出並列行號（fail-closed，回源頭修再 bake）。【頂】=全站精選（恰 4，★標記已廢，殘留★即失敗）。
  * 用法: node scripts/sync-gmail.mjs [--dry-run] [--unlock] [--check] [--help]
  * Env 覆寫（僅測用）：GMAIL_IN1 / GMAIL_IN2（輸入大綱）、GMAIL_OUT（輸出 JSON）。
  */
@@ -42,7 +42,7 @@ const LINK_RE = /https?:\/\/\S+/g;
 
 const ERROR_HINTS = {
   "missing-input": "輸入大綱缺失：確認兩檔在 00_Inbox（測用可用 GMAIL_IN1/GMAIL_IN2 指暫存檔）",
-  "parse-fail": "條目文法不合：回源頭大綱修該行（加【功用|因果|解決|資訊】前綴＋（date，source），精選加【頂】全站恰3），再重跑 bake",
+  "parse-fail": "條目文法不合：回源頭大綱修該行（加【功用|因果|解決|資訊】前綴＋（date，source），精選加【頂】全站恰4），再重跑 bake",
   locked: "lock 仍在：若無其他實例在跑，加 --unlock 清掉後重跑",
 };
 
@@ -56,7 +56,7 @@ if (args.includes("--help")) {
   --check    只檢查已落地 JSON（存在＋可解析＋四段皆有卡＋angle/claim 非空），不 bake
 輸入: 00_Inbox/週報-2026-W42-大綱.md ＋ bnext-回補-大綱-2026-W42.md
 段映射: ## 一、學習資訊→study／## 二、投資→invest／## 三、本月促銷優惠→promo／## 四、快訊→flash；## 附註排除
-條目文法: - [【頂】]【angle】claim（date，source）[— link]（angle=功用|因果|解決|資訊必填；【頂】=全站精選恰3，worker 提案＋Ethan 終審；連結僅收錄大綱已有的，不編造）
+條目文法: - [【頂】]【angle】claim（date，source）[— link]（angle=功用|因果|解決|資訊必填；【頂】=全站精選恰4，worker 提案＋Ethan 終審；連結僅收錄大綱已有的，不編造）
 顯式跳過（SKIP，不算失敗）: 無…產出／不列…優惠／非投資…備查行；其餘解析失敗行 exit 非零並列行號`);
   process.exit(0);
 }
@@ -140,9 +140,9 @@ export function parseOutline(text, file) {
 }
 
 /** - [【頂】]【angle】claim（meta）[— tail]；meta=末個全形括號；tail 無 http 即附 claim（不編 link）。
- *  【頂】=全站精選（恰 3，bake 斷言；worker 提案＋Ethan 終審；★標記已廢，殘留即失敗）；angle=功用|因果|解決|資訊（資訊=直陳無痛點：放假政策／版本更新／功能通知等）。 */
+ *  【頂】=全站精選（恰 4，bake 斷言；worker 提案＋Ethan 終審；★標記已廢，殘留即失敗）；angle=功用|因果|解決|資訊（資訊=直陳無痛點：放假政策／版本更新／功能通知等）。 */
 export function parseEntry(body, topic) {
-  if (body.startsWith("★")) throw new Error("★標記已廢，精選改【頂】前綴（全站恰 3）");
+  if (body.startsWith("★")) throw new Error("★標記已廢，精選改【頂】前綴（全站恰 4）");
   const m = body.match(/^(【頂】)?【(功用|因果|解決|資訊)】\s*(.+)$/s);
   if (!m) throw new Error("缺【功用|因果|解決|資訊】前綴");
   const top3 = m[1] === "【頂】";
@@ -217,7 +217,7 @@ function assertDigest(doc) {
     if (!n) fail("parse-fail", `段 ${t}（${SECTION_LABEL[t]}）無卡`);
   }
   const tops = doc.items.filter((i) => i.top3 === true).length;
-  if (tops !== 3) fail("parse-fail", `全站【頂】需恰 3（現 ${tops}）：回源頭大綱加【頂】／刪【頂】再 bake（worker 提案＋Ethan 終審）`);
+  if (tops !== 4) fail("parse-fail", `全站【頂】需恰 4（現 ${tops}）：回源頭大綱加【頂】／刪【頂】再 bake（worker 提案＋Ethan 終審）`);
   for (const [i, it] of doc.items.entries()) {
     if (!["功用", "因果", "解決", "資訊"].includes(it.angle)) fail("parse-fail", `items[${i}] angle 非法`);
     if (!it.claim?.trim()) fail("parse-fail", `items[${i}] claim 空`);

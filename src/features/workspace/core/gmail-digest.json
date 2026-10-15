@@ -81,6 +81,7 @@
    "claim": "跟 AI 對話的 9 大隱私防線：ChatGPT／Claude 怎麼存、誰能讀",
    "date": "2026-09-17",
    "source": "–",
+   "top3": true,
    "link": "https://www.bnext.com.tw/article/92235/chatgpt-claude-privacy-9-stops-opt-out-training",
    "links": [
     "https://www.bnext.com.tw/article/92235/chatgpt-claude-privacy-9-stops-opt-out-training"
@@ -195,7 +196,6 @@
    "claim": "HiNet 晚上 X 圖片／Twitch／GitHub 慢：Fastly 連線改善 3 招（WARP、hosts、IPv6）",
    "date": "2026-10-12",
    "source": "免費資源網",
-   "top3": true,
    "link": "https://free.com.tw/hinet-fastly-slow-fix/",
    "links": [
     "https://free.com.tw/hinet-fastly-slow-fix/"
@@ -558,6 +558,7 @@
    "claim": "免費領 Gemini 一年 Google AI Plus、年底前截止",
    "date": "2026-08-21",
    "source": "–",
+   "top3": true,
    "link": "https://www.bnext.com.tw/article/91933/google-ai-plus-student-free；ChatGPT",
    "links": [
     "https://www.bnext.com.tw/article/91933/google-ai-plus-student-free；ChatGPT"

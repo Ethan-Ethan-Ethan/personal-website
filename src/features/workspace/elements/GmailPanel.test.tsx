@@ -14,10 +14,10 @@ describe("GmailPanel", () => {
     // 寫信給我：站內唯一公開郵箱，簡單 mailto 不帶參數
     const mail = screen.getByRole("link", { name: "寫信給我" });
     expect(mail.getAttribute("href")).toBe("mailto:isitoled@gmail.com");
-    // 左欄本週精選TOP3：平鋪三卡
-    expect(screen.getByText("本週精選TOP3")).toBeTruthy();
+    // 左欄本週精選TOP4：平鋪四卡
+    expect(screen.getByText("本週精選TOP4")).toBeTruthy();
     const flats = screen.getAllByTestId("top3-flat");
-    expect(flats.length).toBe(3);
+    expect(flats.length).toBe(4);
     // 左欄無折疊：section 內無 details／看全表
     const section = screen.getByLabelText("Gmail 本週重點");
     expect(within(section).queryAllByText(/看全表/).length).toBe(0);
@@ -35,23 +35,24 @@ describe("GmailPanel", () => {
     expect(claimP?.style.fontWeight).toBe("600");
     expect(claimP?.style.letterSpacing).toBe("0.05em");
     expect(claimP?.textContent?.length).toBeGreaterThan(0);
-    // Top3 三條（worker 提案＋Ethan 終審）：HiNet／台積電／辦公日曆
-    expect(screen.getByLabelText(/本週精選｜HiNet/)).toBeTruthy();
+    // Top4 四條（worker 提案＋Ethan 終審）：隱私9防線／台積電／Gemini免費領／辦公日曆
+    expect(screen.getByLabelText(/本週精選｜.*隱私防線/)).toBeTruthy();
     expect(screen.getByLabelText(/本週精選｜台積電/)).toBeTruthy();
+    expect(screen.getByLabelText(/本週精選｜免費領 Gemini/)).toBeTruthy();
     expect(screen.getByLabelText(/本週精選｜2027 辦公日曆/)).toBeTruthy();
     // angle 只留 JSON／bake，UI 不渲染徽
     expect(screen.queryByText(/【(功用|因果|解決|資訊)】/)).toBeNull();
     expect(screen.queryByText(/【頂】/)).toBeNull();
   });
-  it("shows honest empty state when snapshot is missing, shapeless, or top3 != 3", () => {
+  it("shows honest empty state when snapshot is missing, shapeless, or top3 != 4", () => {
     const { unmount } = render(<GmailPanel open digest={null} />);
     expect(screen.getByText("本週重點尚未 bake")).toBeTruthy();
-    expect(screen.queryByText("本週精選TOP3")).toBeNull();
+    expect(screen.queryByText("本週精選TOP4")).toBeNull();
     unmount();
     render(<GmailPanel open digest={{ _generated: "x", week: "2026-W42", sources: [], items: [] }} />);
     expect(screen.getByText("本週重點尚未 bake")).toBeTruthy();
     cleanup();
-    // 四段齊但無【頂】→空態（【頂】恰 3 門）
+    // 四段齊但無【頂】→空態（【頂】恰 4 門）
     render(
       <GmailPanel
         open
@@ -86,7 +87,7 @@ describe("GmailPanel", () => {
             { topic: "study", angle: "功用", claim: "學卡", date: "2026-10-12", source: "s", top3: true },
             { topic: "invest", angle: "因果", claim: "投卡", date: "2026-10-13", source: "s", top3: true },
             { topic: "promo", angle: "因果", claim: "過期卡", date: "2026-09-01", source: "s", expiry: "9/30 前", top3: true },
-            { topic: "flash", angle: "資訊", claim: "快卡", date: "2026-10-14", source: "s" },
+            { topic: "flash", angle: "資訊", claim: "快卡", date: "2026-10-14", source: "s", top3: true },
           ],
         }}
       />
@@ -95,13 +96,13 @@ describe("GmailPanel", () => {
     // 過期卡同時在左欄 Top3（本週精選｜前綴）與右欄全表（精確匹配）各一卡
     expect(screen.getAllByLabelText(/過期卡/).length).toBe(2);
   });
-  it("baked snapshot itself passes shape gate (4 topics, top3 exactly 3 site-wide, no featured)", () => {
+  it("baked snapshot itself passes shape gate (4 topics, top3 exactly 4 site-wide, no featured)", () => {
     const d = digest as unknown as { week: string; items: { topic: string; angle: string; claim: string; link?: string; links?: string[]; top3?: boolean; featured?: boolean }[] };
     for (const t of ["study", "invest", "promo", "flash"]) {
       expect(d.items.some((i) => i.topic === t)).toBe(true);
     }
-    // 全站【頂】恰 3（★機制已廢，featured 殘留零容忍）
-    expect(d.items.filter((i) => i.top3 === true).length).toBe(3);
+    // 全站【頂】恰 4（★機制已廢，featured 殘留零容忍）
+    expect(d.items.filter((i) => i.top3 === true).length).toBe(4);
     expect(d.items.some((i) => i.featured === true)).toBe(false);
     for (const i of d.items) {
       expect(["功用", "因果", "解決", "資訊"]).toContain(i.angle);
@@ -146,7 +147,7 @@ describe("GmailPanel", () => {
     const glassCard = noLinkCard;
     expect(glassCard.style.backdropFilter).toContain("blur");
   });
-  it("entrance stagger mirrors ForecastGlass (chip wipe → title → Top3 x3 → rail x4; closed collapses to 0ms)", () => {
+  it("entrance stagger mirrors ForecastGlass (chip wipe → title → 精選 x4 → rail x4; closed collapses to 0ms)", () => {
     render(<GmailPanel open />);
     // header chip wipe 100ms
     const head = screen.getByTestId("gmail-head");
@@ -158,10 +159,10 @@ describe("GmailPanel", () => {
     expect(title.className).toContain("fc-dir-l");
     expect(title.className).toContain("is-open");
     expect((title as HTMLElement).style.transitionDelay).toBe("200ms");
-    // Top3 只認數量：恰 3 卡 stagger 300／370／440（名單圈選中，不寫死內容）
+    // 精選只認數量：恰 4 卡 stagger 300／370／440／510（名單圈選中，不寫死內容）
     const flats = screen.getAllByTestId("top3-flat");
-    expect(flats.length).toBe(3);
-    expect(flats.map((c) => (c as HTMLElement).style.transitionDelay)).toEqual(["300ms", "370ms", "440ms"]);
+    expect(flats.length).toBe(4);
+    expect(flats.map((c) => (c as HTMLElement).style.transitionDelay)).toEqual(["300ms", "370ms", "440ms", "510ms"]);
     for (const c of flats) expect(c.className).toContain("is-open");
     // 右欄四組 dir-r stagger 400＋i*70（study／invest／promo／flash 順）
     const groups = screen.getAllByTestId(/rail-full-/);

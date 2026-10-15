@@ -30,15 +30,15 @@ describe("sync-gmail bake", () => {
     expect(r.out).toMatch(/study=22 invest=26 promo=18 flash=5/);
     expect(r.out).toContain("SKIP");
   });
-  it("落地 JSON 形狀：四段皆有卡／angle+claim 非空／link 全 http／全站【頂】恰3", () => {
+  it("落地 JSON 形狀：四段皆有卡／angle+claim 非空／link 全 http／全站【頂】恰4", () => {
     const doc = JSON.parse(readFileSync(join(ROOT, "src/features/workspace/core/gmail-digest.json"), "utf-8"));
     expect(doc.week).toBe("2026-W42");
     expect(doc.weekRange).toBe("10/07–10/14");
     for (const t of ["study", "invest", "promo", "flash"]) {
       expect(doc.items.filter((i: { topic: string }) => i.topic === t).length).toBeGreaterThan(0);
     }
-    // 全站【頂】恰 3（★機制已廢，featured 殘留零容忍）
-    expect(doc.items.filter((i: { top3?: boolean }) => i.top3 === true).length).toBe(3);
+    // 全站【頂】恰 4（★機制已廢，featured 殘留零容忍）
+    expect(doc.items.filter((i: { top3?: boolean }) => i.top3 === true).length).toBe(4);
     expect(doc.items.some((i: { featured?: boolean }) => i.featured === true)).toBe(false);
     for (const i of doc.items) {
       expect(["功用", "因果", "解決", "資訊"]).toContain(i.angle);
@@ -71,12 +71,12 @@ describe("sync-gmail bake", () => {
     };
     const good1 = join(dir, "a.md");
     const good2 = join(dir, "b.md");
-    // 【頂】合計恰 3（兩檔合併算）；多連結一條驗 links 全收
+    // 【頂】合計恰 4（兩檔合併算）；多連結一條驗 links 全收
     writeFileSync(good1, `## 一、學習資訊\n\n- 【頂】【資訊】學頂放假通知（2026-10-12，來源）\n- 【功用】學普通卡（2026-10-11，來源）— https://a.example/x ／ https://b.example/y\n\n${topics()}`);
-    writeFileSync(good2, `## 一、學習資訊\n\n- 【頂】【解決】學頂解法（2026-10-10，來源）\n- 【頂】【因果】學頂三（2026-10-09，來源）\n\n${topics()}`);
+    writeFileSync(good2, `## 一、學習資訊\n\n- 【頂】【解決】學頂解法（2026-10-10，來源）\n- 【頂】【因果】學頂三（2026-10-09，來源）\n- 【頂】【功用】學頂四（2026-10-08，來源）\n\n${topics()}`);
     const r = run(["--dry-run"], { GMAIL_IN1: good1, GMAIL_IN2: good2 });
     expect(r.code).toBe(0);
-    expect(r.out).toMatch(/study=4 invest=6 promo=6 flash=6/);
+    expect(r.out).toMatch(/study=5 invest=6 promo=6 flash=6/);
     // 殘留★即失敗（fail-closed，指回【頂】）
     const bad3 = join(dir, "c.md");
     const bad4 = join(dir, "d.md");

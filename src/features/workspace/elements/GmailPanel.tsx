@@ -31,7 +31,7 @@ const TOPICS: { key: DigestTopic; label: string }[] = [
 // 資訊=直陳無痛點（放假政策／版本更新／功能通知等），bake 只做存在性斷言、永不分類。
 const ANGLES = ['功用', '因果', '解決', '資訊'] as const;
 
-/** 快照形狀驗證（缺段／空卡／angle-claim 空／【頂】非恰 3→視為缺快照，走誠實空態，不假掛）。 */
+/** 快照形狀驗證（缺段／空卡／angle-claim 空／【頂】非恰 4→視為缺快照，走誠實空態，不假掛）。 */
 function asValidDigest(doc: unknown): DigestDoc | null {
   if (!doc || typeof doc !== 'object') return null;
   const d = doc as Partial<DigestDoc>;
@@ -42,7 +42,7 @@ function asValidDigest(doc: unknown): DigestDoc | null {
   for (const i of d.items) {
     if (!i || !(ANGLES as readonly string[]).includes(i.angle) || !i.claim?.trim()) return null;
   }
-  if (d.items.filter((i) => i?.top3 === true).length !== 3) return null;
+  if (d.items.filter((i) => i?.top3 === true).length !== 4) return null;
   return d as DigestDoc;
 }
 
@@ -83,7 +83,7 @@ const CARD: CSSProperties = {
   backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
   padding: '12px 16px',
 };
-// 左欄 Top3 平鋪卡：實底無玻璃（無 blur、無白邊，僅極細描邊定界，圓角保留 16）。
+// 左欄精選平鋪卡：實底無玻璃（無 blur、無白邊，僅極細描邊定界，圓角保留 16）。
 const TOP3_CARD: CSSProperties = {
   background: 'rgba(0,0,0,0.45)',
   border: '1px solid rgba(255,255,255,0.08)',
@@ -96,7 +96,7 @@ const CHIP: CSSProperties = {
   whiteSpace: 'nowrap',
 };
 
-/** 開場 stagger（ms，仿 ForecastGlass D.*：header chip wipe 100 → 標題 200 → Top3 三卡 300+i*70 → 右欄組 400+i*70；關閉一律 0ms 同收）。只認 Top3 數量（3 卡 stagger），不寫死內容。 */
+/** 開場 stagger（ms，仿 ForecastGlass D.*：header chip wipe 100 → 標題 200 → 精選卡 300+i*70 → 右欄組 400+i*70；關閉一律 0ms 同收）。只認精選卡數量（300+i*70 自動延展，不寫死上限），不寫死內容。 */
 const D = { chip: 100, title: 200, top0: 300, topStep: 70, rail0: 400, railStep: 70 } as const;
 
 function LinkList({ item }: { item: DigestItem }) {
@@ -147,7 +147,7 @@ function FullCard({ item, on }: { item: DigestItem; on: string }) {
   );
 }
 
-/** 左欄 Top3 平鋪卡：字體跟氣溫頁（claim 17px 600 白字＋CJK 0.05em 追蹤、meta 11px muted）。 */
+/** 左欄精選平鋪卡：字體跟氣溫頁（claim 17px 600 白字＋CJK 0.05em 追蹤、meta 11px muted）。 */
 function Top3Card({ item, on, delay }: { item: DigestItem; on: string; delay: string }) {
   return (
     <article
@@ -224,7 +224,7 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
             <div style={{ marginBottom: 14 }}>
               <div data-testid="gmail-title" className={`fc-node fc-dir-l${on}`} style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8, ...dl(D.title) }}>
                 <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.1em', color: INK }}>
-                  本週精選TOP3
+                  本週精選TOP4
                 </span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
