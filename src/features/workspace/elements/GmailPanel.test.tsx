@@ -146,6 +146,45 @@ describe("GmailPanel", () => {
     const glassCard = noLinkCard;
     expect(glassCard.style.backdropFilter).toContain("blur");
   });
+  it("entrance stagger mirrors ForecastGlass (chip wipe → title → Top3 x3 → rail x4; closed collapses to 0ms)", () => {
+    render(<GmailPanel open />);
+    // header chip wipe 100ms
+    const head = screen.getByTestId("gmail-head");
+    expect(head.className).toContain("fc-wipe-r");
+    expect(head.className).toContain("is-open");
+    expect((head as HTMLElement).style.transitionDelay).toBe("100ms");
+    // 標題 200ms
+    const title = screen.getByTestId("gmail-title");
+    expect(title.className).toContain("fc-dir-l");
+    expect(title.className).toContain("is-open");
+    expect((title as HTMLElement).style.transitionDelay).toBe("200ms");
+    // Top3 只認數量：恰 3 卡 stagger 300／370／440（名單圈選中，不寫死內容）
+    const flats = screen.getAllByTestId("top3-flat");
+    expect(flats.length).toBe(3);
+    expect(flats.map((c) => (c as HTMLElement).style.transitionDelay)).toEqual(["300ms", "370ms", "440ms"]);
+    for (const c of flats) expect(c.className).toContain("is-open");
+    // 右欄四組 dir-r stagger 400＋i*70（study／invest／promo／flash 順）
+    const groups = screen.getAllByTestId(/rail-full-/);
+    expect(groups.length).toBe(4);
+    groups.forEach((g, i) => {
+      const box = (g as HTMLElement).closest(".fc-node") as HTMLElement;
+      expect(box.className).toContain("fc-dir-r");
+      expect(box.className).toContain("is-open");
+      expect(box.style.transitionDelay).toBe(`${400 + i * 70}ms`);
+    });
+    cleanup();
+    // 關閉一律 0ms 同收
+    render(<GmailPanel open={false} />);
+    expect(screen.getByTestId("gmail-head").className).not.toContain("is-open");
+    expect((screen.getByTestId("gmail-head") as HTMLElement).style.transitionDelay).toBe("0ms");
+    expect((screen.getByTestId("gmail-title") as HTMLElement).style.transitionDelay).toBe("0ms");
+    for (const c of screen.getAllByTestId("top3-flat")) {
+      expect((c as HTMLElement).style.transitionDelay).toBe("0ms");
+    }
+    for (const g of screen.getAllByTestId(/rail-full-/)) {
+      expect(((g as HTMLElement).closest(".fc-node") as HTMLElement).style.transitionDelay).toBe("0ms");
+    }
+  });
   it("cardLinks caps at 3 and expiryKey orders promos by date", () => {
     expect(cardLinks({ link: "https://a.example/" })).toEqual(["https://a.example/"]);
     expect(cardLinks({ link: "https://a.example/", links: ["https://a.example/", "https://b.example/", "https://c.example/", "https://d.example/"] }).length).toBe(3);

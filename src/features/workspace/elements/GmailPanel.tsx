@@ -96,6 +96,9 @@ const CHIP: CSSProperties = {
   whiteSpace: 'nowrap',
 };
 
+/** 開場 stagger（ms，仿 ForecastGlass D.*：header chip wipe 100 → 標題 200 → Top3 三卡 300+i*70 → 右欄組 400+i*70；關閉一律 0ms 同收）。只認 Top3 數量（3 卡 stagger），不寫死內容。 */
+const D = { chip: 100, title: 200, top0: 300, topStep: 70, rail0: 400, railStep: 70 } as const;
+
 function LinkList({ item }: { item: DigestItem }) {
   const ls = cardLinks(item);
   if (!ls.length) return null;
@@ -145,14 +148,14 @@ function FullCard({ item, on }: { item: DigestItem; on: string }) {
 }
 
 /** 左欄 Top3 平鋪卡：字體跟氣溫頁（claim 17px 600 白字＋CJK 0.05em 追蹤、meta 11px muted）。 */
-function Top3Card({ item, on }: { item: DigestItem; on: string }) {
+function Top3Card({ item, on, delay }: { item: DigestItem; on: string; delay: string }) {
   return (
     <article
       key={`top3:${item.topic}:${item.claim}`}
       data-testid="top3-flat"
       className={`fc-node fc-dir-l${on}`}
       aria-label={`本週精選｜${item.claim}`}
-      style={TOP3_CARD}
+      style={{ ...TOP3_CARD, transitionDelay: delay }}
     >
       <p style={{ margin: 0, fontSize: 17, lineHeight: '26px', fontWeight: 600, color: INK, letterSpacing: '0.05em' }}>
         {item.claim}
@@ -170,6 +173,8 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
   const doc = digest === undefined ? asValidDigest(gmailDigest) : digest ? asValidDigest(digest) : null;
   const on = open ? ' is-open' : '';
   const top3 = (doc?.items ?? []).filter((i) => i.top3 === true);
+  // 仿 ForecastGlass：開場 delay stagger，關閉一律 0ms 同收。
+  const dl = (ms: number): { transitionDelay: string } => ({ transitionDelay: open ? `${ms}ms` : '0ms' });
   return (
     <>
       <section
@@ -182,7 +187,7 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
           visibility: open ? 'visible' : 'hidden',
         }}
       >
-        <style>{`.gmail-panel{scrollbar-width:thin;overflow-x:hidden;}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.gmail-panel details>summary{cursor:pointer;}@media (max-width: 900px){.gmail-panel{left:5% !important;width:auto !important;right:5% !important;max-height:52vh;}.gmail-rail{position:static !important;width:auto !important;max-width:none !important;margin:16px 5% 0 !important;max-height:none !important;overflow:visible !important;pointer-events:auto !important;}}@media (prefers-reduced-motion: reduce){.gmail-panel .fc-node{transition:none;}}`}</style>
+        <style>{`.gmail-panel{scrollbar-width:thin;overflow-x:hidden;}${FC_TRANSITION_CSS}.fc-dir-l{transform:translateX(-26px);}.fc-dir-r{transform:translateX(30px) scale(.985);}.fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}.gmail-panel details>summary{cursor:pointer;}@media (max-width: 900px){.gmail-panel{left:5% !important;width:auto !important;right:5% !important;max-height:52vh;}.gmail-rail{position:static !important;width:auto !important;max-width:none !important;margin:16px 5% 0 !important;max-height:none !important;overflow:visible !important;pointer-events:auto !important;}}@media (prefers-reduced-motion: reduce){.gmail-panel .fc-node{transition:none;}}`}</style>
         {!doc ? (
           <div
             className={`fc-node fc-dir-l${on}`}
@@ -200,7 +205,7 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
           </div>
         ) : (
           <>
-            <div className={`fc-node fc-dir-l${on}`} style={{ marginBottom: 12 }}>
+            <div data-testid="gmail-head" className={`fc-node fc-wipe-r${on}`} style={{ marginBottom: 12, ...dl(D.chip) }}>
               <span style={{
                 display: 'inline-block', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
                 color: INK, border: '1px solid rgba(255,255,255,0.35)', background: 'rgba(255,255,255,0.15)',
@@ -217,14 +222,14 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
               </div>
             </div>
             <div style={{ marginBottom: 14 }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+              <div data-testid="gmail-title" className={`fc-node fc-dir-l${on}`} style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8, ...dl(D.title) }}>
                 <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.1em', color: INK }}>
                   本週精選TOP3
                 </span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {top3.map((item) => (
-                  <Top3Card key={`top3:${item.topic}:${item.claim}`} item={item} on={on} />
+                {top3.map((item, i) => (
+                  <Top3Card key={`top3:${item.topic}:${item.claim}`} item={item} on={on} delay={open ? `${D.top0 + i * D.topStep}ms` : '0ms'} />
                 ))}
               </div>
             </div>
@@ -244,10 +249,10 @@ export default function GmailPanel({ open, digest }: { open: boolean; digest?: D
             visibility: open ? 'visible' : 'hidden',
           }}
         >
-          {TOPICS.map((t) => {
+          {TOPICS.map((t, idx) => {
             const cards = doc.items.filter((i) => i.topic === t.key);
             return (
-              <div key={t.key} className={`fc-node fc-dir-l${on}`} style={{ ...CARD, padding: '14px 16px' }}>
+              <div key={t.key} className={`fc-node fc-dir-r${on}`} style={{ ...CARD, padding: '14px 16px', ...dl(D.rail0 + idx * D.railStep) }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
                   <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', color: INK }}>
                     {t.label}
