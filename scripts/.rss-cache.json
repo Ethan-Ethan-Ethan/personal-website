@@ -7707,7 +7707,91 @@
     "https://www.infoq.com/news/2026/10/antigravity-sdk-local-models/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
       "title": "Google Antigravity SDK Adds Local Model Support for Greater Token Efficiency and Code Privacy",
       "date": "2026-10-15T07:05:55.911Z"
+    },
+    "https://www.youtube.com/watch?v=7p5LxFdc-Qg": {
+      "title": "Tesla makes cars that fly? [video]",
+      "date": "2026-10-16T06:49:03.585Z"
+    },
+    "https://lwn.net/Articles/1094721/": {
+      "title": "Comparing Chromium Development at Google and Igalia",
+      "date": "2026-10-16T06:49:03.585Z"
+    },
+    "https://github.com/Saffsanity/sill": {
+      "title": "Any window from your Mac, on your iPhone and iPad",
+      "date": "2026-10-16T06:49:03.585Z"
+    },
+    "https://www.vlt.io/blog/competition-keeps-javascript-moving": {
+      "title": "Thank You, Deno",
+      "date": "2026-10-16T06:49:03.585Z"
+    },
+    "https://ipinfo.io/blog/rpki-protects-70-internet-routes": {
+      "title": "RPKI now protects 70% of internet routes",
+      "date": "2026-10-16T06:49:03.586Z"
+    },
+    "https://www.niemanlab.org/2026/10/metas-new-commercial-terms-will-allow-the-scraping-of-news-sites-legal-experts-say/": {
+      "title": "Business accounts will consent to Meta scraping their websites Starting Oct. 30",
+      "date": "2026-10-16T06:49:03.586Z"
+    },
+    "https://github.com/johnrash/bebox": {
+      "title": "BeBox is a Haiku application that emulates Be Inc.'s BeBox",
+      "date": "2026-10-16T06:49:03.586Z"
+    },
+    "https://viceconsole.fyi/blog/2026/10/10/what-i-self-host/": {
+      "title": "What I self-host",
+      "date": "2026-10-16T06:49:03.586Z"
+    },
+    "https://support.withings.com/hc/en-us/community/posts/51887047154577-Unacceptable-Apple-Health-Sync-is-now-behind-a-99-year-paywall-for-new-accounts": {
+      "title": "New Withings Users Must Pay $99/Year for Apple Health Syncing",
+      "date": "2026-10-16T06:49:03.586Z"
+    },
+    "https://thereallo.dev/blog/someone-on-torrent-sites-kept-fucking-with-my-sonarr-setup": {
+      "title": "Someone on Torrent Sites Kept Fucking with My Sonarr",
+      "date": "2026-10-16T06:49:03.587Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cm2d65npyrdjo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中國製造的玩具如何從工廠到美國？",
+      "date": "2026-10-16T06:49:03.896Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/crz65gxl2jxlo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "法國總統大選前，學生抗議活動是否被人為操縱？",
+      "date": "2026-10-16T06:49:03.896Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cmde8dpz7ykjo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "特朗普叫停網上直播處決胡德堡槍擊案槍手",
+      "date": "2026-10-16T06:49:03.896Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/c6vgj9r0k18eo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "「日子難熬」：美國人苦苦應對不斷上漲的通貨膨脹",
+      "date": "2026-10-16T06:49:03.897Z"
+    },
+    "https://www.bbc.com/zhongwen/articles/cqn065gxdk4lo/trad?at_medium=RSS&amp;at_campaign=rss": {
+      "title": "中朝新鴨綠江大橋通車：北京、平壤與莫斯科的新格局",
+      "date": "2026-10-16T06:49:03.897Z"
+    },
+    "https://www.infoq.com/news/2026/10/azure-maia-300/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Microsoft Commits Maia to Multi-Gigawatt Inference, and Its Efficiency Metric Draws Questions",
+      "date": "2026-10-16T06:49:04.668Z"
+    },
+    "https://www.infoq.com/news/2026/10/instagram-compose-migration/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Instagram Modernized its UI with an AI-Native Architecture, Cutting Token Costs by 33%",
+      "date": "2026-10-16T06:49:04.668Z"
+    },
+    "https://www.infoq.com/news/2026/10/optimize-software-workflow/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Optimizing Software Workflow: Exploring Fundamental Impacts in Technology",
+      "date": "2026-10-16T06:49:04.668Z"
+    },
+    "https://www.infoq.com/presentations/agentic-ai-developer-trust-adoption/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Presentation: What 25 Trillion Tokens Reveal About How Developers Actually Adopt AI Agents",
+      "date": "2026-10-16T06:49:04.669Z"
+    },
+    "https://www.infoq.com/news/2026/10/grafana-tempo-31/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Grafana Tempo 3.1 Adds Query-Based Trace Redaction and Sampling-Aware TraceQL Metrics",
+      "date": "2026-10-16T06:49:04.669Z"
+    },
+    "https://www.infoq.com/articles/spring-security-7-server-side-dpop-token-exchange/?utm_campaign=infoq_content&amp;utm_source=infoq&amp;utm_medium=feed&amp;utm_term=global": {
+      "title": "Article: Server-Side DPoP and Token Exchange in Spring Security 7",
+      "date": "2026-10-16T06:49:04.669Z"
     }
   },
-  "lastRun": "2026-10-15T07:05:55.911Z"
+  "lastRun": "2026-10-16T06:49:04.669Z"
 }
