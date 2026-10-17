@@ -10,7 +10,7 @@ const css = () =>
   Array.from(document.querySelectorAll("style"))
     .map((s) => s.textContent ?? "")
     .join("\n");
-const LABELS = ["Gmail", "圖表", "地區", "日曆", "搜尋"];
+const LABELS = ["Gmail", "文章", "圖表", "地區", "日曆", "搜尋"];
 
 describe("ForecastBottomBar", () => {
   it("renders 5 tab keys in rail order without grid; grid active means no highlight", () => {
@@ -25,6 +25,7 @@ describe("ForecastBottomBar", () => {
     ).toBeNull();
     // 預設 activeId=grid：底欄無高亮即正常（五鍵全 false）
     expect(buttons.map((b) => b.getAttribute("aria-pressed"))).toEqual([
+      "false",
       "false",
       "false",
       "false",

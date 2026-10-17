@@ -9,6 +9,7 @@ import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
 import ForecastBottomBar from './ForecastBottomBar';
 import ForecastRegionPicker from './ForecastRegionPicker';
 import GmailPanel from './GmailPanel';
+import ArticlePanel from './ArticlePanel';
 import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
 import '../../../components/reactbits/SplitText.css';
@@ -105,6 +106,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       {forecastOpen && activeId === 'grid' && <ForecastGlass data={forecastData} open />}
       {forecastOpen && activeId === 'globe' && <ForecastRegionPicker value={manualCounty} onSelect={setManualCounty} />}
       <GmailPanel open={forecastOpen && activeId === 'mail'} />
+      {forecastOpen && activeId === 'article' && <ArticlePanel onClose={() => { setActiveId('grid'); setForecastOpen(false); }} />}
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>

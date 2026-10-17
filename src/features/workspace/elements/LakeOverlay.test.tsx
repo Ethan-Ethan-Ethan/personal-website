@@ -117,7 +117,7 @@ describe("LakeOverlay mobile bottom bar", () => {
       Array.from(bar.querySelectorAll("button")).map((b) =>
         b.getAttribute("aria-label")
       )
-    ).toEqual(["Gmail", "圖表", "地區", "日曆", "搜尋"]);
+    ).toEqual(["Gmail", "文章", "圖表", "地區", "日曆", "搜尋"]);
     // 總覽缺席：底欄無總覽鍵（回家走房子鍵；側軌六鍵不動）
     expect(
       bar.querySelector('button[aria-label="總覽"]')
