@@ -22,7 +22,7 @@ tags:
 | 框架 | Astro 7 + Tailwind v4 + GitHub Actions + Cloudflare Pages |
 | Repo | `Ethan-Ethan-Ethan/personal-website` |
 | 部署觸發 | `git push` → `main` → `.github/workflows/deploy.yml` 自動部署 |
-| RSS 排程 | `.github/workflows/rss-aggregate.yml` 每日 UTC 02:00 |
+| RSS 排程 | 已退役（RSS 聚合線路已移除，改以 Gmail 整理為主）|
 | 整體狀態 | Cozy Galaxy P0 視覺重構進行中：房間、流星遮擋、披風微動畫與 responsive runtime 已建立；螢幕小方框＋底部連結 preview 已完成本地實作與自動驗證，目前等待人工確認構圖，再決定第二階段直接連結或 floating window |
 
 ## 代辦清單（正本，已去重）
@@ -40,6 +40,7 @@ tags:
 - [ ] **#9 網站樣式優化** — 2026-08-27 使用者表態想做網頁樣式；採用開源 skill `dembrandt/dembrandt-skills`（已 clone 至 `Agent-Skills/dembrandt-skills`，41 個 UX/design-system 技能，經 `~/.config/opencode/skills → Agent-Skills` 既有 symlink 自動載入；MIT）。dembrandt MCP 引擎已接（本地 stdio，`opencode.jsonc` 的 `mcpServers.dembrandt`）；實測 `dembrandt https://ethanyang.dpdns.org` 擷取成功（顏色 9 / 字體 19 / 間距 12 / 圓角 4 / 按鈕 2 變體，與 global.css 一致），Cloudflare 未擋。MCP 工具需重啟 OpenCode 才載入；CLI 已可直接用。下一步：把 tokens 存到 `design-system/` 供 `website-analyze` 用，並挑子技能（color-mode-and-theme / algorithmic-color-palette / component-family-consistency / wcag-accessibility）套用優化。
 - [x] **#10 Cozy Galaxy 玩偶披風微動畫** — Desktop／Tablet／Mobile 已接入照片披風 Alpha 三段 CSS rig，使用者已確認可見且速度調整後可接受；未做 clean plate 或 AI inpainting。設計正本：`/Users/ethan/Documents/memory/design/2026-09-06-personal-website-plush-cape-motion-design.md`。
 - [x] **#11 螢幕小方框與底部連結 Preview（第一階段）** — 已隱藏頂部導覽與常駐文字卡片；四個螢幕方框和四個底部 UI 共用局部小視窗與 SVG 指向線。Pointer／focus ownership、Escape、resize、Tablet fallback、Mobile tap 與不霧化 pixel contract 均完成。第一階段刻意不導航、不改 hash、不開 floating window；等待人工構圖確認後再決定第二階段連結方式。計畫：`plan/2026-09-06-monitor-hotspot-popover-implementation.md`。
+- [ ] **#12 Gmail／Google 整合後續（2026-10-14 自 Gmail 整理 session 移入）** — 細節見 `~/Documents/memory/events/2026-10-14.md` 同日 `[Gmail 整理]／[Google MCP]／[依序完成]` 三節。Gmail 主線已結案（muse A–G 全關）；文件直連讀管線已通。待辦：①兩份大綱待確認（`00_Inbox/週報-2026-W42-大綱.md`、`bnext-回補-大綱-2026-W42.md`，確認後清信）②shwoo 5 封 2026-11-14 複檢 ③newebpay 維持手動 ④launchd 三排程已重建（10-14）⑤Google MCP 凍結等 GA（Preview 拒 Gmail；iCloud 亦非 Workspace）⑥行事曆 API 已開、同步設計未定 ⑦照片跳過。
 
 ## 網域續簽專區（#5）
 
