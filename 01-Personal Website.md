@@ -335,12 +335,12 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 ### 待完成
 
 - [ ] P0：人工驗收桌機／手機 Alpha 前景的邊緣與漏切；通過後才允許合併 `main`
-- [x] Phase 2：GitHub OAuth 驗證（Decap CMS 瀏覽器登入）— 已取消（Decap 放棄，改手動寫文流程）
-- [x] Phase 2：測試瀏覽器寫文章 → commit → 自動部署 — 已取消（隨 Decap 放棄，改手動寫文流程）
+- [ ] Phase 2：GitHub OAuth 驗證（Decap CMS 瀏覽器登入）
+- [ ] Phase 2：測試瀏覽器寫文章 → commit → 自動部署
 - [x] Phase 6：Cloudflare Access 設定（`/protected/*` 路由保護）— ✅ 2026-08-27 實測已生效
 - [x] Phase 6：停用舊 Workers 部署（`steep-glitter-0952`）— ✅ 2026-08-27 已刪除 script
-- [ ] 域名續約檢查（2027-02-15）
-- [x] Reddit 替代 RSS 源評估 — 已過時（RSS 聚合線路已退役，改以 Gmail 整理為主）
+- [ ] 域名續約檢查（2026-11-12）
+- [ ] Reddit 替代 RSS 源評估
 - [ ] 檢查履歷中哪些內容適合公開
 
 ### 已完成
