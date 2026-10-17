@@ -81,13 +81,14 @@ ${mdContent}`;
       className="article-panel"
       aria-label="文章發表"
       style={{
-        position: 'absolute', inset: 0, zIndex: 5, pointerEvents: 'auto',
+        position: 'absolute', top: '8%', left: '8%', right: '8%', zIndex: 5, pointerEvents: 'auto',
+        maxHeight: '88vh', overflowY: 'auto',
         background: 'rgba(0,0,0,0.35)',
         fontFamily: '"Inter", ui-sans-serif, system-ui, sans-serif',
       }}
     >
       <style>{`
-        .article-wrap{display:flex;flex-direction:column;height:100%;gap:16px;padding:24px;overflow-y:auto;}
+        .article-wrap{display:flex;flex-direction:column;gap:16px;padding:24px;overflow-y:auto;min-height:60vh;}
         .article-header{margin-bottom:8px;}
         .article-kicker{display:block;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:2px;}
         .article-title{font-size:28px;font-weight:600;letter-spacing:-0.02em;color:#fff;margin:0;}
