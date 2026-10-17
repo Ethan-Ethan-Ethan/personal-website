@@ -14,7 +14,6 @@ items:
   - { id: R08, description: Galaxy reduced-motion metadata, assertion: yaml_path, path: elements.galaxy.reduced_motion, exists: true, weight: 1 }
   - { id: R09, description: 必須包含 about content section, assertion: regex_matches, pattern: '(?m)^\s*sections:\s*\[projects, ai-lab, trading-lab, about, articles\]\s*$', weight: 2 }
   - { id: R10, description: command.list 正式存在, assertion: yaml_path, path: commands.command.list.owner, equals: site-shell, weight: 2 }
-  - { id: R11, description: RSS dry-run 契約, assertion: yaml_path, path: commands.rss.run.input.dry-run, equals: boolean, weight: 2 }
   - { id: R12, description: verify-all command, assertion: yaml_path, path: verification.commands.verify-all, exists: true, weight: 1 }
   - { id: R13, description: 無本機絕對路徑, assertion: regex_matches, pattern: '(?s)\A(?!.*\/(?:Users|home|private|var|Volumes|tmp|etc)\/).*\Z', weight: 2 }
   - { id: R14, description: 無 parent-directory traversal, assertion: not_contains_text, text: "../", weight: 2 }

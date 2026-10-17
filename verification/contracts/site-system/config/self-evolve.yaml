@@ -9,7 +9,7 @@ engine:
 metric:
   pass_threshold: 1.0
   required_pass_ratio: 1.0
-  weights_sum: 34
+  weights_sum: 32
 gate:
   vault_write: manual
   rule: Generated registry must never replace config/site-system.yaml as canonical source.

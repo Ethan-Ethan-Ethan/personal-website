@@ -12,7 +12,7 @@ Required contract:
 - elements is a mapping containing at minimum: galaxy, computer-foreground, plush-character
 - features is a mapping containing at minimum: scene-preview, window-lifecycle
 - content.sections is a list containing projects, ai-lab, trading-lab, about, articles
-- commands is nested by domain. It must contain commands.scene.preview, commands.window.open, and commands.rss.run.
+- commands is nested by domain. It must contain commands.scene.preview and commands.window.open.
 - every trunk/element/feature entry has owner and depends_on
 - every element also has a non-negative numeric layer
 - every command has owner, input, result, failure

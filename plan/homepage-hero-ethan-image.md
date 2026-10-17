@@ -115,7 +115,7 @@ status: done
 - D1 對比度 human acceptance（2026-10-14 CLOSED：使用者真機人眼通過）｜target: glass hero 真機對比確認｜owner: 使用者已驗｜reason: live shader 底靜態儀器值無意義，已人眼＋真機｜revisit_when: 無｜blocks_current_closure: 否
 - D2 真資料＋carousel 另案（2026-10-14 施工中：key 已入 Keychain service=cwa，F-D0047-091 週預報＋snapshot bake＋Geolocation 最近縣市，回退臺北）｜target: `forecast-placeholder.ts` 只留回退；真值走 cwa-snapshot.json＋selectForecastData；carousel 新 Task｜owner: 主 agent 施工中（待 e2e＋實拍收尾）｜reason: 36hr 無法填 7 天，改用週預報；PoP `-`→null、風速邊界記法取界｜revisit_when: 本輪收尾驗收｜blocks_current_closure: 否
 - D3 Worklog 誤刪恢復＋commit（2026-10-14 CLOSED：commit `30a2d02`，1 file 33+/0-，scope gate PASS）｜target: Worklog.md Replan 4–7（163 行誤刪已取回；誤判成立：無授權記錄／repo 內無第二份／5 節功能全未取消僅停用）＋3 新增塊保留（lake-landing／hero／YAML）｜owner: 主 agent 已執行（使用者批 A；誤刪版備份 $TMPDIR/worklog-20261014-pre-restore.md）｜reason: 原 165 deletions 經查為重寫掉段誤傷（Replan 4 空標題殘留），非刻意封存｜revisit_when: 無｜blocks_current_closure: 否
-- D4 全量 e2e 47 failed 跟進｜target: workspace/visual-fusion/hotspot 舊分支 specs｜owner: 維護者另案｜reason: pre-existing（USE_LAKE=true 基線既有，index.astro 零改動）｜revisit_when: 切回 WorkspaceDesktop 或 specs 改寫時｜blocks_current_closure: 否
+- D4 全量 e2e 47 failed 跟進｜target: workspace/visual-fusion/hotspot 舊分支 specs｜owner: 維護者另案｜reason: pre-existing（USE_LAKE=true 基線既有，index.astro 零改動）｜revisit_when: 2027-01-16（90 天內，切回 WorkspaceDesktop 或 specs 改寫時複審；逾期未結則關閉或轉 follow-up）｜blocks_current_closure: 否
 
 ---
 
