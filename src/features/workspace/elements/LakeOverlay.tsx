@@ -103,7 +103,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       {/* 底欄點鍵＝選中＋開面板（手機無反應算壞）；桌機側軌維持只切 active 不動 forecastOpen */}
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} activeId={activeId} onSelect={setActiveId} />
       <ForecastBottomBar activeId={activeId} onSelect={(id) => { setActiveId(id); setForecastOpen(true); }} />
-      {forecastOpen && activeId === 'grid' && <ForecastGlass data={forecastData} open />}
+      <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
       {forecastOpen && activeId === 'globe' && <ForecastRegionPicker value={manualCounty} onSelect={setManualCounty} />}
       <GmailPanel open={forecastOpen && activeId === 'mail'} />
       {forecastOpen && activeId === 'article' && <ArticlePanel onClose={() => { setActiveId('grid'); setForecastOpen(false); }} />}
