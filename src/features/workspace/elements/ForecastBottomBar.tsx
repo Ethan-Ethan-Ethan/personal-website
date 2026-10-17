@@ -20,7 +20,7 @@ export default function ForecastBottomBar({ activeId = 'grid', onSelect }: {
       aria-label="功能選單"
       className="forecast-bottom-bar"
       style={{
-        position: 'absolute', left: 12, right: 12, bottom: 8, zIndex: 4, pointerEvents: 'auto',
+        position: 'absolute', left: 12, right: 12, bottom: 8, zIndex: 6, pointerEvents: 'auto',
         flexDirection: 'row', alignItems: 'stretch', justifyContent: 'space-around',
         padding: '8px 4px', paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 0px))',
         background: 'rgba(255,255,255,0.10)',

@@ -55,15 +55,15 @@ describe("rail horizontal-scrollbar regression", () => {
     expect(rail.style.overflowY).toBe("auto");
     expect(rail.style.overflowX).toBe("hidden");
   });
-  it("gmail-panel mobile (<=900px) full-screen inset:0", () => {
+  it("gmail-panel mobile (<=900px) leaves bottom nav bar reachable", () => {
     render(<GmailPanel open />);
     const css = Array.from(document.querySelectorAll("style"))
       .map((s) => s.textContent ?? "")
       .join("\n");
-    // Ego 390px 實測：header chip 101–127；FAB 已退役（底欄取代），面板全屏覆蓋。
-    // 修法：手機 media 內 .gmail-panel 加 position:fixed, inset:0（全屏覆蓋，上滑不截頂），桌機不動。
+    // Ego 390px 實測：header chip 101–127；FAB 已退役（底欄取代），面板不遮底部導航欄。
+    // 修法：手機 media 內 .gmail-panel 加 position:fixed, bottom:90px（留出底部導航欄空間），桌機不動。
     expect(css).toContain(
-      "@media (max-width: 900px){.gmail-panel{position:fixed !important;inset:0 !important;"
+      "@media (max-width: 900px){.gmail-panel{position:fixed !important;top:0 !important;left:0 !important;right:0 !important;bottom:90px !important;"
     );
   });
 });
