@@ -1,0 +1,337 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Topbar from '../../components/Topbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="發表新文章 | Ethan" description="撰寫並預覽新文章，輸出 Markdown 檔案內容以儲存至 src/content/posts/。">
+  <Topbar />
+
+  <main class="pt-16 max-w-[var(--container-wide)] mx-auto px-6 py-12">
+    <!-- Header -->
+    <header class="mb-10">
+      <nav class="text-sm text-soft mb-6">
+        <a href="/" class="hover:text-green transition-colors">首頁</a>
+        <span class="mx-1 text-line">/</span>
+        <a href="/articles/" class="hover:text-green transition-colors">文章</a>
+        <span class="mx-1 text-line">/</span>
+        <span class="text-text">發表新文章</span>
+      </nav>
+      <h1 class="text-4xl font-bold tracking-tight mb-2">發表新文章</h1>
+      <p class="text-muted text-md">撰寫 Markdown 內容，即時預覽，完成後複製檔案內容儲存至 `src/content/posts/你的文章-slug.md` 並 push 即可發布。</p>
+    </header>
+
+    <!-- Editor + Preview -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Editor Panel -->
+      <section class="bg-panel border border-line rounded-xl p-5 shadow-card flex flex-col h-[70vh]">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-semibold text-text">編輯器</h3>
+          <div class="flex gap-2">
+            <button
+              onclick="copyContent()"
+              class="px-3 py-1.5 rounded-md bg-panel-2 border border-line text-xs text-muted hover:border-green transition-colors"
+            >
+              複製檔案內容
+            </button>
+          </div>
+        </div>
+
+        <!-- Frontmatter -->
+        <div class="mb-5 p-4 rounded-lg bg-bg/50 border border-line/50">
+          <label class="block text-xs font-medium text-soft mb-2">前置資料 (Frontmatter)</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] text-soft uppercase tracking-wider mb-1">標題 title</label>
+              <input
+                id="frontmatter-title"
+                type="text"
+                placeholder="例如：如何優化 CI/CD 管線"
+                class="w-full bg-bg border border-line rounded-md p-2 text-sm text-text focus:border-green focus:outline-none transition-colors"
+              />
+            </div>
+            <div>
+              <label class="block text-[10px] text-soft uppercase tracking-wider mb-1">摘要 description</label>
+              <input
+                id="frontmatter-desc"
+                type="text"
+                placeholder="一句話摘要"
+                class="w-full bg-bg border border-line rounded-md p-2 text-sm text-text focus:border-green focus:outline-none transition-colors"
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] text-soft uppercase tracking-wider mb-1">分類 category</label>
+              <input
+                id="frontmatter-cat"
+                type="text"
+                placeholder="例如：AI 工作流"
+                class="w-full bg-bg border border-line rounded-md p-2 text-sm text-text focus:border-green focus:outline-none transition-colors"
+              />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] text-soft uppercase tracking-wider mb-1">標籤 tags (逗號分隔)</label>
+              <input
+                id="frontmatter-tags"
+                type="text"
+                placeholder="例如：Astro, CI/CD, 自動化"
+                class="w-full bg-bg border border-line rounded-md p-2 text-sm text-text focus:border-green focus:outline-none transition-colors"
+              />
+            </div>
+            <div>
+              <label class="block text-[10px] text-soft uppercase tracking-wider mb-1">來源 source</label>
+              <select
+                id="frontmatter-source"
+                class="w-full bg-bg border border-line rounded-md p-2 text-sm text-text focus:border-green focus:outline-none transition-colors"
+              >
+                <option value="manual">manual</option>
+                <option value="rss">rss</option>
+                <option value="gmail">gmail</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] text-soft uppercase tracking-wider mb-1">草稿 draft</label>
+              <select
+                id="frontmatter-draft"
+                class="w-full bg-bg border border-line rounded-md p-2 text-sm text-text focus:border-green focus:outline-none transition-colors"
+              >
+                <option value="false">false (公開)</option>
+                <option value="true">true (草稿)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Markdown Editor -->
+        <label class="block text-xs font-medium text-soft mb-2">Markdown 內容</label>
+        <textarea
+          id="markdown-content"
+          class="w-full h-full font-mono text-sm text-text bg-bg border border-line rounded-md p-4 focus:border-green focus:outline-none transition-colors resize-none leading-relaxed"
+          placeholder="輸入文章內容... 支援標準 Markdown 語法。"
+          spellCheck="false"
+        ></textarea>
+      </section>
+
+      <!-- Preview Panel -->
+      <section class="bg-panel border border-line rounded-xl p-5 shadow-card flex flex-col h-[70vh] overflow-hidden">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-sm font-semibold text-text">預覽</h3>
+          <span id="preview-status" class="text-[10px] text-green font-mono">即時</span>
+        </div>
+        <div id="preview" class="flex-1 overflow-y-auto p-6 bg-bg rounded-lg border border-line/50 prose prose-invert dark custom-prose">
+          <p class="text-soft text-sm italic">在此預覽文章內容，左側輸入 Markdown 即可即時更新。</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Generated File Output -->
+    <section class="mt-8 bg-bg/30 border border-line/50 rounded-xl p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-semibold text-text">輸出檔案內容</h3>
+        <button
+          onclick="copyFileContent()"
+          class="px-3 py-1.5 rounded-md bg-panel-2 border border-line text-xs text-muted hover:border-green transition-colors"
+        >
+          複製全部
+        </button>
+      </div>
+      <div class="relative">
+        <textarea
+          id="file-output"
+          class="w-full h-48 font-mono text-xs text-muted bg-panel border border-line rounded-md p-4 focus:border-green focus:outline-none transition-colors resize-none"
+          readonly
+          spellCheck="false"
+        ></textarea>
+        <div class="absolute top-2 right-2 text-[10px] text-soft">
+          儲存至：src/content/posts/你的文章-slug.md
+        </div>
+      </div>
+      <p class="mt-3 text-[11px] text-soft">
+        步驟：1. 編輯左側內容 → 2. 複製上方檔案內容 → 3. 建立 <code class="text-text bg-panel-2 px-1.5 rounded">src/content/posts/你的文章-slug.md</code> → 4. 貼上內容 → 5. git push 發布。
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    // 預設內容
+    const defaultContent = `# 標題範例
+
+這是第一段內容。
+
+## 副標題
+
+可以寫 Markdown 語法，例如：
+
+- 列表項目一
+- 列表項目二
+
+[連結範例](https://example.com)
+
+\`\`\`javascript
+console.log('Hello World');
+\`\`\`
+
+> 引用區塊範例
+
+---
+
+*文章日期會自動根據建立時間填入。*`;
+
+    // 元素參考
+    const fmTitle = document.getElementById('frontmatter-title');
+    const fmDesc = document.getElementById('frontmatter-desc');
+    const fmCat = document.getElementById('frontmatter-cat');
+    const fmTags = document.getElementById('frontmatter-tags');
+    const fmSource = document.getElementById('frontmatter-source');
+    const fmDraft = document.getElementById('frontmatter-draft');
+    const mdContent = document.getElementById('markdown-content');
+    const preview = document.getElementById('preview');
+    const fileOutput = document.getElementById('file-output');
+
+    // 初始化
+    mdContent.value = defaultContent;
+    updatePreview();
+    updateFileOutput();
+
+    // 簡單 Markdown → HTML 轉換（不依賴外部庫，供預覽用）
+    function mdToHtml(text) {
+      return text
+        // 前置資料區塊
+        .replace(/^---[\s\S]*?---/m, '')
+        // 標題
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
+        // 粗體 / 斜體
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        // 程式碼區塊
+        .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>')
+        // 內聯程式碼
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        // 連結
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        // 引用
+        .replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
+        // 分隔線
+        .replace(/^---$/gm, '<hr>')
+        // 無序列表
+        .replace(/^- (.*$)/gim, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>\n?)+/g, m => '<ul>' + m + '</ul>')
+        // 段落（空行分隔）
+        .split(/\n\n+/)
+        .map(para => {
+          const t = para.trim();
+          if (!t) return '';
+          if (t.startsWith('<') && t.endsWith('>')) return t;
+          return '<p>' + t.replace(/\n/g, '<br>') + '</p>';
+        })
+        .join('');
+    }
+
+    function updatePreview() {
+      preview.innerHTML = mdToHtml(mdContent.value);
+    }
+
+    function updateFileOutput() {
+      const today = new Date().toISOString();
+      const title = fmTitle.value || 'Untitled';
+      const desc = fmDesc.value || '';
+      const cat = fmCat.value || '';
+      const tags = fmTags.value.split(',').map(t => t.trim()).filter(Boolean);
+      const source = fmSource.value || 'manual';
+      const draft = fmDraft.value || 'false';
+
+      const tagsYaml = tags.length > 0
+        ? '\n  - ' + tags.join('\n  - ')
+        : '';
+
+      const slug = title.toLowerCase()
+        .replace(/[^\w\u4e00-\u9fff\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim()
+        .replace(/^-+|-+$/g, '')
+        .substring(0, 60);
+
+      const content = `---
+title: "${title}"
+description: "${desc}"
+date: ${today}
+category: "${cat}"
+tags:[${tagsYaml}\n  ]
+source: ${source}
+draft: ${draft}
+---
+
+${mdContent.value}`;
+
+      fileOutput.value = content;
+      return { slug, content };
+    }
+
+    // 即時更新
+    [fmTitle, fmDesc, fmCat, fmTags, fmSource, fmDraft, mdContent].forEach(el => {
+      el.addEventListener('input', () => {
+        updatePreview();
+        updateFileOutput();
+      });
+    });
+
+    function copyContent() {
+      mdContent.select();
+      document.execCommand('copy');
+      alert('已複製 Markdown 內容');
+    }
+
+    function copyFileContent() {
+      fileOutput.select();
+      document.execCommand('copy');
+      alert('已複製完整檔案內容（含 frontmatter）');
+    }
+  </script>
+
+  <style>
+    .custom-prose h1, .custom-prose h2, .custom-prose h3, .custom-prose h4 {
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    .custom-prose h1 { font-size: 1.875rem; }
+    .custom-prose h2 { font-size: 1.5rem; }
+    .custom-prose h3 { font-size: 1.25rem; }
+    .custom-prose p { margin-bottom: 1em; color: var(--color-text); }
+    .custom-prose a { color: var(--color-blue); text-decoration: underline; }
+    .custom-prose a:hover { color: var(--color-green); }
+    .custom-prose blockquote {
+      border-left: 3px solid var(--color-amber);
+      padding-left: 1em;
+      color: var(--color-muted);
+      font-style: italic;
+      margin: 1.5em 0;
+    }
+    .custom-prose pre {
+      background: var(--color-panel);
+      border: 1px solid var(--color-line);
+      border-radius: 8px;
+      padding: 1em;
+      overflow-x: auto;
+      margin: 1.5em 0;
+    }
+    .custom-prose code {
+      font-family: "JetBrains Mono", monospace;
+      background: var(--color-panel-2);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.875em;
+    }
+    .custom-prose ul, .custom-prose ol { padding-left: 1.5em; margin-bottom: 1em; }
+    .custom-prose li { margin-bottom: 0.5em; }
+    .custom-prose hr { border: none; border-top: 1px solid var(--color-line); margin: 2em 0; }
+  </style>
+</BaseLayout>

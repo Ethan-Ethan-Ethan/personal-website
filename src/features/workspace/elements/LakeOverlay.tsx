@@ -53,6 +53,12 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       { timeout: 6000, maximumAge: 3600000 }
     );
   }, []);
+  // 點擊側軌「文章」書本圖示時，導向文章發表／列表頁。
+  useEffect(() => {
+    if (activeId === 'article') {
+      window.location.href = '/articles/';
+    }
+  }, [activeId]);
   // 手動地區選擇優先於定位；定位失敗／拒絕時回退預設縣市（臺北）。
   const [manualCounty, setManualCounty] = useState<string | null>(null);
   const counties = useMemo(() => {
