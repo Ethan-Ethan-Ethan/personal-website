@@ -15,7 +15,7 @@ export default function ArticlePanel({ onClose }: { onClose: () => void }) {
   const [fmDraft, setFmDraft] = useState('false');
   const [mdContent, setMdContent] = useState('# 標題範例\n\n這是第一段內容。\n\n## 副標題\n\n可以寫 Markdown 語法，例如列表：\n\n- 項目一\n- 項目二\n\n[連結範例](https://example.com)\n\n```javascript\nconsole.log(\'Hello World\');\n```\n\n---\n\n*請將上方內容替換為您的文章。*');
 
-  const sourceLabel = { manual: '原創', rss: 'RSS', gmail: 'Gmail' };
+  const sourceLabel = { manual: '原創', gmail: 'Gmail' };
   const today = useMemo(() => new Date().toISOString(), []);
   const slug = useMemo(() => {
     const t = fmTitle || 'Untitled';

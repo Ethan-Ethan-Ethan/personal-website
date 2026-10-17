@@ -45,8 +45,6 @@ commands:
   content:
     check: { owner: public-content, input: { source-mode: source-mode }, result: public-content-valid, failure: public-content-invalid }
     sync: { owner: public-content, input: { dry-run: boolean }, result: public-content-synced, failure: public-content-sync-failed }
-  rss:
-    run: { owner: content-bridge, input: { dry-run: boolean }, result: rss-aggregated, failure: rss-aggregation-failed }
   verify:
     unit: { owner: site-shell, input: {}, result: unit-tests-passed, failure: unit-tests-failed }
     e2e: { owner: site-shell, input: {}, result: e2e-tests-passed, failure: e2e-tests-failed }

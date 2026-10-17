@@ -24,7 +24,7 @@ const currentIndex = allPosts.findIndex(p => p.id === post.id);
 const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
-const sourceLabel = { manual: '原創', rss: 'RSS 聚合', gmail: 'Gmail 擷取' }[source];
+const sourceLabel = { manual: '原創', gmail: 'Gmail 擷取' }[source];
 ---
 
 <BaseLayout title={`${title} | Ethan`} description={description}>

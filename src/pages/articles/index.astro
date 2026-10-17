@@ -14,12 +14,12 @@ const posts = articles.map(({ post }) => post);
 const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))];
 ---
 
-<BaseLayout title="文章 | Ethan" description="所有公開文章 — 工作經驗、AI 工作流、公開筆記與 RSS 聚合內容。">
+<BaseLayout title="文章 | Ethan" description="所有公開文章 — 工作經驗、AI 工作流、公開筆記與 Gmail 整理內容。">
   <Topbar />
 
   <main class="pt-14 max-w-[var(--container-default)] mx-auto px-4 py-10">
     <h1 class="text-3xl font-bold tracking-tight mb-2">文章</h1>
-    <p class="text-muted mb-8">工作經驗、AI 工作流、公開筆記，以及自動聚合的 RSS 與 Gmail 文章。</p>
+    <p class="text-muted mb-8">工作經驗、AI 工作流、公開筆記，以及 Gmail 整理文章。</p>
 
     <!-- Category Filter -->
     <div class="flex flex-wrap gap-2 mb-8">

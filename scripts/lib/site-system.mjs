@@ -26,7 +26,6 @@ const REQUIRED_COMMANDS = [
   'window.reconcile',
   'content.check',
   'content.sync',
-  'rss.run',
   'verify.unit',
   'verify.e2e',
   'verify.contracts',

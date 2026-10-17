@@ -185,13 +185,6 @@ describe('site-system canonical YAML', () => {
     await expect(verifyGeneratedSiteSystem(root, { write: true })).rejects.toThrow(/project root/);
   });
 
-  test('declares rss.run in the canonical command registry', async () => {
-    const config = validateSiteSystem(parseSiteSystem(await goodYaml()));
-    expect(config.commands.rss.run).toMatchObject({ owner: 'content-bridge' });
-    expect(generateSiteSystemTypes(await goodYaml())).toContain('"rss.run"');
-    expect(generateSiteSystemTypes(await goodYaml())).toContain('"command.list"');
-  });
-
   test('generates deterministic TypeScript with source SHA and detects drift', async () => {
     const source = await goodYaml();
     const first = generateSiteSystemTypes(source);

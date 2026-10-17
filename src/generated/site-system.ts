@@ -1,5 +1,5 @@
 // @generated from config/site-system.yaml; do not edit
-// source-sha256: f62ee501b09f65c07c005548b82a16a7860c50d30cec819257cd77ee42b023f0
+// source-sha256: 206acd1abe6b75542092788d4dd6101ec23f001cef64fb5709f9f81b964ca664
 
 export const siteSystem = {
   "version": 1,
@@ -294,16 +294,6 @@ export const siteSystem = {
         "failure": "public-content-sync-failed"
       }
     },
-    "rss": {
-      "run": {
-        "owner": "content-bridge",
-        "input": {
-          "dry-run": "boolean"
-        },
-        "result": "rss-aggregated",
-        "failure": "rss-aggregation-failed"
-      }
-    },
     "verify": {
       "unit": {
         "owner": "site-shell",
@@ -370,7 +360,6 @@ export const SITE_COMMANDS = [
   "window.reconcile",
   "content.check",
   "content.sync",
-  "rss.run",
   "verify.unit",
   "verify.e2e",
   "verify.contracts",
