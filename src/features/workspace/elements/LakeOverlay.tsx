@@ -106,7 +106,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
       {forecastOpen && activeId === 'globe' && <ForecastRegionPicker value={manualCounty} onSelect={setManualCounty} />}
       <GmailPanel open={forecastOpen && activeId === 'mail'} />
-      {forecastOpen && activeId === 'article' && <ArticlePanel onClose={() => { setActiveId('grid'); setForecastOpen(false); }} />}
+      <ArticlePanel open={forecastOpen && activeId === 'article'} onClose={() => { setActiveId('grid'); setForecastOpen(false); }} />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>

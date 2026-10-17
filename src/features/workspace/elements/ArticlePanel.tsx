@@ -6,7 +6,7 @@ const INK = '#f5f1e6';
  *  client-side 僅負責編輯＋預覽＋產生 Markdown 檔案內容；實際發布 = 複製內容 → 建立 src/content/posts/{slug}.md → git push。
  *  瀏覽現有文章：底部「瀏覽全部文章」連向 /articles/（Astro Content Collection 列表頁）。
  */
-export default function ArticlePanel({ onClose }: { onClose: () => void }) {
+export default function ArticlePanel({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [fmTitle, setFmTitle] = useState('');
   const [fmDesc, setFmDesc] = useState('');
   const [fmCat, setFmCat] = useState('');
@@ -76,24 +76,28 @@ ${mdContent}`;
   const INPUT = 'w-full bg-black/20 border border-white/20 rounded-md p-2 text-sm text-white focus:border-green/60 focus:outline-none transition-colors';
   const LABEL = 'block text-[10px] text-white/60 uppercase tracking-wider mb-1 font-medium';
 
+  const D = { chip: 100, header: 200, label: 300, input: 400, editor: 500, preview: 600, file: 700, btn: 800 } as const;
+
   return (
     <section
-      className="article-panel"
+      className={`article-panel fc-node fc-dir-l ${open ? 'is-open' : ''}`}
       aria-label="文章發表"
       style={{
-        position: 'absolute', inset: 0, zIndex: 10, pointerEvents: 'auto',
+        position: 'absolute', top: '8%', left: '8%', right: '8%', zIndex: 5, pointerEvents: open ? 'auto' : 'none',
+        maxHeight: '88vh', overflowY: 'auto',
         background: 'rgba(0,0,0,0.3)',
+        fontFamily: '"Inter", ui-sans-serif, system-ui, sans-serif',
       }}
     >
       <style>{`
-        .article-wrap{display:flex;flex-direction:column;height:100%;gap:16px;padding:24px;overflow-y:auto;}
+        .article-wrap{display:flex;flex-direction:column;gap:16px;padding:24px;overflow-y:auto;min-height:60vh;}
         .article-header{margin-bottom:8px;}
         .article-kicker{display:block;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:2px;}
         .article-title{font-size:28px;font-weight:600;letter-spacing:-0.02em;color:#fff;margin:0;}
         .article-desc{font-size:14px;color:rgba(255,255,255,0.9);margin-top:6px;line-height:1.6;}
         .editor-grid{display:grid;grid-template-columns:1fr;gap:12px;}
         @media (min-width: 901px){.editor-grid{grid-template-columns:1fr 1fr;}}
-        .glass-card{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:12px;padding:18px 20px;backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(0,0,0,0.35);display:flex;flex-direction:column;height:100%;}
+        .glass-card{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:16px;padding:18px 20px;backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(0,0,0,0.35);display:flex;flex-direction:column;height:100%;}
         .panel-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:10px;}
         textarea.markdown-edit{width:100%;height:420px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;color:#fff;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:14px;resize:none;line-height:1.7;outline:none;}
         textarea.markdown-edit:focus{border-color:rgba(136,181,107,0.6);}
@@ -109,36 +113,48 @@ ${mdContent}`;
         .file-output label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.7);display:block;margin-bottom:8px;}
         textarea.file-text{width:100%;height:150px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;color:rgba(255,255,255,0.7);background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:12px;resize:none;outline:none;}
         .btn-row{display:flex;gap:10px;margin-top:12px;}
-        .btn{display:inline-flex;items:center;gap:6px;padding:8px 14px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
         .btn-primary{background:#88b56b;color:#11110f;}
         .btn-primary:hover{background:#7aa35f;}
         .btn-ghost{background:rgba(255,255,255,0.10);color:#fff;border:1px solid rgba(255,255,255,0.2);}
         .btn-ghost:hover{border-color:rgba(255,255,255,0.4);}
-        .btn-close{position:absolute;top:16px;right:20px;z-index:11;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,0.10);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+        .btn-close{position:absolute;top:12px;right:16px;z-index:6;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,0.10);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
         .btn-close:hover{background:rgba(255,255,255,0.2);}
         .browse-link{margin-top:16px;text-align:center;}
         .browse-link a{color:#76a7bd;text-decoration:none;font-size:13px;font-weight:600;}
         .browse-link a:hover{color:#88b56b;text-decoration:underline;}
+        /* 動畫：fc-node 隱態、is-open 顯態、stagger */
+        .fc-node{transform:translateY(14px);opacity:0;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1),opacity 0.6s cubic-bezier(0.16,1,0.3,1);}
+        .fc-node.is-open{transform:none;opacity:1;}
+        .fc-dir-l{transform:translateX(-26px);opacity:0;}
+        .fc-dir-l.is-open{transform:none;opacity:1;}
+        .fc-dir-r{transform:translateX(30px) scale(.985);opacity:0;}
+        .fc-dir-r.is-open{transform:none;opacity:1;}
+        .fc-dir-up{transform:translateY(14px);opacity:0;}
+        .fc-dir-up.is-open{transform:none;opacity:1;}
+        .fc-wipe-r{clip-path:inset(0 100% 0 0);transform:none;}
+        .fc-wipe-r.is-open{clip-path:inset(0 0 0 0);}
+        @media (prefers-reduced-motion: reduce){.fc-node,.fc-node.is-open{transition:none;transform:none;opacity:1;}}
       `}</style>
-      <button type="button" className="btn-close" aria-label="關閉文章面板" onClick={onClose}>×</button>
+      <button type="button" className={`btn-close fc-node fc-dir-r ${open ? 'is-open' : ''}`} aria-label="關閉文章面板" onClick={onClose}>×</button>
 
       <div className="article-wrap">
-        <div className="article-header">
-          <span className="article-kicker">發表新文章</span>
-          <h1 className="article-title">工作室寫作區</h1>
-          <p className="article-desc">撰寫 Markdown，即時預覽，複製檔案內容後建立 `src/content/posts/{slug}.md` 並 push 即可發布。</p>
+        <div className="article-header fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.header}ms` : '0ms' }}>
+          <span className="article-kicker fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.chip}ms` : '0ms' }}>發表新文章</span>
+          <h1 className="article-title fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.header}ms` : '0ms' }}>工作室寫作區</h1>
+          <p className="article-desc fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.header + 100}ms` : '0ms' }}>撰寫 Markdown，即時預覽，複製檔案內容後建立 `src/content/posts/${slug}.md` 並 push 即可發布。</p>
         </div>
 
         <div className="editor-grid">
           {/* 編輯器 */}
-          <div className="glass-card">
+          <div className="glass-card fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.editor}ms` : '0ms' }}>
             <div className="panel-label">編輯器</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '14px' }}>
-              <div>
+              <div className="fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.label}ms` : '0ms' }}>
                 <label className={LABEL}>標題 title</label>
                 <input value={fmTitle} onChange={(e) => setFmTitle(e.target.value)} placeholder="文章標題" className={INPUT} />
               </div>
-              <div>
+              <div className="fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.label + 50}ms` : '0ms' }}>
                 <label className={LABEL}>來源 source</label>
                 <select value={fmSource} onChange={(e) => setFmSource(e.target.value)} className={INPUT}>
                   <option value="manual">manual（原創）</option>
@@ -146,16 +162,16 @@ ${mdContent}`;
                 </select>
               </div>
             </div>
-            <div style={{ marginBottom: '14px' }}>
+            <div style={{ marginBottom: '14px' }} className="fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.label + 100}ms` : '0ms' }}>
               <label className={LABEL}>摘要 description</label>
               <input value={fmDesc} onChange={(e) => setFmDesc(e.target.value)} placeholder="一句話摘要" className={INPUT} />
             </div>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '14px' }}>
-              <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '14px' }} className="fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.label + 150}ms` : '0ms' }}>
+              <div style={{ flex: 1 }} className="fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.input}ms` : '0ms' }}>
                 <label className={LABEL}>分類 category</label>
                 <input value={fmCat} onChange={(e) => setFmCat(e.target.value)} placeholder="例如：AI 工作流" className={INPUT} />
               </div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1 }} className="fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.input + 50}ms` : '0ms' }}>
                 <label className={LABEL}>草稿 draft</label>
                 <select value={fmDraft} onChange={(e) => setFmDraft(e.target.value)} className={INPUT}>
                   <option value="false">false（公開）</option>
@@ -163,26 +179,26 @@ ${mdContent}`;
                 </select>
               </div>
             </div>
-            <div>
+            <div className="fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.input + 100}ms` : '0ms' }}>
               <label className={LABEL}>標籤 tags（逗號分隔）</label>
               <input value={fmTags} onChange={(e) => setFmTags(e.target.value)} placeholder="例如：Astro, CI/CD, 自動化" className={INPUT} />
             </div>
-            <label className={LABEL}>Markdown 內容</label>
-            <textarea className="markdown-edit" value={mdContent} onChange={(e) => setMdContent(e.target.value)} spellCheck={false} />
+            <label className={LABEL} className="fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.input + 150}ms` : '0ms' }}>Markdown 內容</label>
+            <textarea className="markdown-edit fc-node fc-dir-up ${open ? 'is-open' : ''}" value={mdContent} onChange={(e) => setMdContent(e.target.value)} spellCheck={false} style={{ transitionDelay: open ? `${D.editor + 50}ms` : '0ms' }} />
           </div>
 
           {/* 預覽 */}
-          <div className="glass-card">
+          <div className="glass-card fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.preview}ms` : '0ms' }}>
             <div className="panel-label">預覽</div>
             <div className="preview-wrap" dangerouslySetInnerHTML={{ __html: htmlPreview }} />
           </div>
         </div>
 
-        <div className="file-output">
-          <label>輸出檔案內容（複製後儲存至 `src/content/posts/{slug}.md`）</label>
+        <div className="file-output fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.file}ms` : '0ms' }}>
+          <label>輸出檔案內容（複製後儲存至 `src/content/posts/${slug}.md`）</label>
           <textarea className="file-text" readOnly value={fileContent} spellCheck={false} />
           <div className="btn-row">
-            <button type="button" className="btn btn-primary" onClick={() => {
+            <button type="button" className="btn btn-primary fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.btn}ms` : '0ms' }} onClick={() => {
               const ta = document.createElement('textarea');
               ta.value = fileContent;
               document.body.appendChild(ta);
@@ -193,7 +209,7 @@ ${mdContent}`;
             }}>
               複製檔案內容
             </button>
-            <button type="button" className="btn btn-ghost" onClick={() => {
+            <button type="button" className="btn btn-ghost fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.btn + 50}ms` : '0ms' }} onClick={() => {
               const ta = document.createElement('textarea');
               ta.value = mdContent;
               document.body.appendChild(ta);
@@ -206,11 +222,11 @@ ${mdContent}`;
             </button>
           </div>
           <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.6)', marginTop: '8px' }}>
-            步驟：1. 編輯內容 → 2. 複製檔案內容 → 3. 建立 `src/content/posts/{slug}.md` → 4. 貼上 → 5. git push 發布。
+            步驟：1. 編輯內容 → 2. 複製檔案內容 → 3. 建立 `src/content/posts/${slug}.md` → 4. 貼上 → 5. git push 發布。
           </p>
         </div>
 
-        <div className="browse-link">
+        <div className="browse-link fc-node fc-dir-up ${open ? 'is-open' : ''}" style={{ transitionDelay: open ? `${D.btn + 100}ms` : '0ms' }}>
           <a href="/articles/">瀏覽全部文章 →</a>
         </div>
       </div>
