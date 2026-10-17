@@ -193,8 +193,8 @@ describe("GmailPanel", () => {
     const css = Array.from(document.querySelectorAll("style"))
       .map((s) => s.textContent ?? "")
       .join("\n");
-    // ① 高度：media 內 max-height:52vh 帶 !important（壓過 inline 72vh；Ego 實測 607px 撞底部播放器）
-    expect(css).toContain("max-height:52vh !important");
+    // ① 高度：media 內 max-height:none 帶 !important（全屏覆蓋，壓過 inline 72vh）
+    expect(css).toContain("max-height:none !important");
     // inline 數值不動（只加 media 權重）
     expect((screen.getByLabelText("Gmail 本週重點") as HTMLElement).style.maxHeight).toBe("72vh");
     // ② 好讀：加深規則落在 ≤900px media 內（桌機外無此規則）
