@@ -9,7 +9,7 @@ const posts = defineCollection({
     date: z.coerce.date(),
     category: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    source: z.enum(['manual', 'rss', 'gmail']).default('manual'),
+    source: z.enum(['manual', 'gmail']).default('manual'),
     sourceUrl: z.string().url().optional(),
     draft: z.boolean().default(false),
   }),

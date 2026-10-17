@@ -20,11 +20,6 @@ describe('site command router', () => {
       .rejects.toThrow(/does not accept --source-mode/);
   });
 
-  test('accepts dry-run for rss.run because it is declared by the canonical contract', async () => {
-    await expect(runSiteCommand({ projectRoot, argv: ['rss', 'run', '--dry-run'] }))
-      .resolves.toMatchObject({ ok: true, command: 'rss.run', dryRun: true });
-  });
-
   test('lists semantic commands from generated registry', async () => {
     const result = await runSiteCommand({ projectRoot, argv: ['command', 'list'] });
     expect(result.ok).toBe(true);

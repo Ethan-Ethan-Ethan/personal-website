@@ -38,20 +38,18 @@ const post = (id, { draft = false } = {}) => ({
 });
 
 describe('article routing', () => {
-  test('keeps existing top-level URLs and maps nested RSS/Gmail ids to the same flat route', async () => {
+  test('maps nested ids to flat routes', async () => {
     const { getArticleHref, getArticleSlug } = await loadArticleRouting();
 
     expect(getArticleSlug(post('manual-post'))).toBe('manual-post');
     expect(getArticleHref(post('manual-post'))).toBe('/articles/manual-post');
-    expect(getArticleSlug(post('rss/aggregated-post'))).toBe('aggregated-post');
-    expect(getArticleHref(post('rss/aggregated-post'))).toBe('/articles/aggregated-post');
     expect(getArticleSlug(post('gmail/inbox/captured-post'))).toBe('captured-post');
     expect(getArticleHref(post('gmail/inbox/captured-post'))).toBe('/articles/captured-post');
   });
 
   test('uses one slug rule for listing hrefs and static paths', async () => {
     const { buildArticleListing, buildArticleStaticPaths } = await loadArticleRouting();
-    const posts = [post('manual-post'), post('rss/aggregated-post'), post('gmail/captured-post')];
+    const posts = [post('manual-post'), post('gmail/captured-post')];
 
     const hrefs = buildArticleListing(posts).map((entry) => entry.href);
     const routeHrefs = buildArticleStaticPaths(posts).map(({ params }) => `/articles/${params.slug}`);
@@ -61,34 +59,34 @@ describe('article routing', () => {
 
   test('preserves the original collection entry id in article listings', async () => {
     const { buildArticleListing } = await loadArticleRouting();
-    const sourcePost = post('rss/aggregated-post');
+    const sourcePost = post('gmail/inbox/captured-post');
 
     const [entry] = buildArticleListing([sourcePost]);
 
-    expect(entry.href).toBe('/articles/aggregated-post');
+    expect(entry.href).toBe('/articles/captured-post');
     expect(entry.post).toBe(sourcePost);
-    expect(entry.post.id).toBe('rss/aggregated-post');
+    expect(entry.post.id).toBe('gmail/inbox/captured-post');
   });
 
   test('fails closed when static routes contain duplicate flat slugs', async () => {
     const { buildArticleStaticPaths } = await loadArticleRouting();
-    const posts = [post('rss/shared-post'), post('gmail/inbox/shared-post')];
+    const posts = [post('gmail/shared-post'), post('gmail/inbox/shared-post')];
 
     expect(() => buildArticleStaticPaths(posts)).toThrow(/duplicate article slug "shared-post"/i);
   });
 
   test('fails closed when listing entries contain duplicate flat slugs', async () => {
     const { buildArticleListing } = await loadArticleRouting();
-    const posts = [post('rss/shared-post'), post('gmail/inbox/shared-post')];
+    const posts = [post('gmail/shared-post'), post('gmail/inbox/shared-post')];
 
     expect(() => buildArticleListing(posts)).toThrow(/duplicate article slug "shared-post"/i);
   });
 
   test('excludes drafts before checking routes and listings for collisions', async () => {
     const { buildArticleListing, buildArticleStaticPaths } = await loadArticleRouting();
-    const posts = [post('rss/shared-post'), post('gmail/inbox/shared-post', { draft: true })];
+    const posts = [post('gmail/shared-post'), post('gmail/inbox/shared-post', { draft: true })];
 
-    expect(buildArticleListing(posts).map(({ post: entry }) => entry.id)).toEqual(['rss/shared-post']);
+    expect(buildArticleListing(posts).map(({ post: entry }) => entry.id)).toEqual(['gmail/shared-post']);
     expect(buildArticleStaticPaths(posts).map(({ params }) => params.slug)).toEqual(['shared-post']);
   });
 
@@ -123,12 +121,10 @@ describe('article routing', () => {
       );
 
       const htmlFiles = await collectHtmlFiles(outputDirectory);
-      const rssSlug = '2026-07-11-ghost-font-a-font-that-humans-can-read-but-ai-cannot';
 
       expect(htmlFiles.length).toBeGreaterThan(4);
       expect(htmlFiles).toContain('articles/ai-workflow/index.html');
-      expect(htmlFiles).toContain(`articles/${rssSlug}/index.html`);
-      expect(htmlFiles).not.toContain(`articles/rss/${rssSlug}/index.html`);
+      expect(htmlFiles).not.toContain(`articles/rss/`);
     } finally {
       await rm(temporaryRoot, { recursive: true, force: true });
     }

@@ -3,10 +3,9 @@ import { resolve } from 'node:path';
 import { parseSiteSystem, validateSiteSystem } from './site-system.mjs';
 import { handleSystemCommand } from '../commands/system.mjs';
 import { handleContentCommand } from '../commands/content.mjs';
-import { handleRssCommand } from '../commands/rss.mjs';
 import { handleVerifyCommand } from '../commands/verify.mjs';
 
-export const SITE_HELP = `Usage: npm run site -- <domain> <action> [options]\n\nDomains:\n  system   validate | generate\n  command  list\n  content  check | sync\n  rss      run\n  verify   unit | e2e | contracts | transition | build | all\n\nOptions:\n  --dry-run\n  --source-mode <auto|artifact>\n  --project-root <path>\n  --help\n`;
+export const SITE_HELP = `Usage: npm run site -- <domain> <action> [options]\n\nDomains:\n  system   validate | generate\n  command  list\n  content  check | sync\n  verify   unit | e2e | contracts | transition | build | all\n\nOptions:\n  --dry-run\n  --source-mode <auto|artifact>\n  --project-root <path>\n  --help\n`;
 
 const CONTRACT_OPTION_NAMES = new Map([
   ['--dry-run', 'dry-run'],
@@ -72,7 +71,6 @@ export async function runSiteCommand({ projectRoot = process.cwd(), argv = [] })
   if (command === 'command.list') return { ok: true, command, lines: declared };
   if (parsed.domain === 'system') return handleSystemCommand(root, parsed.action, parsed);
   if (parsed.domain === 'content') return handleContentCommand(root, parsed.action, parsed);
-  if (parsed.domain === 'rss') return handleRssCommand(root, parsed.action, parsed);
   if (parsed.domain === 'verify') return handleVerifyCommand(root, parsed.action);
   throw new Error(`command ${command} is runtime-only; use the website interaction surface`);
 }

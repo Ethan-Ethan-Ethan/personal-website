@@ -142,7 +142,6 @@ ${mdContent}`;
                 <label className={LABEL}>來源 source</label>
                 <select value={fmSource} onChange={(e) => setFmSource(e.target.value)} className={INPUT}>
                   <option value="manual">manual（原創）</option>
-                  <option value="rss">rss（聚合）</option>
                   <option value="gmail">gmail（擷取）</option>
                 </select>
               </div>
