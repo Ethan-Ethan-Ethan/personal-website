@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
-import { selectForecastData } from '../core/cwa-forecast';
+import { countyByName, nearestCounty, parseCwaWeekly, toForecastData, CWA_DEFAULT_COUNTY, type CwaCounty } from '../core/cwa-forecast';
 import snapshotDoc from '../core/cwa-snapshot.json';
 import { HEXMAP } from '../core/recipe-runtime-binding';
 import ForecastGlass from './ForecastGlass';
 import ForecastSideRail, { HouseIcon } from './ForecastSideRail';
 import ForecastBottomBar from './ForecastBottomBar';
+import ForecastRegionPicker from './ForecastRegionPicker';
 import GmailPanel from './GmailPanel';
 import useReducedMotion from './useReducedMotion';
 import SplitText from '../../../components/reactbits/SplitText';
@@ -52,10 +53,20 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       { timeout: 6000, maximumAge: 3600000 }
     );
   }, []);
-  const forecastData = useMemo(
-    () => selectForecastData(snapshotDoc, geo).data ?? FORECAST_PLACEHOLDER,
-    [geo]
-  );
+  // 手動地區選擇優先於定位；定位失敗／拒絕時回退預設縣市（臺北）。
+  const [manualCounty, setManualCounty] = useState<string | null>(null);
+  const counties = useMemo(() => {
+    try { return parseCwaWeekly(snapshotDoc); } catch { return []; }
+  }, []);
+  const forecastData = useMemo(() => {
+    let main: CwaCounty | null = null;
+    if (manualCounty) main = countyByName(counties, manualCounty);
+    if (!main && geo) main = nearestCounty(counties, geo.lat, geo.lon);
+    if (!main) main = countyByName(counties, CWA_DEFAULT_COUNTY) ?? counties[0] ?? null;
+    if (!main) return FORECAST_PLACEHOLDER;
+    const rest = counties.filter((c) => c !== main);
+    return toForecastData(main, rest.slice(0, 3));
+  }, [manualCounty, geo, counties]);
   useEffect(() => {
     if (!forecastOpen) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setForecastOpen(false); };
@@ -91,7 +102,8 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       {/* 底欄點鍵＝選中＋開面板（手機無反應算壞）；桌機側軌維持只切 active 不動 forecastOpen */}
       <ForecastSideRail onClose={() => setForecastOpen(false)} open={forecastOpen} activeId={activeId} onSelect={setActiveId} />
       <ForecastBottomBar activeId={activeId} onSelect={(id) => { setActiveId(id); setForecastOpen(true); }} />
-      <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
+      {forecastOpen && activeId === 'grid' && <ForecastGlass data={forecastData} open />}
+      {forecastOpen && activeId === 'globe' && <ForecastRegionPicker value={manualCounty} onSelect={setManualCounty} />}
       <GmailPanel open={forecastOpen && activeId === 'mail'} />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
