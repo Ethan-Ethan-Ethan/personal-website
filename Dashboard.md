@@ -233,4 +233,4 @@ npm run dev          # 或 astro dev --background
 | `visual-design/`／`vlog/`／`website-deploy/`／`resume-links/`（剪報箱 vs 內容庫待定性） | 使用者 | 需先定義定性才能定處置，不代判 | 2026-11-18 | 否 |
 | `plan/` 舊 appendix 群＋untracked 新產物（待區分歸檔 vs 收納） | 主 Agent | 逐項提案後處理，不順手加 | 2026-11-18 | 否 |
 | contracts 三套定性已正（theme-switch 有效／palette 佔位 by-design／style-contract demo 有效）＋`test-results/.last-run.json` 樁值待真實 reporter | 主 Agent | 樁值不手動改值，另案接 reporter 自然覆寫 | 2026-11-18 | 否 |
-| hero `.workspace-copy` 字距字級微調（commit 待人工 preview） | 使用者 | 美學需人眼；preview 不過即 revert 該 commit | 2026-10-26 | 否 |
+| hero `.workspace-copy` 字距字級微調 | 使用者 | ✅ 2026-10-19 人工 preview 通過，pending 解除（若後續發現問題仍可 revert `ca4a6ae`） | 2026-10-26 | 否（已關閉） |
