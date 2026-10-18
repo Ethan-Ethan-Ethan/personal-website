@@ -1,4 +1,5 @@
 # recipe-runtime-binding.v1.yaml — Recipe→site-system 綁定表契約（Task 6，runtime legacy contract）
+# 治理登記（2026-10-14 YAML 共用優先）：derived_from: ./website-recipe.v1.schema.yaml（站內分支，檔內上游聲明）。
 # 上游：website-recipe.v1.schema.yaml＋Task 2 recipe_hash（scene/visual/motion 語意層）
 # 規則：缺值一律降級靜態可讀頁，絕不猜測補值。本 Task 不改 components/CSS/Three.js。
 # NOTE 2026-10-13（binding 對齊）：WebsiteRecipeV1（website-style-recipe.ts L37）已演進為
