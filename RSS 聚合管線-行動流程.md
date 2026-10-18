@@ -14,6 +14,8 @@ source_url_state: direct
 
 # RSS 聚合管線 — 行動流程
 
+> 2026-10-18 歷史註記：下述 `scripts/rss-aggregate.mjs`／`scripts/rss-feeds.json`／`src/content/posts/rss/`／`scripts/.rss-cache.json`／`.github/workflows/rss-aggregate.yml` 磁碟皆不存在（workflows 僅存 deploy.yml）；有效內容鏈改走 `config/public-content.json`→sync（見 Dashboard）。本檔保留作歷史參考，按圖操作前先確認檔案已恢復。
+
 ## 目標
 每日自動從多個 RSS 源擷取文章，去重後產生 Markdown 檔，存入 repo 供 Astro 網站渲染。
 
