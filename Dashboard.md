@@ -30,12 +30,12 @@ tags:
 > 來源去重：`01-Personal Website.md` 與 `網站重建計畫 2026.md` 原本各寫一份重複清單，此處為唯一正本。
 
 - [x] **#1 Decap CMS GitHub OAuth 驗證** — ✅ 2026-08-27 決議**放棄 Decap**（路線 B）並從 repo 移除 `public/admin/`；live `/admin/*` 剩 DigitalPlat edge 快取殘留（等 ≤7 天 TTL）。孤兒 GitHub OAuth App（client_id `Ov23liWBSrm6U8VNv6Zi`）已於 2026-08-27 由使用者在 GitHub UI 刪除 → #1 完全收尾。
-- [ ] **#2 測試「瀏覽器寫文章 → commit → 自動部署」** — ❌ 隨 #1 放棄 Decap 而取消；改用 #C 手動寫文流程（直接新增 `src/content/posts/*.md` 並 `git push`）。
+- [x] **#2 測試「瀏覽器寫文章 → commit → 自動部署」** — ❌ 隨 #1 放棄 Decap 而取消；改用 #C 手動寫文流程（直接新增 `src/content/posts/*.md` 並 `git push`）。（2026-10-19 確認關閉：取消非待辦）
 - [x] **#3 Cloudflare Access 設定（`/protected/*` 路由保護）** — ✅ 2026-08-27 實測生效：未帶憑證訪問 /protected/resume 回傳 302 導向 cloudflareaccess.com 登入；App「Ethan Personal Website Protected」允許 isitoled@gmail.com（GitHub IdP）。原計畫書「待完成」為過期狀態。
 - [x] **#4 停用舊 Workers 部署（`steep-glitter-0952`）** — ✅ 2026-08-27 已透過 Cloudflare API 刪除 script（剩 isitoled / red-mode-ea77，非目標）。舊站徹底停用。
 - [ ] **#5 網域續簽** — 到期 Jun 15, 2027，免費續期窗口約 2027-02-15 起（到期前 120 天）；SOP 與追蹤已建（見專區）。2026-10-13 實查無需動作，待窗口內執行
 - [ ] **#6 Reddit 替代 RSS 源評估** — 已評估：Reddit 伺服器端 403 早已由「改用 RSSHub 36Kr 源」緩解（feeds 現無 Reddit，見 踩坑紀錄/Worklog）。若要真 Reddit 內容，替代方案：①Reddit OAuth API（需建 Reddit app + 憑證）②穩定 RSSHub/Redlib 實例（公共實例不穩）。待你決定是否要真 Reddit。
-- [ ] **#7 檢查履歷公開 / 私人邊界** — ✅ 已做公開「摘要版履歷頁」：`src/pages/resume.astro`（職稱/時間/雇主/技能/學歷/摘要，**去機密**：隱藏電話、客戶名稱與量化細節），導覽「履歷」與首頁卡片改指向 `/resume`；完整版仍留 `/protected/resume`（Cloudflare Access）。`astro build` 859 頁通過。**待 push 上線（使用者 2026-08-27 選本地保留，未推）**。
+- [x] **#7 檢查履歷公開 / 私人邊界** — ✅ 已做公開「摘要版履歷頁」：`src/pages/resume.astro`（職稱/時間/雇主/技能/學歷/摘要，**去機密**：隱藏電話、客戶名稱與量化細節），導覽「履歷」與首頁卡片改指向 `/resume`；完整版仍留 `/protected/resume`（Cloudflare Access）。`astro build` 859 頁通過。**2026-10-19 實測 `/resume/` 線上 200（標題「履歷摘要 | Ethan」），已上線，本項關閉。**
 - [x] **#8 工作台卡片滑動面板功能** — ✅ 2026-08-27 實作：首頁新增「工作台」區塊，3 卡片（待辦健康度 / 週報 / 經驗沉澱）點擊後用 `grid-template-rows: 0fr→1fr` 滑出下方面板；`astro build` 35 頁通過。週報 / 經驗沉澱面板內容待填。
 - [ ] **#9 網站樣式優化** — 2026-08-27 使用者表態想做網頁樣式；採用開源 skill `dembrandt/dembrandt-skills`（已 clone 至 `Agent-Skills/dembrandt-skills`，41 個 UX/design-system 技能，經 `~/.config/opencode/skills → Agent-Skills` 既有 symlink 自動載入；MIT）。dembrandt MCP 引擎已接（本地 stdio，`opencode.jsonc` 的 `mcpServers.dembrandt`）；實測 `dembrandt https://ethanyang.dpdns.org` 擷取成功（顏色 9 / 字體 19 / 間距 12 / 圓角 4 / 按鈕 2 變體，與 global.css 一致），Cloudflare 未擋。MCP 工具需重啟 OpenCode 才載入；CLI 已可直接用。下一步：把 tokens 存到 `design-system/` 供 `website-analyze` 用，並挑子技能（color-mode-and-theme / algorithmic-color-palette / component-family-consistency / wcag-accessibility）套用優化。
 - [x] **#10 Cozy Galaxy 玩偶披風微動畫** — Desktop／Tablet／Mobile 已接入照片披風 Alpha 三段 CSS rig，使用者已確認可見且速度調整後可接受；未做 clean plate 或 AI inpainting。設計正本：`/Users/ethan/Documents/memory/design/2026-09-06-personal-website-plush-cape-motion-design.md`。
