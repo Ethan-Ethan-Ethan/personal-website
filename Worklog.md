@@ -11,10 +11,6 @@ source_exempt: true
 
 > 合併專案工作紀錄：原 Personal-Website（Astro 7 重建）+ Website Design System（設計方法論）
 
-## 2026-09-06 Replan 2 — 真實 Window Mask 接入
-
-## 2026-09-06 Replan 3 — 移除實心背景與前景重繪
-
 ## 2026-09-06 Replan 4 — 流星位於電腦後方
 
 ### 精確需求
@@ -145,8 +141,6 @@ backdrop-filter: blur(8px);
 - GREEN：compact header PASS。
 - Full E2E：39 PASS、17 expected skip、0 FAIL。
 - Astro build：860 pages。
-
-## 2026-09-06 現況更新 — 星空與電腦景深
 
 ## 問題與解法
 
