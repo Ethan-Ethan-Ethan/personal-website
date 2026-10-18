@@ -188,13 +188,16 @@ describe("GmailPanel", () => {
       expect(((g as HTMLElement).closest(".fc-node") as HTMLElement).style.transitionDelay).toBe("0ms");
     }
   });
-  it("mobile media: panel height wins over inline 72vh; cards darken (desktop inline untouched)", () => {
+  it("mobile media: panel becomes full-height scroll region like forecast-stack (desktop inline untouched)", () => {
     render(<GmailPanel open />);
     const css = Array.from(document.querySelectorAll("style"))
       .map((s) => s.textContent ?? "")
       .join("\n");
-    // ① 高度：media 內 max-height:52vh 帶 !important（壓過 inline 72vh；Ego 實測 607px 撞底部播放器）
-    expect(css).toContain("max-height:52vh !important");
+    // ① 幾何：media 內 top:0＋bottom:110px＋max-height:none（壓過 inline 72vh；整頁捲動區同 forecast-stack，
+    // 底部止於底欄上方不撞播放器，取代 52vh 小盒；往上滑整區跟著走，不裁視窗）
+    expect(css).toContain("top:0 !important;");
+    expect(css).toContain("bottom:110px !important;");
+    expect(css).toContain("max-height:none !important;");
     // inline 數值不動（只加 media 權重）
     expect((screen.getByLabelText("Gmail 本週重點") as HTMLElement).style.maxHeight).toBe("72vh");
     // ② 好讀：加深規則落在 ≤900px media 內（桌機外無此規則）
@@ -213,7 +216,7 @@ describe("GmailPanel", () => {
     render(<GmailPanel open />);
     const section = screen.getByLabelText("Gmail 本週重點") as HTMLElement;
     // rail 在 section 內、主欄之後（DOM 尾）：Top3 四卡皆先於 rail，
-    // 手機 static 自然接在主欄之後，進同一 52vh 捲動流（根因：兄弟節點 static 流入 overlay 頂部交疊）
+    // 手機 static 自然接在主欄之後，進同一整頁捲動流 top:0→bottom:110px（同 forecast-stack；根因：兄弟節點 static 流入 overlay 頂部交疊）
     const rail = within(section).getByLabelText("重點側欄") as HTMLElement;
     const flats = within(section).getAllByTestId("top3-flat");
     expect(flats.length).toBe(4);

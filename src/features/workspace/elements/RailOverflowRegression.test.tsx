@@ -55,15 +55,17 @@ describe("rail horizontal-scrollbar regression", () => {
     expect(rail.style.overflowY).toBe("auto");
     expect(rail.style.overflowX).toBe("hidden");
   });
-  it("gmail-panel mobile (<=900px) sits below header-chip: top:132px", () => {
+  it("gmail-panel mobile (<=900px) uses full-height scroll region like forecast-stack", () => {
     render(<GmailPanel open />);
     const css = Array.from(document.querySelectorAll("style"))
       .map((s) => s.textContent ?? "")
       .join("\n");
-    // Ego 390px 實測：header chip 101–127；FAB 已退役（底欄取代），面板仍避讓 header 區。
-    // 修法：手機 media 內 .gmail-panel 加 top:132px（chip bottom 127＋5px 間隙），桌機不動。
+    // Ego 390px 實測：header chip 101–127；FAB 已退役（底欄取代）。舊法 top:132px＋52vh 小盒會裁內容，
+    // 改整頁捲動區 top:0→bottom:110px（止於底欄上），padding-top:96px 避讓 header 區，桌機不動。
     expect(css).toContain(
-      "@media (max-width: 900px){.gmail-panel{top:132px !important;"
+      "@media (max-width: 900px){.gmail-panel{top:0 !important;"
     );
+    expect(css).toContain("bottom:110px !important;");
+    expect(css).toContain("padding:96px 5% 130px;");
   });
 });
