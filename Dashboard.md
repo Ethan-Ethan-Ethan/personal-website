@@ -223,3 +223,13 @@ npm run dev          # 或 astro dev --background
 - 2026-10-12：hero 決策定案（方案A：Lake 背景保留＋forecast glass 疊加；Q1-A＋G2a＋G4 全過，carousel 排除另案）。commits：`edbfbf0→05684d9`（`edbfbf0..05684d9` 實測 7 個＋基底 edbfbf0；派發單寫 6，以 git log 實測為準）。
 - 2026-10-12：hero 證據（Phase 5 進行中）：`system validate` 綠（BUILD_EXIT 0）／`vitest` 21 files／160 tests 綠（VITEST_EXIT 0）／本次 e2e brand-image 6/6 綠（desktop＋mobile，EXIT 0）／reduced-motion 終態＋手機 rail 堆疊不斷裂。
 - 2026-10-12：hero 待辦：①對比度待真機 human acceptance（靜態儀器值無意義，沿 lake 前例）②全量 e2e 47 failed＝pre-existing 非回歸（WorkspaceDesktop 停用分支，基線 f73326d 已寫死，本次零改 index.astro）③真資料後補（只改 forecast-placeholder.ts）＋carousel 真資料後另案。計畫：`plan/homepage-hero-ethan-image.md`（Task 7／Phase 5 待 Dashboard＋Worklog 同步後 commit）。
+
+## Deferred（2026-10-18 立，revisit 2026-11-18 前）
+
+| target | owner | reason | revisit_when | blocks_current_closure |
+|---|---|---|---|---|
+| `deploy/personal-site-starter.zip`（舊包，現役 Pages deploy） | 使用者 | 刪包不可逆，或需留作歷史回滾參照，待清理提案確認 | 2026-11-18 | 否 |
+| `work/foreground-segmentation/.venv/`＋models（可重生中間檔） | 主 Agent | 前景驗證確認完成後可移 trash，驗證前保留 | 2026-11-01 | 否 |
+| `visual-design/`／`vlog/`／`website-deploy/`／`resume-links/`（剪報箱 vs 內容庫待定性） | 使用者 | 需先定義定性才能定處置，不代判 | 2026-11-18 | 否 |
+| `plan/` 舊 appendix 群＋untracked 新產物（待區分歸檔 vs 收納） | 主 Agent | 逐項提案後處理，不順手加 | 2026-11-18 | 否 |
+| contracts 三套定性已正（theme-switch 有效／palette 佔位 by-design／style-contract demo 有效）＋`test-results/.last-run.json` 樁值待真實 reporter | 主 Agent | 樁值不手動改值，另案接 reporter 自然覆寫 | 2026-11-18 | 否 |
