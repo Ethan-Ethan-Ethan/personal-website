@@ -1,4 +1,5 @@
 {
+  // 2026-10-18 註記：本檔為已退役 Workers `steep-glitter-0952` 孤兒配置（2026-08-27 已刪 script，見 Dashboard #4）；現役部署為 `.github/workflows/deploy.yml` → `pages deploy dist`，不讀本檔。勿改 directory 復用，待清理提案。
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "steep-glitter-0952",
   "account_id": "c73dba6f5aac979271d75c66c05369ad",

@@ -22,7 +22,7 @@ tags:
 | 框架 | Astro 7 + Tailwind v4 + GitHub Actions + Cloudflare Pages |
 | Repo | `Ethan-Ethan-Ethan/personal-website` |
 | 部署觸發 | `git push` → `main` → `.github/workflows/deploy.yml` 自動部署 |
-| RSS 排程 | `.github/workflows/rss-aggregate.yml` 每日 UTC 02:00 |
+| RSS 排程 | `.github/workflows/rss-aggregate.yml` 每日 UTC 02:00（2026-10-18 註記：該檔磁碟缺失，僅存 deploy.yml；有效內容鏈改走 public-content.json→sync，見稽核） |
 | 整體狀態 | Cozy Galaxy P0 視覺重構進行中：房間、流星遮擋、披風微動畫與 responsive runtime 已建立；螢幕小方框＋底部連結 preview 已完成本地實作與自動驗證，目前等待人工確認構圖，再決定第二階段直接連結或 floating window |
 
 ## 代辦清單（正本，已去重）
@@ -101,7 +101,7 @@ npm run dev          # 或 astro dev --background
 # 停止：astro dev stop ｜ 狀態：astro dev status ｜ 日誌：astro dev logs
 ```
 
-### B. 透過 Decap CMS 瀏覽器編輯（目標流程，**被 #1 阻擋**）
+### B. 透過 Decap CMS 瀏覽器編輯（目標流程，**被 #1 阻擋**）（2026-10-18 註記：Decap 已於 #1 決議放棄，本流程退役；現行寫文走 C 手動流程）
 > ⚠️ 現狀：`auth: github` 走 Netlify 閘道（已停用 404），自訂 client_id 無效。
 > 需先架設 **External OAuth Client proxy** 並把 `auth` 指向它，本流程才可用。
 1. 開瀏覽器前往 `https://ethanyang.dpdns.org/admin/`

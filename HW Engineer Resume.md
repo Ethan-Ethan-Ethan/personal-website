@@ -15,7 +15,8 @@ source_exempt: true
 
 # HW Engineer Resume
 
-> Based on [[05_Reference/硬體開發工作/硬體專案索引|硬體專案索引]] (Project Index)
+> Based on [[04_Projects/硬體開發素材/03-Source Notes/硬體專案索引|硬體專案索引]] (Project Index)
+> Canonical: [[04_Projects/個人網站/履歷|履歷.md]]; this file is the English derivative.
 > Chinese version → [[履歷 - 硬體工程師]]
 
 ---
@@ -119,6 +120,6 @@ Full-stack Hardware Engineer with **10+ years** of experience in Server/NB platf
 
 ## References
 
-- [[05_Reference/硬體開發工作/硬體專案索引|硬體專案索引]] — Full project directory
+- [[04_Projects/硬體開發素材/03-Source Notes/硬體專案索引|硬體專案索引]] — Full project directory
 - [[履歷 - 硬體工程師]] — Chinese version
 - `~/Documents/硬體開發工作/履歷/` — Existing resume files

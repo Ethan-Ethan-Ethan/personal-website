@@ -29,6 +29,7 @@ source_exempt: true
 ├── generate_resume_pdf.py
 └── generate_local_resume_pdf.py
 ```
+> 2026-10-18 實測註記：磁碟僅存 `generate_local_resume_pdf.py`，`generate_resume_pdf.py` 缺失；`resume/` 另有 v4＋FAE 版由 `resume/generate-pdf.sh`（印 `履歷/履歷.html`）產出，不走本節雙軌。改生成器前先對齊 G2 registry。
 
 ## 執行方式
 
@@ -98,7 +99,7 @@ pip install reportlab
 1. 用文字編輯器打開對應的 `.py` 檔案
 2. 修改 `story` 列表中的內容（文字、項目、職稱等）
 3. 執行腳本重新生成 PDF
-4. 公開版要記得上傳到 Cloudflare Workers（`personal-site-starter.zip`）
+4. 公開版要記得上傳到 Cloudflare Workers（`personal-site-starter.zip`）（2026-10-18 註記：Workers 已退役＋該 zip 為舊包；現役為 Pages deploy dist，本步停用待清理提案）
 
 ## 待補欄位
 

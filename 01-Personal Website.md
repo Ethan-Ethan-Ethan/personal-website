@@ -249,7 +249,7 @@ site_highlights:
 
 ## 內容分區
 
-> 網站內容索引與素材分類
+> 網站內容索引與素材分類（2026-10-18 註記：vlog／visual-design／resume-links／website-deploy 目前為剪報箱性質，未接入 sync；若算內容庫則不凍，若算閒置則待你定義後補凍結標記，不自行封存）
 
 - **履歷**：引用既有正本（`04_Projects/個人網站/履歷/`），不在本專案複製
 - **Vlog**：影片剪輯、旁白、素材整理流程 → `vlog/`
@@ -258,7 +258,7 @@ site_highlights:
 - **視覺設計**：個人品牌、版面、形象照 → `visual-design/`
 - **履歷素材**：履歷相關素材與入口 → `resume-links/`
 
-### 首頁規劃
+### 首頁規劃（2026-10-18 註記：下為 Cozy Galaxy 歷史規劃；現況以 2026-10-12 LakeLanding live 為準，見下行）
 
 ```text
 Cozy Galaxy AI Workshop
@@ -296,7 +296,7 @@ git push (main)
 | Workflow | Trigger | 說明 |
 |----------|---------|------|
 | `deploy.yml` | push to main | 自動部署到 Cloudflare Pages（與 Pages 原生整合重複，保留供擴充） |
-| `rss-aggregate.yml` | daily UTC 02:00 | RSS 聚合 → auto-commit Markdown |
+| `rss-aggregate.yml`（2026-10-18 註記：磁碟僅存 deploy.yml，本檔缺失；待補或改以手動流程） | daily UTC 02:00 | RSS 聚合 → auto-commit Markdown |
 
 ### Cloudflare Pages 設定
 
@@ -330,7 +330,7 @@ curl -I https://ethanyang.dpdns.org/articles/   # expect 200
 curl -I https://personal-website-bvk.pages.dev/ # expect 200
 ```
 
-## 待辦清單
+## 待辦清單（2026-10-18 註記：本節為歷史快照；代辦正本以 Dashboard.md「代辦清單（正本，已去重）」為準。Decap 已放棄、Workers 已刪、Access 已生效，見 Dashboard #1/#3/#4）
 
 ### 待完成
 

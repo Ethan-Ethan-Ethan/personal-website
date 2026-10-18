@@ -62,6 +62,11 @@ npm run site -- --help
 | `npm test` | 執行 Vitest unit tests |
 | `npm run test:e2e` | 執行 Playwright 互動與路由測試 |
 | `npm run verify` | unit → e2e → contracts → content → build |
+| `npm run sync:cwa` | 中央氣象署預報抓取＋bake（需 Keychain `cwa`） |
+| `npm run content:dsh` | 內容 DSH 演化試點 |
+| `npm run verify:n-budget` | 導覽預算檢查 |
+| `npm run verify:baseline-hashes` | 基線雜湊檢查 |
+| `npm run verify:transition` | 轉場單一來源檢查 |
 | `npm run build` | 驗證系統與公開內容後建立 Astro 靜態站 |
 
 ## 開發邊界
