@@ -3,7 +3,7 @@ type: project
 status: active
 project: personal-website
 created: 2026-06-15
-updated: 2026-09-06
+updated: 2026-10-19
 tags:
   - project/personal-website
   - domain/ai-dev
@@ -17,13 +17,13 @@ site_section: projects
 site_slug: personal-website
 site_title: Personal Website
 site_summary: 把內容管線、交易視覺化與個人品牌整合成可持續維護的 Astro 網站。
-site_last_reviewed: 2026-09-05
+site_last_reviewed: 2026-10-19
 site_featured: true
 site_order: 10
 site_demo_url: https://ethanyang.dpdns.org
 site_highlights:
   - Astro 7 靜態內容架構
-  - RSS 與 Gmail 自動聚合
+  - 湖面首頁＋氣象／Gmail 側欄（bake）
   - Cloudflare Pages 自動部署
 
 ---
@@ -38,29 +38,35 @@ site_highlights:
 - **正式網站**：[https://ethanyang.dpdns.org/](https://ethanyang.dpdns.org/)
 - **第二代 Astro 7 站**：`https://personal-website-bvk.pages.dev`（Cloudflare Pages，push to main 自動部署）
 - **Repo**：`Ethan-Ethan-Ethan/personal-website`
-- **狀態**：系統重構與自動驗證已通過；本地 Grounding DINO＋SAM 2.1 透明前景已接入，等待人工視覺驗收
-- **待完成**：Decap CMS OAuth 驗證、瀏覽器寫文測試、網域續約（2027-02-15 窗口，到期 Jun 15, 2027）、Reddit 替代源、履歷公開邊界（Cloudflare Access / 停用舊 Workers 已於 2026-08-27 完成）
+- **狀態**：正式站 live 為湖面首頁（`USE_LAKE=true`，`main` 已部署）。Cozy Galaxy／透明前景為停用分支，不是現役焦點。代辦正本見 [[Dashboard]]
+- **待完成（入口不重複列）**：網域續約 #5、Reddit 源 #6、樣式 #9。Decap／OAuth／履歷公開邊界／Workers 已關（Dashboard #1–#4、#7）
 - **技術棧**：Astro 7 + React island + Three.js + Tailwind CSS v4 + Playwright/Vitest + Cloudflare Pages
 - **域名**：`ethanyang.dpdns.org`（DigitalPlat FreeDomain，續期檢查 2027-02-15，到期 Jun 15, 2027）
 - **成本**：全站零成本基礎設施（$0/月）
 - **AI Lab 模組**：[[04_Projects/個人網站/ai-lab/README|AI Lab]]（網站組裝與公開映射；專案正文仍留原 Canonical Source）
 
-## 目前焦點（2026-09-06）
+## 目前焦點（2026-10-19）
 
 ```text
-正確場景分層
-├── 背景：房間與窗外底圖
-├── 中景：Three.js 星空／星雲／流星
-└── 前景：具 Alpha 的完整電腦、玩偶與桌面物件
+live 首頁（LakeLanding）
+├── 湖面 Canvas＋魚群＋時段音訊
+├── Overlay：房子鈕／側軌／底欄
+│   ├── 總覽＝CWA 預報（cwa-snapshot.json，手動 npm run sync:cwa）
+│   ├── Gmail＝週報 bake（gmail-digest.json，手動 sync-gmail.mjs）
+│   ├── 文章＝本機組 md 面板（非 /articles 列表）
+│   ├── 地區＝縣市選擇
+│   └── 圖表／日曆／搜尋＝只亮燈（deferred）
+└── About dialog；分頁 /articles /trading /resume /protected
 ```
 
-- **Mac Vision 判定**：桌機玩偶區僅保留約 2.8%、桌面約 7%，且錯留約 27% 窗外背景；本地 Qwen 複驗為 FAIL，已排除。
-- **實作路線**：本地 Qwen／Grounding DINO 定位物件，SAM 2.1 Hiera Small 產生逐物件 mask；BiRefNet HR-matting 因本機 dtype 相容失敗兩次，依規則停止。
-- **已接入素材**：`workspace-foreground-alpha.webp`（桌機 241 KB）與 `workspace-mobile-foreground-alpha.webp`（手機 96 KB）。
-- **程式調整**：移除電腦與玩偶的不透明 WebP polygon overlay；保留純 CSS 眼睛、圍巾與光暈動畫。
-- **下一步**：由使用者在本機 preview 人工檢查邊緣、漏切與背景殘留；必要時只精修 mask，不回退 polygon。
-- **驗收標準**：星星可在窗外與電腦後方移動，但不得穿過電腦外殼、螢幕框、玩偶或桌面物件。
-- **發布狀態**：尚未合併 `main`、尚未部署 production；本機 preview 僅供視覺檢查。
+- **開關**：`src/pages/index.astro` `USE_LAKE=true`。回滾湖面：改 `false` 才掛 WorkspaceDesktop。
+- **凍結**：Cozy Galaxy（星空／前景 occluder／hotspot preview）、scene.*／window.* 命令、legacy e2e（預設 `testIgnore`）。
+- **YAML**：`config/site-system.yaml` 已登記 lake-canvas／fish-layer／lake-overlay 為 live；Galaxy 元素保留凍結。`npm run system:generate` 後 `src/generated/site-system.ts` 必須無 drift。
+- **發布狀態**：已在 `main`／production（2026-10-19 `curl` `/` 200，HTML 含 `lake-landing`）。
+
+### 歷史焦點（2026-09-06 Cozy Galaxy，已凍結）
+
+當時場景分層：房間底圖 → Three.js 星空／流星 → Alpha 前景電腦與玩偶。Grounding DINO＋SAM 2.1 素材已接入；人工驗收與 hotspot 二階段隨該分支凍結，不阻擋現役湖面。
 
 ## 里程碑
 
@@ -258,25 +264,19 @@ site_highlights:
 - **視覺設計**：個人品牌、版面、形象照 → `visual-design/`
 - **履歷素材**：履歷相關素材與入口 → `resume-links/`
 
-### 首頁規劃（2026-10-18 註記：下為 Cozy Galaxy 歷史規劃；現況以 2026-10-12 LakeLanding live 為準，見下行）
+### 首頁規劃（live＝湖面；Galaxy 樹為歷史）
 
 ```text
-Cozy Galaxy AI Workshop
-├── 窗外宇宙：Three.js 星空、星雲、行星與流星
-├── 書桌前景：電腦遮擋星空，燈光、植物與 glow 微動畫
-├── 玩偶：呼吸、眨眼、耳朵與圍巾動態
-└── HTML 工作區
-    ├── Projects
-    ├── AI Lab
-    ├── Trading Lab
-    └── About / Contact
+LakeLanding（USE_LAKE=true）
+├── 時段名 SplitText＋播放鍵
+├── 氣象玻璃／Gmail／文章面板／地區
+└── 右上時間＋About
 ```
 
-- 主文案：**我打造能持續驗證與演化的 AI 系統。**
-- 桌機使用可拖曳視窗；手機使用單一全螢幕 active card。
-- URL hash、瀏覽器返回鍵、鍵盤與 reduced-motion 均納入互動契約。
-- 架構正本：`config/site-system.yaml`；指令入口：`npm run site -- <domain> <action>`。
-- 2026-10-12 現況補充：首頁已切湖面（LakeLanding live，USE_LAKE=true），導覽為浮空極簡（左上品牌 Ethan、右上時間＋About 彈框）；Selected work 已下架（trading 未好）；About 為原生 dialog 灰底彈框（`src/components/AboutDialog.astro`），/resume 整頁保留。
+- 主文案仍：**我打造能持續驗證與演化的 AI 系統。**（noscript／品牌）
+- 可拖曳視窗／hash／AI Lab 浮動窗＝WorkspaceDesktop，**現役首頁不走這條**。
+- CLI 仍：`npm run site -- <domain> <action>`。結構 YAML 見上「YAML」條。
+- About：`src/components/AboutDialog.astro`；完整履歷 `/resume` 與 `/protected/resume`。
 
 ## 網站部署
 
@@ -334,14 +334,14 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 
 ### 待完成
 
-- [ ] P0：人工驗收桌機／手機 Alpha 前景的邊緣與漏切；通過後才允許合併 `main`
-- [ ] Phase 2：GitHub OAuth 驗證（Decap CMS 瀏覽器登入）
-- [ ] Phase 2：測試瀏覽器寫文章 → commit → 自動部署
+- [x] P0：人工驗收桌機／手機 Alpha 前景 — 2026-10-19 改標凍結（Galaxy 分支；live 已是湖面且 `main` 已部署，不再擋合併）
+- [x] Phase 2：GitHub OAuth 驗證（Decap CMS 瀏覽器登入）— 已放棄，見 Dashboard #1
+- [x] Phase 2：測試瀏覽器寫文章 → commit → 自動部署 — 已取消，見 Dashboard #2
 - [x] Phase 6：Cloudflare Access 設定（`/protected/*` 路由保護）— ✅ 2026-08-27 實測已生效
 - [x] Phase 6：停用舊 Workers 部署（`steep-glitter-0952`）— ✅ 2026-08-27 已刪除 script
-- [ ] 域名續約檢查（2026-11-12）
-- [ ] Reddit 替代 RSS 源評估
-- [ ] 檢查履歷中哪些內容適合公開
+- [ ] 域名續約檢查 — 正本 Dashboard #5（窗口 2027-02-15，非 2026-11-12）
+- [ ] Reddit 替代 RSS 源評估 — 正本 Dashboard #6
+- [x] 檢查履歷中哪些內容適合公開 — Dashboard #7 已上線 `/resume/`
 
 ### 已完成
 
@@ -354,7 +354,7 @@ curl -I https://personal-website-bvk.pages.dev/ # expect 200
 - [x] P3：Obsidian → 網站輸出流程
 - [x] Phase 1-6 既有網站管線完成
 - [x] Cozy Galaxy 系統骨架、Command Bus、公開 projection 與 verification commands
-- [ ] 完成 branch preview 的視覺與內容人工審核後再合併 `main`
+- [x] 完成 branch preview 的視覺與內容人工審核後再合併 `main` — 2026-10-19：production 已是湖面，本條過期關閉
 
 ## 封存文件
 

@@ -2,34 +2,32 @@
 type: note
 status: active
 created: 2026-09-05
-updated: 2026-09-05
+updated: 2026-10-19
 tags:
   - project/personal-website
   - domain/ai-dev
 source_exempt: true
 ---
 
-# Cozy Galaxy AI Workshop
+# 個人網站（live＝湖面）
 
-個人網站的唯一程式碼入口。網站以 **Astro + React island + Three.js** 組成一間可互動的溫馨宇宙工作室；文章、履歷、Vlog、交易研究與既有公開路由維持不變。
+程式碼入口。**現役首頁是 LakeLanding**（`USE_LAKE=true`），不是 Cozy Galaxy 工作室。文章、履歷、交易研究與 `/protected` 路由維持獨立分頁。
+
+Galaxy／WorkspaceDesktop 仍在 repo，由旗標與 e2e `testIgnore` 凍結。`config/site-system.yaml` 同時登記 **live 湖面**與凍結 Galaxy（契約 R04 仍要求 `elements.galaxy`）。
 
 ## 系統結構
 
 ```text
-config/site-system.yaml              # 主幹／元素／功能／指令的唯一結構正本
-├── src/generated/site-system.ts     # 由 YAML 產生的 runtime registry
-├── src/features/workspace/          # React workspace 與 Command Bus
-│   ├── core/                        # command-bus、contracts、window-state
-│   ├── elements/                    # 星空、前景電腦、玩偶、氣氛與 hotspots
-│   └── windows/                     # Dock、浮動視窗與內容 panels
-├── src/features/articles/           # 文章路由規則
-├── src/styles/workspace/            # tokens、shell、scene、elements、windows、responsive
-├── scripts/commands/                # CLI domain handlers
-├── scripts/lib/                     # schema、projection 與 command runtime
-└── verification/                    # unit、e2e、deterministic contracts
+src/pages/index.astro                # USE_LAKE → LakeLanding | WorkspaceDesktop
+src/features/workspace/elements/     # 現役：LakeLanding／Canvas／Overlay／Forecast／Gmail
+src/features/workspace/core/         # cwa-snapshot、gmail-digest、lake-*、command-bus
+src/features/workspace/WorkspaceDesktop.tsx  # 凍結分支
+config/site-system.yaml              # live 湖面＋凍結 Galaxy（generate → site-system.ts）
+src/features/articles/               # /articles 路由
+src/components/workspace/            # facade only；新程式引用 features/
+scripts/                             # site.mjs、sync-cwa、sync-gmail
+verification/                        # unit、e2e（legacy specs 預設忽略）
 ```
-
-`src/components/workspace/` 僅保留相容入口；新程式應引用 `src/features/workspace/`。
 
 ## 公開內容資料流
 
@@ -71,11 +69,11 @@ npm run site -- --help
 
 ## 開發邊界
 
-- 不在 Canvas 中放置內容文字；四個入口皆為 HTML button。
-- Three.js 只負責窗外宇宙，電腦與玩偶是前景分層元素。
+- 現役首頁互動在 LakeOverlay／側軌，不在 Galaxy Canvas 按鈕。
+- WorkspaceDesktop 的「不在 Canvas 放字／四個 HTML 入口」只約束凍結分支。
 - Trading Lab 只公開研究方法、歷史 evidence 與限制，不提供即時訊號或下單功能。
-- `prefers-reduced-motion`、WebGL fallback 與手機 adaptive quality 不得影響內容可用性。
-- Production 部署仍由既有 Cloudflare Pages 流程處理；本重構預設只做 branch preview，不自動 push 或 deploy。
+- `prefers-reduced-motion` 不得影響氣象／Gmail／文章可讀性。
+- Production：`git push` `main` → `deploy.yml` → Cloudflare Pages。湖面已在 production，不是 branch-only preview。
 
 ## 設計與實作規格
 

@@ -1,5 +1,5 @@
 // @generated from config/site-system.yaml; do not edit
-// source-sha256: 206acd1abe6b75542092788d4dd6101ec23f001cef64fb5709f9f81b964ca664
+// source-sha256: ff6e84daeac81f1eb736b9f699098c8c0cfa7b53e61bd5ed0107c3110ced0ee9
 
 export const siteSystem = {
   "version": 1,
@@ -34,6 +34,37 @@ export const siteSystem = {
     }
   },
   "elements": {
+    "lake-canvas": {
+      "owner": "LakeCanvas",
+      "component": "LakeCanvas",
+      "layer": 2,
+      "responsive": "adaptive",
+      "motion": "canvas",
+      "reduced_motion": "static",
+      "depends_on": []
+    },
+    "fish-layer": {
+      "owner": "FishLayer",
+      "component": "FishLayer",
+      "layer": 3,
+      "responsive": "adaptive",
+      "motion": "canvas",
+      "reduced_motion": "static",
+      "depends_on": [
+        "lake-canvas"
+      ]
+    },
+    "lake-overlay": {
+      "owner": "LakeOverlay",
+      "component": "LakeOverlay",
+      "layer": 4,
+      "responsive": "adaptive",
+      "motion": "css",
+      "reduced_motion": "static",
+      "depends_on": [
+        "lake-canvas"
+      ]
+    },
     "galaxy": {
       "owner": "GalaxyCanvas",
       "component": "GalaxyCanvas",
@@ -118,6 +149,26 @@ export const siteSystem = {
     }
   },
   "features": {
+    "lake-landing": {
+      "owner": "workspace",
+      "depends_on": [
+        "lake-canvas",
+        "fish-layer",
+        "lake-overlay"
+      ]
+    },
+    "cwa-forecast": {
+      "owner": "workspace",
+      "depends_on": [
+        "lake-overlay"
+      ]
+    },
+    "gmail-digest": {
+      "owner": "workspace",
+      "depends_on": [
+        "lake-overlay"
+      ]
+    },
     "scene-preview": {
       "owner": "workspace",
       "depends_on": [

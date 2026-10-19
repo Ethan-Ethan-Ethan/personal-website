@@ -3,7 +3,7 @@ type: dashboard
 project: personal-website
 status: active
 created: 2026-08-27
-updated: 2026-10-11
+updated: 2026-10-19
 tags:
   - project/personal-website
 ---
@@ -22,8 +22,9 @@ tags:
 | 框架 | Astro 7 + Tailwind v4 + GitHub Actions + Cloudflare Pages |
 | Repo | `Ethan-Ethan-Ethan/personal-website` |
 | 部署觸發 | `git push` → `main` → `.github/workflows/deploy.yml` 自動部署 |
-| RSS 排程 | `.github/workflows/rss-aggregate.yml` 每日 UTC 02:00（2026-10-18 註記：該檔磁碟缺失，僅存 deploy.yml；有效內容鏈改走 public-content.json→sync，見稽核） |
-| 整體狀態 | Cozy Galaxy P0 視覺重構進行中：房間、流星遮擋、披風微動畫與 responsive runtime 已建立；螢幕小方框＋底部連結 preview 已完成本地實作與自動驗證，目前等待人工確認構圖，再決定第二階段直接連結或 floating window |
+| RSS 排程 | **斷鍊／凍結**：`rss-aggregate.yml` 磁碟不存在（workflows 僅 `deploy.yml`）。有效公開內容走 `config/public-content.json`→`content:sync`；文章手寫 `src/content/posts/` |
+| 現行首頁 | **LakeLanding live**（`src/pages/index.astro` `USE_LAKE=true`）。湖面＋氣象 CWA bake＋Gmail 週報側欄＋About dialog。`main`＝`origin/main`＝`bda5c81`（2026-10-19 核） |
+| 整體狀態 | 線上已是湖面。`config/site-system.yaml` 已登記 live：lake-canvas／fish-layer／lake-overlay；Galaxy／WorkspaceDesktop 元素保留並標凍結（契約仍釘 `elements.galaxy`） |
 
 ## 代辦清單（正本，已去重）
 
@@ -36,10 +37,10 @@ tags:
 - [ ] **#5 網域續簽** — 到期 Jun 15, 2027，免費續期窗口約 2027-02-15 起（到期前 120 天）；SOP 與追蹤已建（見專區）。2026-10-13 實查無需動作，待窗口內執行
 - [ ] **#6 Reddit 替代 RSS 源評估** — 已評估：Reddit 伺服器端 403 早已由「改用 RSSHub 36Kr 源」緩解（feeds 現無 Reddit，見 踩坑紀錄/Worklog）。若要真 Reddit 內容，替代方案：①Reddit OAuth API（需建 Reddit app + 憑證）②穩定 RSSHub/Redlib 實例（公共實例不穩）。待你決定是否要真 Reddit。
 - [x] **#7 檢查履歷公開 / 私人邊界** — ✅ 已做公開「摘要版履歷頁」：`src/pages/resume.astro`（職稱/時間/雇主/技能/學歷/摘要，**去機密**：隱藏電話、客戶名稱與量化細節），導覽「履歷」與首頁卡片改指向 `/resume`；完整版仍留 `/protected/resume`（Cloudflare Access）。`astro build` 859 頁通過。**2026-10-19 實測 `/resume/` 線上 200（標題「履歷摘要 | Ethan」），已上線，本項關閉。**
-- [x] **#8 工作台卡片滑動面板功能** — ✅ 2026-08-27 實作：首頁新增「工作台」區塊，3 卡片（待辦健康度 / 週報 / 經驗沉澱）點擊後用 `grid-template-rows: 0fr→1fr` 滑出下方面板；`astro build` 35 頁通過。週報 / 經驗沉澱面板內容待填。
+- [x] **#8 工作台卡片滑動面板功能** — ✅ 2026-08-27 實作於 WorkspaceDesktop。2026-10-19：該分支被 `USE_LAKE` 關掉，週報／經驗沉澱「待填」不再是現役首頁缺口。
 - [ ] **#9 網站樣式優化** — 2026-08-27 使用者表態想做網頁樣式；採用開源 skill `dembrandt/dembrandt-skills`（已 clone 至 `Agent-Skills/dembrandt-skills`，41 個 UX/design-system 技能，經 `~/.config/opencode/skills → Agent-Skills` 既有 symlink 自動載入；MIT）。dembrandt MCP 引擎已接（本地 stdio，`opencode.jsonc` 的 `mcpServers.dembrandt`）；實測 `dembrandt https://ethanyang.dpdns.org` 擷取成功（顏色 9 / 字體 19 / 間距 12 / 圓角 4 / 按鈕 2 變體，與 global.css 一致），Cloudflare 未擋。MCP 工具需重啟 OpenCode 才載入；CLI 已可直接用。下一步：把 tokens 存到 `design-system/` 供 `website-analyze` 用，並挑子技能（color-mode-and-theme / algorithmic-color-palette / component-family-consistency / wcag-accessibility）套用優化。
 - [x] **#10 Cozy Galaxy 玩偶披風微動畫** — Desktop／Tablet／Mobile 已接入照片披風 Alpha 三段 CSS rig，使用者已確認可見且速度調整後可接受；未做 clean plate 或 AI inpainting。設計正本：`/Users/ethan/Documents/memory/design/2026-09-06-personal-website-plush-cape-motion-design.md`。
-- [x] **#11 螢幕小方框與底部連結 Preview（第一階段）** — 已隱藏頂部導覽與常駐文字卡片；四個螢幕方框和四個底部 UI 共用局部小視窗與 SVG 指向線。Pointer／focus ownership、Escape、resize、Tablet fallback、Mobile tap 與不霧化 pixel contract 均完成。第一階段刻意不導航、不改 hash、不開 floating window；等待人工構圖確認後再決定第二階段連結方式。計畫：`plan/2026-09-06-monitor-hotspot-popover-implementation.md`。
+- [x] **#11 螢幕小方框與底部連結 Preview（第一階段）** — Galaxy 分支已完成自動驗證。2026-10-19：首頁 live 已切湖面，第二階段連結／構圖確認**凍結**（隨 WorkspaceDesktop；重啟見 `E2E_INCLUDE_LEGACY=1`）。計畫：`plan/2026-09-06-monitor-hotspot-popover-implementation.md`。
 
 ## 網域續簽專區（#5）
 
@@ -144,6 +145,8 @@ npm run dev          # 或 astro dev --background
 - 踩坑紀錄：[[04-踩坑紀錄]]
 
 ## 處理日誌
+- 2026-10-19：`site-system.yaml` 登記 live 湖面元素＋凍結 Galaxy；`system:generate`／validate ok；契約 32/32 PASS。
+- 2026-10-19：入口對齊 live 湖面 — 狀態總覽改 LakeLanding；#8/#11 標凍結（WorkspaceDesktop／Galaxy）；RSS 列為斷鍊。未改 `site-system.yaml`。
 - 2026-10-12：全站去 Yang 上線（title／品牌／頁尾／履歷全改；live 標題 Ethan｜AI 系統創作者實錘；部署成功）。
 - 2026-10-12：標題去 Yang（全站 title＋noscript h1；內文描述／履歷 h1 未動）；Selected work 本地先行不上網（待辦）；build 1664。
 - 2026-10-12：去英文名（About 卡只留楊宥綸；首頁左上只留 Ethan；build 1664；ego 實拍）。

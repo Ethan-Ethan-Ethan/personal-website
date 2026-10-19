@@ -8,7 +8,9 @@ version: 1
 # - 人工維護：src/data/public-content.json、sources.json（根目錄）｜產出者人工｜改後跑 content:check
 # - 暫存：.astro/（build 產物，不進版控判斷、不引用）
 # - 契約：verification/contracts/（20 檔）＋本檔｜產出者各域｜verify contracts gate
-# - 凍結（D4，標記不刪除）：scene.*／window.*（WorkspaceDesktop 停用分支 runtime-only 命令）
+# live（2026-10-19）：index USE_LAKE=true → lake-canvas／fish-layer／lake-overlay
+# 凍結（D4，標記不刪除）：galaxy／scene-atmosphere／computer-*／plush／workspace-windows／dock；
+# scene.*／window.*（WorkspaceDesktop 停用分支 runtime-only 命令；重啟見 E2E_INCLUDE_LEGACY=1）
 system:
   id: personal-website
   generated_types: src/generated/site-system.ts
@@ -19,6 +21,11 @@ trunk:
   window-state: { owner: react, depends_on: [] }
   content-bridge: { owner: astro, depends_on: [] }
 elements:
+  # live 湖面
+  lake-canvas: { owner: LakeCanvas, component: LakeCanvas, layer: 2, responsive: adaptive, motion: canvas, reduced_motion: static, depends_on: [] }
+  fish-layer: { owner: FishLayer, component: FishLayer, layer: 3, responsive: adaptive, motion: canvas, reduced_motion: static, depends_on: [lake-canvas] }
+  lake-overlay: { owner: LakeOverlay, component: LakeOverlay, layer: 4, responsive: adaptive, motion: css, reduced_motion: static, depends_on: [lake-canvas] }
+  # 凍結：Cozy Galaxy / WorkspaceDesktop（契約 R04 仍釘 galaxy.component）
   galaxy: { owner: GalaxyCanvas, component: GalaxyCanvas, layer: 2, responsive: adaptive, motion: webgl, reduced_motion: static, depends_on: [scene-state] }
   scene-atmosphere: { owner: SceneAtmosphere, component: SceneAtmosphere, layer: 3, responsive: adaptive, motion: css, reduced_motion: static, depends_on: [scene-state] }
   computer-foreground: { owner: ForegroundOcclusion, component: ForegroundOcclusion, layer: 4, responsive: adaptive, motion: none, reduced_motion: static, depends_on: [galaxy] }
@@ -27,6 +34,10 @@ elements:
   workspace-windows: { owner: WorkspaceWindows, component: WorkspaceWindows, layer: 20, responsive: adaptive, motion: css, reduced_motion: fade-only, depends_on: [command-bus, window-state, content-bridge] }
   workspace-dock: { owner: WorkspaceDock, component: WorkspaceDock, layer: 40, responsive: adaptive, motion: css, reduced_motion: static, depends_on: [command-bus, window-state] }
 features:
+  lake-landing: { owner: workspace, depends_on: [lake-canvas, fish-layer, lake-overlay] }
+  cwa-forecast: { owner: workspace, depends_on: [lake-overlay] }
+  gmail-digest: { owner: workspace, depends_on: [lake-overlay] }
+  # 凍結 Galaxy／視窗生命週期
   scene-preview: { owner: workspace, depends_on: [command-bus, scene-state, galaxy, scene-atmosphere, plush-character, computer-hotspots] }
   window-lifecycle: { owner: workspace, depends_on: [command-bus, window-state, workspace-windows, workspace-dock] }
   foreground-occlusion: { owner: workspace, depends_on: [galaxy, computer-foreground, plush-character] }

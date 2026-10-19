@@ -2,7 +2,7 @@
 type: note
 status: active
 created: 2026-09-05
-updated: 2026-09-05
+updated: 2026-10-19
 tags:
   - project/personal-website
   - domain/ai-dev
@@ -15,8 +15,9 @@ source_exempt: true
 
 ## 網站模組
 
-- 首頁視窗與互動正本：`src/features/workspace/WorkspaceDesktop.tsx`
-- 公開衍生資料：`src/data/generated/public-content.json`
+- **現役首頁**：`src/features/workspace/elements/LakeLanding.tsx`（index `USE_LAKE=true`）
+- **凍結**：`src/features/workspace/WorkspaceDesktop.tsx`（含 AI Lab 浮動視窗；現役湖面不掛這層）
+- 公開衍生資料：`src/data/generated/public-content.json`（content:sync；湖面 overlay 幾乎不讀這份）
 - 白名單設定：`config/public-content.json`
 - 同步與隱私閘門：`scripts/lib/sync-public-content.mjs`
 - 指令入口：`npm run site -- content <check|sync>`
@@ -34,7 +35,7 @@ source_exempt: true
 各專案 canonical note
 └── 經人工審核的 site_* frontmatter
     └── 個人網站 public projection
-        └── 首頁 AI Lab 浮動視窗
+        └── WorkspaceDesktop AI Lab 窗（凍結；live 湖面不顯示）
 ```
 
 ## 公開邊界
