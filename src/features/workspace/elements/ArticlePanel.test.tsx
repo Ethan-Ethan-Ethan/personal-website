@@ -17,6 +17,9 @@ describe("ArticlePanel", () => {
     expect(screen.getByRole("link", { name: "閱讀全文 →" }).getAttribute("href")).toBe(
       "/articles/harness-not-claude",
     );
+    const loop = screen.getByRole("link", { name: "你需要的不是更多 Skill，而是更好的 Loop" });
+    expect(loop.getAttribute("href")).toBe("/wip/better-loop-not-more-skills");
+    expect(screen.getAllByTestId("article-related")).toHaveLength(3);
   });
 
   it("featured card uses the same type scale as Gmail top cards", () => {

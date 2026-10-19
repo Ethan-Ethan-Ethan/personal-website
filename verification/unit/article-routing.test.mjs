@@ -98,11 +98,9 @@ describe('article routing', () => {
       readFile(new URL('../../src/components/PostCard.astro', import.meta.url), 'utf8'),
     ]);
 
-    expect(indexPage).toContain('buildArticleListing');
-    expect(indexPage).toContain('<PostCard post={post} />');
+    expect(indexPage).toContain("Astro.redirect('/')");
     expect(detailPage).toContain('buildArticleStaticPaths');
-    expect(detailPage).toContain('getArticleHref(prevPost)');
-    expect(detailPage).toContain('getArticleHref(nextPost)');
+    expect(detailPage).toContain('getArticleHref(post)');
     expect(homePage).toContain('getArticleHref(post)');
     expect(postCard).toContain("import { getArticleHref } from '../features/articles/routing.mjs';");
     expect(postCard).toContain('href={getArticleHref(post)}');
@@ -123,7 +121,8 @@ describe('article routing', () => {
       const htmlFiles = await collectHtmlFiles(outputDirectory);
 
       expect(htmlFiles.length).toBeGreaterThan(4);
-      expect(htmlFiles).toContain('articles/ai-workflow/index.html');
+      expect(htmlFiles).toContain('articles/harness-not-claude/index.html');
+      expect(htmlFiles).not.toContain('articles/ai-workflow/index.html');
       expect(htmlFiles).not.toContain(`articles/rss/`);
     } finally {
       await rm(temporaryRoot, { recursive: true, force: true });

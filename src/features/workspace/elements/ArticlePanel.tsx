@@ -124,6 +124,30 @@ export default function ArticlePanel({ open, onClose }: { open: boolean; onClose
             <p style={{ margin: '8px 0 0', fontSize: 14, lineHeight: '22px', fontWeight: 500, color: INK }}>
               {card.body}
             </p>
+            {card.related?.length ? (
+              <ul data-testid="article-related" style={{ listStyle: 'none', margin: '10px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                {card.related.map((rel) => (
+                  <li key={rel.href}>
+                    <a
+                      href={rel.href}
+                      style={{
+                        display: 'inline-block',
+                        minHeight: 36,
+                        padding: '6px 0',
+                        color: 'rgba(118,167,189,0.98)',
+                        fontSize: 13,
+                        lineHeight: '20px',
+                        fontWeight: 600,
+                        textDecoration: 'none',
+                        letterSpacing: '0.02em',
+                      }}
+                    >
+                      {rel.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </article>
         ))}
       </div>
@@ -134,10 +158,6 @@ export default function ArticlePanel({ open, onClose }: { open: boolean; onClose
           style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 600, textDecoration: 'none' }}
         >
           閱讀全文 →
-        </a>
-        {' · '}
-        <a href="/articles/" style={{ color: 'rgba(118,167,189,0.95)', fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>
-          全部文章
         </a>
         <button
           type="button"

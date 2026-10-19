@@ -1,12 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Topbar from '../../components/Topbar.astro';
-import Footer from '../../components/Footer.astro';
 import { getCollection, render } from 'astro:content';
-import {
-  buildArticleStaticPaths,
-  getArticleHref,
-} from '../../features/articles/routing.mjs';
+import { buildArticleStaticPaths, getArticleHref } from '../../features/articles/routing.mjs';
+import { ARTICLE_FEATURE } from '../../features/workspace/core/article-feature';
+import { RIVERBED_PATH } from '../../features/workspace/core/lake-assets';
 
 export async function getStaticPaths() {
   return buildArticleStaticPaths(await getCollection('posts'));
@@ -14,77 +11,161 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const { title, description, date, category, tags, source, sourceUrl } = post.data;
+const { title, description, date, category } = post.data;
+const href = getArticleHref(post);
+const isFeatured = href === ARTICLE_FEATURE.href;
+const chip = isFeatured ? ARTICLE_FEATURE.chip : `${category ?? '筆記'} · ${date.toISOString().slice(0, 10)}`;
 const formattedDate = date.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
-
-// Get sorted posts for prev/next navigation
-const allPosts = (await getCollection('posts', ({ data }) => !data.draft))
-  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
-const currentIndex = allPosts.findIndex(p => p.id === post.id);
-const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
-
-const sourceLabel = { manual: '原創', gmail: 'Gmail 擷取' }[source];
 ---
 
 <BaseLayout title={`${title} | Ethan`} description={description}>
-  <Topbar />
-
-  <main class="pt-14 max-w-[var(--container-narrow)] mx-auto px-4 py-10">
-    <!-- Breadcrumb -->
-    <nav class="text-sm text-soft mb-6">
-      <a href="/" class="hover:text-text transition-colors">首頁</a>
-      <span class="mx-1">/</span>
-      <a href="/articles/" class="hover:text-text transition-colors">文章</a>
-      <span class="mx-1">/</span>
-      <span class="text-muted">{title}</span>
-    </nav>
-
-    <!-- Article Header -->
-    <header class="mb-8">
-      <div class="flex items-center gap-2 mb-3">
-        <span class="text-xs font-medium text-green">{sourceLabel}</span>
-        {category && <span class="text-xs text-soft">· {category}</span>}
-      </div>
-      <h1 class="text-3xl font-bold tracking-tight leading-tight mb-3">{title}</h1>
-      {description && <p class="text-muted text-md mb-4">{description}</p>}
-      <div class="flex items-center gap-4 text-sm text-soft">
-        <time datetime={date.toISOString()}>{formattedDate}</time>
-        {sourceUrl && (
-          <a href={sourceUrl} target="_blank" rel="noopener" class="text-blue hover:text-green transition-colors">原文 ↗</a>
-        )}
-      </div>
-      {tags.length > 0 && (
-        <div class="flex flex-wrap gap-1.5 mt-3">
-          {tags.map(tag => (
-            <span class="px-2 py-0.5 rounded-sm bg-panel-2 text-xs text-soft border border-line">{tag}</span>
-          ))}
-        </div>
+  <div class="lake-article" transition:animate="none">
+    <div class="lake-article-bed" style={`background-image:url('${RIVERBED_PATH}')`} aria-hidden="true"></div>
+    <div class="lake-article-veil" aria-hidden="true"></div>
+    <a class="lake-article-home" href="/" aria-label="Ethan 首頁">EY</a>
+    <main class="lake-article-main">
+      <span class="lake-article-chip">{chip}</span>
+      <p class="lake-article-kicker">{category ?? '公開筆記'} · {formattedDate}</p>
+      <h1 class="lake-article-title">{isFeatured ? ARTICLE_FEATURE.title : title}</h1>
+      {isFeatured && (
+        <p class="lake-article-featured">{ARTICLE_FEATURE.featured}</p>
       )}
-    </header>
-
-    <!-- Article Content -->
-    <article class="prose">
-      <Content />
-    </article>
-
-    <!-- Article Navigation -->
-    <nav class="mt-12 pt-6 border-t border-line flex justify-between items-center gap-4">
-      {prevPost ? (
-        <a href={getArticleHref(prevPost)} class="text-sm text-muted hover:text-green transition-colors no-underline">
-          ← {prevPost.data.title}
-        </a>
-      ) : <span />}
-      <a href="/articles/" class="text-sm text-blue hover:text-green transition-colors no-underline">
-        文章列表
-      </a>
-      {nextPost ? (
-        <a href={getArticleHref(nextPost)} class="text-sm text-muted hover:text-green transition-colors no-underline">
-          {nextPost.data.title} →
-        </a>
-      ) : <span />}
-    </nav>
-  </main>
-
-  <Footer />
+      <article class="lake-article-card prose lake-article-prose">
+        <Content />
+      </article>
+      <p class="lake-article-back">
+        <a href="/">← 回湖面首頁</a>
+      </p>
+    </main>
+  </div>
 </BaseLayout>
+
+<style>
+  .lake-article {
+    position: relative;
+    min-height: 100dvh;
+    color: #fff;
+    overflow: hidden;
+  }
+  .lake-article-bed,
+  .lake-article-veil {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+  }
+  .lake-article-bed {
+    background: #060913 center / cover no-repeat;
+  }
+  .lake-article-veil {
+    background: linear-gradient(180deg, rgba(6, 9, 19, 0.55) 0%, rgba(6, 9, 19, 0.72) 48%, rgba(6, 9, 19, 0.88) 100%);
+  }
+  .lake-article-home {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+  }
+  .lake-article-main {
+    position: relative;
+    z-index: 1;
+    width: min(560px, 92vw);
+    margin: 0 auto;
+    padding: 88px 0 64px;
+  }
+  @media (max-width: 900px) {
+    .lake-article-main {
+      width: auto;
+      padding: 96px 5% 48px;
+    }
+  }
+  .lake-article-chip {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+  .lake-article-kicker {
+    margin: 8px 0 0;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .lake-article-title {
+    margin: 12px 0;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .lake-article-featured {
+    margin: 0 0 16px;
+    padding: 16px 18px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    font-size: 17px;
+    line-height: 26px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .lake-article-card {
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    padding: 18px 18px 8px;
+    max-width: none;
+  }
+  .lake-article-prose {
+    color: #fff;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+  .lake-article-prose :global(h1:first-child) {
+    display: none;
+  }
+  .lake-article-prose :global(h2),
+  .lake-article-prose :global(h3) {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-top: 1.4em;
+  }
+  .lake-article-prose :global(a) {
+    color: rgba(118, 167, 189, 0.98);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .lake-article-back {
+    margin: 20px 0 0;
+    text-align: center;
+  }
+  .lake-article-back a {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>
