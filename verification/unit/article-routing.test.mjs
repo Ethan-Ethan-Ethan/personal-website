@@ -91,14 +91,14 @@ describe('article routing', () => {
   });
 
   test('article pages and PostCard use the shared routing helpers directly', async () => {
-    const [indexPage, detailPage, homePage, postCard] = await Promise.all([
-      readFile(new URL('../../src/pages/articles/index.astro', import.meta.url), 'utf8'),
+    const [redirects, detailPage, homePage, postCard] = await Promise.all([
+      readFile(new URL('../../public/_redirects', import.meta.url), 'utf8'),
       readFile(new URL('../../src/pages/articles/[slug].astro', import.meta.url), 'utf8'),
       readFile(new URL('../../src/pages/index.astro', import.meta.url), 'utf8'),
       readFile(new URL('../../src/components/PostCard.astro', import.meta.url), 'utf8'),
     ]);
 
-    expect(indexPage).toContain("Astro.redirect('/')");
+    expect(redirects).toMatch(/\/articles\/\s+\/\s+301/);
     expect(detailPage).toContain('buildArticleStaticPaths');
     expect(detailPage).toContain('getArticleHref(post)');
     expect(homePage).toContain('getArticleHref(post)');
@@ -122,6 +122,7 @@ describe('article routing', () => {
 
       expect(htmlFiles.length).toBeGreaterThan(4);
       expect(htmlFiles).toContain('articles/harness-not-claude/index.html');
+      expect(htmlFiles).not.toContain('articles/index.html');
       expect(htmlFiles).not.toContain('articles/ai-workflow/index.html');
       expect(htmlFiles).not.toContain(`articles/rss/`);
     } finally {

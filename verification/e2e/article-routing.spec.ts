@@ -6,10 +6,15 @@ test('serves the current featured article at a flat URL', async ({ page }) => {
   await expect(page.getByRole('link', { name: '你需要的不是更多 Skill，而是更好的 Loop' })).toBeVisible();
 });
 
-test('retired listing redirects to the lake homepage', async ({ page }) => {
-  await page.goto('/articles/');
-  await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByRole('button', { name: '文章' })).toBeVisible();
+test('retired listing is not a catalog page', async ({ request }) => {
+  const response = await request.get('/articles/', { maxRedirects: 0 });
+  // Cloudflare Pages：_redirects 301；astro preview：無 index 則 404。
+  expect([301, 302, 307, 308, 404]).toContain(response.status());
+  if (response.status() === 200) {
+    const body = await response.text();
+    expect(body).not.toContain('Redirecting from');
+    expect(body).not.toContain('AI 工具要接到工作流');
+  }
 });
 
 test('retired June notes are not served', async ({ request }) => {
