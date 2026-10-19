@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { FC_TRANSITION_CSS } from '../core/forecast-transitions';
 import { ARTICLE_FEATURE } from '../core/article-feature';
 
@@ -21,9 +21,25 @@ const FEATURED: CSSProperties = {
   padding: '16px 18px',
 };
 
+const LINK: CSSProperties = {
+  color: 'rgba(255,255,255,0.85)',
+  fontSize: 13,
+  fontWeight: 600,
+  textDecoration: 'none',
+  background: 'transparent',
+  border: 'none',
+  cursor: 'pointer',
+  padding: 0,
+};
+
 const D = { chip: 100, title: 200, feat: 280, card0: 360, cardStep: 70, link: 720 } as const;
 
 export default function ArticlePanel({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [reading, setReading] = useState(false);
+  useEffect(() => {
+    if (!open) setReading(false);
+  }, [open]);
+
   const on = open ? ' is-open' : '';
   const dl = (ms: number): { transitionDelay: string } => ({ transitionDelay: open ? `${ms}ms` : '0ms' });
   const doc = ARTICLE_FEATURE;
@@ -69,113 +85,122 @@ export default function ArticlePanel({ open, onClose }: { open: boolean; onClose
         </div>
       </div>
 
-      <h2
-        data-testid="article-title"
-        className={`fc-node fc-dir-l${on}`}
-        style={{
-          margin: '0 0 12px',
-          fontSize: 20,
-          lineHeight: '28px',
-          fontWeight: 600,
-          letterSpacing: '0.05em',
-          color: INK,
-          ...dl(D.title),
-        }}
-      >
-        {doc.title}
-      </h2>
-
-      <article
-        data-testid="article-featured"
-        className={`fc-node fc-dir-l article-feature-card${on}`}
-        aria-label={`精選｜${doc.featured}`}
-        style={{ ...FEATURED, marginBottom: 12, ...dl(D.feat) }}
-      >
-        <p style={{ margin: 0, fontSize: 17, lineHeight: '26px', fontWeight: 600, color: INK, letterSpacing: '0.05em' }}>
-          {doc.featured}
-        </p>
-      </article>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {doc.cards.map((card, i) => (
-          <article
-            key={card.index}
-            data-testid="article-card"
-            className={`fc-node fc-dir-l article-body-card${on}`}
-            aria-label={`${card.index} ${card.title}`}
-            style={{ ...CARD, ...dl(D.card0 + i * D.cardStep) }}
-          >
-            <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
-              <span
-                style={{
-                  fontSize: 11,
-                  letterSpacing: '0.1em',
-                  color: INK,
-                  border: '1px solid rgba(255,255,255,0.35)',
-                  borderRadius: 999,
-                  padding: '1px 8px',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {card.index}
-              </span>
-              <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: '0.04em', color: INK }}>{card.title}</span>
-            </div>
-            <p style={{ margin: '8px 0 0', fontSize: 14, lineHeight: '22px', fontWeight: 500, color: INK }}>
-              {card.body}
-            </p>
-            {card.related?.length ? (
-              <ul data-testid="article-related" style={{ listStyle: 'none', margin: '10px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {card.related.map((rel) => (
-                  <li key={rel.href}>
-                    <a
-                      href={rel.href}
-                      style={{
-                        display: 'inline-block',
-                        minHeight: 36,
-                        padding: '6px 0',
-                        color: 'rgba(118,167,189,0.98)',
-                        fontSize: 13,
-                        lineHeight: '20px',
-                        fontWeight: 600,
-                        textDecoration: 'none',
-                        letterSpacing: '0.02em',
-                      }}
-                    >
-                      {rel.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </article>
-        ))}
-      </div>
-
-      <div className={`fc-node fc-dir-l${on}`} style={{ marginTop: 16, textAlign: 'center', ...dl(D.link) }}>
-        <a
-          href={doc.href}
-          style={{ color: 'rgba(255,255,255,0.85)', fontSize: 13, fontWeight: 600, textDecoration: 'none' }}
-        >
-          閱讀全文 →
-        </a>
+      {!reading ? (
         <button
           type="button"
-          aria-label="關閉文章面板"
-          onClick={onClose}
+          data-testid="article-title-card"
+          className={`fc-node fc-dir-l article-feature-card${on}`}
+          aria-label={`打開文章｜${doc.title}`}
+          onClick={() => setReading(true)}
           style={{
-            display: 'block',
-            margin: '12px auto 0',
-            background: 'transparent',
-            border: 'none',
-            color: 'rgba(255,255,255,0.55)',
-            fontSize: 12,
+            ...FEATURED,
+            width: '100%',
+            textAlign: 'left',
             cursor: 'pointer',
+            color: INK,
+            ...dl(D.title),
           }}
         >
-          關閉
+          <span data-testid="article-title" style={{ display: 'block', fontSize: 17, lineHeight: '26px', fontWeight: 600, letterSpacing: '0.05em' }}>
+            {doc.title}
+          </span>
         </button>
-      </div>
+      ) : (
+        <>
+          <h2
+            data-testid="article-title"
+            className={`fc-node fc-dir-l${on}`}
+            style={{
+              margin: '0 0 12px',
+              fontSize: 20,
+              lineHeight: '28px',
+              fontWeight: 600,
+              letterSpacing: '0.05em',
+              color: INK,
+              ...dl(D.title),
+            }}
+          >
+            {doc.title}
+          </h2>
+
+          <article
+            data-testid="article-featured"
+            className={`fc-node fc-dir-l article-feature-card${on}`}
+            aria-label={`精選｜${doc.featured}`}
+            style={{ ...FEATURED, marginBottom: 12, ...dl(D.feat) }}
+          >
+            <p style={{ margin: 0, fontSize: 17, lineHeight: '26px', fontWeight: 600, color: INK, letterSpacing: '0.05em' }}>
+              {doc.featured}
+            </p>
+          </article>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {doc.cards.map((card, i) => (
+              <article
+                key={card.index}
+                data-testid="article-card"
+                className={`fc-node fc-dir-l article-body-card${on}`}
+                aria-label={`${card.index} ${card.title}`}
+                style={{ ...CARD, ...dl(D.card0 + i * D.cardStep) }}
+              >
+                <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      letterSpacing: '0.1em',
+                      color: INK,
+                      border: '1px solid rgba(255,255,255,0.35)',
+                      borderRadius: 999,
+                      padding: '1px 8px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {card.index}
+                  </span>
+                  <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: '0.04em', color: INK }}>{card.title}</span>
+                </div>
+                <p style={{ margin: '8px 0 0', fontSize: 14, lineHeight: '22px', fontWeight: 500, color: INK }}>
+                  {card.body}
+                </p>
+                {card.related?.length ? (
+                  <ul data-testid="article-related" style={{ listStyle: 'none', margin: '10px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {card.related.map((rel) => (
+                      <li key={rel.href}>
+                        <a
+                          href={rel.href}
+                          style={{
+                            display: 'inline-block',
+                            minHeight: 36,
+                            padding: '6px 0',
+                            color: 'rgba(118,167,189,0.98)',
+                            fontSize: 13,
+                            lineHeight: '20px',
+                            fontWeight: 600,
+                            textDecoration: 'none',
+                            letterSpacing: '0.02em',
+                          }}
+                        >
+                          {rel.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            ))}
+          </div>
+
+          <div className={`fc-node fc-dir-l${on}`} style={{ marginTop: 16, textAlign: 'center', ...dl(D.link) }}>
+            <a href={doc.href} style={LINK}>
+              閱讀全文 →
+            </a>
+            {' · '}
+            <button type="button" aria-label="返回文章列表" onClick={() => setReading(false)} style={LINK}>
+              返回
+            </button>
+          </div>
+        </>
+      )}
     </section>
   );
 }

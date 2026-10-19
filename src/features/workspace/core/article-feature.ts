@@ -24,7 +24,7 @@ export type ArticleFeature = {
 export const ARTICLE_FEATURE: ArticleFeature = {
   chip: "筆記 · 2026-10-18",
   kicker: "公開筆記",
-  title: "你需要的不是更強的模型，而是更好的 Harness",
+  title: "不使用 Claude 的三大理由：你需要的不是更強的模型，而是更好的 Harness",
   date: "2026-10-18",
   href: "/articles/harness-not-claude",
   featured:
