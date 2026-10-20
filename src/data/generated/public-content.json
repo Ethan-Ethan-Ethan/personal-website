@@ -112,7 +112,7 @@
     {
       "id": "trading-automation",
       "slug": "trading-research",
-      "title": "投資交易自動化",
+      "title": "量化交易驗證研究",
       "summary": "用候選模型、回放與驗證邊界研究交易方法；公開內容只呈現方法，不提供即時訊號。",
       "section": "trading-lab",
       "status": "active",
