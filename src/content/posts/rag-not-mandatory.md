@@ -23,8 +23,8 @@ AI Agent 還在快速演進，RAG 當然有用，但遠不到「公司必備」�
 
 例如，**Ontology（本體論）搭配向量檢索，再加上開源 EmbeddingGemma 2**，就值得評估。與其盲目堆疊架構，不如先想清楚：怎麼讓 Agent 找得更準、存得更少、維護得更輕鬆。
 
-- 減少 Agent 資料存放位置：Ontology ＆ EmbeddingGemma 2
-- 站在巨人肩上：小企業不必砸錢買模型設備，也能兼顧隱私與安全
+- [減少 Agent 資料存放位置：Ontology ＆ EmbeddingGemma 2](/wip/ontology-embedding-gemma-2)
+- [站在巨人肩上：小企業不必砸錢買模型設備，也能兼顧隱私與安全](/wip/sme-open-weights-privacy)
 
 ### RAG 不是不好，而是別把它當信仰。
 

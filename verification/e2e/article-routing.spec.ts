@@ -24,6 +24,12 @@ test('retired June notes are not served', async ({ request }) => {
   }
 });
 
+test('WIP slugs show under-construction page', async ({ page }) => {
+  await page.goto('/wip/ontology-embedding-gemma-2');
+  await expect(page.getByRole('heading', { level: 1, name: /Ontology.*EmbeddingGemma 2/ })).toBeVisible();
+  await expect(page.getByText('建構中')).toBeVisible();
+});
+
 test('does not serve nested source paths for flat article routes', async ({ request }) => {
   const response = await request.get('/articles/rss/example');
   expect(response.ok()).toBe(false);

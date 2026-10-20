@@ -1,4 +1,4 @@
-/** 日記方括號題目：尚無正文，點進 /wip/{slug} 顯示建構中。 */
+/** 日記方括號題目：尚無正文，點進 /wip/{slug} 顯示建構中。契約見 verification/contracts/articles/CAPABILITY.md */
 
 export type WipNote = {
   slug: string;
@@ -12,6 +12,8 @@ export const WIP_NOTES: WipNote[] = [
   { slug: "shared-knowledge-graph", title: "讓所有 Agent 共用同一份專案知識：你只需要接線與知識圖譜" },
   { slug: "llm-word-puzzle", title: "大語言模型從一開始到現在，還是在玩文字拼圖" },
   { slug: "simple-over-fancy-ai", title: "AI 功能再花俏，不如大道至簡" },
+  { slug: "ontology-embedding-gemma-2", title: "減少 Agent 資料存放位置：Ontology ＆ EmbeddingGemma 2" },
+  { slug: "sme-open-weights-privacy", title: "站在巨人肩上：小企業不必砸錢買模型設備，也能兼顧隱私與安全" },
 ];
 
 export function wipHref(slug: string): string {

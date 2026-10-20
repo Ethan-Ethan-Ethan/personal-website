@@ -41,6 +41,10 @@ export const ARTICLE_FEATURE: ArticleFeature = {
       title: "不用傳統 RAG，也能做知識檢索",
       body:
         "Ontology 搭配向量檢索與開源 EmbeddingGemma 2 值得評估。目標是找得更準、存得更少、維護得更輕，而不是盲目堆架構。",
+      related: [
+        { title: "減少 Agent 資料存放位置：Ontology ＆ EmbeddingGemma 2", href: wipHref("ontology-embedding-gemma-2") },
+        { title: "站在巨人肩上：小企業不必砸錢買模型設備，也能兼顧隱私與安全", href: wipHref("sme-open-weights-privacy") },
+      ],
     },
     {
       index: "03",

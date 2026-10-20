@@ -23,7 +23,8 @@ describe("ArticlePanel", () => {
     expect(screen.getByRole("button", { name: "返回文章列表" })).toBeTruthy();
     const graph = screen.getByRole("link", { name: "讓所有 Agent 共用同一份專案知識：你只需要接線與知識圖譜" });
     expect(graph.getAttribute("href")).toBe("/wip/shared-knowledge-graph");
-    expect(screen.getAllByTestId("article-related")).toHaveLength(1);
+    expect(screen.getAllByTestId("article-related")).toHaveLength(2);
+    expect(screen.getAllByRole("link").filter((a) => a.getAttribute("href")?.startsWith("/wip/"))).toHaveLength(3);
   });
 
   it("returns from the essay layout to the title card", () => {
