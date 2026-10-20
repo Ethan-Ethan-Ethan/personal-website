@@ -10,7 +10,7 @@ describe("ForecastSideRail", () => {
   it("renders icon buttons in order with grid active by default", () => {
     // 按鍵只在開啟態可及（關閉態 visibility:hidden 整棵藏起）：在此渲染開啟態驗證
     render(<ForecastSideRail onClose={() => {}} open />);
-    const labels = ["總覽", "Gmail", "文章", "圖表", "交易", "日曆", "搜尋"];
+    const labels = ["總覽", "Gmail", "文章", "交易自動化", "日曆", "搜尋"];
     for (const label of labels) {
       expect(screen.getByRole("button", { name: label })).toBeTruthy();
     }

@@ -95,7 +95,7 @@ export default function TradingPanel({ open }: { open: boolean }) {
 
   return (
     <section
-      aria-label="交易觀察"
+      aria-label="交易自動化"
       className={`trading-panel${on}`}
       style={{
         position: 'absolute',
@@ -125,13 +125,13 @@ export default function TradingPanel({ open }: { open: boolean }) {
             padding: '3px 10px',
           }}
         >
-          Trading · 5m
+          Automation · 5m
         </span>
       </div>
 
       <header className={`fc-node fc-wipe-r${on}`} style={{ marginBottom: 14, ...dl(D.title) }}>
         <h2 style={{ margin: 0, fontSize: 22, fontWeight: 600, color: INK, letterSpacing: '0.02em' }}>
-          交易觀察
+          交易自動化
         </h2>
         <p style={{ margin: '6px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.72)' }}>
           快照更新：{generated}

@@ -56,6 +56,6 @@ export type WorkspaceApp = { id: WorkspaceWindowId; label: string; eyebrow: stri
 export const WORKSPACE_APPS: WorkspaceApp[] = [
   { id: 'projects', label: 'Projects', eyebrow: 'Selected work', icon: '✦' },
   { id: 'ai-lab', label: 'AI Lab', eyebrow: 'Systems & agents', icon: '⌘' },
-  { id: 'trading-lab', label: 'Trading Lab', eyebrow: 'Research only', icon: '⌁' },
+  { id: 'trading-lab', label: '交易自動化', eyebrow: 'Automation · 5m', icon: '₿' },
   { id: 'about', label: 'About', eyebrow: 'Profile & contact', icon: '◎' },
 ];

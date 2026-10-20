@@ -52,19 +52,7 @@ export const ICONS: IconDef[] = [
   },
   {
     id: 'chart',
-    label: '圖表',
-    path: (
-      <>
-        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-        <path d="M7 13v4" />
-        <path d="M12 9v8" />
-        <path d="M17 5v12" />
-      </>
-    ),
-  },
-  {
-    id: 'trading',
-    label: '交易',
+    label: '交易自動化',
     path: (
       <>
         <path d="M10.5 7.5c2.5-.5 5 .5 5 3s-2.5 2.5-4.5 3c-2 .5-3.5 1.5-3.5 3.5s2 3 4.5 3.5 4.5-.5 4.5-3" />
@@ -100,9 +88,9 @@ export const ICONS: IconDef[] = [
 // 框體開關由 LakeOverlay 控制；房子常駐框外（同槽幾何），永不卸載防閃爍。
 // 底部停在 phase 文字之上（bottom:110），不壓字。
 // 路徑依賴標記：muse 原路線五鍵（總覽→圖表→地區→日曆→搜尋）無 Gmail；
-// 2026-10-15 用戶拍板次鍵插 Gmail、圖表順延；2026-10-21 地區槽改交易（₿ 風格圖示＋TradingPanel）。
-// active 上提 LakeOverlay 受控（預設 grid）；chart 仍 deferred；trading／mail／article 掛面板。
-export type RailId = 'grid' | 'mail' | 'article' | 'chart' | 'trading' | 'calendar' | 'search';
+// 2026-10-15 用戶拍板次鍵插 Gmail、圖表順延；2026-10-21 原圖表槽改 ₿＋交易自動化（TradingPanel）。
+// active 上提 LakeOverlay 受控（預設 grid）；chart／mail／article 掛面板。
+export type RailId = 'grid' | 'mail' | 'article' | 'chart' | 'calendar' | 'search';
 
 export default function ForecastSideRail({ onClose, open, activeId = 'grid', onSelect }: {
   onClose: () => void;

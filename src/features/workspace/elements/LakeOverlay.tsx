@@ -103,7 +103,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
       <GmailPanel open={forecastOpen && activeId === 'mail'} />
       <ArticlePanel open={forecastOpen && activeId === 'article'} onClose={() => { setActiveId('grid'); setForecastOpen(false); }} />
-      <TradingPanel open={forecastOpen && activeId === 'trading'} />
+      <TradingPanel open={forecastOpen && activeId === 'chart'} />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
         <span style={tiny} aria-label="當地時間">{time}</span>
