@@ -55,8 +55,10 @@ export const ICONS: IconDef[] = [
     label: '交易自動化',
     path: (
       <>
-        <path d="M10.5 7.5c2.5-.5 5 .5 5 3s-2.5 2.5-4.5 3c-2 .5-3.5 1.5-3.5 3.5s2 3 4.5 3.5 4.5-.5 4.5-3" />
-        <path d="M11 5v3M13 5v3M11 16v3M13 16v3M12 5v14" />
+        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+        <path d="M7 13v4" />
+        <path d="M12 9v8" />
+        <path d="M17 5v12" />
       </>
     ),
   },
