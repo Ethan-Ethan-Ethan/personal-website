@@ -15,16 +15,15 @@ describe("ArticlePanel", () => {
     expect(screen.queryByTestId("article-card")).toBeNull();
 
     fireEvent.click(screen.getByTestId("article-title-card"));
-    expect(screen.getByTestId("article-featured").textContent).toContain("螺絲起子");
+    expect(screen.getByTestId("article-featured").textContent).toContain("Harness 才是整台車");
     expect(screen.getAllByTestId("article-card")).toHaveLength(4);
     expect(screen.getByRole("link", { name: "閱讀全文 →" }).getAttribute("href")).toBe(
-      "/articles/rag-not-mandatory",
+      "/articles/harness-not-claude",
     );
     expect(screen.getByRole("button", { name: "返回文章列表" })).toBeTruthy();
-    const graph = screen.getByRole("link", { name: "讓所有 Agent 共用同一份專案知識：你只需要接線與知識圖譜" });
-    expect(graph.getAttribute("href")).toBe("/wip/shared-knowledge-graph");
-    expect(screen.getAllByTestId("article-related")).toHaveLength(2);
-    expect(screen.getAllByRole("link").filter((a) => a.getAttribute("href")?.startsWith("/wip/"))).toHaveLength(3);
+    const loop = screen.getByRole("link", { name: "你需要的不是更多 Skill，而是更好的 Loop" });
+    expect(loop.getAttribute("href")).toBe("/wip/better-loop-not-more-skills");
+    expect(screen.getAllByTestId("article-related")).toHaveLength(3);
   });
 
   it("returns from the essay layout to the title card", () => {

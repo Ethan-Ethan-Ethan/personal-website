@@ -4,7 +4,8 @@
 
 ## 行為
 
-- **精選主文**：`src/content/posts/*.md`（`draft: false`）+ `article-feature.ts` 定義湖面書本側欄精選與 `/articles/{slug}` 全文。
+- **精選主文（湖面書本）**：`article-feature.ts` 僅能指向**一篇**當期精選；換精選不刪除其他 `posts/*.md`，它們仍保留 `/articles/{slug}`。
+- **其他已發佈文**：`draft: false` 且未在 `article-feature` 者，僅能直連 URL（或日後擴多篇列表）；下架用 `draft: true` 或刪文。
 - **尚無正文的延伸題**：一律登錄 `WIP_NOTES`（`article-wip.ts`），連結只用 `/wip/{slug}`；頁面 `src/pages/wip/[slug].astro` 顯示「建構中」，不得 404。
 - **禁止**：正文未寫完卻連到假路徑、空 href，或未登錄 slug 的 `/wip/…`（會 404）。
 
