@@ -2,7 +2,6 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { WIP_NOTES, wipBySlug, wipHref } from "./article-wip";
-import { ARTICLE_FEATURE } from "./article-feature";
 
 const POSTS_DIR = join(import.meta.dirname, "../../../content/posts");
 const WIP_LINK = /\/wip\/([a-z0-9-]+)/g;
@@ -22,15 +21,6 @@ describe("article WIP notes", () => {
     expect(new Set(slugs).size).toBe(slugs.length);
     expect(wipBySlug("llm-word-puzzle")?.title).toContain("文字拼圖");
     expect(wipHref("simple-over-fancy-ai")).toBe("/wip/simple-over-fancy-ai");
-  });
-
-  it("every related card link points at a registered WIP slug", () => {
-    const hrefs = ARTICLE_FEATURE.cards.flatMap((c) => c.related ?? []).map((r) => r.href);
-    expect(hrefs.length).toBeGreaterThan(0);
-    for (const href of hrefs) {
-      const slug = href.replace("/wip/", "");
-      expect(wipBySlug(slug)).toBeTruthy();
-    }
   });
 
   it("every /wip/ link in published posts is registered (建構中路由)", () => {

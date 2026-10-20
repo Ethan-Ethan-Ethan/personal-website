@@ -6,11 +6,22 @@ import AboutDialog from '../components/AboutDialog.astro';
 import publicContent from '../data/generated/public-content.json';
 import { getCollection } from 'astro:content';
 import { getArticleHref } from '../features/articles/routing.mjs';
+import { sortArticleCatalog } from '../features/workspace/core/article-catalog';
 
-const posts = (await getCollection('posts', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const articleCatalog = sortArticleCatalog(
+  posts.map((post) => ({
+    title: post.data.title,
+    href: getArticleHref(post),
+    date: post.data.date.toISOString().slice(0, 10),
+    category: post.data.category ?? '公開筆記',
+    summary: post.data.description ?? '',
+    pinned: post.data.pinned ?? false,
+  })),
+);
+const postsByDate = [...posts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const homepageContent = publicContent.items.map(({ sourceHash: _sourceHash, ...item }) => item);
-const recentArticles = posts.slice(0, 6).map((post) => ({
+const recentArticles = postsByDate.slice(0, 6).map((post) => ({
   title: post.data.title,
   href: getArticleHref(post),
   category: post.data.category,
@@ -21,7 +32,7 @@ const USE_LAKE = true;
 
 <BaseLayout title="Ethan｜AI 系統創作者" description="建立可驗證、可組合並能持續演化的 AI、知識圖譜、影片理解與量化研究系統。">
   {USE_LAKE
-    ? <LakeLanding client:load />
+    ? <LakeLanding client:load articleCatalog={articleCatalog} />
     : <WorkspaceDesktop client:load content={homepageContent} recentArticles={recentArticles} />}
   <AboutDialog />
   <noscript>

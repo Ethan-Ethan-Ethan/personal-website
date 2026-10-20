@@ -2,44 +2,50 @@
 import { describe, expect, it, afterEach } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import ArticlePanel from "./ArticlePanel";
-import { ARTICLE_FEATURE } from "../core/article-feature";
+import type { ArticleCatalogEntry } from "../core/article-catalog";
+
+const CATALOG: ArticleCatalogEntry[] = [
+  {
+    title: "不使用 Claude 的三大理由：你需要的不是更強的模型，而是更好的 Harness",
+    href: "/articles/harness-not-claude",
+    date: "2026-10-18",
+    category: "公開筆記",
+    summary: "模型是引擎，Harness 才是整台車。",
+    pinned: true,
+  },
+  {
+    title: "RAG 是公司必備嗎？我看未必。",
+    href: "/articles/rag-not-mandatory",
+    date: "2026-10-21",
+    category: "公開筆記",
+    summary: "懂 RAG 是專業，不懂就判死刑是傲慢。",
+    pinned: false,
+  },
+];
 
 afterEach(() => cleanup());
 
 describe("ArticlePanel", () => {
-  it("starts with a title card and opens the essay layout on click", () => {
-    render(<ArticlePanel open onClose={() => {}} />);
-    expect(screen.getByText(ARTICLE_FEATURE.chip)).toBeTruthy();
-    expect(screen.getByTestId("article-title").textContent).toBe(ARTICLE_FEATURE.title);
-    expect(screen.queryByTestId("article-featured")).toBeNull();
-    expect(screen.queryByTestId("article-card")).toBeNull();
+  it("lists all notes with pinned badge on list view", () => {
+    render(<ArticlePanel open onClose={() => {}} articles={CATALOG} />);
+    expect(screen.getAllByTestId("article-list-item")).toHaveLength(2);
+    expect(screen.getByText("置頂")).toBeTruthy();
+    expect(screen.getByText(CATALOG[1].title)).toBeTruthy();
+  });
 
-    fireEvent.click(screen.getByTestId("article-title-card"));
-    expect(screen.getByTestId("article-featured").textContent).toContain("Harness 才是整台車");
-    expect(screen.getAllByTestId("article-card")).toHaveLength(4);
+  it("opens detail and links to full article", () => {
+    render(<ArticlePanel open onClose={() => {}} articles={CATALOG} />);
+    fireEvent.click(screen.getByRole("button", { name: /Harness/ }));
+    expect(screen.getByTestId("article-featured").textContent).toContain("Harness");
     expect(screen.getByRole("link", { name: "閱讀全文 →" }).getAttribute("href")).toBe(
       "/articles/harness-not-claude",
     );
-    expect(screen.getByRole("button", { name: "返回文章列表" })).toBeTruthy();
-    const loop = screen.getByRole("link", { name: "你需要的不是更多 Skill，而是更好的 Loop" });
-    expect(loop.getAttribute("href")).toBe("/wip/better-loop-not-more-skills");
-    expect(screen.getAllByTestId("article-related")).toHaveLength(3);
   });
 
-  it("returns from the essay layout to the title card", () => {
-    render(<ArticlePanel open onClose={() => {}} />);
-    fireEvent.click(screen.getByTestId("article-title-card"));
-    fireEvent.click(screen.getByRole("button", { name: "返回文章列表" }));
-    expect(screen.getByTestId("article-title-card")).toBeTruthy();
-    expect(screen.queryByRole("link", { name: "閱讀全文 →" })).toBeNull();
-  });
-
-  it("featured card uses the same type scale as Gmail top cards", () => {
-    render(<ArticlePanel open onClose={() => {}} />);
-    fireEvent.click(screen.getByTestId("article-title-card"));
-    const p = screen.getByTestId("article-featured").querySelector("p");
-    expect(p?.style.fontSize).toBe("17px");
-    expect(p?.style.fontWeight).toBe("600");
-    expect(p?.style.letterSpacing).toBe("0.05em");
+  it("returns to list from detail", () => {
+    render(<ArticlePanel open onClose={() => {}} articles={CATALOG} />);
+    fireEvent.click(screen.getByRole("button", { name: /RAG/ }));
+    fireEvent.click(screen.getByRole("button", { name: "返回筆記列表" }));
+    expect(screen.getAllByTestId("article-list-item")).toHaveLength(2);
   });
 });

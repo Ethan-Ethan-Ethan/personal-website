@@ -4,8 +4,11 @@ import FishLayer from './FishLayer';
 import { useLakePhase } from './useLakePhase';
 import { useLakeAudio } from './useLakeAudio';
 import { PHASE_COUNT } from '../core/lake-palette';
+import type { ArticleCatalogEntry } from '../core/article-catalog';
 
-export default function LakeLanding() {
+type Props = { articleCatalog: ArticleCatalogEntry[] };
+
+export default function LakeLanding({ articleCatalog }: Props) {
   const { phaseIndex, phase, goTo } = useLakePhase();
   const { playing, toggle } = useLakeAudio(phase.trackId);
   // 魚光跟水光：exposure 映射到 0..1，夜低晝高（FishLayer 內再轉亮度＋飽和）。
@@ -22,6 +25,7 @@ export default function LakeLanding() {
         goTo={goTo}
         trackPlaying={playing}
         onTogglePlay={toggle}
+        articleCatalog={articleCatalog}
       />
     </div>
   );

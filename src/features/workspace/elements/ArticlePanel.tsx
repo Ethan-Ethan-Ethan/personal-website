@@ -1,6 +1,6 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { FC_TRANSITION_CSS } from '../core/forecast-transitions';
-import { ARTICLE_FEATURE } from '../core/article-feature';
+import type { ArticleCatalogEntry } from '../core/article-catalog';
 
 const INK = '#ffffff';
 
@@ -34,19 +34,29 @@ const LINK: CSSProperties = {
 
 const D = { chip: 100, title: 200, feat: 280, card0: 360, cardStep: 70, link: 720 } as const;
 
-export default function ArticlePanel({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [reading, setReading] = useState(false);
+type Props = {
+  open: boolean;
+  onClose: () => void;
+  articles: ArticleCatalogEntry[];
+};
+
+export default function ArticlePanel({ open, onClose, articles }: Props) {
+  const [activeHref, setActiveHref] = useState<string | null>(null);
   useEffect(() => {
-    if (!open) setReading(false);
+    if (!open) setActiveHref(null);
   }, [open]);
+
+  const active = useMemo(
+    () => articles.find((a) => a.href === activeHref) ?? null,
+    [articles, activeHref],
+  );
 
   const on = open ? ' is-open' : '';
   const dl = (ms: number): { transitionDelay: string } => ({ transitionDelay: open ? `${ms}ms` : '0ms' });
-  const doc = ARTICLE_FEATURE;
 
   return (
     <section
-      aria-label="精選文章"
+      aria-label="公開筆記"
       className={`article-panel${on}`}
       style={{
         position: 'absolute',
@@ -76,35 +86,61 @@ export default function ArticlePanel({ open, onClose }: { open: boolean; onClose
             padding: '3px 10px',
           }}
         >
-          {doc.chip}
+          Notes
         </span>
         <div style={{ marginTop: 8, fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)' }}>
-          {doc.kicker}
-          {' · '}
-          {doc.date}
+          公開筆記 · 置頂優先
         </div>
       </div>
 
-      {!reading ? (
-        <button
-          type="button"
-          data-testid="article-title-card"
-          className={`fc-node fc-dir-l article-feature-card${on}`}
-          aria-label={`打開文章｜${doc.title}`}
-          onClick={() => setReading(true)}
-          style={{
-            ...FEATURED,
-            width: '100%',
-            textAlign: 'left',
-            cursor: 'pointer',
-            color: INK,
-            ...dl(D.title),
-          }}
-        >
-          <span data-testid="article-title" style={{ display: 'block', fontSize: 17, lineHeight: '26px', fontWeight: 600, letterSpacing: '0.05em' }}>
-            {doc.title}
-          </span>
-        </button>
+      {!active ? (
+        <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {articles.map((entry, i) => (
+            <li key={entry.href}>
+              <button
+                type="button"
+                data-testid="article-list-item"
+                className={`fc-node fc-dir-l article-feature-card${on}`}
+                aria-label={`打開筆記｜${entry.title}`}
+                onClick={() => setActiveHref(entry.href)}
+                style={{
+                  ...FEATURED,
+                  width: '100%',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  color: INK,
+                  ...dl(D.title + i * 40),
+                }}
+              >
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 6 }}>
+                  {entry.pinned ? (
+                    <span
+                      style={{
+                        fontSize: 10,
+                        letterSpacing: '0.12em',
+                        color: INK,
+                        border: '1px solid rgba(255,255,255,0.35)',
+                        borderRadius: 999,
+                        padding: '1px 8px',
+                      }}
+                    >
+                      置頂
+                    </span>
+                  ) : null}
+                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.65)' }}>{entry.date}</span>
+                </div>
+                <span data-testid="article-title" style={{ display: 'block', fontSize: 17, lineHeight: '26px', fontWeight: 600, letterSpacing: '0.05em' }}>
+                  {entry.title}
+                </span>
+                {entry.summary ? (
+                  <span style={{ display: 'block', marginTop: 8, fontSize: 13, lineHeight: '20px', color: 'rgba(255,255,255,0.82)', fontWeight: 500 }}>
+                    {entry.summary}
+                  </span>
+                ) : null}
+              </button>
+            </li>
+          ))}
+        </ul>
       ) : (
         <>
           <h2
@@ -120,82 +156,28 @@ export default function ArticlePanel({ open, onClose }: { open: boolean; onClose
               ...dl(D.title),
             }}
           >
-            {doc.title}
+            {active.title}
           </h2>
 
-          <article
-            data-testid="article-featured"
-            className={`fc-node fc-dir-l article-feature-card${on}`}
-            aria-label={`精選｜${doc.featured}`}
-            style={{ ...FEATURED, marginBottom: 12, ...dl(D.feat) }}
-          >
-            <p style={{ margin: 0, fontSize: 17, lineHeight: '26px', fontWeight: 600, color: INK, letterSpacing: '0.05em' }}>
-              {doc.featured}
-            </p>
-          </article>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {doc.cards.map((card, i) => (
-              <article
-                key={card.index}
-                data-testid="article-card"
-                className={`fc-node fc-dir-l article-body-card${on}`}
-                aria-label={`${card.index} ${card.title}`}
-                style={{ ...CARD, ...dl(D.card0 + i * D.cardStep) }}
-              >
-                <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      letterSpacing: '0.1em',
-                      color: INK,
-                      border: '1px solid rgba(255,255,255,0.35)',
-                      borderRadius: 999,
-                      padding: '1px 8px',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {card.index}
-                  </span>
-                  <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: '0.04em', color: INK }}>{card.title}</span>
-                </div>
-                <p style={{ margin: '8px 0 0', fontSize: 14, lineHeight: '22px', fontWeight: 500, color: INK }}>
-                  {card.body}
-                </p>
-                {card.related?.length ? (
-                  <ul data-testid="article-related" style={{ listStyle: 'none', margin: '10px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    {card.related.map((rel) => (
-                      <li key={rel.href}>
-                        <a
-                          href={rel.href}
-                          style={{
-                            display: 'inline-block',
-                            minHeight: 36,
-                            padding: '6px 0',
-                            color: 'rgba(118,167,189,0.98)',
-                            fontSize: 13,
-                            lineHeight: '20px',
-                            fontWeight: 600,
-                            textDecoration: 'none',
-                            letterSpacing: '0.02em',
-                          }}
-                        >
-                          {rel.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </article>
-            ))}
-          </div>
+          {active.summary ? (
+            <article
+              data-testid="article-featured"
+              className={`fc-node fc-dir-l article-feature-card${on}`}
+              aria-label={`摘要｜${active.summary}`}
+              style={{ ...FEATURED, marginBottom: 12, ...dl(D.feat) }}
+            >
+              <p style={{ margin: 0, fontSize: 15, lineHeight: '24px', fontWeight: 500, color: INK, letterSpacing: '0.03em' }}>
+                {active.summary}
+              </p>
+            </article>
+          ) : null}
 
           <div className={`fc-node fc-dir-l${on}`} style={{ marginTop: 16, textAlign: 'center', ...dl(D.link) }}>
-            <a href={doc.href} style={LINK}>
+            <a href={active.href} style={LINK}>
               閱讀全文 →
             </a>
             {' · '}
-            <button type="button" aria-label="返回文章列表" onClick={() => setReading(false)} style={LINK}>
+            <button type="button" aria-label="返回筆記列表" onClick={() => setActiveHref(null)} style={LINK}>
               返回
             </button>
           </div>

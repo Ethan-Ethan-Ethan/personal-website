@@ -12,6 +12,7 @@ const posts = defineCollection({
     source: z.enum(['manual', 'gmail']).default('manual'),
     sourceUrl: z.string().url().optional(),
     draft: z.boolean().default(false),
+    pinned: z.boolean().default(false),
   }),
 });
 

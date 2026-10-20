@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Topbar from '../../components/Topbar.astro';
 import Footer from '../../components/Footer.astro';
 import { WIP_NOTES, wipBySlug } from '../../features/workspace/core/article-wip';
-import { ARTICLE_FEATURE } from '../../features/workspace/core/article-feature';
 
 export function getStaticPaths() {
   return WIP_NOTES.map((note) => ({ params: { slug: note.slug } }));
@@ -26,7 +25,7 @@ const title = note?.title ?? '尚未完成的筆記';
         這則延伸閱讀還沒寫完。標題先留著，正文稍後補上。
       </p>
       <div class="flex flex-wrap justify-center gap-4 text-sm">
-        <a href={ARTICLE_FEATURE.href} class="text-blue hover:text-green transition-colors">← 回到精選文章</a>
+        <a href="/" class="text-blue hover:text-green transition-colors">← 回到湖面首頁</a>
         <a href="/" class="text-muted hover:text-text transition-colors">首頁</a>
       </div>
     </div>

@@ -9,6 +9,7 @@ tags:
   - Agent
 source: manual
 draft: false
+pinned: true
 ---
 
 # 不使用 Claude 的三大理由：你需要的不是更強的模型，而是更好的 Harness

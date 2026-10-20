@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { LakePhase } from '../core/lake-palette';
+import type { ArticleCatalogEntry } from '../core/article-catalog';
 import { FORECAST_PLACEHOLDER } from '../core/forecast-placeholder';
 import { countyByName, nearestCounty, parseCwaWeekly, toForecastData, CWA_DEFAULT_COUNTY, type CwaCounty } from '../core/cwa-forecast';
 import snapshotDoc from '../core/cwa-snapshot.json';
@@ -24,6 +25,7 @@ type Props = {
   goTo: (i: number) => void;
   trackPlaying: boolean;
   onTogglePlay: () => void;
+  articleCatalog: ArticleCatalogEntry[];
 };
 
 function useLocalTime(): string {
@@ -35,7 +37,7 @@ function useLocalTime(): string {
   return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, trackPlaying, onTogglePlay }: Props) {
+export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, trackPlaying, onTogglePlay, articleCatalog }: Props) {
   const time = useLocalTime();
   // 動態偏好：使用者開了「減少動態」→ 場景名用靜態字（不播逐字動畫）；跟隨 OS 即時切換。
   const reducedMotion = useReducedMotion();
@@ -102,7 +104,7 @@ export default function LakeOverlay({ phase, phaseIndex, phaseCount, goTo, track
       <ForecastBottomBar activeId={activeId} onSelect={(id) => { setActiveId(id); setForecastOpen(true); }} />
       <ForecastGlass data={forecastData} open={forecastOpen && activeId === 'grid'} />
       <GmailPanel open={forecastOpen && activeId === 'mail'} />
-      <ArticlePanel open={forecastOpen && activeId === 'article'} onClose={() => { setActiveId('grid'); setForecastOpen(false); }} />
+      <ArticlePanel open={forecastOpen && activeId === 'article'} onClose={() => { setActiveId('grid'); setForecastOpen(false); }} articles={articleCatalog} />
       <TradingPanel open={forecastOpen && activeId === 'chart'} />
 
       <div style={{ position: 'absolute', top: 20, right: 24, display: 'flex', gap: 16, alignItems: 'baseline' }}>
