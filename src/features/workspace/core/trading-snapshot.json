@@ -1,0 +1,18 @@
+{
+  "_generated": "2026-10-21T00:00:00+08:00",
+  "markets": {
+    "btc": {
+      "symbol_tv": "MEXC:BTCUSDT",
+      "bias": "觀望",
+      "summary": "5 分鐘結構：區間內震盪，等待力道框邊界確認後再評估方向。",
+      "method_note": "圖表為 TradingView 行情參考；力道框／生死線等判讀依收盤價與心法，非圖上自動指標。"
+    },
+    "txf": {
+      "symbol_tv": "TAIFEX:TXF1!",
+      "bias": null,
+      "summary": null,
+      "method_note": "台指期 5 分鐘觀察快照整備中；圖表可先切換品種參考價格。",
+      "pending": true
+    }
+  }
+}

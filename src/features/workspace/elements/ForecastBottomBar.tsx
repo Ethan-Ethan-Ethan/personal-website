@@ -4,7 +4,7 @@ import { ICONS } from './ForecastSideRail';
 const INK = HEXMAP["forecast_ink"];
 
 // 手機專用底部橫式 tab bar（≤900px 才顯示，＞900px 隱藏；與側軌互斥顯示）。
-// 五鍵沿側軌 ICONS 語言正本過濾總覽（mail/chart/globe/calendar/search；20px／stroke2／round＋墨色 INK），active 高亮同側軌。
+// 五鍵沿側軌 ICONS 語言正本過濾總覽（mail/article/chart/trading/calendar/search；20px／stroke2／round＋墨色 INK），active 高亮同側軌。
 // 總覽由房子鍵回家，底欄不過濾會重複；activeId 為 grid 時底欄無高亮即正常。
 // 玻璃底 blur12＋safe-area inset-bottom；與側軌同狀態機（activeId／onSelect 直通父層）。
 // 面板開關：底欄點鍵＝選中＋開面板（父層 onSelect 內 setActiveId＋setForecastOpen(true)）；
