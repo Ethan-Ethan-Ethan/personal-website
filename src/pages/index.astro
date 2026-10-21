@@ -7,17 +7,23 @@ import publicContent from '../data/generated/public-content.json';
 import { getCollection } from 'astro:content';
 import { getArticleHref } from '../features/articles/routing.mjs';
 import { sortArticleCatalog } from '../features/workspace/core/article-catalog';
+import { parseArticleLakeBody } from '../features/workspace/core/article-lake-parse';
 
 const posts = await getCollection('posts', ({ data }) => !data.draft);
 const articleCatalog = sortArticleCatalog(
-  posts.map((post) => ({
-    title: post.data.title,
-    href: getArticleHref(post),
-    date: post.data.date.toISOString().slice(0, 10),
-    category: post.data.category ?? '公開筆記',
-    summary: post.data.description ?? '',
-    pinned: post.data.pinned ?? false,
-  })),
+  posts.map((post) => {
+    const { intro, cards } = parseArticleLakeBody(post.body ?? '');
+    return {
+      title: post.data.title,
+      href: getArticleHref(post),
+      date: post.data.date.toISOString().slice(0, 10),
+      category: post.data.category ?? '公開筆記',
+      summary: post.data.description ?? '',
+      pinned: post.data.pinned ?? false,
+      intro,
+      cards,
+    };
+  }),
 );
 const postsByDate = [...posts].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const homepageContent = publicContent.items.map(({ sourceHash: _sourceHash, ...item }) => item);

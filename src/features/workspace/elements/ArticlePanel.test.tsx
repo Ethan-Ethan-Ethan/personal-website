@@ -12,6 +12,9 @@ const CATALOG: ArticleCatalogEntry[] = [
     category: "公開筆記",
     summary: "模型是引擎，Harness 才是整台車。",
     pinned: true,
+    cards: [
+      { index: "01", title: "小節一", body: "正文一", related: [{ title: "延伸", href: "/wip/x" }] },
+    ],
   },
   {
     title: "RAG 是公司必備嗎？我看未必。",
@@ -20,6 +23,8 @@ const CATALOG: ArticleCatalogEntry[] = [
     category: "公開筆記",
     summary: "懂 RAG 是專業，不懂就判死刑是傲慢。",
     pinned: false,
+    intro: "開場段落",
+    cards: [{ index: "01", title: "結論", body: "正文" }],
   },
 ];
 
@@ -33,13 +38,13 @@ describe("ArticlePanel", () => {
     expect(screen.getByText(CATALOG[1].title)).toBeTruthy();
   });
 
-  it("opens detail and links to full article", () => {
+  it("opens inline full note with featured, cards, and related links", () => {
     render(<ArticlePanel open onClose={() => {}} articles={CATALOG} />);
     fireEvent.click(screen.getByRole("button", { name: /Harness/ }));
     expect(screen.getByTestId("article-featured").textContent).toContain("Harness");
-    expect(screen.getByRole("link", { name: "閱讀全文 →" }).getAttribute("href")).toBe(
-      "/articles/harness-not-claude",
-    );
+    expect(screen.getAllByTestId("article-card")).toHaveLength(1);
+    expect(screen.getByRole("link", { name: "延伸" }).getAttribute("href")).toBe("/wip/x");
+    expect(screen.queryByRole("link", { name: /閱讀全文/ })).toBeNull();
   });
 
   it("returns to list from detail", () => {

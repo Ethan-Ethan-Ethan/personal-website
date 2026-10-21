@@ -89,7 +89,7 @@ export default function ArticlePanel({ open, onClose, articles }: Props) {
           Notes
         </span>
         <div style={{ marginTop: 8, fontSize: 11, letterSpacing: '0.06em', color: 'rgba(255,255,255,0.6)' }}>
-          公開筆記 · 置頂優先
+          {active ? `${active.category} · ${active.date}` : '公開筆記 · 置頂優先'}
         </div>
       </div>
 
@@ -163,22 +163,85 @@ export default function ArticlePanel({ open, onClose, articles }: Props) {
             <article
               data-testid="article-featured"
               className={`fc-node fc-dir-l article-feature-card${on}`}
-              aria-label={`摘要｜${active.summary}`}
+              aria-label={`重點｜${active.summary}`}
               style={{ ...FEATURED, marginBottom: 12, ...dl(D.feat) }}
             >
-              <p style={{ margin: 0, fontSize: 15, lineHeight: '24px', fontWeight: 500, color: INK, letterSpacing: '0.03em' }}>
+              <p style={{ margin: 0, fontSize: 17, lineHeight: '26px', fontWeight: 600, color: INK, letterSpacing: '0.05em' }}>
                 {active.summary}
               </p>
             </article>
           ) : null}
 
+          {active.intro ? (
+            <div
+              className={`fc-node fc-dir-l article-body-card${on}`}
+              style={{ ...CARD, marginBottom: 12, ...dl(D.feat + 40) }}
+            >
+              <p style={{ margin: 0, fontSize: 14, lineHeight: '22px', fontWeight: 500, color: INK, whiteSpace: 'pre-wrap' }}>
+                {active.intro}
+              </p>
+            </div>
+          ) : null}
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {active.cards.map((card, i) => (
+              <article
+                key={card.index}
+                data-testid="article-card"
+                className={`fc-node fc-dir-l article-body-card${on}`}
+                aria-label={`${card.index} ${card.title}`}
+                style={{ ...CARD, ...dl(D.card0 + i * D.cardStep) }}
+              >
+                <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      letterSpacing: '0.1em',
+                      color: INK,
+                      border: '1px solid rgba(255,255,255,0.35)',
+                      borderRadius: 999,
+                      padding: '1px 8px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {card.index}
+                  </span>
+                  <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: '0.04em', color: INK }}>{card.title}</span>
+                </div>
+                <p style={{ margin: '8px 0 0', fontSize: 14, lineHeight: '22px', fontWeight: 500, color: INK, whiteSpace: 'pre-wrap' }}>
+                  {card.body}
+                </p>
+                {card.related?.length ? (
+                  <ul data-testid="article-related" style={{ listStyle: 'none', margin: '10px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {card.related.map((rel) => (
+                      <li key={rel.href}>
+                        <a
+                          href={rel.href}
+                          style={{
+                            display: 'inline-block',
+                            minHeight: 36,
+                            padding: '6px 0',
+                            color: 'rgba(118,167,189,0.98)',
+                            fontSize: 13,
+                            lineHeight: '20px',
+                            fontWeight: 600,
+                            textDecoration: 'none',
+                            letterSpacing: '0.02em',
+                          }}
+                        >
+                          {rel.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            ))}
+          </div>
+
           <div className={`fc-node fc-dir-l${on}`} style={{ marginTop: 16, textAlign: 'center', ...dl(D.link) }}>
-            <a href={active.href} style={LINK}>
-              閱讀全文 →
-            </a>
-            {' · '}
             <button type="button" aria-label="返回筆記列表" onClick={() => setActiveHref(null)} style={LINK}>
-              返回
+              ← 返回筆記列表
             </button>
           </div>
         </>

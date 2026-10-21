@@ -4,7 +4,7 @@
 
 ## 行為
 
-- **湖面書本（文章側欄）**：`index.astro` 從 `posts` 組 `articleCatalog`（`draft: false` 全顯示）；`sortArticleCatalog` 規則：**`pinned: true` 置頂**（置頂內依日期新→舊），其餘依日期新→舊。點標題看摘要 →「閱讀全文」進 `/articles/{slug}`。
+- **湖面書本（文章側欄）**：`index.astro` 從 `posts` 組 `articleCatalog`（`draft: false` 全顯示）；`sortArticleCatalog`：**`pinned: true` 置頂**。點筆記後在側欄內顯示 **重點（description）＋正文拆卡（`parseArticleLakeBody`：`###` 小節、文首 intro、`- [](/wip/)` 延伸）**，底部「返回筆記列表」；**不**在側欄導向「閱讀全文」中間頁。獨立 URL `/articles/{slug}` 仍供分享與無 JS 直達。
 - **全文**：`src/content/posts/*.md`；`description` 為側欄摘要與全文頁開場摘要。
 - **延伸題（未寫正文）**：登錄 `WIP_NOTES` → `/wip/{slug}` 建構中頁。
 
