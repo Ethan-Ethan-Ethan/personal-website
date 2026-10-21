@@ -1,0 +1,37 @@
+name: Trading snapshot automation
+
+on:
+  schedule:
+    # 每 5 分鐘（UTC）；略錯開整點負載。公開 repo 定時 workflow 需保持 repo 活躍以免被自動停用。
+    - cron: '2,7,12,17,22,27,32,37,42,47,52,57 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run trading automation
+        run: node scripts/run-trading-automation.mjs
+
+      - name: Commit and push if snapshot changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/features/workspace/core/trading-snapshot.json
+          if git diff --staged --quiet; then
+            echo "No snapshot change to commit"
+            exit 0
+          fi
+          git commit -m "chore: update trading snapshot from automation"
+          git push

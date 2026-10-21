@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseTradingSnapshot } from './trading-snapshot';
+import { applyMarketSignalEvent, hasDirectionalSignal, parseTradingSnapshot } from './trading-snapshot';
 import snapshotDoc from './trading-snapshot.json';
 
 describe('trading-snapshot', () => {
@@ -8,6 +8,20 @@ describe('trading-snapshot', () => {
     expect(doc).not.toBeNull();
     expect(doc!.markets.btc.symbol_tv).toContain('BTC');
     expect(doc!.markets.txf.pending).toBe(true);
+  });
+
+  it('treats only 偏多/偏空 as directional', () => {
+    const doc = parseTradingSnapshot(snapshotDoc)!;
+    expect(hasDirectionalSignal(doc.markets.btc)).toBe(false);
+    const withLong = applyMarketSignalEvent(doc, 'btc', {
+      bias: '偏多',
+      summary: '測試',
+      signal_at: '2026-10-22T10:00:00+08:00',
+    });
+    expect(hasDirectionalSignal(withLong.markets.btc)).toBe(true);
+    const cleared = applyMarketSignalEvent(withLong, 'btc', { bias: null });
+    expect(hasDirectionalSignal(cleared.markets.btc)).toBe(false);
+    expect(cleared.markets.btc.signal_at).toBe('2026-10-22T10:00:00+08:00');
   });
 
   it('rejects invalid bias', () => {

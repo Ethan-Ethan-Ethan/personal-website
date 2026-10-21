@@ -2,7 +2,9 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { FC_TRANSITION_CSS } from '../core/forecast-transitions';
 import {
   TRADING_DISCLAIMER,
+  NO_DIRECTION_LABEL,
   formatGeneratedZh,
+  hasDirectionalSignal,
   loadTradingSnapshot,
   type MarketKey,
 } from '../core/trading-snapshot';
@@ -92,6 +94,8 @@ export default function TradingPanel({ open }: { open: boolean }) {
   const market = doc?.markets[tab];
   const symbol = market?.symbol_tv ?? (tab === 'btc' ? 'MEXC:BTCUSDT' : 'TAIFEX:TXF1!');
   const generated = doc ? formatGeneratedZh(doc._generated) : '—';
+  const directional = hasDirectionalSignal(market ?? null);
+  const lastSignal = market?.signal_at ? formatGeneratedZh(market.signal_at) : null;
 
   return (
     <section
@@ -134,7 +138,7 @@ export default function TradingPanel({ open }: { open: boolean }) {
           交易自動化
         </h2>
         <p style={{ margin: '6px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.72)' }}>
-          快照更新：{generated}
+          {directional ? `訊號更新：${generated}` : '文字僅在出現方向訊號時更新'}
         </p>
       </header>
 
@@ -180,16 +184,36 @@ export default function TradingPanel({ open }: { open: boolean }) {
           <p style={{ margin: 0, fontSize: 13, color: 'rgba(255,255,255,0.8)', lineHeight: 1.55 }}>
             {market.method_note}
           </p>
-        ) : (
+        ) : directional ? (
           <>
-            {market?.bias ? (
-              <p style={{ margin: '0 0 6px', fontSize: 13, color: INK }}>
-                本根偏向：<strong>{market.bias}</strong>
-              </p>
-            ) : null}
+            <p style={{ margin: '0 0 6px', fontSize: 13, color: INK }} data-testid="trading-bias">
+              本根偏向：<strong>{market!.bias}</strong>
+            </p>
             {market?.summary ? (
               <p style={{ margin: '0 0 8px', fontSize: 13, color: 'rgba(255,255,255,0.85)', lineHeight: 1.55 }}>
                 {market.summary}
+              </p>
+            ) : null}
+            {lastSignal ? (
+              <p style={{ margin: '0 0 8px', fontSize: 11, color: 'rgba(255,255,255,0.65)' }}>
+                訊號時間：{lastSignal}
+              </p>
+            ) : null}
+            <p style={{ margin: 0, fontSize: 12, color: 'rgba(255,255,255,0.72)', lineHeight: 1.5 }}>
+              {market?.method_note}
+            </p>
+          </>
+        ) : (
+          <>
+            <p
+              data-testid="trading-no-direction"
+              style={{ margin: '0 0 8px', fontSize: 15, fontWeight: 600, color: INK, letterSpacing: '0.04em' }}
+            >
+              {NO_DIRECTION_LABEL}
+            </p>
+            {lastSignal ? (
+              <p style={{ margin: '0 0 8px', fontSize: 11, color: 'rgba(255,255,255,0.65)' }}>
+                上次方向訊號：{lastSignal}
               </p>
             ) : null}
             <p style={{ margin: 0, fontSize: 12, color: 'rgba(255,255,255,0.72)', lineHeight: 1.5 }}>
