@@ -18,6 +18,7 @@
     "test:e2e": "node scripts/site.mjs verify e2e",
     "sync:cwa": "node scripts/sync-cwa.mjs",
     "sync:trading": "node scripts/sync-trading-snapshot.mjs",
+    "trading:local-sync": "node scripts/run-trading-automation.mjs",
     "trading:automation": "node scripts/run-trading-automation.mjs",
     "content:dsh": "node scripts/run-content-dsh.mjs",
     "verify": "node scripts/site.mjs verify all",

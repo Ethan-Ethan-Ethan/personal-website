@@ -1,0 +1,10 @@
+{
+  "revision": "2026-10-22T03:45:00+08:00",
+  "markets": {
+    "btc": {
+      "bias": null,
+      "summary": null,
+      "signal_at": null
+    }
+  }
+}
