@@ -19,11 +19,13 @@
 
 範例見 `verification/fixtures/trading/website-trading-signal.example.json`。
 
-**生產者**：`04_Projects/投資交易/scripts/live/cb_scanner.py` 每次 `--once` 掃描結尾呼叫 `website_lake_signal.publish_from_scan`（寫信箱＋預設跑本 repo `trading:local-sync`；`WEBSITE_LAKE_SYNC=0` 可只寫信箱）。
+**生產者**：`04_Projects/投資交易/scripts/live/cb_scanner.py` 每次 `--once` 掃描結尾呼叫 `website_lake_signal.publish_from_scan`：
 
-個人網站腳本合併進快照，**有變才寫檔**。
+1. 寫 `投資交易/outputs/website-trading-signal.json`（本機訊號）
+2. 跑本 repo `trading:local-sync`
+3. 快照有變 → **自動** `git commit` + `push origin main` → Cloudflare deploy
 
-可選 `TRADING_LOCAL_DEPLOY=1`：快照變更後本機 `git commit` + `push origin main`（觸發既有 Cloudflare deploy）。
+關閉：`WEBSITE_LAKE_SYNC=0`（不碰個人網站）／`WEBSITE_LAKE_AUTO_DEPLOY=0`（只更新本地 snapshot 不 push）／`cb_scanner --dry-run`（全程不寫不推）。
 
 ### launchd（可選）
 

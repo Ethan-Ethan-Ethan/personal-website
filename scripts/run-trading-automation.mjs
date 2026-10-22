@@ -31,6 +31,7 @@ function maybeDeploy() {
   } catch {
     execSync('git commit -m "chore: trading snapshot from local inbox"', { cwd: ROOT, stdio: 'inherit' });
     execSync('git push origin main', { cwd: ROOT, stdio: 'inherit' });
+    console.log('DEPLOYED: pushed origin main (Cloudflare deploy will follow)');
   }
 }
 
