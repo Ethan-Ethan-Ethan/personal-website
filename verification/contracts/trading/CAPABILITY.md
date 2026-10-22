@@ -19,7 +19,9 @@
 
 範例見 `verification/fixtures/trading/website-trading-signal.example.json`。
 
-投資交易 pipeline 在產生／清除方向時更新該 JSON；個人網站腳本合併進快照，**有變才寫檔**。
+**生產者**：`04_Projects/投資交易/scripts/live/cb_scanner.py` 每次 `--once` 掃描結尾呼叫 `website_lake_signal.publish_from_scan`（寫信箱＋預設跑本 repo `trading:local-sync`；`WEBSITE_LAKE_SYNC=0` 可只寫信箱）。
+
+個人網站腳本合併進快照，**有變才寫檔**。
 
 可選 `TRADING_LOCAL_DEPLOY=1`：快照變更後本機 `git commit` + `push origin main`（觸發既有 Cloudflare deploy）。
 
